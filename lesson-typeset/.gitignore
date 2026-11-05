@@ -1,0 +1,24 @@
+# Python 编译缓存
+__pycache__/
+*.py[cod]
+*.pyo
+
+# 虚拟环境
+.venv/
+venv/
+
+# 系统与编辑器
+.DS_Store
+Thumbs.db
+*.swp
+.idea/
+.vscode/
+
+# 脚本产物（排版输出的 docx/pdf 不入库）
+/output/
+*.docx
+*.pdf
+
+# 临时文件
+/tmp/
+*.tmp

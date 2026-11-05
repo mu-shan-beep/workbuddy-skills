@@ -1,0 +1,51 @@
+# ============================================================
+# WorkBuddy 技能库汇总仓库 · 忽略规则
+# ============================================================
+
+# --- Python 编译缓存与虚拟环境 ---
+__pycache__/
+*.py[cod]
+*.pyo
+.venv/
+venv/
+env/
+
+# --- 系统与编辑器 ---
+.DS_Store
+Thumbs.db
+._*
+*.swp
+*.swo
+.idea/
+.vscode/
+
+# --- 非自建技能：市场/技能中心安装，上游可随时重装，不纳入备份 ---
+/ima-skills__skillhub/
+/totorosir-workbuddy-checkin/
+# 今后新安装的第三方技能按同样方式在此追加，保持仓库只含自建内容
+
+# --- WorkBuddy 运行时迁移标记（由应用自动生成，非技能内容）---
+/*_migration.json
+/.disable_to_model_invocation_migration.json
+/.model_invocation_to_override_migration.json
+/.user_invocable_only_to_off_migration.json
+/_bm_skillid_migration.json
+
+# --- 凭证与本地配置（严禁入库）---
+*.env
+.env*
+*-cred.json
+*-rt.json
+checkin-cred.json
+checkin-rt.json
+notify_config.json
+*.key
+*.pem
+*.p12
+*.pfx
+
+# --- 排版与渲染产物 ---
+/output/
+/~$*
+*.log
+*.tmp

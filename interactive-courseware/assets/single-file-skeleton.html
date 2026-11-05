@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>交互课件骨架 · 单文件离线版</title>
+<style>
+:root{
+  --bg:#F4F7FB; --panel:#FFFFFF; --ink:#12243A; --muted:#5A6E85;
+  --line:#D8E2EE; --accent:#185FA5; --accent-soft:#E6F1FB;
+  --ok:#3B6D11; --ok-soft:#EAF3DE; --warn:#854F0B; --warn-soft:#FAEEDA;
+  --bad:#A32D2D; --bad-soft:#FCEBEB;
+  --radius:12px; --font:"PingFang SC","Microsoft YaHei",system-ui,sans-serif;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);font-size:15px;line-height:1.6;display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:16px;flex-wrap:wrap;padding:10px 20px;background:var(--panel);border-bottom:1px solid var(--line)}
+.brand{font-size:16px;font-weight:600;letter-spacing:.5px}
+.brand small{display:block;font-size:12px;font-weight:400;color:var(--muted);letter-spacing:0}
+.spacer{flex:1}
+.layers{display:flex;gap:8px;flex-wrap:wrap}
+.layer{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border:1px solid var(--line);border-radius:999px;background:#fff;cursor:pointer;font-size:13px;user-select:none}
+.layer input{accent-color:var(--accent)}
+.layer.on{background:var(--accent-soft);border-color:#B5D4F4;color:var(--accent)}
+.btn{font:inherit;font-size:13px;padding:7px 14px;border-radius:8px;border:1px solid var(--line);background:#fff;color:var(--ink);cursor:pointer}
+.btn:hover{border-color:#B5D4F4}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+.btn.primary:hover{background:#134E88}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+main{flex:1;display:flex;min-height:0}
+aside{width:216px;flex:none;padding:16px;overflow:auto;background:var(--panel);border-right:1px solid var(--line)}
+aside h2{font-size:12px;font-weight:600;color:var(--muted);letter-spacing:1px;margin:0 0 10px}
+.step{display:flex;gap:10px;padding:9px 10px;border-radius:8px;margin-bottom:4px;font-size:13px;cursor:pointer;border:1px solid transparent}
+.step:hover{background:#F7FAFD}
+.step .no{width:20px;height:20px;flex:none;border-radius:50%;background:#EDF2F8;color:var(--muted);font-size:11px;display:grid;place-items:center;font-weight:600}
+.step.done .no{background:var(--ok-soft);color:var(--ok)}
+.step.active{background:var(--accent-soft);border-color:#B5D4F4}
+.step.active .no{background:var(--accent);color:#fff}
+.step.locked{opacity:.42;cursor:not-allowed}
+section.stage{flex:1;display:grid;place-items:center;padding:16px;min-width:0}
+#canvas{width:100%;height:100%;max-height:100%}
+.band{fill:transparent;cursor:default;transition:fill .15s}
+.pickable .band{cursor:pointer}
+.pickable .band:hover{fill:rgba(24,95,165,.10)}
+.band.picked{fill:rgba(59,109,17,.18);stroke:var(--ok);stroke-width:2}
+.band.wrong{fill:rgba(163,45,45,.16);stroke:var(--bad);stroke-width:2}
+.band.revealed{fill:rgba(24,95,165,.16);stroke:var(--accent);stroke-width:2;stroke-dasharray:6 4}
+.globe{fill:#E8F1FB;stroke:#B5D4F4;stroke-width:1.5}
+.lat{stroke:#A9C6E4;stroke-width:1;fill:none}
+.eq{stroke:#7FA8CE;stroke-width:1.5;fill:none}
+.lbl{font-size:13px;fill:var(--muted)}
+footer{padding:14px 20px 16px;background:var(--panel);border-top:1px solid var(--line)}
+.taskhead{display:flex;align-items:baseline;gap:12px;margin-bottom:10px}
+.taskhead h3{margin:0;font-size:15px;font-weight:600}
+.taskhead span{font-size:13px;color:var(--muted)}
+.answer{min-height:56px;margin-bottom:10px}
+.actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.feedback{font-size:13px;padding:5px 10px;border-radius:6px}
+.feedback.ok{background:var(--ok-soft);color:var(--ok)}
+.feedback.bad{background:var(--bad-soft);color:var(--bad)}
+.feedback.info{background:var(--warn-soft);color:var(--warn)}
+.hintbox{background:var(--warn-soft);color:var(--warn);border-radius:8px;padding:9px 12px;font-size:13px;margin-bottom:10px}
+.hintbox b{font-weight:600}
+.items{display:flex;gap:8px;flex-wrap:wrap}
+.item{padding:9px 14px;border:1px solid var(--line);border-radius:8px;background:#fff;cursor:pointer;font-size:14px;user-select:none}
+.item:hover{border-color:#B5D4F4}
+.item.sel{border-color:var(--accent);background:var(--accent-soft);color:var(--accent)}
+.opt{display:block;padding:9px 12px;border:1px solid var(--line);border-radius:8px;margin-bottom:6px;cursor:pointer;font-size:14px}
+.opt:hover{border-color:#B5D4F4}
+.opt input{margin-right:8px;accent-color:var(--accent)}
+.match{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.col{display:flex;flex-direction:column;gap:6px}
+.pill{padding:8px 12px;border:1px solid var(--line);border-radius:8px;background:#fff;font-size:14px;cursor:pointer}
+.pill:hover{border-color:#B5D4F4}
+.pill.sel{border-color:var(--accent);background:var(--accent-soft);color:var(--accent)}
+.pill.linked{border-style:solid;border-color:#97C459;background:var(--ok-soft)}
+.pairs{font-size:13px;color:var(--muted);margin-top:8px}
+.sliderwrap{display:flex;align-items:center;gap:14px}
+input[type=range]{flex:1;accent-color:var(--accent)}
+.readout{font-variant-numeric:tabular-nums;font-size:15px;font-weight:600;min-width:78px}
+@media (max-width:900px){
+  aside{width:100%;border-right:0;border-bottom:1px solid var(--line);display:flex;gap:6px;overflow-x:auto;padding:10px}
+  aside h2{display:none}
+  main{flex-direction:column}
+  section.stage{min-height:260px}
+  .step{white-space:nowrap}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="brand">交互课件骨架<small>单文件 · 离线 · 替换 CONFIG 即可用</small></div>
+  <div class="spacer"></div>
+  <div class="layers" id="layers"></div>
+  <button class="btn" id="modeBtn">困难模式</button>
+  <button class="btn" id="resetBtn">重置</button>
+</header>
+
+<main>
+  <aside>
+    <h2>任务进度</h2>
+    <div id="steps"></div>
+  </aside>
+  <section class="stage">
+    <svg id="canvas" viewBox="0 0 600 560" role="img" aria-label="演示舞台">
+      <defs>
+        <clipPath id="globeClip"><circle cx="300" cy="280" r="200"/></clipPath>
+      </defs>
+      <circle class="globe" cx="300" cy="280" r="200"/>
+      <g clip-path="url(#globeClip)">
+        <rect class="band" data-id="nh-60-90" x="100" y="80"  width="400" height="67"/>
+        <rect class="band" data-id="nh-30-60" x="100" y="147" width="400" height="66"/>
+        <rect class="band" data-id="nh-0-30"  x="100" y="213" width="400" height="67"/>
+        <rect class="band" data-id="sh-0-30"  x="100" y="280" width="400" height="67"/>
+        <rect class="band" data-id="sh-30-60" x="100" y="347" width="400" height="66"/>
+        <rect class="band" data-id="sh-60-90" x="100" y="413" width="400" height="67"/>
+      </g>
+      <path class="lat" d="M100 147 A200 40 0 0 0 500 147"/>
+      <path class="lat" d="M100 213 A200 40 0 0 0 500 213"/>
+      <path class="eq"  d="M100 280 A200 40 0 0 0 500 280"/>
+      <path class="lat" d="M100 347 A200 40 0 0 0 500 347"/>
+      <path class="lat" d="M100 413 A200 40 0 0 0 500 413"/>
+      <text class="lbl" x="514" y="152">60°N</text>
+      <text class="lbl" x="514" y="218">30°N</text>
+      <text class="lbl" x="514" y="285">0°</text>
+      <text class="lbl" x="514" y="352">30°S</text>
+      <text class="lbl" x="514" y="418">60°S</text>
+      <text class="lbl" x="300" y="524" text-anchor="middle">演示舞台：替换成你的学科图形，保留 .band 的点击约定即可</text>
+    </svg>
+  </section>
+</main>
+
+<footer>
+  <div class="taskhead"><h3 id="taskTitle"></h3><span id="taskDesc"></span></div>
+  <div id="hintBox"></div>
+  <div class="answer" id="answerArea"></div>
+  <div class="actions">
+    <button class="btn" id="hintBtn">提示</button>
+    <button class="btn primary" id="submitBtn">提交检测</button>
+    <span id="feedback"></span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ============ 1. 只改这里 ============ */
+  const CONFIG = {
+    layers: [
+      { id: "grid",  name: "纬度网格", on: true },
+      { id: "belts", name: "气压带",   on: true }
+    ],
+    tasks: [
+      {
+        title: "把四个环节按先后排好",
+        desc: "点击两项可交换位置",
+        type: "sort",
+        items: ["赤道受热上升", "高空气流流向两极", "两极冷却下沉", "近地面流回赤道"],
+        correct: ["赤道受热上升", "高空气流流向两极", "两极冷却下沉", "近地面流回赤道"],
+        hints: [
+          "先想：空气是先动，还是先有气压差？",
+          "赤道受热之后，空气是往上还是往下？",
+          "顺序是：赤道上升 → 高空流向两极 → 两极下沉 → 近地面回流。"
+        ]
+      },
+      {
+        title: "在球上点出南北半球的信风带",
+        desc: "点两个区域后提交",
+        type: "pick",
+        correct: ["nh-0-30", "sh-0-30"],
+        hints: [
+          "信风带在低纬还是中纬？",
+          "赤道到 30° 之间，南北各一处。",
+          "正确位置是 0°—30° 的南北两条带。"
+        ]
+      },
+      {
+        title: "60° 附近，为什么是暖空气被迫抬升？",
+        desc: "单选",
+        type: "choice",
+        options: [
+          "因为暖空气密度小，主动向上浮",
+          "因为冷空气密度大、楔在下方，把暖空气抬了上去",
+          "因为该纬度地转偏向力最大",
+          "因为高空一直是低压"
+        ],
+        correct: 1,
+        hints: [
+          "看谁在下面、谁在上面。",
+          "冷空气密度大，会往哪里挤？",
+          "冷空气楔在下方，暖空气被顶上去，形成极锋。"
+        ]
+      },
+      {
+        title: "把纬度连到对应的气压带",
+        desc: "先点左栏，再点右栏",
+        type: "match",
+        left:  ["0°", "30°", "60°", "90°"],
+        right: ["副极地低压带", "极地高压带", "赤道低压带", "副热带高压带", "副热带低压带"],
+        correct: { 0: 2, 1: 3, 2: 0, 3: 1 },
+        hints: [
+          "赤道是受热上升还是冷却下沉？",
+          "30° 是下沉区，60° 是上升区。",
+          "0°→赤道低压带，30°→副热带高压带，60°→副极地低压带，90°→极地高压带。注意「副热带低压带」并不存在。"
+        ]
+      },
+      {
+        title: "把滑块拖到夏至，再判断各带位置",
+        desc: "拖动后提交",
+        type: "slider",
+        min: 0, max: 47, step: 0.5, target: 23.5, tolerance: 0.6,
+        question: "此时北半球气压带、风带整体如何移动？",
+        options: ["整体北移", "整体南移", "位置不变", "南北对称扩张"],
+        correct: 0,
+        hints: [
+          "太阳直射点在哪，气压带就跟到哪。",
+          "夏至直射点在北回归线，也就是 23.5°N。",
+          "拖到 23.5°，气压带风带整体北移。"
+        ]
+      }
+    ]
+  };
+  /* ============ 以下不用改 ============ */
+
+  const state = {
+    mode: "hard",            // hard | easy
+    level: 0,
+    passed: CONFIG.tasks.map(() => false),
+    hints: 0,
+    revealed: false,
+    submitted: false,
+    sort: null,
+    picked: [],
+    choice: null,
+    pairs: {},
+    matchSel: null,
+    slider: 0,
+    sliderChoice: null
+  };
+
+  const $ = id => document.getElementById(id);
+
+  function resetLevelState(){
+    state.hints = 0;
+    state.revealed = false;
+    state.submitted = false;
+    state.picked = [];
+    state.choice = null;
+    state.pairs = {};
+    state.matchSel = null;
+    state.sliderChoice = null;
+    const t = CONFIG.tasks[state.level];
+    state.sort = t && t.type === "sort" ? t.items.slice() : null;
+    state.slider = t && t.type === "slider" ? t.min : 0;
+  }
+
+  function unlocked(i){
+    if (state.mode === "easy") return true;
+    return i === 0 || state.passed[i - 1];
+  }
+
+  function renderLayers(){
+    $("layers").innerHTML = CONFIG.layers.map(function(l){
+      return '<label class="layer' + (l.on ? ' on' : '') + '">' +
+             '<input type="checkbox" data-layer="' + l.id + '"' + (l.on ? ' checked' : '') + '>' +
+             l.name + '</label>';
+    }).join("");
+    Array.prototype.forEach.call($("layers").querySelectorAll("input"), function(el){
+      el.addEventListener("change", function(e){
+        const id = e.target.getAttribute("data-layer");
+        CONFIG.layers.forEach(function(l){ if (l.id === id) l.on = e.target.checked; });
+        e.target.parentNode.classList.toggle("on", e.target.checked);
+        applyLayers();
+      });
+    });
+  }
+
+  function applyLayers(){
+    const on = {};
+    CONFIG.layers.forEach(function(l){ on[l.id] = l.on; });
+    const bands = document.querySelectorAll(".band");
+    Array.prototype.forEach.call(bands, function(b){ b.style.display = on.belts ? "" : "none"; });
+    const grid = document.querySelectorAll(".lat,.eq");
+    Array.prototype.forEach.call(grid, function(g){ g.style.display = on.grid ? "" : "none"; });
+  }
+
+  function renderSteps(){
+    $("steps").innerHTML = CONFIG.tasks.map(function(t, i){
+      const cls = ["step"];
+      if (state.passed[i]) cls.push("done");
+      if (i === state.level) cls.push("active");
+      if (!unlocked(i)) cls.push("locked");
+      return '<div class="' + cls.join(" ") + '" data-i="' + i + '">' +
+             '<span class="no">' + (state.passed[i] ? "✓" : (i + 1)) + '</span>' +
+             '<span>' + t.title + '</span></div>';
+    }).join("");
+    Array.prototype.forEach.call($("steps").querySelectorAll(".step"), function(el){
+      el.addEventListener("click", function(){
+        const i = Number(el.getAttribute("data-i"));
+        if (!unlocked(i)) { flash("需先通过第 " + i + " 关", "info"); return; }
+        go(i);
+      });
+    });
+  }
+
+  function go(i){
+    state.level = i;
+    resetLevelState();
+    renderSteps();
+    renderTask();
+    $("feedback").textContent = "";
+    $("feedback").className = "";
+    updateHintBtn();
+  }
+
+  function updateHintBtn(){
+    const t = CONFIG.tasks[state.level];
+    $("hintBtn").disabled = state.hints >= t.hints.length;
+    $("hintBtn").textContent = state.hints === 0 ? "提示" : "再提示（" + state.hints + "/" + t.hints.length + "）";
+  }
+
+  function renderTask(){
+    const t = CONFIG.tasks[state.level];
+    $("taskTitle").textContent = "第 " + (state.level + 1) + " 关 · " + t.title;
+    $("taskDesc").textContent = t.desc || "";
+    $("hintBox").innerHTML = "";
+    const a = $("answerArea");
+    a.innerHTML = "";
+    $("canvas").classList.remove("pickable");
+
+    if (t.type === "sort"){
+      a.innerHTML = '<div class="items" id="sortWrap"></div>';
+      paintSort();
+    } else if (t.type === "pick"){
+      a.innerHTML = '<div style="font-size:13px;color:var(--muted)">在左侧球体上点选区域（已选 <b id="pickCount">0</b> 处）</div>';
+      $("canvas").classList.add("pickable");
+      Array.prototype.forEach.call(document.querySelectorAll(".band"), function(b){ b.classList.remove("picked","wrong","revealed"); });
+      document.querySelectorAll(".band").forEach(function(b){
+        b.onclick = function(){
+          if (!CONFIG.tasks[state.level] || CONFIG.tasks[state.level].type !== "pick") return;
+          const id = b.getAttribute("data-id");
+          const idx = state.picked.indexOf(id);
+          if (idx >= 0) { state.picked.splice(idx, 1); b.classList.remove("picked"); }
+          else { state.picked.push(id); b.classList.add("picked"); }
+          $("pickCount").textContent = state.picked.length;
+        };
+      });
+    } else if (t.type === "choice"){
+      a.innerHTML = t.options.map(function(o, i){
+        return '<label class="opt"><input type="radio" name="choice" value="' + i + '">' + o + '</label>';
+      }).join("");
+      Array.prototype.forEach.call(a.querySelectorAll("input"), function(el){
+        el.addEventListener("change", function(){ state.choice = Number(el.value); });
+      });
+    } else if (t.type === "match"){
+      a.innerHTML =
+        '<div class="match"><div class="col" id="colL"></div><div class="col" id="colR"></div></div>' +
+        '<div class="pairs" id="pairsText">尚未连线</div>';
+      t.left.forEach(function(s, i){
+        const d = document.createElement("div");
+        d.className = "pill"; d.textContent = s; d.setAttribute("data-side","L"); d.setAttribute("data-i", i);
+        $("colL").appendChild(d);
+      });
+      t.right.forEach(function(s, i){
+        const d = document.createElement("div");
+        d.className = "pill"; d.textContent = s; d.setAttribute("data-side","R"); d.setAttribute("data-i", i);
+        $("colR").appendChild(d);
+      });
+      Array.prototype.forEach.call(a.querySelectorAll(".pill"), function(el){
+        el.addEventListener("click", function(){ onPill(el); });
+      });
+    } else if (t.type === "slider"){
+      a.innerHTML =
+        '<div class="sliderwrap"><input type="range" id="rng" min="' + t.min + '" max="' + t.max +
+        '" step="' + t.step + '" value="' + t.min + '"><span class="readout" id="ro">' + t.min.toFixed(1) + '°</span></div>' +
+        '<div style="margin-top:10px;font-size:14px">' + t.question + '</div>' +
+        t.options.map(function(o, i){
+          return '<label class="opt" style="margin-top:6px"><input type="radio" name="schoice" value="' + i + '">' + o + '</label>';
+        }).join("");
+      $("rng").addEventListener("input", function(e){
+        state.slider = Number(e.target.value);
+        $("ro").textContent = state.slider.toFixed(1) + "°";
+      });
+      Array.prototype.forEach.call(a.querySelectorAll("input[name=schoice]"), function(el){
+        el.addEventListener("change", function(){ state.sliderChoice = Number(el.value); });
+      });
+    }
+  }
+
+  function paintSort(){
+    const wrap = $("sortWrap");
+    wrap.innerHTML = state.sort.map(function(s, i){
+      return '<div class="item" data-i="' + i + '">' + s + '</div>';
+    }).join("");
+    Array.prototype.forEach.call(wrap.querySelectorAll(".item"), function(el){
+      el.addEventListener("click", function(){
+        const i = Number(el.getAttribute("data-i"));
+        if (state.matchSel === null) { state.matchSel = i; el.classList.add("sel"); return; }
+        if (state.matchSel === i) { el.classList.remove("sel"); state.matchSel = null; return; }
+        const j = state.matchSel;
+        const tmp = state.sort[i]; state.sort[i] = state.sort[j]; state.sort[j] = tmp;
+        state.matchSel = null;
+        paintSort();
+      });
+    });
+  }
+
+  function onPill(el){
+    const side = el.getAttribute("data-side");
+    const i = Number(el.getAttribute("data-i"));
+    if (side === "L"){
+      Array.prototype.forEach.call(document.querySelectorAll('.pill[data-side="L"]'), function(p){ p.classList.remove("sel"); });
+      el.classList.add("sel");
+      state.matchSel = i;
+      return;
+    }
+    if (state.matchSel === null) { flash("请先点左栏", "info"); return; }
+    state.pairs[state.matchSel] = i;
+    Array.prototype.forEach.call(document.querySelectorAll(".pill"), function(p){ p.classList.remove("sel","linked"); });
+    state.matchSel = null;
+    paintPairs();
+  }
+
+  function paintPairs(){
+    const t = CONFIG.tasks[state.level];
+    const keys = Object.keys(state.pairs);
+    if (!keys.length){ $("pairsText").textContent = "尚未连线"; return; }
+    $("pairsText").textContent = keys.map(function(k){
+      return t.left[k] + " → " + t.right[state.pairs[k]];
+    }).join("　　");
+    Array.prototype.forEach.call(document.querySelectorAll('.pill[data-side="L"]'), function(p){
+      if (state.pairs[p.getAttribute("data-i")] !== undefined) p.classList.add("linked");
+    });
+  }
+
+  function check(){
+    const t = CONFIG.tasks[state.level];
+    if (t.type === "sort") return JSON.stringify(state.sort) === JSON.stringify(t.correct);
+    if (t.type === "pick"){
+      if (state.picked.length !== t.correct.length) return false;
+      return t.correct.every(function(c){ return state.picked.indexOf(c) >= 0; });
+    }
+    if (t.type === "choice") return state.choice === t.correct;
+    if (t.type === "match"){
+      const ks = Object.keys(t.correct);
+      return ks.every(function(k){ return state.pairs[k] === t.correct[k]; }) &&
+             Object.keys(state.pairs).length === ks.length;
+    }
+    if (t.type === "slider"){
+      return Math.abs(state.slider - t.target) <= t.tolerance && state.sliderChoice === t.correct;
+    }
+    return false;
+  }
+
+  function revealAnswer(){
+    const t = CONFIG.tasks[state.level];
+    state.revealed = true;
+    if (t.type === "sort"){ state.sort = t.correct.slice(); paintSort(); }
+    if (t.type === "pick"){
+      Array.prototype.forEach.call(document.querySelectorAll(".band"), function(b){
+        if (t.correct.indexOf(b.getAttribute("data-id")) >= 0) b.classList.add("revealed");
+      });
+    }
+    if (t.type === "choice"){
+      const inputs = document.querySelectorAll('input[name=choice]');
+      inputs[t.correct].checked = true;
+      state.choice = t.correct;
+    }
+    if (t.type === "match"){
+      state.pairs = {}; Object.keys(t.correct).forEach(function(k){ state.pairs[k] = t.correct[k]; });
+      paintPairs();
+    }
+    if (t.type === "slider"){
+      state.slider = t.target;
+      const r = $("rng"); if (r){ r.value = String(t.target); }
+      const ro = $("ro"); if (ro) ro.textContent = t.target.toFixed(1) + "°";
+      const inputs = document.querySelectorAll('input[name=schoice]');
+      if (inputs[t.correct]) inputs[t.correct].checked = true;
+      state.sliderChoice = t.correct;
+    }
+    flash("答案已展示。请对照重读一遍，再点「提交检测」才算过关。", "info");
+  }
+
+  function submit(){
+    const t = CONFIG.tasks[state.level];
+    if (!check()){
+      flash("还不对，再想想。可以点「提示」拿一层线索。", "bad");
+      return;
+    }
+    state.passed[state.level] = true;
+    renderSteps();
+    if (state.level < CONFIG.tasks.length - 1){
+      flash("通过。下一关已解锁。", "ok");
+      setTimeout(function(){ go(state.level + 1); }, 700);
+    } else {
+      flash("全部关卡通过。", "ok");
+    }
+  }
+
+  let flashTimer = null;
+  function flash(msg, kind){
+    const el = $("feedback");
+    el.textContent = msg;
+    el.className = "feedback " + (kind || "");
+    if (flashTimer) clearTimeout(flashTimer);
+    flashTimer = setTimeout(function(){ el.textContent = ""; el.className = ""; }, 6000);
+  }
+
+  $("hintBtn").addEventListener("click", function(){
+    const t = CONFIG.tasks[state.level];
+    state.hints = Math.min(state.hints + 1, t.hints.length);
+    const isLast = state.hints === t.hints.length;
+    $("hintBox").innerHTML = '<div class="hintbox"><b>提示 ' + state.hints + '</b>　' + t.hints[state.hints - 1] + '</div>';
+    updateHintBtn();
+    if (isLast) revealAnswer();
+  });
+
+  $("submitBtn").addEventListener("click", submit);
+
+  $("modeBtn").addEventListener("click", function(){
+    state.mode = state.mode === "hard" ? "easy" : "hard";
+    $("modeBtn").textContent = state.mode === "hard" ? "困难模式" : "简单模式";
+    renderSteps();
+    flash(state.mode === "hard" ? "已切换为困难模式：前一关通过才解锁下一关。" : "已切换为简单模式：全部关卡开放。", "info");
+  });
+
+  $("resetBtn").addEventListener("click", function(){
+    state.mode = "hard";
+    $("modeBtn").textContent = "困难模式";
+    state.passed = CONFIG.tasks.map(function(){ return false; });
+    go(0);
+  });
+
+  renderLayers();
+  applyLayers();
+  go(0);
+})();
+</script>
+</body>
+</html>
