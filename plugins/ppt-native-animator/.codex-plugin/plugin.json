@@ -1,0 +1,25 @@
+{
+  "name": "ppt-native-animator",
+  "version": "0.3.4+codex.20261026",
+  "description": "Analyze local PowerPoint files, design model-authored teaching sequences, apply editable native animations, and audit the result.",
+  "author": {
+    "name": "Local developer"
+  },
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "PPT 原生动画助手",
+    "shortDescription": "为本地 PowerPoint 课件生成可编辑的原生动画。",
+    "longDescription": "先校验 PPT 结构并结合逐字稿教学节点，由大模型设计真人课堂或自动微课动画方案，再通过确定性编译、性能预算、OOXML 写入和强制审计生成原生动画；高风险页面在目标 PowerPoint 或 WPS 中抽查播放。",
+    "developerName": "Local developer",
+    "category": "Productivity",
+    "capabilities": [
+      "Write"
+    ],
+    "defaultPrompt": [
+      "为这份 PPT 生成真人课堂控制的逐步讲解动画方案。",
+      "按微课自动模式处理这份 PPT。",
+      "检查这份 PPT 的现有动画并提出优化方案。",
+      "对照源文件审计这份动画版 PPT 是否有遗漏或内容变化。"
+    ]
+  }
+}

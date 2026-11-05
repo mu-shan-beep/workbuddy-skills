@@ -1,0 +1,23 @@
+{
+  "name": "ppt-native-animator",
+  "version": "0.3.4+codex.20261026",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "test": "node tests/run-tests.mjs && node tests/package-regression.mjs",
+    "test:unit": "node tests/run-tests.mjs",
+    "test:package": "node tests/package-regression.mjs",
+    "release:manifest": "node scripts/release-manifest.mjs --write",
+    "release:verify": "node scripts/release-manifest.mjs",
+    "analyze:model": "node scripts/prepare-model-analysis.mjs",
+    "analyze:incremental": "node scripts/prepare-incremental-analysis.mjs",
+    "compile:model": "node scripts/compile-model-plan.mjs",
+    "merge:incremental": "node scripts/merge-model-plan-patch.mjs",
+    "apply": "node scripts/apply-animation-plan.mjs",
+    "validate": "node scripts/validate-presentation.mjs",
+    "audit": "node scripts/audit-animation-result.mjs"
+  }
+}

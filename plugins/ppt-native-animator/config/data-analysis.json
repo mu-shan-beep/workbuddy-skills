@@ -1,0 +1,13 @@
+{
+  "id": "data-analysis",
+  "label": "数据分析",
+  "playback": "mixed",
+  "answerTrigger": "on_click",
+  "paragraphs": false,
+  "titleInitial": false,
+  "questionInitial": false,
+  "groupBody": false,
+  "maxStages": 8,
+  "effects": { "text": "fade", "image": "fade", "diagram": "fade", "answer": "fade" },
+  "timing": { "text": 360, "image": 480, "diagram": 480, "answer": 420, "delay": 150, "transition": 550 }
+}

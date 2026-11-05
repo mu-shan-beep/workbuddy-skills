@@ -1,0 +1,4 @@
+interface:
+  display_name: "教学｜教案包与课件"
+  short_description: "按教案包流程制作教学资源，多轮检查评分、阶段确认、单课时顺序制作并保持画风一致"
+  default_prompt: "使用 $teaching-ppt-workflow 按流程制作完整教案包，逐阶段检查、展示并等待确认；确认后继续下一阶段，PPT按课时顺序完成，最终分类打包交付。"

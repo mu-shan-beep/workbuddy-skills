@@ -10,6 +10,20 @@
 
 ---
 
+## Codex 技能与插件备份（2026-11-05）
+
+本次扩展备份保留原 WorkBuddy 三项自建技能，并额外收录：
+
+- `codex-skills/teaching-ppt-workflow`：教案包制作流程（含可画先归档再组装、AI按需简单融入规则）。
+- `codex-skills/ppt-visual-style`：个人课件视觉风格规则。
+- `codex-skills/interactive-courseware`：Codex 交互课件流程，与根目录 WorkBuddy 版本分别保存。
+- `plugins/ppt-native-animator`：自研 PowerPoint 动画插件源码、配置、三项配套技能及测试。
+
+下文原“3个技能”统计仅指根目录 WorkBuddy 自建技能。第三方市场技能、系统插件、密钥、授权配置、缓存及运行产物不在本次备份内。`backup-manifest.json` 记录本次各文件校验值及来源目录。恢复时分别复制到对应宿主的技能或插件目录，凭证另行配置，不从本仓库恢复。
+
+---
+
+
 ## 一、技能清单
 
 本仓库共备份 3 个技能，全部由本人从零编写。安装来源的技能不入库，名单与介绍见[第三节](#三安装来源的技能3-个)。

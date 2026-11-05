@@ -1,0 +1,13 @@
+{
+  "id": "microcourse-auto",
+  "label": "微课自动",
+  "playback": "auto",
+  "answerTrigger": "after_previous",
+  "paragraphs": false,
+  "titleInitial": false,
+  "questionInitial": false,
+  "groupBody": false,
+  "maxStages": 8,
+  "effects": { "text": "fade", "image": "fade", "diagram": "wipe", "answer": "fade" },
+  "timing": { "text": 380, "image": 520, "diagram": 460, "answer": 440, "delay": 180, "transition": 600 }
+}

@@ -1,0 +1,6 @@
+interface:
+  display_name: "PPT 原生动画"
+  short_description: "为本地 PowerPoint 课件添加可编辑原生动画"
+  default_prompt: "Use $ppt-native-animation to analyze this PowerPoint, design its teaching sequence, and apply editable native animations to a new copy."
+policy:
+  allow_implicit_invocation: true

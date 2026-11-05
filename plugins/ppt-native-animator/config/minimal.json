@@ -1,0 +1,13 @@
+{
+  "id": "minimal",
+  "label": "极简兼容",
+  "playback": "mixed",
+  "answerTrigger": "on_click",
+  "paragraphs": false,
+  "titleInitial": false,
+  "questionInitial": false,
+  "groupBody": false,
+  "maxStages": 4,
+  "effects": { "text": "fade", "image": "fade", "diagram": "fade", "answer": "fade" },
+  "timing": { "text": 340, "image": 460, "diagram": 400, "answer": 400, "delay": 120, "transition": 500 }
+}
