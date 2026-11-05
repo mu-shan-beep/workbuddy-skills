@@ -12,18 +12,15 @@
 
 ## 一、技能清单
 
-本仓库共备份 4 个技能。其中 3 个由本人从零编写，`teachable-figures` 是安装来的技能，经本地二次开发后一并纳入备份。
+本仓库共备份 3 个技能，全部由本人从零编写。安装来源的技能不入库，名单与介绍见[第三节](#三安装来源的技能3-个)。
 
 | 技能 | 来源 | 一句话用途 | 体积 | 文件数 |
 |---|---|---|---|---|
 | [`lesson-typeset`](#1-lesson-typeset--文档排版引擎) | 自建 | 按固定版式把教学设计、逐字稿、学习清单、制作笔记排成 Word | 1.1M | 40 |
-| [`teachable-figures`](#2-teachable-figures--教学图示生成) | 安装 + 二次开发 | 把抽象概念做成可预测、可操作、可解释的教学图示 | 6.8M | 112 |
-| [`interactive-courseware`](#3-interactive-courseware--交互课件制作流程) | 自建 | 把「讲不清长什么样」的知识点做成单文件离线交互课件 | 52K | 5 |
-| [`xhs-lesson-notes`](#4-xhs-lesson-notes--小红书备课笔记文案) | 自建 | 写小红书语文课件推广笔记，含对标拆解与合规自检 | 36K | 2 |
+| [`interactive-courseware`](#2-interactive-courseware--交互课件制作流程) | 自建 | 把「讲不清长什么样」的知识点做成单文件离线交互课件 | 52K | 5 |
+| [`xhs-lesson-notes`](#3-xhs-lesson-notes--小红书备课笔记文案) | 自建 | 写小红书语文课件推广笔记，含对标拆解与合规自检 | 36K | 2 |
 
-四个技能覆盖「内容生产 → 可视化表达 → 交互化呈现 → 对外传播」的完整链路，彼此职责不重叠。
-
-> `teachable-figures` 的来源是 anatomy 与 iso-figure 两个 MIT 开源仓库，本地改造已超出上游提供的内容范围（下游修改记录见 `references/source-manifest.json`），因此虽然来源属外部安装，仍保留在备份内。
+三个技能覆盖「内容生产 → 交互化呈现 → 对外传播」的链路，彼此职责不重叠。
 
 ---
 
@@ -71,47 +68,7 @@ lesson-typeset/
 
 ---
 
-### 2. `teachable-figures` — 教学图示生成
-
-**做什么**：把课文、章节或技术概念转化为**可教学**的图示——学习者先预测结果，再改变条件，观察变化，最后解释原因。核心是让一个机制变得可见、可操作，而非画一张静态配图。
-
-**支持的形态**
-
-- 可复用的 2D 交互组件（widget）
-- 可工作的等轴测 SVG 对象
-- 机械装配、剖视图、爆炸图
-- 概念需要空间运动才能说清时，生成真正的 3D 可旋转模型
-
-**设计约束**：遵循 predict → try → explain 教学法；保留宿主应用的课程约定与无障碍要求；默认先做一轮简短访谈再动手，除非用户要求直接生成。
-
-**不适用**：普通数据图表、仪表盘、幻灯片、静态插画、整门课程。
-
-**来源说明**：基于两个 MIT 协议开源仓库二次开发，上游地址、commit、许可证与本地改动记录均写在 `references/source-manifest.json`：
-
-- `wheresryan22/anatomy` → `assets/anatomy`
-- `MrBongoC/ai-iso-skill` → `assets/iso-figure`
-
-**目录结构**
-
-```
-teachable-figures/
-├── SKILL.md
-├── references/        12 份方法论文档 + 截图目录 + source-manifest.json
-│   ├── learning-design.md        学习设计（写 spec 前必读）
-│   ├── teaching-and-spec.md      教学法与规格
-│   ├── rendering-selection.md    渲染方式选择
-│   ├── simple-iso.md             等轴测工作流
-│   ├── spatial-and-3d.md         空间与 3D
-│   ├── mechanical-craft.md       机械结构
-│   ├── verification.md           正确性与视觉保真校验
-│   └── ...
-├── assets/            6.4M，含 anatomy / iso-figure 素材与 HRA 网格数据
-└── scripts/           构建与校验脚本
-```
-
----
-
-### 3. `interactive-courseware` — 交互课件制作流程
+### 2. `interactive-courseware` — 交互课件制作流程
 
 **做什么**：把「学生想不明白它长什么样、课上又没法做对照」的知识点，做成**单文件、离线、可投屏**的 HTML 交互课件。整个文件拷进 U 盘就能上课，不依赖网络和安装。
 
@@ -147,7 +104,7 @@ interactive-courseware/
 
 ---
 
-### 4. `xhs-lesson-notes` — 小红书备课笔记文案
+### 3. `xhs-lesson-notes` — 小红书备课笔记文案
 
 **做什么**：写语文课件、教案产品的小红书推广文案。定位不是卖货话术，而是**教师对教师的备课笔记**，可信度来自可复用的备课价值。
 
@@ -176,18 +133,24 @@ xhs-lesson-notes/
 
 ## 三、安装来源的技能（3 个）
 
-技能面板显示「技能（6）」，其中 3 个自建、3 个是安装来的。安装的三个里，`teachable-figures` 因本地二次开发量大仍纳入备份，另外两个仅在本地使用、不入库。
+技能面板显示「技能（6）」，其中 3 个自建、3 个是安装来的。**安装的三个均不入库**，此处只作登记，便于换机时知道该补装什么。
 
 > 专家包与插件不在此列。它们不是独立技能，由专家中心与插件市场分发、随应用更新，无法从本仓库恢复。
 
 ### 3.1 逐个登记
 
-#### `teachable-figures` — 教学图示（在备份内）
+#### `teachable-figures` — 教学图示
 
-- **来源**：从 `anatomy`（wheresryan22/anatomy）与 `iso-figure`（MrBongoC/ai-iso-skill）两个 MIT 仓库安装，本地二次开发，当前本地版本 0.3.0
-- **能做什么**：详见[第二节](#2-teachable-figures--教学图示生成)。核心是把课文或技术概念做成 predict → try → explain 的可操作图示
-- **备份状态**：**已纳入备份**。判断依据是本地改造已超出上游提供的内容，重新安装后无法复原，因此不能只依赖上游
-- **恢复方式**：从本仓库直接恢复；若从上游重装，需重新应用 `references/source-manifest.json` 中记录的本地改动
+把课文、章节或技术概念转化为**可教学**的图示：学习者先预测结果，再改变条件，观察变化，最后解释原因。支持 2D 交互组件、等轴测 SVG 对象、机械装配与剖视图，概念需要空间运动才能说清时可生成真正的 3D 可旋转模型。不适用于数据图表、仪表盘、幻灯片、静态插画与整门课程。
+
+- **版本 / 来源**：0.3.0 / GitHub 仓库安装（`ywEdAi/teachable-figures`，MIT）
+- **上游 commit**：`1acdd97`（2026-11-02）
+- **能做什么**：遵循 predict → try → explain 教学法；保留宿主应用的课程约定与无障碍要求；默认先做一轮简短访谈再动手。内含 15 个双语示例课、两套 vendored 渲染工具包（`anatomy`、`iso-figure`）与 HRA 人体网格数据
+- **触发场景**：教学图示、交互式图解、机制演示、可旋转模型、把课本插图做成能操作的、等轴测图
+- **不入库原因**：本地文件与该 commit **逐字节一致、零改造**，重装即可完整复原，归档进个人仓库没有版本价值
+- **恢复方式**：见[第五节](#五在新机器上恢复)的第三方技能恢复命令
+
+> 注意：该技能内的 `references/source-manifest.json` 含一段 `local_modifications`，记录的是**上游作者**融合 anatomy 与 iso-figure 时的改动，不是本地改动。看到 `local` 字样不要误判为本地二次开发。
 
 #### `ima-skills__skillhub` — IMA 知识库
 
@@ -221,7 +184,7 @@ WorkBuddy「Buddy 加油站」的每日签到自动化，接口直签，跨 Wind
 3. `SKILL.md` frontmatter 的 `author` 不是本人
 4. 存在 `references/source-manifest.json` 且指向外部仓库
 
-> 例外：命中第 4 条、但本地改造量已明显超出上游内容的，可比照 `teachable-figures` 处理——保留在库内，同时在 3.1 写清来源与备份理由，避免日后误判为自建。
+命中后还须做一步实证：把上游仓库拉到临时目录，与本地逐字节比对，确认改动量。**不要只读 `source-manifest.json` 的 `local_modifications` 就断定有本地改造**——那段文字可能出自上游作者之手。`teachable-figures` 就是因此被误判过一次。
 
 ---
 
@@ -232,7 +195,6 @@ WorkBuddy「Buddy 加油站」的每日签到自动化，接口直签，跨 Wind
 ├── README.md                        本文件
 ├── .gitignore                       排除第三方技能、缓存、凭证与产物
 ├── lesson-typeset/
-├── teachable-figures/
 ├── interactive-courseware/
 └── xhs-lesson-notes/
 ```
@@ -241,7 +203,7 @@ WorkBuddy「Buddy 加油站」的每日签到自动化，接口直签，跨 Wind
 
 | 类别 | 内容 |
 |---|---|
-| 第三方技能 | `/ima-skills__skillhub/`、`/totorosir-workbuddy-checkin/` |
+| 第三方技能 | `/ima-skills__skillhub/`、`/totorosir-workbuddy-checkin/`、`/teachable-figures/` |
 | 编译缓存 | `__pycache__/`、`*.pyc`、`*.pyo` |
 | 凭证类 | `*.env`、`*-cred.json`、`*-rt.json`、`*.key`、`*.pem` |
 | 运行时标记 | 根目录 `*_migration.json`（应用自动生成） |
@@ -262,7 +224,19 @@ git clone git@github.com:mu-shan-beep/workbuddy-skills.git ~/.workbuddy/skills
 mv ~/.workbuddy/skills ~/.workbuddy/skills.bak
 git clone git@github.com:mu-shan-beep/workbuddy-skills.git ~/.workbuddy/skills
 
-# 4. 第三方技能按需从市场重新安装，不在此仓库内
+# 4. 第三方技能不在此仓库内，按第三节的登记逐个补装
+```
+
+第三方技能恢复命令：
+
+```bash
+# teachable-figures（GitHub 仓库，零改造，可直接完整安装）
+git clone https://github.com/ywEdAi/teachable-figures.git /tmp/tf-install
+rsync -a --exclude='.git' /tmp/tf-install/ ~/.workbuddy/skills/teachable-figures/
+rm -rf /tmp/tf-install
+
+# ima-skills__skillhub、totorosir-workbuddy-checkin
+# 分别从技能中心、插件市场重新安装
 ```
 
 恢复后重启 WorkBuddy，技能列表才会刷新。
