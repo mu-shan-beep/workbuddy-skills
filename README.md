@@ -12,14 +12,18 @@
 
 ## 一、技能清单
 
-| 技能 | 一句话用途 | 体积 | 文件数 |
-|---|---|---|---|
-| [`lesson-typeset`](#1-lesson-typeset--文档排版引擎) | 按固定版式把教学设计、逐字稿、学习清单、制作笔记排成 Word | 1.1M | 40 |
-| [`teachable-figures`](#2-teachable-figures--教学图示生成) | 把抽象概念做成可预测、可操作、可解释的教学图示 | 6.8M | 112 |
-| [`interactive-courseware`](#3-interactive-courseware--交互课件制作流程) | 把「讲不清长什么样」的知识点做成单文件离线交互课件 | 52K | 5 |
-| [`xhs-lesson-notes`](#4-xhs-lesson-notes--小红书备课笔记文案) | 写小红书语文课件推广笔记，含对标拆解与合规自检 | 36K | 2 |
+本仓库共备份 4 个技能。其中 3 个由本人从零编写，`teachable-figures` 是安装来的技能，经本地二次开发后一并纳入备份。
+
+| 技能 | 来源 | 一句话用途 | 体积 | 文件数 |
+|---|---|---|---|---|
+| [`lesson-typeset`](#1-lesson-typeset--文档排版引擎) | 自建 | 按固定版式把教学设计、逐字稿、学习清单、制作笔记排成 Word | 1.1M | 40 |
+| [`teachable-figures`](#2-teachable-figures--教学图示生成) | 安装 + 二次开发 | 把抽象概念做成可预测、可操作、可解释的教学图示 | 6.8M | 112 |
+| [`interactive-courseware`](#3-interactive-courseware--交互课件制作流程) | 自建 | 把「讲不清长什么样」的知识点做成单文件离线交互课件 | 52K | 5 |
+| [`xhs-lesson-notes`](#4-xhs-lesson-notes--小红书备课笔记文案) | 自建 | 写小红书语文课件推广笔记，含对标拆解与合规自检 | 36K | 2 |
 
 四个技能覆盖「内容生产 → 可视化表达 → 交互化呈现 → 对外传播」的完整链路，彼此职责不重叠。
+
+> `teachable-figures` 的来源是 anatomy 与 iso-figure 两个 MIT 开源仓库，本地改造已超出上游提供的内容范围（下游修改记录见 `references/source-manifest.json`），因此虽然来源属外部安装，仍保留在备份内。
 
 ---
 
@@ -170,15 +174,20 @@ xhs-lesson-notes/
 
 ---
 
-## 三、第三方内容登记（不入库）
+## 三、安装来源的技能（3 个）
 
-本机除四个自建技能外，还安装了两个第三方技能。它们**均不进入本仓库**，此处登记以便换机时知道补装什么。
+技能面板显示「技能（6）」，其中 3 个自建、3 个是安装来的。安装的三个里，`teachable-figures` 因本地二次开发量大仍纳入备份，另外两个仅在本地使用、不入库。
 
 > 专家包与插件不在此列。它们不是独立技能，由专家中心与插件市场分发、随应用更新，无法从本仓库恢复。
 
-### 3.1 已安装的第三方技能（2 个）
+### 3.1 逐个登记
 
-直接装在 `~/.workbuddy/skills/` 下，属于可独立安装、可独立备份的技能包。
+#### `teachable-figures` — 教学图示（在备份内）
+
+- **来源**：从 `anatomy`（wheresryan22/anatomy）与 `iso-figure`（MrBongoC/ai-iso-skill）两个 MIT 仓库安装，本地二次开发，当前本地版本 0.3.0
+- **能做什么**：详见[第二节](#2-teachable-figures--教学图示生成)。核心是把课文或技术概念做成 predict → try → explain 的可操作图示
+- **备份状态**：**已纳入备份**。判断依据是本地改造已超出上游提供的内容，重新安装后无法复原，因此不能只依赖上游
+- **恢复方式**：从本仓库直接恢复；若从上游重装，需重新应用 `references/source-manifest.json` 中记录的本地改动
 
 #### `ima-skills__skillhub` — IMA 知识库
 
@@ -212,7 +221,7 @@ WorkBuddy「Buddy 加油站」的每日签到自动化，接口直签，跨 Wind
 3. `SKILL.md` frontmatter 的 `author` 不是本人
 4. 存在 `references/source-manifest.json` 且指向外部仓库
 
-> 例外：`teachable-figures` 命中第 4 条，但本地改造已超出上游提供的内容范围，经确认后保留在库内，上游信息如实记录在 manifest 中。
+> 例外：命中第 4 条、但本地改造量已明显超出上游内容的，可比照 `teachable-figures` 处理——保留在库内，同时在 3.1 写清来源与备份理由，避免日后误判为自建。
 
 ---
 
