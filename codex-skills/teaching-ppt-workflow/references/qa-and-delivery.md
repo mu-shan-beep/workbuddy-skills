@@ -85,6 +85,7 @@ Check the task boundary too: a standalone style analysis must not generate image
 - Representative slideshow playback has been tested, including changed animation, timer, audio or video behavior where applicable. Opening the file is not a playback test.
 - Record each affected dynamic page as `已播放通过`, `播放失败`, or `未验证`, with the tested application; never report `未验证` as passed.
 - Delivery filenames are clear and free of temporary suffixes.
+- 图片交付前验证实际文件存在、可解码及尺寸/数量；ZIP实际打开并检查条目、完整性及内容与交付图片一致。文件可读与用户端可下载分别报告：本地检查不等于已验证用户下载。用户反馈无法下载时，先检查交付文件和当前有效的附件/下载入口，必要时重新附上已核对文件；未经复现不把中文文件名、签名过期或其他猜测写成根因。不只重发同一失效入口，也不把其他聊天的 sandbox 路径或临时链接当作当前可用交付。
 - The delivery folder excludes extracted assets, work logs and obsolete drafts.
 
 ## Delivery report

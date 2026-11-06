@@ -268,13 +268,13 @@
     },
     {
       "path": "codex-skills/teaching-ppt-workflow/SKILL.md",
-      "sha256": "aec207ef2fe13ca4192358d691c59ccb648c0d235ef984161363c103eff068ab",
-      "bytes": 20701
+      "sha256": "2c3dc4c08e9d1405162b160c05277fce30b35aae49c8cdad53661d7ef7885caa",
+      "bytes": 21137
     },
     {
       "path": "codex-skills/teaching-ppt-workflow/references/lesson-pack.md",
-      "sha256": "e60b56f49cefe5c0d48e8a7fab72e119761211486a016bbae87224bc6168e5e6",
-      "bytes": 19797
+      "sha256": "4a7e8b61878dd780925e703ebc3fe33941f3fd0ce0f7987bca53853b39192975",
+      "bytes": 20640
     },
     {
       "path": "codex-skills/teaching-ppt-workflow/references/capability-routing.md",
@@ -293,8 +293,8 @@
     },
     {
       "path": "codex-skills/teaching-ppt-workflow/references/teaching-resources.md",
-      "sha256": "b4b71c2af987205467adec265e1535c403dcb802211406c16414b7cb2341241b",
-      "bytes": 8012
+      "sha256": "c085cc34dec8ec00620d801dbd96e486ddb02c9836d08aafe880e46a339b617c",
+      "bytes": 8530
     },
     {
       "path": "codex-skills/teaching-ppt-workflow/references/lesson-pack-prompts.md",
@@ -313,18 +313,18 @@
     },
     {
       "path": "codex-skills/teaching-ppt-workflow/references/classroom-design.md",
-      "sha256": "447d28cf4b4c955c0827d3d3c87667abbdc0bda6474a43484791bfc3e481cf04",
-      "bytes": 6803
+      "sha256": "5d7d71b3ee94edd2543eacbdf3900d5aeeaac674d9e4db1af2fbf8aac5d1b7c0",
+      "bytes": 8464
     },
     {
       "path": "codex-skills/teaching-ppt-workflow/references/canva-layer-repair.md",
-      "sha256": "12a53aa46ea32e9dfdb88e07dfc53dbe0082030773a105430e3622a603af0f68",
-      "bytes": 4913
+      "sha256": "28ebf774129e1d067d242ac9e71216e74da9d2863310755dc4fa491de24865e9",
+      "bytes": 5711
     },
     {
       "path": "codex-skills/teaching-ppt-workflow/references/qa-and-delivery.md",
-      "sha256": "1bc5df663bf8cb640f23c9ca409c384c0045e0d373a8a91daf671fe575c4d701",
-      "bytes": 11800
+      "sha256": "a82ab6e44c347086c9b8462ddbe6ae5d63285ae464ac7bb0a0747429d68cfe8f",
+      "bytes": 12363
     },
     {
       "path": "codex-skills/teaching-ppt-workflow/references/local-editing.md",
@@ -338,13 +338,13 @@
     },
     {
       "path": "codex-skills/teaching-ppt-workflow/references/feedback-regression.md",
-      "sha256": "5dfd59832495e7a94ff38e04c6ea4a39d60503936d842428b58f9c1aa0b39b6a",
-      "bytes": 2956
+      "sha256": "4e4ed7d43c717cde899fb735a34ddbf2d7c76d36c9d7d037fca3a5e7987765f7",
+      "bytes": 5821
     },
     {
       "path": "codex-skills/teaching-ppt-workflow/references/lesson-review.md",
-      "sha256": "6d77c7b5d7932420d0fd5f2e3de4a03da08f85455a9c20e28827973192b4e5ef",
-      "bytes": 22702
+      "sha256": "1e7837946117f29b643eeb47ff6b03abe024b2bc7dce6ba8e8eb13b43a9e458c",
+      "bytes": 23853
     },
     {
       "path": "codex-skills/teaching-ppt-workflow/agents/openai.yaml",
@@ -388,8 +388,8 @@
     },
     {
       "path": "codex-skills/ppt-visual-style/SKILL.md",
-      "sha256": "9f9841c5d01765bfa3bfe4f3c0c93535cb18ea2fae71889973c8c9193bec72f9",
-      "bytes": 5788
+      "sha256": "1775789a99bf5cff65fde6bf76514fa6e2ebf55ce98d77cf4d7990bf03830ca1",
+      "bytes": 6492
     },
     {
       "path": "codex-skills/ppt-visual-style/references/research.md",
@@ -670,6 +670,22 @@
       "path": "plugins/ppt-native-animator/skills/ppt-animation-auditor/agents/openai.yaml",
       "sha256": "c1e9d83245abd8fefa0d88c43339929d50e849152c8733c4239aff4a6b63d3e1",
       "bytes": 316
+    },
+    {
+      "path": "codex-skills/teaching-ppt-workflow/references/design-reasoning.md",
+      "sha256": "e4063f13ec231497a17c8866eadc69c84a856b47f03c39215e67b555e6f8856a",
+      "bytes": 4326
+    }
+  ],
+  "scope_updates": [
+    {
+      "date": "2026-11-06",
+      "destinations": [
+        "codex-skills/teaching-ppt-workflow",
+        "codex-skills/ppt-visual-style"
+      ],
+      "verified_files": 33,
+      "summary": "同步牛和鹅局部修复、图层、宣传和交付经验，以及优秀案例设计思路的迁移规则"
     }
   ]
 }

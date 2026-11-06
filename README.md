@@ -12,6 +12,8 @@
 
 ## Codex 技能与插件备份（2026-11-05）
 
+2026-11-06增量同步：更新 `codex-skills/teaching-ppt-workflow` 与 `codex-skills/ppt-visual-style`。保留《牛和鹅》经验的证据边界，补充局部修复复查、宣传原页复用及设计思路迁移规则；本次核对这两项目录共33个文件。清单中的 `date` 为初始快照日期，`scope_updates` 记录后续分范围更新，其他目录不代表本次重新核验。
+
 本次扩展备份保留原 WorkBuddy 三项自建技能，并额外收录：
 
 - `codex-skills/teaching-ppt-workflow`：教案包制作流程（含可画先归档再组装、AI按需简单融入规则）。
