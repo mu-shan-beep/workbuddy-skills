@@ -1,10 +1,10 @@
 ---
-name: lesson-script
+name: lesson-transcript
 description: 依据已确认的教学设计与成品课件，逐页编写可直接照读的课堂逐字稿（讲课稿），或对已有逐字稿做「教学设计—课件—时间」三方对读与质量审核。产出 lesson-typeset 可直接排版的 Markdown 源稿（## 第 N 页 · 标题｜起—止），默认一个课时一份；不改教学设计、不改课件、不调页序，材料冲突只列不改。当用户说「写逐字稿」「按课件写讲课稿／课堂实录稿」「审核逐字稿」「检查逐字稿和课件对不对得上」「课时时间对不对」时使用。
 agent_created: true
 ---
 
-# 课堂逐字稿：编写与审核（lesson-script）
+# 课堂逐字稿：编写与审核（lesson-transcript）
 
 一句话：**教学设计决定教什么，课件决定放什么，逐字稿只负责把它变成课堂上说得出口的话。**
 
@@ -36,7 +36,7 @@ agent_created: true
 | 要拿到的 | 怎么拿 | 用途 |
 |---|---|---|
 | 环节与活动的分钟数 | 读教学设计，抄成「环节→活动（分钟）」两列，先自查加法＝课时总长 | 时间的唯一基准 |
-| 每页屏幕内容 | `python3 ~/.workbuddy/skills/lesson-script/scripts/pptx_text.py <课件.pptx> [--notes]` | 页标题、问句清单、词表／写字表／作业项 |
+| 每页屏幕内容 | `python3 ~/.workbuddy/skills/lesson-transcript/scripts/pptx_text.py <课件.pptx> [--notes]` | 页标题、问句清单、词表／写字表／作业项 |
 | 课文原句 | 教材 PDF 或用户给的原文 | 引文、多音字、动词串只能照教材 |
 
 缺哪一样就说明哪一样缺失，不凭印象补（2.1、13.2）。
@@ -70,7 +70,7 @@ agent_created: true
 跑机器校验，再人工过 `script-spec.md` 十九 A–G 七类清单：
 
 ```bash
-python3 ~/.workbuddy/skills/lesson-script/scripts/audit_script.py \
+python3 ~/.workbuddy/skills/lesson-transcript/scripts/audit_script.py \
   <源稿.md> --acts acts.json --total 40 --images assets/ppt-第一课时
 ```
 

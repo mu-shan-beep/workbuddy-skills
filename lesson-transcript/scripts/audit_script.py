@@ -4,7 +4,7 @@
 逐字稿时间轴与归属校验
 ======================
 
-查四件事（依据 lesson-script/references/script-spec.md 十一、十九 E）：
+查四件事（依据 lesson-transcript/references/script-spec.md 十一、十九 E）：
 
 1. 页号 1…N 连续、无跳号；
 2. 时间轴首尾相接、无断点／倒退，首页 0:00，末页止 ＝ 课时长；

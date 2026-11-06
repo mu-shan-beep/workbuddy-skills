@@ -22,7 +22,7 @@
 ## 1. 抽课件文字（先拿到“画面事实”）
 
 ```bash
-python3 ~/.workbuddy/skills/lesson-script/scripts/pptx_text.py 牛和鹅-第一课时-课件.pptx
+python3 ~/.workbuddy/skills/lesson-transcript/scripts/pptx_text.py 牛和鹅-第一课时-课件.pptx
 ```
 
 - 输出「第 N 页：文字…」，页码即播放顺序，可直接当稿页标题的来源。
@@ -71,7 +71,7 @@ python3 ~/.workbuddy/skills/lesson-script/scripts/pptx_text.py 牛和鹅-第一�
 ```
 
 ```bash
-python3 ~/.workbuddy/skills/lesson-script/scripts/audit_script.py \
+python3 ~/.workbuddy/skills/lesson-transcript/scripts/audit_script.py \
   .workbuddy/牛和鹅-第一课时-逐字稿-源.md \
   --acts acts-1.json --total 40 --images assets/ppt-第一课时
 ```

@@ -31,11 +31,11 @@
 | 技能 | 来源 | 一句话用途 | 体积 | 文件数 |
 |---|---|---|---|---|
 | [`lesson-typeset`](#1-lesson-typeset--文档排版引擎) | 自建 | 按固定版式把教学设计、逐字稿、学习清单、制作笔记排成 Word | 1.1M | 40 |
-| [`lesson-script`](#4-lesson-script--逐字稿编写与审核) | 自建 | 照设计与课件逐页写课堂逐字稿，并做「设计—课件—时间」三方对读 | 60K | 5 |
+| [`lesson-transcript`](#4-lesson-transcript--逐字稿编写与审核) | 自建 | 照设计与课件逐页写课堂逐字稿，并做「设计—课件—时间」三方对读 | 60K | 5 |
 | [`interactive-courseware`](#2-interactive-courseware--交互课件制作流程) | 自建 | 把「讲不清长什么样」的知识点做成单文件离线交互课件 | 52K | 5 |
 | [`xhs-lesson-notes`](#3-xhs-lesson-notes--小红书备课笔记文案) | 自建 | 写小红书语文课件推广笔记，含对标拆解与合规自检 | 36K | 2 |
 
-四个技能覆盖「写稿 → 排版 → 交互化呈现 → 对外传播」的链路，彼此职责不重叠：`lesson-script` 只产 Markdown 源稿，`lesson-typeset` 只负责把源稿排成 docx。
+四个技能覆盖「写稿 → 排版 → 交互化呈现 → 对外传播」的链路，彼此职责不重叠：`lesson-transcript` 只产 Markdown 源稿，`lesson-typeset` 只负责把源稿排成 docx。
 
 ---
 
@@ -148,7 +148,7 @@ xhs-lesson-notes/
 
 ---
 
-### 4. `lesson-script` — 逐字稿编写与审核
+### 4. `lesson-transcript` — 逐字稿编写与审核
 
 **做什么**：照已确认的教学设计与成品课件，逐页写教师能直接照读的课堂逐字稿；也能反过来查已有稿子——课件页数、页面问句、课后任务、板书条数、每页时长对不对得上。
 
@@ -168,7 +168,7 @@ xhs-lesson-notes/
 实测：《牛和鹅》两课时各 18 页课件、40 分钟，查出并修正 8 处不对齐（环节内活动分钟自造、课件四问只答三问、课后任务少一项、板书三条只写两条、课件“捉／提”错字），复校 15／13 页、各 18 图、时间轴 0:00→40:00 连续。
 
 ```
-lesson-script/
+lesson-transcript/
 ├── SKILL.md                        边界、四段工作流、源稿契约、时间算法、只审不改
 ├── references/
 │   ├── script-spec.md              唯一标准（V1.0，二十三章）
@@ -244,7 +244,7 @@ WorkBuddy「Buddy 加油站」的每日签到自动化，接口直签，跨 Wind
 ├── README.md                        本文件
 ├── .gitignore                       排除第三方技能、缓存、凭证与产物
 ├── lesson-typeset/
-├── lesson-script/
+├── lesson-transcript/
 ├── interactive-courseware/
 └── xhs-lesson-notes/
 ```
