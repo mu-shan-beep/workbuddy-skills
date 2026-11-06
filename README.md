@@ -19,7 +19,7 @@
 - `codex-skills/interactive-courseware`：Codex 交互课件流程，与根目录 WorkBuddy 版本分别保存。
 - `plugins/ppt-native-animator`：自研 PowerPoint 动画插件源码、配置、三项配套技能及测试。
 
-下文原“3个技能”统计仅指根目录 WorkBuddy 自建技能。第三方市场技能、系统插件、密钥、授权配置、缓存及运行产物不在本次备份内。`backup-manifest.json` 记录本次各文件校验值及来源目录。恢复时分别复制到对应宿主的技能或插件目录，凭证另行配置，不从本仓库恢复。
+下文「技能清单」统计仅指根目录 WorkBuddy 自建技能（现有 4 个），不含 codex-skills 与 plugins。第三方市场技能、系统插件、密钥、授权配置、缓存及运行产物不在本次备份内。`backup-manifest.json` 记录本次各文件校验值及来源目录。恢复时分别复制到对应宿主的技能或插件目录，凭证另行配置，不从本仓库恢复。
 
 ---
 
