@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-逐字稿「课件对齐 + 时间轴 + 硬伤」校验 V3
+逐字稿「课件对齐 + 时间轴 + 硬伤」校验 V4
 ==========================================
 
 核心口径（2026-11-07 用户裁定）：**逐字稿只服务课件，必须完全匹配课件**。
@@ -22,7 +22,8 @@
   [配图]   截图张数 ＝ 稿页数
 
 内容类
-  [回指]   写“刚才有人说‘X’”，前文必须有学生台词说过 X（规范 8.1、9.2）
+  [回指]   写“刚才有人说‘X’”，前文须有学生台词或〔学生可能说〕的预设说过 X（规范 8.1、9.2）
+  [结构]   含师生对话的页若缺少〔操作〕，页面任务未落地（规范 5、4.2）
   [指代]   页首不能说“翻页前／上一页”（刚翻页，指代落空）
   [数字]   “找出 N 处”与“M 处都找到了”数字一致；“听写 N 个字”与词表字数一致
   [标记]   行首“师／生”标记后必须有冒号，否则排版会当正文
@@ -50,6 +51,10 @@ DUR_RE = re.compile(r"约\s*(\d+)\s*(分钟|分半)")
 SLIDE_RE = re.compile(r"^ppt/slides/slide(\d+)\.xml$")
 TEXT_RE = re.compile(r"<a:t>(.*?)</a:t>", re.S)
 QUES_RE = re.compile(r"[^？?。！!；;：:，,]{4,}[？?]")
+# 反问／过渡问过滤：课件里以指令词开头的“问句”多为引导语，不是要学生答的待答问句
+RHET_RE = re.compile(r"^(让我们|我们(来|一起)|请你(看|听|读)|下面|接下来|现在|你(看|听|读)一下|一起来)")
+# 〔学生可能说〕里的预设回答也应计入回指引用池
+POSS_RE = re.compile(r"^[〔【]学生可能说[〕】]\s*(.*)")
 
 # 问句核心词提取用：疑问词与虚词，先按长度降序整体剔除，剩下的实词片段才参与比对
 Q_STOP = ["为什么", "怎么样", "怎样", "怎么", "哪些", "什么", "哪里", "哪儿", "如何",
@@ -238,11 +243,14 @@ def main():
             if idx >= len(slides):
                 continue
             st = slides[idx]
-            if not share_frag(p["title"], st, 2):
+            if not share_frag(p["title"], st, 3):
                 warns.append("[课件] 第 %d 页标题“%s”在课件该页文字里找不到，疑为自造标题"
                              % (p["page"], p["title"]))
             for q in QUES_RE.findall(st):
                 if len(han(q)) < 4:
+                    continue
+                # 以指令词开头的“问句”多为引导语（反问／过渡），不算待答问句
+                if RHET_RE.match(q.rstrip("？?")):
                     continue
                 # 页标题也属于稿子，课件把问题做成页标题时，答案就在正文里
                 cov = q_cover(q, p["title"] + " " + p["body"])
@@ -334,6 +342,8 @@ def main():
             l = l.strip()
             if STUDENT_RE.match(l):
                 stu_pool.append(STUDENT_RE.sub("", l))
+            elif POSS_RE.match(l):
+                stu_pool.append(POSS_RE.match(l).group(1).strip())
             for q in BACKREF_RE.findall(l):
                 src = re.sub(r"[^\u4e00-\u9fa5]", "", q)
                 if len(src) < 4:
@@ -389,6 +399,15 @@ def main():
                     re.match(r"^(师|生)[（(]", l) and not LBL_RE.match(l)):
                 warns.append("[标记] 第 %d 页“%s…”缺冒号或括号未闭合，排版会当正文"
                              % (p["page"], l[:12]))
+
+    # ── 结构：含对话却缺〔操作〕 ──────────────────────────────
+    for p in pages:
+        lines = [l.strip() for l in p["body"].split("\n") if l.strip()]
+        has_op = any(OP_RE.match(l) for l in lines)
+        has_dialogue = any(TEACHER_RE.match(l) or STUDENT_RE.match(l) for l in lines)
+        if has_dialogue and not has_op:
+            warns.append("[结构] 第 %d 页有师生对话却缺〔操作〕，页面任务没落到操作上"
+                         % p["page"])
 
     # ── 板书列名覆盖 ──────────────────────────────────────────
     if a.board_keys:
