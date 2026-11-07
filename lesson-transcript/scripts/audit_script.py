@@ -4,9 +4,9 @@
 逐字稿「课件对齐 + 时间轴 + 硬伤」校验 V3
 ==========================================
 
-核心口径（2026-11-07 用户裁定）：**逐字稿以课件为主，必须完全匹配课件**；
-教学设计只是帮助理解课件的背景材料。所以 V3 把「课件对齐」提到最前，
-设计相关检查降级为 WARN。
+核心口径（2026-11-07 用户裁定）：**逐字稿只服务课件，必须完全匹配课件**。
+课件是唯一依据；教学设计不进入校验——它既不提供页数、页切分，也不提供检查项。
+稿子的每一页都必须能在课件里找到对应的一页，多说一句、少讲一问都算错。
 
 课件对齐（--pptx 提供时，硬性）
   [课件]   稿页数 ＝ 课件页数
@@ -14,10 +14,9 @@
   [课件]   课件该页的每个问句都在稿该页被讲（漏问／换问 → ERROR）
   [PPT]    稿中写“依次出现／飞入／淡入”等，课件该页必须真有动画
 
-时间类
+时间类（全部按稿自己的页区间推算，不看教学设计）
   [页数]   使用说明自述的课件页数 ＝ 实际稿页数
   [时间轴] 页号 1…N 连续、首尾相接、首页 0:00、末页 ＝ 课时长
-  [活动]   每页落在设计的某个活动内；跨相邻活动 WARN，跨环节 ERROR
   [时间]   页内预算：〔操作〕活动时长 ＋ 教师台词朗读时长 ≤ 页时长（＋0.8 分钟容差）
   [时间]   页内自述“约 N 分钟”不得超过页时长；“学生活动占比”低于 40% 提示
   [配图]   截图张数 ＝ 稿页数
@@ -27,19 +26,13 @@
   [指代]   页首不能说“翻页前／上一页”（刚翻页，指代落空）
   [数字]   “找出 N 处”与“M 处都找到了”数字一致；“听写 N 个字”与词表字数一致
   [标记]   行首“师／生”标记后必须有冒号，否则排版会当正文
-  [板书]   〔板书〕各行须覆盖板书设计的全部列名（--board-keys）
-  [背景]   设计里的学生动作（acts 的 must）没落进稿（提示级，课件无承载页时可接受）
+  [板书]   〔板书〕各行须覆盖板书设计图的列名（--board-keys，板书图是独立素材，不是教学设计）
 
 用法：
     python3 audit_script.py 逐字稿-源.md
     python3 audit_script.py 逐字稿-源.md --pptx 课件.pptx
-    python3 audit_script.py 逐字稿-源.md --acts acts.json --images assets/ppt-第一课时
+    python3 audit_script.py 逐字稿-源.md --pptx 课件.pptx --images assets/ppt-第一课时
     python3 audit_script.py 逐字稿-源.md --pptx 课件.pptx --board-keys 事情,心情,原因
-
-acts.json（must 可选，写该活动设计栏里学生必须真做的动作词）：
-    [{"name": "五·填写前三项心情", "start": "23:00", "end": "32:00",
-      "must": ["同桌", "核对", "句式"]}]
-    时间可写 分:秒 或 时:分:秒。
 
 退出码：0 全部通过（可含 WARN）；1 存在 ERROR。
 """
@@ -47,7 +40,6 @@ acts.json（must 可选，写该活动设计栏里学生必须真做的动作词
 import argparse
 import glob
 import html
-import json
 import os
 import re
 import sys
@@ -132,27 +124,8 @@ def to_sec(h, m):
     return int(h) * 60 + int(m)
 
 
-def parse_clock(s):
-    parts = [int(x) for x in s.split(":")]
-    while len(parts) < 3:
-        parts.insert(0, 0)
-    return parts[0] * 3600 + parts[1] * 60 + parts[2]
-
-
 def fmt(sec):
     return "%d:%02d" % (sec // 60, sec % 60)
-
-
-def load_acts(path):
-    if not path:
-        return []
-    with open(path, encoding="utf-8") as f:
-        raw = json.load(f)
-    acts = []
-    for a in raw:
-        acts.append((a["name"], parse_clock(a["start"]), parse_clock(a["end"]),
-                     [w for w in a.get("must", []) if w]))
-    return acts
 
 
 def slide_timings(pptx):
@@ -227,9 +200,8 @@ def page_mentions(body):
 
 
 def main():
-    ap = argparse.ArgumentParser(description="逐字稿时间轴、归属与硬伤校验")
+    ap = argparse.ArgumentParser(description="逐字稿与课件逐页对齐、时间轴与硬伤校验")
     ap.add_argument("script", help="逐字稿源稿（.md）")
-    ap.add_argument("--acts", help="活动区间 JSON（可含 must）")
     ap.add_argument("--total", type=int, default=40, help="课时总长（分钟），默认 40")
     ap.add_argument("--images", help="课件截图目录，检查张数是否等于页数")
     ap.add_argument("--pptx", help="成品课件，校验稿中所述动画是否真实存在")
@@ -307,46 +279,7 @@ def main():
     if prev != total:
         errors.append("[时间轴] 末页止于 %s，与课时长 %s 不符" % (fmt(prev), fmt(total)))
 
-    # ── 活动归属 ──────────────────────────────────────────────
-    acts = load_acts(a.acts)
-    for p in pages:
-        p["act"] = "-"
-        if not acts:
-            continue
-        inside = [n for n, s, e, _ in acts if p["start"] >= s and p["end"] <= e]
-        if inside:
-            p["act"] = inside[0]
-            continue
-        spanning = [n for n, s, e, _ in acts if p["start"] < e and p["end"] > s]
-        if len(spanning) == 2:
-            p["act"] = "%s + %s" % (spanning[0], spanning[1])
-            warns.append("[活动] 第 %d 页跨同环节两个相邻活动：%s"
-                         % (p["page"], " / ".join(spanning)))
-        elif len(spanning) > 2:
-            p["act"] = "跨 %d 个活动" % len(spanning)
-            errors.append("[活动] 第 %d 页跨 %d 个活动（%s），超出单页容量的合理范围"
-                          % (p["page"], len(spanning), " / ".join(spanning)))
-        else:
-            errors.append("[活动] 第 %d 页（%s—%s）不落在任何活动区间内"
-                          % (p["page"], fmt(p["start"]), fmt(p["end"])))
-
-    # ── 设计动作是否落地（背景提示，不阻断）────────────────────
-    # 课件是唯一权威：设计里的动作若在课件没有承载页，可以不做，故只报 WARN。
-    # 覆盖判定用「时间有重叠」而非「整页落在区间内」：跨环节的页两头都算覆盖，
-    # 否则该活动里的学生动作只要落在跨界页上就会被误判为缺失。
-    for name, s, e, must in acts:
-        if not must:
-            continue
-        covered = [p for p in pages if p["start"] < e and p["end"] > s]
-        if not covered:
-            warns.append("[背景] 活动「%s」没有任何稿页覆盖（设计环节与课件页错位）" % name)
-            continue
-        pool = "".join(p["body"] for p in covered)
-        miss = [w for w in must if w not in pool]
-        if miss:
-            warns.append("[背景] 活动「%s」（%s—%s）设计里的动作没落进稿子：%s"
-                         "（课件无承载页时可接受，需在交付说明里写明）"
-                         % (name, fmt(s), fmt(e), "、".join(miss)))
+    # 教学设计不参与校验：页怎么切、每页多久，由课件页与稿子自己的时间轴决定。
 
     # ── 页内时间预算 ──────────────────────────────────────────
     ops_total = 0.0
@@ -482,14 +415,14 @@ def main():
               % (len(pages), slide_note, fmt(prev), ops_total,
                  ops_total / script_min * 100, img_note))
         print("")
-        print("%-4s %-14s %-9s %-8s %-8s %s"
-              % ("页", "起—止", "时长(分)", "操作+台词", "自述", "归属活动"))
+        print("%-4s %-14s %-9s %-8s %s"
+              % ("页", "起—止", "时长(分)", "操作+台词", "自述"))
         for p in pages:
             dur = (p["end"] - p["start"]) / 60.0
             mention = ",".join("%g" % x for x in p["mentions"]) or "-"
-            print("%-4d %-14s %-9.1f %-8s %-8s %s"
+            print("%-4d %-14s %-9.1f %-8s %s"
                   % (p["page"], "%s—%s" % (fmt(p["start"]), fmt(p["end"])), dur,
-                     "%.1f+%.1f" % (p["ops"], p["tea_min"]), mention, p["act"]))
+                     "%.1f+%.1f" % (p["ops"], p["tea_min"]), mention))
         print("")
 
     for e in errors:
@@ -497,7 +430,7 @@ def main():
     for w in warns:
         print("WARN   " + w)
     if not errors:
-        print("通过：课件逐页对齐、时间轴连续、总长 %s、每页落在设计活动内%s"
+        print("通过：课件逐页对齐、时间轴连续、总长 %s%s"
               % (fmt(total), "，配图张数正确" if a.images else ""))
     sys.exit(1 if errors else 0)
 
