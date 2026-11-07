@@ -187,7 +187,8 @@ def render_free(doc, cells, opts):
 
 def needs_table(cells, opts):
     """进表的两类：二维列对齐的行、需要与表格同构的「图版」行。"""
-    if any(cs["t"] in ("head", "actname", "lines") for _, cs in cells):
+    if any(cs["t"] in ("head", "actname", "lines", "ghead", "gcell")
+           for _, cs in cells):
         return True
     return opts.get("figure_panel", False)
 

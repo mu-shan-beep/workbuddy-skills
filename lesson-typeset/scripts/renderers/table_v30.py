@@ -106,9 +106,10 @@ def band2_row(text):                    # 环节分区行：§7.1 0.75pt 分隔�
 
 
 def head_row(cells):
-    # §15.6 单表不启用 tblHeader；续接靠同表内普通表头行
+    # 现在每个课时一张活动表，表头只出现一次；跨页必须重复列名（tblHeader），
+    # 否则续页只剩数据、看不出哪一列是「教师活动」（2026-11-07 实测）。
     return ([(span, {"t": "head", "text": txt}) for span, txt in cells],
-            {"h": H_HEAD, "cant": True, "keep": True, "bd": "thin"})
+            {"h": H_HEAD, "cant": True, "keep": True, "header": True, "bd": "thin"})
 
 
 def field_row(cells):
@@ -128,12 +129,39 @@ def act_row(name, t_lines, s_lines, d_lines):
              (7, {"t": "lines", "lines": t_lines}),
              (5, {"t": "lines", "lines": s_lines}),
              (4, {"t": "lines", "lines": d_lines})],
-            {"h": None, "cant": False, "bd": "thin"})   # §15.3 长行按段落跨页
+            {"h": None, "cant": False, "bd": "thin"})   # §15.3 长行按段落跨页：
+            # 整行不拆实测 8→9 页、页尾留白 5—8cm（2026-11-07），代价大于收益；
+            # 活动名称用 keepLines 保住整段，跨页时由渲染器整段下移
 
 
 def image_row(path):
     return ([(NGRID, {"t": "image", "path": path})],
             {"h": None, "cant": True, "bd": "thin"})     # §17.3 图片不跨页拆分
+
+
+def grid_spans(rows):
+    """多列对照表按内容长度分配 20 格，保证列与列横向对齐。
+    规范 §2.4 第 ① 类：二维数据必须能列对齐，不能并成一片文字。"""
+    n = len(rows[0])
+    lens = [max(2, min(16, max((len(re.sub(r"\*\*", "", r[k]))
+                                for r in rows), default=2))) for k in range(n)]
+    total = sum(lens) or n
+    spans = [max(2, int(round(NGRID * l / total))) for l in lens]
+    while sum(spans) > NGRID:                  # 舍入余量逐格回吐给最宽的一列
+        spans[spans.index(max(spans))] -= 1
+    while sum(spans) < NGRID:
+        spans[spans.index(max(spans))] += 1
+    return spans
+
+
+def grid_head_row(spans, head):
+    return ([(sp, {"t": "ghead", "text": h}) for sp, h in zip(spans, head)],
+            {"h": H_HEAD, "cant": True, "header": True, "bd": "thin"})
+
+
+def grid_body_row(spans, cells):
+    return ([(sp, {"t": "gcell", "text": c}) for sp, c in zip(spans, cells)],
+            {"h": None, "cant": False, "bd": "thin"})
 
 
 # ─────────────────── 解析源稿（只补结构，不改文字） ───────────────────
@@ -176,7 +204,7 @@ def parse_source(path):
             act_open = True
         elif s.startswith("### "):
             nxt = next_content(i + 1)
-            if nxt.startswith(("#### ", "## ", ":::act", "![](", "| ", ":::")):
+            if nxt.startswith(("#### ", "## ", ":::act", "![", "| ", ":::")):
                 add(band2_row(s[4:].strip()))
                 act_open = False
             else:
@@ -218,18 +246,31 @@ def parse_source(path):
             rws = [[c.strip() for c in r.strip("|").split("|")]
                    for r in raw if not re.fullmatch(r"[\s\-:|]+", r.strip("|"))]
             head, data = rws[0], rws[1:]
-            # 口径覆盖⑤：对照块按用户反馈并成一个通栏单元格，仍属同一主表（§14.1）
-            # §7.1「辅助对照行 0.5pt 网格边框」→ 给这个容器画一圈细框
-            sep = JOIN * 2
-            parts = [("sub", sep.join(head))]
-            for r in data:
-                parts.append(("tab", "**" + r[0] + "**" + sep + sep.join(r[1:])))
-            add(group_row(parts, cant=True, bd="thin"))
+            # §2.4 ①「二维数据需要列与列横向对齐」：三列以上、且不止两行的
+            # 对照表必须成真表格；两列短表仍按辅助块并格（2026-11-05 口径）。
+            if len(head) >= 3 and len(data) >= 3:
+                spans = grid_spans([head] + data)
+                add(grid_head_row(spans, head))
+                for r in data:
+                    add(grid_body_row(spans, r))
+            else:
+                # §14.1 辅助对照块按用户反馈并成一个通栏单元格，仍属同一主表
+                sep = JOIN * 2
+                parts = [("sub", sep.join(head))]
+                for r in data:
+                    parts.append(("tab", "**" + r[0] + "**" + sep + sep.join(r[1:])))
+                add(group_row(parts, cant=True, bd="thin"))
             act_open = False
             i = j - 1
-        elif s.startswith("![]("):
-            add(image_row(s[4:].rstrip(")")))
-            act_open = False
+        elif s.startswith("!["):
+            # 兼容 ![说明](路径) 与 ![](路径) 两种写法：早期只认空替代文本，
+            # 带说明的图片会被当普通文字原样输出（2026-11-07 实测静默丢图）。
+            m = re.match(r"^!\[[^\]]*\]\((.+?)\)\s*$", s)
+            if m:
+                add(image_row(m.group(1)))
+                act_open = False
+            else:
+                group.append(("text", s))
         elif re.match(r"^\d+\.\s", s) or s.startswith("**"):
             group.append(("item", s))
         elif s != ":::":
@@ -313,16 +354,23 @@ def fill_cell(cell, cs, opts):
         X.add_run(p, cs["text"], size=FS_TITLE, color=TITLE, bold=True, font=X.Ctx.head)
         return
 
-    if t in ("band", "band2", "head"):
+    if t in ("band", "band2", "head", "ghead"):
         X._cell_shade(cell, BAND)
         cell.vertical_alignment = CENTER
         p = cell.paragraphs[0]
         before, after = (BAND_BEFORE, BAND_AFTER) if t == "band" else (SUB_BEFORE, SUB_AFTER)
         X.fmt_para(p, before, after, line=1.2,
-                   align=CENTER_A if t == "head" else LEFT_A,
+                   align=CENTER_A if t in ("head", "ghead") else LEFT_A,
                    keep_next=opts.get("keep", False))
-        size = {"band": FS_H1, "band2": FS_H2, "head": FS_TH}[t]
+        size = {"band": FS_H1, "band2": FS_H2, "head": FS_TH, "ghead": FS_TH}[t]
         X.add_run(p, cs["text"], size=size, color=GREEN, bold=True, font=X.Ctx.head)
+        return
+
+    if t == "gcell":                      # 多列对照表数据格：顶部对齐、10.5pt
+        cell.vertical_alignment = TOP
+        p = cell.paragraphs[0]
+        X.fmt_para(p, 0, AFTER_CELL, line=LINE_CELL, align=LEFT_A)
+        X.add_rich(p, cs["text"], size=FS_CELL, color=INK)
         return
 
     if t == "flabel":                     # §9 字段名称：左对齐、垂直居中
@@ -407,6 +455,9 @@ def build_table(doc, rows_spec):
             X._set_row_h(row, opts["h"])
         if opts.get("cant"):
             X._row_cant_split(row)
+        if opts.get("header"):                # 跨页重复列名
+            trPr = row._tr.get_or_add_trPr()
+            trPr.append(OxmlElement("w:tblHeader"))
         tr = row._tr
         tcs = tr.findall(qn("w:tc"))
         for tc in tcs[len(cells):]:

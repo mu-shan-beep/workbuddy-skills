@@ -184,11 +184,12 @@ def style_of(line):
         return "board"
     if s.startswith("〔") or s.startswith("【"):
         return "note"
-    if s.startswith("生（齐）") or s.startswith("生(齐)"):
+    # 学生／教师标记允许任意短括号标注：生：、生（齐）：、生（部分）：、师（指名）：……
+    # 2026-11-07 修：原先只认「生（齐）」，`生（部分）：` 被判成 body，字号与悬挂缩进随即丢失，
+    # 在成品里表现为层级塌陷（同一页出现两种学生台词样式）。
+    if re.match(r"^生\s*(?:[（(][^）)]{0,8}[）)])?\s*[：:]", s):
         return "stu"
-    if s.startswith("生：") or s.startswith("生:"):
-        return "stu"
-    if s.startswith("师：") or s.startswith("师:"):
+    if re.match(r"^师\s*(?:[（(][^）)]{0,8}[）)])?\s*[：:]", s):
         return "tea"
     return "body"
 

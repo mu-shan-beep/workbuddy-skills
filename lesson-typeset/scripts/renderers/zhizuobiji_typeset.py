@@ -104,6 +104,10 @@ NOTE_PAD_Y = 4.0
 
 MM2PT = 72 / 25.4
 
+# 字段行：「**标签：** 值」用制表位对齐，值换行后与首行值左缘齐平
+FIELD_EDGE_CM = 3.30                  # 值列起点（自版心左缘量，含 2 字首行缩进）
+FIELD_RE = re.compile(r"^\*\*([^*]{1,12}[：:])\*\*\s*(.+)$")
+
 
 def mm2pt(mm):
     return mm * MM2PT
@@ -437,7 +441,20 @@ def build(md, out_path, header="", title=None, subtitle=None, mirror=False,
             continue
 
         if kind == "p":
+            mf = FIELD_RE.match(payload)
             p = doc.add_paragraph()
+            if mf:                          # 「**标签：** 值」字段行：制表位对齐，
+                label, value = mf.group(1), mf.group(2)   # 换行后与值左缘齐平
+                edge = Cm(FIELD_EDGE_CM)
+                fmt_para(p, before=lead(0), after=mm2pt(SP_P_AFT),
+                         line=LINE_BODY, left=edge,
+                         first=Pt(FS_BODY * 2) - edge)
+                p.paragraph_format.tab_stops.add_tab_stop(edge)
+                add_run(p, label, size=FS_BODY, color=INK, bold=True)
+                add_run(p, "\t", size=FS_BODY, color=INK)
+                add_rich(p, value, size=FS_BODY, color=INK)
+                last = "p"
+                continue
             fmt_para(p, before=lead(0), after=mm2pt(SP_P_AFT), line=LINE_BODY,
                      first=Pt(FS_BODY * 2))
             add_rich(p, payload, size=FS_BODY, color=INK)

@@ -479,7 +479,8 @@ def data_table(doc, headers, rows, width_cm, widths=None):
     _tbl_borders(t, BORDER_OUT, BORDER_IN, LINE)
     _tbl_margins(t, *CELL_MAR)
 
-    if headers:
+    has_head = bool(headers) and any((h or "").strip() for h in headers)
+    if has_head:                    # 表头全空＝无表头的作答网格，不画浅绿表头行
         row = t.add_row()
         _row_header(row)
         _row_cant_split(row)
