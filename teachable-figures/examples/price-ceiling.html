@@ -1,0 +1,1097 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title data-i18n data-zh="限租令：房租封顶后，租到房的人会变多吗？" data-en="Rent cap: does capping rent let more people rent?">Rent cap: does capping rent let more people rent?</title>
+<style>
+/* lesson-shell v2: shared by every example page; keep identical across files */
+:root{color-scheme:light dark;--bar:56px;--bg:#f7f6f2;--surface:#fff;--stage:#eeece6;--ink:#141618;--text:#2a2e31;--muted:#61676c;--faint:#8b9196;--line:#e4e1d9;--line-strong:#cbc7bd;--accent:#d9480f;--accent-soft:#fcebe2;--focus:#d9480f;--ok:#1d7a4c;--sans:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Noto Sans SC","Microsoft YaHei",sans-serif;--mono:ui-monospace,"SF Mono",SFMono-Regular,Menlo,Consolas,monospace}
+@media(prefers-color-scheme:dark){:root{--bg:#111315;--surface:#181b1e;--stage:#0b0d0f;--ink:#f3f4f2;--text:#dadedc;--muted:#a1a7ab;--faint:#7a8085;--line:#272b2f;--line-strong:#3b4045;--accent:#ff7a45;--accent-soft:#2b1a11;--focus:#ff7a45;--ok:#4cc38a}}
+*{box-sizing:border-box}html{-webkit-text-size-adjust:100%}body{margin:0;background:var(--bg);color:var(--text);font:15.5px/1.6 var(--sans);-webkit-font-smoothing:antialiased}
+[hidden]{display:none!important}html[data-lang=zh] [lang=en],html[data-lang=en] [lang=zh]{display:none!important}
+:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+.skip{position:absolute;left:12px;top:-80px;z-index:30;background:var(--surface);color:var(--ink);padding:8px 12px;border-radius:8px}.skip:focus{top:10px}
+.bar{position:sticky;top:0;z-index:20;height:var(--bar);display:flex;align-items:center;gap:14px;padding:0 16px 0 20px;background:color-mix(in srgb,var(--bg) 90%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.bar .back{display:inline-flex;align-items:center;gap:6px;min-height:40px;color:var(--muted);text-decoration:none;font-size:14px;white-space:nowrap}.bar .back:hover{color:var(--ink)}
+.bar .crumb{min-width:0;font:500 12px/1.2 var(--mono);color:var(--faint);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lang-switch{margin-left:auto;flex:none;display:inline-flex;padding:3px;border:1px solid var(--line);border-radius:999px;background:var(--surface)}
+.lang-switch button{appearance:none;border:0;background:none;cursor:pointer;font:600 12px/1 var(--sans);min-height:30px;min-width:40px;padding:0 11px;border-radius:999px;color:var(--muted)}
+.lang-switch button[aria-pressed=true]{background:var(--ink);color:var(--bg)}
+.lesson{display:flex;flex-direction:column}.panel{display:contents}
+.intro{order:0;padding:28px 20px 6px}
+.figure-pane{order:1;margin:14px 12px 4px;padding:12px;background:var(--stage);border-radius:16px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.steps{order:2;padding:0 20px 40px}
+.stage{position:relative;min-height:0;display:grid;place-items:center}.stage>svg,.stage>canvas{display:block;width:100%;height:auto}
+.fig-caption{margin:0;font-size:12.5px;line-height:1.5;color:var(--muted)}
+.readouts{display:grid;grid-template-columns:repeat(auto-fit,minmax(104px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.readout{background:var(--surface);padding:9px 13px;min-width:0}
+.readout .k{display:block;font:500 12px/1.35 var(--sans);color:var(--muted)}
+.readout strong{display:block;font:650 21px/1.3 var(--sans);font-variant-numeric:tabular-nums;color:var(--ink);letter-spacing:-.01em;overflow-wrap:anywhere}
+.readout .u{display:block;font-size:12px;line-height:1.35;color:var(--faint)}
+.meta{display:flex;flex-wrap:wrap;gap:4px 10px;margin:0 0 14px;padding:0;list-style:none;font:500 12.5px/1.4 var(--sans);color:var(--muted)}.meta li+li::before{content:"/";margin-right:10px;color:var(--line-strong)}
+h1{margin:0 0 12px;font-size:clamp(25px,2.5vw,33px);line-height:1.18;letter-spacing:-.025em;font-weight:700;color:var(--ink);text-wrap:balance}
+.lead{margin:0;color:var(--muted)}
+.step{padding:26px 0 22px;border-top:1px solid var(--line)}.intro+.steps .step:first-child,.steps>.step:first-child{border-top:0}
+.step>h2{display:flex;align-items:center;gap:10px;margin:0 0 12px;font-size:17px;line-height:1.3;letter-spacing:-.01em;color:var(--ink)}
+.step>h2 .n{flex:none;font:600 11px/1 var(--mono);color:var(--accent);border:1px solid currentColor;border-radius:6px;padding:4px 6px}
+h3{margin:20px 0 6px;font-size:14.5px;color:var(--ink)}p{margin:0 0 12px}strong{color:var(--ink)}
+.small{font-size:13.5px;color:var(--muted)}
+fieldset{border:0;padding:0;margin:0;min-width:0}legend{padding:0;margin:0 0 12px;font-weight:600;color:var(--ink)}
+label.choice{display:flex;gap:10px;align-items:flex-start;padding:10px 13px;margin-bottom:8px;border:1px solid var(--line);border-radius:10px;background:var(--surface);cursor:pointer;transition:border-color .12s,box-shadow .12s}
+label.choice:hover{border-color:var(--line-strong)}label.choice:has(input:checked){border-color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink)}label.choice:has(input:disabled){cursor:default}
+label.choice input{flex:none;margin:4px 0 0}input{accent-color:var(--ink)}input[type=radio],input[type=checkbox]{width:17px;height:17px}
+button,select{font:500 14px/1.2 var(--sans);color:var(--ink);background:var(--surface);border:1px solid var(--line-strong);border-radius:10px;padding:0 16px;min-height:42px;cursor:pointer}
+button:hover:not(:disabled),select:hover:not(:disabled){border-color:var(--ink)}button.primary{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+button:disabled,select:disabled{opacity:.45;cursor:not-allowed}
+.controls{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:14px 0}
+.toggle{display:flex;align-items:center;gap:10px;min-height:42px;font-weight:500;color:var(--ink);cursor:pointer}
+.range{margin:16px 0 8px}.range label{display:flex;justify-content:space-between;gap:12px;font-weight:500;color:var(--ink)}.range output{font:500 13px/1.6 var(--mono);color:var(--muted)}
+input[type=range]{width:100%;min-height:32px;margin:4px 0}
+.status{min-height:1.6em;margin:12px 0;padding:10px 12px;border-radius:10px;background:var(--bg);font-size:14px}
+.callout{margin:14px 0;padding:2px 0 2px 14px;border-left:3px solid var(--accent)}
+textarea{display:block;width:100%;min-height:90px;margin-top:8px;padding:10px 12px;font:inherit;color:var(--text);background:var(--bg);border:1px solid var(--line-strong);border-radius:10px;resize:vertical}
+table{border-collapse:collapse;width:100%;margin-top:14px;font-size:14px}th,td{text-align:left;padding:9px 6px;border-bottom:1px solid var(--line);vertical-align:top}th:first-child,td:first-child{padding-left:0}caption{text-align:left;font-weight:600;color:var(--ink);margin-bottom:4px}
+.limits{color:var(--muted);font-size:14px}
+.pane-more{display:none}
+.foot{margin-top:8px;padding-top:16px;border-top:1px solid var(--line);font-size:12.5px;color:var(--faint)}
+/* attention: figure parts [data-part], step focus [data-focus], ordered highlights ol.look, dual-coding terms [data-ref] */
+#experiment [data-part]{transition:opacity .28s ease,filter .28s ease,box-shadow .2s ease}
+#experiment.tf-ring [data-part].tf-hot:not(svg *){box-shadow:0 0 0 2px var(--accent),0 0 0 7px color-mix(in srgb,var(--accent) 18%,transparent);border-radius:10px}
+#experiment.tf-ring svg [data-part].tf-hot{filter:drop-shadow(0 0 1px var(--accent)) drop-shadow(0 0 5px color-mix(in srgb,var(--accent) 40%,transparent))}
+.focus-bar{display:flex;align-items:center;gap:12px;min-height:30px;margin:-4px 0 -2px}
+.focus-caption{flex:1;min-width:0;margin:0;font-size:13px;line-height:1.4;color:var(--ink)}.focus-caption:empty{visibility:hidden}
+.focus-caption .look-n{display:inline-grid;place-items:center;min-width:20px;height:20px;margin-right:8px;padding:0 5px;border-radius:999px;background:var(--accent);color:#fff;font:700 11px/1 var(--sans);vertical-align:1px}
+.focus-toggle{flex:none;display:inline-flex;align-items:center;gap:7px;min-height:30px;font-size:12.5px;color:var(--muted);cursor:pointer;white-space:nowrap}.focus-toggle input{width:15px;height:15px;margin:0}
+ol.look{margin:12px 0 8px;padding:0;list-style:none;counter-reset:look}
+ol.look>li{counter-increment:look;position:relative;margin:0 0 6px;padding:8px 10px 8px 38px;border:1px solid var(--line);border-radius:10px;cursor:pointer;color:var(--muted);transition:border-color .15s,background .15s}
+ol.look>li::before{content:counter(look);position:absolute;left:10px;top:9px;display:grid;place-items:center;width:20px;height:20px;border-radius:999px;border:1px solid var(--line-strong);font:650 11px/1 var(--sans);color:var(--muted)}
+ol.look>li:hover{border-color:var(--line-strong)}ol.look>li[aria-current=step]{border-color:var(--accent);background:var(--accent-soft);color:var(--ink)}ol.look>li[aria-current=step]::before{background:var(--accent);border-color:var(--accent);color:#fff}
+.look-nav{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:0 0 14px}.look-nav button{min-height:34px;padding:0 11px;font-size:13px}.look-nav .look-num{min-width:34px;padding:0}.look-nav .look-num[aria-pressed=true]{background:var(--accent);border-color:var(--accent);color:#fff}
+[data-ref]:not(a,button,input,select,label){text-decoration:underline dotted color-mix(in srgb,var(--accent) 70%,transparent);text-decoration-thickness:1.5px;text-underline-offset:3px;cursor:help;border-radius:4px}
+[data-ref].tf-ref-on{background:var(--accent-soft);box-shadow:0 0 0 2px var(--accent-soft);color:var(--ink)}[data-ref][aria-pressed=true]{background:var(--accent-soft);box-shadow:0 0 0 1px var(--accent)}
+.part-tip{position:fixed;z-index:40;pointer-events:none;max-width:240px;padding:5px 9px;border-radius:8px;background:var(--ink);color:var(--bg);font:500 12.5px/1.35 var(--sans);box-shadow:0 4px 14px rgb(0 0 0/.18)}
+@media(min-width:960px) and (min-height:560px){
+.lesson{display:grid;grid-template-columns:minmax(0,1fr) clamp(380px,35vw,500px);height:calc(100dvh - var(--bar))}
+.panel{display:block;grid-column:2;grid-row:1;overflow-y:auto;overscroll-behavior:contain;background:var(--surface);border-left:1px solid var(--line)}
+.figure-pane{grid-column:1;grid-row:1;margin:0;border-radius:0;padding:24px 28px;min-height:0}
+.figure-pane{overflow-y:auto;overscroll-behavior:contain}.figure-pane>*{flex-shrink:0}
+.figure-pane .stage{flex:1}.figure-pane .stage>svg,.figure-pane .stage>canvas{height:100%;max-height:100%}
+.pane-more{display:flex;grid-column:1;grid-row:1;align-self:end;position:relative;z-index:2;justify-content:center;align-items:flex-end;height:76px;padding-bottom:14px;pointer-events:none;background:linear-gradient(color-mix(in srgb,var(--stage) 0%,transparent),var(--stage) 72%)}
+.pane-more button{pointer-events:auto;min-height:32px;padding:0 14px;border-radius:999px;font-size:12.5px;box-shadow:0 2px 10px rgb(0 0 0/.12)}
+.intro{padding:32px 32px 6px}.steps{padding:0 32px 48px}
+.bar{padding:0 20px 0 24px}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+/* /lesson-shell */
+:root{--cs:#2f6bd8;--ps:#13866a;--dwl:#8b9196}
+@media(prefers-color-scheme:dark){:root{--cs:#6f9dff;--ps:#3cc39a;--dwl:#8b9196}}
+.plot-bg{fill:var(--surface)}
+.gridline{stroke:var(--line);stroke-width:1}.axis{stroke:var(--line-strong);stroke-width:1.2}
+.tick{fill:var(--faint);font:500 11.5px var(--sans);font-variant-numeric:tabular-nums}
+.axis-label{fill:var(--muted);font:600 12px var(--sans)}
+.curve{fill:none;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}.curve.d{stroke:var(--cs)}.curve.s{stroke:var(--ps)}
+.curve.alt{stroke:var(--faint);stroke-width:1.5;stroke-dasharray:5 5}
+.curve-label{font:700 13px var(--sans)}.curve-label.d{fill:var(--cs)}.curve-label.s{fill:var(--ps)}.curve-label.alt{fill:var(--faint);font-weight:600;font-size:11.5px}
+.area.cs{fill:var(--cs);fill-opacity:.17}.area.ps{fill:var(--ps);fill-opacity:.2}.area.dwl{fill:url(#hatch-dwl)}.area.waste{fill:url(#hatch-waste)}
+.transfer{fill:none;stroke:var(--ink);stroke-width:1.2;stroke-dasharray:4 4;opacity:.55}
+.avg-line{stroke:var(--cs);stroke-width:1.4;stroke-dasharray:6 4}
+.guide{stroke:var(--faint);stroke-width:1;stroke-dasharray:2 4}
+.eq{fill:var(--ink)}.eq-label{fill:var(--ink);font:600 12px var(--sans)}
+.cap-line{stroke:var(--accent);stroke-width:2.4}.cap-line.off{stroke:var(--faint);stroke-dasharray:6 5}
+.cap-pill rect{fill:var(--accent)}.cap-pill text{fill:#fff;font:700 12px var(--sans)}.cap-pill.off rect{fill:var(--faint)}
+.cap-hit{fill:transparent;cursor:ns-resize;touch-action:none}
+.qmark{fill:var(--surface);stroke-width:2.2}.qmark.d{stroke:var(--cs)}.qmark.s{stroke:var(--ps)}
+.gap{stroke:var(--accent);stroke-width:1.6;fill:none}.gap-label{fill:var(--accent);font:700 12px var(--sans)}
+.area-label{font:650 11.5px var(--sans);fill:var(--ink);opacity:.8}
+.hidden-note{fill:var(--muted);font:600 14px var(--sans)}
+.readouts{grid-template-columns:repeat(4,minmax(0,1fr))}
+.readout strong{font-size:19px}
+.readout.cs strong{color:var(--cs)}.readout.ps strong{color:var(--ps)}.readout.gap strong{color:var(--accent)}
+.ledger{display:flex;flex-direction:column;gap:10px;padding:12px 14px;background:var(--surface);border:1px solid var(--line);border-radius:12px}
+.ledger-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}
+.ledger h2{margin:0;font:600 12.5px/1.3 var(--sans);color:var(--muted)}
+#budget-total{font:600 12.5px/1.3 var(--sans);color:var(--ink);font-variant-numeric:tabular-nums}
+.budget{display:flex;height:14px;border-radius:7px;overflow:hidden;background:var(--line)}
+.budget span{display:block;height:100%;transition:flex-basis .25s}
+.b-cs{background:var(--cs)}.b-ps{background:var(--ps)}
+.b-dwl{background:repeating-linear-gradient(135deg,var(--dwl) 0 2px,transparent 2px 5px),color-mix(in srgb,var(--dwl) 30%,transparent)}
+.b-waste{background:repeating-linear-gradient(135deg,var(--accent) 0 2px,transparent 2px 5px),color-mix(in srgb,var(--accent) 25%,transparent)}
+.key{display:flex;flex-wrap:wrap;gap:4px 14px;margin:0;padding:0;list-style:none;font-size:12px;color:var(--muted)}
+.key li{display:inline-flex;align-items:center;gap:6px}.key i{display:inline-block;width:12px;height:9px;border-radius:2px}
+.strip{display:grid;grid-template-columns:auto minmax(0,1fr);gap:6px 10px;align-items:center}
+.strip .k{font-size:12px;color:var(--muted);white-space:nowrap}
+.cells{display:grid;gap:3px}
+.cell{height:16px;border-radius:3px;border:1.5px solid transparent}
+.cell.got{background:var(--cs)}.cell.queue{background:repeating-linear-gradient(135deg,var(--cs) 0 3px,color-mix(in srgb,var(--accent) 70%,transparent) 3px 6px)}
+.cell.want{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 12%,transparent)}
+.cell.out{background:var(--line)}
+.cell.rented{background:var(--ps)}.cell.unsold{border-color:var(--accent);background:color-mix(in srgb,var(--ps) 25%,transparent)}.cell.withheld{background:var(--line)}
+.cell.blank{background:var(--line);opacity:.6}
+.seg{display:inline-flex;flex-wrap:wrap;padding:3px;border:1px solid var(--line-strong);border-radius:11px;background:var(--surface)}
+.seg label{position:relative;display:flex;align-items:center;gap:6px;padding:8px 13px;border-radius:8px;cursor:pointer;font-size:13.5px;color:var(--muted)}
+.seg input{position:absolute;opacity:0;pointer-events:none}
+.seg label:has(input:checked){background:var(--ink);color:var(--bg)}
+.seg label:has(input:focus-visible){outline:2px solid var(--focus);outline-offset:1px}
+.seg label:has(input:disabled){cursor:not-allowed;opacity:.5}
+.field-label{display:block;margin:16px 0 8px;font-weight:600;color:var(--ink)}
+.formula{margin:10px 0;padding:11px 14px;border-radius:10px;background:var(--bg);font:500 14px/1.6 var(--mono);overflow-wrap:anywhere}
+.note{margin:14px 0;padding:12px 14px;border:1px solid var(--line);border-radius:10px;font-size:14px}.note h3{margin-top:0}
+.problem{margin:18px 0 0;padding:14px;border:1px solid var(--line);border-radius:12px;background:var(--bg)}
+.problem legend{float:left;width:100%;margin-bottom:10px}
+.problem .answer{display:flex;flex-wrap:wrap;gap:10px;align-items:center;clear:both}
+.problem input[type=number]{width:120px;min-height:42px;padding:0 12px;font:500 15px var(--sans);color:var(--ink);background:var(--surface);border:1px solid var(--line-strong);border-radius:10px}
+.problem .fb{margin:10px 0 0;font-size:14px}.fb.ok{color:var(--ok)}.fb.no{color:var(--text)}
+.problem label.choice{clear:both}
+.eqs{font:500 14px/1.7 var(--mono);color:var(--ink)}
+.range output{font-family:var(--sans);font-variant-numeric:tabular-nums}
+@media(max-width:620px){.readouts{grid-template-columns:repeat(2,minmax(0,1fr))}.strip{grid-template-columns:minmax(0,1fr)}}
+@media(min-width:960px) and (min-height:560px){.figure-pane{gap:10px;padding:18px 24px}.figure-pane .stage{position:relative;min-height:clamp(260px,46vh,400px)}.figure-pane .stage>svg{position:absolute;inset:0;width:100%;height:100%;max-height:none}}
+</style>
+</head>
+<body>
+<a class="skip" href="#experiment"><span lang="zh">跳到实验</span><span lang="en">Skip to experiment</span></a>
+<header class="bar">
+<a class="back" href="index.html" data-keep-lang>← <span lang="zh">全部示例</span><span lang="en">All examples</span></a>
+<span class="crumb">price-ceiling.html</span>
+<div class="lang-switch" role="group" aria-label="语言 / Language"><button type="button" data-set-lang="zh" aria-pressed="false">中文</button><button type="button" data-set-lang="en" aria-pressed="true">EN</button></div>
+</header>
+<main class="lesson">
+<div class="panel">
+<div class="intro">
+<ul class="meta"><li><span lang="zh">经济学 · 价格管制</span><span lang="en">Economics · price controls</span></li><li><span lang="zh">2D 交互模型</span><span lang="en">2D interactive model</span></li><li><span lang="zh">约 10 分钟</span><span lang="en">~10 min</span></li></ul>
+<h1><span lang="zh">房租封顶之后，租到房的人会变多吗？</span><span lang="en">Cap the rent. Do more people get an apartment?</span></h1>
+<p class="lead" lang="zh">一座城市的公寓市场租金是每月 $2,000，大约 1 万套租出去。市议会提议把租金上限定在 $1,500。左边的图把市场画成两条线：<strong>需求</strong>（每户愿意付多少）和<strong>供给</strong>（房东要多少才肯出租）。下面一排小方块是一户户家庭和一套套公寓。</p>
+<p class="lead" lang="en">A city’s apartments rent for $2,000 a month, and about 10,000 are rented. The council proposes capping rent at $1,500. The chart on the left draws the market as two lines: <strong>demand</strong> (what each household would pay) and <strong>supply</strong> (what each landlord needs before renting out). The squares below it are the individual households and apartments.</p>
+</div>
+<div class="steps">
+<section class="step" aria-labelledby="predict-title" data-focus="curves market">
+<h2 id="predict-title"><span class="n">01</span><span lang="zh">预测</span><span lang="en">Predict</span></h2>
+<form id="prediction-form">
+<fieldset>
+<legend><span lang="zh">租金上限定在 $1,500，低于现在的市场租金。真正租到公寓的家庭数量会怎样？</span><span lang="en">Rent is capped at $1,500, below today’s market rent. What happens to the number of households who actually get to rent an apartment?</span></legend>
+<label class="choice"><input type="radio" name="prediction" value="more" required><span><span lang="zh">变多：更便宜了，更多人租得起。</span><span lang="en">More. It’s cheaper, so more people can afford one.</span></span></label>
+<label class="choice"><input type="radio" name="prediction" value="same"><span><span lang="zh">差不多：房子还是那些房子，只是租金变低了。</span><span lang="en">About the same. The buildings are still there; only the rent changes.</span></span></label>
+<label class="choice"><input type="radio" name="prediction" value="fewer"><span><span lang="zh">变少。</span><span lang="en">Fewer.</span></span></label>
+</fieldset>
+<div class="controls"><button type="submit" class="primary"><span lang="zh">记下预测</span><span lang="en">Save my prediction</span></button></div>
+<p id="prediction-status" class="small" aria-live="polite"></p>
+</form>
+</section>
+<section class="step" aria-labelledby="try-title" data-focus="curves cap quantities">
+<h2 id="try-title"><span class="n">02</span><span lang="zh">设定上限</span><span lang="en">Set the cap</span></h2>
+<p lang="zh">拖动图上的<span data-ref="cap">橙色线</span>，或用下面的滑块，调整租金上限。看<span data-ref="quantities">三个数</span>：房东愿意出租多少（Qs），家庭想租多少（Qd），以及<strong>实际</strong>租出了多少。然后切到“长期”：几年之后，房东可以把公寓改成自住、出售，或者干脆不再新建。</p>
+<p lang="en">Drag the <span data-ref="cap">orange line</span> on the chart, or use the slider, to move the cap. Watch <span data-ref="quantities">three numbers</span>: how many apartments landlords offer (Qs), how many households want (Qd), and how many are <strong>actually</strong> rented. Then switch to the long run: after a few years landlords can convert units to condos, sell them, or stop building.</p>
+<div class="range">
+<label for="price"><span id="price-k"><span lang="zh">租金上限（每月）</span><span lang="en">Rent cap (per month)</span></span><output id="price-out" for="price"></output></label>
+<input id="price" type="range" min="600" max="2900" step="50" value="1500" disabled>
+</div>
+<span class="field-label" id="run-k"><span lang="zh">时间跨度</span><span lang="en">Time horizon</span></span>
+<fieldset id="run-set" class="seg" aria-labelledby="run-k" disabled>
+<label><input type="radio" name="run" value="sr" checked><span lang="zh">短期（1 年内）</span><span lang="en">Short run (within a year)</span></label>
+<label><input type="radio" name="run" value="lr"><span lang="zh">长期（10 年）</span><span lang="en">Long run (10 years)</span></label>
+</fieldset>
+<div class="controls">
+<button id="reset" type="button"><span lang="zh">重置</span><span lang="en">Reset lesson</span></button>
+</div>
+<p id="status" class="status" role="status"></p>
+</section>
+<section id="explanation" class="step" aria-labelledby="explain-title" hidden>
+<h2 id="explain-title"><span class="n">03</span><span lang="zh">解释：短边决定成交量</span><span lang="en">Explain: the short side sets the quantity</span></h2>
+<p id="prediction-feedback" class="callout"></p>
+<div lang="zh">
+<p>一次出租需要两方都同意：一户想租，一个房东肯租。在 $1,500，想租的有 1.5 万户，但房东只肯出 <span class="sr-num" data-k="sr"></span>（短期）或 <span class="sr-num" data-k="lr"></span>（长期）。<strong data-ref="quantities">成交量 = min(Qd, Qs)</strong>，由数量更少的那一边，也就是“短边”决定。上限压低了价格，同时把成交量推到了供给一侧。</p>
+<p class="formula">成交量 = min(Qd, Qs) = Qs　（上限有约束时）</p>
+<h3>上限高于市场价，就什么都没变</h3>
+<p>把上限拖到 $2,000 以上试试：它不再“约束”任何人，租金照样停在 $2,000。只有低于市场价的上限才会起作用。</p>
+<h3>为什么短期看起来几乎没事</h3>
+<p>楼已经盖好了，短期里房东除了出租没有更好的用途，所以短期供给很陡：$1,500 时仍有约 9,500 套在租，几乎和原来一样。代价要过几年才出现：改作自住或出售、减少维护、不再新建，长期供给变平，同一个上限下只剩约 5,000 套。<strong>好处马上看得见，代价慢慢才来</strong>，这是限租政策在政治上很受欢迎的一个原因。</p>
+<h3>谁赢、谁输</h3>
+<p>租到房的家庭每月少付 $500，图上<span data-ref="transfer">虚线框的“转移”</span>从房东流向这些租客。没租到的家庭什么都没得到，还得继续找房。房东失去了转移的那部分，再加上不再出租的那些公寓原本能赚的钱。左下的长条始终把<strong>可能的总剩余</strong>分成四份：租客剩余 + 房东剩余 + 无谓损失 + 分配损失，四份加起来不变。</p>
+</div>
+<div lang="en">
+<p>A rental takes two people who agree: a household that wants to rent and a landlord willing to rent. At $1,500, 15,000 households want an apartment, but landlords offer only <span class="sr-num" data-k="sr"></span> (short run) or <span class="sr-num" data-k="lr"></span> (long run). <strong>Quantity traded = min(Qd, Qs)</strong>: whichever side is smaller, the “short side,” decides. The cap pushed the price down and, with it, pushed the quantity onto the supply side.</p>
+<p class="formula">traded = min(Qd, Qs) = Qs   (when the cap binds)</p>
+<h3>A cap above the market rent changes nothing</h3>
+<p>Drag the cap above $2,000: it no longer binds anyone, and rent stays at $2,000. Only a cap below the market price does anything.</p>
+<h3>Why the short run looks almost harmless</h3>
+<p>The buildings already exist, and in the short run a landlord has no better use for them than renting, so short-run supply is steep: at $1,500 about 9,500 units stay on the market, nearly the same as before. The cost arrives over years: conversions to condos or owner occupancy, less maintenance, no new construction. Long-run supply is flatter, and the same cap leaves only about 5,000 units. <strong>The benefit is visible at once; the cost comes slowly.</strong> That is one reason rent caps are politically popular.</p>
+<h3>Who wins and who loses</h3>
+<p>Households who get an apartment pay $500 less each month; the <span data-ref="transfer">dashed “transfer” box</span> moves that money from landlords to them. Households who miss out get nothing and keep searching. Landlords lose the transfer plus what the withdrawn apartments would have earned. The bar under the chart always splits the <strong>total possible surplus</strong> four ways: tenants + landlords + deadweight loss + rationing loss. The four always add up to the same total.</p>
+</div>
+<ol class="look">
+<li data-focus="market"><span lang="zh">先看没有上限时的市场：两条曲线在 $2,000 相交。</span><span lang="en">Start with the market without a cap: the curves cross at $2,000.</span></li>
+<li data-focus="cap"><span lang="zh">再看上限：$1,500 这条线压在交点下面，所以它有约束。</span><span lang="en">Then the cap: the $1,500 line sits below the crossing, so it binds.</span></li>
+<li data-focus="quantities"><span lang="zh">看上限线上的两个点：想租的 Qd 远多于房东肯出的 Qs，成交量只能是较小的 Qs。</span><span lang="en">Now the two points on the cap line: Qd wanted far exceeds Qs offered, so only the smaller Qs gets rented.</span></li>
+<li data-focus="transfer"><span lang="zh">看转移：租到房的家庭少付的钱，是房东少收的钱。</span><span lang="en">Look at the transfer: what the lucky households save is what landlords lose.</span></li>
+<li data-focus="dwl"><span lang="zh">最后看三角形：不再出租的那些公寓，本来能让双方都得益，这部分谁也没得到。</span><span lang="en">Finally the triangle: the apartments no longer rented would have benefited both sides, and nobody gets that.</span></li>
+</ol>
+<div class="note">
+<h3><span lang="zh">这个模型不衡量什么</span><span lang="en">What this model does not weigh</span></h3>
+<p lang="zh">剩余把每一美元算得一样重，不管它落到谁手里；它也不计算“能留在原来的社区”的价值。限租的支持者看重的正是这两点：分配，以及租客的稳定。实证研究两方面都看到了：Diamond、McQuade 和 Qian（2019，<i>American Economic Review</i>）研究旧金山 1994 年扩大的限租范围，发现受保护的租客明显更可能留在原住址；同时受管制楼宇的房东把出租供给减少了约 15%，作者估计这可能推高了全市其他房子的租金。</p>
+<p lang="en">Surplus counts every dollar the same, whoever receives it, and it puts no value on staying in one’s neighborhood. Those are exactly what supporters of rent control care about: distribution and tenant stability. The evidence sees both sides. Diamond, McQuade and Qian (2019, <i>American Economic Review</i>) studied San Francisco’s 1994 expansion of rent control. Covered tenants were substantially more likely to stay at their address, while landlords of covered buildings reduced rental supply by about 15%, which the authors estimate likely raised rents elsewhere in the city.</p>
+</div>
+</section>
+<section id="rationing" class="step" aria-labelledby="ration-title" data-focus="ledger agents loss dwl" hidden>
+<h2 id="ration-title"><span class="n">04</span><span lang="zh">谁拿到那些公寓？</span><span lang="en">Who gets the apartments?</span></h2>
+<p lang="zh">短缺时，价格不再决定谁租到房，总得用别的办法分配。教科书里的无谓损失三角形默认最想要的人拿到房。换一种分配规则，看左下的<span data-ref="ledger">长条</span>和<span data-ref="agents">小方块</span>。</p>
+<p lang="en">With a shortage, price no longer decides who gets a unit; something else has to. The textbook deadweight triangle quietly assumes the households who value apartments most get them. Change the rule and watch <span data-ref="ledger">the bar</span> and <span data-ref="agents">the squares</span>.</p>
+<span class="field-label" id="rule-k"><span lang="zh">分配规则</span><span lang="en">Rationing rule</span></span>
+<fieldset id="rule-set" class="seg" aria-labelledby="rule-k">
+<label><input type="radio" name="rule" value="efficient" checked><span lang="zh">最想要的先得</span><span lang="en">Highest value first</span></label>
+<label><input type="radio" name="rule" value="lottery"><span lang="zh">抽签</span><span lang="en">Lottery</span></label>
+<label><input type="radio" name="rule" value="queue"><span lang="zh">排队</span><span lang="en">Queue</span></label>
+</fieldset>
+<div class="controls"><button id="redraw" type="button" disabled><span lang="zh">重新抽签</span><span lang="en">Draw the lottery again</span></button></div>
+<p id="rule-status" class="status" role="status"></p>
+<div lang="zh">
+<h3>抽签：多出一块“错配”</h3>
+<p>想租的 Qd 户里随机抽 Qs 户。中签者的平均估值只是所有想租者的平均，有人只愿付 $1,550 却中了签，有人愿付 $2,900 却落空。损失多出一块：</p>
+<p class="formula">错配损失 = b · Qs · (Qd − Qs) / 2</p>
+<p>重新抽签只会换掉中签的人，不会改变这个期望损失。Glaeser 和 Luttmer（2003）在纽约的受管制公寓里就发现了大量这类“住错房”的错配。</p>
+<h3>排队：把转移烧掉</h3>
+<p>如果靠排队、托关系、花时间找房来分配，大家会一直“付出”到最后一个租到房的人刚好觉得不值，也就是到需求曲线在 Qs 处的高度。多出来的部分不是给了房东，而是花在了等待上。这里假设每个人的时间同样值钱、找房成本全部浪费，是一个极端情形。</p>
+</div>
+<div lang="en">
+<h3>Lottery: an extra misallocation loss</h3>
+<p>Qs winners are drawn at random from the Qd households who want a unit. The average winner values it only as much as the average applicant. Someone who would pay $1,550 wins while someone who would pay $2,900 misses out. That adds a loss:</p>
+<p class="formula">misallocation = b · Qs · (Qd − Qs) / 2</p>
+<p>Redrawing changes who wins, not this expected loss. Glaeser and Luttmer (2003) found substantial misallocation of this kind among New York City’s rent-controlled apartments.</p>
+<h3>Queue: the transfer goes up in smoke</h3>
+<p>If units go to whoever waits longest, knows someone, or searches hardest, people keep “paying” in time until the last household to get a unit is just indifferent: up to the demand curve’s height at Qs. The extra doesn’t reach landlords; it is spent waiting. This assumes everyone’s time is worth the same and all search cost is wasted, an extreme case.</p>
+</div>
+</section>
+<section id="practice" class="step" aria-labelledby="practice-title" hidden>
+<h2 id="practice-title"><span class="n">05</span><span lang="zh">独立练习：这次没有图</span><span lang="en">Independent practice: no chart this time</span></h2>
+<p lang="zh">一座城市给面粉定了价格上限。开始后，左边的图、标注和读数都会隐藏，控件锁定。只用下面的方程算。</p>
+<p lang="en">A city caps the price of flour. Once you start, the chart, its labels and the readouts on the left are hidden and the controls lock. Work from the equations alone.</p>
+<div class="note eqs"><div><span lang="zh">需求：</span><span lang="en">Demand: </span>P = 20 − 2Q</div><div><span lang="zh">供给：</span><span lang="en">Supply: </span>P = 2 + Q</div><div><span lang="zh">上限：</span><span lang="en">Cap: </span>P = $6</div><div class="small"><span lang="zh">P：每袋美元；Q：每周千袋</span><span lang="en">P in $ per bag; Q in thousand bags a week</span></div></div>
+<div class="controls"><button id="practice-start" type="button" class="primary"><span lang="zh">开始练习（隐藏图）</span><span lang="en">Start practice (hide the chart)</span></button></div>
+<form id="prob-1" class="problem" hidden>
+<fieldset><legend><span lang="zh">1. 短缺是多少千袋？</span><span lang="en">1. How large is the shortage, in thousand bags?</span></legend>
+<div class="answer"><input id="p1" type="number" step="any" inputmode="decimal" data-i18n data-zh-aria-label="短缺（千袋）" data-en-aria-label="Shortage in thousand bags" aria-label="Shortage in thousand bags"><button type="submit"><span lang="zh">核对</span><span lang="en">Check</span></button></div></fieldset>
+<p id="p1-fb" class="fb" role="status"></p>
+</form>
+<form id="prob-2" class="problem" hidden>
+<fieldset><legend><span lang="zh">2. 如果面粉都给了最想要的买家，每周损失多少剩余（无谓损失，单位：千美元）？</span><span lang="en">2. If the flour goes to the buyers who value it most, how much surplus is lost each week (deadweight loss, in $ thousand)?</span></legend>
+<div class="answer"><input id="p2" type="number" step="any" inputmode="decimal" data-i18n data-zh-aria-label="无谓损失（千美元）" data-en-aria-label="Deadweight loss in $ thousand" aria-label="Deadweight loss in $ thousand"><button type="submit"><span lang="zh">核对</span><span lang="en">Check</span></button></div></fieldset>
+<p id="p2-fb" class="fb" role="status"></p>
+</form>
+<form id="prob-3" class="problem" hidden>
+<fieldset><legend><span lang="zh">3. 现在面粉改为在所有愿意按 $6 购买的人中抽签分配。和第 2 题相比，损失的总剩余……</span><span lang="en">3. Now the flour is handed out by lottery among everyone who wants it at $6. Compared with question 2, the total surplus lost is…</span></legend>
+<label class="choice"><input type="radio" name="p3" value="same" required><span><span lang="zh">一样：卖出的数量没变。</span><span lang="en">The same: the quantity sold hasn’t changed.</span></span></label>
+<label class="choice"><input type="radio" name="p3" value="larger"><span><span lang="zh">更大。</span><span lang="en">Larger.</span></span></label>
+<label class="choice"><input type="radio" name="p3" value="smaller"><span><span lang="zh">更小：抽签更公平。</span><span lang="en">Smaller: a lottery is fairer.</span></span></label>
+<div class="controls"><button type="submit"><span lang="zh">核对</span><span lang="en">Check</span></button></div></fieldset>
+<p id="p3-fb" class="fb" role="status"></p>
+</form>
+<div class="controls">
+<button id="practice-show" type="button" hidden><span lang="zh">画出这个市场来核对</span><span lang="en">Draw this market to check</span></button>
+<button id="practice-exit" type="button" hidden><span lang="zh">回到房租市场</span><span lang="en">Back to the rent market</span></button>
+</div>
+</section>
+<section id="transfer" class="step" aria-labelledby="transfer-title" hidden>
+<h2 id="transfer-title"><span class="n">06</span><span lang="zh">迁移：小麦的最低价</span><span lang="en">Transfer: a minimum price for wheat</span></h2>
+<form id="transfer-form">
+<fieldset><legend><span lang="zh">政府规定小麦的收购价不得低于某个价格，且这个价格高于市场价，政府自己不收购。会发生什么？</span><span lang="en">A government rules that wheat may not sell below a minimum price set above the market price, and buys none itself. What happens?</span></legend>
+<label class="choice"><input type="radio" name="transfer" value="shortage" required><span><span lang="zh">出现短缺：价格高了，农民惜售。</span><span lang="en">A shortage: at the higher price farmers hold back.</span></span></label>
+<label class="choice"><input type="radio" name="transfer" value="surplus"><span><span lang="zh">出现过剩：卖不出去的小麦。</span><span lang="en">A surplus: wheat that can’t be sold.</span></span></label>
+<label class="choice"><input type="radio" name="transfer" value="none"><span><span lang="zh">数量不变，只是农民收入变高。</span><span lang="en">Quantity is unchanged; farmers simply earn more.</span></span></label>
+</fieldset>
+<div class="controls"><button type="submit"><span lang="zh">核对答案</span><span lang="en">Check my answer</span></button></div>
+<p id="transfer-feedback" class="status" role="status"></p>
+</form>
+<label id="floor-wrap" class="toggle" hidden><input id="floor" type="checkbox"><span lang="zh">在模型里验证：把政策改成价格下限（沿用房租市场的两条线）</span><span lang="en">Check it in the model: switch the policy to a price floor (same two curves)</span></label>
+</section>
+<section class="step limits" aria-labelledby="limits-title">
+<h2 id="limits-title"><span lang="zh">这个模型的适用范围</span><span lang="en">Where this model applies</span></h2>
+<div lang="zh">
+<p>需求和供给都是直线，市场只有一种公寓。真实的住房按地段、面积、质量各不相同；实际的限租通常只覆盖一部分房子，还常有空置后重新定价等例外。这里的数字是示意，没有按任何城市校准；短期和长期两条供给线只用来说明“供给会随时间变得更有弹性”。</p>
+<p>抽签和排队是两个极端情形。排队假设每个人的时间同样值钱、找房成本全部浪费。价格下限模式假设卖得出去的是成本最低的卖家，也没有计入卖不出去的产品本身的浪费。</p>
+<p>参考：标准的供求与剩余分析见任一本经济学原理教材；Diamond, McQuade &amp; Qian (2019), <i>The Effects of Rent Control Expansion on Tenants, Landlords, and Inequality: Evidence from San Francisco</i>, AER；Glaeser &amp; Luttmer (2003), <i>The Misallocation of Housing Under Rent Control</i>, AER。</p>
+</div>
+<div lang="en">
+<p>Demand and supply are straight lines, and the market has one kind of apartment. Real housing differs by location, size and quality; real rent control usually covers only part of the stock, often with exceptions such as resetting rent between tenants. The numbers are illustrative and not calibrated to any city; the short- and long-run supply lines only show that supply becomes more elastic over time.</p>
+<p>Lottery and queue are two extremes. The queue assumes everyone’s time is worth the same and all search cost is wasted. Floor mode assumes the lowest-cost sellers are the ones who sell, and does not count the waste of goods produced but unsold.</p>
+<p>References: supply, demand and surplus as in any principles textbook; Diamond, McQuade &amp; Qian (2019), <i>The Effects of Rent Control Expansion on Tenants, Landlords, and Inequality: Evidence from San Francisco</i>, AER; Glaeser &amp; Luttmer (2003), <i>The Misallocation of Housing Under Rent Control</i>, AER.</p>
+</div>
+<p class="foot"><span lang="zh">离线可用。用 Tab 切换控件，方向键调节滑块；图上的橙色线也可以用鼠标或手指拖动。</span><span lang="en">Works offline. Use Tab to reach controls and arrow keys on the slider; the orange line on the chart can also be dragged with a mouse or finger.</span></p>
+</section>
+</div>
+</div>
+<section id="experiment" class="figure-pane" aria-labelledby="figure-title">
+<div class="stage">
+<svg id="chart" viewBox="0 0 720 430" role="img" aria-labelledby="figure-title figure-desc">
+<title id="figure-title" data-i18n data-zh="公寓市场的供求图与租金上限" data-en="Supply and demand for apartments with a rent cap">Supply and demand for apartments with a rent cap</title>
+<desc id="figure-desc"></desc>
+<defs>
+<pattern id="hatch-dwl" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="6" height="6" fill="var(--dwl)" fill-opacity=".14"/><line x1="0" y1="0" x2="0" y2="6" stroke="var(--dwl)" stroke-width="2"/></pattern>
+<pattern id="hatch-waste" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="6" height="6" fill="var(--accent)" fill-opacity=".12"/><line x1="0" y1="0" x2="0" y2="6" stroke="var(--accent)" stroke-width="2"/></pattern>
+</defs>
+<g id="plot"></g>
+</svg>
+</div>
+<div class="readouts" data-i18n data-zh-aria-label="当前市场" data-en-aria-label="Current market" aria-label="Current market">
+<div class="readout" data-part="quantities"><span class="k" data-ref="quantities"><span lang="zh">房东愿出租 Qs</span><span lang="en">Offered, Qs</span></span><strong id="r-qs"></strong><span class="u" id="r-qs-u"></span></div>
+<div class="readout" data-part="quantities"><span class="k" data-ref="quantities"><span lang="zh">家庭想租 Qd</span><span lang="en">Wanted, Qd</span></span><strong id="r-qd"></strong><span class="u" id="r-qd-u"></span></div>
+<div class="readout" data-part="quantities"><span class="k" data-ref="quantities"><span lang="zh">实际租出</span><span lang="en">Actually rented</span></span><strong id="r-traded"></strong><span class="u" id="r-traded-u"></span></div>
+<div class="readout gap" data-part="quantities"><span class="k" id="r-gap-k"></span><strong id="r-gap"></strong><span class="u" id="r-gap-u"></span></div>
+<div class="readout cs" data-part="surplus"><span class="k" id="r-cs-k"></span><strong id="r-cs"></strong><span class="u" id="r-cs-u"></span></div>
+<div class="readout ps" data-part="surplus"><span class="k" id="r-ps-k"></span><strong id="r-ps"></strong><span class="u" id="r-ps-u"></span></div>
+<div class="readout" data-part="dwl"><span class="k" data-ref="dwl"><span lang="zh">无谓损失</span><span lang="en">Deadweight loss</span></span><strong id="r-dwl"></strong><span class="u" id="r-dwl-u"></span></div>
+<div class="readout" data-part="loss"><span class="k" data-ref="loss"><span lang="zh">分配损失</span><span lang="en">Rationing loss</span></span><strong id="r-loss"></strong><span class="u" id="r-loss-u"></span></div>
+</div>
+<div class="ledger">
+<div class="ledger-head"><h2><span lang="zh">可能的总剩余，分成四份</span><span lang="en">Total possible surplus, split four ways</span></h2><span id="budget-total"></span></div>
+<div class="budget" id="budget" aria-hidden="true" data-part="ledger" data-zh-label="可能的总剩余，分成四份" data-en-label="Total possible surplus, split four ways"><span class="b-cs"></span><span class="b-ps"></span><span class="b-dwl"></span><span class="b-waste"></span></div>
+<ul class="key"><li data-ref="surplus"><i class="b-cs"></i><span id="key-cs"></span></li><li data-ref="surplus"><i class="b-ps"></i><span id="key-ps"></span></li><li data-ref="dwl"><i class="b-dwl"></i><span lang="zh">无谓损失</span><span lang="en">Deadweight loss</span></li><li data-ref="loss"><i class="b-waste"></i><span lang="zh">分配损失</span><span lang="en">Rationing loss</span></li></ul>
+<div class="strip" aria-hidden="true" data-part="agents" data-zh-label="每个小方块是一户家庭或一位房东" data-en-label="Each square is one household or one landlord">
+<span class="k" id="strip-buyers-k"></span><div class="cells" id="buyers"></div>
+<span class="k" id="strip-sellers-k"></span><div class="cells" id="sellers"></div>
+</div>
+<ul class="key" id="strip-key"></ul>
+</div>
+<p id="summary" class="fig-caption" aria-live="polite"></p>
+</section>
+</main>
+<script>
+'use strict';
+/* lesson-shell i18n v2: shared by every example page; keep identical across files.
+   Static copy: paired elements <span lang="zh">…</span><span lang="en">…</span> (CSS hides the other language).
+   Text-only nodes and attributes: data-i18n plus data-zh / data-en (textContent) or data-zh-<attr> / data-en-<attr>.
+   Dynamic copy: tr('中文', 'English'); say(el, () => tr(…)) re-renders the message when the language changes. */
+const I18N = (() => {
+  const KEY = 'tf-lang', LANGS = ['zh', 'en'];
+  const stored = (() => { try { return localStorage.getItem(KEY); } catch { return null; } })();
+  const param = new URLSearchParams(location.search).get('lang');
+  let lang = LANGS.includes(param) ? param : LANGS.includes(stored) ? stored : /^zh\b/i.test(navigator.language || '') ? 'zh' : 'en';
+  const listeners = [];
+  function apply() {
+    const root = document.documentElement;
+    root.lang = lang === 'zh' ? 'zh-CN' : 'en';
+    root.dataset.lang = lang;
+    for (const el of document.querySelectorAll('[data-i18n]')) {
+      for (const { name, value } of [...el.attributes]) {
+        if (name === 'data-' + lang) el.textContent = value;
+        else if (name.startsWith('data-' + lang + '-')) el.setAttribute(name.slice(lang.length + 6), value);
+      }
+    }
+    for (const button of document.querySelectorAll('[data-set-lang]')) button.setAttribute('aria-pressed', String(button.dataset.setLang === lang));
+    for (const link of document.querySelectorAll('a[data-keep-lang]')) {
+      const target = new URL(link.getAttribute('href').split('?')[0], location.href);
+      target.searchParams.set('lang', lang);
+      link.href = target.href;
+    }
+    listeners.forEach(fn => fn(lang));
+  }
+  document.addEventListener('click', event => {
+    const button = event.target.closest('[data-set-lang]');
+    if (!button || button.dataset.setLang === lang) return;
+    lang = button.dataset.setLang;
+    try { localStorage.setItem(KEY, lang); } catch {}
+    try { const here = new URL(location.href); here.searchParams.set('lang', lang); history.replaceState(history.state, '', here); } catch {}
+    apply();
+  });
+  return { get lang() { return lang; }, on(fn) { listeners.push(fn); }, apply };
+})();
+const tr = (zh, en) => I18N.lang === 'zh' ? zh : en;
+const spoken = new Map();
+function say(target, message) {
+  const el = typeof target === 'string' ? document.getElementById(target) : target;
+  spoken.set(el, message);
+  el.textContent = message ? message() : '';
+}
+I18N.on(() => spoken.forEach((message, el) => { el.textContent = message ? message() : ''; }));
+// On short screens the figure pane scrolls on its own; while more of it is below the fold, show a cue that scrolls it.
+(() => {
+  const pane = document.querySelector('.lesson > .figure-pane');
+  if (!pane) return;
+  const cue = document.createElement('div');
+  cue.className = 'pane-more';
+  cue.hidden = true;
+  cue.innerHTML = '<button type="button" tabindex="-1" aria-hidden="true"></button>';
+  const button = cue.firstChild;
+  const label = () => { button.textContent = tr('下方还有内容 ↓', 'More below ↓'); };
+  label();
+  I18N.on(label);
+  button.addEventListener('click', () => pane.scrollBy({ top: pane.clientHeight * 0.75, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' }));
+  pane.after(cue);
+  function update() {
+    const scrolls = getComputedStyle(pane).overflowY !== 'visible' && pane.scrollHeight > pane.clientHeight + 1;
+    cue.hidden = !(scrolls && pane.scrollHeight - pane.clientHeight - pane.scrollTop > 4);
+    if (scrolls) pane.tabIndex = 0; else pane.removeAttribute('tabindex');
+  }
+  const sizes = new ResizeObserver(update);
+  const watch = () => { sizes.disconnect(); sizes.observe(pane); for (const child of pane.children) sizes.observe(child); };
+  new MutationObserver(() => { watch(); update(); }).observe(pane, { childList: true });
+  pane.addEventListener('scroll', update, { passive: true });
+  addEventListener('resize', update);
+  watch();
+  update();
+})();
+/* Attention guide. Figure parts: [data-part="id"] inside #experiment (labels: data-zh-label / data-en-label).
+   Step focus: a panel .step or element with data-focus="id …" dims the other parts while it is the active step
+   (focused element first, else the first visible step crossing the reading line). Ordered highlights: ol.look > li[data-focus].
+   Dual coding: [data-ref="id …"] terms and legend items link to parts both ways. Nothing moves until the learner scrolls, hovers or clicks. */
+(() => {
+  const figure = document.getElementById('experiment');
+  if (!figure || !figure.querySelector('[data-part]')) return;
+  const panel = document.querySelector('.lesson > .panel');
+  const KEY = 'tf-focus-guide', ids = value => (value || '').split(/\s+/).filter(Boolean);
+  let guide = (() => { try { return localStorage.getItem(KEY) !== 'off'; } catch { return true; } })();
+  let stepIds = [], look = null, peek = null, pinned = null, activeStep = null;
+  const style = document.createElement('style');
+  document.head.append(style);
+  const bar = document.createElement('div');
+  bar.className = 'focus-bar';
+  bar.innerHTML = '<p class="focus-caption" aria-live="polite"></p><label class="focus-toggle"><input type="checkbox"><span></span></label>';
+  const caption = bar.firstChild, toggle = bar.querySelector('input'), toggleText = bar.querySelector('.focus-toggle span');
+  toggle.checked = guide;
+  figure.prepend(bar);
+  const tip = document.createElement('div');
+  tip.className = 'part-tip';
+  tip.hidden = true;
+  document.body.append(tip);
+  const fine = matchMedia('(hover: hover) and (pointer: fine)');
+  const sel = list => list.map(id => `[data-part~="${CSS.escape(id)}"]`).join(',');
+  function render() {
+    const hot = pinned || peek || (look && look.ids) || (guide ? stepIds : []);
+    const ring = !!(pinned || peek || look);
+    figure.classList.toggle('tf-ring', ring && hot.length > 0);
+    figure.toggleAttribute('data-focusing', hot.length > 0);
+    style.textContent = hot.length ? `#experiment [data-part]:not(${sel(hot)}){opacity:.24;filter:saturate(.35)}` : '';
+    for (const part of figure.querySelectorAll('[data-part]')) part.classList.toggle('tf-hot', ring && ids(part.dataset.part).some(id => hot.includes(id)));
+  }
+  // Re-rendered figures replace their children; keep the hot class on new parts.
+  new MutationObserver(() => { if (figure.classList.contains('tf-ring')) render(); }).observe(figure, { childList: true, subtree: true });
+  const visible = el => el.offsetParent !== null || el.getClientRects().length > 0;
+  const steps = () => [...document.querySelectorAll('.panel .step, .panel [data-focus]:not(ol.look *)')].filter(visible);
+  function pickStep() {
+    const scroller = panel && getComputedStyle(panel).overflowY !== 'visible' ? panel : null;
+    const box = scroller ? scroller.getBoundingClientRect() : { top: 0, bottom: innerHeight, height: innerHeight };
+    const line = box.top + box.height * 0.3, list = steps();
+    const inView = el => { const r = el.getBoundingClientRect(); return r.bottom > box.top && r.top < box.bottom; };
+    const focused = document.activeElement && list.filter(el => el.contains(document.activeElement)).pop();
+    if (focused && inView(focused)) return focused;
+    let found = null;
+    for (const el of list) { const r = el.getBoundingClientRect(); if (r.bottom > line && r.top < box.bottom && (!found || found.contains(el))) found = el; else if (found && !found.contains(el)) break; }
+    return found;
+  }
+  function update() {
+    const step = pickStep();
+    if (step !== activeStep) {
+      activeStep = step;
+      if (look && !(step && step.contains(look.list))) setLook(null);
+    }
+    const target = step && (step.matches('[data-focus]') ? step : null);
+    stepIds = target ? ids(target.dataset.focus) : [];
+    render();
+  }
+  let queued = false;
+  const schedule = () => { if (!queued) { queued = true; requestAnimationFrame(() => { queued = false; update(); }); } };
+  (panel || document).addEventListener('scroll', schedule, { passive: true });
+  addEventListener('scroll', schedule, { passive: true });
+  addEventListener('resize', schedule);
+  document.addEventListener('focusin', schedule);
+  new MutationObserver(schedule).observe(document.querySelector('.panel') || document.body, { attributes: true, attributeFilter: ['hidden'], subtree: true });
+  toggle.addEventListener('change', () => { guide = toggle.checked; try { localStorage.setItem(KEY, guide ? 'on' : 'off'); } catch {} render(); });
+  // Ordered highlights.
+  const lists = [...document.querySelectorAll('ol.look')];
+  function setLook(next) {
+    look = next;
+    for (const list of lists) {
+      const items = [...list.children];
+      items.forEach((li, i) => { if (next && next.list === list && next.index === i) li.setAttribute('aria-current', 'step'); else li.removeAttribute('aria-current'); });
+      for (const button of list.previousElementSibling.querySelectorAll('.look-num')) button.setAttribute('aria-pressed', String(!!next && next.list === list && Number(button.dataset.index) === next.index));
+    }
+    caption.textContent = '';
+    if (next) {
+      const n = document.createElement('span');
+      n.className = 'look-n';
+      n.textContent = `${next.index + 1}/${next.list.children.length}`;
+      const text = document.createElement('span');
+      text.append(...[...next.list.children[next.index].childNodes].map(node => node.cloneNode(true)));
+      caption.append(n, text);
+    }
+    render();
+  }
+  const go = (list, index) => setLook({ list, index, ids: ids(list.children[index].dataset.focus) });
+  for (const list of lists) {
+    const nav = document.createElement('div');
+    nav.className = 'look-nav';
+    const items = [...list.children];
+    items.forEach((li, i) => {
+      const b = document.createElement('button');
+      b.type = 'button'; b.className = 'look-num'; b.dataset.index = i; b.textContent = i + 1; b.setAttribute('aria-pressed', 'false');
+      b.addEventListener('click', () => go(list, i));
+      nav.append(b);
+      li.addEventListener('click', event => { if (!event.target.closest('a,button,input,[data-ref]')) go(list, i); });
+    });
+    const make = (cls, zh, en, fn) => { const b = document.createElement('button'); b.type = 'button'; b.className = cls; const label = () => { b.textContent = tr(zh, en); }; label(); I18N.on(label); b.addEventListener('click', fn); nav.append(b); };
+    const at = () => (look && look.list === list ? look.index : -1);
+    make('look-prev', '‹ 上一步', '‹ Prev', () => go(list, Math.max(0, at() - 1)));
+    make('look-next', '下一步 ›', 'Next ›', () => go(list, Math.min(items.length - 1, at() + 1)));
+    make('look-clear', '清除', 'Clear', () => setLook(null));
+    list.before(nav);
+  }
+  // Dual coding: terms ↔ parts.
+  const refs = () => document.querySelectorAll('[data-ref]');
+  for (const term of refs()) if (!term.matches('a,button,input,select,textarea,label,[tabindex]')) { term.tabIndex = 0; term.setAttribute('role', 'button'); term.setAttribute('aria-pressed', 'false'); }
+  const termOf = event => event.target.closest && event.target.closest('[data-ref]');
+  let pointer = 'mouse';
+  document.addEventListener('pointerdown', event => { pointer = event.pointerType; }, true);
+  document.addEventListener('pointerover', event => { const term = termOf(event); if (term && event.pointerType === 'mouse') { peek = ids(term.dataset.ref); render(); } });
+  document.addEventListener('pointerout', event => { const term = termOf(event); if (term && !term.contains(event.relatedTarget)) { peek = null; render(); } });
+  document.addEventListener('focusin', event => { const term = termOf(event); if (term) { peek = ids(term.dataset.ref); render(); } });
+  document.addEventListener('focusout', event => { if (termOf(event)) { peek = null; render(); } });
+  function pin(term) {
+    const next = ids(term.dataset.ref).join(' ');
+    pinned = pinned && pinned.join(' ') === next ? null : ids(next);
+    for (const other of refs()) if (other.getAttribute('role') === 'button') other.setAttribute('aria-pressed', String(!!pinned && other.dataset.ref === term.dataset.ref));
+    render();
+  }
+  document.addEventListener('click', event => { const term = termOf(event); if (term && term.getAttribute('role') === 'button' && pointer !== 'mouse') pin(term); });
+  document.addEventListener('keydown', event => {
+    const term = termOf(event);
+    if (term && term.getAttribute('role') === 'button' && (event.key === 'Enter' || event.key === ' ')) { event.preventDefault(); pin(term); }
+    if (event.key === 'Escape' && (look || pinned)) { pinned = null; for (const other of refs()) if (other.getAttribute('role') === 'button') other.setAttribute('aria-pressed', 'false'); setLook(null); }
+  });
+  function partLabel(part) { return part.getAttribute(`data-${I18N.lang}-label`); }
+  figure.addEventListener('pointermove', event => {
+    const part = event.target.closest && event.target.closest('[data-part]');
+    const label = part && partLabel(part);
+    for (const term of refs()) term.classList.toggle('tf-ref-on', !!part && ids(term.dataset.ref).some(id => ids(part.dataset.part).includes(id)));
+    if (!label || !fine.matches || event.pointerType !== 'mouse') { tip.hidden = true; return; }
+    tip.textContent = label;
+    tip.hidden = false;
+    const x = Math.min(event.clientX + 14, innerWidth - tip.offsetWidth - 8), y = event.clientY + 18 + tip.offsetHeight > innerHeight ? event.clientY - tip.offsetHeight - 12 : event.clientY + 18;
+    tip.style.left = x + 'px'; tip.style.top = y + 'px';
+  });
+  figure.addEventListener('pointerleave', () => { tip.hidden = true; for (const term of refs()) term.classList.remove('tf-ref-on'); });
+  const labels = () => { toggleText.textContent = tr('焦点引导', 'Focus guide'); };
+  labels();
+  I18N.on(() => { labels(); if (look) setLook(look); });
+  update();
+})();
+/* /lesson-shell */
+const $ = id => document.getElementById(id);
+
+// Markets. Demand P = a − bQ. Supply P = max(0, c + dQ): a negative c is housing stock that rents at any price ≥ 0.
+const RENT = {id:'rent', a:3000, b:100, runs:{sr:{c:-8000, d:1000}, lr:{c:1000, d:100}},
+  qMax:25, pMax:3200, qTick:5, pTick:500, buyers:24, sellers:20, step:50};
+const FLOUR = {id:'flour', a:20, b:2, runs:{sr:{c:2, d:1}, lr:{c:2, d:1}},
+  qMax:10, pMax:20, qTick:2, pTick:4, buyers:10, sellers:10, cap:6};
+
+const demandQ = (m, p) => Math.max(0, (m.a - p) / m.b);
+const demandP = (m, q) => m.a - m.b * q;
+const supplyQ = (s, p) => Math.max(0, (p - s.c) / s.d);
+const supplyP = (s, q) => Math.max(0, s.c + s.d * q);
+const grossValue = (m, q) => m.a * q - m.b * q * q / 2;            // area under demand from 0 to q
+function cost(s, q) {                                                // area under supply from 0 to q
+  if (q <= 0) return 0;
+  if (s.c >= 0) return s.c * q + s.d * q * q / 2;
+  const q0 = -s.c / s.d;
+  return q <= q0 ? 0 : s.d * (q - q0) ** 2 / 2;
+}
+
+// Pure teaching model: everything on the page is read from this.
+function lesson({market, run, mode, price, rule}) {
+  const m = market, s = m.runs[run];
+  const qStar = (m.a - s.c) / (m.b + s.d), pStar = demandP(m, qStar);
+  const binding = mode === 'ceiling' ? price < pStar - 1e-9 : price > pStar + 1e-9;
+  const p = binding ? price : pStar;
+  const qd = demandQ(m, p), qs = supplyQ(s, p), traded = Math.min(qd, qs);
+  const tsMax = grossValue(m, qStar) - cost(s, qStar);
+  const gross = grossValue(m, traded);                                // buyers with the highest value get the units
+  let cs = gross - p * traded, loss = 0, avgWinner = null, fullPrice = null;
+  const rationed = binding && mode === 'ceiling' && traded > 0;
+  if (rationed && rule === 'lottery') {
+    avgWinner = m.a - m.b * qd / 2;                                   // mean value among everyone who wants a unit
+    loss = gross - traded * avgWinner;                                // = b·Qs·(Qd − Qs)/2
+    cs -= loss;
+  }
+  if (rationed && rule === 'queue') {
+    fullPrice = demandP(m, traded);                                   // rent + time until the marginal winner is indifferent
+    loss = (fullPrice - p) * traded;
+    cs -= loss;
+  }
+  const ps = p * traded - cost(s, traded);
+  const dwl = tsMax - (gross - cost(s, traded));
+  const gap = mode === 'ceiling' ? Math.max(0, qd - qs) : Math.max(0, qs - qd);
+  const transfer = binding ? Math.abs(pStar - p) * traded : 0;
+  return {market:m, supply:s, run, mode, rule, price, binding, p, pStar, qStar, qd, qs, traded, gap,
+    tsMax, cs, ps, dwl, loss, transfer, avgWinner, fullPrice};
+}
+
+// Discrete agents: one cell per 1,000 households / apartments, read off the same curves.
+function hash(...values) {
+  let h = 2166136261;
+  for (const v of values) { h ^= v; h = Math.imul(h, 16777619); h ^= h >>> 13; h = Math.imul(h, 0x5bd1e995); h ^= h >>> 15; }
+  return (h >>> 0) / 4294967296;
+}
+function agents(r, draw) {
+  const m = r.market;
+  const values = Array.from({length:m.buyers}, (_, i) => demandP(m, i + .5));
+  const want = values.filter(v => v >= r.p - 1e-9).length;
+  const units = Math.min(Math.round(r.traded), want);
+  let winners = new Set(Array.from({length:units}, (_, i) => i));
+  if (r.binding && r.mode === 'ceiling' && r.rule === 'lottery') {
+    const pool = Array.from({length:want}, (_, i) => i).sort((x, y) => hash(31, draw, x) - hash(31, draw, y));
+    winners = new Set(pool.slice(0, units));
+  }
+  const queue = r.binding && r.mode === 'ceiling' && r.rule === 'queue';
+  const buyers = values.map((v, i) => ({value:v, state:winners.has(i) ? (queue ? 'queue' : 'got') : i < want ? 'want' : 'out'}));
+  const costs = Array.from({length:m.sellers}, (_, j) => supplyP(r.supply, j + .5));
+  const offered = costs.filter(c => c <= r.p + 1e-9).length;
+  const sellers = costs.map((c, j) => ({cost:c, state:j < units ? 'rented' : j < offered ? 'unsold' : 'withheld'}));
+  return {buyers, sellers, want, units, offered};
+}
+
+function selfCheck() {
+  const fail = msg => { throw new Error('Model self-check failed: ' + msg); };
+  const close = (x, y, tol = 1e-6) => Math.abs(x - y) <= tol * Math.max(1, Math.abs(y));
+  for (const market of [RENT, FLOUR]) for (const run of ['sr', 'lr']) for (const mode of ['ceiling', 'floor']) for (const rule of ['efficient', 'lottery', 'queue']) {
+    for (let price = 0; price <= market.a; price += market.a / 40) {
+      const r = lesson({market, run, mode, price, rule});
+      if (!close(r.cs + r.ps + r.dwl + r.loss, r.tsMax)) fail('surplus budget does not add up');
+      if (!close(r.traded, Math.min(r.qd, r.qs))) fail('quantity is not set by the short side');
+      if (r.cs < -1e-6 || r.ps < -1e-6 || r.dwl < -1e-6 || r.loss < -1e-6) fail('negative surplus share');
+      if (!r.binding && (r.dwl > 1e-6 || !close(r.traded, r.qStar))) fail('a non-binding control must leave the market alone');
+      if (r.binding && mode === 'ceiling' && r.traded > 0 && supplyP(r.supply, r.traded) > 0) {
+        const triangle = (demandP(market, r.traded) - price) * (r.qStar - r.traded) / 2;
+        if (!close(r.dwl, triangle)) fail('deadweight loss is not the triangle');
+      }
+      if (r.binding && mode === 'ceiling' && rule === 'lottery' && r.traded > 0) {
+        let integral = 0; const n = 4000, h = r.qd / n;
+        for (let i = 0; i < n; i++) integral += demandP(market, (i + .5) * h) * h;
+        if (!close(r.loss, grossValue(market, r.traded) - r.traded / r.qd * integral, 1e-6)) fail('lottery loss disagrees with integration');
+        if (!close(r.loss, market.b * r.qs * (r.qd - r.qs) / 2)) fail('lottery loss formula');
+      }
+    }
+  }
+  for (let price = 600; price < 2000; price += 50) {
+    const sr = lesson({market:RENT, run:'sr', mode:'ceiling', price, rule:'efficient'});
+    const lr = lesson({market:RENT, run:'lr', mode:'ceiling', price, rule:'efficient'});
+    if (lr.gap < sr.gap - 1e-9) fail('long-run shortage must be at least the short-run one');
+  }
+  const f = lesson({market:FLOUR, run:'sr', mode:'ceiling', price:FLOUR.cap, rule:'efficient'});
+  const fl = lesson({market:FLOUR, run:'sr', mode:'ceiling', price:FLOUR.cap, rule:'lottery'});
+  if (!close(f.gap, 3) || !close(f.dwl, 6) || !close(fl.loss, 12)) fail('practice answers');
+  const r = lesson({market:RENT, run:'sr', mode:'ceiling', price:1500, rule:'efficient'});
+  if (!close(r.qStar, 10) || !close(r.pStar, 2000) || !close(r.qs, 9.5)) fail('rent market calibration');
+}
+selfCheck();
+
+// ---------- State and formatting ----------
+const state = {prediction:null, revealed:false, seen:{sr:false, lr:false}, run:'sr', mode:'ceiling', price:1500, rule:'efficient', draw:1,
+  view:'rent', practice:{1:false, 2:false, 3:false}, transferred:false};
+const isRent = m => m.id === 'rent';
+const fmtQ = (m, q) => isRent(m) ? tr(`${q.toFixed(1)} 千套`, `${q.toFixed(1)}k`) : tr(`${q.toFixed(1)} 千袋`, `${q.toFixed(1)}k bags`);
+const fmtP = (m, p) => isRent(m) ? '$' + Math.round(p).toLocaleString('en-US') : '$' + (Math.round(p * 100) / 100);
+function fmtV(m, v) {
+  v = Math.max(0, v);
+  if (isRent(m)) {                                                    // v is $ thousand per month
+    const wan = v / 10;
+    return tr(`${wan >= 100 ? wan.toFixed(0) : wan.toFixed(1)} 万美元`, `$${(v / 1000).toFixed(2)}M`);
+  }
+  return tr(`${Math.round(v * 1000).toLocaleString('en-US')} 美元`, `$${v.toFixed(1)}k`);
+}
+const per = m => isRent(m) ? tr('每月', 'per month') : tr('每周', 'per week');
+
+function current() {
+  if (state.view === 'rent') return lesson({market:RENT, run:state.run, mode:state.mode, price:state.price, rule:state.rule});
+  return lesson({market:FLOUR, run:'sr', mode:'ceiling', price:FLOUR.cap, rule:state.rule});
+}
+
+// ---------- Chart ----------
+const svg = $('chart'), plot = $('plot');
+const NS = 'http://www.w3.org/2000/svg';
+let box = {W:720, H:430, L:62, R:20, T:22, B:46};
+function el(tag, attrs, parent = plot, text) {
+  const node = document.createElementNS(NS, tag);
+  for (const [k, v] of Object.entries(attrs)) node.setAttribute(k, v);
+  if (text != null) node.textContent = text;
+  parent.appendChild(node);
+  return node;
+}
+const twoPane = matchMedia('(min-width:960px) and (min-height:560px)');
+function sizeChart() {
+  // One viewBox unit = one CSS pixel, so labels keep their size; in two panes the chart fills the stage.
+  const stage = svg.parentElement;
+  const W = Math.round(Math.max(340, stage.clientWidth || 720));
+  const H = twoPane.matches ? Math.round(Math.max(260, stage.clientHeight || 430)) : Math.round(Math.max(300, Math.min(440, W * .6)));
+  box = {W, H, L:W < 480 ? 50 : 62, R:W < 480 ? 12 : 20, T:22, B:46};
+  svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
+}
+function drawChart(r, hidden) {
+  plot.replaceChildren();
+  const m = r.market, {W, H, L, R, T, B} = box;
+  const x = q => L + q / m.qMax * (W - L - R);
+  const y = p => T + (1 - p / m.pMax) * (H - T - B);
+  const pts = list => list.map(([q, p]) => `${x(q).toFixed(1)},${y(Math.min(p, m.pMax)).toFixed(1)}`).join(' ');
+  el('rect', {class:'plot-bg', x:L, y:T, width:W - L - R, height:H - T - B, rx:4});
+  for (let p = 0; p <= m.pMax + 1e-9; p += m.pTick) {
+    el('line', {class:'gridline', x1:L, x2:W - R, y1:y(p), y2:y(p)});
+    if (!hidden) el('text', {class:'tick', x:L - 8, y:y(p) + 4, 'text-anchor':'end'}, plot, isRent(m) ? (p ? `$${(p / 1000).toFixed(1)}k` : '$0') : `$${p}`);
+  }
+  for (let q = 0; q <= m.qMax + 1e-9; q += m.qTick) if (!hidden) el('text', {class:'tick', x:x(q), y:H - B + 17, 'text-anchor':'middle'}, plot, isRent(m) ? `${q}k` : `${q}`);
+  el('line', {class:'axis', x1:L, x2:W - R, y1:y(0), y2:y(0)});
+  el('line', {class:'axis', x1:L, x2:L, y1:T, y2:y(0)});
+  if (hidden) {
+    el('text', {class:'hidden-note', x:(L + W - R) / 2, y:(T + H - B) / 2 - 8, 'text-anchor':'middle'}, plot, tr('练习中：图已隐藏', 'Practice: chart hidden'));
+    el('text', {class:'tick', x:(L + W - R) / 2, y:(T + H - B) / 2 + 14, 'text-anchor':'middle'}, plot, tr('只用右边的方程计算', 'Work from the equations on the right'));
+    return;
+  }
+  el('text', {class:'axis-label', x:L, y:T - 8}, plot, isRent(m) ? tr('月租（美元）', 'Rent ($ / month)') : tr('价格（美元/袋）', 'Price ($ / bag)'));
+  el('text', {class:'axis-label', x:W - R, y:H - 8, 'text-anchor':'end'}, plot, isRent(m) ? tr('公寓数量（千套）', 'Apartments (thousands)') : tr('数量（千袋/周）', 'Quantity (thousand bags / week)'));
+
+  const s = r.supply, t = r.traded, p = r.p;
+  const supplyLine = (q1, q2) => {                                     // polyline along the supply curve, including its flat part at 0
+    const list = [[q1, supplyP(s, q1)]];
+    if (s.c < 0) { const q0 = -s.c / s.d; if (q0 > q1 && q0 < q2) list.push([q0, 0]); }
+    list.push([q2, supplyP(s, q2)]);
+    return list;
+  };
+  // Areas.
+  if (t > 0) {
+    if (r.avgWinner != null) el('polygon', {class:'area cs', points:pts([[0, p], [0, r.avgWinner], [t, r.avgWinner], [t, p]])});
+    else if (r.fullPrice != null) el('polygon', {class:'area cs', points:pts([[0, m.a], [t, r.fullPrice], [0, r.fullPrice]])});
+    else el('polygon', {class:'area cs', points:pts([[0, m.a], [t, demandP(m, t)], [t, p], [0, p]])});
+    el('polygon', {class:'area ps', points:pts([[0, p], [t, p], ...supplyLine(0, t).reverse()])});
+    if (r.fullPrice != null) el('polygon', {class:'area waste', points:pts([[0, p], [t, p], [t, r.fullPrice], [0, r.fullPrice]])});
+  }
+  if (r.binding && t < r.qStar - 1e-9) el('polygon', {class:'area dwl', points:pts([[t, demandP(m, t)], [r.qStar, r.pStar], ...supplyLine(t, r.qStar).reverse()])});
+  if (r.binding && t > 0 && r.fullPrice == null) {
+    const top = Math.max(r.pStar, p), bottom = Math.min(r.pStar, p);
+    el('rect', {class:'transfer', x:x(0), y:y(top), width:x(t) - x(0), height:y(bottom) - y(top)});
+    el('text', {class:'area-label', x:x(t / 2), y:(y(top) + y(bottom)) / 2 + 4, 'text-anchor':'middle'}, plot, tr('转移', 'transfer'));
+  }
+  if (r.avgWinner != null) {
+    el('line', {class:'avg-line', x1:x(0), x2:x(t), y1:y(r.avgWinner), y2:y(r.avgWinner)});
+    el('text', {class:'area-label', x:x(0) + 6, y:y(r.avgWinner) - 6}, plot, tr('中签者的平均估值', 'average winner’s value'));
+  }
+  if (r.fullPrice != null && t > 0) el('text', {class:'area-label', x:x(t / 2), y:(y(p) + y(r.fullPrice)) / 2 + 4, 'text-anchor':'middle'}, plot, tr('排队耗掉的时间', 'time spent queuing'));
+
+  // Curves: the other run's supply faintly, for comparison.
+  if (isRent(m)) {
+    const other = m.runs[r.run === 'sr' ? 'lr' : 'sr'];
+    const qEnd = Math.min(m.qMax, supplyQ(other, m.pMax));
+    const list = [[0, supplyP(other, 0)]];
+    if (other.c < 0) list.push([-other.c / other.d, 0]);
+    list.push([qEnd, supplyP(other, qEnd)]);
+    el('polyline', {class:'curve alt', points:pts(list)});
+    el('text', {class:'curve-label alt', x:x(qEnd) + 4, y:y(supplyP(other, qEnd)) + 14}, plot, r.run === 'sr' ? tr('长期供给', 'long-run S') : tr('短期供给', 'short-run S'));
+  }
+  const dEnd = Math.min(m.qMax, m.a / m.b);
+  el('polyline', {class:'curve d', points:pts([[0, m.a], [dEnd, demandP(m, dEnd)]])});
+  el('text', {class:'curve-label d', x:x(dEnd) - 10, y:y(demandP(m, dEnd)) + 18, 'text-anchor':'end'}, plot, tr('需求 D', 'Demand D'));
+  const sEnd = Math.min(m.qMax, supplyQ(s, m.pMax));
+  el('polyline', {class:'curve s', points:pts(supplyLine(0, sEnd))});
+  el('text', {class:'curve-label s', x:x(sEnd) - 6, y:y(supplyP(s, sEnd)) + 16, 'text-anchor':'end'}, plot, isRent(m) ? (r.run === 'sr' ? tr('短期供给 S', 'Short-run S') : tr('长期供给 S', 'Long-run S')) : tr('供给 S', 'Supply S'));
+
+  // Market equilibrium.
+  el('line', {class:'guide', x1:x(r.qStar), x2:x(r.qStar), y1:y(r.pStar), y2:y(0)});
+  el('line', {class:'guide', x1:L, x2:x(r.qStar), y1:y(r.pStar), y2:y(r.pStar)});
+  el('circle', {class:'eq', cx:x(r.qStar), cy:y(r.pStar), r:4.5});
+  el('text', {class:'eq-label', x:x(r.qStar) + 9, y:y(r.pStar) - 8}, plot, tr(`市场：${fmtP(m, r.pStar)} · ${fmtQ(m, r.qStar)}`, `Market: ${fmtP(m, r.pStar)} · ${fmtQ(m, r.qStar)}`));
+
+  // The control line, its quantities and the gap.
+  if (state.prediction || state.view !== 'rent') {
+    const off = !r.binding, line = r.price;
+    if (line <= m.pMax) {
+      el('line', {class:'cap-line' + (off ? ' off' : ''), x1:L, x2:W - R, y1:y(line), y2:y(line)});
+      if (r.binding) {
+        const [q1, q2] = [Math.min(r.qd, r.qs), Math.max(r.qd, r.qs)];
+        const gy = y(line) + (r.mode === 'ceiling' ? 14 : -14);
+        el('path', {class:'gap', d:`M${x(q1)},${gy - 5}V${gy}H${x(q2)}V${gy - 5}`});
+        el('text', {class:'gap-label', x:(x(q1) + x(q2)) / 2, y:gy + (r.mode === 'ceiling' ? 15 : -7), 'text-anchor':'middle'}, plot,
+          r.mode === 'ceiling' ? tr(`短缺 ${fmtQ(m, r.gap)}`, `shortage ${fmtQ(m, r.gap)}`) : tr(`过剩 ${fmtQ(m, r.gap)}`, `unsold ${fmtQ(m, r.gap)}`));
+        el('circle', {class:'qmark s', cx:x(r.qs), cy:y(line), r:5});
+        el('circle', {class:'qmark d', cx:x(r.qd), cy:y(line), r:5});
+      }
+      const label = (r.mode === 'ceiling' ? tr('上限 ', 'Cap ') : tr('下限 ', 'Floor ')) + fmtP(m, line);
+      const g = el('g', {class:'cap-pill' + (off ? ' off' : '')});
+      const text = el('text', {x:0, y:y(line) + 4.5, 'text-anchor':'middle'}, g, label);
+      const w = (text.getComputedTextLength() || label.length * 7.2) + 20;
+      text.setAttribute('x', W - R - w / 2);
+      g.insertBefore(el('rect', {x:W - R - w, y:y(line) - 12, width:w, height:24, rx:12}, g), text);
+      if (state.view === 'rent' && !$('price').disabled) el('rect', {class:'cap-hit', x:L, y:y(line) - 14, width:W - L - R, height:28, 'data-drag':'1'});
+    }
+  }
+  tagChart();
+}
+// Name the chart's parts for the focus guide, by the classes drawChart gives them.
+const CHART_PARTS = [
+  ['curve curve-label', 'curves', '需求曲线和供给曲线', 'The demand and supply curves'],
+  ['guide eq eq-label', 'market', '没有上限时的市场租金和数量', 'Market rent and quantity without a cap'],
+  ['cap-line cap-pill cap-hit', 'cap', '租金上限：拖动它', 'The rent cap: drag it'],
+  ['gap gap-label qmark', 'quantities', '上限处房东愿出租的 Qs 和家庭想租的 Qd', 'At the cap: Qs offered and Qd wanted'],
+  ['cs ps', 'surplus', '租客剩余和房东剩余', 'Tenants’ and landlords’ surplus'],
+  ['dwl', 'dwl', '无谓损失：不再成交的那些出租', 'Deadweight loss: rentals that no longer happen'],
+  ['waste avg-line', 'loss', '分配损失：没分给最想要的人', 'Rationing loss: units not going to those who value them most'],
+  ['transfer', 'transfer', '转移：从房东流向租到房的家庭', 'Transfer from landlords to the households who rent'],
+].map(([cls, id, zh, en]) => [cls.split(' '), id, zh, en]);
+function tagChart() {
+  for (const n of plot.children) {
+    const hit = CHART_PARTS.find(([cls]) => cls.some(c => n.classList.contains(c)));
+    if (hit) { n.setAttribute('data-part', hit[1]); n.setAttribute('data-zh-label', hit[2]); n.setAttribute('data-en-label', hit[3]); }
+  }
+}
+
+// ---------- Readouts, ledger, agents ----------
+function sayText(id, text) { $(id).textContent = text; }
+function render() {
+  const r = current(), m = r.market, hidden = state.view === 'practice-hidden';
+  drawChart(r, hidden);
+  const gapLabel = r.mode === 'ceiling' ? tr('短缺', 'Shortage') : tr('过剩（卖不出）', 'Unsold surplus');
+  sayText('r-gap-k', gapLabel);
+  sayText('r-cs-k', isRent(m) ? tr('租客剩余', 'Tenants’ surplus') : tr('买家剩余', 'Buyers’ surplus'));
+  sayText('r-ps-k', isRent(m) ? tr('房东剩余', 'Landlords’ surplus') : tr('卖家剩余', 'Sellers’ surplus'));
+  const q = v => hidden ? '?' : v;
+  sayText('r-qs', q(fmtQ(m, r.qs))); sayText('r-qd', q(fmtQ(m, r.qd))); sayText('r-traded', q(fmtQ(m, r.traded)));
+  sayText('r-gap', q(fmtQ(m, r.gap)));
+  sayText('r-cs', q(fmtV(m, r.cs))); sayText('r-ps', q(fmtV(m, r.ps))); sayText('r-dwl', q(fmtV(m, r.dwl))); sayText('r-loss', q(fmtV(m, r.loss)));
+  const unitQ = isRent(m) ? tr('千套公寓', 'thousand apartments') : tr('千袋 / 周', 'thousand bags / week');
+  sayText('r-qs-u', hidden ? '' : unitQ); sayText('r-qd-u', hidden ? '' : unitQ);
+  sayText('r-traded-u', hidden ? '' : r.binding ? tr('= min(Qd, Qs)，短边', '= min(Qd, Qs), the short side') : tr('市场出清', 'market clears'));
+  sayText('r-gap-u', hidden ? '' : r.binding ? (r.mode === 'ceiling' ? tr('想租却租不到', 'want one, can’t get one') : tr('想卖却卖不出', 'offered but unsold')) : tr('政策没有约束', 'the control doesn’t bind'));
+  sayText('r-cs-u', hidden ? '' : per(m)); sayText('r-ps-u', hidden ? '' : per(m));
+  sayText('r-dwl-u', hidden ? '' : tr('没发生的交易', 'trades that no longer happen'));
+  const lossNote = !r.binding || r.mode !== 'ceiling' ? tr('价格在分配', 'price allocates')
+    : r.rule === 'lottery' ? tr('抽签造成的错配', 'lottery misallocation') : r.rule === 'queue' ? tr('排队耗掉的时间', 'time spent queuing') : tr('最想要的先得', 'highest value first');
+  sayText('r-loss-u', hidden ? '' : lossNote);
+  // Ledger.
+  const parts = hidden ? [0, 0, 0, 0] : [r.cs, r.ps, r.dwl, r.loss].map(v => Math.max(0, v) / r.tsMax * 100);
+  [...$('budget').children].forEach((span, i) => { span.style.flexBasis = parts[i] + '%'; });
+  sayText('budget-total', hidden ? '?' : tr(`${per(m)} ${fmtV(m, r.tsMax)}`, `${fmtV(m, r.tsMax)} ${per(m)}`));
+  sayText('key-cs', isRent(m) ? tr('租客', 'Tenants') : tr('买家', 'Buyers'));
+  sayText('key-ps', isRent(m) ? tr('房东', 'Landlords') : tr('卖家', 'Sellers'));
+  const crowd = agents(r, state.draw);
+  sayText('strip-buyers-k', isRent(m) ? tr('家庭（估值从高到低）', 'Households, highest value first') : tr('买家（估值从高到低）', 'Buyers, highest value first'));
+  sayText('strip-sellers-k', isRent(m) ? tr('公寓（成本从低到高）', 'Apartments, lowest cost first') : tr('面粉（成本从低到高）', 'Flour, lowest cost first'));
+  for (const [id, list] of [['buyers', crowd.buyers], ['sellers', crowd.sellers]]) {
+    const row = $(id);
+    row.style.gridTemplateColumns = `repeat(${list.length}, minmax(0, 1fr))`;
+    row.replaceChildren(...list.map(a => { const c = document.createElement('span'); c.className = 'cell ' + (hidden ? 'blank' : a.state); c.dataset.state = a.state; return c; }));
+  }
+  const key = [['got', tr('租到', 'got one')], ['want', tr('想租没租到', 'wants one, none left')], ['out', tr('嫌贵不租', 'priced out')],
+    ['rented', tr('出租中', 'rented')], ['withheld', tr('不出租', 'withheld')]];
+  if (r.rule === 'queue' && r.binding && r.mode === 'ceiling') key.splice(1, 0, ['queue', tr('排队租到', 'got one after queuing')]);
+  if (r.mode === 'floor') key.splice(key.length - 1, 0, ['unsold', tr('卖不出', 'unsold')]);
+  $('strip-key').replaceChildren(...key.map(([cls, text]) => { const li = document.createElement('li'); li.innerHTML = `<i class="cell ${cls}" style="height:9px"></i>`; li.append(text); return li; }));
+  // Summary for screen readers and as a caption.
+  const summary = hidden ? tr('练习中，图和读数已隐藏。', 'Practice in progress; the chart and readouts are hidden.')
+    : !r.binding ? tr(`${r.mode === 'ceiling' ? '上限' : '下限'} ${fmtP(m, r.price)} 没有约束：价格停在 ${fmtP(m, r.pStar)}，成交 ${fmtQ(m, r.traded)}。`, `The ${r.mode === 'ceiling' ? 'cap' : 'floor'} at ${fmtP(m, r.price)} does not bind: the price stays at ${fmtP(m, r.pStar)} and ${fmtQ(m, r.traded)} trade.`)
+    : r.mode === 'ceiling' ? tr(`${fmtP(m, r.p)} 时想要 ${fmtQ(m, r.qd)}，只供给 ${fmtQ(m, r.qs)}；成交 ${fmtQ(m, r.traded)}，短缺 ${fmtQ(m, r.gap)}。总剩余损失 ${fmtV(m, r.dwl + r.loss)}。`, `At ${fmtP(m, r.p)}, ${fmtQ(m, r.qd)} are wanted but only ${fmtQ(m, r.qs)} offered; ${fmtQ(m, r.traded)} trade, a shortage of ${fmtQ(m, r.gap)}. Surplus lost: ${fmtV(m, r.dwl + r.loss)}.`)
+    : tr(`${fmtP(m, r.p)} 时供给 ${fmtQ(m, r.qs)}，只卖出 ${fmtQ(m, r.traded)}；过剩 ${fmtQ(m, r.gap)}。`, `At ${fmtP(m, r.p)}, ${fmtQ(m, r.qs)} are offered but only ${fmtQ(m, r.traded)} sell; ${fmtQ(m, r.gap)} go unsold.`);
+  sayText('summary', summary);
+  sayText('figure-desc', summary);
+  // Right-panel texts.
+  $('price-out').textContent = fmtP(RENT, state.price);
+  document.querySelectorAll('.sr-num').forEach(n => { n.textContent = fmtQ(RENT, lesson({market:RENT, run:n.dataset.k, mode:'ceiling', price:1500, rule:'efficient'}).qs); });
+  renderStatus(r);
+}
+
+function renderStatus(r) {
+  const m = RENT;
+  let text = '';
+  if (!state.prediction) text = tr('先在上面记下你的预测。', 'Save a prediction above first.');
+  else if (state.view !== 'rent') text = tr('练习进行中，房租市场已暂停。', 'Practice in progress; the rent market is paused.');
+  else if (!r.binding) text = r.mode === 'ceiling'
+    ? tr(`上限高于市场租金 ${fmtP(m, r.pStar)}，没有约束：照样租出 ${fmtQ(m, r.traded)}。往下拖到 $2,000 以下。`, `The cap is above the market rent of ${fmtP(m, r.pStar)}, so it doesn’t bind: ${fmtQ(m, r.traded)} are rented as before. Drag it below $2,000.`)
+    : tr(`下限低于市场租金，没有约束。往上拖到 $2,000 以上。`, `The floor is below the market rent, so it doesn’t bind. Drag it above $2,000.`);
+  else if (r.mode === 'floor') text = tr(`下限 ${fmtP(m, r.p)}：房东想出租 ${fmtQ(m, r.qs)}，家庭只想租 ${fmtQ(m, r.qd)}。这次短边是需求，${fmtQ(m, r.gap)} 套空着。`, `Floor at ${fmtP(m, r.p)}: landlords offer ${fmtQ(m, r.qs)}, households want only ${fmtQ(m, r.qd)}. Now demand is the short side, and ${fmtQ(m, r.gap)} sit empty.`);
+  else {
+    text = tr(`${r.run === 'sr' ? '短期' : '长期'}：${fmtP(m, r.p)} 时 ${fmtQ(m, r.qd)} 户想租，房东只出 ${fmtQ(m, r.qs)}。真正租出的是 ${fmtQ(m, r.traded)}，比市场时的 ${fmtQ(m, r.qStar)} 少。`,
+      `${r.run === 'sr' ? 'Short run' : 'Long run'}: at ${fmtP(m, r.p)}, ${fmtQ(m, r.qd)} households want an apartment but landlords offer ${fmtQ(m, r.qs)}. Only ${fmtQ(m, r.traded)} get rented, fewer than the ${fmtQ(m, r.qStar)} at the market rent.`);
+    if (!state.revealed) text += state.seen.sr && !state.seen.lr ? tr(' 现在切到“长期”，保持上限低于 $2,000。', ' Now switch to the long run, keeping the cap below $2,000.')
+      : !state.seen.sr ? tr(' 再切回“短期”比较一下。', ' Switch back to the short run to compare.') : '';
+  }
+  $('status').textContent = text;
+  const rs = $('rule-status');
+  if (state.revealed) {
+    const ex = lesson({market:RENT, run:state.run, mode:'ceiling', price:state.price, rule:'efficient'});
+    rs.textContent = !r.binding || r.mode !== 'ceiling' ? tr('上限没有约束时不需要分配，价格自己完成了。', 'With no binding cap there is nothing to ration; price does it.')
+      : r.rule === 'lottery' ? tr(`抽签多损失 ${fmtV(m, r.loss)}，加上无谓损失共 ${fmtV(m, r.loss + r.dwl)}，是“最想要的先得”时的 ${(Math.round((r.loss + r.dwl) / ex.dwl * 10) / 10)} 倍。`, `The lottery loses an extra ${fmtV(m, r.loss)}: ${fmtV(m, r.loss + r.dwl)} in total, ${(Math.round((r.loss + r.dwl) / ex.dwl * 10) / 10)}× the highest-value-first loss.`)
+      : r.rule === 'queue' ? tr(`排队耗掉 ${fmtV(m, r.loss)}，比转移给租客的 ${fmtV(m, ex.transfer)} 还多。租客剩余只剩 ${fmtV(m, r.cs)}。`, `Queuing burns ${fmtV(m, r.loss)}, more than the ${fmtV(m, ex.transfer)} transfer to tenants. Tenants keep only ${fmtV(m, r.cs)}.`)
+      : tr(`只有标准的无谓损失三角形：${fmtV(m, r.dwl)}。`, `Only the standard deadweight triangle: ${fmtV(m, r.dwl)}.`);
+  }
+}
+
+// ---------- Interaction ----------
+const runInputs = () => document.querySelectorAll('input[name=run]');
+const ruleInputs = () => document.querySelectorAll('input[name=rule]');
+function setControls() {
+  const live = !!state.prediction && state.view === 'rent';
+  $('price').disabled = !live;
+  $('run-set').disabled = !live;
+  $('rule-set').disabled = !state.revealed || state.mode === 'floor' || state.view === 'practice-hidden';
+  $('redraw').disabled = !(state.revealed && state.rule === 'lottery' && state.view !== 'practice-hidden');
+  $('price-k').querySelector('[lang=zh]').textContent = state.mode === 'ceiling' ? '租金上限（每月）' : '租金下限（每月）';
+  $('price-k').querySelector('[lang=en]').textContent = state.mode === 'ceiling' ? 'Rent cap (per month)' : 'Rent floor (per month)';
+}
+function update() {
+  const r = current();
+  if (state.prediction && state.view === 'rent' && state.mode === 'ceiling' && r.binding) state.seen[state.run] = true;
+  if (state.prediction && !state.revealed && state.seen.sr && state.seen.lr) reveal();
+  setControls();
+  render();
+}
+function reveal() {
+  state.revealed = true;
+  for (const id of ['explanation', 'rationing', 'practice', 'transfer']) $(id).hidden = false;
+  const sr = lesson({market:RENT, run:'sr', mode:'ceiling', price:1500, rule:'efficient'});
+  const lr = lesson({market:RENT, run:'lr', mode:'ceiling', price:1500, rule:'efficient'});
+  const p = state.prediction;
+  say($('prediction-feedback'), () => p === 'fewer'
+    ? tr(`你预测“变少”，对了。$1,500 时实际租出的公寓从 ${fmtQ(RENT, sr.qStar)} 降到短期 ${fmtQ(RENT, sr.traded)}、长期 ${fmtQ(RENT, lr.traded)}，虽然想租的家庭增加到了 ${fmtQ(RENT, sr.qd)}。`,
+         `You predicted fewer. Right: at $1,500 the apartments actually rented fall from ${fmtQ(RENT, sr.qStar)} to ${fmtQ(RENT, sr.traded)} in the short run and ${fmtQ(RENT, lr.traded)} in the long run, even though the households who want one rise to ${fmtQ(RENT, sr.qd)}.`)
+    : p === 'more'
+    ? tr(`你预测“变多”。想租的家庭确实变多了（${fmtQ(RENT, sr.qd)}），但租房需要房东愿意出租。实际租出的反而从 ${fmtQ(RENT, sr.qStar)} 降到 ${fmtQ(RENT, sr.traded)}（短期）和 ${fmtQ(RENT, lr.traded)}（长期）。`,
+         `You predicted more. More households do want one (${fmtQ(RENT, sr.qd)}), but a rental also needs a willing landlord. Apartments actually rented fall from ${fmtQ(RENT, sr.qStar)} to ${fmtQ(RENT, sr.traded)} (short run) and ${fmtQ(RENT, lr.traded)} (long run).`)
+    : tr(`你预测“差不多”。短期里你几乎是对的：${fmtQ(RENT, sr.traded)} 对 ${fmtQ(RENT, sr.qStar)}。但长期房东会把房子撤出市场，只剩 ${fmtQ(RENT, lr.traded)}。`,
+         `You predicted about the same. In the short run you were nearly right: ${fmtQ(RENT, sr.traded)} against ${fmtQ(RENT, sr.qStar)}. Over the long run landlords withdraw units, and only ${fmtQ(RENT, lr.traded)} remain.`));
+}
+
+$('prediction-form').addEventListener('submit', event => {
+  event.preventDefault();
+  const choice = new FormData(event.target).get('prediction');
+  if (!choice) return;
+  state.prediction = choice;
+  event.target.querySelectorAll('input,button').forEach(c => { c.disabled = true; });
+  say($('prediction-status'), () => tr('已记下。现在动手设定上限。', 'Saved. Now set the cap.'));
+  update();
+});
+$('price').addEventListener('input', event => { state.price = Number(event.target.value); update(); });
+runInputs().forEach(input => input.addEventListener('change', () => { state.run = input.value; update(); }));
+ruleInputs().forEach(input => input.addEventListener('change', () => { state.rule = input.value; update(); }));
+$('redraw').addEventListener('click', () => { state.draw += 1; update(); });
+
+// Drag the cap line on the chart; the slider stays the source of truth.
+let dragging = null;
+svg.addEventListener('pointerdown', event => {
+  if (!event.target.dataset?.drag || $('price').disabled) return;
+  dragging = event.pointerId; svg.setPointerCapture(event.pointerId); event.preventDefault();
+});
+svg.addEventListener('pointermove', event => {
+  if (dragging !== event.pointerId) return;
+  const pt = svg.createSVGPoint(); pt.x = event.clientX; pt.y = event.clientY;
+  const local = pt.matrixTransform(svg.getScreenCTM().inverse());
+  const {H, T, B} = box, slider = $('price');
+  const p = (1 - (local.y - T) / (H - T - B)) * RENT.pMax;
+  const snapped = Math.min(Number(slider.max), Math.max(Number(slider.min), Math.round(p / RENT.step) * RENT.step));
+  if (snapped !== state.price) { slider.value = snapped; state.price = snapped; update(); }
+});
+const endDrag = event => { if (dragging === event.pointerId) { dragging = null; } };
+svg.addEventListener('pointerup', endDrag); svg.addEventListener('pointercancel', endDrag);
+
+// Independent practice.
+const PRACTICE = {
+  1:{answer:3, wrong:{2:['你只算了供给减少了多少（6 → 4）。短缺比较的是上限下的两边：Qd − Qs = 7 − 4。', 'You measured only how far supply fell (6 → 4). A shortage compares the two sides at the cap: Qd − Qs = 7 − 4.'],
+    1:['你只算了需求增加了多少（6 → 7）。短缺是上限下想买的减去肯卖的。', 'You measured only how far demand rose (6 → 7). A shortage is what buyers want at the cap minus what sellers offer.'],
+    4:['4 是实际卖出的量（Qs）。短缺是没被满足的那部分。', '4 is what actually sells (Qs). The shortage is the part left unmet.'],
+    7:['7 是需求量 Qd。还要减去供给量。', '7 is the quantity demanded. Subtract what is offered.']},
+    hint:['在 P = 6 解出 Qd（20 − 2Q = 6）和 Qs（2 + Q = 6），再相减。', 'Solve for Qd (20 − 2Q = 6) and Qs (2 + Q = 6) at P = 6, then subtract.']},
+  2:{answer:6, wrong:{2:['你用了 P* − 上限（8 − 6）做高。损失的交易价值是买家愿付（Q = 4 时 12）和卖家成本（6）之差。', 'You used P* − cap (8 − 6) as the height. The lost trades are worth the gap between what buyers would pay (12 at Q = 4) and what supplying costs (6).'],
+    12:['忘了 ½：无谓损失是三角形，不是长方形。', 'You forgot the ½: the loss is a triangle, not a rectangle.'],
+    9:['你用短缺（3）做了底。不再发生的交易是从 Qs = 4 到 Q* = 6 这一段。', 'You used the shortage (3) as the base. The trades that stop happening run from Qs = 4 to Q* = 6.'],
+    8:['8 是转移长方形（8 − 6）× 4。它从卖家转给买家，并没有损失。', '8 is the transfer rectangle (8 − 6) × 4. It moves from sellers to buyers; it isn’t lost.']},
+    hint:['先求 Q*（20 − 2Q = 2 + Q），再算三角形：½ ×（Q = 4 时需求价 − 供给价）×（Q* − Qs）。', 'Find Q* (20 − 2Q = 2 + Q), then the triangle: ½ × (demand price − supply price at Q = 4) × (Q* − Qs).']},
+  3:{answer:'larger', wrong:{same:['卖出的数量没变，但拿到面粉的人变了：有人只愿付 $7 却抽中，有人愿付 $19 却落空。多损失 b·Qs·(Qd − Qs)/2 = 2·4·3/2 = 12，总共 18。', 'The quantity sold is the same, but who gets it changes: someone who would pay $7 wins while someone who would pay $19 misses out. That loses b·Qs·(Qd − Qs)/2 = 2·4·3/2 = 12 more, 18 in total.'],
+    smaller:['抽签的公平是真实的价值，但从剩余看，随机分配会把面粉给估值更低的人，多损失 12，总共 18。', 'The fairness of a lottery is a real value, but in surplus terms random allocation hands flour to lower-value buyers: 12 more is lost, 18 in total.']}}
+};
+function startPractice() {
+  state.view = 'practice-hidden';
+  $('practice-start').disabled = true;
+  $('prob-1').hidden = false;
+  $('practice-exit').hidden = false;
+  update();
+  $('p1').focus();
+}
+$('practice-start').addEventListener('click', startPractice);
+function checkNumber(n) {
+  const raw = $('p' + n).value.trim();
+  const fb = $('p' + n + '-fb');
+  if (raw === '') { say(fb, () => tr('先填一个数。', 'Enter a number first.')); fb.className = 'fb no'; return; }
+  const value = Number(raw), spec = PRACTICE[n];
+  const ok = Math.abs(value - spec.answer) < 0.05;
+  const known = Object.keys(spec.wrong).find(k => Math.abs(value - Number(k)) < 0.05);
+  say(fb, () => ok ? tr(`正确：${spec.answer}。`, `Correct: ${spec.answer}.`) : known ? tr('还不对。', 'Not quite. ') + tr(...spec.wrong[known]) : tr('还不对。', 'Not quite. ') + tr(...spec.hint));
+  fb.className = 'fb ' + (ok ? 'ok' : 'no');
+  state.practice[n] = state.practice[n] || ok;
+  if (n < 3) $('prob-' + (n + 1)).hidden = false;
+  practiceProgress();
+}
+$('prob-1').addEventListener('submit', e => { e.preventDefault(); checkNumber(1); });
+$('prob-2').addEventListener('submit', e => { e.preventDefault(); checkNumber(2); });
+$('prob-3').addEventListener('submit', e => {
+  e.preventDefault();
+  const choice = new FormData(e.target).get('p3'), fb = $('p3-fb');
+  if (!choice) return;
+  const ok = choice === 'larger';
+  say(fb, () => ok ? tr('正确：更大。抽签把面粉给了一些估值低的人，多损失 12，总共 18（千美元/周）。', 'Correct: larger. The lottery hands flour to some low-value buyers, losing 12 more: 18 in total ($ thousand a week).')
+    : tr('还不对。', 'Not quite. ') + tr(...PRACTICE[3].wrong[choice]));
+  fb.className = 'fb ' + (ok ? 'ok' : 'no');
+  state.practice[3] = state.practice[3] || ok;
+  state.practice.tried3 = true;
+  practiceProgress();
+});
+function practiceProgress() {
+  $('practice-show').hidden = !state.practice.tried3;
+}
+$('practice-show').addEventListener('click', () => { state.view = 'practice-shown'; state.rule = 'efficient'; document.querySelector('input[name=rule][value=efficient]').checked = true; update(); });
+$('practice-exit').addEventListener('click', () => {
+  state.view = 'rent';
+  $('practice-start').disabled = false;
+  update();
+});
+
+// Transfer, then the floor mode to check it.
+$('transfer-form').addEventListener('submit', event => {
+  event.preventDefault();
+  const choice = new FormData(event.target).get('transfer');
+  if (!choice) return;
+  const fb = $('transfer-feedback');
+  say(fb, () => choice === 'surplus'
+    ? tr('对。价格高于市场价时，农民想卖得更多，买家想买得更少，这次短边是需求：成交量 = Qd，多出来的小麦卖不出去。', 'Right. Above the market price farmers want to sell more and buyers want less. Now demand is the short side: quantity traded = Qd, and the extra wheat goes unsold.')
+    : choice === 'shortage'
+    ? tr('不对。高价让农民想卖得更多，不是更少；买家才会少买。成交量 = Qd，结果是过剩。', 'Not quite. A higher price makes farmers want to sell more, not less; it’s buyers who cut back. Quantity traded = Qd, so the result is a surplus.')
+    : tr('不对。农民每卖一袋确实赚得更多，但买家少买了：成交量降到 Qd，剩下的小麦卖不出去。', 'Not quite. Farmers earn more per bushel they sell, but buyers buy less: quantity falls to Qd and the rest goes unsold.'));
+  state.transferred = true;
+  $('floor-wrap').hidden = false;
+});
+$('floor').addEventListener('change', event => {
+  state.mode = event.target.checked ? 'floor' : 'ceiling';
+  state.price = state.mode === 'floor' ? 2500 : 1500;
+  $('price').value = state.price;
+  if (state.view !== 'rent') { state.view = 'rent'; $('practice-start').disabled = false; }
+  update();
+});
+
+// Keep the chart's text a readable size: the viewBox follows the stage width.
+let lastSize = [0, 0];
+new ResizeObserver(() => {
+  const stage = svg.parentElement, size = [stage.clientWidth, twoPane.matches ? stage.clientHeight : 0];
+  if (Math.abs(size[0] - lastSize[0]) > 4 || Math.abs(size[1] - lastSize[1]) > 4) { lastSize = size; sizeChart(); render(); }
+}).observe(svg.parentElement);
+
+function resetLesson() {
+  Object.assign(state, {prediction:null, revealed:false, seen:{sr:false, lr:false}, run:'sr', mode:'ceiling', price:1500, rule:'efficient', draw:1,
+    view:'rent', practice:{1:false, 2:false, 3:false}, transferred:false});
+  for (const form of ['prediction-form', 'prob-1', 'prob-2', 'prob-3', 'transfer-form']) { $(form).reset(); $(form).querySelectorAll('input,button').forEach(c => { c.disabled = false; }); }
+  for (const id of ['explanation', 'rationing', 'practice', 'transfer', 'prob-1', 'prob-2', 'prob-3', 'practice-show', 'practice-exit', 'floor-wrap']) $(id).hidden = true;
+  for (const id of ['prediction-status', 'prediction-feedback', 'p1-fb', 'p2-fb', 'p3-fb', 'transfer-feedback']) { say($(id), null); $(id).textContent = ''; }
+  $('practice-start').disabled = false;
+  $('floor').checked = false;
+  $('price').value = 1500;
+  document.querySelector('input[name=run][value=sr]').checked = true;
+  document.querySelector('input[name=rule][value=efficient]').checked = true;
+  update();
+}
+$('reset').addEventListener('click', resetLesson);
+I18N.on(render);
+I18N.apply();
+sizeChart();
+resetLesson();
+</script>
+</body>
+</html>

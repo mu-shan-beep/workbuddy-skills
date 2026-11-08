@@ -1,0 +1,577 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title data-i18n data-zh="圆锥切高一半，截面积也减半吗？ · Teachable figures" data-en="Slice a cone · Teachable figures">Slice a cone · Teachable figures</title>
+<style>
+/* lesson-shell v2: shared by every example page; keep identical across files */
+:root{color-scheme:light dark;--bar:56px;--bg:#f7f6f2;--surface:#fff;--stage:#eeece6;--ink:#141618;--text:#2a2e31;--muted:#61676c;--faint:#8b9196;--line:#e4e1d9;--line-strong:#cbc7bd;--accent:#d9480f;--accent-soft:#fcebe2;--focus:#d9480f;--ok:#1d7a4c;--sans:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Noto Sans SC","Microsoft YaHei",sans-serif;--mono:ui-monospace,"SF Mono",SFMono-Regular,Menlo,Consolas,monospace}
+@media(prefers-color-scheme:dark){:root{--bg:#111315;--surface:#181b1e;--stage:#0b0d0f;--ink:#f3f4f2;--text:#dadedc;--muted:#a1a7ab;--faint:#7a8085;--line:#272b2f;--line-strong:#3b4045;--accent:#ff7a45;--accent-soft:#2b1a11;--focus:#ff7a45;--ok:#4cc38a}}
+*{box-sizing:border-box}html{-webkit-text-size-adjust:100%}body{margin:0;background:var(--bg);color:var(--text);font:15.5px/1.6 var(--sans);-webkit-font-smoothing:antialiased}
+[hidden]{display:none!important}html[data-lang=zh] [lang=en],html[data-lang=en] [lang=zh]{display:none!important}
+:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+.skip{position:absolute;left:12px;top:-80px;z-index:30;background:var(--surface);color:var(--ink);padding:8px 12px;border-radius:8px}.skip:focus{top:10px}
+.bar{position:sticky;top:0;z-index:20;height:var(--bar);display:flex;align-items:center;gap:14px;padding:0 16px 0 20px;background:color-mix(in srgb,var(--bg) 90%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.bar .back{display:inline-flex;align-items:center;gap:6px;min-height:40px;color:var(--muted);text-decoration:none;font-size:14px;white-space:nowrap}.bar .back:hover{color:var(--ink)}
+.bar .crumb{min-width:0;font:500 12px/1.2 var(--mono);color:var(--faint);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lang-switch{margin-left:auto;flex:none;display:inline-flex;padding:3px;border:1px solid var(--line);border-radius:999px;background:var(--surface)}
+.lang-switch button{appearance:none;border:0;background:none;cursor:pointer;font:600 12px/1 var(--sans);min-height:30px;min-width:40px;padding:0 11px;border-radius:999px;color:var(--muted)}
+.lang-switch button[aria-pressed=true]{background:var(--ink);color:var(--bg)}
+.lesson{display:flex;flex-direction:column}.panel{display:contents}
+.intro{order:0;padding:28px 20px 6px}
+.figure-pane{order:1;margin:14px 12px 4px;padding:12px;background:var(--stage);border-radius:16px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.steps{order:2;padding:0 20px 40px}
+.stage{position:relative;min-height:0;display:grid;place-items:center}.stage>svg,.stage>canvas{display:block;width:100%;height:auto}
+.fig-caption{margin:0;font-size:12.5px;line-height:1.5;color:var(--muted)}
+.readouts{display:grid;grid-template-columns:repeat(auto-fit,minmax(104px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.readout{background:var(--surface);padding:9px 13px;min-width:0}
+.readout .k{display:block;font:500 12px/1.35 var(--sans);color:var(--muted)}
+.readout strong{display:block;font:650 21px/1.3 var(--sans);font-variant-numeric:tabular-nums;color:var(--ink);letter-spacing:-.01em;overflow-wrap:anywhere}
+.readout .u{display:block;font-size:12px;line-height:1.35;color:var(--faint)}
+.meta{display:flex;flex-wrap:wrap;gap:4px 10px;margin:0 0 14px;padding:0;list-style:none;font:500 12.5px/1.4 var(--sans);color:var(--muted)}.meta li+li::before{content:"/";margin-right:10px;color:var(--line-strong)}
+h1{margin:0 0 12px;font-size:clamp(25px,2.5vw,33px);line-height:1.18;letter-spacing:-.025em;font-weight:700;color:var(--ink);text-wrap:balance}
+.lead{margin:0;color:var(--muted)}
+.step{padding:26px 0 22px;border-top:1px solid var(--line)}.intro+.steps .step:first-child,.steps>.step:first-child{border-top:0}
+.step>h2{display:flex;align-items:center;gap:10px;margin:0 0 12px;font-size:17px;line-height:1.3;letter-spacing:-.01em;color:var(--ink)}
+.step>h2 .n{flex:none;font:600 11px/1 var(--mono);color:var(--accent);border:1px solid currentColor;border-radius:6px;padding:4px 6px}
+h3{margin:20px 0 6px;font-size:14.5px;color:var(--ink)}p{margin:0 0 12px}strong{color:var(--ink)}
+.small{font-size:13.5px;color:var(--muted)}
+fieldset{border:0;padding:0;margin:0;min-width:0}legend{padding:0;margin:0 0 12px;font-weight:600;color:var(--ink)}
+label.choice{display:flex;gap:10px;align-items:flex-start;padding:10px 13px;margin-bottom:8px;border:1px solid var(--line);border-radius:10px;background:var(--surface);cursor:pointer;transition:border-color .12s,box-shadow .12s}
+label.choice:hover{border-color:var(--line-strong)}label.choice:has(input:checked){border-color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink)}label.choice:has(input:disabled){cursor:default}
+label.choice input{flex:none;margin:4px 0 0}input{accent-color:var(--ink)}input[type=radio],input[type=checkbox]{width:17px;height:17px}
+button,select{font:500 14px/1.2 var(--sans);color:var(--ink);background:var(--surface);border:1px solid var(--line-strong);border-radius:10px;padding:0 16px;min-height:42px;cursor:pointer}
+button:hover:not(:disabled),select:hover:not(:disabled){border-color:var(--ink)}button.primary{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+button:disabled,select:disabled{opacity:.45;cursor:not-allowed}
+.controls{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:14px 0}
+.toggle{display:flex;align-items:center;gap:10px;min-height:42px;font-weight:500;color:var(--ink);cursor:pointer}
+.range{margin:16px 0 8px}.range label{display:flex;justify-content:space-between;gap:12px;font-weight:500;color:var(--ink)}.range output{font:500 13px/1.6 var(--mono);color:var(--muted)}
+input[type=range]{width:100%;min-height:32px;margin:4px 0}
+.status{min-height:1.6em;margin:12px 0;padding:10px 12px;border-radius:10px;background:var(--bg);font-size:14px}
+.callout{margin:14px 0;padding:2px 0 2px 14px;border-left:3px solid var(--accent)}
+textarea{display:block;width:100%;min-height:90px;margin-top:8px;padding:10px 12px;font:inherit;color:var(--text);background:var(--bg);border:1px solid var(--line-strong);border-radius:10px;resize:vertical}
+table{border-collapse:collapse;width:100%;margin-top:14px;font-size:14px}th,td{text-align:left;padding:9px 6px;border-bottom:1px solid var(--line);vertical-align:top}th:first-child,td:first-child{padding-left:0}caption{text-align:left;font-weight:600;color:var(--ink);margin-bottom:4px}
+.limits{color:var(--muted);font-size:14px}
+.pane-more{display:none}
+.foot{margin-top:8px;padding-top:16px;border-top:1px solid var(--line);font-size:12.5px;color:var(--faint)}
+/* attention: figure parts [data-part], step focus [data-focus], ordered highlights ol.look, dual-coding terms [data-ref] */
+#experiment [data-part]{transition:opacity .28s ease,filter .28s ease,box-shadow .2s ease}
+#experiment.tf-ring [data-part].tf-hot:not(svg *){box-shadow:0 0 0 2px var(--accent),0 0 0 7px color-mix(in srgb,var(--accent) 18%,transparent);border-radius:10px}
+#experiment.tf-ring svg [data-part].tf-hot{filter:drop-shadow(0 0 1px var(--accent)) drop-shadow(0 0 5px color-mix(in srgb,var(--accent) 40%,transparent))}
+.focus-bar{display:flex;align-items:center;gap:12px;min-height:30px;margin:-4px 0 -2px}
+.focus-caption{flex:1;min-width:0;margin:0;font-size:13px;line-height:1.4;color:var(--ink)}.focus-caption:empty{visibility:hidden}
+.focus-caption .look-n{display:inline-grid;place-items:center;min-width:20px;height:20px;margin-right:8px;padding:0 5px;border-radius:999px;background:var(--accent);color:#fff;font:700 11px/1 var(--sans);vertical-align:1px}
+.focus-toggle{flex:none;display:inline-flex;align-items:center;gap:7px;min-height:30px;font-size:12.5px;color:var(--muted);cursor:pointer;white-space:nowrap}.focus-toggle input{width:15px;height:15px;margin:0}
+ol.look{margin:12px 0 8px;padding:0;list-style:none;counter-reset:look}
+ol.look>li{counter-increment:look;position:relative;margin:0 0 6px;padding:8px 10px 8px 38px;border:1px solid var(--line);border-radius:10px;cursor:pointer;color:var(--muted);transition:border-color .15s,background .15s}
+ol.look>li::before{content:counter(look);position:absolute;left:10px;top:9px;display:grid;place-items:center;width:20px;height:20px;border-radius:999px;border:1px solid var(--line-strong);font:650 11px/1 var(--sans);color:var(--muted)}
+ol.look>li:hover{border-color:var(--line-strong)}ol.look>li[aria-current=step]{border-color:var(--accent);background:var(--accent-soft);color:var(--ink)}ol.look>li[aria-current=step]::before{background:var(--accent);border-color:var(--accent);color:#fff}
+.look-nav{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:0 0 14px}.look-nav button{min-height:34px;padding:0 11px;font-size:13px}.look-nav .look-num{min-width:34px;padding:0}.look-nav .look-num[aria-pressed=true]{background:var(--accent);border-color:var(--accent);color:#fff}
+[data-ref]:not(a,button,input,select,label){text-decoration:underline dotted color-mix(in srgb,var(--accent) 70%,transparent);text-decoration-thickness:1.5px;text-underline-offset:3px;cursor:help;border-radius:4px}
+[data-ref].tf-ref-on{background:var(--accent-soft);box-shadow:0 0 0 2px var(--accent-soft);color:var(--ink)}[data-ref][aria-pressed=true]{background:var(--accent-soft);box-shadow:0 0 0 1px var(--accent)}
+.part-tip{position:fixed;z-index:40;pointer-events:none;max-width:240px;padding:5px 9px;border-radius:8px;background:var(--ink);color:var(--bg);font:500 12.5px/1.35 var(--sans);box-shadow:0 4px 14px rgb(0 0 0/.18)}
+@media(min-width:960px) and (min-height:560px){
+.lesson{display:grid;grid-template-columns:minmax(0,1fr) clamp(380px,35vw,500px);height:calc(100dvh - var(--bar))}
+.panel{display:block;grid-column:2;grid-row:1;overflow-y:auto;overscroll-behavior:contain;background:var(--surface);border-left:1px solid var(--line)}
+.figure-pane{grid-column:1;grid-row:1;margin:0;border-radius:0;padding:24px 28px;min-height:0}
+.figure-pane{overflow-y:auto;overscroll-behavior:contain}.figure-pane>*{flex-shrink:0}
+.figure-pane .stage{flex:1}.figure-pane .stage>svg,.figure-pane .stage>canvas{height:100%;max-height:100%}
+.pane-more{display:flex;grid-column:1;grid-row:1;align-self:end;position:relative;z-index:2;justify-content:center;align-items:flex-end;height:76px;padding-bottom:14px;pointer-events:none;background:linear-gradient(color-mix(in srgb,var(--stage) 0%,transparent),var(--stage) 72%)}
+.pane-more button{pointer-events:auto;min-height:32px;padding:0 14px;border-radius:999px;font-size:12.5px;box-shadow:0 2px 10px rgb(0 0 0/.12)}
+.intro{padding:32px 32px 6px}.steps{padding:0 32px 48px}
+.bar{padding:0 20px 0 24px}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+/* /lesson-shell */
+:root{--wire:#7d878e;--gold:#e9ae46;--cone:#3c8fa1}
+@media(prefers-color-scheme:dark){:root{--wire:#8d979d}}
+#stage text{fill:var(--ink);font:15px var(--sans)}
+.legend{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:12.5px;color:var(--muted)}.legend i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px;vertical-align:-1px}.legend .dash{display:inline-block;width:18px;border-top:1.5px dashed var(--wire);margin-right:6px;vertical-align:3px}
+.summary{margin:0;font-size:14px;font-variant-numeric:tabular-nums}
+details{margin:10px 0 16px}summary{cursor:pointer;min-height:40px;padding:8px 0;font-weight:600;color:var(--ink)}
+@media(max-width:959px){#experiment .readouts{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(min-width:960px) and (min-height:560px){.figure-pane .stage>svg{max-height:min(100%,640px)}}
+</style>
+<style id="evolve-base">
+/* evolve runtime v1: version notes, carried answers, learning record; components add their own styles in the css slot */
+.changes{margin:16px 0 0;padding:12px 14px;border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:10px;background:var(--bg);font-size:14px}
+.changes strong{display:block;margin-bottom:4px}.changes ul{margin:6px 0 0;padding-left:18px;color:var(--muted)}
+.carried{margin:8px 0 0;font-size:13px;color:var(--muted)}.carried::before{content:"↺ ";color:var(--accent)}
+.evolve-card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+#evidence-out{max-height:240px;overflow:auto;margin:10px 0 0;padding:10px 12px;font:12px/1.5 var(--mono);background:var(--bg);border:1px solid var(--line);border-radius:10px;white-space:pre-wrap;word-break:break-word}
+</style>
+<!-- evolve:slot css -->
+<!-- /evolve:slot css -->
+</head>
+<body>
+<a class="skip" href="#experiment"><span lang="zh">跳到图形</span><span lang="en">Skip to the figure</span></a>
+<header class="bar">
+<a class="back" href="../../index.html" data-keep-lang>← <span lang="zh">全部示例</span><span lang="en">All examples</span></a>
+<span class="crumb" id="crumb">evolve/geometry-slices · v1</span>
+<div class="lang-switch" role="group" aria-label="语言 / Language"><button type="button" data-set-lang="zh" aria-pressed="false">中文</button><button type="button" data-set-lang="en" aria-pressed="true">EN</button></div>
+</header>
+<main class="lesson">
+<div class="panel">
+<div class="intro">
+<ul class="meta"><li><span lang="zh">数学</span><span lang="en">Mathematics</span></li><li><span lang="zh">真 3D 旋转</span><span lang="en">True 3D</span></li><li><span lang="zh">约 2 分钟</span><span lang="en">~2 min</span></li></ul>
+<h1><span lang="zh">切口深一倍，<br>截面也大一倍吗？</span><span lang="en">Double the height. Double the slice?</span></h1>
+<p class="lead" lang="zh">用一个平行于底面的平面去切圆锥，切口是一个圆。把切面从锥顶往下移，看看为什么它的面积比半径长得更快。</p>
+<p class="lead" lang="en">A plane parallel to a cone's base cuts a circle. Move it away from the apex to discover why its area grows faster than its radius.</p>
+<div id="changes" class="changes" hidden aria-live="polite"></div>
+</div>
+<div class="steps">
+<section class="step" aria-labelledby="predict-title" data-focus="cone cut h">
+<h2 id="predict-title"><span class="n">01</span><span lang="zh">预测</span><span lang="en">Predict</span></h2>
+<fieldset>
+<legend><span lang="zh">先在离锥顶 2 cm 处切一刀。如果<span data-ref="cut">切面</span>移到离锥顶 4 cm 处，截面积会变成……</span><span lang="en">Start 2 cm down from the apex. If <span data-ref="cut">the slice</span> moves to 4 cm down, its area becomes…</span></legend>
+<label class="choice"><input type="radio" name="prediction" value="2"><span lang="zh">原来的 2 倍。</span><span lang="en">twice as large.</span></label>
+<label class="choice"><input type="radio" name="prediction" value="4"><span lang="zh">原来的 4 倍。</span><span lang="en">four times as large.</span></label>
+<label class="choice"><input type="radio" name="prediction" value="1"><span lang="zh">一样大，因为圆锥本身没变。</span><span lang="en">the same size, because the cone is unchanged.</span></label>
+</fieldset>
+<p id="carried-prediction" class="carried" hidden></p>
+</section>
+<section class="step" aria-labelledby="try-title" data-focus="cone cut h radius area">
+<h2 id="try-title"><span class="n">02</span><span lang="zh">比较两个切面</span><span lang="en">Try two slices</span></h2>
+<p lang="zh">比较 2 cm 和 4 cm 两个切面。上半截圆锥已经拿掉，方便你看<span data-ref="cut">金色的切口</span>。转动视角看看：切口始终是圆，只是在屏幕上看起来像椭圆。</p>
+<p lang="en">Compare 2 cm and 4 cm. The upper cone is removed so you can inspect the <span data-ref="cut">gold cut face</span>. Turn the view to see that the slice is circular, even when it looks elliptical on screen.</p>
+<div class="controls"><button id="trial-a" type="button" class="primary"><span lang="zh">切在 h = 2</span><span lang="en">Compare h = 2</span></button><button id="trial-b" type="button" class="primary"><span lang="zh">切在 h = 4</span><span lang="en">Compare h = 4</span></button></div>
+<div class="range"><label for="height"><span><span lang="zh">离锥顶的距离 h</span><span lang="en">Distance from apex h</span></span><output id="height-value" for="height">2.0 cm</output></label><input id="height" type="range" min="0" max="8" step=".1" value="2"></div>
+<div class="range"><label for="yaw"><span><span lang="zh">转动圆锥</span><span lang="en">Turn the cone</span></span><output id="yaw-value" for="yaw">25°</output></label><input id="yaw" type="range" min="-180" max="180" step="5" value="25"></div>
+<div class="range"><label for="pitch"><span><span lang="zh">俯视角度</span><span lang="en">View from above</span></span><output id="pitch-value" for="pitch">25°</output></label><input id="pitch" type="range" min="10" max="70" step="5" value="25"></div>
+<p class="small"><span lang="zh">转动视角只改变你看到的样子，不会改变图上的读数。</span><span lang="en">Turning the view changes what you see, never the readouts on the figure.</span></p>
+<div class="controls"><button id="reset" type="button"><span lang="zh">重置</span><span lang="en">Reset lesson</span></button></div>
+</section>
+<section class="step" aria-labelledby="explain-title">
+<h2 id="explain-title"><span class="n">03</span><span lang="zh">解释变化</span><span lang="en">Explain what changed</span></h2>
+<div class="controls"><button id="check" type="button" class="primary"><span lang="zh">对照我的预测</span><span lang="en">Compare my prediction</span></button></div>
+<p id="feedback" class="status" aria-live="polite"></p>
+<details><summary><span lang="zh">看推理过程</span><span lang="en">See the reasoning</span></summary>
+<div lang="zh"><p>由相似三角形得 r / R = h / H。这里 R = 4 cm、H = 8 cm，所以 r = h / 2。面积 A = πr²。h 加倍，r 也加倍；把加倍的半径平方，面积就变成 4 倍。</p><p>h = 2 cm 时，r = 1 cm，A = π cm²。h = 4 cm 时，r = 2 cm，A = 4π cm²。转动视角会改变你看到的形状，但不会改变这些数值。</p></div>
+<div lang="en"><p>Similar triangles give r / R = h / H. Here R = 4 cm and H = 8 cm, so r = h / 2. The area is A = πr². Doubling h doubles r, and squaring a doubled radius gives four times the area.</p><p>At h = 2 cm, r = 1 cm and A = π cm². At h = 4 cm, r = 2 cm and A = 4π cm². Turning the camera changes what you see, but never these values.</p></div>
+</details>
+<ol class="look">
+<li data-focus="h"><span lang="zh">先看 h：切面从离锥顶 2 cm 移到 4 cm，距离加倍。</span><span lang="en">Start with h: the slice moves from 2 cm to 4 cm below the apex, so the distance doubles.</span></li>
+<li data-focus="removed radius"><span lang="zh">再看拿掉的上半截：它和整个圆锥相似，所以半径 r 也加倍。</span><span lang="en">Then the removed top: it is similar to the whole cone, so the radius r doubles too.</span></li>
+<li data-focus="cut"><span lang="zh">看金色切口：它始终是圆，只是转到斜处看起来像椭圆。</span><span lang="en">Look at the gold cut: it is always a circle, even when it looks like an ellipse from an angle.</span></li>
+<li data-focus="area"><span lang="zh">最后看面积：半径加倍再平方，2² = 4，所以是 4 倍。</span><span lang="en">Finally the area: double the radius and square it, 2² = 4, so four times as large.</span></li>
+</ol>
+<label for="explanation"><strong><span lang="zh">h 加倍，面积为什么是 4 倍，而不是 2 倍？用你自己的话解释。</span><span lang="en">Why does doubling h make the area four times larger, not twice? Explain in your own words.</span></strong></label>
+<textarea id="explanation" data-i18n data-zh-placeholder="半径变成 2 倍，因为…… 面积变成……倍，因为……" data-en-placeholder="The radius doubles because… The area changes by… because…"></textarea>
+<p id="carried-explanation" class="carried" hidden></p>
+</section>
+<!-- evolve:slot steps -->
+<!-- /evolve:slot steps -->
+<section class="step" aria-labelledby="transfer-title">
+<h2 id="transfer-title"><span class="n">04</span><span lang="zh">迁移</span><span lang="en">Transfer</span></h2>
+<fieldset><legend><span lang="zh">不动滑块，预测 h = 6 cm 的截面积是 h = 2 cm 时的几倍。</span><span lang="en">Without moving the slider, predict the area at h = 6 cm compared with h = 2 cm.</span></legend>
+<label class="choice"><input type="radio" name="transfer" value="3"><span lang="zh">3 倍</span><span lang="en">3 times as large</span></label>
+<label class="choice"><input type="radio" name="transfer" value="9"><span lang="zh">9 倍</span><span lang="en">9 times as large</span></label>
+<label class="choice"><input type="radio" name="transfer" value="6"><span lang="zh">6 倍</span><span lang="en">6 times as large</span></label>
+</fieldset>
+<div class="controls"><button id="transfer-check" type="button"><span lang="zh">核对答案</span><span lang="en">Check transfer</span></button></div>
+<p id="transfer-feedback" class="status" aria-live="polite"></p>
+</section>
+<section class="step" aria-labelledby="record-title">
+<h2 id="record-title"><span class="n">05</span><span lang="zh">学习记录</span><span lang="en">Learning record</span></h2>
+<p lang="zh">这份记录包含你的预测、操作、解释和作答，可以交给老师或 AI 助手，让这张图根据你的想法长出下一版。不含姓名，也不会自动上传。</p>
+<p lang="en">This record holds your prediction, actions, explanation and answers. Hand it to a teacher or an AI agent so this figure can grow its next version from your thinking. It has no name in it and is never uploaded automatically.</p>
+<div class="controls"><button id="export-evidence" type="button" class="primary"><span lang="zh">下载学习记录</span><span lang="en">Export learning evidence</span></button><button id="copy-evidence" type="button"><span lang="zh">复制</span><span lang="en">Copy</span></button></div>
+<p id="export-status" class="status" aria-live="polite"></p>
+<pre id="evidence-out" hidden></pre>
+</section>
+<section class="step limits" aria-labelledby="limits-title">
+<h2 id="limits-title"><span lang="zh">这个模型的适用范围</span><span lang="en">Where this model applies</span></h2>
+<p lang="zh">这是一个直圆锥，用平行于底面的平面去切。h 从锥顶量起，不是从底面量起。h = 0 时截面缩成一个点，面积为零；h = 8 时截面就是底面。这里不涉及斜截面，也不计算体积。</p>
+<p lang="en">A right circular cone, cut parallel to its base. h is measured from the apex, not from the base. At h = 0 the circle is a point with zero area; at h = 8 it equals the base. No oblique sections or volume calculation are implied.</p>
+<p lang="zh">图形是示意性的投影，计算由标注的尺寸驱动。</p>
+<p lang="en">The picture is a schematic projection; the stated dimensions drive the calculations.</p>
+<p class="foot"><span lang="zh">离线可用，不需要动画或网络。用 Tab 切换控件，方向键调节滑块。</span><span lang="en">Works offline. No animation or network access is needed. Use Tab to reach controls and arrow keys on the sliders.</span></p>
+</section>
+</div>
+</div>
+<section id="experiment" class="figure-pane" aria-labelledby="scene-title">
+<div class="stage">
+<svg id="stage" viewBox="0 0 560 470" role="img" aria-labelledby="scene-title scene-desc"><title id="scene-title" data-i18n data-zh="可调节平行切面的立体圆锥" data-en="A three dimensional cone with an adjustable parallel slice">A three dimensional cone with an adjustable parallel slice</title><desc id="scene-desc" data-i18n data-zh="剩下的下半截圆锥是蓝色。金色的圆形切口离锥顶越远就越大。虚线表示被拿掉的上半截。" data-en="The remaining lower cone is blue. The gold circular cut face grows as its distance from the apex increases. Dashed lines show the removed upper cone.">The remaining lower cone is blue. The gold circular cut face grows as its distance from the apex increases. Dashed lines show the removed upper cone.</desc><g id="wire" data-part="removed" data-zh-label="拿掉的上半截：相似三角形 r / R = h / H" data-en-label="The removed top: similar triangles, r / R = h / H"></g><g id="mesh"></g></svg>
+</div>
+<div class="legend"><span data-ref="cone"><i style="background:var(--cone)"></i><span lang="zh">剩下的圆锥</span><span lang="en">Remaining cone</span></span><span data-ref="cut"><i style="background:var(--gold)"></i><span lang="zh">切口</span><span lang="en">Cut face</span></span><span data-ref="removed"><span class="dash"></span><span lang="zh">拿掉的部分</span><span lang="en">Removed portion</span></span></div>
+<div class="readouts" data-i18n data-zh-aria-label="当前切面的读数" data-en-aria-label="Readouts for the current slice" aria-label="Readouts for the current slice">
+<div class="readout" data-part="h" data-zh-label="切面离锥顶的距离" data-en-label="How far the slice is from the apex"><span class="k" data-ref="h"><span lang="zh">离锥顶 h</span><span lang="en">Distance h</span></span><strong id="h-count">2.0 cm</strong><span class="u"><span lang="zh">锥高 H = 8 cm</span><span lang="en">Cone height H = 8 cm</span></span></div>
+<div class="readout" data-part="radius" data-zh-label="切口圆的半径，与 h 成正比" data-en-label="Radius of the cut circle, proportional to h"><span class="k" data-ref="radius"><span lang="zh">切面半径 r</span><span lang="en">Slice radius r</span></span><strong id="radius">1.00 cm</strong><span class="u">r = h / 2</span></div>
+<div class="readout" data-part="area" data-zh-label="切口面积，与 r² 成正比" data-en-label="Cut area, proportional to r²"><span class="k" data-ref="area"><span lang="zh">切面面积 A</span><span lang="en">Slice area A</span></span><strong id="area">3.14 cm²</strong><span class="u" data-scaffold="formula-hint">A = πr²</span></div>
+<div class="readout" data-part="area"><span class="k" data-ref="area"><span lang="zh">相对 h = 2</span><span lang="en">vs. h = 2</span></span><strong id="ratio">×1.00</strong><span class="u"><span lang="zh">面积倍数</span><span lang="en">area multiple</span></span></div>
+</div>
+<!-- evolve:slot figure -->
+<!-- /evolve:slot figure -->
+<p id="summary" class="summary" aria-live="polite"></p>
+<p class="fig-caption"><span lang="zh">世界坐标在深度方向旋转后再投影。图形是示意，读数由标注的尺寸计算。</span><span lang="en">World coordinates are rotated in depth and projected. The picture is schematic; the stated dimensions drive the calculations.</span></p>
+</section>
+</main>
+<script type="application/json" id="artifact-state">
+{
+  "schema": "teachable-figures/artifact-state@1",
+  "artifact_id": "geometry-slices",
+  "version": 1,
+  "base": "examples/geometry-slices.html",
+  "components": {},
+  "scaffolds": {
+    "formula-hint": "visible"
+  },
+  "preserved": {},
+  "bindings": {
+    "prediction": "input[name=prediction]",
+    "explanation": "#explanation",
+    "transfer": "input[name=transfer]"
+  },
+  "validation": {
+    "self_check": "lesson.selfCheck()",
+    "control": "#height",
+    "samples": [
+      0,
+      1,
+      2,
+      3.3,
+      4,
+      6,
+      8
+    ]
+  },
+  "lineage": [
+    {
+      "version": 1,
+      "from": null,
+      "op": "create",
+      "why": {
+        "zh": "基础课：从 geometry-slices 示例派生，加入插槽、解释探针和学习记录导出。",
+        "en": "Base lesson: derived from the geometry-slices example, with slots, an explanation probe and evidence export."
+      },
+      "operations": [],
+      "evidence": null,
+      "outcome": null
+    }
+  ]
+}
+</script>
+<script>
+'use strict';
+/* lesson-shell i18n v2: shared by every example page; keep identical across files.
+   Static copy: paired elements <span lang="zh">…</span><span lang="en">…</span> (CSS hides the other language).
+   Text-only nodes and attributes: data-i18n plus data-zh / data-en (textContent) or data-zh-<attr> / data-en-<attr>.
+   Dynamic copy: tr('中文', 'English'); say(el, () => tr(…)) re-renders the message when the language changes. */
+const I18N = (() => {
+  const KEY = 'tf-lang', LANGS = ['zh', 'en'];
+  const stored = (() => { try { return localStorage.getItem(KEY); } catch { return null; } })();
+  const param = new URLSearchParams(location.search).get('lang');
+  let lang = LANGS.includes(param) ? param : LANGS.includes(stored) ? stored : /^zh\b/i.test(navigator.language || '') ? 'zh' : 'en';
+  const listeners = [];
+  function apply() {
+    const root = document.documentElement;
+    root.lang = lang === 'zh' ? 'zh-CN' : 'en';
+    root.dataset.lang = lang;
+    for (const el of document.querySelectorAll('[data-i18n]')) {
+      for (const { name, value } of [...el.attributes]) {
+        if (name === 'data-' + lang) el.textContent = value;
+        else if (name.startsWith('data-' + lang + '-')) el.setAttribute(name.slice(lang.length + 6), value);
+      }
+    }
+    for (const button of document.querySelectorAll('[data-set-lang]')) button.setAttribute('aria-pressed', String(button.dataset.setLang === lang));
+    for (const link of document.querySelectorAll('a[data-keep-lang]')) {
+      const target = new URL(link.getAttribute('href').split('?')[0], location.href);
+      target.searchParams.set('lang', lang);
+      link.href = target.href;
+    }
+    listeners.forEach(fn => fn(lang));
+  }
+  document.addEventListener('click', event => {
+    const button = event.target.closest('[data-set-lang]');
+    if (!button || button.dataset.setLang === lang) return;
+    lang = button.dataset.setLang;
+    try { localStorage.setItem(KEY, lang); } catch {}
+    try { const here = new URL(location.href); here.searchParams.set('lang', lang); history.replaceState(history.state, '', here); } catch {}
+    apply();
+  });
+  return { get lang() { return lang; }, on(fn) { listeners.push(fn); }, apply };
+})();
+const tr = (zh, en) => I18N.lang === 'zh' ? zh : en;
+const spoken = new Map();
+function say(target, message) {
+  const el = typeof target === 'string' ? document.getElementById(target) : target;
+  spoken.set(el, message);
+  el.textContent = message ? message() : '';
+}
+I18N.on(() => spoken.forEach((message, el) => { el.textContent = message ? message() : ''; }));
+// On short screens the figure pane scrolls on its own; while more of it is below the fold, show a cue that scrolls it.
+(() => {
+  const pane = document.querySelector('.lesson > .figure-pane');
+  if (!pane) return;
+  const cue = document.createElement('div');
+  cue.className = 'pane-more';
+  cue.hidden = true;
+  cue.innerHTML = '<button type="button" tabindex="-1" aria-hidden="true"></button>';
+  const button = cue.firstChild;
+  const label = () => { button.textContent = tr('下方还有内容 ↓', 'More below ↓'); };
+  label();
+  I18N.on(label);
+  button.addEventListener('click', () => pane.scrollBy({ top: pane.clientHeight * 0.75, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' }));
+  pane.after(cue);
+  function update() {
+    const scrolls = getComputedStyle(pane).overflowY !== 'visible' && pane.scrollHeight > pane.clientHeight + 1;
+    cue.hidden = !(scrolls && pane.scrollHeight - pane.clientHeight - pane.scrollTop > 4);
+    if (scrolls) pane.tabIndex = 0; else pane.removeAttribute('tabindex');
+  }
+  const sizes = new ResizeObserver(update);
+  const watch = () => { sizes.disconnect(); sizes.observe(pane); for (const child of pane.children) sizes.observe(child); };
+  new MutationObserver(() => { watch(); update(); }).observe(pane, { childList: true });
+  pane.addEventListener('scroll', update, { passive: true });
+  addEventListener('resize', update);
+  watch();
+  update();
+})();
+/* Attention guide. Figure parts: [data-part="id"] inside #experiment (labels: data-zh-label / data-en-label).
+   Step focus: a panel .step or element with data-focus="id …" dims the other parts while it is the active step
+   (focused element first, else the first visible step crossing the reading line). Ordered highlights: ol.look > li[data-focus].
+   Dual coding: [data-ref="id …"] terms and legend items link to parts both ways. Nothing moves until the learner scrolls, hovers or clicks. */
+(() => {
+  const figure = document.getElementById('experiment');
+  if (!figure || !figure.querySelector('[data-part]')) return;
+  const panel = document.querySelector('.lesson > .panel');
+  const KEY = 'tf-focus-guide', ids = value => (value || '').split(/\s+/).filter(Boolean);
+  let guide = (() => { try { return localStorage.getItem(KEY) !== 'off'; } catch { return true; } })();
+  let stepIds = [], look = null, peek = null, pinned = null, activeStep = null;
+  const style = document.createElement('style');
+  document.head.append(style);
+  const bar = document.createElement('div');
+  bar.className = 'focus-bar';
+  bar.innerHTML = '<p class="focus-caption" aria-live="polite"></p><label class="focus-toggle"><input type="checkbox"><span></span></label>';
+  const caption = bar.firstChild, toggle = bar.querySelector('input'), toggleText = bar.querySelector('.focus-toggle span');
+  toggle.checked = guide;
+  figure.prepend(bar);
+  const tip = document.createElement('div');
+  tip.className = 'part-tip';
+  tip.hidden = true;
+  document.body.append(tip);
+  const fine = matchMedia('(hover: hover) and (pointer: fine)');
+  const sel = list => list.map(id => `[data-part~="${CSS.escape(id)}"]`).join(',');
+  function render() {
+    const hot = pinned || peek || (look && look.ids) || (guide ? stepIds : []);
+    const ring = !!(pinned || peek || look);
+    figure.classList.toggle('tf-ring', ring && hot.length > 0);
+    figure.toggleAttribute('data-focusing', hot.length > 0);
+    style.textContent = hot.length ? `#experiment [data-part]:not(${sel(hot)}){opacity:.24;filter:saturate(.35)}` : '';
+    for (const part of figure.querySelectorAll('[data-part]')) part.classList.toggle('tf-hot', ring && ids(part.dataset.part).some(id => hot.includes(id)));
+  }
+  // Re-rendered figures replace their children; keep the hot class on new parts.
+  new MutationObserver(() => { if (figure.classList.contains('tf-ring')) render(); }).observe(figure, { childList: true, subtree: true });
+  const visible = el => el.offsetParent !== null || el.getClientRects().length > 0;
+  const steps = () => [...document.querySelectorAll('.panel .step, .panel [data-focus]:not(ol.look *)')].filter(visible);
+  function pickStep() {
+    const scroller = panel && getComputedStyle(panel).overflowY !== 'visible' ? panel : null;
+    const box = scroller ? scroller.getBoundingClientRect() : { top: 0, bottom: innerHeight, height: innerHeight };
+    const line = box.top + box.height * 0.3, list = steps();
+    const inView = el => { const r = el.getBoundingClientRect(); return r.bottom > box.top && r.top < box.bottom; };
+    const focused = document.activeElement && list.filter(el => el.contains(document.activeElement)).pop();
+    if (focused && inView(focused)) return focused;
+    let found = null;
+    for (const el of list) { const r = el.getBoundingClientRect(); if (r.bottom > line && r.top < box.bottom && (!found || found.contains(el))) found = el; else if (found && !found.contains(el)) break; }
+    return found;
+  }
+  function update() {
+    const step = pickStep();
+    if (step !== activeStep) {
+      activeStep = step;
+      if (look && !(step && step.contains(look.list))) setLook(null);
+    }
+    const target = step && (step.matches('[data-focus]') ? step : null);
+    stepIds = target ? ids(target.dataset.focus) : [];
+    render();
+  }
+  let queued = false;
+  const schedule = () => { if (!queued) { queued = true; requestAnimationFrame(() => { queued = false; update(); }); } };
+  (panel || document).addEventListener('scroll', schedule, { passive: true });
+  addEventListener('scroll', schedule, { passive: true });
+  addEventListener('resize', schedule);
+  document.addEventListener('focusin', schedule);
+  new MutationObserver(schedule).observe(document.querySelector('.panel') || document.body, { attributes: true, attributeFilter: ['hidden'], subtree: true });
+  toggle.addEventListener('change', () => { guide = toggle.checked; try { localStorage.setItem(KEY, guide ? 'on' : 'off'); } catch {} render(); });
+  // Ordered highlights.
+  const lists = [...document.querySelectorAll('ol.look')];
+  function setLook(next) {
+    look = next;
+    for (const list of lists) {
+      const items = [...list.children];
+      items.forEach((li, i) => { if (next && next.list === list && next.index === i) li.setAttribute('aria-current', 'step'); else li.removeAttribute('aria-current'); });
+      for (const button of list.previousElementSibling.querySelectorAll('.look-num')) button.setAttribute('aria-pressed', String(!!next && next.list === list && Number(button.dataset.index) === next.index));
+    }
+    caption.textContent = '';
+    if (next) {
+      const n = document.createElement('span');
+      n.className = 'look-n';
+      n.textContent = `${next.index + 1}/${next.list.children.length}`;
+      const text = document.createElement('span');
+      text.append(...[...next.list.children[next.index].childNodes].map(node => node.cloneNode(true)));
+      caption.append(n, text);
+    }
+    render();
+  }
+  const go = (list, index) => setLook({ list, index, ids: ids(list.children[index].dataset.focus) });
+  for (const list of lists) {
+    const nav = document.createElement('div');
+    nav.className = 'look-nav';
+    const items = [...list.children];
+    items.forEach((li, i) => {
+      const b = document.createElement('button');
+      b.type = 'button'; b.className = 'look-num'; b.dataset.index = i; b.textContent = i + 1; b.setAttribute('aria-pressed', 'false');
+      b.addEventListener('click', () => go(list, i));
+      nav.append(b);
+      li.addEventListener('click', event => { if (!event.target.closest('a,button,input,[data-ref]')) go(list, i); });
+    });
+    const make = (cls, zh, en, fn) => { const b = document.createElement('button'); b.type = 'button'; b.className = cls; const label = () => { b.textContent = tr(zh, en); }; label(); I18N.on(label); b.addEventListener('click', fn); nav.append(b); };
+    const at = () => (look && look.list === list ? look.index : -1);
+    make('look-prev', '‹ 上一步', '‹ Prev', () => go(list, Math.max(0, at() - 1)));
+    make('look-next', '下一步 ›', 'Next ›', () => go(list, Math.min(items.length - 1, at() + 1)));
+    make('look-clear', '清除', 'Clear', () => setLook(null));
+    list.before(nav);
+  }
+  // Dual coding: terms ↔ parts.
+  const refs = () => document.querySelectorAll('[data-ref]');
+  for (const term of refs()) if (!term.matches('a,button,input,select,textarea,label,[tabindex]')) { term.tabIndex = 0; term.setAttribute('role', 'button'); term.setAttribute('aria-pressed', 'false'); }
+  const termOf = event => event.target.closest && event.target.closest('[data-ref]');
+  let pointer = 'mouse';
+  document.addEventListener('pointerdown', event => { pointer = event.pointerType; }, true);
+  document.addEventListener('pointerover', event => { const term = termOf(event); if (term && event.pointerType === 'mouse') { peek = ids(term.dataset.ref); render(); } });
+  document.addEventListener('pointerout', event => { const term = termOf(event); if (term && !term.contains(event.relatedTarget)) { peek = null; render(); } });
+  document.addEventListener('focusin', event => { const term = termOf(event); if (term) { peek = ids(term.dataset.ref); render(); } });
+  document.addEventListener('focusout', event => { if (termOf(event)) { peek = null; render(); } });
+  function pin(term) {
+    const next = ids(term.dataset.ref).join(' ');
+    pinned = pinned && pinned.join(' ') === next ? null : ids(next);
+    for (const other of refs()) if (other.getAttribute('role') === 'button') other.setAttribute('aria-pressed', String(!!pinned && other.dataset.ref === term.dataset.ref));
+    render();
+  }
+  document.addEventListener('click', event => { const term = termOf(event); if (term && term.getAttribute('role') === 'button' && pointer !== 'mouse') pin(term); });
+  document.addEventListener('keydown', event => {
+    const term = termOf(event);
+    if (term && term.getAttribute('role') === 'button' && (event.key === 'Enter' || event.key === ' ')) { event.preventDefault(); pin(term); }
+    if (event.key === 'Escape' && (look || pinned)) { pinned = null; for (const other of refs()) if (other.getAttribute('role') === 'button') other.setAttribute('aria-pressed', 'false'); setLook(null); }
+  });
+  function partLabel(part) { return part.getAttribute(`data-${I18N.lang}-label`); }
+  figure.addEventListener('pointermove', event => {
+    const part = event.target.closest && event.target.closest('[data-part]');
+    const label = part && partLabel(part);
+    for (const term of refs()) term.classList.toggle('tf-ref-on', !!part && ids(term.dataset.ref).some(id => ids(part.dataset.part).includes(id)));
+    if (!label || !fine.matches || event.pointerType !== 'mouse') { tip.hidden = true; return; }
+    tip.textContent = label;
+    tip.hidden = false;
+    const x = Math.min(event.clientX + 14, innerWidth - tip.offsetWidth - 8), y = event.clientY + 18 + tip.offsetHeight > innerHeight ? event.clientY - tip.offsetHeight - 12 : event.clientY + 18;
+    tip.style.left = x + 'px'; tip.style.top = y + 'px';
+  });
+  figure.addEventListener('pointerleave', () => { tip.hidden = true; for (const term of refs()) term.classList.remove('tf-ref-on'); });
+  const labels = () => { toggleText.textContent = tr('焦点引导', 'Focus guide'); };
+  labels();
+  I18N.on(() => { labels(); if (look) setLook(look); });
+  update();
+})();
+/* /lesson-shell */
+/* evolve runtime v1: artifact state, component registry, evidence log; see references/evolving-artifacts.md */
+const ARTIFACT = JSON.parse(document.getElementById('artifact-state').textContent);
+const evolve = (() => {
+  const components = {}, events = [], t0 = performance.now(), started = new Date().toISOString();
+  const log = (type, data = {}) => events.push({ t: Math.round(performance.now() - t0), type, ...data });
+  return {
+    state: ARTIFACT, components, log,
+    register(id, api) { components[id] = api; api.render?.(window.lesson?.state); },
+    rendered(s) { for (const api of Object.values(components)) api.render?.(s); },
+    read(id) { return components[id].read(); },
+    evidence() {
+      const val = sel => { const el = document.querySelector(sel.includes('name=') ? sel + ':checked' : sel); return el ? (el.value || null) : null; };
+      const answers = {};
+      for (const [key, sel] of Object.entries(ARTIFACT.bindings)) answers[key] = val(sel);
+      for (const api of Object.values(components)) Object.assign(answers, api.answers?.() || {});
+      const last = ARTIFACT.lineage[ARTIFACT.lineage.length - 1];
+      return {
+        schema: 'teachable-figures/evidence@1',
+        artifact: { id: ARTIFACT.artifact_id, version: ARTIFACT.version, components: Object.keys(ARTIFACT.components),
+          scaffolds_visible: [...document.querySelectorAll('[data-scaffold]')].filter(el => !el.hidden).map(el => el.dataset.scaffold) },
+        after_change: last.version > 1 ? { version: last.version, from: last.from } : null,
+        session: { started, lang: I18N.lang, viewport: innerWidth >= 960 ? 'wide' : 'narrow' },
+        events: events.slice(),
+        answers,
+        privacy: 'No name or account. Typed text is kept as typed; audio is never stored.',
+      };
+    },
+  };
+})();
+const initial = {h:2,yaw:25,pitch:25};
+const state = {...initial};
+const $ = id => document.getElementById(id);
+const derive = h => ({radius:h/2,area:Math.PI*(h/2)**2});
+function rotate([x,y,z], yaw=state.yaw, pitch=state.pitch){const a=yaw*Math.PI/180,b=pitch*Math.PI/180;const u=x*Math.cos(a)+z*Math.sin(a),v=-x*Math.sin(a)+z*Math.cos(a);return [u,y*Math.cos(b)-v*Math.sin(b),y*Math.sin(b)+v*Math.cos(b)];}
+const project = p => {const [x,y,z]=rotate(p);return [280+40*x,235-40*y,z];};
+function polygon(points,color,part='cone'){const p=points.map(project);return {z:p.reduce((s,a)=>s+a[2],0)/p.length,html:`<polygon data-part="${part}" points="${p.map(a=>a.slice(0,2).join(',')).join(' ')}" fill="${color}" stroke="${color}" stroke-width=".6"/>`};}
+function render(){
+  const {radius,area}=derive(state.h),y=4-state.h,faces=[],n=64;
+  const circle=(r,h,t)=>[r*Math.cos(t),h,r*Math.sin(t)];
+  for(let i=0;i<n;i++){const a=i*2*Math.PI/n,b=(i+1)*2*Math.PI/n;const p=circle(radius,y,a),q=circle(radius,y,b),u=circle(4,-4,a),v=circle(4,-4,b);const shade=39+12*Math.cos((a+b)/2-state.yaw*Math.PI/180);if(state.h<8)faces.push(polygon([p,u,v],`hsl(192 40% ${shade}%)`),polygon([p,v,q],`hsl(192 40% ${shade}%)`),polygon([[0,-4,0],v,u],'#337386'));faces.push(polygon([[0,y,0],p,q],'#e9ae46','cut'));}
+  faces.sort((a,b)=>a.z-b.z);$('mesh').innerHTML=faces.map(f=>f.html).join('');
+  let lines='';for(let i=0;i<8;i++){const t=i*Math.PI/4,p=project([0,4,0]),q=project(circle(radius,y,t));lines+=`<line x1="${p[0]}" y1="${p[1]}" x2="${q[0]}" y2="${q[1]}"/>`;}
+  $('wire').innerHTML=`<g fill="none" stroke="var(--wire)" stroke-width="1.2" stroke-dasharray="5 5">${lines}</g>`;
+  for(const key of ['yaw','pitch']){$(key+'-value').textContent=state[key]+'°';$(key).value=state[key];}
+  const h=state.h.toFixed(1),r=radius.toFixed(2),A=area.toFixed(2),k=(area/Math.PI).toFixed(2);
+  $('height').value=state.h;$('height-value').textContent=h+' cm';$('h-count').textContent=h+' cm';
+  $('radius').textContent=r+' cm';$('area').textContent=A+' cm²';$('ratio').textContent='×'+k;
+  $('summary').textContent=tr(`h = ${h} cm，半径 ${r} cm，面积 ${A} cm²，是 h = 2 cm 时的 ${k} 倍。`,`h = ${h} cm. Radius = ${r} cm. Area = ${A} cm², or ${k} times the area at h = 2 cm.`);
+  evolve.rendered(state);
+}
+$('height').addEventListener('input',e=>{state.h=Number(e.target.value);render();});
+for(const key of ['yaw','pitch'])$(key).addEventListener('input',e=>{state[key]=Number(e.target.value);render();});
+for(const [id,h] of [['trial-a',2],['trial-b',4]])$(id).addEventListener('click',()=>{state.h=h;render();});
+$('check').addEventListener('click',()=>{const p=document.querySelector('input[name="prediction"]:checked')?.value;say('feedback',()=>!p?tr('先选一个预测，再比较 2 cm 和 4 cm 两个切面。','Choose a prediction, then compare the 2 cm and 4 cm slices.'):p==='4'?tr('你的预测与模型一致。在 4 cm 处半径是 2 cm，面积是 2 cm 切面的 4 倍。','Your prediction matches the model. At 4 cm the radius is 2 cm and the area is four times the 2 cm slice.'):tr('再比较一次 h = 2 和 h = 4。半径翻倍了，面积却从 π 变成 4π cm²。面积取决于半径的平方。','Try h = 2 and h = 4 again. The radius doubles, but the area increases from π to 4π cm². Area depends on radius squared.'));});
+$('transfer-check').addEventListener('click',()=>{const p=document.querySelector('input[name="transfer"]:checked')?.value;say('transfer-feedback',()=>!p?tr('先选一个迁移预测。','Choose a transfer prediction first.'):p==='9'?tr('对。h 变成 3 倍，r 也变成 3 倍，面积就是 3² = 9 倍。','Yes. Tripling h triples r, so the area becomes 3² = 9 times as large.'):tr('h = 6 时 r = 3 cm；h = 2 时 r = 1 cm。比较 π × 3² 和 π × 1²。','At h = 6, r = 3 cm. At h = 2, r = 1 cm. Compare π × 3² with π × 1².'));});
+$('reset').addEventListener('click',()=>{Object.assign(state,initial);document.querySelectorAll('input[type=radio]').forEach(e=>e.checked=false);$('explanation').value='';say('feedback',null);say('transfer-feedback',null);document.querySelectorAll('details').forEach(e=>e.open=false);render();});
+function selfCheck(){if(derive(0).area!==0||Math.abs(derive(8).area-16*Math.PI)>1e-10||derive(4).area/derive(2).area!==4)throw Error('Cone model invariant failed');for(let yaw=-180;yaw<=180;yaw+=15){const p=rotate([1,2,3],yaw,25);if(Math.abs(p.reduce((s,v)=>s+v*v,0)-14)>1e-10)throw Error('Rotation changed lengths');}return true;}
+window.lesson={state,derive,rotate,selfCheck,render};selfCheck();
+/* evolve hooks: log learner actions, restore carried answers, show what changed */
+document.querySelectorAll('input[name="prediction"]').forEach(el => el.addEventListener('change', () => evolve.log('prediction', { value: el.value })));
+$('height').addEventListener('change', e => evolve.log('set', { control: 'height', value: Number(e.target.value) }));
+for (const [id, h] of [['trial-a', 2], ['trial-b', 4]]) $(id).addEventListener('click', () => evolve.log('trial', { h }));
+$('check').addEventListener('click', () => { const p = document.querySelector('input[name="prediction"]:checked')?.value; evolve.log('check', { result: !p ? 'none' : p === '4' ? 'match' : 'mismatch' }); });
+$('explanation').addEventListener('change', e => evolve.log('explanation', { text: e.target.value }));
+$('transfer-check').addEventListener('click', () => { const p = document.querySelector('input[name="transfer"]:checked')?.value || null; evolve.log('transfer', { value: p, correct: p === '9' }); });
+$('reset').addEventListener('click', () => evolve.log('reset'));
+function exportText() { evolve.log('export'); const text = JSON.stringify(evolve.evidence(), null, 2); $('evidence-out').textContent = text; $('evidence-out').hidden = false; return text; }
+$('export-evidence').addEventListener('click', () => {
+  const text = exportText(), a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob([text], { type: 'application/json' }));
+  a.download = `evidence-${ARTIFACT.artifact_id}-v${ARTIFACT.version}.json`; a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+  say('export-status', () => tr('已下载。也可以复制下面的内容。', 'Downloaded. You can also copy the text below.'));
+});
+$('copy-evidence').addEventListener('click', async () => {
+  const text = exportText();
+  try { await navigator.clipboard.writeText(text); say('export-status', () => tr('已复制到剪贴板。', 'Copied to the clipboard.')); }
+  catch { say('export-status', () => tr('无法自动复制，请手动选中下面的内容。', 'Could not copy automatically; select the text below.')); }
+});
+function restoreCarried() {
+  const p = ARTIFACT.preserved, from = ARTIFACT.lineage[ARTIFACT.lineage.length - 1].from;
+  for (const [key, sel] of Object.entries(ARTIFACT.bindings)) {
+    if (p[key] == null) continue;
+    if (sel.includes('name=')) { const el = document.querySelector(`${sel}[value="${p[key]}"]`); if (el) el.checked = true; }
+    else document.querySelector(sel).value = p[key];
+  }
+  if (p.prediction != null) say('carried-prediction', () => tr(`沿用你在第 ${from} 版的预测。`, `Carried over from your version ${from} prediction.`));
+  if (p.explanation != null) say('carried-explanation', () => tr(`这是你在第 ${from} 版写的解释。看过新的表示之后，可以修改它。`, `This is the explanation you wrote in version ${from}. Revise it after the new view.`));
+  $('carried-prediction').hidden = p.prediction == null; $('carried-explanation').hidden = p.explanation == null;
+  const last = ARTIFACT.lineage[ARTIFACT.lineage.length - 1];
+  if (last.version > 1) {
+    const show = () => { const ops = last.operations.map(o => `<li>${o.reason ? tr(o.reason.zh, o.reason.en) : o.op}</li>`).join(''); $('changes').innerHTML = `<strong>${tr(`第 ${last.version} 版：这张图根据你的回答做了修改`, `Version ${last.version}: this figure changed in response to your answers`)}</strong>${tr(last.why.zh, last.why.en)}<ul>${ops}</ul>`; };
+    show(); I18N.on(show); $('changes').hidden = false;
+  }
+  $('crumb').textContent = `evolve/${ARTIFACT.artifact_id} · v${ARTIFACT.version}`;
+}
+restoreCarried();
+I18N.on(render);
+I18N.apply();
+render();
+</script>
+<!-- evolve:slot script -->
+<!-- /evolve:slot script -->
+</body>
+</html>

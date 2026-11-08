@@ -1,0 +1,451 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title data-i18n data-zh="Teachable figures · 可操作的教学图" data-en="Teachable figures · interactive teaching figures">Teachable figures · interactive teaching figures</title>
+<style>
+/* lesson-shell v2: shared by every example page; keep identical across files */
+:root{color-scheme:light dark;--bar:56px;--bg:#f7f6f2;--surface:#fff;--stage:#eeece6;--ink:#141618;--text:#2a2e31;--muted:#61676c;--faint:#8b9196;--line:#e4e1d9;--line-strong:#cbc7bd;--accent:#d9480f;--accent-soft:#fcebe2;--focus:#d9480f;--ok:#1d7a4c;--sans:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Noto Sans SC","Microsoft YaHei",sans-serif;--mono:ui-monospace,"SF Mono",SFMono-Regular,Menlo,Consolas,monospace}
+@media(prefers-color-scheme:dark){:root{--bg:#111315;--surface:#181b1e;--stage:#0b0d0f;--ink:#f3f4f2;--text:#dadedc;--muted:#a1a7ab;--faint:#7a8085;--line:#272b2f;--line-strong:#3b4045;--accent:#ff7a45;--accent-soft:#2b1a11;--focus:#ff7a45;--ok:#4cc38a}}
+*{box-sizing:border-box}html{-webkit-text-size-adjust:100%}body{margin:0;background:var(--bg);color:var(--text);font:15.5px/1.6 var(--sans);-webkit-font-smoothing:antialiased}
+[hidden]{display:none!important}html[data-lang=zh] [lang=en],html[data-lang=en] [lang=zh]{display:none!important}
+:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+.skip{position:absolute;left:12px;top:-80px;z-index:30;background:var(--surface);color:var(--ink);padding:8px 12px;border-radius:8px}.skip:focus{top:10px}
+.bar{position:sticky;top:0;z-index:20;height:var(--bar);display:flex;align-items:center;gap:14px;padding:0 16px 0 20px;background:color-mix(in srgb,var(--bg) 90%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.bar .back{display:inline-flex;align-items:center;gap:6px;min-height:40px;color:var(--muted);text-decoration:none;font-size:14px;white-space:nowrap}.bar .back:hover{color:var(--ink)}
+.bar .crumb{min-width:0;font:500 12px/1.2 var(--mono);color:var(--faint);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lang-switch{margin-left:auto;flex:none;display:inline-flex;padding:3px;border:1px solid var(--line);border-radius:999px;background:var(--surface)}
+.lang-switch button{appearance:none;border:0;background:none;cursor:pointer;font:600 12px/1 var(--sans);min-height:30px;min-width:40px;padding:0 11px;border-radius:999px;color:var(--muted)}
+.lang-switch button[aria-pressed=true]{background:var(--ink);color:var(--bg)}
+.lesson{display:flex;flex-direction:column}.panel{display:contents}
+.intro{order:0;padding:28px 20px 6px}
+.figure-pane{order:1;margin:14px 12px 4px;padding:12px;background:var(--stage);border-radius:16px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.steps{order:2;padding:0 20px 40px}
+.stage{position:relative;min-height:0;display:grid;place-items:center}.stage>svg,.stage>canvas{display:block;width:100%;height:auto}
+.fig-caption{margin:0;font-size:12.5px;line-height:1.5;color:var(--muted)}
+.readouts{display:grid;grid-template-columns:repeat(auto-fit,minmax(104px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.readout{background:var(--surface);padding:9px 13px;min-width:0}
+.readout .k{display:block;font:500 12px/1.35 var(--sans);color:var(--muted)}
+.readout strong{display:block;font:650 21px/1.3 var(--sans);font-variant-numeric:tabular-nums;color:var(--ink);letter-spacing:-.01em;overflow-wrap:anywhere}
+.readout .u{display:block;font-size:12px;line-height:1.35;color:var(--faint)}
+.meta{display:flex;flex-wrap:wrap;gap:4px 10px;margin:0 0 14px;padding:0;list-style:none;font:500 12.5px/1.4 var(--sans);color:var(--muted)}.meta li+li::before{content:"/";margin-right:10px;color:var(--line-strong)}
+h1{margin:0 0 12px;font-size:clamp(25px,2.5vw,33px);line-height:1.18;letter-spacing:-.025em;font-weight:700;color:var(--ink);text-wrap:balance}
+.lead{margin:0;color:var(--muted)}
+.step{padding:26px 0 22px;border-top:1px solid var(--line)}.intro+.steps .step:first-child,.steps>.step:first-child{border-top:0}
+.step>h2{display:flex;align-items:center;gap:10px;margin:0 0 12px;font-size:17px;line-height:1.3;letter-spacing:-.01em;color:var(--ink)}
+.step>h2 .n{flex:none;font:600 11px/1 var(--mono);color:var(--accent);border:1px solid currentColor;border-radius:6px;padding:4px 6px}
+h3{margin:20px 0 6px;font-size:14.5px;color:var(--ink)}p{margin:0 0 12px}strong{color:var(--ink)}
+.small{font-size:13.5px;color:var(--muted)}
+fieldset{border:0;padding:0;margin:0;min-width:0}legend{padding:0;margin:0 0 12px;font-weight:600;color:var(--ink)}
+label.choice{display:flex;gap:10px;align-items:flex-start;padding:10px 13px;margin-bottom:8px;border:1px solid var(--line);border-radius:10px;background:var(--surface);cursor:pointer;transition:border-color .12s,box-shadow .12s}
+label.choice:hover{border-color:var(--line-strong)}label.choice:has(input:checked){border-color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink)}label.choice:has(input:disabled){cursor:default}
+label.choice input{flex:none;margin:4px 0 0}input{accent-color:var(--ink)}input[type=radio],input[type=checkbox]{width:17px;height:17px}
+button,select{font:500 14px/1.2 var(--sans);color:var(--ink);background:var(--surface);border:1px solid var(--line-strong);border-radius:10px;padding:0 16px;min-height:42px;cursor:pointer}
+button:hover:not(:disabled),select:hover:not(:disabled){border-color:var(--ink)}button.primary{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+button:disabled,select:disabled{opacity:.45;cursor:not-allowed}
+.controls{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:14px 0}
+.toggle{display:flex;align-items:center;gap:10px;min-height:42px;font-weight:500;color:var(--ink);cursor:pointer}
+.range{margin:16px 0 8px}.range label{display:flex;justify-content:space-between;gap:12px;font-weight:500;color:var(--ink)}.range output{font:500 13px/1.6 var(--mono);color:var(--muted)}
+input[type=range]{width:100%;min-height:32px;margin:4px 0}
+.status{min-height:1.6em;margin:12px 0;padding:10px 12px;border-radius:10px;background:var(--bg);font-size:14px}
+.callout{margin:14px 0;padding:2px 0 2px 14px;border-left:3px solid var(--accent)}
+textarea{display:block;width:100%;min-height:90px;margin-top:8px;padding:10px 12px;font:inherit;color:var(--text);background:var(--bg);border:1px solid var(--line-strong);border-radius:10px;resize:vertical}
+table{border-collapse:collapse;width:100%;margin-top:14px;font-size:14px}th,td{text-align:left;padding:9px 6px;border-bottom:1px solid var(--line);vertical-align:top}th:first-child,td:first-child{padding-left:0}caption{text-align:left;font-weight:600;color:var(--ink);margin-bottom:4px}
+.limits{color:var(--muted);font-size:14px}
+.pane-more{display:none}
+.foot{margin-top:8px;padding-top:16px;border-top:1px solid var(--line);font-size:12.5px;color:var(--faint)}
+/* attention: figure parts [data-part], step focus [data-focus], ordered highlights ol.look, dual-coding terms [data-ref] */
+#experiment [data-part]{transition:opacity .28s ease,filter .28s ease,box-shadow .2s ease}
+#experiment.tf-ring [data-part].tf-hot:not(svg *){box-shadow:0 0 0 2px var(--accent),0 0 0 7px color-mix(in srgb,var(--accent) 18%,transparent);border-radius:10px}
+#experiment.tf-ring svg [data-part].tf-hot{filter:drop-shadow(0 0 1px var(--accent)) drop-shadow(0 0 5px color-mix(in srgb,var(--accent) 40%,transparent))}
+.focus-bar{display:flex;align-items:center;gap:12px;min-height:30px;margin:-4px 0 -2px}
+.focus-caption{flex:1;min-width:0;margin:0;font-size:13px;line-height:1.4;color:var(--ink)}.focus-caption:empty{visibility:hidden}
+.focus-caption .look-n{display:inline-grid;place-items:center;min-width:20px;height:20px;margin-right:8px;padding:0 5px;border-radius:999px;background:var(--accent);color:#fff;font:700 11px/1 var(--sans);vertical-align:1px}
+.focus-toggle{flex:none;display:inline-flex;align-items:center;gap:7px;min-height:30px;font-size:12.5px;color:var(--muted);cursor:pointer;white-space:nowrap}.focus-toggle input{width:15px;height:15px;margin:0}
+ol.look{margin:12px 0 8px;padding:0;list-style:none;counter-reset:look}
+ol.look>li{counter-increment:look;position:relative;margin:0 0 6px;padding:8px 10px 8px 38px;border:1px solid var(--line);border-radius:10px;cursor:pointer;color:var(--muted);transition:border-color .15s,background .15s}
+ol.look>li::before{content:counter(look);position:absolute;left:10px;top:9px;display:grid;place-items:center;width:20px;height:20px;border-radius:999px;border:1px solid var(--line-strong);font:650 11px/1 var(--sans);color:var(--muted)}
+ol.look>li:hover{border-color:var(--line-strong)}ol.look>li[aria-current=step]{border-color:var(--accent);background:var(--accent-soft);color:var(--ink)}ol.look>li[aria-current=step]::before{background:var(--accent);border-color:var(--accent);color:#fff}
+.look-nav{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:0 0 14px}.look-nav button{min-height:34px;padding:0 11px;font-size:13px}.look-nav .look-num{min-width:34px;padding:0}.look-nav .look-num[aria-pressed=true]{background:var(--accent);border-color:var(--accent);color:#fff}
+[data-ref]:not(a,button,input,select,label){text-decoration:underline dotted color-mix(in srgb,var(--accent) 70%,transparent);text-decoration-thickness:1.5px;text-underline-offset:3px;cursor:help;border-radius:4px}
+[data-ref].tf-ref-on{background:var(--accent-soft);box-shadow:0 0 0 2px var(--accent-soft);color:var(--ink)}[data-ref][aria-pressed=true]{background:var(--accent-soft);box-shadow:0 0 0 1px var(--accent)}
+.part-tip{position:fixed;z-index:40;pointer-events:none;max-width:240px;padding:5px 9px;border-radius:8px;background:var(--ink);color:var(--bg);font:500 12.5px/1.35 var(--sans);box-shadow:0 4px 14px rgb(0 0 0/.18)}
+@media(min-width:960px) and (min-height:560px){
+.lesson{display:grid;grid-template-columns:minmax(0,1fr) clamp(380px,35vw,500px);height:calc(100dvh - var(--bar))}
+.panel{display:block;grid-column:2;grid-row:1;overflow-y:auto;overscroll-behavior:contain;background:var(--surface);border-left:1px solid var(--line)}
+.figure-pane{grid-column:1;grid-row:1;margin:0;border-radius:0;padding:24px 28px;min-height:0}
+.figure-pane{overflow-y:auto;overscroll-behavior:contain}.figure-pane>*{flex-shrink:0}
+.figure-pane .stage{flex:1}.figure-pane .stage>svg,.figure-pane .stage>canvas{height:100%;max-height:100%}
+.pane-more{display:flex;grid-column:1;grid-row:1;align-self:end;position:relative;z-index:2;justify-content:center;align-items:flex-end;height:76px;padding-bottom:14px;pointer-events:none;background:linear-gradient(color-mix(in srgb,var(--stage) 0%,transparent),var(--stage) 72%)}
+.pane-more button{pointer-events:auto;min-height:32px;padding:0 14px;border-radius:999px;font-size:12.5px;box-shadow:0 2px 10px rgb(0 0 0/.12)}
+.intro{padding:32px 32px 6px}.steps{padding:0 32px 48px}
+.bar{padding:0 20px 0 24px}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+/* /lesson-shell */
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+.brand{font:700 14px/1 var(--sans);letter-spacing:-.01em;color:var(--ink);text-decoration:none;display:inline-flex;align-items:center;gap:8px}
+.brand i{width:14px;height:14px;border-radius:4px;background:var(--accent);display:inline-block;box-shadow:5px 5px 0 -1px var(--ink)}
+.nav{display:flex;gap:4px;margin-left:12px}.nav a{color:var(--muted);text-decoration:none;font-size:13.5px;padding:8px 10px;border-radius:8px}.nav a:hover{color:var(--ink);background:var(--surface)}
+.hero{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:56px;align-items:end;padding:72px 0 56px}
+.hero h1{font-size:clamp(36px,5.2vw,64px);line-height:1.04;letter-spacing:-.045em;margin:0 0 20px;text-wrap:balance}
+.hero h1 em{font-style:normal;color:var(--accent)}
+.hero .sub{font-size:17px;line-height:1.6;color:var(--muted);max-width:52ch;margin:0 0 28px}
+.cta{display:flex;flex-wrap:wrap;gap:10px}
+.btn{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 18px;border-radius:11px;font:600 14.5px/1 var(--sans);text-decoration:none;border:1px solid var(--line-strong);color:var(--ink);background:var(--surface)}
+.btn:hover{border-color:var(--ink)}.btn.primary{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.loop{margin:0;padding:0;list-style:none;border:1px solid var(--line);border-radius:16px;background:var(--surface);overflow:hidden}
+.loop li{display:grid;grid-template-columns:36px 1fr;gap:12px;padding:16px 18px;border-top:1px solid var(--line)}.loop li:first-child{border-top:0}
+.loop .n{font:600 11px/1.9 var(--mono);color:var(--accent)}
+.loop b{display:block;color:var(--ink);font-size:15px}.loop span{font-size:13.5px;color:var(--muted)}
+.install{margin-top:22px;border:1px solid var(--line);border-radius:12px;background:var(--surface);overflow:hidden}
+.install-head{display:flex;justify-content:space-between;align-items:center;padding:8px 8px 8px 14px;border-bottom:1px solid var(--line);font:500 12px/1 var(--sans);color:var(--muted)}
+.install-head button{min-height:30px;padding:0 10px;font-size:12px;border-radius:8px}
+.install pre{margin:0;padding:12px 14px;font:13px/1.6 var(--mono);color:var(--ink);overflow-x:auto;white-space:pre}
+.install pre .c{color:var(--faint)}
+.section-head{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:28px 0 18px;border-top:1px solid var(--line)}
+.group{margin:8px 0 14px;font:600 13px/1.4 var(--sans);letter-spacing:.02em;color:var(--muted)}
+.section-head h2{margin:0;font-size:22px;letter-spacing:-.02em;color:var(--ink)}.section-head p{margin:0;color:var(--muted);font-size:14px}
+.feature{margin-bottom:56px}
+.feature a{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);border:1px solid var(--line);border-radius:18px;overflow:hidden;background:var(--surface);color:inherit;text-decoration:none;transition:border-color .15s}
+.feature a:hover{border-color:var(--line-strong)}
+.feature .shot{aspect-ratio:16/10}
+.feature .text{padding:32px;display:flex;flex-direction:column;gap:12px;justify-content:center}
+.feature h3{margin:0;font-size:26px;line-height:1.2;letter-spacing:-.025em;color:var(--ink)}
+.feature p{margin:0;color:var(--muted)}
+.kicker{font:500 12px/1.4 var(--mono);color:var(--accent)}
+.go{margin-top:6px;font-weight:600;color:var(--ink);font-size:14px}
+.shot{position:relative;background:var(--stage);overflow:hidden}
+.shot img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;padding:14px;transition:transform .35s ease}
+.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px;padding-bottom:36px}
+article a{display:flex;flex-direction:column;height:100%;border:1px solid var(--line);border-radius:16px;overflow:hidden;background:var(--surface);color:inherit;text-decoration:none;transition:border-color .15s}
+article a:hover{border-color:var(--line-strong)}article a:hover img,.feature a:hover img{transform:scale(1.025)}
+article .shot{aspect-ratio:4/3;border-bottom:1px solid var(--line)}
+article .body{padding:16px 18px 18px;display:flex;flex-direction:column;gap:6px}
+article .tags{font:500 12px/1.4 var(--sans);color:var(--muted)}
+article h3{margin:0;font-size:17px;line-height:1.35;letter-spacing:-.01em;color:var(--ink)}
+footer.site{border-top:1px solid var(--line);padding:24px 0 40px;font-size:13px;color:var(--faint);display:flex;flex-wrap:wrap;gap:8px 20px;justify-content:space-between}
+footer.site a{color:var(--muted)}
+@media(max-width:1100px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:960px){.hero{grid-template-columns:minmax(0,1fr);gap:32px;padding:48px 0 40px}.feature a{grid-template-columns:1fr}.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:640px){.wrap{padding:0 16px}.nav{display:none}.grid{grid-template-columns:1fr;gap:14px}.feature .text{padding:20px}.section-head{flex-direction:column;gap:4px}.hero .sub{font-size:16px}}
+@media(prefers-reduced-motion:reduce){.shot img{transition:none}article a:hover img,.feature a:hover img{transform:none}}
+</style>
+</head>
+<body>
+<header class="bar">
+<a class="brand" href="index.html"><i aria-hidden="true"></i>teachable-figures</a>
+<nav class="nav" data-i18n data-zh-aria-label="主导航" data-en-aria-label="Main" aria-label="Main"><a href="how-it-works.html" data-keep-lang><span lang="zh">工作原理</span><span lang="en">How it works</span></a><a href="#lessons"><span lang="zh">示例</span><span lang="en">Lessons</span></a><a href="https://github.com/ywEdAi/teachable-figures">GitHub</a></nav>
+<div class="lang-switch" role="group" aria-label="语言 / Language"><button type="button" data-set-lang="zh" aria-pressed="false">中文</button><button type="button" data-set-lang="en" aria-pressed="true">EN</button></div>
+</header>
+<main>
+<div class="wrap">
+<section class="hero">
+<div>
+<h1><span lang="zh">改变一个条件，<em>看清</em>一个机制。</span><span lang="en">Change one condition. <em>See</em> one mechanism.</span></h1>
+<p class="sub" lang="zh">一个给 Claude Code、Codex 等 agent 用的 skill。它把一句难懂的结论变成离线的互动图：学习者先预测，再动手改变一个原因，观察读数，最后用自己的话解释。</p>
+<p class="sub" lang="en">An agent skill for Claude Code, Codex, and others. It turns a hard-to-grasp claim into an offline interactive figure: the learner predicts, changes one cause, watches the readout, then explains it in their own words.</p>
+<div class="cta">
+<a class="btn primary" href="how-it-works.html" data-keep-lang><span lang="zh">看它如何工作</span><span lang="en">See how it works</span> →</a>
+<a class="btn" href="https://github.com/ywEdAi/teachable-figures/blob/main/README.zh-CN.md#快速安装" lang="zh">安装说明</a>
+<a class="btn" href="https://github.com/ywEdAi/teachable-figures#quick-install" lang="en">Install guide</a>
+</div>
+<div class="install">
+<div class="install-head"><span>Claude Code</span><button type="button" id="copy"><span lang="zh">复制</span><span lang="en">Copy</span></button></div>
+<pre id="install-cmd">git clone https://github.com/ywEdAi/teachable-figures \
+  ~/.claude/skills/teachable-figures</pre>
+</div>
+</div>
+<ol class="loop" data-i18n data-zh-aria-label="每个示例的学习步骤" data-en-aria-label="The steps in every lesson" aria-label="The steps in every lesson">
+<li><span class="n">01</span><div><b><span lang="zh">预测</span><span lang="en">Predict</span></b><span lang="zh">先选一个答案，其中一个是常见误解。</span><span lang="en">Commit to an answer; one option is a common misconception.</span></div></li>
+<li><span class="n">02</span><div><b><span lang="zh">动手</span><span lang="en">Try</span></b><span lang="zh">只改变一个原因，图和读数来自同一个模型。</span><span lang="en">Change one cause; the figure and readouts share one model.</span></div></li>
+<li><span class="n">03</span><div><b><span lang="zh">观察</span><span lang="en">Observe</span></b><span lang="zh">读数让结果可以对照你的预测。</span><span lang="en">Readouts let you check the result against your prediction.</span></div></li>
+<li><span class="n">04</span><div><b><span lang="zh">解释与迁移</span><span lang="en">Explain &amp; transfer</span></b><span lang="zh">用自己的话说清楚，再预测一个新情形。</span><span lang="en">Say why in your own words, then predict a new case.</span></div></li>
+</ol>
+</section>
+
+<div class="feature">
+<a href="how-it-works.html" data-keep-lang>
+<div class="shot"><img data-shot="how-it-works" alt="" loading="lazy"></div>
+<div class="text">
+<span class="kicker"><span lang="zh">先从这里开始</span><span lang="en">Start here</span></span>
+<h3><span lang="zh">这个 skill 先画图吗？</span><span lang="en">Does this skill start by drawing?</span></h3>
+<p lang="zh">用这个 skill 讲它自己：交给它几个请求，看哪些会被拒绝；再拿掉其中一步，看哪些失败在截图里根本看不出来。</p>
+<p lang="en">The skill, explained with itself: hand it requests and see which it declines, then remove a step and see which failures a screenshot never shows.</p>
+<span class="go"><span lang="zh">打开 →</span><span lang="en">Open →</span></span>
+</div>
+</a>
+</div>
+
+<div class="section-head" id="lessons">
+<h2><span lang="zh">十五个完整示例</span><span lang="en">Fifteen complete lessons</span></h2>
+<p><span lang="zh">都是单个 HTML 文件，离线可用，写明了模型的假设与来源。</span><span lang="en">Each is one offline HTML file that states its model's assumptions and sources.</span></p>
+</div>
+<h3 class="group"><span lang="zh">数学、概率与信息</span><span lang="en">Math, probability and information</span></h3>
+<div class="grid">
+<article><a href="geometry-slices.html" data-keep-lang><div class="shot"><img data-shot="geometry-slices" data-i18n data-zh-alt="被水平截开的圆锥，截面以金色显示" data-en-alt="A cone cut horizontally, with the cross-section in gold" alt="" loading="lazy"></div><div class="body"><span class="tags"><span lang="zh">数学 · 3D 旋转</span><span lang="en">Math · 3D rotation</span></span><h3><span lang="zh">圆锥切高一半，截面积也减半吗？</span><span lang="en">Halve the cone's height: is the slice half as big?</span></h3></div></a></article>
+<article><a href="bayes-base-rate.html" data-keep-lang><div class="shot"><img data-shot="bayes-base-rate" data-i18n data-zh-alt="1000 人的点阵，阳性者被圈出" data-en-alt="A grid of 1,000 people with the positives circled" alt="" loading="lazy"></div><div class="body"><span class="tags"><span lang="zh">概率 · 医学推理</span><span lang="en">Probability · medical reasoning</span></span><h3><span lang="zh">检测阳性，就有九成可能患病吗？</span><span lang="en">You test positive: are you 90% likely to be sick?</span></h3></div></a></article>
+<article><a href="information-entropy.html" data-keep-lang><div class="shot"><img data-shot="information-entropy" data-i18n data-zh-alt="提问树：每个问题的宽度表示它被问到的频率" data-en-alt="A question tree: each question's width is how often it is asked" alt="" loading="lazy"></div><div class="body"><span class="tags"><span lang="zh">信息论 · 熵</span><span lang="en">Information theory · entropy</span></span><h3><span lang="zh">平均每次能少于一个问题吗？</span><span lang="en">Can you average less than one question per answer?</span></h3></div></a></article>
+<article><a href="transformer-flow.html" data-keep-lang><div class="shot"><img data-shot="transformer-flow" data-i18n data-zh-alt="因果遮罩下的注意力权重图" data-en-alt="Attention weights under a causal mask" alt="" loading="lazy"></div><div class="body"><span class="tags"><span lang="zh">AI · 2D 数据流</span><span lang="en">AI · 2D data flow</span></span><h3><span lang="zh">一个 token 能看到后面的 token 吗？</span><span lang="en">Can a token read the tokens after it?</span></h3></div></a></article>
+</div>
+<h3 class="group"><span lang="zh">自然科学</span><span lang="en">Natural sciences</span></h3>
+<div class="grid">
+<article><a href="gear-ratio.html" data-keep-lang><div class="shot"><img data-shot="gear-ratio" data-i18n data-zh-alt="12 齿主动轮与 24 齿输出轮啮合" data-en-alt="A 12-tooth driver meshing with a 24-tooth output" alt="" loading="lazy"></div><div class="body"><span class="tags"><span lang="zh">机械 · 2D 模型</span><span lang="en">Mechanics · 2D model</span></span><h3><span lang="zh">多加一个齿轮，输出会变慢吗？</span><span lang="en">Does an extra gear slow the output?</span></h3></div></a></article>
+<article><a href="rocket-launch.html" data-keep-lang><div class="shot"><img data-shot="rocket-launch" data-i18n data-zh-alt="半剖火箭结构：整流罩、两个储箱、推力架与发动机" data-en-alt="Half-section rocket: fairing, two tanks, thrust frame and engine" alt="" loading="lazy"></div><div class="body"><span class="tags"><span lang="zh">物理 · 机械剖面</span><span lang="en">Physics · mechanical cutaway</span></span><h3><span lang="zh">火箭点火，就一定起飞吗？</span><span lang="en">Does a rocket lift off as soon as it ignites?</span></h3></div></a></article>
+<article><a href="seasons.html" data-keep-lang><div class="shot"><img data-shot="seasons" data-i18n data-zh-alt="地球公转轨道与正午阳光照射角" data-en-alt="Earth's orbit and the noon sunlight angle" alt="" loading="lazy"></div><div class="body"><span class="tags"><span lang="zh">地球科学 · 天文</span><span lang="en">Earth science · astronomy</span></span><h3><span lang="zh">夏天热，是因为离太阳更近吗？</span><span lang="en">Is summer hot because Earth is closer to the Sun?</span></h3></div></a></article>
+<article><a href="dynamic-equilibrium.html" data-keep-lang><div class="shot"><img data-shot="dynamic-equilibrium" data-i18n data-zh-alt="烧瓶里的 N₂O₄ 与 NO₂ 分子，以及正逆反应速率" data-en-alt="N₂O₄ and NO₂ molecules in a flask, with forward and backward rates" alt="" loading="lazy"></div><div class="body"><span class="tags"><span lang="zh">化学 · 平衡</span><span lang="en">Chemistry · equilibrium</span></span><h3><span lang="zh">达到平衡，反应就停了吗？</span><span lang="en">At equilibrium, has the reaction stopped?</span></h3></div></a></article>
+<article><a href="human-anatomy.html" data-keep-lang><div class="shot"><img data-shot="human-anatomy" data-i18n data-zh-alt="打开观察窗的人体胸腔，可见双肺、心脏和气管" data-en-alt="A human chest with its window open, showing lungs, heart and airway" alt="" loading="lazy"></div><div class="body"><span class="tags"><span lang="zh">生物 · 3D 网格</span><span lang="en">Biology · 3D meshes</span></span><h3><span lang="zh">换个方向看，器官的位置会变吗？</span><span lang="en">Turn the view: do the organs move?</span></h3></div></a></article>
+<article><a href="natural-selection.html" data-keep-lang><div class="shot"><img data-shot="natural-selection" data-i18n data-zh-alt="树皮上的桦尺蛾，与黑色型频率随世代的变化" data-en-alt="Peppered moths on bark, with the dark form's share over generations" alt="" loading="lazy"></div><div class="body"><span class="tags"><span lang="zh">生物 · 进化</span><span lang="en">Biology · evolution</span></span><h3><span lang="zh">树变黑了，蛾子会自己变黑吗？</span><span lang="en">When the trees darken, do the moths turn dark?</span></h3></div></a></article>
+<article><a href="moon-phases.html" data-keep-lang><div class="shot"><img data-shot="moon-phases" data-i18n data-zh-alt="三维日地月模型与地球上看到的月相" data-en-alt="A 3D Sun–Earth–Moon model and the Moon as seen from Earth" alt="" loading="lazy"></div><div class="body"><span class="tags"><span lang="zh">天文 · 三维</span><span lang="en">Astronomy · 3D</span></span><h3><span lang="zh">月相是地球的影子造成的吗？</span><span lang="en">Are the Moon's phases Earth's shadow?</span></h3></div></a></article>
+<article><a href="four-stroke-engine.html" data-keep-lang><div class="shot"><img data-shot="four-stroke-engine" data-i18n data-zh-alt="单缸四冲程发动机的三维剖面" data-en-alt="A 3D cutaway of a single-cylinder four-stroke engine" alt="" loading="lazy"></div><div class="body"><span class="tags"><span lang="zh">机械 · 三维</span><span lang="en">Mechanics · 3D</span></span><h3><span lang="zh">发动机为什么要转两圈才做一次功？</span><span lang="en">Why does an engine turn twice for every power stroke?</span></h3></div></a></article>
+</div>
+<h3 class="group"><span lang="zh">人文与社会</span><span lang="en">Humanities and society</span></h3>
+<div class="grid">
+<article><a href="ship-of-theseus.html" data-keep-lang><div class="shot"><img data-shot="ship-of-theseus" data-i18n data-zh-alt="两艘船：港口里逐块修补的船，和用旧船板重新拼起的船" data-en-alt="Two ships: one repaired plank by plank in the harbor, one rebuilt from the old planks" alt="" loading="lazy"></div><div class="body"><span class="tags"><span lang="zh">哲学 · 同一性</span><span lang="en">Philosophy · identity</span></span><h3><span lang="zh">船板全换掉，还是原来那艘船吗？</span><span lang="en">Replace every plank: is it still the same ship?</span></h3></div></a></article>
+<article><a href="price-ceiling.html" data-keep-lang><div class="shot"><img data-shot="price-ceiling" data-i18n data-zh-alt="供需曲线上的房租上限、短缺与无谓损失" data-en-alt="Supply and demand with a rent cap, the shortage, and lost surplus" alt="" loading="lazy"></div><div class="body"><span class="tags"><span lang="zh">经济 · 市场</span><span lang="en">Economics · markets</span></span><h3><span lang="zh">限制房租，会有更多人租到房吗？</span><span lang="en">Cap the rent: do more people get apartments?</span></h3></div></a></article>
+<article><a href="chinese-clothing.html" data-keep-lang><div class="shot"><img data-shot="chinese-clothing" data-i18n data-zh-alt="明代曳撒示意图，上身交领，下摆为褶裥" data-en-alt="A Ming-dynasty yesa robe: cross collar above, pleated skirt below" alt="" loading="lazy"></div><div class="body"><span class="tags"><span lang="zh">历史 · 服饰结构</span><span lang="en">History · garment structure</span></span><h3><span lang="zh">曳撒的褶裥，是另穿的裙子吗？</span><span lang="en">Are the yesa's pleats a separate skirt?</span></h3></div></a></article>
+</div>
+</div>
+</main>
+<div class="wrap">
+<footer class="site">
+<span><span lang="zh">直接打开 HTML 即可离线运行。这些图是教学设计，尚未经过学习者实验验证。</span><span lang="en">Open any HTML file to run it offline. These figures are teaching designs; they have not been tested with learners.</span></span>
+<span><a href="https://github.com/ywEdAi/teachable-figures">GitHub</a> · <a href="https://github.com/ywEdAi/teachable-figures/blob/main/references/sources-and-fusion.md"><span lang="zh">来源与许可证</span><span lang="en">Sources &amp; licenses</span></a></span>
+</footer>
+</div>
+<script>
+'use strict';
+/* lesson-shell i18n v2: shared by every example page; keep identical across files.
+   Static copy: paired elements <span lang="zh">…</span><span lang="en">…</span> (CSS hides the other language).
+   Text-only nodes and attributes: data-i18n plus data-zh / data-en (textContent) or data-zh-<attr> / data-en-<attr>.
+   Dynamic copy: tr('中文', 'English'); say(el, () => tr(…)) re-renders the message when the language changes. */
+const I18N = (() => {
+  const KEY = 'tf-lang', LANGS = ['zh', 'en'];
+  const stored = (() => { try { return localStorage.getItem(KEY); } catch { return null; } })();
+  const param = new URLSearchParams(location.search).get('lang');
+  let lang = LANGS.includes(param) ? param : LANGS.includes(stored) ? stored : /^zh\b/i.test(navigator.language || '') ? 'zh' : 'en';
+  const listeners = [];
+  function apply() {
+    const root = document.documentElement;
+    root.lang = lang === 'zh' ? 'zh-CN' : 'en';
+    root.dataset.lang = lang;
+    for (const el of document.querySelectorAll('[data-i18n]')) {
+      for (const { name, value } of [...el.attributes]) {
+        if (name === 'data-' + lang) el.textContent = value;
+        else if (name.startsWith('data-' + lang + '-')) el.setAttribute(name.slice(lang.length + 6), value);
+      }
+    }
+    for (const button of document.querySelectorAll('[data-set-lang]')) button.setAttribute('aria-pressed', String(button.dataset.setLang === lang));
+    for (const link of document.querySelectorAll('a[data-keep-lang]')) {
+      const target = new URL(link.getAttribute('href').split('?')[0], location.href);
+      target.searchParams.set('lang', lang);
+      link.href = target.href;
+    }
+    listeners.forEach(fn => fn(lang));
+  }
+  document.addEventListener('click', event => {
+    const button = event.target.closest('[data-set-lang]');
+    if (!button || button.dataset.setLang === lang) return;
+    lang = button.dataset.setLang;
+    try { localStorage.setItem(KEY, lang); } catch {}
+    try { const here = new URL(location.href); here.searchParams.set('lang', lang); history.replaceState(history.state, '', here); } catch {}
+    apply();
+  });
+  return { get lang() { return lang; }, on(fn) { listeners.push(fn); }, apply };
+})();
+const tr = (zh, en) => I18N.lang === 'zh' ? zh : en;
+const spoken = new Map();
+function say(target, message) {
+  const el = typeof target === 'string' ? document.getElementById(target) : target;
+  spoken.set(el, message);
+  el.textContent = message ? message() : '';
+}
+I18N.on(() => spoken.forEach((message, el) => { el.textContent = message ? message() : ''; }));
+// On short screens the figure pane scrolls on its own; while more of it is below the fold, show a cue that scrolls it.
+(() => {
+  const pane = document.querySelector('.lesson > .figure-pane');
+  if (!pane) return;
+  const cue = document.createElement('div');
+  cue.className = 'pane-more';
+  cue.hidden = true;
+  cue.innerHTML = '<button type="button" tabindex="-1" aria-hidden="true"></button>';
+  const button = cue.firstChild;
+  const label = () => { button.textContent = tr('下方还有内容 ↓', 'More below ↓'); };
+  label();
+  I18N.on(label);
+  button.addEventListener('click', () => pane.scrollBy({ top: pane.clientHeight * 0.75, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' }));
+  pane.after(cue);
+  function update() {
+    const scrolls = getComputedStyle(pane).overflowY !== 'visible' && pane.scrollHeight > pane.clientHeight + 1;
+    cue.hidden = !(scrolls && pane.scrollHeight - pane.clientHeight - pane.scrollTop > 4);
+    if (scrolls) pane.tabIndex = 0; else pane.removeAttribute('tabindex');
+  }
+  const sizes = new ResizeObserver(update);
+  const watch = () => { sizes.disconnect(); sizes.observe(pane); for (const child of pane.children) sizes.observe(child); };
+  new MutationObserver(() => { watch(); update(); }).observe(pane, { childList: true });
+  pane.addEventListener('scroll', update, { passive: true });
+  addEventListener('resize', update);
+  watch();
+  update();
+})();
+/* Attention guide. Figure parts: [data-part="id"] inside #experiment (labels: data-zh-label / data-en-label).
+   Step focus: a panel .step or element with data-focus="id …" dims the other parts while it is the active step
+   (focused element first, else the first visible step crossing the reading line). Ordered highlights: ol.look > li[data-focus].
+   Dual coding: [data-ref="id …"] terms and legend items link to parts both ways. Nothing moves until the learner scrolls, hovers or clicks. */
+(() => {
+  const figure = document.getElementById('experiment');
+  if (!figure || !figure.querySelector('[data-part]')) return;
+  const panel = document.querySelector('.lesson > .panel');
+  const KEY = 'tf-focus-guide', ids = value => (value || '').split(/\s+/).filter(Boolean);
+  let guide = (() => { try { return localStorage.getItem(KEY) !== 'off'; } catch { return true; } })();
+  let stepIds = [], look = null, peek = null, pinned = null, activeStep = null;
+  const style = document.createElement('style');
+  document.head.append(style);
+  const bar = document.createElement('div');
+  bar.className = 'focus-bar';
+  bar.innerHTML = '<p class="focus-caption" aria-live="polite"></p><label class="focus-toggle"><input type="checkbox"><span></span></label>';
+  const caption = bar.firstChild, toggle = bar.querySelector('input'), toggleText = bar.querySelector('.focus-toggle span');
+  toggle.checked = guide;
+  figure.prepend(bar);
+  const tip = document.createElement('div');
+  tip.className = 'part-tip';
+  tip.hidden = true;
+  document.body.append(tip);
+  const fine = matchMedia('(hover: hover) and (pointer: fine)');
+  const sel = list => list.map(id => `[data-part~="${CSS.escape(id)}"]`).join(',');
+  function render() {
+    const hot = pinned || peek || (look && look.ids) || (guide ? stepIds : []);
+    const ring = !!(pinned || peek || look);
+    figure.classList.toggle('tf-ring', ring && hot.length > 0);
+    figure.toggleAttribute('data-focusing', hot.length > 0);
+    style.textContent = hot.length ? `#experiment [data-part]:not(${sel(hot)}){opacity:.24;filter:saturate(.35)}` : '';
+    for (const part of figure.querySelectorAll('[data-part]')) part.classList.toggle('tf-hot', ring && ids(part.dataset.part).some(id => hot.includes(id)));
+  }
+  // Re-rendered figures replace their children; keep the hot class on new parts.
+  new MutationObserver(() => { if (figure.classList.contains('tf-ring')) render(); }).observe(figure, { childList: true, subtree: true });
+  const visible = el => el.offsetParent !== null || el.getClientRects().length > 0;
+  const steps = () => [...document.querySelectorAll('.panel .step, .panel [data-focus]:not(ol.look *)')].filter(visible);
+  function pickStep() {
+    const scroller = panel && getComputedStyle(panel).overflowY !== 'visible' ? panel : null;
+    const box = scroller ? scroller.getBoundingClientRect() : { top: 0, bottom: innerHeight, height: innerHeight };
+    const line = box.top + box.height * 0.3, list = steps();
+    const inView = el => { const r = el.getBoundingClientRect(); return r.bottom > box.top && r.top < box.bottom; };
+    const focused = document.activeElement && list.filter(el => el.contains(document.activeElement)).pop();
+    if (focused && inView(focused)) return focused;
+    let found = null;
+    for (const el of list) { const r = el.getBoundingClientRect(); if (r.bottom > line && r.top < box.bottom && (!found || found.contains(el))) found = el; else if (found && !found.contains(el)) break; }
+    return found;
+  }
+  function update() {
+    const step = pickStep();
+    if (step !== activeStep) {
+      activeStep = step;
+      if (look && !(step && step.contains(look.list))) setLook(null);
+    }
+    const target = step && (step.matches('[data-focus]') ? step : null);
+    stepIds = target ? ids(target.dataset.focus) : [];
+    render();
+  }
+  let queued = false;
+  const schedule = () => { if (!queued) { queued = true; requestAnimationFrame(() => { queued = false; update(); }); } };
+  (panel || document).addEventListener('scroll', schedule, { passive: true });
+  addEventListener('scroll', schedule, { passive: true });
+  addEventListener('resize', schedule);
+  document.addEventListener('focusin', schedule);
+  new MutationObserver(schedule).observe(document.querySelector('.panel') || document.body, { attributes: true, attributeFilter: ['hidden'], subtree: true });
+  toggle.addEventListener('change', () => { guide = toggle.checked; try { localStorage.setItem(KEY, guide ? 'on' : 'off'); } catch {} render(); });
+  // Ordered highlights.
+  const lists = [...document.querySelectorAll('ol.look')];
+  function setLook(next) {
+    look = next;
+    for (const list of lists) {
+      const items = [...list.children];
+      items.forEach((li, i) => { if (next && next.list === list && next.index === i) li.setAttribute('aria-current', 'step'); else li.removeAttribute('aria-current'); });
+      for (const button of list.previousElementSibling.querySelectorAll('.look-num')) button.setAttribute('aria-pressed', String(!!next && next.list === list && Number(button.dataset.index) === next.index));
+    }
+    caption.textContent = '';
+    if (next) {
+      const n = document.createElement('span');
+      n.className = 'look-n';
+      n.textContent = `${next.index + 1}/${next.list.children.length}`;
+      const text = document.createElement('span');
+      text.append(...[...next.list.children[next.index].childNodes].map(node => node.cloneNode(true)));
+      caption.append(n, text);
+    }
+    render();
+  }
+  const go = (list, index) => setLook({ list, index, ids: ids(list.children[index].dataset.focus) });
+  for (const list of lists) {
+    const nav = document.createElement('div');
+    nav.className = 'look-nav';
+    const items = [...list.children];
+    items.forEach((li, i) => {
+      const b = document.createElement('button');
+      b.type = 'button'; b.className = 'look-num'; b.dataset.index = i; b.textContent = i + 1; b.setAttribute('aria-pressed', 'false');
+      b.addEventListener('click', () => go(list, i));
+      nav.append(b);
+      li.addEventListener('click', event => { if (!event.target.closest('a,button,input,[data-ref]')) go(list, i); });
+    });
+    const make = (cls, zh, en, fn) => { const b = document.createElement('button'); b.type = 'button'; b.className = cls; const label = () => { b.textContent = tr(zh, en); }; label(); I18N.on(label); b.addEventListener('click', fn); nav.append(b); };
+    const at = () => (look && look.list === list ? look.index : -1);
+    make('look-prev', '‹ 上一步', '‹ Prev', () => go(list, Math.max(0, at() - 1)));
+    make('look-next', '下一步 ›', 'Next ›', () => go(list, Math.min(items.length - 1, at() + 1)));
+    make('look-clear', '清除', 'Clear', () => setLook(null));
+    list.before(nav);
+  }
+  // Dual coding: terms ↔ parts.
+  const refs = () => document.querySelectorAll('[data-ref]');
+  for (const term of refs()) if (!term.matches('a,button,input,select,textarea,label,[tabindex]')) { term.tabIndex = 0; term.setAttribute('role', 'button'); term.setAttribute('aria-pressed', 'false'); }
+  const termOf = event => event.target.closest && event.target.closest('[data-ref]');
+  let pointer = 'mouse';
+  document.addEventListener('pointerdown', event => { pointer = event.pointerType; }, true);
+  document.addEventListener('pointerover', event => { const term = termOf(event); if (term && event.pointerType === 'mouse') { peek = ids(term.dataset.ref); render(); } });
+  document.addEventListener('pointerout', event => { const term = termOf(event); if (term && !term.contains(event.relatedTarget)) { peek = null; render(); } });
+  document.addEventListener('focusin', event => { const term = termOf(event); if (term) { peek = ids(term.dataset.ref); render(); } });
+  document.addEventListener('focusout', event => { if (termOf(event)) { peek = null; render(); } });
+  function pin(term) {
+    const next = ids(term.dataset.ref).join(' ');
+    pinned = pinned && pinned.join(' ') === next ? null : ids(next);
+    for (const other of refs()) if (other.getAttribute('role') === 'button') other.setAttribute('aria-pressed', String(!!pinned && other.dataset.ref === term.dataset.ref));
+    render();
+  }
+  document.addEventListener('click', event => { const term = termOf(event); if (term && term.getAttribute('role') === 'button' && pointer !== 'mouse') pin(term); });
+  document.addEventListener('keydown', event => {
+    const term = termOf(event);
+    if (term && term.getAttribute('role') === 'button' && (event.key === 'Enter' || event.key === ' ')) { event.preventDefault(); pin(term); }
+    if (event.key === 'Escape' && (look || pinned)) { pinned = null; for (const other of refs()) if (other.getAttribute('role') === 'button') other.setAttribute('aria-pressed', 'false'); setLook(null); }
+  });
+  function partLabel(part) { return part.getAttribute(`data-${I18N.lang}-label`); }
+  figure.addEventListener('pointermove', event => {
+    const part = event.target.closest && event.target.closest('[data-part]');
+    const label = part && partLabel(part);
+    for (const term of refs()) term.classList.toggle('tf-ref-on', !!part && ids(term.dataset.ref).some(id => ids(part.dataset.part).includes(id)));
+    if (!label || !fine.matches || event.pointerType !== 'mouse') { tip.hidden = true; return; }
+    tip.textContent = label;
+    tip.hidden = false;
+    const x = Math.min(event.clientX + 14, innerWidth - tip.offsetWidth - 8), y = event.clientY + 18 + tip.offsetHeight > innerHeight ? event.clientY - tip.offsetHeight - 12 : event.clientY + 18;
+    tip.style.left = x + 'px'; tip.style.top = y + 'px';
+  });
+  figure.addEventListener('pointerleave', () => { tip.hidden = true; for (const term of refs()) term.classList.remove('tf-ref-on'); });
+  const labels = () => { toggleText.textContent = tr('焦点引导', 'Focus guide'); };
+  labels();
+  I18N.on(() => { labels(); if (look) setLook(look); });
+  update();
+})();
+/* /lesson-shell */
+const dark = matchMedia('(prefers-color-scheme: dark)');
+function shots() {
+  for (const img of document.querySelectorAll('img[data-shot]')) img.src = `previews/${img.dataset.shot}-${I18N.lang}-${dark.matches ? 'dark' : 'light'}.jpg`;
+}
+dark.addEventListener('change', shots);
+I18N.on(shots);
+document.getElementById('copy').addEventListener('click', async event => {
+  const button = event.currentTarget;
+  try { await navigator.clipboard.writeText(document.getElementById('install-cmd').textContent.replace(/\\\n\s*/g, '')); button.dataset.done = '1'; } catch {}
+  say(button, () => button.dataset.done ? tr('已复制', 'Copied') : tr('复制', 'Copy'));
+  setTimeout(() => { delete button.dataset.done; say(button, () => tr('复制', 'Copy')); }, 1600);
+});
+I18N.apply();
+</script>
+</body>
+</html>

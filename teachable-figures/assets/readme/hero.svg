@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="390" viewBox="0 0 1200 390" role="img" aria-labelledby="title description">
+  <title id="title">Teachable figures</title>
+  <desc id="description">An agent skill for figures that let learners predict a result, change a cause, and explain the effect. A twelve-tooth driver gives a twenty-four-tooth output half a turn.</desc>
+  <rect width="1200" height="390" rx="24" fill="#f7f4ec"/>
+  <g font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" fill="#192b30">
+    <text x="54" y="64" font-size="22" letter-spacing="3" fill="#176b64">AN AGENT SKILL FOR LEARNING</text>
+    <text x="50" y="157" font-size="80" font-weight="720">Teachable</text>
+    <text x="50" y="242" font-size="80" font-weight="720">figures</text>
+    <text x="54" y="302" font-size="30">Make one mechanism testable.</text>
+    <text x="54" y="350" font-size="24" fill="#62777b">Predict. Try. Explain.</text>
+  </g>
+  <g id="gear-ratio-model" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif">
+    <circle cx="785" cy="161" r="47" fill="#176b64"/>
+    <circle cx="926" cy="161" r="94" fill="#e2e8dd" stroke="#176b64" stroke-width="3"/>
+    <path d="M785 161v-36M926 161v-80" fill="none" stroke="#c96c35" stroke-width="8" stroke-linecap="round"/>
+    <circle cx="785" cy="161" r="7" fill="#f7f4ec"/>
+    <circle cx="926" cy="161" r="7" fill="#176b64"/>
+    <path d="M741 108a69 69 0 0 1 109 14m-1-20 3 23-23-3M1028 221a118 118 0 0 1-163 47m10 20-15-23 27-4" fill="none" stroke="#62777b" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    <g fill="#192b30" font-size="25" text-anchor="middle">
+      <text x="785" y="239">12 teeth</text>
+      <text x="962" y="306">24 teeth</text>
+    </g>
+    <text x="888" y="351" text-anchor="middle" font-size="29" fill="#176b64">1 input turn → ½ output turn</text>
+  </g>
+</svg>

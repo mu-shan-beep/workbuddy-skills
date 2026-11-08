@@ -1,0 +1,993 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title data-i18n data-zh="动态平衡：颜色不再变化时，反应停了吗？" data-en="Dynamic equilibrium: when the colour stops changing, has the reaction stopped?">Dynamic equilibrium: when the colour stops changing, has the reaction stopped?</title>
+<style>
+/* lesson-shell v2: shared by every example page; keep identical across files */
+:root{color-scheme:light dark;--bar:56px;--bg:#f7f6f2;--surface:#fff;--stage:#eeece6;--ink:#141618;--text:#2a2e31;--muted:#61676c;--faint:#8b9196;--line:#e4e1d9;--line-strong:#cbc7bd;--accent:#d9480f;--accent-soft:#fcebe2;--focus:#d9480f;--ok:#1d7a4c;--sans:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Noto Sans SC","Microsoft YaHei",sans-serif;--mono:ui-monospace,"SF Mono",SFMono-Regular,Menlo,Consolas,monospace}
+@media(prefers-color-scheme:dark){:root{--bg:#111315;--surface:#181b1e;--stage:#0b0d0f;--ink:#f3f4f2;--text:#dadedc;--muted:#a1a7ab;--faint:#7a8085;--line:#272b2f;--line-strong:#3b4045;--accent:#ff7a45;--accent-soft:#2b1a11;--focus:#ff7a45;--ok:#4cc38a}}
+*{box-sizing:border-box}html{-webkit-text-size-adjust:100%}body{margin:0;background:var(--bg);color:var(--text);font:15.5px/1.6 var(--sans);-webkit-font-smoothing:antialiased}
+[hidden]{display:none!important}html[data-lang=zh] [lang=en],html[data-lang=en] [lang=zh]{display:none!important}
+:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+.skip{position:absolute;left:12px;top:-80px;z-index:30;background:var(--surface);color:var(--ink);padding:8px 12px;border-radius:8px}.skip:focus{top:10px}
+.bar{position:sticky;top:0;z-index:20;height:var(--bar);display:flex;align-items:center;gap:14px;padding:0 16px 0 20px;background:color-mix(in srgb,var(--bg) 90%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.bar .back{display:inline-flex;align-items:center;gap:6px;min-height:40px;color:var(--muted);text-decoration:none;font-size:14px;white-space:nowrap}.bar .back:hover{color:var(--ink)}
+.bar .crumb{min-width:0;font:500 12px/1.2 var(--mono);color:var(--faint);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lang-switch{margin-left:auto;flex:none;display:inline-flex;padding:3px;border:1px solid var(--line);border-radius:999px;background:var(--surface)}
+.lang-switch button{appearance:none;border:0;background:none;cursor:pointer;font:600 12px/1 var(--sans);min-height:30px;min-width:40px;padding:0 11px;border-radius:999px;color:var(--muted)}
+.lang-switch button[aria-pressed=true]{background:var(--ink);color:var(--bg)}
+.lesson{display:flex;flex-direction:column}.panel{display:contents}
+.intro{order:0;padding:28px 20px 6px}
+.figure-pane{order:1;margin:14px 12px 4px;padding:12px;background:var(--stage);border-radius:16px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.steps{order:2;padding:0 20px 40px}
+.stage{position:relative;min-height:0;display:grid;place-items:center}.stage>svg,.stage>canvas{display:block;width:100%;height:auto}
+.fig-caption{margin:0;font-size:12.5px;line-height:1.5;color:var(--muted)}
+.readouts{display:grid;grid-template-columns:repeat(auto-fit,minmax(104px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.readout{background:var(--surface);padding:9px 13px;min-width:0}
+.readout .k{display:block;font:500 12px/1.35 var(--sans);color:var(--muted)}
+.readout strong{display:block;font:650 21px/1.3 var(--sans);font-variant-numeric:tabular-nums;color:var(--ink);letter-spacing:-.01em;overflow-wrap:anywhere}
+.readout .u{display:block;font-size:12px;line-height:1.35;color:var(--faint)}
+.meta{display:flex;flex-wrap:wrap;gap:4px 10px;margin:0 0 14px;padding:0;list-style:none;font:500 12.5px/1.4 var(--sans);color:var(--muted)}.meta li+li::before{content:"/";margin-right:10px;color:var(--line-strong)}
+h1{margin:0 0 12px;font-size:clamp(25px,2.5vw,33px);line-height:1.18;letter-spacing:-.025em;font-weight:700;color:var(--ink);text-wrap:balance}
+.lead{margin:0;color:var(--muted)}
+.step{padding:26px 0 22px;border-top:1px solid var(--line)}.intro+.steps .step:first-child,.steps>.step:first-child{border-top:0}
+.step>h2{display:flex;align-items:center;gap:10px;margin:0 0 12px;font-size:17px;line-height:1.3;letter-spacing:-.01em;color:var(--ink)}
+.step>h2 .n{flex:none;font:600 11px/1 var(--mono);color:var(--accent);border:1px solid currentColor;border-radius:6px;padding:4px 6px}
+h3{margin:20px 0 6px;font-size:14.5px;color:var(--ink)}p{margin:0 0 12px}strong{color:var(--ink)}
+.small{font-size:13.5px;color:var(--muted)}
+fieldset{border:0;padding:0;margin:0;min-width:0}legend{padding:0;margin:0 0 12px;font-weight:600;color:var(--ink)}
+label.choice{display:flex;gap:10px;align-items:flex-start;padding:10px 13px;margin-bottom:8px;border:1px solid var(--line);border-radius:10px;background:var(--surface);cursor:pointer;transition:border-color .12s,box-shadow .12s}
+label.choice:hover{border-color:var(--line-strong)}label.choice:has(input:checked){border-color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink)}label.choice:has(input:disabled){cursor:default}
+label.choice input{flex:none;margin:4px 0 0}input{accent-color:var(--ink)}input[type=radio],input[type=checkbox]{width:17px;height:17px}
+button,select{font:500 14px/1.2 var(--sans);color:var(--ink);background:var(--surface);border:1px solid var(--line-strong);border-radius:10px;padding:0 16px;min-height:42px;cursor:pointer}
+button:hover:not(:disabled),select:hover:not(:disabled){border-color:var(--ink)}button.primary{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+button:disabled,select:disabled{opacity:.45;cursor:not-allowed}
+.controls{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:14px 0}
+.toggle{display:flex;align-items:center;gap:10px;min-height:42px;font-weight:500;color:var(--ink);cursor:pointer}
+.range{margin:16px 0 8px}.range label{display:flex;justify-content:space-between;gap:12px;font-weight:500;color:var(--ink)}.range output{font:500 13px/1.6 var(--mono);color:var(--muted)}
+input[type=range]{width:100%;min-height:32px;margin:4px 0}
+.status{min-height:1.6em;margin:12px 0;padding:10px 12px;border-radius:10px;background:var(--bg);font-size:14px}
+.callout{margin:14px 0;padding:2px 0 2px 14px;border-left:3px solid var(--accent)}
+textarea{display:block;width:100%;min-height:90px;margin-top:8px;padding:10px 12px;font:inherit;color:var(--text);background:var(--bg);border:1px solid var(--line-strong);border-radius:10px;resize:vertical}
+table{border-collapse:collapse;width:100%;margin-top:14px;font-size:14px}th,td{text-align:left;padding:9px 6px;border-bottom:1px solid var(--line);vertical-align:top}th:first-child,td:first-child{padding-left:0}caption{text-align:left;font-weight:600;color:var(--ink);margin-bottom:4px}
+.limits{color:var(--muted);font-size:14px}
+.pane-more{display:none}
+.foot{margin-top:8px;padding-top:16px;border-top:1px solid var(--line);font-size:12.5px;color:var(--faint)}
+/* attention: figure parts [data-part], step focus [data-focus], ordered highlights ol.look, dual-coding terms [data-ref] */
+#experiment [data-part]{transition:opacity .28s ease,filter .28s ease,box-shadow .2s ease}
+#experiment.tf-ring [data-part].tf-hot:not(svg *){box-shadow:0 0 0 2px var(--accent),0 0 0 7px color-mix(in srgb,var(--accent) 18%,transparent);border-radius:10px}
+#experiment.tf-ring svg [data-part].tf-hot{filter:drop-shadow(0 0 1px var(--accent)) drop-shadow(0 0 5px color-mix(in srgb,var(--accent) 40%,transparent))}
+.focus-bar{display:flex;align-items:center;gap:12px;min-height:30px;margin:-4px 0 -2px}
+.focus-caption{flex:1;min-width:0;margin:0;font-size:13px;line-height:1.4;color:var(--ink)}.focus-caption:empty{visibility:hidden}
+.focus-caption .look-n{display:inline-grid;place-items:center;min-width:20px;height:20px;margin-right:8px;padding:0 5px;border-radius:999px;background:var(--accent);color:#fff;font:700 11px/1 var(--sans);vertical-align:1px}
+.focus-toggle{flex:none;display:inline-flex;align-items:center;gap:7px;min-height:30px;font-size:12.5px;color:var(--muted);cursor:pointer;white-space:nowrap}.focus-toggle input{width:15px;height:15px;margin:0}
+ol.look{margin:12px 0 8px;padding:0;list-style:none;counter-reset:look}
+ol.look>li{counter-increment:look;position:relative;margin:0 0 6px;padding:8px 10px 8px 38px;border:1px solid var(--line);border-radius:10px;cursor:pointer;color:var(--muted);transition:border-color .15s,background .15s}
+ol.look>li::before{content:counter(look);position:absolute;left:10px;top:9px;display:grid;place-items:center;width:20px;height:20px;border-radius:999px;border:1px solid var(--line-strong);font:650 11px/1 var(--sans);color:var(--muted)}
+ol.look>li:hover{border-color:var(--line-strong)}ol.look>li[aria-current=step]{border-color:var(--accent);background:var(--accent-soft);color:var(--ink)}ol.look>li[aria-current=step]::before{background:var(--accent);border-color:var(--accent);color:#fff}
+.look-nav{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:0 0 14px}.look-nav button{min-height:34px;padding:0 11px;font-size:13px}.look-nav .look-num{min-width:34px;padding:0}.look-nav .look-num[aria-pressed=true]{background:var(--accent);border-color:var(--accent);color:#fff}
+[data-ref]:not(a,button,input,select,label){text-decoration:underline dotted color-mix(in srgb,var(--accent) 70%,transparent);text-decoration-thickness:1.5px;text-underline-offset:3px;cursor:help;border-radius:4px}
+[data-ref].tf-ref-on{background:var(--accent-soft);box-shadow:0 0 0 2px var(--accent-soft);color:var(--ink)}[data-ref][aria-pressed=true]{background:var(--accent-soft);box-shadow:0 0 0 1px var(--accent)}
+.part-tip{position:fixed;z-index:40;pointer-events:none;max-width:240px;padding:5px 9px;border-radius:8px;background:var(--ink);color:var(--bg);font:500 12.5px/1.35 var(--sans);box-shadow:0 4px 14px rgb(0 0 0/.18)}
+@media(min-width:960px) and (min-height:560px){
+.lesson{display:grid;grid-template-columns:minmax(0,1fr) clamp(380px,35vw,500px);height:calc(100dvh - var(--bar))}
+.panel{display:block;grid-column:2;grid-row:1;overflow-y:auto;overscroll-behavior:contain;background:var(--surface);border-left:1px solid var(--line)}
+.figure-pane{grid-column:1;grid-row:1;margin:0;border-radius:0;padding:24px 28px;min-height:0}
+.figure-pane{overflow-y:auto;overscroll-behavior:contain}.figure-pane>*{flex-shrink:0}
+.figure-pane .stage{flex:1}.figure-pane .stage>svg,.figure-pane .stage>canvas{height:100%;max-height:100%}
+.pane-more{display:flex;grid-column:1;grid-row:1;align-self:end;position:relative;z-index:2;justify-content:center;align-items:flex-end;height:76px;padding-bottom:14px;pointer-events:none;background:linear-gradient(color-mix(in srgb,var(--stage) 0%,transparent),var(--stage) 72%)}
+.pane-more button{pointer-events:auto;min-height:32px;padding:0 14px;border-radius:999px;font-size:12.5px;box-shadow:0 2px 10px rgb(0 0 0/.12)}
+.intro{padding:32px 32px 6px}.steps{padding:0 32px 48px}
+.bar{padding:0 20px 0 24px}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+/* /lesson-shell */
+:root{--a-fill:#e3e8ec;--a-edge:#7d8a95;--b-fill:#a4501f;--b-edge:#6e3110;--gas:164,80,31;--tag:#6b48d6;--flash:#e8a33d;--plot-a:#6f7d88;--plot-b:#b5541d;--flask:#fbfaf7}
+@media(prefers-color-scheme:dark){:root{--a-fill:#3a444d;--a-edge:#9aa7b2;--b-fill:#d27a45;--b-edge:#f0a77a;--gas:210,122,69;--tag:#a48bff;--flash:#f2b85c;--plot-a:#9aa7b2;--plot-b:#e08a52;--flask:#14171a}}
+#figure text{font-family:var(--sans);fill:var(--muted);font-size:12px}
+#figure .t-title{font-size:13px;font-weight:600;fill:var(--ink)}
+#figure .t-big{font-size:13px;font-weight:600;font-variant-numeric:tabular-nums}
+#figure .axis{stroke:var(--line-strong);stroke-width:1}
+#figure .grid{stroke:var(--line);stroke-width:1}
+#figure .flask{fill:var(--flask);stroke:var(--ink);stroke-width:1.6}
+#figure .ma{fill:var(--a-fill);stroke:var(--a-edge);stroke-width:1.1}
+#figure .mb{fill:var(--b-fill);stroke:var(--b-edge);stroke-width:1.1}
+#figure .bond{stroke:var(--a-edge);stroke-width:2.2}
+#figure .tagdot{fill:var(--tag)}
+#figure .flash{fill:none;stroke:var(--flash);stroke-width:2}
+#figure .la{fill:none;stroke:var(--plot-a);stroke-width:2.2}
+#figure .lb{fill:none;stroke:var(--plot-b);stroke-width:2.2}
+#figure .lf{fill:none;stroke:var(--ink);stroke-width:2}
+#figure .lr{fill:none;stroke:var(--accent);stroke-width:2;stroke-dasharray:6 4}
+#figure .mark{stroke:var(--faint);stroke-dasharray:3 3}
+#figure .placeholder{fill:var(--faint);font-size:13px}
+.key{display:flex;flex-wrap:wrap;gap:6px 16px;margin:0;padding:0;list-style:none;font-size:12.5px;color:var(--muted)}
+.key li{display:flex;align-items:center;gap:6px}.key svg{flex:none}
+.figure-pane[data-faded] .key{visibility:hidden}
+.range output{font-family:var(--sans);font-variant-numeric:tabular-nums}
+.chem{font-variant-numeric:tabular-nums;white-space:nowrap}
+.note{margin:14px 0;padding:12px 14px;border:1px solid var(--line);border-radius:10px;font-size:14px}.note h3{margin-top:0}
+.practice-q{margin:0 0 18px;padding:14px;border:1px solid var(--line);border-radius:12px}
+.practice-q legend{margin-bottom:10px}
+.answer{display:flex;flex-wrap:wrap;align-items:center;gap:10px}
+.answer input{width:9em;min-height:42px;padding:0 12px;font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--line-strong);border-radius:10px}
+.status.ok{color:var(--ok)}
+.practice-q .status:empty,#disturb-feedback:empty,#transfer-feedback:empty{display:none}
+code.eq{font:500 13.5px/1.5 var(--mono);color:var(--ink)}
+@media(min-width:960px) and (min-height:560px){.figure-pane{gap:10px;padding:18px 24px}}
+</style>
+</head>
+<body>
+<a class="skip" href="#experiment"><span lang="zh">跳到实验</span><span lang="en">Skip to experiment</span></a>
+<header class="bar">
+<a class="back" href="index.html" data-keep-lang>← <span lang="zh">全部示例</span><span lang="en">All examples</span></a>
+<span class="crumb">dynamic-equilibrium.html</span>
+<div class="lang-switch" role="group" aria-label="语言 / Language"><button type="button" data-set-lang="zh" aria-pressed="false">中文</button><button type="button" data-set-lang="en" aria-pressed="true">EN</button></div>
+</header>
+<main class="lesson">
+<div class="panel">
+<div class="intro">
+<ul class="meta"><li><span lang="zh">化学 · 化学平衡</span><span lang="en">Chemistry · equilibrium</span></li><li><span lang="zh">粒子模拟 + 速率模型</span><span lang="en">Particles + rate model</span></li><li><span lang="zh">约 10 分钟</span><span lang="en">~10 min</span></li></ul>
+<h1><span lang="zh">颜色不再变了，反应就停了吗？</span><span lang="en">When the colour stops changing, has the reaction stopped?</span></h1>
+<p class="lead" lang="zh">密封烧瓶里装着无色的 N₂O₄。它会分解成红棕色的 NO₂，两个 NO₂ 也能重新结合成 N₂O₄。瓶子先变棕，然后颜色就稳定了。这时候，瓶里的分子在做什么？</p>
+<p class="lead" lang="en">A sealed flask holds colourless N₂O₄. It splits into brown NO₂, and two NO₂ can join back into N₂O₄. The flask turns brown, then the colour holds steady. What are the molecules doing at that point?</p>
+</div>
+<div class="steps">
+<section class="step" aria-labelledby="predict-title" data-focus="flask">
+<h2 id="predict-title"><span class="n">01</span><span lang="zh">预测</span><span lang="en">Predict</span></h2>
+<form id="prediction-form">
+<fieldset>
+<legend><span lang="zh"><span data-ref="flask">瓶子</span>的颜色已经稳定了好几分钟。分子还在反应吗？</span><span lang="en">The <span data-ref="flask">flask’s</span> colour has held steady for minutes. Are molecules still reacting?</span></legend>
+<label class="choice"><input type="radio" name="prediction" value="stopped" required><span><span lang="zh">没有。反应已经结束，没有分子再转化。</span><span lang="en">No. The reaction is over; nothing converts any more.</span></span></label>
+<label class="choice"><input type="radio" name="prediction" value="forward"><span><span lang="zh">只剩一点点：偶尔还有 N₂O₄ 分解，但不会再结合回去。</span><span lang="en">Barely. A few N₂O₄ still split, but nothing joins back.</span></span></label>
+<label class="choice"><input type="radio" name="prediction" value="both"><span><span lang="zh">还在反应：N₂O₄ 一直在分解，NO₂ 一直在结合，两边速率相等。</span><span lang="en">Yes. N₂O₄ keeps splitting and NO₂ keeps joining, at equal rates.</span></span></label>
+</fieldset>
+<div class="controls"><button type="submit" class="primary"><span lang="zh">记下预测</span><span lang="en">Save my prediction</span></button></div>
+<p id="prediction-status" class="small" aria-live="polite"></p>
+</form>
+</section>
+<section class="step" aria-labelledby="try-title" data-focus="flask conc rates tag">
+<h2 id="try-title"><span class="n">02</span><span lang="zh">让烧瓶反应</span><span lang="en">Run the flask</span></h2>
+<p lang="zh">先让它跑到颜色稳定。然后给一部分 N₂O₄ 打上 ¹⁵N 标记：浓度不变，但你能追踪原子去了哪里。</p>
+<p lang="en">Run it until the colour is steady. Then tag some N₂O₄ with ¹⁵N: the concentrations don’t change, but you can follow where the atoms go.</p>
+<fieldset class="start-set">
+<legend><span lang="zh">烧瓶里一开始装的是</span><span lang="en">The flask starts with</span></legend>
+<label class="choice"><input type="radio" name="start" value="reactant" checked disabled><span><span lang="zh">只有 N₂O₄（40 mM，无色）</span><span lang="en">Only N₂O₄ (40 mM, colourless)</span></span></label>
+<label class="choice"><input type="radio" name="start" value="product" disabled><span><span lang="zh">只有 NO₂（80 mM，深棕色，氮原子总数相同）</span><span lang="en">Only NO₂ (80 mM, dark brown, same number of N atoms)</span></span></label>
+</fieldset>
+<div class="controls">
+<button id="run" class="primary" type="button" disabled></button>
+<button id="skip" type="button" disabled><span lang="zh">快进 10 秒</span><span lang="en">Skip 10 s</span></button>
+<button id="reset" type="button"><span lang="zh">重置</span><span lang="en">Reset lesson</span></button>
+</div>
+<label class="toggle"><input id="tag" type="checkbox" disabled><span lang="zh">把 25% 的 N₂O₄ 换成 ¹⁵N 标记的分子</span><span lang="en">Swap 25% of the N₂O₄ for ¹⁵N-tagged molecules</span></label>
+<p id="status" class="status" role="status"></p>
+</section>
+<section id="explanation" class="step" aria-labelledby="explain-title" hidden>
+<h2 id="explain-title"><span class="n">03</span><span lang="zh">解释：停住的是颜色，不是反应</span><span lang="en">Explain: the colour stops, the reaction doesn’t</span></h2>
+<p id="prediction-feedback" class="callout"></p>
+<div lang="zh">
+<p>颜色只取决于 [NO₂]。颜色稳定，说明 [NO₂] 不变，也就是<strong>每秒生成的 NO₂ 和每秒消耗的 NO₂ 一样多</strong>。两边都不是零。</p>
+<p><span data-ref="tag">标记实验</span>就是证据：浓度一点没变，¹⁵N 却从 N₂O₄ 跑进了 NO₂。如果反应真的停了，标记会永远留在 N₂O₄ 里。</p>
+<h3>为什么两个速率会自己变得相等</h3>
+<p><span data-ref="rates">分解速率</span> <code class="eq">r→ = k→[N₂O₄]</code>，结合速率 <code class="eq">r← = k←[NO₂]²</code>（两个 NO₂ 相撞才能结合，所以是平方）。一开始只有 N₂O₄，r← 为零；NO₂ 越积越多，r← 越来越大，r→ 越来越小，直到两者相等。令 r→ = r←，就得到</p>
+<p><code class="eq">K = k→ / k← = [NO₂]² / [N₂O₄]</code></p>
+<p>这就是平衡常数。它不是额外的定律，而是“两个速率相等”的另一种写法（古尔德贝格和瓦格在 1864 年提出的质量作用定律）。</p>
+<p>试试改从“只有 NO₂”开始：两条路最后停在同一组浓度上。平衡位置只由 K 和原子总数决定，跟从哪边出发无关。</p>
+</div>
+<div lang="en">
+<p>The colour depends only on [NO₂]. A steady colour means [NO₂] is constant: <strong>NO₂ is made exactly as fast as it is used up</strong>. Neither rate is zero.</p>
+<p>The <span data-ref="tag">tags</span> are the evidence. The concentrations never moved, yet ¹⁵N crossed from N₂O₄ into NO₂. If the reaction had stopped, every tag would have stayed in N₂O₄.</p>
+<h3>Why the two rates even out on their own</h3>
+<p><span data-ref="rates">Splitting</span> runs at <code class="eq">r→ = k→[N₂O₄]</code>; joining at <code class="eq">r← = k←[NO₂]²</code> (two NO₂ must collide, hence the square). At first there is no NO₂, so r← is zero. As NO₂ builds up, r← climbs and r→ falls until they meet. Set r→ = r← and you get</p>
+<p><code class="eq">K = k→ / k← = [NO₂]² / [N₂O₄]</code></p>
+<p>That is the equilibrium constant. It is not an extra law; it is “the two rates are equal” written another way (the law of mass action, Guldberg and Waage, 1864).</p>
+<p>Now start from “only NO₂”. Both runs settle on the same concentrations: the equilibrium depends on K and the total number of atoms, not on which side you start from.</p>
+</div>
+<ol class="look">
+<li data-focus="conc"><span lang="zh">先看浓度：两条曲线走平了，颜色就不再变。</span><span lang="en">Start with concentration: both curves flatten, so the colour stops changing.</span></li>
+<li data-focus="rates"><span lang="zh">再看速率：两条线在同一个高度汇合，都不是零。</span><span lang="en">Now the rates: the two lines meet at the same height, and neither is zero.</span></li>
+<li data-focus="flask"><span lang="zh">看烧瓶：闪光一直在出现，每一个都是一次分解或结合。</span><span lang="en">Look in the flask: flashes keep appearing, each one a split or a join.</span></li>
+<li data-focus="tag"><span lang="zh">看标记：浓度没动，¹⁵N 却进了 NO₂。</span><span lang="en">Look at the tag: the concentrations hold still, yet ¹⁵N moves into NO₂.</span></li>
+<li data-focus="quotient"><span lang="zh">最后看 Q：它停在 K 上，正是“两个速率相等”的另一种写法。</span><span lang="en">Finally Q: it settles at K, which is “the two rates are equal” written another way.</span></li>
+</ol>
+<label for="writing"><strong><span lang="zh">用你自己的话写：</span><span lang="en">In your own words:</span></strong></label>
+<textarea id="writing" data-i18n data-zh-placeholder="颜色不变，是因为……；但标记显示……" data-en-placeholder="The colour is constant because … but the tags show …" placeholder="The colour is constant because … but the tags show …"></textarea>
+</section>
+<section id="disturb" class="step" aria-labelledby="disturb-title" data-focus="rates conc quotient" hidden>
+<h2 id="disturb-title"><span class="n">04</span><span lang="zh">打破平衡</span><span lang="en">Disturb it</span></h2>
+<form id="disturb-form">
+<fieldset>
+<legend><span lang="zh">先预测：往平衡的烧瓶里再加 10 mM N₂O₄，哪个速率会<strong>立刻</strong>跳起来？</span><span lang="en">Predict first: you add 10 mM of N₂O₄ to the flask at equilibrium. Which rate jumps <strong>immediately</strong>?</span></legend>
+<label class="choice"><input type="radio" name="disturb" value="forward" required><span><span lang="zh">分解速率 r→</span><span lang="en">The splitting rate r→</span></span></label>
+<label class="choice"><input type="radio" name="disturb" value="backward"><span><span lang="zh">结合速率 r←</span><span lang="en">The joining rate r←</span></span></label>
+<label class="choice"><input type="radio" name="disturb" value="both"><span><span lang="zh">两个一起跳，保持相等</span><span lang="en">Both, staying equal</span></span></label>
+</fieldset>
+<div class="controls"><button type="submit"><span lang="zh">记下，然后加料</span><span lang="en">Save, then add it</span></button></div>
+</form>
+<div class="controls"><button id="add" type="button" disabled><span lang="zh">加入 10 mM N₂O₄</span><span lang="en">Add 10 mM N₂O₄</span></button></div>
+<p id="disturb-feedback" class="status" role="status"></p>
+<div class="range">
+<label for="temp"><span><span lang="zh">温度</span><span lang="en">Temperature</span></span><output id="temp-out" for="temp"></output></label>
+<input id="temp" type="range" min="0" max="60" step="1" value="25" disabled>
+</div>
+<div lang="zh">
+<p><strong>勒夏特列原理是速率的结果。</strong>加入 N₂O₄ 后 r→ 立刻变大，r← 要等 NO₂ 积累才跟上。于是净反应向右，直到 Q 回到 K。“平衡会抵消扰动”说的就是这件事（勒夏特列，1884）。</p>
+<p><strong>温度改的是 K 本身。</strong>N₂O₄ 分解要吸收约 57 kJ/mol，加热时 k→ 增长得远比 k← 快，所以 K = k→/k← 变大，热烧瓶更棕，冰水里几乎无色。</p>
+<p><strong>催化剂不改 K。</strong>它同时降低两个方向的能垒，k→ 和 k← 按同一倍数变大：到达平衡更快，平衡位置不变。</p>
+</div>
+<div lang="en">
+<p><strong>Le Chatelier’s principle falls out of the rates.</strong> Adding N₂O₄ raises r→ at once; r← only catches up as NO₂ builds. So the net reaction runs forward until Q is back at K. “Equilibrium counteracts a disturbance” describes exactly that (Le Chatelier, 1884).</p>
+<p><strong>Temperature changes K itself.</strong> Splitting N₂O₄ absorbs about 57 kJ/mol, so heating speeds up k→ far more than k←. K = k→/k← grows: the hot flask is browner, the iced one nearly colourless.</p>
+<p><strong>A catalyst leaves K alone.</strong> It lowers the barrier both ways, scaling k→ and k← by the same factor: equilibrium arrives sooner but in the same place.</p>
+</div>
+</section>
+<section id="practice" class="step" aria-labelledby="practice-title" hidden>
+<h2 id="practice-title"><span class="n">05</span><span lang="zh">独立练习</span><span lang="en">Independent practice</span></h2>
+<p lang="zh">这一步收起辅助：图上的曲线、标签和读数都会隐藏，控件也会锁住。只看题目里的数字作答。</p>
+<p lang="en">This step removes the supports: the plots, labels and readouts are hidden and the controls lock. Work from the numbers in each question.</p>
+<div class="controls"><button id="practice-start" class="primary" type="button"><span lang="zh">开始练习</span><span lang="en">Start practice</span></button></div>
+<div id="practice-body" hidden>
+<form id="p1" class="practice-q">
+<fieldset><legend id="p1-q"></legend>
+<div class="answer"><input id="p1-answer" type="text" inputmode="decimal" autocomplete="off" data-i18n data-zh-aria-label="逆反应速率（mM/s）" data-en-aria-label="Backward rate in mM/s" aria-label="Backward rate in mM/s"><span>mM/s</span><button type="submit"><span lang="zh">核对</span><span lang="en">Check</span></button></div>
+</fieldset>
+<p id="p1-feedback" class="status" role="status"></p>
+</form>
+<form id="p2" class="practice-q">
+<fieldset><legend><span lang="zh">25 °C 时 K = 4.6 mM。另一只烧瓶里 [N₂O₄] = 20 mM，[NO₂] = 12 mM。它的 Q 是多少？</span><span lang="en">At 25 °C, K = 4.6 mM. Another flask holds [N₂O₄] = 20 mM and [NO₂] = 12 mM. What is its Q?</span></legend>
+<div class="answer"><input id="p2-answer" type="text" inputmode="decimal" autocomplete="off" aria-label="Q (mM)" ><span>mM</span><button type="submit"><span lang="zh">核对</span><span lang="en">Check</span></button></div>
+</fieldset>
+<p id="p2-feedback" class="status" role="status"></p>
+</form>
+<form id="p3" class="practice-q">
+<fieldset><legend><span lang="zh">还是这只烧瓶（[N₂O₄] = 20 mM，[NO₂] = 12 mM，K = 4.6 mM）。接下来净反应往哪边走？</span><span lang="en">Same flask ([N₂O₄] = 20 mM, [NO₂] = 12 mM, K = 4.6 mM). Which way does the net reaction go next?</span></legend>
+<label class="choice"><input type="radio" name="p3" value="forward" required><span><span lang="zh">生成更多 NO₂，颜色变深</span><span lang="en">Toward NO₂: the colour deepens</span></span></label>
+<label class="choice"><input type="radio" name="p3" value="backward"><span><span lang="zh">生成更多 N₂O₄，颜色变浅</span><span lang="en">Toward N₂O₄: the colour fades</span></span></label>
+<label class="choice"><input type="radio" name="p3" value="none"><span><span lang="zh">不变，密封的烧瓶已经平衡了</span><span lang="en">No net change: a sealed flask is already at equilibrium</span></span></label>
+</fieldset>
+<div class="controls"><button type="submit"><span lang="zh">核对</span><span lang="en">Check</span></button></div>
+<p id="p3-feedback" class="status" role="status"></p>
+</form>
+<p id="practice-score" class="small" aria-live="polite"></p>
+<div class="controls"><button id="practice-end" type="button"><span lang="zh">恢复图上的辅助</span><span lang="en">Bring back the figure</span></button></div>
+</div>
+</section>
+<section id="transfer" class="step" aria-labelledby="transfer-title" hidden>
+<h2 id="transfer-title"><span class="n">06</span><span lang="zh">迁移：饱和食盐水</span><span lang="en">Transfer: a saturated salt solution</span></h2>
+<form id="transfer-form">
+<fieldset><legend><span lang="zh">一杯饱和食盐水，杯底有没溶完的盐晶体，放了一周，晶体质量一点没变。现在放进一粒用放射性钠标记的盐晶体。一天后，标记会在哪里？</span><span lang="en">A saturated salt solution has undissolved crystals at the bottom; their mass hasn’t changed in a week. You drop in one crystal made with radioactive sodium. A day later, where is the label?</span></legend>
+<label class="choice"><input type="radio" name="transfer" value="crystal" required><span><span lang="zh">还在那粒晶体里：溶液饱和了，不会再溶解。</span><span lang="en">Still in that crystal: a saturated solution can’t dissolve any more.</span></span></label>
+<label class="choice"><input type="radio" name="transfer" value="spread"><span><span lang="zh">溶液里和其他晶体上都有了，但晶体总质量不变。</span><span lang="en">In the solution and on other crystals too, while the total crystal mass stays the same.</span></span></label>
+<label class="choice"><input type="radio" name="transfer" value="shrinks"><span><span lang="zh">进入了溶液，因为那粒晶体溶解变小了。</span><span lang="en">In the solution, because that crystal dissolved and shrank.</span></span></label>
+</fieldset>
+<div class="controls"><button type="submit"><span lang="zh">核对答案</span><span lang="en">Check my answer</span></button></div>
+<p id="transfer-feedback" class="status" role="status"></p>
+</form>
+</section>
+<section class="step limits" aria-labelledby="limits-title">
+<h2 id="limits-title"><span lang="zh">这个模型的适用范围</span><span lang="en">Where this model applies</span></h2>
+<div lang="zh">
+<p>时间被大大放慢了：真实的 N₂O₄ 在一眨眼间就到达平衡。速率常数的绝对值是为观看而选的，比值 K 才是真实的：25 °C 时 Kc ≈ 4.6 mM，ΔH ≈ +57.2 kJ/mol。温度依赖用范特霍夫方程计算，并把 ΔH 直接用于 Kc，这是近似。</p>
+<p>模型把 k← 当成与温度无关（NO₂ 结合几乎没有能垒），把气体当作理想、均匀的。瓶里画出的每个分子代表 0.5 mM；粒子的位置和谁跟谁反应是随机示意，反应次数跟着速率模型走，所以图和读数不会对不上。</p>
+<p>标记实验是示意：真实的同位素交换实验更常用于溶液和固体（比如迁移题里的盐），原理相同。</p>
+<p>历史：古尔德贝格和瓦格（1864）提出质量作用定律；勒夏特列（1884）总结了平衡对扰动的响应；德·海韦西把放射性同位素用作示踪剂，获 1943 年诺贝尔化学奖。</p>
+</div>
+<div lang="en">
+<p>Time is slowed down enormously: real N₂O₄ reaches equilibrium in the blink of an eye. The absolute rate constants were chosen for viewing; their ratio K is real: Kc ≈ 4.6 mM at 25 °C, ΔH ≈ +57.2 kJ/mol. Temperature dependence uses the van ’t Hoff equation with ΔH applied to Kc, an approximation.</p>
+<p>The model treats k← as temperature-independent (NO₂ recombination has almost no barrier) and the gas as ideal and well mixed. Each drawn molecule stands for 0.5 mM. Positions and which molecules react are a random illustration; the number of reactions follows the rate model, so the flask never disagrees with the readouts.</p>
+<p>The tagging run is illustrative. Real isotope-exchange experiments are more often done in solutions and solids (like the salt in the transfer question); the principle is the same.</p>
+<p>History: Guldberg and Waage proposed the law of mass action (1864); Le Chatelier described how equilibria respond to disturbance (1884); George de Hevesy’s use of radioactive isotopes as tracers earned the 1943 Nobel Prize in Chemistry.</p>
+</div>
+<p class="foot"><span lang="zh">离线可用。用 Tab 切换控件，方向键调节滑块。没有快捷键会干扰你的写作。</span><span lang="en">Works offline. Use Tab to reach controls and arrow keys on sliders. No keyboard shortcuts override your writing.</span></p>
+</section>
+</div>
+</div>
+<section id="experiment" class="figure-pane" aria-labelledby="figure-title">
+<div class="stage">
+<svg id="figure" viewBox="0 0 920 470" role="img" aria-labelledby="figure-title figure-desc">
+<title id="figure-title" data-i18n data-zh="密封烧瓶中的 N₂O₄ 和 NO₂，以及浓度和速率随时间的变化" data-en="N₂O₄ and NO₂ in a sealed flask, with concentration and rate over time">N₂O₄ and NO₂ in a sealed flask, with concentration and rate over time</title>
+<desc id="figure-desc"></desc>
+<g id="scene"></g>
+</svg>
+</div>
+<ul class="key">
+<li data-ref="flask conc"><svg width="26" height="14" aria-hidden="true"><line x1="8" y1="7" x2="18" y2="7" stroke="var(--a-edge)" stroke-width="2.2"/><circle cx="8" cy="7" r="5" fill="var(--a-fill)" stroke="var(--a-edge)"/><circle cx="18" cy="7" r="5" fill="var(--a-fill)" stroke="var(--a-edge)"/></svg><span lang="zh">N₂O₄（无色）</span><span lang="en">N₂O₄ (colourless)</span></li>
+<li data-ref="flask conc"><svg width="14" height="14" aria-hidden="true"><circle cx="7" cy="7" r="5" fill="var(--b-fill)" stroke="var(--b-edge)"/></svg><span lang="zh">NO₂（红棕色）</span><span lang="en">NO₂ (brown)</span></li>
+<li data-ref="flask tag"><svg width="14" height="14" aria-hidden="true"><circle cx="7" cy="7" r="5" fill="var(--a-fill)" stroke="var(--a-edge)"/><circle cx="7" cy="7" r="2.2" fill="var(--tag)"/></svg><span lang="zh">¹⁵N 标记</span><span lang="en">¹⁵N tag</span></li>
+<li data-ref="flask"><svg width="18" height="18" aria-hidden="true"><circle cx="9" cy="9" r="7" fill="none" stroke="var(--flash)" stroke-width="2"/></svg><span lang="zh">刚发生的一次反应</span><span lang="en">A reaction just happened</span></li>
+</ul>
+<div class="readouts" data-i18n data-zh-aria-label="当前状态" data-en-aria-label="Current state" aria-label="Current state">
+<div class="readout" data-part="conc"><span class="k" data-ref="conc">[N₂O₄]</span><strong id="ro-a"></strong><span class="u">mM</span></div>
+<div class="readout" data-part="conc"><span class="k" data-ref="conc">[NO₂]</span><strong id="ro-b"></strong><span class="u">mM</span></div>
+<div class="readout" data-part="quotient" data-zh-label="反应商 Q，与平衡常数 K 比较" data-en-label="Reaction quotient Q, compared with K"><span class="k">Q = [NO₂]²/[N₂O₄]</span><strong id="ro-q"></strong><span class="u" id="ro-q-u"></span></div>
+<div class="readout" data-part="rates"><span class="k" data-ref="rates"><span lang="zh">分解 ⇄ 结合</span><span lang="en">Split ⇄ join</span></span><strong id="ro-rates"></strong><span class="u" id="ro-net"></span></div>
+<div class="readout" data-part="tag" data-zh-label="¹⁵N 标记分别在 N₂O₄ 和 NO₂ 里的占比" data-en-label="Share of the ¹⁵N tag in N₂O₄ and in NO₂"><span class="k" data-ref="tag"><span lang="zh">¹⁵N 占比 N₂O₄ · NO₂</span><span lang="en">¹⁵N share N₂O₄ · NO₂</span></span><strong id="ro-tag"></strong><span class="u" id="ro-tag-u"></span></div>
+</div>
+<p id="summary" class="fig-caption" aria-live="polite"></p>
+</section>
+</main>
+<script>
+'use strict';
+/* lesson-shell i18n v2: shared by every example page; keep identical across files.
+   Static copy: paired elements <span lang="zh">…</span><span lang="en">…</span> (CSS hides the other language).
+   Text-only nodes and attributes: data-i18n plus data-zh / data-en (textContent) or data-zh-<attr> / data-en-<attr>.
+   Dynamic copy: tr('中文', 'English'); say(el, () => tr(…)) re-renders the message when the language changes. */
+const I18N = (() => {
+  const KEY = 'tf-lang', LANGS = ['zh', 'en'];
+  const stored = (() => { try { return localStorage.getItem(KEY); } catch { return null; } })();
+  const param = new URLSearchParams(location.search).get('lang');
+  let lang = LANGS.includes(param) ? param : LANGS.includes(stored) ? stored : /^zh\b/i.test(navigator.language || '') ? 'zh' : 'en';
+  const listeners = [];
+  function apply() {
+    const root = document.documentElement;
+    root.lang = lang === 'zh' ? 'zh-CN' : 'en';
+    root.dataset.lang = lang;
+    for (const el of document.querySelectorAll('[data-i18n]')) {
+      for (const { name, value } of [...el.attributes]) {
+        if (name === 'data-' + lang) el.textContent = value;
+        else if (name.startsWith('data-' + lang + '-')) el.setAttribute(name.slice(lang.length + 6), value);
+      }
+    }
+    for (const button of document.querySelectorAll('[data-set-lang]')) button.setAttribute('aria-pressed', String(button.dataset.setLang === lang));
+    for (const link of document.querySelectorAll('a[data-keep-lang]')) {
+      const target = new URL(link.getAttribute('href').split('?')[0], location.href);
+      target.searchParams.set('lang', lang);
+      link.href = target.href;
+    }
+    listeners.forEach(fn => fn(lang));
+  }
+  document.addEventListener('click', event => {
+    const button = event.target.closest('[data-set-lang]');
+    if (!button || button.dataset.setLang === lang) return;
+    lang = button.dataset.setLang;
+    try { localStorage.setItem(KEY, lang); } catch {}
+    try { const here = new URL(location.href); here.searchParams.set('lang', lang); history.replaceState(history.state, '', here); } catch {}
+    apply();
+  });
+  return { get lang() { return lang; }, on(fn) { listeners.push(fn); }, apply };
+})();
+const tr = (zh, en) => I18N.lang === 'zh' ? zh : en;
+const spoken = new Map();
+function say(target, message) {
+  const el = typeof target === 'string' ? document.getElementById(target) : target;
+  spoken.set(el, message);
+  el.textContent = message ? message() : '';
+}
+I18N.on(() => spoken.forEach((message, el) => { el.textContent = message ? message() : ''; }));
+// On short screens the figure pane scrolls on its own; while more of it is below the fold, show a cue that scrolls it.
+(() => {
+  const pane = document.querySelector('.lesson > .figure-pane');
+  if (!pane) return;
+  const cue = document.createElement('div');
+  cue.className = 'pane-more';
+  cue.hidden = true;
+  cue.innerHTML = '<button type="button" tabindex="-1" aria-hidden="true"></button>';
+  const button = cue.firstChild;
+  const label = () => { button.textContent = tr('下方还有内容 ↓', 'More below ↓'); };
+  label();
+  I18N.on(label);
+  button.addEventListener('click', () => pane.scrollBy({ top: pane.clientHeight * 0.75, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' }));
+  pane.after(cue);
+  function update() {
+    const scrolls = getComputedStyle(pane).overflowY !== 'visible' && pane.scrollHeight > pane.clientHeight + 1;
+    cue.hidden = !(scrolls && pane.scrollHeight - pane.clientHeight - pane.scrollTop > 4);
+    if (scrolls) pane.tabIndex = 0; else pane.removeAttribute('tabindex');
+  }
+  const sizes = new ResizeObserver(update);
+  const watch = () => { sizes.disconnect(); sizes.observe(pane); for (const child of pane.children) sizes.observe(child); };
+  new MutationObserver(() => { watch(); update(); }).observe(pane, { childList: true });
+  pane.addEventListener('scroll', update, { passive: true });
+  addEventListener('resize', update);
+  watch();
+  update();
+})();
+/* Attention guide. Figure parts: [data-part="id"] inside #experiment (labels: data-zh-label / data-en-label).
+   Step focus: a panel .step or element with data-focus="id …" dims the other parts while it is the active step
+   (focused element first, else the first visible step crossing the reading line). Ordered highlights: ol.look > li[data-focus].
+   Dual coding: [data-ref="id …"] terms and legend items link to parts both ways. Nothing moves until the learner scrolls, hovers or clicks. */
+(() => {
+  const figure = document.getElementById('experiment');
+  if (!figure || !figure.querySelector('[data-part]')) return;
+  const panel = document.querySelector('.lesson > .panel');
+  const KEY = 'tf-focus-guide', ids = value => (value || '').split(/\s+/).filter(Boolean);
+  let guide = (() => { try { return localStorage.getItem(KEY) !== 'off'; } catch { return true; } })();
+  let stepIds = [], look = null, peek = null, pinned = null, activeStep = null;
+  const style = document.createElement('style');
+  document.head.append(style);
+  const bar = document.createElement('div');
+  bar.className = 'focus-bar';
+  bar.innerHTML = '<p class="focus-caption" aria-live="polite"></p><label class="focus-toggle"><input type="checkbox"><span></span></label>';
+  const caption = bar.firstChild, toggle = bar.querySelector('input'), toggleText = bar.querySelector('.focus-toggle span');
+  toggle.checked = guide;
+  figure.prepend(bar);
+  const tip = document.createElement('div');
+  tip.className = 'part-tip';
+  tip.hidden = true;
+  document.body.append(tip);
+  const fine = matchMedia('(hover: hover) and (pointer: fine)');
+  const sel = list => list.map(id => `[data-part~="${CSS.escape(id)}"]`).join(',');
+  function render() {
+    const hot = pinned || peek || (look && look.ids) || (guide ? stepIds : []);
+    const ring = !!(pinned || peek || look);
+    figure.classList.toggle('tf-ring', ring && hot.length > 0);
+    figure.toggleAttribute('data-focusing', hot.length > 0);
+    style.textContent = hot.length ? `#experiment [data-part]:not(${sel(hot)}){opacity:.24;filter:saturate(.35)}` : '';
+    for (const part of figure.querySelectorAll('[data-part]')) part.classList.toggle('tf-hot', ring && ids(part.dataset.part).some(id => hot.includes(id)));
+  }
+  // Re-rendered figures replace their children; keep the hot class on new parts.
+  new MutationObserver(() => { if (figure.classList.contains('tf-ring')) render(); }).observe(figure, { childList: true, subtree: true });
+  const visible = el => el.offsetParent !== null || el.getClientRects().length > 0;
+  const steps = () => [...document.querySelectorAll('.panel .step, .panel [data-focus]:not(ol.look *)')].filter(visible);
+  function pickStep() {
+    const scroller = panel && getComputedStyle(panel).overflowY !== 'visible' ? panel : null;
+    const box = scroller ? scroller.getBoundingClientRect() : { top: 0, bottom: innerHeight, height: innerHeight };
+    const line = box.top + box.height * 0.3, list = steps();
+    const inView = el => { const r = el.getBoundingClientRect(); return r.bottom > box.top && r.top < box.bottom; };
+    const focused = document.activeElement && list.filter(el => el.contains(document.activeElement)).pop();
+    if (focused && inView(focused)) return focused;
+    let found = null;
+    for (const el of list) { const r = el.getBoundingClientRect(); if (r.bottom > line && r.top < box.bottom && (!found || found.contains(el))) found = el; else if (found && !found.contains(el)) break; }
+    return found;
+  }
+  function update() {
+    const step = pickStep();
+    if (step !== activeStep) {
+      activeStep = step;
+      if (look && !(step && step.contains(look.list))) setLook(null);
+    }
+    const target = step && (step.matches('[data-focus]') ? step : null);
+    stepIds = target ? ids(target.dataset.focus) : [];
+    render();
+  }
+  let queued = false;
+  const schedule = () => { if (!queued) { queued = true; requestAnimationFrame(() => { queued = false; update(); }); } };
+  (panel || document).addEventListener('scroll', schedule, { passive: true });
+  addEventListener('scroll', schedule, { passive: true });
+  addEventListener('resize', schedule);
+  document.addEventListener('focusin', schedule);
+  new MutationObserver(schedule).observe(document.querySelector('.panel') || document.body, { attributes: true, attributeFilter: ['hidden'], subtree: true });
+  toggle.addEventListener('change', () => { guide = toggle.checked; try { localStorage.setItem(KEY, guide ? 'on' : 'off'); } catch {} render(); });
+  // Ordered highlights.
+  const lists = [...document.querySelectorAll('ol.look')];
+  function setLook(next) {
+    look = next;
+    for (const list of lists) {
+      const items = [...list.children];
+      items.forEach((li, i) => { if (next && next.list === list && next.index === i) li.setAttribute('aria-current', 'step'); else li.removeAttribute('aria-current'); });
+      for (const button of list.previousElementSibling.querySelectorAll('.look-num')) button.setAttribute('aria-pressed', String(!!next && next.list === list && Number(button.dataset.index) === next.index));
+    }
+    caption.textContent = '';
+    if (next) {
+      const n = document.createElement('span');
+      n.className = 'look-n';
+      n.textContent = `${next.index + 1}/${next.list.children.length}`;
+      const text = document.createElement('span');
+      text.append(...[...next.list.children[next.index].childNodes].map(node => node.cloneNode(true)));
+      caption.append(n, text);
+    }
+    render();
+  }
+  const go = (list, index) => setLook({ list, index, ids: ids(list.children[index].dataset.focus) });
+  for (const list of lists) {
+    const nav = document.createElement('div');
+    nav.className = 'look-nav';
+    const items = [...list.children];
+    items.forEach((li, i) => {
+      const b = document.createElement('button');
+      b.type = 'button'; b.className = 'look-num'; b.dataset.index = i; b.textContent = i + 1; b.setAttribute('aria-pressed', 'false');
+      b.addEventListener('click', () => go(list, i));
+      nav.append(b);
+      li.addEventListener('click', event => { if (!event.target.closest('a,button,input,[data-ref]')) go(list, i); });
+    });
+    const make = (cls, zh, en, fn) => { const b = document.createElement('button'); b.type = 'button'; b.className = cls; const label = () => { b.textContent = tr(zh, en); }; label(); I18N.on(label); b.addEventListener('click', fn); nav.append(b); };
+    const at = () => (look && look.list === list ? look.index : -1);
+    make('look-prev', '‹ 上一步', '‹ Prev', () => go(list, Math.max(0, at() - 1)));
+    make('look-next', '下一步 ›', 'Next ›', () => go(list, Math.min(items.length - 1, at() + 1)));
+    make('look-clear', '清除', 'Clear', () => setLook(null));
+    list.before(nav);
+  }
+  // Dual coding: terms ↔ parts.
+  const refs = () => document.querySelectorAll('[data-ref]');
+  for (const term of refs()) if (!term.matches('a,button,input,select,textarea,label,[tabindex]')) { term.tabIndex = 0; term.setAttribute('role', 'button'); term.setAttribute('aria-pressed', 'false'); }
+  const termOf = event => event.target.closest && event.target.closest('[data-ref]');
+  let pointer = 'mouse';
+  document.addEventListener('pointerdown', event => { pointer = event.pointerType; }, true);
+  document.addEventListener('pointerover', event => { const term = termOf(event); if (term && event.pointerType === 'mouse') { peek = ids(term.dataset.ref); render(); } });
+  document.addEventListener('pointerout', event => { const term = termOf(event); if (term && !term.contains(event.relatedTarget)) { peek = null; render(); } });
+  document.addEventListener('focusin', event => { const term = termOf(event); if (term) { peek = ids(term.dataset.ref); render(); } });
+  document.addEventListener('focusout', event => { if (termOf(event)) { peek = null; render(); } });
+  function pin(term) {
+    const next = ids(term.dataset.ref).join(' ');
+    pinned = pinned && pinned.join(' ') === next ? null : ids(next);
+    for (const other of refs()) if (other.getAttribute('role') === 'button') other.setAttribute('aria-pressed', String(!!pinned && other.dataset.ref === term.dataset.ref));
+    render();
+  }
+  document.addEventListener('click', event => { const term = termOf(event); if (term && term.getAttribute('role') === 'button' && pointer !== 'mouse') pin(term); });
+  document.addEventListener('keydown', event => {
+    const term = termOf(event);
+    if (term && term.getAttribute('role') === 'button' && (event.key === 'Enter' || event.key === ' ')) { event.preventDefault(); pin(term); }
+    if (event.key === 'Escape' && (look || pinned)) { pinned = null; for (const other of refs()) if (other.getAttribute('role') === 'button') other.setAttribute('aria-pressed', 'false'); setLook(null); }
+  });
+  function partLabel(part) { return part.getAttribute(`data-${I18N.lang}-label`); }
+  figure.addEventListener('pointermove', event => {
+    const part = event.target.closest && event.target.closest('[data-part]');
+    const label = part && partLabel(part);
+    for (const term of refs()) term.classList.toggle('tf-ref-on', !!part && ids(term.dataset.ref).some(id => ids(part.dataset.part).includes(id)));
+    if (!label || !fine.matches || event.pointerType !== 'mouse') { tip.hidden = true; return; }
+    tip.textContent = label;
+    tip.hidden = false;
+    const x = Math.min(event.clientX + 14, innerWidth - tip.offsetWidth - 8), y = event.clientY + 18 + tip.offsetHeight > innerHeight ? event.clientY - tip.offsetHeight - 12 : event.clientY + 18;
+    tip.style.left = x + 'px'; tip.style.top = y + 'px';
+  });
+  figure.addEventListener('pointerleave', () => { tip.hidden = true; for (const term of refs()) term.classList.remove('tf-ref-on'); });
+  const labels = () => { toggleText.textContent = tr('焦点引导', 'Focus guide'); };
+  labels();
+  I18N.on(() => { labels(); if (look) setLook(look); });
+  update();
+})();
+/* /lesson-shell */
+const $ = id => document.getElementById(id);
+
+// ---- Pure teaching model: N2O4 ⇌ 2 NO2, concentrations in mM, model time in s (slowed for viewing). ----
+const KB = 0.008;            // k← in mM⁻¹ s⁻¹, taken as temperature-independent
+const DH = 57200, RGAS = 8.314, K25 = 4.6;
+const S = 0.5;               // mM represented by one drawn molecule
+const START = { reactant: { A: 40, B: 0 }, product: { A: 0, B: 80 } };
+const Kof = T => K25 * Math.exp(-DH / RGAS * (1 / (T + 273.15) - 1 / 298.15));
+function derive(s) {
+  const K = Kof(s.T), kf = KB * K;
+  const rf = kf * s.A, rb = KB * s.B * s.B;
+  const Q = s.A > 1e-9 ? s.B * s.B / s.A : Infinity;
+  const n = 2 * s.A + s.B;
+  const eqB = (-K + Math.sqrt(K * K + 8 * K * n)) / 4, eqA = (n - eqB) / 2;
+  const relation = Q < K * 0.98 ? '<' : Q > K * 1.02 ? '>' : '=';
+  const atEq = Math.abs(rf - rb) <= 0.02 * Math.max(rf, rb) && rf > 0;
+  const fA = s.A > 1e-9 ? s.la / (2 * s.A) : 0, fB = s.B > 1e-9 ? s.lb / s.B : 0;
+  return { K, kf, rf, rb, net: rf - rb, Q, n, eqA, eqB, relation, atEq, fA, fB };
+}
+function rates(s) {
+  const { rf, rb, fA, fB } = derive(s);
+  const dla = 2 * rb * fB - 2 * rf * fA;
+  return { A: rb - rf, B: 2 * (rf - rb), la: dla, lb: -dla };
+}
+function advance(s, dt) {
+  let x = { ...s };
+  const steps = Math.max(1, Math.ceil(dt / 0.02)), h = dt / steps;
+  const add = (p, d, k) => ({ ...p, A: Math.max(0, p.A + d.A * k), B: Math.max(0, p.B + d.B * k), la: Math.max(0, p.la + d.la * k), lb: Math.max(0, p.lb + d.lb * k) });
+  for (let i = 0; i < steps; i++) {
+    const k1 = rates(x), k2 = rates(add(x, k1, h / 2)), k3 = rates(add(x, k2, h / 2)), k4 = rates(add(x, k3, h));
+    const d = { A: (k1.A + 2 * k2.A + 2 * k3.A + k4.A) / 6, B: (k1.B + 2 * k2.B + 2 * k3.B + k4.B) / 6, la: (k1.la + 2 * k2.la + 2 * k3.la + k4.la) / 6, lb: (k1.lb + 2 * k2.lb + 2 * k3.lb + k4.lb) / 6 };
+    x = add(x, d, h);
+  }
+  x.t = s.t + dt;
+  return x;
+}
+const initial = (start, T = 25) => ({ t: 0, T, A: START[start].A, B: START[start].B, la: 0, lb: 0 });
+function selfCheck() {
+  const near = (a, b, tol) => Math.abs(a - b) <= tol;
+  const ok = [];
+  ok.push(near(Kof(25), 4.6, 1e-9));
+  ok.push(Kof(60) > Kof(25) && Kof(0) < Kof(25));                      // endothermic: heating raises K
+  const r = advance(initial('reactant'), 120), p = advance(initial('product'), 120);
+  ok.push(near(r.A, p.A, 1e-3) && near(r.B, p.B, 1e-3));                 // same equilibrium from both sides
+  const d = derive(r);
+  ok.push(near(r.B, d.eqB, 1e-3) && near(d.Q, d.K, 1e-3 * d.K));         // integration agrees with closed form
+  ok.push(d.rf > 0.5 && near(d.rf, d.rb, 1e-4));                          // equal and nonzero
+  ok.push(near(2 * r.A + r.B, 80, 1e-6));                                 // N atoms conserved
+  const tagged = { ...r, la: 0.25 * 2 * r.A, lb: 0 }, later = advance(tagged, 120), dl = derive(later);
+  ok.push(near(later.la + later.lb, tagged.la, 1e-6) && near(dl.fA, dl.fB, 1e-3) && near(later.A, r.A, 1e-6));
+  const added = { ...r, A: r.A + 10 }, da = derive(added);
+  ok.push(da.relation === '<' && da.rf > d.rf * 1.2 && near(da.rb, d.rb, 1e-9));
+  if (ok.includes(false)) throw new Error('equilibrium model self-check failed: ' + ok.join(','));
+}
+selfCheck();
+
+// ---- Lesson state ----
+const PRACTICE_T = 40;
+const practiceCase = (() => {
+  const s = advance({ ...initial('reactant', PRACTICE_T) }, 200), d = derive(s);
+  return { A: s.A, B: s.B, rf: Math.round(d.rf * 10) / 10 };
+})();
+let sim, box, hist, marks, ui;
+const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+function rng(seed) { return () => { seed |= 0; seed = seed + 0x6D2B79F5 | 0; let t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+function freshUI() {
+  return { predicted: null, playing: false, revealed: false, tagged: false, tagT: null, disturbChoice: null, added: 0, beforeAdd: null,
+    practice: false, practiceDone: { p1: false, p2: false, p3: false }, transferDone: false, phase: '' };
+}
+function resetFlask(start) {
+  sim = initial(start, sim ? sim.T : 25);
+  hist = []; marks = [];
+  box = { mols: [], accF: 0, accB: 0, events: [], rand: rng(start === 'reactant' ? 7 : 11) };
+  syncBox(true);
+  record();
+}
+function resetLesson() {
+  stop();
+  ui = freshUI();
+  sim = null;
+  for (const f of ['prediction-form', 'disturb-form', 'transfer-form', 'p1', 'p2', 'p3']) $(f).reset();
+  document.querySelector('input[name=start][value=reactant]').checked = true;
+  $('temp').value = 25; $('writing').value = '';
+  $('tag').checked = false;
+  resetFlask('reactant');
+  for (const id of ['explanation', 'disturb', 'practice', 'transfer', 'practice-body']) $(id).hidden = true;
+  for (const id of ['prediction-status', 'status', 'disturb-feedback', 'p1-feedback', 'p2-feedback', 'p3-feedback', 'practice-score', 'transfer-feedback', 'prediction-feedback']) say($(id), null);
+  render();
+}
+
+// ---- Particle flask (view; event counts follow the rate model) ----
+function newMol(kind, x, y, tags) {
+  const r = box.rand, sp = kind === 'A' ? 0.05 : 0.08, a = r() * Math.PI * 2;
+  return { k: kind, x, y, vx: Math.cos(a) * sp, vy: Math.sin(a) * sp, rot: r() * Math.PI, t: tags, flash: -9 };
+}
+const count = k => box.mols.filter(m => m.k === k).length;
+function split(m, flash) {
+  const i = box.mols.indexOf(m); if (i < 0) return;
+  box.mols.splice(i, 1);
+  const dx = Math.cos(m.rot) * 0.014, dy = Math.sin(m.rot) * 0.014;
+  const a = newMol('B', clamp(m.x - dx), clamp(m.y - dy), m.t[0]), b = newMol('B', clamp(m.x + dx), clamp(m.y + dy), m.t[1]);
+  if (flash) a.flash = b.flash = sim.t;
+  box.mols.push(a, b);
+}
+function join(m1, flash) {
+  const pool = box.mols.filter(m => m.k === 'B' && m !== m1);
+  if (!pool.length) return;
+  let best = pool[0], bd = Infinity;
+  for (const m of pool) { const d = (m.x - m1.x) ** 2 + (m.y - m1.y) ** 2; if (d < bd) { bd = d; best = m; } }
+  box.mols = box.mols.filter(m => m !== m1 && m !== best);
+  const d = newMol('A', (m1.x + best.x) / 2, (m1.y + best.y) / 2, [m1.t, best.t]);
+  if (flash) d.flash = sim.t;
+  box.mols.push(d);
+}
+const clamp = v => Math.min(0.97, Math.max(0.03, v));
+const pick = arr => arr[Math.floor(box.rand() * arr.length)];
+function syncBox(fresh) {
+  const units = Math.round((2 * sim.A + sim.B) / S);
+  if (fresh) box.mols = [];
+  let haveUnits = 2 * count('A') + count('B');
+  while (haveUnits < units) { box.mols.push(newMol('A', 0.05 + box.rand() * 0.9, 0.05 + box.rand() * 0.9, [false, false])); haveUnits += 2; }
+  let nB = Math.round(sim.B / S);
+  if ((units - nB) % 2) nB += sim.B / S > nB ? 1 : -1;
+  nB = Math.max(0, Math.min(units, nB));
+  const nA = (units - nB) / 2;
+  while (count('A') > nA) split(pick(box.mols.filter(m => m.k === 'A')), false);
+  while (count('A') < nA && count('B') >= 2) join(pick(box.mols.filter(m => m.k === 'B')), false);
+  if (ui && ui.tagged) retag();
+}
+function retag() {
+  // Place tags so the drawn flask matches the model's tagged fractions.
+  const atomsA = box.mols.filter(m => m.k === 'A'), atomsB = box.mols.filter(m => m.k === 'B');
+  const d = derive(sim);
+  const want = (n, f) => Math.round(n * f);
+  const flagsA = shuffle(Array.from({ length: atomsA.length * 2 }, (_, i) => i < want(atomsA.length * 2, d.fA)));
+  atomsA.forEach((m, i) => { m.t = [flagsA[2 * i], flagsA[2 * i + 1]]; });
+  const flagsB = shuffle(Array.from({ length: atomsB.length }, (_, i) => i < want(atomsB.length, d.fB)));
+  atomsB.forEach((m, i) => { m.t = flagsB[i]; });
+}
+function shuffle(a) { for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(box.rand() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
+function untag() { for (const m of box.mols) m.t = m.k === 'A' ? [false, false] : false; }
+function moveBox(dt) {
+  const d = derive(sim);
+  box.accF += d.rf * dt / S; box.accB += d.rb * dt / S;
+  while (box.accF >= 1) { box.accF -= 1; const as = box.mols.filter(m => m.k === 'A'); if (as.length) { split(pick(as), true); box.events.push({ t: sim.t, k: 'f' }); } }
+  while (box.accB >= 1) { box.accB -= 1; const bs = box.mols.filter(m => m.k === 'B'); if (bs.length >= 2) { join(pick(bs), true); box.events.push({ t: sim.t, k: 'b' }); } }
+  box.events = box.events.filter(e => e.t > sim.t - 1);
+  if (Math.abs(count('A') * S - sim.A) > 2 * S) syncBox(false);
+  if (reduced.matches) return;
+  for (const m of box.mols) {
+    m.x += m.vx * dt; m.y += m.vy * dt;
+    if (m.x < 0.03 || m.x > 0.97) { m.vx *= -1; m.x = clamp(m.x); }
+    if (m.y < 0.03 || m.y > 0.97) { m.vy *= -1; m.y = clamp(m.y); }
+    m.rot += (m.k === 'A' ? 0.6 : 0) * dt;
+  }
+}
+
+// ---- Time ----
+function record() { const d = derive(sim); hist.push({ t: sim.t, A: sim.A, B: sim.B, rf: d.rf, rb: d.rb }); }
+function step(dt) {
+  const end = sim.t + dt;
+  while (sim.t < end - 1e-9) {
+    const h = Math.min(0.05, end - sim.t);
+    sim = advance(sim, h);
+    moveBox(h);
+    if (!hist.length || sim.t - hist[hist.length - 1].t >= 0.2 - 1e-9) record();
+  }
+  if (hist.length > 1600) hist = hist.slice(-1200);
+}
+let raf = 0, last = 0;
+function loop(now) {
+  const dt = Math.min(0.05, (now - last) / 1000); last = now;
+  step(dt); render(); raf = requestAnimationFrame(loop);
+}
+function play() { if (ui.playing) return; ui.playing = true; last = performance.now(); raf = requestAnimationFrame(loop); render(); }
+function stop() { cancelAnimationFrame(raf); if (ui) ui.playing = false; }
+function skip(seconds) {
+  // Integrate exactly, then redraw the flask to match.
+  const end = sim.t + seconds;
+  while (sim.t < end - 1e-9) { sim = advance(sim, Math.min(0.2, end - sim.t)); record(); }
+  box.accF = box.accB = 0; box.events = [];
+  syncBox(false);
+}
+function addMark(label) { marks.push({ t: sim.t, label }); }
+
+// ---- Formatting ----
+const f1 = v => (Math.round(v * 10) / 10).toFixed(1);
+const f2 = v => !isFinite(v) ? '∞' : v >= 100 ? v.toFixed(0) : v >= 10 ? v.toFixed(1) : v.toFixed(2);
+const pct = v => Math.round(v * 100) + '%';
+
+// ---- Figure ----
+function layout() {
+  const w = $('experiment').clientWidth;
+  return w < 620 ? 'narrow' : 'wide';
+}
+function plot(x, y, w, h, t0, t1, series, ymax, title, faded) {
+  let g = `<text class="t-title" x="${x}" y="${y - 10}">${title}</text>`;
+  g += `<line class="axis" x1="${x}" y1="${y + h}" x2="${x + w}" y2="${y + h}"/><line class="axis" x1="${x}" y1="${y}" x2="${x}" y2="${y + h}"/>`;
+  if (faded) return g + `<text class="placeholder" x="${x + w / 2}" y="${y + h / 2}" text-anchor="middle">${tr('练习中隐藏', 'Hidden during practice')}</text>`;
+  for (const f of [0.5, 1]) g += `<line class="grid" x1="${x}" y1="${y + h - f * h}" x2="${x + w}" y2="${y + h - f * h}"/><text x="${x - 6}" y="${y + h - f * h + 4}" text-anchor="end">${f2(ymax * f)}</text>`;
+  g += `<text x="${x - 6}" y="${y + h + 4}" text-anchor="end">0</text>`;
+  const X = t => x + (t - t0) / (t1 - t0) * w, Y = v => y + h - Math.min(1, v / ymax) * h;
+  for (const m of marks) if (m.t >= t0) g += `<line class="mark" x1="${X(m.t)}" y1="${y}" x2="${X(m.t)}" y2="${y + h}"/>`;
+  const pts = hist.filter(p => p.t >= t0);
+  for (const s of series) {
+    if (pts.length > 1) g += `<path class="${s.cls}" d="${pts.map((p, i) => (i ? 'L' : 'M') + X(p.t).toFixed(1) + ' ' + Y(p[s.key]).toFixed(1)).join('')}"/>`;
+    const lastP = pts[pts.length - 1];
+    if (lastP) g += `<text x="${Math.min(X(lastP.t) + 6, x + w + 6)}" y="${Y(lastP[s.key]) + 4 + (s.dy || 0)}" style="fill:var(${s.color});font-weight:600">${s.label}</text>`;
+  }
+  g += `<text x="${x + w}" y="${y + h + 16}" text-anchor="end">${tr('时间', 'time')} ${f1(t1)} s</text>`;
+  return g;
+}
+function flask(x, y, size, mols, B, faded) {
+  const tint = 0.55 * (1 - Math.exp(-B / 45));
+  let g = `<rect class="flask" x="${x}" y="${y}" width="${size}" height="${size}" rx="18"/>`;
+  g += `<rect x="${x + 1}" y="${y + 1}" width="${size - 2}" height="${size - 2}" rx="17" style="fill:rgba(var(--gas),${tint.toFixed(3)})"/>`;
+  const P = v => (v * (size - 24) + 12);
+  for (const m of mols) {
+    const cx = x + P(m.x), cy = y + P(m.y);
+    if (m.k === 'A') {
+      const dx = Math.cos(m.rot) * 4.6, dy = Math.sin(m.rot) * 4.6;
+      g += `<line class="bond" x1="${(cx - dx).toFixed(1)}" y1="${(cy - dy).toFixed(1)}" x2="${(cx + dx).toFixed(1)}" y2="${(cy + dy).toFixed(1)}"/>`;
+      g += `<circle class="ma" cx="${(cx - dx).toFixed(1)}" cy="${(cy - dy).toFixed(1)}" r="5"/><circle class="ma" cx="${(cx + dx).toFixed(1)}" cy="${(cy + dy).toFixed(1)}" r="5"/>`;
+      if (!faded && m.t[0]) g += `<circle class="tagdot" cx="${(cx - dx).toFixed(1)}" cy="${(cy - dy).toFixed(1)}" r="2.3"/>`;
+      if (!faded && m.t[1]) g += `<circle class="tagdot" cx="${(cx + dx).toFixed(1)}" cy="${(cy + dy).toFixed(1)}" r="2.3"/>`;
+    } else {
+      g += `<circle class="mb" cx="${cx.toFixed(1)}" cy="${cy.toFixed(1)}" r="5"/>`;
+      if (!faded && m.t) g += `<circle class="tagdot" cx="${cx.toFixed(1)}" cy="${cy.toFixed(1)}" r="2.3"/>`;
+    }
+    const age = sim ? sim.t - m.flash : 9;
+    if (!faded && age >= 0 && age < 0.8) g += `<circle class="flash" cx="${cx.toFixed(1)}" cy="${cy.toFixed(1)}" r="${(10 + (reduced.matches ? 0 : age * 8)).toFixed(1)}" style="opacity:${(1 - age / 0.8).toFixed(2)}"/>`;
+  }
+  return g;
+}
+let practiceMols = null;
+function practiceFlask() {
+  // A fixed sample for the practice cases, with no tags or flashes.
+  const unsolved = !ui.practiceDone.p1 ? 'p1' : 'p2';
+  if (practiceMols && practiceMols.which === unsolved) return practiceMols;
+  const c = unsolved === 'p1' ? practiceCase : { A: 20, B: 12 };
+  const r = rng(unsolved === 'p1' ? 3 : 5), out = [];
+  for (let i = 0; i < Math.round(c.A / S); i++) out.push({ k: 'A', x: 0.04 + r() * 0.92, y: 0.04 + r() * 0.92, rot: r() * Math.PI, t: [false, false], flash: -9 });
+  for (let i = 0; i < Math.round(c.B / S); i++) out.push({ k: 'B', x: 0.04 + r() * 0.92, y: 0.04 + r() * 0.92, t: false, flash: -9 });
+  practiceMols = { which: unsolved, mols: out, B: c.B };
+  return practiceMols;
+}
+function drawFigure() {
+  const L = layout(), svg = $('figure'), faded = ui.practice;
+  const d = derive(sim);
+  const t1 = Math.max(30, sim.t), t0 = Math.max(0, t1 - 60);
+  const ymaxC = Math.max(80, Math.ceil(Math.max(...hist.map(p => Math.max(p.A, p.B)), 0) / 10) * 10);
+  const ymaxR = Math.max(1, Math.max(...hist.filter(p => p.t >= t0).map(p => Math.max(p.rf, p.rb)), 0) * 1.15);
+  const cSeries = [{ key: 'A', cls: 'la', label: 'N₂O₄', color: '--plot-a', dy: -2 }, { key: 'B', cls: 'lb', label: 'NO₂', color: '--plot-b', dy: 10 }];
+  const rSeries = [{ key: 'rf', cls: 'lf', label: tr('分解', 'split'), color: '--ink', dy: -4 }, { key: 'rb', cls: 'lr', label: tr('结合', 'join'), color: '--accent', dy: 10 }];
+  const p = faded ? practiceFlask() : null;
+  const mols = faded ? p.mols : box.mols, gasB = faded ? p.B : sim.B;
+  const fwd = box.events.filter(e => e.k === 'f').length, back = box.events.filter(e => e.k === 'b').length;
+  const head = faded ? tr('练习用烧瓶', 'Practice flask') : `${tr('密封烧瓶', 'Sealed flask')} · ${sim.T} °C · t = ${f1(sim.t)} s`;
+  const counter = faded ? '' : ui.playing
+    ? `${tr('上一秒', 'Last second')}: ${fwd} ${tr('次分解', 'split')} · ${back} ${tr('次结合', 'joined')}`
+    : `${tr('按模型每秒', 'Per second, by the model')}: ${f1(d.rf / S)} ${tr('次分解', 'split')} · ${f1(d.rb / S)} ${tr('次结合', 'joined')}`;
+  const FL = `<g data-part="flask" data-zh-label="烧瓶：每个分子和刚发生的反应" data-en-label="Flask: every molecule and each reaction as it happens">`;
+  const CP = `<g data-part="conc" data-zh-label="浓度随时间的变化" data-en-label="Concentration over time">`, RP = `<g data-part="rates" data-zh-label="分解速率和结合速率" data-en-label="Splitting rate and joining rate">`;
+  let g = '';
+  if (L === 'wide') {
+    svg.setAttribute('viewBox', '0 0 920 470');
+    g += `<text class="t-title" x="20" y="22">${head}</text>`;
+    g += FL + flask(20, 34, 400, mols, gasB, faded) + `<text class="t-big" x="20" y="458">${counter}</text></g>`;
+    g += CP + plot(500, 52, 340, 150, t0, t1, cSeries, ymaxC, tr('浓度 (mM)', 'Concentration (mM)'), faded) + '</g>';
+    g += RP + plot(500, 282, 340, 150, t0, t1, rSeries, ymaxR, tr('速率 (mM/s)', 'Rate (mM/s)'), faded) + '</g>';
+  } else {
+    svg.setAttribute('viewBox', '0 0 460 760');
+    g += `<text class="t-title" x="10" y="22">${head}</text>`;
+    g += FL + flask(10, 34, 440, mols, gasB, faded) + `<text class="t-big" x="10" y="496">${counter}</text></g>`;
+    g += CP + plot(52, 540, 330, 70, t0, t1, cSeries, ymaxC, tr('浓度 (mM)', 'Concentration (mM)'), faded) + '</g>';
+    g += RP + plot(52, 668, 330, 70, t0, t1, rSeries, ymaxR, tr('速率 (mM/s)', 'Rate (mM/s)'), faded) + '</g>';
+  }
+  $('scene').innerHTML = g;
+  $('experiment').toggleAttribute('data-faded', faded);
+}
+
+// ---- Render ----
+let lastSummary = '', lastSummaryT = 0;
+function render() {
+  const d = derive(sim), faded = ui.practice;
+  drawFigure();
+  const hide = v => faded ? '—' : v;
+  $('ro-a').textContent = hide(f1(sim.A));
+  $('ro-b').textContent = hide(f1(sim.B));
+  $('ro-q').textContent = hide(f2(d.Q));
+  $('ro-q-u').textContent = faded ? '' : `${d.relation} K (${f2(d.K)} mM)`;
+  $('ro-rates').textContent = hide(`${f2(d.rf)} ⇄ ${f2(d.rb)}`);
+  $('ro-net').textContent = faded ? '' : tr(`净 ${f2(Math.abs(d.net))} mM/s ${d.net > 0.005 ? '→' : d.net < -0.005 ? '←' : ''}`, `net ${f2(Math.abs(d.net))} mM/s ${d.net > 0.005 ? '→' : d.net < -0.005 ? '←' : ''}`).trim();
+  $('ro-tag').textContent = faded ? '—' : ui.tagged ? `${pct(d.fA)} · ${pct(d.fB)}` : '—';
+  $('ro-tag-u').textContent = faded ? '' : ui.tagged ? tr('同位素交换中', 'tracer exchanging') : tr('尚未标记', 'not tagged yet');
+  $('temp-out').textContent = `${$('temp').value} °C · K = ${f2(Kof(+$('temp').value))} mM`;
+  const locked = !ui.predicted || ui.practice;
+  for (const el of document.querySelectorAll('input[name=start]')) el.disabled = locked;
+  $('run').disabled = locked; $('skip').disabled = locked; $('tag').disabled = locked;
+  $('add').disabled = locked || !ui.disturbChoice || !ui.revealed;
+  $('temp').disabled = locked || !ui.revealed;
+  $('run').textContent = ui.playing ? tr('暂停', 'Pause') : tr('开始反应', 'Run');
+  $('practice-start').hidden = ui.practice;
+  updateStatus(d);
+  checkReveal(d);
+  const summary = faded ? tr('练习模式：图上的曲线、读数和标签已隐藏。', 'Practice mode: plots, readouts and labels are hidden.')
+    : tr(`${sim.T} °C，[N₂O₄] ${f1(sim.A)} mM，[NO₂] ${f1(sim.B)} mM。Q ${d.relation} K。分解 ${f2(d.rf)}、结合 ${f2(d.rb)} mM/s。`,
+      `${sim.T} °C. [N₂O₄] ${f1(sim.A)} mM, [NO₂] ${f1(sim.B)} mM. Q ${d.relation} K. Splitting ${f2(d.rf)}, joining ${f2(d.rb)} mM/s.`)
+      + (ui.tagged ? tr(` ¹⁵N 占比：N₂O₄ ${pct(d.fA)}，NO₂ ${pct(d.fB)}。`, ` ¹⁵N share: N₂O₄ ${pct(d.fA)}, NO₂ ${pct(d.fB)}.`) : '');
+  $('figure-desc').textContent = summary;
+  // The caption is announced only while paused; during a run it refreshes quietly every 1.5 s of model time.
+  $('summary').setAttribute('aria-live', ui.playing ? 'off' : 'polite');
+  if (summary !== lastSummary && (!ui.playing || sim.t - lastSummaryT >= 1.5 || sim.t < lastSummaryT)) { $('summary').textContent = summary; lastSummary = summary; lastSummaryT = sim.t; }
+}
+function updateStatus(d) {
+  let phase;
+  if (!ui.predicted) phase = 'wait';
+  else if (ui.practice) phase = 'practice';
+  else if (sim.t === 0 && !ui.playing) phase = 'ready';
+  else if (d.atEq) phase = ui.tagged ? (d.fB >= 0.1 ? 'eq-tag-seen' : 'eq-tag') : 'eq';
+  else phase = d.net > 0 ? 'forward' : 'backward';
+  if (phase === ui.phase) return;
+  ui.phase = phase;
+  const msg = {
+    wait: () => tr('先做出预测，再开始反应。', 'Make a prediction first, then run the flask.'),
+    practice: () => tr('练习中：控件已锁住。', 'Practising: the controls are locked.'),
+    ready: () => tr('按“开始反应”，或快进 10 秒。', 'Press Run, or skip 10 s.'),
+    forward: () => tr('净反应向右：N₂O₄ 分解得比结合得快，瓶子在变棕。', 'Net forward: N₂O₄ splits faster than it re-forms, so the flask is browning.'),
+    backward: () => tr('净反应向左：NO₂ 结合得比 N₂O₄ 分解得快，瓶子在变浅。', 'Net backward: NO₂ joins faster than N₂O₄ splits, so the flask is fading.'),
+    eq: () => tr('颜色稳定了。看右下的速率图和瓶里的闪光：真的什么都没发生吗？试试打上标记。', 'The colour is steady. Check the rate plot and the flashes in the flask: is nothing happening? Try tagging.'),
+    'eq-tag': () => tr('浓度没变。盯住 NO₂ 里的 ¹⁵N 占比。', 'Concentrations are fixed. Watch the ¹⁵N share in NO₂.'),
+    'eq-tag-seen': () => tr('浓度一点没变，¹⁵N 却进入了 NO₂：两个方向一直在反应。', 'Concentrations never moved, yet ¹⁵N reached NO₂: both directions keep running.'),
+  }[phase];
+  say($('status'), msg);
+}
+function checkReveal(d) {
+  if (ui.revealed || !ui.predicted) return;
+  if (!(d.atEq && ui.tagged && d.fB >= 0.1)) return;
+  ui.revealed = true;
+  for (const id of ['explanation', 'disturb', 'practice', 'transfer']) $(id).hidden = false;
+  const p = ui.predicted;
+  say($('prediction-feedback'), () => ({
+    stopped: tr('你预测反应已经停了。颜色停住是真的，反应没有停：分解和结合每秒都在发生，只是数量相等。', 'You predicted the reaction had stopped. The colour did stop; the reaction did not. Splitting and joining both happen every second, in equal numbers.'),
+    forward: tr('你预测只剩少量分解。如果只有分解，NO₂ 会一直增加，颜色会一直变深。颜色稳定，说明结合在以同样的速率抵消它。', 'You predicted only a trickle of splitting. With splitting alone, NO₂ would keep rising and the colour would keep deepening. A steady colour means joining cancels it at the same rate.'),
+    both: tr('你预测得对：两边速率相等，都不为零。下面看看为什么它们会自己相等。', 'You predicted it: the two rates are equal and neither is zero. Below is why they even out on their own.'),
+  })[p]);
+}
+
+// ---- Events ----
+$('prediction-form').addEventListener('submit', e => {
+  e.preventDefault();
+  const v = new FormData(e.target).get('prediction'); if (!v) return;
+  ui.predicted = v;
+  say($('prediction-status'), () => tr('已记下。现在让烧瓶反应。', 'Saved. Now run the flask.'));
+  render();
+});
+for (const el of document.querySelectorAll('input[name=start]')) el.addEventListener('change', () => {
+  stop(); ui.tagged = false; $('tag').checked = false; resetFlask(el.value); render();
+});
+$('run').addEventListener('click', () => { if (ui.playing) { stop(); render(); } else play(); });
+$('skip').addEventListener('click', () => { skip(10); render(); });
+$('tag').addEventListener('change', () => {
+  ui.tagged = $('tag').checked;
+  if (ui.tagged) {
+    sim = { ...sim, la: 0.25 * 2 * sim.A, lb: 0 }; ui.tagT = sim.t; addMark('tag');
+    // Tag whole molecules: a quarter of the N2O4 becomes ¹⁵N2O4.
+    untag(); const as = shuffle(box.mols.filter(m => m.k === 'A'));
+    as.slice(0, Math.round(as.length * 0.25)).forEach(m => { m.t = [true, true]; });
+  } else { sim = { ...sim, la: 0, lb: 0 }; untag(); }
+  render();
+});
+$('disturb-form').addEventListener('submit', e => {
+  e.preventDefault();
+  const v = new FormData(e.target).get('disturb'); if (!v) return;
+  ui.disturbChoice = v;
+  say($('disturb-feedback'), () => tr('已记下。现在加料，盯住速率图。', 'Saved. Now add it and watch the rate plot.'));
+  render(); $('add').focus();
+});
+$('add').addEventListener('click', () => {
+  const before = derive(sim);
+  sim = { ...sim, A: sim.A + 10 }; addMark('add'); syncBox(false);
+  ui.added += 1;
+  const after = derive(sim);
+  const right = ui.disturbChoice === 'forward';
+  say($('disturb-feedback'), () => (right ? tr('预测对了。', 'You predicted it. ') : tr('再看一眼。', 'Look again. '))
+    + tr(`分解速率立刻从 ${f2(before.rf)} 跳到 ${f2(after.rf)} mM/s，结合速率还是 ${f2(after.rb)}：它只看 [NO₂]，要等 NO₂ 积累才会上升。现在 Q < K，净反应向右。`,
+      `Splitting jumped from ${f2(before.rf)} to ${f2(after.rf)} mM/s at once; joining stayed at ${f2(after.rb)} because it depends only on [NO₂] and rises only as NO₂ builds. Q < K now, so the net reaction runs forward.`));
+  render();
+});
+$('temp').addEventListener('input', () => { sim = { ...sim, T: +$('temp').value }; addMark('temp'); render(); });
+$('practice-start').addEventListener('click', () => {
+  stop(); ui.practice = true; practiceMols = null; ui.phase = '';
+  $('practice-body').hidden = false;
+  render(); $('p1-answer').focus();
+});
+$('practice-end').addEventListener('click', () => { ui.practice = false; ui.phase = ''; render(); });
+const num = id => { const v = parseFloat(String($(id).value).replace(',', '.')); return Number.isFinite(v) ? v : null; };
+const close = (v, target, rel = 0.03) => v !== null && Math.abs(v - target) <= Math.max(rel * Math.abs(target), 1e-9);
+function mark(id, ok, msg) { $(id).classList.toggle('ok', ok); say($(id), msg); }
+function practiceScore() {
+  const n = Object.values(ui.practiceDone).filter(Boolean).length;
+  say($('practice-score'), () => tr(`已答对 ${n} / 3。`, `${n} of 3 correct.`));
+  practiceMols = null; render();
+}
+function p1Question() {
+  return tr(`另一只烧瓶在 ${PRACTICE_T} °C 下已经平衡，它的分解速率是 ${practiceCase.rf.toFixed(1)} mM/s。结合速率是多少？`,
+    `Another flask has reached equilibrium at ${PRACTICE_T} °C. Its splitting rate is ${practiceCase.rf.toFixed(1)} mM/s. What is its joining rate?`);
+}
+say($('p1-q'), p1Question);
+$('p1').addEventListener('submit', e => {
+  e.preventDefault();
+  const v = num('p1-answer'), r = practiceCase.rf;
+  let ok = false, msg;
+  if (v === null) msg = () => tr('请输入一个数。', 'Enter a number.');
+  else if (close(v, r)) { ok = true; msg = () => tr(`正确：${r.toFixed(1)} mM/s。平衡时两个速率相等，而且都不为零。`, `Correct: ${r.toFixed(1)} mM/s. At equilibrium the two rates are equal, and neither is zero.`); }
+  else if (v === 0) msg = () => tr('这是“平衡时反应停了”的想法。颜色不变说明两个速率相等，不是都为零；分解还在以这个速率进行，结合也必须一样快。', 'That is the “reaction has stopped” idea. A constant colour means the rates are equal, not zero; splitting is still running at this rate, so joining must match it.');
+  else if (close(v, 2 * r) || close(v, r / 2)) msg = () => tr('你可能把 NO₂ 的生成速率当成了结合速率。每次分解产生 2 个 NO₂，但这里两个速率都按“每秒多少 N₂O₄”计，平衡时正好相等。', 'You may have counted NO₂ instead of N₂O₄. Each split makes two NO₂, but both rates here count N₂O₄ per second, and at equilibrium they are equal.');
+  else msg = () => tr('平衡时浓度不再变化，所以结合必须正好抵消分解。', 'At equilibrium nothing changes on balance, so joining must exactly cancel splitting.');
+  ui.practiceDone.p1 = ui.practiceDone.p1 || ok; mark('p1-feedback', ok, msg); practiceScore();
+});
+$('p2').addEventListener('submit', e => {
+  e.preventDefault();
+  const v = num('p2-answer'), q = 12 * 12 / 20;
+  let ok = false, msg;
+  if (v === null) msg = () => tr('请输入一个数。', 'Enter a number.');
+  else if (close(v, q)) { ok = true; msg = () => tr('正确：Q = 12² / 20 = 7.2 mM。', 'Correct: Q = 12² / 20 = 7.2 mM.'); }
+  else if (close(v, 12 / 20)) msg = () => tr('你用的是 [NO₂]，没有平方。方程里 2 NO₂ 的系数 2 变成了指数：[NO₂]²。', 'You used [NO₂] without squaring it. The 2 in “2 NO₂” becomes an exponent: [NO₂]².');
+  else if (close(v, 2 * 12 / 20)) msg = () => tr('你把系数 2 乘上去了。系数要变成指数：Q = [NO₂]² / [N₂O₄]。', 'You multiplied by the coefficient. It becomes an exponent instead: Q = [NO₂]² / [N₂O₄].');
+  else if (close(v, 20 / 144) || close(v, 20 / 12)) msg = () => tr('分子分母倒过来了。Q 是生成物比反应物：[NO₂]² / [N₂O₄]。', 'Upside down. Q puts products over reactants: [NO₂]² / [N₂O₄].');
+  else if (close(v, 4.6)) msg = () => tr('4.6 是 K，平衡时的值。Q 要用这只烧瓶此刻的浓度来算。', '4.6 is K, the equilibrium value. Q uses this flask’s concentrations right now.');
+  else msg = () => tr('Q = [NO₂]² / [N₂O₄]，代入这只烧瓶的浓度。', 'Q = [NO₂]² / [N₂O₄], using this flask’s concentrations.');
+  ui.practiceDone.p2 = ui.practiceDone.p2 || ok; mark('p2-feedback', ok, msg); practiceScore();
+});
+$('p3').addEventListener('submit', e => {
+  e.preventDefault();
+  const v = new FormData(e.target).get('p3'); if (!v) return;
+  const ok = v === 'backward';
+  const msg = {
+    backward: () => tr('正确：Q = 7.2 > K = 4.6，NO₂ 比平衡允许的多。结合速率（∝[NO₂]²）大于分解速率，直到 Q 降到 K。', 'Correct: Q = 7.2 > K = 4.6, so there is more NO₂ than equilibrium allows. Joining (∝[NO₂]²) outruns splitting until Q falls to K.'),
+    forward: () => tr('方向反了。Q > K 表示生成物已经太多，净反应要往反应物那边走，颜色变浅。', 'Backwards. Q > K means there is already too much product, so the net reaction runs toward reactants and the colour fades.'),
+    none: () => tr('密封不等于平衡。只有 Q = K 时才平衡；这里 Q ≠ K，所以还会变。', 'Sealed is not the same as at equilibrium. Only Q = K is equilibrium; here Q ≠ K, so it will still change.'),
+  }[v];
+  ui.practiceDone.p3 = ui.practiceDone.p3 || ok; mark('p3-feedback', ok, msg); practiceScore();
+});
+$('transfer-form').addEventListener('submit', e => {
+  e.preventDefault();
+  const v = new FormData(e.target).get('transfer'); if (!v) return;
+  const ok = v === 'spread';
+  const msg = {
+    spread: () => tr('正确。饱和溶液里溶解和结晶一直在以相同速率进行：标记的钠离子溶进去，别的离子结晶出来，晶体总质量不变。这和烧瓶里的 ¹⁵N 是同一个机制。', 'Correct. In a saturated solution, dissolving and crystallising keep running at equal rates: tagged sodium ions dissolve while others crystallise, so the total crystal mass stays put. Same mechanism as the ¹⁵N in the flask.'),
+    crystal: () => tr('这是“平衡时什么都停了”的想法。饱和只说明溶解和结晶一样快，不是都停了，所以标记会扩散出去。', 'That is the “everything stops at equilibrium” idea. Saturation means dissolving and crystallising are equally fast, not stopped, so the label spreads.'),
+    shrinks: () => tr('标记确实会进入溶液，但那粒晶体不会净变小：溶掉多少，就有同样多的离子在晶体上重新长回来。', 'The label does reach the solution, but the crystal does not shrink overall: as many ions crystallise back as dissolve.'),
+  }[v];
+  ui.transferDone = true; mark('transfer-feedback', ok, msg);
+});
+$('reset').addEventListener('click', resetLesson);
+addEventListener('resize', () => { if (ui) render(); });
+I18N.on(() => { if (!ui) return; ui.phase = ''; render(); });
+resetLesson();
+I18N.apply();
+</script>
+</body>
+</html>

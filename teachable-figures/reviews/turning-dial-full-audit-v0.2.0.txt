@@ -1,0 +1,73 @@
+Working directory: /tmp/teachable-turning-fix/examples/turning-dial
+Command: node build.mjs --audit --verbose
+
+clearance: 0 problems
+clearance apart: 0 problems
+terminals: 0 ends not on a mount
+loose ends: 0
+screen folds: 0
+support: 0 unsupported solids · 0 hanging tubes · 0 sunk pairs
+depth order: 0 problems
+through in mid-flight: 0 pairs
+self-overlap: 0 chunks whose outline crosses itself on screen
+wobble: 0 smoothed profiles whose slope turns between its ends
+saddles off their host apart: 0
+stand-in shapes: 0 items whose recorded shape covers too little of what it draws
+crowding: 0 pairs where a bend or end touches another line on screen
+audit · 7 tubes · 89 solids · 13 items · 1 depth states · 20 overlaps · 20 order rules · 0.6 s
+audit passed
+  … separation
+  … order scan sweep: 4800 states
+  … order scan sweep: 667 random states, 1716 event states
+  … order scan tap: 241 states
+  … order scan tap: 667 random states, 92 event states
+  … order scan break: 133 states
+  … order scan break: 667 random states, 32 event states
+  … rigid
+  … swept
+  … posed
+  … folds, self, crowding, endon
+  … coverage
+  … continuity
+  … continuity dial: 7200 steps of 0.05° over 74 parts
+  … continuity wheel: 7200 steps of 0.05° over 2 parts
+  … continuity pawl: 160 steps of 0.05° over 2 parts
+  … continuity f2.mcp: 440 steps of 0.05° over 3 parts
+  … continuity f2.pip: 280 steps of 0.05° over 4 parts
+  … continuity f2.dip: 180 steps of 0.05° over 1 parts
+  … continuity tap: 241 frames over 89 parts
+  … continuity break: 133 frames over 89 parts
+  … depth oracle
+separation: 0
+unseparated: 0
+cycles: 0
+forced: 0
+swaps: 0
+layers: 0
+rigid: 0
+swept: 0
+posed: 0
+folds: 0
+self: 0
+crowding: 0
+endon: 0
+coverage: 0
+depth: 0
+continuity: 0
+worst tone step 0.25 · worst birth 1.12 px² · worst dot α step 0.010 · worst faded α step 0.031 · merges 0 · outline motion over bound 0.000 px · halving 0 of 800
+order changes: 920 states with swaps · 9015 order states · 3254 posed states · 1105 planes (tightest margin -0.028) · depth oracle 72 states, 20058 overlapping pairs
+  sweep at 105.600: 484 pairs reorder (hand.f3.socket.cover / cable.red:0; hand.f3.socket.cover / cable.red:1; hand.f3.socket.cover / cable.red:2; hand.f3.socket.cover / cable.red:3)
+  sweep at 96.000: 477 pairs reorder (hand.f3.k0+ / cable.red:0; hand.f3.k0+ / cable.red:1; hand.f3.k0+ / cable.red:2; hand.f3.k0+ / cable.red:3)
+  break at 0.450: 456 pairs reorder (hand.f3.socket.cover / cable.red:0; hand.f3.socket.cover / cable.red:1; hand.f3.socket.cover / cable.red:2; hand.f3.socket.cover / cable.red:3)
+  sweep at 310.200: 274 pairs reorder (dial.hub / hand.f1.p1; dial.hub / hand.f1.k0-; dial.hub / hand.f1.k0+; dial.hub / hand.f1.k1+)
+  sweep at 670.200: 274 pairs reorder (dial.hub / hand.f1.p1; dial.hub / hand.f1.k0-; dial.hub / hand.f1.k0+; dial.hub / hand.f1.k1+)
+  sweep at 1030.200: 274 pairs reorder (dial.hub / hand.f1.p1; dial.hub / hand.f1.k0-; dial.hub / hand.f1.k0+; dial.hub / hand.f1.k1+)
+  sweep at 1390.200: 274 pairs reorder (dial.hub / hand.f1.p1; dial.hub / hand.f1.k0-; dial.hub / hand.f1.k0+; dial.hub / hand.f1.k1+)
+  sweep at 130.200: 241 pairs reorder (hand.f3.junction / hand.thumb.knuckle; hand.f3.junction / hand.thumb.cone; hand.f3.junction / hand.thumb.link; hand.f3.k0- / hand.thumb.knuckle)
+  sweep at 490.200: 225 pairs reorder (hand.f3.junction / hand.thumb.knuckle; hand.f3.junction / hand.thumb.cone; hand.f3.junction / hand.thumb.link; hand.f3.k0- / hand.thumb.knuckle)
+  sweep at 850.200: 225 pairs reorder (hand.f3.junction / hand.thumb.knuckle; hand.f3.junction / hand.thumb.cone; hand.f3.junction / hand.thumb.link; hand.f3.k0- / hand.thumb.knuckle)
+turn audit · 443.46 s
+turn audit passed
+wrote turning-dial.html · 660 KB · 89 parts · lock: 1 planes, 1 dynamic · dial: 2 planes, 1 dynamic · hand: 1102 planes, 3 dynamic · build 0.7 s
+
+Exit status: 0

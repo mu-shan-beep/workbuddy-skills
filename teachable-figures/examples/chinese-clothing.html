@@ -1,0 +1,538 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title data-i18n data-zh="看懂一件明代曳撒袍" data-en="Reading one Ming-dynasty yesa robe">Reading one Ming-dynasty yesa robe</title>
+<style>
+/* lesson-shell v2: shared by every example page; keep identical across files */
+:root{color-scheme:light dark;--bar:56px;--bg:#f7f6f2;--surface:#fff;--stage:#eeece6;--ink:#141618;--text:#2a2e31;--muted:#61676c;--faint:#8b9196;--line:#e4e1d9;--line-strong:#cbc7bd;--accent:#d9480f;--accent-soft:#fcebe2;--focus:#d9480f;--ok:#1d7a4c;--sans:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Noto Sans SC","Microsoft YaHei",sans-serif;--mono:ui-monospace,"SF Mono",SFMono-Regular,Menlo,Consolas,monospace}
+@media(prefers-color-scheme:dark){:root{--bg:#111315;--surface:#181b1e;--stage:#0b0d0f;--ink:#f3f4f2;--text:#dadedc;--muted:#a1a7ab;--faint:#7a8085;--line:#272b2f;--line-strong:#3b4045;--accent:#ff7a45;--accent-soft:#2b1a11;--focus:#ff7a45;--ok:#4cc38a}}
+*{box-sizing:border-box}html{-webkit-text-size-adjust:100%}body{margin:0;background:var(--bg);color:var(--text);font:15.5px/1.6 var(--sans);-webkit-font-smoothing:antialiased}
+[hidden]{display:none!important}html[data-lang=zh] [lang=en],html[data-lang=en] [lang=zh]{display:none!important}
+:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+.skip{position:absolute;left:12px;top:-80px;z-index:30;background:var(--surface);color:var(--ink);padding:8px 12px;border-radius:8px}.skip:focus{top:10px}
+.bar{position:sticky;top:0;z-index:20;height:var(--bar);display:flex;align-items:center;gap:14px;padding:0 16px 0 20px;background:color-mix(in srgb,var(--bg) 90%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.bar .back{display:inline-flex;align-items:center;gap:6px;min-height:40px;color:var(--muted);text-decoration:none;font-size:14px;white-space:nowrap}.bar .back:hover{color:var(--ink)}
+.bar .crumb{min-width:0;font:500 12px/1.2 var(--mono);color:var(--faint);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lang-switch{margin-left:auto;flex:none;display:inline-flex;padding:3px;border:1px solid var(--line);border-radius:999px;background:var(--surface)}
+.lang-switch button{appearance:none;border:0;background:none;cursor:pointer;font:600 12px/1 var(--sans);min-height:30px;min-width:40px;padding:0 11px;border-radius:999px;color:var(--muted)}
+.lang-switch button[aria-pressed=true]{background:var(--ink);color:var(--bg)}
+.lesson{display:flex;flex-direction:column}.panel{display:contents}
+.intro{order:0;padding:28px 20px 6px}
+.figure-pane{order:1;margin:14px 12px 4px;padding:12px;background:var(--stage);border-radius:16px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.steps{order:2;padding:0 20px 40px}
+.stage{position:relative;min-height:0;display:grid;place-items:center}.stage>svg,.stage>canvas{display:block;width:100%;height:auto}
+.fig-caption{margin:0;font-size:12.5px;line-height:1.5;color:var(--muted)}
+.readouts{display:grid;grid-template-columns:repeat(auto-fit,minmax(104px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.readout{background:var(--surface);padding:9px 13px;min-width:0}
+.readout .k{display:block;font:500 12px/1.35 var(--sans);color:var(--muted)}
+.readout strong{display:block;font:650 21px/1.3 var(--sans);font-variant-numeric:tabular-nums;color:var(--ink);letter-spacing:-.01em;overflow-wrap:anywhere}
+.readout .u{display:block;font-size:12px;line-height:1.35;color:var(--faint)}
+.meta{display:flex;flex-wrap:wrap;gap:4px 10px;margin:0 0 14px;padding:0;list-style:none;font:500 12.5px/1.4 var(--sans);color:var(--muted)}.meta li+li::before{content:"/";margin-right:10px;color:var(--line-strong)}
+h1{margin:0 0 12px;font-size:clamp(25px,2.5vw,33px);line-height:1.18;letter-spacing:-.025em;font-weight:700;color:var(--ink);text-wrap:balance}
+.lead{margin:0;color:var(--muted)}
+.step{padding:26px 0 22px;border-top:1px solid var(--line)}.intro+.steps .step:first-child,.steps>.step:first-child{border-top:0}
+.step>h2{display:flex;align-items:center;gap:10px;margin:0 0 12px;font-size:17px;line-height:1.3;letter-spacing:-.01em;color:var(--ink)}
+.step>h2 .n{flex:none;font:600 11px/1 var(--mono);color:var(--accent);border:1px solid currentColor;border-radius:6px;padding:4px 6px}
+h3{margin:20px 0 6px;font-size:14.5px;color:var(--ink)}p{margin:0 0 12px}strong{color:var(--ink)}
+.small{font-size:13.5px;color:var(--muted)}
+fieldset{border:0;padding:0;margin:0;min-width:0}legend{padding:0;margin:0 0 12px;font-weight:600;color:var(--ink)}
+label.choice{display:flex;gap:10px;align-items:flex-start;padding:10px 13px;margin-bottom:8px;border:1px solid var(--line);border-radius:10px;background:var(--surface);cursor:pointer;transition:border-color .12s,box-shadow .12s}
+label.choice:hover{border-color:var(--line-strong)}label.choice:has(input:checked){border-color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink)}label.choice:has(input:disabled){cursor:default}
+label.choice input{flex:none;margin:4px 0 0}input{accent-color:var(--ink)}input[type=radio],input[type=checkbox]{width:17px;height:17px}
+button,select{font:500 14px/1.2 var(--sans);color:var(--ink);background:var(--surface);border:1px solid var(--line-strong);border-radius:10px;padding:0 16px;min-height:42px;cursor:pointer}
+button:hover:not(:disabled),select:hover:not(:disabled){border-color:var(--ink)}button.primary{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+button:disabled,select:disabled{opacity:.45;cursor:not-allowed}
+.controls{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:14px 0}
+.toggle{display:flex;align-items:center;gap:10px;min-height:42px;font-weight:500;color:var(--ink);cursor:pointer}
+.range{margin:16px 0 8px}.range label{display:flex;justify-content:space-between;gap:12px;font-weight:500;color:var(--ink)}.range output{font:500 13px/1.6 var(--mono);color:var(--muted)}
+input[type=range]{width:100%;min-height:32px;margin:4px 0}
+.status{min-height:1.6em;margin:12px 0;padding:10px 12px;border-radius:10px;background:var(--bg);font-size:14px}
+.callout{margin:14px 0;padding:2px 0 2px 14px;border-left:3px solid var(--accent)}
+textarea{display:block;width:100%;min-height:90px;margin-top:8px;padding:10px 12px;font:inherit;color:var(--text);background:var(--bg);border:1px solid var(--line-strong);border-radius:10px;resize:vertical}
+table{border-collapse:collapse;width:100%;margin-top:14px;font-size:14px}th,td{text-align:left;padding:9px 6px;border-bottom:1px solid var(--line);vertical-align:top}th:first-child,td:first-child{padding-left:0}caption{text-align:left;font-weight:600;color:var(--ink);margin-bottom:4px}
+.limits{color:var(--muted);font-size:14px}
+.pane-more{display:none}
+.foot{margin-top:8px;padding-top:16px;border-top:1px solid var(--line);font-size:12.5px;color:var(--faint)}
+/* attention: figure parts [data-part], step focus [data-focus], ordered highlights ol.look, dual-coding terms [data-ref] */
+#experiment [data-part]{transition:opacity .28s ease,filter .28s ease,box-shadow .2s ease}
+#experiment.tf-ring [data-part].tf-hot:not(svg *){box-shadow:0 0 0 2px var(--accent),0 0 0 7px color-mix(in srgb,var(--accent) 18%,transparent);border-radius:10px}
+#experiment.tf-ring svg [data-part].tf-hot{filter:drop-shadow(0 0 1px var(--accent)) drop-shadow(0 0 5px color-mix(in srgb,var(--accent) 40%,transparent))}
+.focus-bar{display:flex;align-items:center;gap:12px;min-height:30px;margin:-4px 0 -2px}
+.focus-caption{flex:1;min-width:0;margin:0;font-size:13px;line-height:1.4;color:var(--ink)}.focus-caption:empty{visibility:hidden}
+.focus-caption .look-n{display:inline-grid;place-items:center;min-width:20px;height:20px;margin-right:8px;padding:0 5px;border-radius:999px;background:var(--accent);color:#fff;font:700 11px/1 var(--sans);vertical-align:1px}
+.focus-toggle{flex:none;display:inline-flex;align-items:center;gap:7px;min-height:30px;font-size:12.5px;color:var(--muted);cursor:pointer;white-space:nowrap}.focus-toggle input{width:15px;height:15px;margin:0}
+ol.look{margin:12px 0 8px;padding:0;list-style:none;counter-reset:look}
+ol.look>li{counter-increment:look;position:relative;margin:0 0 6px;padding:8px 10px 8px 38px;border:1px solid var(--line);border-radius:10px;cursor:pointer;color:var(--muted);transition:border-color .15s,background .15s}
+ol.look>li::before{content:counter(look);position:absolute;left:10px;top:9px;display:grid;place-items:center;width:20px;height:20px;border-radius:999px;border:1px solid var(--line-strong);font:650 11px/1 var(--sans);color:var(--muted)}
+ol.look>li:hover{border-color:var(--line-strong)}ol.look>li[aria-current=step]{border-color:var(--accent);background:var(--accent-soft);color:var(--ink)}ol.look>li[aria-current=step]::before{background:var(--accent);border-color:var(--accent);color:#fff}
+.look-nav{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:0 0 14px}.look-nav button{min-height:34px;padding:0 11px;font-size:13px}.look-nav .look-num{min-width:34px;padding:0}.look-nav .look-num[aria-pressed=true]{background:var(--accent);border-color:var(--accent);color:#fff}
+[data-ref]:not(a,button,input,select,label){text-decoration:underline dotted color-mix(in srgb,var(--accent) 70%,transparent);text-decoration-thickness:1.5px;text-underline-offset:3px;cursor:help;border-radius:4px}
+[data-ref].tf-ref-on{background:var(--accent-soft);box-shadow:0 0 0 2px var(--accent-soft);color:var(--ink)}[data-ref][aria-pressed=true]{background:var(--accent-soft);box-shadow:0 0 0 1px var(--accent)}
+.part-tip{position:fixed;z-index:40;pointer-events:none;max-width:240px;padding:5px 9px;border-radius:8px;background:var(--ink);color:var(--bg);font:500 12.5px/1.35 var(--sans);box-shadow:0 4px 14px rgb(0 0 0/.18)}
+@media(min-width:960px) and (min-height:560px){
+.lesson{display:grid;grid-template-columns:minmax(0,1fr) clamp(380px,35vw,500px);height:calc(100dvh - var(--bar))}
+.panel{display:block;grid-column:2;grid-row:1;overflow-y:auto;overscroll-behavior:contain;background:var(--surface);border-left:1px solid var(--line)}
+.figure-pane{grid-column:1;grid-row:1;margin:0;border-radius:0;padding:24px 28px;min-height:0}
+.figure-pane{overflow-y:auto;overscroll-behavior:contain}.figure-pane>*{flex-shrink:0}
+.figure-pane .stage{flex:1}.figure-pane .stage>svg,.figure-pane .stage>canvas{height:100%;max-height:100%}
+.pane-more{display:flex;grid-column:1;grid-row:1;align-self:end;position:relative;z-index:2;justify-content:center;align-items:flex-end;height:76px;padding-bottom:14px;pointer-events:none;background:linear-gradient(color-mix(in srgb,var(--stage) 0%,transparent),var(--stage) 72%)}
+.pane-more button{pointer-events:auto;min-height:32px;padding:0 14px;border-radius:999px;font-size:12.5px;box-shadow:0 2px 10px rgb(0 0 0/.12)}
+.intro{padding:32px 32px 6px}.steps{padding:0 32px 48px}
+.bar{padding:0 20px 0 24px}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+/* /lesson-shell */
+:root{--cloth:#af7750;--under:#d9b787;--seam:#553925}
+@media(prefers-color-scheme:dark){:root{--cloth:#b57c50;--under:#dbb67e;--seam:#39281c}}
+.stage text{font:550 16px var(--sans);fill:var(--ink)}.stage .annotation{font-size:12px;fill:var(--muted)}
+.garment{fill:url(#silk);stroke:#573b28;stroke-width:1.2;stroke-linejoin:round}.edge{fill:none;stroke:#593a27;stroke-width:9;stroke-linejoin:round}.pleat{fill:none;stroke:#563923;stroke-width:1.2}.stitch{fill:none;stroke:#e6c591;stroke-width:.7;stroke-dasharray:1 2;opacity:.7}.fold-line{fill:none;stroke:#52351f;stroke-width:.8;opacity:.7}
+.part{opacity:.3;transition:opacity .2s}.part.active{opacity:1}
+#fold-caption{margin:0;padding:10px 14px;border-radius:12px;background:var(--surface);border:1px solid var(--line);font-size:15px;line-height:1.6}#fold-caption strong{display:block}#fold-caption .sub{display:block;font:500 12.5px/1.5 var(--sans);color:var(--muted)}
+#result{margin:0;font-size:14px}
+.legend{display:flex;flex-wrap:wrap;gap:6px 16px;margin:0;padding:0;list-style:none;font-size:13px;color:var(--muted)}.legend li{display:flex;align-items:center;gap:6px;border-radius:6px}.legend i{width:12px;height:12px;border-radius:3px;flex:none}
+.field{display:block;margin:4px 0 6px;font-weight:500;color:var(--ink)}select{width:100%}
+details{margin:6px 0 16px}summary{cursor:pointer;min-height:40px;padding:8px 0;font-weight:600;color:var(--ink)}
+.limits a{color:var(--ink)}
+@media(min-width:960px) and (min-height:560px){#fold-caption{font-size:14px}}
+</style>
+</head>
+<body>
+<a class="skip" href="#experiment"><span lang="zh">跳到操作区</span><span lang="en">Skip to experiment</span></a>
+<header class="bar">
+<a class="back" href="index.html" data-keep-lang>← <span lang="zh">全部示例</span><span lang="en">All examples</span></a>
+<span class="crumb">chinese-clothing.html</span>
+<div class="lang-switch" role="group" aria-label="语言 / Language"><button type="button" data-set-lang="zh" aria-pressed="false">中文</button><button type="button" data-set-lang="en" aria-pressed="true">EN</button></div>
+</header>
+<main class="lesson">
+<div class="panel">
+<div class="intro">
+<ul class="meta"><li><span lang="zh">历史</span><span lang="en">History</span></li><li><span lang="zh">服饰结构</span><span lang="en">Garment structure</span></li><li><span lang="zh">约 3 分钟</span><span lang="en">~3 min</span></li></ul>
+<h1><span lang="zh">看懂一件明代曳撒袍</span><span lang="en">Reading one Ming-dynasty yesa robe</span></h1>
+<p class="lead" lang="zh">观察衣襟怎样交叠，再拆开视图看腰下的褶。我们只讨论中国丝绸博物馆所藏的一件明代曳撒袍，不把它当成所有古代服饰的标准。</p>
+<p class="lead" lang="en">See how the front panels overlap, then pull the view apart to inspect the pleats below the waist. We discuss only one Ming-dynasty <i>yesa</i> robe held by the China National Silk Museum, not a standard for all historical dress.</p>
+</div>
+<div class="steps">
+<section class="step" aria-labelledby="predict-title" data-focus="outer sides">
+<h2 id="predict-title"><span class="n">01</span><span lang="zh">先预测</span><span lang="en">Predict</span></h2>
+<form id="prediction-form">
+<fieldset>
+<legend><span lang="zh">把示意图中<span data-ref="outer">最外面的交叠衣襟</span>掀开，会先露出什么？</span><span lang="en">In the diagram, if you lift <span data-ref="outer">the outermost overlapping front panel</span>, what appears first?</span></legend>
+<label class="choice"><input type="radio" name="prediction" value="skin" required><span lang="zh">胸前完全敞开，没有另一片衣襟。</span><span lang="en">The chest is fully open; there is no second front panel.</span></label>
+<label class="choice"><input type="radio" name="prediction" value="under"><span lang="zh">原来被盖住的另一片衣襟。</span><span lang="en">Another front panel that was covered.</span></label>
+</fieldset>
+<div class="controls"><button type="submit" class="primary"><span lang="zh">记下预测</span><span lang="en">Save my prediction</span></button></div>
+<p id="prediction-status" class="small" role="status"></p>
+</form>
+</section>
+<section class="step" aria-labelledby="try-title">
+<h2 id="try-title"><span class="n">02</span><span lang="zh">动手观察</span><span lang="en">Inspect</span></h2>
+<p lang="zh">先勾选「掀开外襟」，比较前后；再用分解滑杆观察上身与腰下部分。<span data-ref="sides">右、左都以穿衣者为准</span>。</p>
+<p lang="en">First tick “Lift the outer front panel” and compare. Then use the exploded-view slider to look at the upper body and the part below the waist. <span data-ref="sides">Right and left always mean the wearer's.</span></p>
+<label class="toggle"><input id="open" type="checkbox"><span lang="zh">掀开外襟</span><span lang="en">Lift the outer front panel</span></label>
+<div class="range">
+<label for="explode"><span><span lang="zh">分解视图</span><span lang="en">Exploded view</span></span><output id="spread" for="explode">0%</output></label>
+<input id="explode" type="range" min="0" max="100" step="25" value="0" aria-describedby="explode-help">
+<p id="explode-help" class="small"><span lang="zh">方向键每次移动 25%。这只是检查视图，不模拟布料受力或真实拆衣。剖面夸大厚度，便于看清折返。</span><span lang="en">Arrow keys move 25% at a time. This is only an inspection view; it does not simulate fabric forces or taking the robe apart. The section exaggerates thickness so the fold-back is visible.</span></p>
+</div>
+<label class="toggle"><input id="fold-inspect" type="checkbox" checked><span lang="zh">显示褶裥剖面</span><span lang="en">Show the pleat cross-section</span></label>
+<label class="field" for="part"><span lang="zh">检查部位</span><span lang="en">Inspect a part</span></label>
+<select id="part"><option value="all" data-i18n data-zh="整件袍" data-en="Whole robe">Whole robe</option><option value="collar" data-i18n data-zh="交叠衣襟" data-en="Overlapping front panels">Overlapping front panels</option><option value="sleeves" data-i18n data-zh="上身与双袖" data-en="Upper body and sleeves">Upper body and sleeves</option><option value="pleats" data-i18n data-zh="腰下褶裥" data-en="Pleats below the waist">Pleats below the waist</option></select>
+<div class="callout"><h3 id="part-title"></h3><p id="part-description" class="small"></p></div>
+<div class="controls"><button type="button" id="reset"><span lang="zh">重置整课</span><span lang="en">Reset lesson</span></button></div>
+<p id="run-status" class="status" role="status"></p>
+</section>
+<section class="step" aria-labelledby="explain-title">
+<h2 id="explain-title"><span class="n">03</span><span lang="zh">解释观察</span><span lang="en">Explain</span></h2>
+<p id="feedback" class="callout"></p>
+<details id="explanation"><summary><span lang="zh">衣襟的内外与袍身的上下</span><span lang="en">Inner and outer panels, upper and lower body</span></summary>
+<div lang="zh"><p>右衽指<span data-ref="outer">左前襟</span>向穿衣者右侧掩合，覆盖<span data-ref="inner">右前襟</span>。正面观看时，<span data-ref="sides">穿衣者的右侧在你的左边</span>。「右」不是观看者的右。</p><p>图中外襟移开后，内襟才显露。浅色只帮助辨认被遮挡部分，不代表另一件内衣。分解图把同一件袍的上身、腰下袍身拉开，不能据此说它们是两件独立衣服。</p></div>
+<div lang="en"><p>Closing to the right (<i>youren</i>) means the <span data-ref="outer">left front panel</span> wraps toward the wearer's right side and covers the <span data-ref="inner">right front panel</span>. Seen from the front, <span data-ref="sides">the wearer's right is on your left</span>. “Right” is not the viewer's right.</p><p>In the figure, the inner panel shows only after the outer panel moves aside. The light color just helps you pick out the hidden part; it is not a separate undergarment. The exploded view pulls apart the upper body and the lower body of the same robe; it does not mean they are two separate garments.</p></div>
+<ol class="look">
+<li data-focus="sides"><span lang="zh">先看顶上的标注：左右以穿衣者为准，穿衣者的右侧在你的左边。</span><span lang="en">Start with the labels at the top: left and right are the wearer's, so the wearer's right is on your left.</span></li>
+<li data-focus="outer"><span lang="zh">再看外襟：左前襟斜着掩向穿衣者右侧，这就是“右衽”。</span><span lang="en">Then the outer panel: the left front wraps across toward the wearer's right. That is “closing to the right”.</span></li>
+<li data-focus="inner"><span lang="zh">看内襟：右前襟被盖在下面，只有掀开外襟才看得见。</span><span lang="en">Now the inner panel: the right front sits underneath and shows only when the outer panel is lifted.</span></li>
+<li data-focus="body lower"><span lang="zh">看上下两部分：分解图把同一件袍拉开，空隙不代表两件衣服。</span><span lang="en">Look at the upper and lower parts: the exploded view pulls one robe apart; the gap does not make it two garments.</span></li>
+<li data-focus="fold"><span lang="zh">最后看剖面：一段布来回折返，就成了腰下的褶。</span><span lang="en">Finally the section: one length of cloth folding back and forth makes the pleats below the waist.</span></li>
+</ol>
+</details>
+<label for="writing"><strong><span lang="zh">用自己的话解释</span><span lang="en">Explain in your own words</span></strong></label>
+<p class="small"><span lang="zh">「掀开外襟后，我看见了___。图上的左右以___为准。分解图的空隙表示___，不表示___。」</span><span lang="en">“After lifting the outer panel I saw ___. Left and right in the figure follow ___. The gap in the exploded view means ___, not ___.”</span></p>
+<textarea id="writing" data-i18n data-zh-placeholder="仅在本页保留，不上传。" data-en-placeholder="Stays on this page only; not uploaded."></textarea>
+<h3><span lang="zh">迁移问题</span><span lang="en">Transfer question</span></h3>
+<form id="transfer-form">
+<fieldset><legend><span lang="zh">如果给同一张正面图做水平镜像，却不改「穿衣者右侧」的标注，会发生什么？</span><span lang="en">If the same front view is mirrored horizontally but the “wearer's right” label stays unchanged, what happens?</span></legend>
+<label class="choice"><input type="radio" name="transfer" value="same" required><span lang="zh">结构解释完全不受影响。</span><span lang="en">The structural explanation is unaffected.</span></label>
+<label class="choice"><input type="radio" name="transfer" value="wrong"><span lang="zh">衣襟左右关系被翻转，标注会误导读者。</span><span lang="en">The panels' left–right overlap flips, so the label misleads readers.</span></label>
+</fieldset>
+<div class="controls"><button type="submit"><span lang="zh">核对答案</span><span lang="en">Check my answer</span></button></div>
+<p id="transfer-feedback" class="status" role="status"></p>
+</form>
+</section>
+<section class="step limits" aria-labelledby="limits-title">
+<h2 id="limits-title"><span lang="zh">证据与示意边界</span><span lang="en">Evidence and schematic limits</span></h2>
+<div lang="zh">
+<p>馆藏原件名为「明代曲水如意云纹暗花缎曳撒袍」。中国丝绸博物馆将它定为明代，记载为褐色丝质，长 108 厘米、宽 49 厘米、通袖长 214 厘米。馆方说明它采用交领右衽、平直双袖，腰下有褶，呈裙状。</p>
+<p><a href="https://www.chinasilkmuseum.com/zggd/info_21.aspx?itemid=1900">查看中国丝绸博物馆原件记录</a>。上述形制、材质和尺寸来自该记录。本图没有复制馆藏照片、暗花纹样或实物裁片。布面的褐色、明暗和细线仅提示缎面材质与折叠方向，不声称复原了原件的组织结构。</p>
+<p>轮廓、褶数、内襟覆盖范围、布边处理与分解距离都是教学重建。放大剖面用连续折线说明布面折返，没有据此断定原件的逐褶折法；剖面厚度也经过夸大。馆方简短记录没有提供逐片裁剪、缝线、扣带或内衣证据，因此这里不声称复原了这些细节，也不扩展成一套完整穿搭。褶裥是布料折叠的表示，不是额外加了一条裙。</p>
+<p>术语另见<a href="https://fashion.wtu.edu.cn/info/1135/3226.htm">武汉纺织大学服装学院陶辉对交领右衽的解释</a>。它用于说明术语，不用于替这件馆藏补造细节。不同年代、地区与场合的衣装需要分别查证。</p>
+</div>
+<div lang="en">
+<p>The museum object is titled 明代曲水如意云纹暗花缎曳撒袍 (a Ming-dynasty <i>yesa</i> robe of figured satin with meander and <i>ruyi</i>-cloud patterns). The China National Silk Museum dates it to the Ming dynasty and records it as brown silk, 108 cm long, 49 cm wide, with a sleeve span of 214 cm. The museum describes a crossed collar closing to the right (<i>jiaoling youren</i>), straight sleeves, and pleats below the waist that form a skirt-like lower part.</p>
+<p><a href="https://www.chinasilkmuseum.com/zggd/info_21.aspx?itemid=1900">View the China National Silk Museum record</a> (in Chinese). The form, material and dimensions above come from that record. This figure does not copy the museum photograph, the figured pattern, or actual pattern pieces. The brown color, shading and fine lines only suggest the satin material and folding direction; they do not claim to reconstruct the original weave.</p>
+<p>The outline, pleat count, inner-panel coverage, edge finishing and exploded distance are teaching reconstructions. The enlarged section uses a continuous zigzag to explain how cloth folds back; it does not assert how the original was pleated fold by fold, and its thickness is exaggerated. The museum's short record gives no evidence for individual pattern pieces, stitching, ties or undergarments, so none of these are claimed here, and the figure is not extended into a full outfit. The pleats represent folded cloth, not an extra skirt.</p>
+<p>For the terms, see <a href="https://fashion.wtu.edu.cn/info/1135/3226.htm">Tao Hui's explanation of <i>jiaoling youren</i></a> (Wuhan Textile University, in Chinese). It explains terminology; it is not used to invent details for this object. Dress from other periods, regions and occasions needs its own sources.</p>
+</div>
+<p class="foot"><span lang="zh">可离线打开。Tab 移到控件，空格勾选，方向键调滑杆。界面不自动播放动画；减少动态效果时仍可逐步检查。重置会清空本页作答。</span><span lang="en">Works offline. Tab moves between controls, Space toggles a checkbox, arrow keys move the slider. Nothing autoplays; with reduced motion you can still inspect step by step. Reset clears your answers on this page.</span></p>
+</section>
+</div>
+</div>
+<section id="experiment" class="figure-pane" aria-labelledby="diagram-title">
+<div class="stage">
+<svg id="garment" viewBox="0 0 500 635" role="img" aria-labelledby="diagram-title diagram-desc"><title id="diagram-title" data-i18n data-zh="明代曳撒袍结构教学重建，正面与褶裥剖面" data-en="Teaching reconstruction of a Ming-dynasty yesa robe: front view and pleat section">Teaching reconstruction of a Ming-dynasty yesa robe: front view and pleat section</title><desc id="diagram-desc">交领右衽的长袍，双袖自然下垂，腰下布料折返成褶。明暗沿褶面变化，衣缘显示内外布层。使用原生控件检查开襟、上下分解与褶裥剖面。</desc>
+<defs>
+<linearGradient id="silk" x1="0" y1="0" x2=".9" y2="1"><stop stop-color="#765033"/><stop offset=".22" stop-color="#c59862"/><stop offset=".44" stop-color="#a77b4b"/><stop offset=".64" stop-color="#c9a36d"/><stop offset="1" stop-color="#795131"/></linearGradient>
+<linearGradient id="sleeve" x1="0" y1="0" x2=".14" y2="1"><stop stop-color="#c7a06a"/><stop offset=".27" stop-color="#ae8352"/><stop offset=".54" stop-color="#d1ae79"/><stop offset=".7" stop-color="#aa7b48"/><stop offset="1" stop-color="#6a472e"/></linearGradient>
+<linearGradient id="fold"><stop stop-color="#68452d"/><stop offset=".17" stop-color="#946b43"/><stop offset=".37" stop-color="#c29a62"/><stop offset=".49" stop-color="#d0ae79"/><stop offset=".6" stop-color="#b18a55"/><stop offset=".82" stop-color="#987048"/><stop offset="1" stop-color="#61412b"/></linearGradient>
+<linearGradient id="lining"><stop stop-color="#b99a6d"/><stop offset=".47" stop-color="#d9bf8c"/><stop offset="1" stop-color="#977751"/></linearGradient>
+<linearGradient id="binding" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#dfbc82"/><stop offset=".45" stop-color="#b38b54"/><stop offset=".67" stop-color="#d8b577"/><stop offset="1" stop-color="#795635"/></linearGradient>
+<pattern id="thread-light" width="3" height="5" patternUnits="userSpaceOnUse"><path d="M.5 0V5" stroke="#fff5d3" stroke-width=".3" opacity=".07"/></pattern>
+<filter id="cloth-shadow" x="-.5" y="-.5" width="2" height="2"><feGaussianBlur stdDeviation="3"/></filter>
+<clipPath id="skirt-clip"><path d="M175 258Q250 253 325 258L366 462Q370 468 361 471Q250 490 139 471Q130 468 134 462Z"/></clipPath>
+</defs>
+<g data-part="sides" data-zh-label="左右都以穿衣者为准：穿衣者的右侧在你的左边" data-en-label="Left and right are the wearer's: the wearer's right is on your left"><text x="23" y="29" class="annotation" data-i18n data-zh="穿衣者右侧" data-en="Wearer's right">Wearer's right</text><text x="477" y="29" class="annotation" text-anchor="end" data-i18n data-zh="穿衣者左侧" data-en="Wearer's left">Wearer's left</text>
+<path d="M80 39V54M420 39V54" fill="none" stroke="var(--line-strong)"/></g>
+<ellipse cx="250" cy="490" rx="132" ry="9" fill="#302012" opacity=".12" filter="url(#cloth-shadow)"/>
+<g id="upper" class="part active">
+<g data-part="body" data-zh-label="上身与双袖" data-en-label="Upper body and sleeves">
+<path d="M217 96Q250 77 283 96L288 128H212Z" fill="#483123"/>
+<path class="garment" d="M211 96Q196 99 172 109L48 131Q43 162 42 191Q94 202 168 171L175 258Q250 266 325 258L332 171Q406 202 458 191Q457 162 452 131L328 109Q305 99 289 96L250 135Z"/>
+<path d="M173 109L48 131Q43 162 42 191Q96 202 168 171Q175 139 173 109Z" fill="url(#sleeve)" stroke="#735036" stroke-width="1"/>
+<path d="M327 109L452 131Q457 162 458 191Q404 202 332 171Q325 139 327 109Z" fill="url(#sleeve)" stroke="#735036" stroke-width="1"/>
+<path d="M49 132Q44 162 44 191L55 192Q54 163 59 131Z M451 132Q456 162 456 191L445 192Q446 163 441 131Z" fill="#8a613c" stroke="#5b3e29" stroke-width="1"/>
+<path d="M58 134Q54 161 55 188M442 134Q446 161 445 188" class="stitch"/>
+<path d="M64 149Q119 149 162 127M62 168Q125 165 163 143M77 185Q127 177 160 159M436 149Q381 149 338 127M438 168Q375 165 337 143M423 185Q373 177 340 159" fill="none" stroke="#ead1a0" stroke-width="1.4" opacity=".24"/>
+<path d="M168 115Q177 144 168 171M332 115Q323 144 332 171" fill="none" stroke="#61422c" stroke-width="1.2"/>
+</g>
+<g id="inner" data-part="inner" data-zh-label="内襟（右前襟）：被外襟盖住" data-en-label="Inner panel (right front): covered by the outer panel"><path d="M210 97L250 135Q289 170 316 197L318 256H181L183 197L250 135Z" fill="url(#lining)" stroke="#735436" stroke-width="1.2"/><path d="M210 97L250 135L316 197" class="edge"/><path d="M210 97L250 135L316 197" fill="none" stroke="url(#binding)" stroke-width="6"/><path d="M211 101L248 138L311 198" class="stitch"/></g>
+<g id="outer" data-part="outer" data-zh-label="外襟（左前襟）：向穿衣者右侧掩合" data-en-label="Outer panel (left front): wraps toward the wearer's right"><path d="M292 100Q316 106 330 114L323 258H179L183 197L250 135Z" fill="#322111" opacity=".25" transform="translate(3 3)" filter="url(#cloth-shadow)"/><path d="M290 96Q310 101 330 109Q323 179 323 256Q250 263 179 256L183 197Q224 161 250 135Z" fill="url(#silk)" stroke="#6e4b30" stroke-width="1.2"/><path d="M290 96L250 135L183 197" class="edge"/><path d="M290 96L250 135L183 197" fill="none" stroke="url(#binding)" stroke-width="6"/><path d="M289 101L251 139L187 199" class="stitch"/><path d="M308 147Q288 185 290 249M225 178Q214 219 211 252" fill="none" stroke="#e4c38e" stroke-width="2" opacity=".22"/><path d="M307 155Q294 201 298 253" fill="none" stroke="#67462a" opacity=".18"/>
+<path d="M179 250Q250 257 323 250L323 256Q250 263 179 256Z" fill="#725033" opacity=".7"/></g>
+<path d="M175 257Q250 263 325 257" fill="none" stroke="#533721" stroke-width="3"/><path d="M178 254Q250 260 322 254" class="stitch"/>
+</g>
+<g id="connections" hidden><path d="M175 258V306M325 258V306" fill="none" stroke="var(--muted)" stroke-width="1.5" stroke-dasharray="5 5"/><text x="250" y="289" text-anchor="middle" class="annotation" data-i18n data-zh="同一件袍的上下部分" data-en="Upper and lower parts of one robe">Upper and lower parts of one robe</text></g>
+<g id="lower" class="part active" data-part="lower" data-zh-label="腰下袍身：布料折返成褶" data-en-label="Below the waist: the cloth folds back into pleats"><path d="M175 258Q250 253 325 258L366 462Q370 468 361 471Q250 490 139 471Q130 468 134 462Z" class="garment"/>
+<g clip-path="url(#skirt-clip)"><path d="M175 259 Q174 323 137 466 Q148.3 475 159.6 469 Q191 324 190 259Z" fill="url(#fold)"/>
+<path d="M175 260 Q173 340 137 465" class="fold-line"/>
+<path d="M180 268 Q180 344 145 462" fill="none" stroke="#efd19c" stroke-width="1.1" opacity=".23"/>
+<path d="M190 259 Q189 323 159.6 466 Q170.9 475 182.2 469 Q206 324 205 259Z" fill="url(#fold)"/>
+<path d="M190 260 Q188 340 159.6 465" class="fold-line"/>
+<path d="M195 268 Q195 344 167.6 462" fill="none" stroke="#efd19c" stroke-width="1.1" opacity=".23"/>
+<path d="M205 259 Q204 323 182.2 466 Q193.5 475 204.8 469 Q221 324 220 259Z" fill="url(#fold)"/>
+<path d="M205 260 Q203 340 182.2 465" class="fold-line"/>
+<path d="M210 268 Q210 344 190.2 462" fill="none" stroke="#efd19c" stroke-width="1.1" opacity=".23"/>
+<path d="M220 259 Q219 323 204.8 466 Q216.1 475 227.4 469 Q236 324 235 259Z" fill="url(#fold)"/>
+<path d="M220 260 Q218 340 204.8 465" class="fold-line"/>
+<path d="M225 268 Q225 344 212.8 462" fill="none" stroke="#efd19c" stroke-width="1.1" opacity=".23"/>
+<path d="M235 259 Q234 323 227.4 466 Q238.7 475 250 469 Q251 324 250 259Z" fill="url(#fold)"/>
+<path d="M235 260 Q233 340 227.4 465" class="fold-line"/>
+<path d="M240 268 Q240 344 235.4 462" fill="none" stroke="#efd19c" stroke-width="1.1" opacity=".23"/>
+<path d="M250 259 Q249 323 250 466 Q261.3 475 272.6 469 Q266 324 265 259Z" fill="url(#fold)"/>
+<path d="M250 260 Q248 340 250 465" class="fold-line"/>
+<path d="M255 268 Q255 344 258 462" fill="none" stroke="#efd19c" stroke-width="1.1" opacity=".23"/>
+<path d="M265 259 Q264 323 272.6 466 Q283.9 475 295.2 469 Q281 324 280 259Z" fill="url(#fold)"/>
+<path d="M265 260 Q263 340 272.6 465" class="fold-line"/>
+<path d="M270 268 Q270 344 280.6 462" fill="none" stroke="#efd19c" stroke-width="1.1" opacity=".23"/>
+<path d="M280 259 Q279 323 295.2 466 Q306.5 475 317.8 469 Q296 324 295 259Z" fill="url(#fold)"/>
+<path d="M280 260 Q278 340 295.2 465" class="fold-line"/>
+<path d="M285 268 Q285 344 303.2 462" fill="none" stroke="#efd19c" stroke-width="1.1" opacity=".23"/>
+<path d="M295 259 Q294 323 317.8 466 Q329.1 475 340.4 469 Q311 324 310 259Z" fill="url(#fold)"/>
+<path d="M295 260 Q293 340 317.8 465" class="fold-line"/>
+<path d="M300 268 Q300 344 325.8 462" fill="none" stroke="#efd19c" stroke-width="1.1" opacity=".23"/>
+<path d="M310 259 Q309 323 340.4 466 Q351.7 475 363 469 Q326 324 325 259Z" fill="url(#fold)"/>
+<path d="M310 260 Q308 340 340.4 465" class="fold-line"/>
+<path d="M315 268 Q315 344 348.4 462" fill="none" stroke="#efd19c" stroke-width="1.1" opacity=".23"/><path d="M175 258H325L370 480H130Z" fill="url(#thread-light)"/><path d="M136 464Q250 485 364 464L366 472Q250 494 134 472Z" fill="#67462d" opacity=".57"/><path d="M137 464Q250 486 363 464" fill="none" stroke="#e3c190" stroke-width="1.3" opacity=".7"/><path d="M138 469Q250 489 362 469" class="stitch"/></g>
+<path d="M175 258Q250 253 325 258" fill="none" stroke="#5f4028" stroke-width="2.2"/>
+</g>
+<g id="fold-detail" data-part="fold" data-zh-label="褶裥剖面（放大厚度）" data-en-label="Pleat cross-section (thickness enlarged)"><path id="fold-leader" d="M326 425L405 468V522" fill="none" stroke="var(--muted)" stroke-width=".9" stroke-dasharray="3 4"/><circle id="fold-point" cx="326" cy="425" r="3" fill="var(--accent)"/>
+<rect x="25" y="527" width="450" height="90" rx="8" fill="var(--surface)" stroke="var(--line-strong)"/>
+<g transform="translate(0 -40)">
+<path d="M70 623L105 602L140 623L175 602L210 623L245 602L280 623L315 602L350 623L385 602L420 623L420 643L385 622L350 643L315 622L280 643L245 622L210 643L175 622L140 643L105 622L70 643Z" fill="#725033" stroke="#66472c" stroke-width="1"/>
+<path d="M70 623L105 602L140 623L175 602L210 623L245 602L280 623L315 602L350 623L385 602L420 623L420 627L385 606L350 627L315 606L280 627L245 606L210 627L175 606L140 627L105 606L70 627Z" fill="#d3b37d" stroke="#6e4a2f" stroke-width=".8"/>
+<path d="M70 623L105 602L140 623L175 602L210 623L245 602L280 623L315 602L350 623L385 602L420 623" fill="none" stroke="#efd5a2" stroke-width="1.5"/>
+</g></g>
+</svg>
+</div>
+<div id="fold-caption" data-part="fold"><strong><span lang="zh">看一小段布料怎样折返</span><span lang="en">How a short length of cloth folds back</span></strong><span class="sub"><span lang="zh">放大剖面 · 折法原理 · 非实物裁片</span><span lang="en">Enlarged section · folding principle · not an actual pattern piece</span></span><span lang="zh">明面朝向光，折返处自遮挡；同一片布连续穿过褶峰和褶谷。</span><span lang="en">Lit faces turn toward the light and each fold shades itself; one continuous piece of cloth runs through every ridge and valley.</span></div>
+<ul class="legend">
+<li data-ref="outer"><i style="background:#c59862"></i><span lang="zh">外襟（左前襟）</span><span lang="en">Outer panel (left front)</span></li>
+<li data-ref="inner"><i style="background:#d9bf8c"></i><span lang="zh">内襟（右前襟）</span><span lang="en">Inner panel (right front)</span></li>
+<li data-ref="lower"><i style="background:#946b43"></i><span lang="zh">腰下褶</span><span lang="en">Pleats below the waist</span></li>
+<li data-ref="fold"><i style="background:#d3b37d;box-shadow:inset 0 -3px #725033"></i><span lang="zh">褶裥剖面</span><span lang="en">Pleat section</span></li>
+</ul>
+<div class="readouts" data-i18n data-zh-aria-label="当前检查状态" data-en-aria-label="Current inspection state" aria-label="Current inspection state">
+<div class="readout" data-part="outer"><span class="k" data-ref="outer"><span lang="zh">外襟</span><span lang="en">Outer panel</span></span><strong id="ro-outer"></strong></div>
+<div class="readout" data-part="body lower"><span class="k"><span lang="zh">分解</span><span lang="en">Spread</span></span><strong id="ro-spread">0%</strong></div>
+<div class="readout"><span class="k"><span lang="zh">检查部位</span><span lang="en">Inspecting</span></span><strong id="ro-part"></strong></div>
+</div>
+<p id="result"></p>
+<p class="fig-caption"><span lang="zh">布面明暗、下垂弧线与放大厚度用于解释褶层。褶数、光泽和布边处理是教学重建，未复制实物织纹，也未按馆藏尺寸比例绘制。</span><span lang="en">Shading, drape curves and enlarged thickness explain the pleat layers. Pleat count, sheen and edge finishing are a teaching reconstruction; they do not copy the object's weave or follow its measured proportions.</span></p>
+</section>
+</main>
+<script>
+'use strict';
+/* lesson-shell i18n v2: shared by every example page; keep identical across files.
+   Static copy: paired elements <span lang="zh">…</span><span lang="en">…</span> (CSS hides the other language).
+   Text-only nodes and attributes: data-i18n plus data-zh / data-en (textContent) or data-zh-<attr> / data-en-<attr>.
+   Dynamic copy: tr('中文', 'English'); say(el, () => tr(…)) re-renders the message when the language changes. */
+const I18N = (() => {
+  const KEY = 'tf-lang', LANGS = ['zh', 'en'];
+  const stored = (() => { try { return localStorage.getItem(KEY); } catch { return null; } })();
+  const param = new URLSearchParams(location.search).get('lang');
+  let lang = LANGS.includes(param) ? param : LANGS.includes(stored) ? stored : /^zh\b/i.test(navigator.language || '') ? 'zh' : 'en';
+  const listeners = [];
+  function apply() {
+    const root = document.documentElement;
+    root.lang = lang === 'zh' ? 'zh-CN' : 'en';
+    root.dataset.lang = lang;
+    for (const el of document.querySelectorAll('[data-i18n]')) {
+      for (const { name, value } of [...el.attributes]) {
+        if (name === 'data-' + lang) el.textContent = value;
+        else if (name.startsWith('data-' + lang + '-')) el.setAttribute(name.slice(lang.length + 6), value);
+      }
+    }
+    for (const button of document.querySelectorAll('[data-set-lang]')) button.setAttribute('aria-pressed', String(button.dataset.setLang === lang));
+    for (const link of document.querySelectorAll('a[data-keep-lang]')) {
+      const target = new URL(link.getAttribute('href').split('?')[0], location.href);
+      target.searchParams.set('lang', lang);
+      link.href = target.href;
+    }
+    listeners.forEach(fn => fn(lang));
+  }
+  document.addEventListener('click', event => {
+    const button = event.target.closest('[data-set-lang]');
+    if (!button || button.dataset.setLang === lang) return;
+    lang = button.dataset.setLang;
+    try { localStorage.setItem(KEY, lang); } catch {}
+    try { const here = new URL(location.href); here.searchParams.set('lang', lang); history.replaceState(history.state, '', here); } catch {}
+    apply();
+  });
+  return { get lang() { return lang; }, on(fn) { listeners.push(fn); }, apply };
+})();
+const tr = (zh, en) => I18N.lang === 'zh' ? zh : en;
+const spoken = new Map();
+function say(target, message) {
+  const el = typeof target === 'string' ? document.getElementById(target) : target;
+  spoken.set(el, message);
+  el.textContent = message ? message() : '';
+}
+I18N.on(() => spoken.forEach((message, el) => { el.textContent = message ? message() : ''; }));
+// On short screens the figure pane scrolls on its own; while more of it is below the fold, show a cue that scrolls it.
+(() => {
+  const pane = document.querySelector('.lesson > .figure-pane');
+  if (!pane) return;
+  const cue = document.createElement('div');
+  cue.className = 'pane-more';
+  cue.hidden = true;
+  cue.innerHTML = '<button type="button" tabindex="-1" aria-hidden="true"></button>';
+  const button = cue.firstChild;
+  const label = () => { button.textContent = tr('下方还有内容 ↓', 'More below ↓'); };
+  label();
+  I18N.on(label);
+  button.addEventListener('click', () => pane.scrollBy({ top: pane.clientHeight * 0.75, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' }));
+  pane.after(cue);
+  function update() {
+    const scrolls = getComputedStyle(pane).overflowY !== 'visible' && pane.scrollHeight > pane.clientHeight + 1;
+    cue.hidden = !(scrolls && pane.scrollHeight - pane.clientHeight - pane.scrollTop > 4);
+    if (scrolls) pane.tabIndex = 0; else pane.removeAttribute('tabindex');
+  }
+  const sizes = new ResizeObserver(update);
+  const watch = () => { sizes.disconnect(); sizes.observe(pane); for (const child of pane.children) sizes.observe(child); };
+  new MutationObserver(() => { watch(); update(); }).observe(pane, { childList: true });
+  pane.addEventListener('scroll', update, { passive: true });
+  addEventListener('resize', update);
+  watch();
+  update();
+})();
+/* Attention guide. Figure parts: [data-part="id"] inside #experiment (labels: data-zh-label / data-en-label).
+   Step focus: a panel .step or element with data-focus="id …" dims the other parts while it is the active step
+   (focused element first, else the first visible step crossing the reading line). Ordered highlights: ol.look > li[data-focus].
+   Dual coding: [data-ref="id …"] terms and legend items link to parts both ways. Nothing moves until the learner scrolls, hovers or clicks. */
+(() => {
+  const figure = document.getElementById('experiment');
+  if (!figure || !figure.querySelector('[data-part]')) return;
+  const panel = document.querySelector('.lesson > .panel');
+  const KEY = 'tf-focus-guide', ids = value => (value || '').split(/\s+/).filter(Boolean);
+  let guide = (() => { try { return localStorage.getItem(KEY) !== 'off'; } catch { return true; } })();
+  let stepIds = [], look = null, peek = null, pinned = null, activeStep = null;
+  const style = document.createElement('style');
+  document.head.append(style);
+  const bar = document.createElement('div');
+  bar.className = 'focus-bar';
+  bar.innerHTML = '<p class="focus-caption" aria-live="polite"></p><label class="focus-toggle"><input type="checkbox"><span></span></label>';
+  const caption = bar.firstChild, toggle = bar.querySelector('input'), toggleText = bar.querySelector('.focus-toggle span');
+  toggle.checked = guide;
+  figure.prepend(bar);
+  const tip = document.createElement('div');
+  tip.className = 'part-tip';
+  tip.hidden = true;
+  document.body.append(tip);
+  const fine = matchMedia('(hover: hover) and (pointer: fine)');
+  const sel = list => list.map(id => `[data-part~="${CSS.escape(id)}"]`).join(',');
+  function render() {
+    const hot = pinned || peek || (look && look.ids) || (guide ? stepIds : []);
+    const ring = !!(pinned || peek || look);
+    figure.classList.toggle('tf-ring', ring && hot.length > 0);
+    figure.toggleAttribute('data-focusing', hot.length > 0);
+    style.textContent = hot.length ? `#experiment [data-part]:not(${sel(hot)}){opacity:.24;filter:saturate(.35)}` : '';
+    for (const part of figure.querySelectorAll('[data-part]')) part.classList.toggle('tf-hot', ring && ids(part.dataset.part).some(id => hot.includes(id)));
+  }
+  // Re-rendered figures replace their children; keep the hot class on new parts.
+  new MutationObserver(() => { if (figure.classList.contains('tf-ring')) render(); }).observe(figure, { childList: true, subtree: true });
+  const visible = el => el.offsetParent !== null || el.getClientRects().length > 0;
+  const steps = () => [...document.querySelectorAll('.panel .step, .panel [data-focus]:not(ol.look *)')].filter(visible);
+  function pickStep() {
+    const scroller = panel && getComputedStyle(panel).overflowY !== 'visible' ? panel : null;
+    const box = scroller ? scroller.getBoundingClientRect() : { top: 0, bottom: innerHeight, height: innerHeight };
+    const line = box.top + box.height * 0.3, list = steps();
+    const inView = el => { const r = el.getBoundingClientRect(); return r.bottom > box.top && r.top < box.bottom; };
+    const focused = document.activeElement && list.filter(el => el.contains(document.activeElement)).pop();
+    if (focused && inView(focused)) return focused;
+    let found = null;
+    for (const el of list) { const r = el.getBoundingClientRect(); if (r.bottom > line && r.top < box.bottom && (!found || found.contains(el))) found = el; else if (found && !found.contains(el)) break; }
+    return found;
+  }
+  function update() {
+    const step = pickStep();
+    if (step !== activeStep) {
+      activeStep = step;
+      if (look && !(step && step.contains(look.list))) setLook(null);
+    }
+    const target = step && (step.matches('[data-focus]') ? step : null);
+    stepIds = target ? ids(target.dataset.focus) : [];
+    render();
+  }
+  let queued = false;
+  const schedule = () => { if (!queued) { queued = true; requestAnimationFrame(() => { queued = false; update(); }); } };
+  (panel || document).addEventListener('scroll', schedule, { passive: true });
+  addEventListener('scroll', schedule, { passive: true });
+  addEventListener('resize', schedule);
+  document.addEventListener('focusin', schedule);
+  new MutationObserver(schedule).observe(document.querySelector('.panel') || document.body, { attributes: true, attributeFilter: ['hidden'], subtree: true });
+  toggle.addEventListener('change', () => { guide = toggle.checked; try { localStorage.setItem(KEY, guide ? 'on' : 'off'); } catch {} render(); });
+  // Ordered highlights.
+  const lists = [...document.querySelectorAll('ol.look')];
+  function setLook(next) {
+    look = next;
+    for (const list of lists) {
+      const items = [...list.children];
+      items.forEach((li, i) => { if (next && next.list === list && next.index === i) li.setAttribute('aria-current', 'step'); else li.removeAttribute('aria-current'); });
+      for (const button of list.previousElementSibling.querySelectorAll('.look-num')) button.setAttribute('aria-pressed', String(!!next && next.list === list && Number(button.dataset.index) === next.index));
+    }
+    caption.textContent = '';
+    if (next) {
+      const n = document.createElement('span');
+      n.className = 'look-n';
+      n.textContent = `${next.index + 1}/${next.list.children.length}`;
+      const text = document.createElement('span');
+      text.append(...[...next.list.children[next.index].childNodes].map(node => node.cloneNode(true)));
+      caption.append(n, text);
+    }
+    render();
+  }
+  const go = (list, index) => setLook({ list, index, ids: ids(list.children[index].dataset.focus) });
+  for (const list of lists) {
+    const nav = document.createElement('div');
+    nav.className = 'look-nav';
+    const items = [...list.children];
+    items.forEach((li, i) => {
+      const b = document.createElement('button');
+      b.type = 'button'; b.className = 'look-num'; b.dataset.index = i; b.textContent = i + 1; b.setAttribute('aria-pressed', 'false');
+      b.addEventListener('click', () => go(list, i));
+      nav.append(b);
+      li.addEventListener('click', event => { if (!event.target.closest('a,button,input,[data-ref]')) go(list, i); });
+    });
+    const make = (cls, zh, en, fn) => { const b = document.createElement('button'); b.type = 'button'; b.className = cls; const label = () => { b.textContent = tr(zh, en); }; label(); I18N.on(label); b.addEventListener('click', fn); nav.append(b); };
+    const at = () => (look && look.list === list ? look.index : -1);
+    make('look-prev', '‹ 上一步', '‹ Prev', () => go(list, Math.max(0, at() - 1)));
+    make('look-next', '下一步 ›', 'Next ›', () => go(list, Math.min(items.length - 1, at() + 1)));
+    make('look-clear', '清除', 'Clear', () => setLook(null));
+    list.before(nav);
+  }
+  // Dual coding: terms ↔ parts.
+  const refs = () => document.querySelectorAll('[data-ref]');
+  for (const term of refs()) if (!term.matches('a,button,input,select,textarea,label,[tabindex]')) { term.tabIndex = 0; term.setAttribute('role', 'button'); term.setAttribute('aria-pressed', 'false'); }
+  const termOf = event => event.target.closest && event.target.closest('[data-ref]');
+  let pointer = 'mouse';
+  document.addEventListener('pointerdown', event => { pointer = event.pointerType; }, true);
+  document.addEventListener('pointerover', event => { const term = termOf(event); if (term && event.pointerType === 'mouse') { peek = ids(term.dataset.ref); render(); } });
+  document.addEventListener('pointerout', event => { const term = termOf(event); if (term && !term.contains(event.relatedTarget)) { peek = null; render(); } });
+  document.addEventListener('focusin', event => { const term = termOf(event); if (term) { peek = ids(term.dataset.ref); render(); } });
+  document.addEventListener('focusout', event => { if (termOf(event)) { peek = null; render(); } });
+  function pin(term) {
+    const next = ids(term.dataset.ref).join(' ');
+    pinned = pinned && pinned.join(' ') === next ? null : ids(next);
+    for (const other of refs()) if (other.getAttribute('role') === 'button') other.setAttribute('aria-pressed', String(!!pinned && other.dataset.ref === term.dataset.ref));
+    render();
+  }
+  document.addEventListener('click', event => { const term = termOf(event); if (term && term.getAttribute('role') === 'button' && pointer !== 'mouse') pin(term); });
+  document.addEventListener('keydown', event => {
+    const term = termOf(event);
+    if (term && term.getAttribute('role') === 'button' && (event.key === 'Enter' || event.key === ' ')) { event.preventDefault(); pin(term); }
+    if (event.key === 'Escape' && (look || pinned)) { pinned = null; for (const other of refs()) if (other.getAttribute('role') === 'button') other.setAttribute('aria-pressed', 'false'); setLook(null); }
+  });
+  function partLabel(part) { return part.getAttribute(`data-${I18N.lang}-label`); }
+  figure.addEventListener('pointermove', event => {
+    const part = event.target.closest && event.target.closest('[data-part]');
+    const label = part && partLabel(part);
+    for (const term of refs()) term.classList.toggle('tf-ref-on', !!part && ids(term.dataset.ref).some(id => ids(part.dataset.part).includes(id)));
+    if (!label || !fine.matches || event.pointerType !== 'mouse') { tip.hidden = true; return; }
+    tip.textContent = label;
+    tip.hidden = false;
+    const x = Math.min(event.clientX + 14, innerWidth - tip.offsetWidth - 8), y = event.clientY + 18 + tip.offsetHeight > innerHeight ? event.clientY - tip.offsetHeight - 12 : event.clientY + 18;
+    tip.style.left = x + 'px'; tip.style.top = y + 'px';
+  });
+  figure.addEventListener('pointerleave', () => { tip.hidden = true; for (const term of refs()) term.classList.remove('tf-ref-on'); });
+  const labels = () => { toggleText.textContent = tr('焦点引导', 'Focus guide'); };
+  labels();
+  I18N.on(() => { labels(); if (look) setLook(look); });
+  update();
+})();
+/* /lesson-shell */
+const $=id=>document.getElementById(id);
+const state={part:'all',open:false,explode:0,foldInspect:true,prediction:null,observed:new Set()};
+const parts={
+ all:{zh:{title:'先看整件',short:'整件',description:'把视线沿衣领、双袖、腰下移动。再选一个部位，其他部分会变淡，但仍保留上下关系。'},en:{title:'Start with the whole robe',short:'Whole robe',description:'Move your eye along the collar, the two sleeves and the part below the waist. Then pick a part: the others fade but keep their upper/lower relationship.'}},
+ collar:{zh:{title:'交叠衣襟',short:'衣襟',description:'勾选「掀开外襟」对比遮挡。外襟是穿衣者左前襟，向其右侧掩合；浅色内襟原本被盖住。'},en:{title:'Overlapping front panels',short:'Front panels',description:'Tick “Lift the outer front panel” to compare what is hidden. The outer panel is the wearer\'s left front panel, closing toward the wearer\'s right; the light inner panel was covered by it.'}},
+ sleeves:{zh:{title:'上身与双袖',short:'上身与袖',description:'馆藏记录描述双袖平直。这里保留宽展的横向袖形，不把轮廓当作实物裁剪图。'},en:{title:'Upper body and sleeves',short:'Upper body',description:'The museum record describes straight sleeves. The drawing keeps a wide horizontal sleeve shape; do not read the outline as an actual cutting pattern.'}},
+ pleats:{zh:{title:'腰下褶裥',short:'褶裥',description:'沿一条亮面看到暗谷，再看放大剖面中的连续布片。腰下的褶把较宽布面收束在腰间；图中的光泽、折法与褶数是示意，不是实物测绘。'},en:{title:'Pleats below the waist',short:'Pleats',description:'Follow a lit face down to a dark valley, then look at the continuous strip of cloth in the enlarged section. The pleats gather a wider piece of cloth into the waist. Sheen, folding method and pleat count are illustrative, not measured from the object.'}}
+};
+const part=()=>parts[state.part][I18N.lang];
+function viewModel(s){return {upperY:-s.explode*.13,lowerY:s.explode*.35,outerX:s.open?88:0,outerY:s.open?-12:0,showConnections:s.explode>=75};}
+function render(){
+ const m=viewModel(state);
+ $('fold-caption').hidden=!state.foldInspect;
+ $('upper').setAttribute('transform',`translate(0 ${m.upperY})`);$('lower').setAttribute('transform',`translate(0 ${m.lowerY})`);$('outer').setAttribute('transform',`translate(${m.outerX} ${m.outerY})`);
+ $('fold-detail').style.display=state.foldInspect?'':'none';$('fold-leader').setAttribute('d',`M326 ${425+m.lowerY}L405 510V522`);$('fold-point').setAttribute('cy',425+m.lowerY);
+ $('connections').toggleAttribute('hidden',!m.showConnections);$('connections').style.display=m.showConnections?'':'none';$('connections').querySelector('path').setAttribute('d',`M175 ${258+m.upperY}V${258+m.lowerY}M325 ${258+m.upperY}V${258+m.lowerY}`);$('connections').querySelector('text').setAttribute('y',263+(m.upperY+m.lowerY)/2);
+ $('upper').setAttribute('class','part '+(state.part==='all'||state.part==='sleeves'||state.part==='collar'?'active':''));$('lower').setAttribute('class','part '+(state.part==='all'||state.part==='pleats'?'active':''));
+ $('part-title').textContent=part().title;$('part-description').textContent=part().description;
+ $('spread').value=state.explode+'%';$('explode').setAttribute('aria-valuetext',tr(`分解 ${state.explode}%`,`Spread ${state.explode}%`));
+ $('ro-outer').textContent=state.open?tr('已移开','Lifted'):tr('合拢','Closed');$('ro-spread').textContent=state.explode+'%';$('ro-part').textContent=part().short;
+ $('result').textContent=tr(`外襟${state.open?'已移开，浅色内襟显露':'合拢，覆盖着内襟'}。分解 ${state.explode}%。${state.explode>0?'上下部分之间的空隙只为检查而设。':'上下部分相接。'}`,`Outer panel ${state.open?'moved aside; the light inner panel shows':'closed, covering the inner panel'}. Spread ${state.explode}%. ${state.explode>0?'The gap between the upper and lower parts exists only for inspection.':'The upper and lower parts are joined.'}`);
+ $('diagram-desc').textContent=$('result').textContent+tr(' 穿衣者右侧在观看者左边。',' The wearer\'s right is on the viewer\'s left.');
+ $('run-status').textContent=tr(`正在检查${part().title}。${state.open?'可比较内外襟的覆盖关系。':'可掀开外襟检查遮挡。'}`,`Inspecting: ${part().title}. ${state.open?'Compare how the inner and outer panels overlap.':'Lift the outer panel to check what it hides.'}`);
+ if(state.observed.size===2){const p=state.prediction;say('feedback',()=>p==='skin'?tr('你的预测是没有另一片衣襟。开合对比显示，被外襟遮住的内襟仍在。这是覆盖关系的示意。','Your prediction was that there is no second front panel. Opening and closing shows the inner panel is still there, hidden by the outer one. This illustrates the overlap.'):p==='under'?tr('你的预测与开合观察一致。试着说清哪一片覆盖哪一片，以及左右以谁为准。','Your prediction matches what opening and closing shows. Now say which panel covers which, and whose left and right are meant.'):tr('你已对比开合两种状态。试着用「覆盖」和「穿衣者」解释观察。','You have compared both states. Try explaining what you saw with “covers” and “the wearer”.'));}
+}
+$('part').addEventListener('change',e=>{state.part=e.target.value;render();});$('fold-inspect').addEventListener('change',e=>{state.foldInspect=e.target.checked;render();});$('open').addEventListener('change',e=>{state.open=e.target.checked;state.observed.add(state.open);render();});$('explode').addEventListener('input',e=>{state.explode=Number(e.target.value);render();});
+$('prediction-form').addEventListener('submit',e=>{e.preventDefault();state.prediction=new FormData(e.currentTarget).get('prediction');render();say('prediction-status',()=>tr('预测已记下。开合衣襟，检查究竟露出了什么。','Prediction saved. Open and close the front panel to check what is really revealed.'));});
+$('transfer-form').addEventListener('submit',e=>{e.preventDefault();const answer=new FormData(e.currentTarget).get('transfer');say('transfer-feedback',()=>tr((answer==='wrong'?'对。':'请对照穿衣者的左右。')+'镜像会反转图中的交叠方向。展示或引用服饰图片时，要核对是否被镜像，并保持方位标注一致。',(answer==='wrong'?'Correct. ':'Check against the wearer\'s left and right. ')+'Mirroring reverses the overlap direction in the picture. When you show or cite garment images, check whether they have been mirrored and keep orientation labels consistent.'));});
+function resetLesson(){Object.assign(state,{part:'all',open:false,explode:0,foldInspect:true,prediction:null,observed:new Set()});['prediction-form','transfer-form'].forEach(id=>$(id).reset());$('part').value='all';$('open').checked=false;$('fold-inspect').checked=true;$('explode').value=0;$('writing').value='';$('explanation').open=false;say('transfer-feedback',null);say('prediction-status',()=>tr('先选一个答案，再开合衣襟。也可以直接操作。','Choose an answer, then open and close the front panel. You can also start operating directly.'));say('feedback',()=>tr('对比开合后的交叠关系，再查看解释。','Compare the overlap with the panel open and closed, then read the explanation.'));render();}
+$('reset').addEventListener('click',resetLesson);
+function selfCheck(){const assert=(ok,message)=>{if(!ok)throw Error(message);};const initial=viewModel({open:false,explode:0});assert(initial.upperY===0&&initial.lowerY===0&&initial.outerX===0,'Assembled reset');for(const explode of [0,25,50,75,100])for(const open of [false,true]){const m=viewModel({open,explode});assert(Object.values(m).every(v=>typeof v==='boolean'||Number.isFinite(v)),'Finite inspection positions');assert(m.lowerY-m.upperY===explode*.48||Math.abs(m.lowerY-m.upperY-explode*.48)<1e-12,'Only inspection separation changes');assert(m.outerX===(open?88:0),'Outer panel reveals under-panel');}assert(viewModel({open:true,explode:100}).lowerY===35,'Exploded endpoint');return 'Passed assembled reset, five spread steps, both overlap states and endpoint.';}
+selfCheck();
+I18N.on(render);
+I18N.apply();
+resetLesson();
+</script>
+</body>
+</html>

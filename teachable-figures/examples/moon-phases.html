@@ -1,0 +1,989 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title data-i18n data-zh="月相是地球的影子造成的吗？" data-en="Are the Moon’s phases Earth’s shadow?">Are the Moon’s phases Earth’s shadow?</title>
+<style>
+/* lesson-shell v2: shared by every example page; keep identical across files */
+:root{color-scheme:light dark;--bar:56px;--bg:#f7f6f2;--surface:#fff;--stage:#eeece6;--ink:#141618;--text:#2a2e31;--muted:#61676c;--faint:#8b9196;--line:#e4e1d9;--line-strong:#cbc7bd;--accent:#d9480f;--accent-soft:#fcebe2;--focus:#d9480f;--ok:#1d7a4c;--sans:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Noto Sans SC","Microsoft YaHei",sans-serif;--mono:ui-monospace,"SF Mono",SFMono-Regular,Menlo,Consolas,monospace}
+@media(prefers-color-scheme:dark){:root{--bg:#111315;--surface:#181b1e;--stage:#0b0d0f;--ink:#f3f4f2;--text:#dadedc;--muted:#a1a7ab;--faint:#7a8085;--line:#272b2f;--line-strong:#3b4045;--accent:#ff7a45;--accent-soft:#2b1a11;--focus:#ff7a45;--ok:#4cc38a}}
+*{box-sizing:border-box}html{-webkit-text-size-adjust:100%}body{margin:0;background:var(--bg);color:var(--text);font:15.5px/1.6 var(--sans);-webkit-font-smoothing:antialiased}
+[hidden]{display:none!important}html[data-lang=zh] [lang=en],html[data-lang=en] [lang=zh]{display:none!important}
+:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+.skip{position:absolute;left:12px;top:-80px;z-index:30;background:var(--surface);color:var(--ink);padding:8px 12px;border-radius:8px}.skip:focus{top:10px}
+.bar{position:sticky;top:0;z-index:20;height:var(--bar);display:flex;align-items:center;gap:14px;padding:0 16px 0 20px;background:color-mix(in srgb,var(--bg) 90%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.bar .back{display:inline-flex;align-items:center;gap:6px;min-height:40px;color:var(--muted);text-decoration:none;font-size:14px;white-space:nowrap}.bar .back:hover{color:var(--ink)}
+.bar .crumb{min-width:0;font:500 12px/1.2 var(--mono);color:var(--faint);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lang-switch{margin-left:auto;flex:none;display:inline-flex;padding:3px;border:1px solid var(--line);border-radius:999px;background:var(--surface)}
+.lang-switch button{appearance:none;border:0;background:none;cursor:pointer;font:600 12px/1 var(--sans);min-height:30px;min-width:40px;padding:0 11px;border-radius:999px;color:var(--muted)}
+.lang-switch button[aria-pressed=true]{background:var(--ink);color:var(--bg)}
+.lesson{display:flex;flex-direction:column}.panel{display:contents}
+.intro{order:0;padding:28px 20px 6px}
+.figure-pane{order:1;margin:14px 12px 4px;padding:12px;background:var(--stage);border-radius:16px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.steps{order:2;padding:0 20px 40px}
+.stage{position:relative;min-height:0;display:grid;place-items:center}.stage>svg,.stage>canvas{display:block;width:100%;height:auto}
+.fig-caption{margin:0;font-size:12.5px;line-height:1.5;color:var(--muted)}
+.readouts{display:grid;grid-template-columns:repeat(auto-fit,minmax(104px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.readout{background:var(--surface);padding:9px 13px;min-width:0}
+.readout .k{display:block;font:500 12px/1.35 var(--sans);color:var(--muted)}
+.readout strong{display:block;font:650 21px/1.3 var(--sans);font-variant-numeric:tabular-nums;color:var(--ink);letter-spacing:-.01em;overflow-wrap:anywhere}
+.readout .u{display:block;font-size:12px;line-height:1.35;color:var(--faint)}
+.meta{display:flex;flex-wrap:wrap;gap:4px 10px;margin:0 0 14px;padding:0;list-style:none;font:500 12.5px/1.4 var(--sans);color:var(--muted)}.meta li+li::before{content:"/";margin-right:10px;color:var(--line-strong)}
+h1{margin:0 0 12px;font-size:clamp(25px,2.5vw,33px);line-height:1.18;letter-spacing:-.025em;font-weight:700;color:var(--ink);text-wrap:balance}
+.lead{margin:0;color:var(--muted)}
+.step{padding:26px 0 22px;border-top:1px solid var(--line)}.intro+.steps .step:first-child,.steps>.step:first-child{border-top:0}
+.step>h2{display:flex;align-items:center;gap:10px;margin:0 0 12px;font-size:17px;line-height:1.3;letter-spacing:-.01em;color:var(--ink)}
+.step>h2 .n{flex:none;font:600 11px/1 var(--mono);color:var(--accent);border:1px solid currentColor;border-radius:6px;padding:4px 6px}
+h3{margin:20px 0 6px;font-size:14.5px;color:var(--ink)}p{margin:0 0 12px}strong{color:var(--ink)}
+.small{font-size:13.5px;color:var(--muted)}
+fieldset{border:0;padding:0;margin:0;min-width:0}legend{padding:0;margin:0 0 12px;font-weight:600;color:var(--ink)}
+label.choice{display:flex;gap:10px;align-items:flex-start;padding:10px 13px;margin-bottom:8px;border:1px solid var(--line);border-radius:10px;background:var(--surface);cursor:pointer;transition:border-color .12s,box-shadow .12s}
+label.choice:hover{border-color:var(--line-strong)}label.choice:has(input:checked){border-color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink)}label.choice:has(input:disabled){cursor:default}
+label.choice input{flex:none;margin:4px 0 0}input{accent-color:var(--ink)}input[type=radio],input[type=checkbox]{width:17px;height:17px}
+button,select{font:500 14px/1.2 var(--sans);color:var(--ink);background:var(--surface);border:1px solid var(--line-strong);border-radius:10px;padding:0 16px;min-height:42px;cursor:pointer}
+button:hover:not(:disabled),select:hover:not(:disabled){border-color:var(--ink)}button.primary{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+button:disabled,select:disabled{opacity:.45;cursor:not-allowed}
+.controls{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:14px 0}
+.toggle{display:flex;align-items:center;gap:10px;min-height:42px;font-weight:500;color:var(--ink);cursor:pointer}
+.range{margin:16px 0 8px}.range label{display:flex;justify-content:space-between;gap:12px;font-weight:500;color:var(--ink)}.range output{font:500 13px/1.6 var(--mono);color:var(--muted)}
+input[type=range]{width:100%;min-height:32px;margin:4px 0}
+.status{min-height:1.6em;margin:12px 0;padding:10px 12px;border-radius:10px;background:var(--bg);font-size:14px}
+.callout{margin:14px 0;padding:2px 0 2px 14px;border-left:3px solid var(--accent)}
+textarea{display:block;width:100%;min-height:90px;margin-top:8px;padding:10px 12px;font:inherit;color:var(--text);background:var(--bg);border:1px solid var(--line-strong);border-radius:10px;resize:vertical}
+table{border-collapse:collapse;width:100%;margin-top:14px;font-size:14px}th,td{text-align:left;padding:9px 6px;border-bottom:1px solid var(--line);vertical-align:top}th:first-child,td:first-child{padding-left:0}caption{text-align:left;font-weight:600;color:var(--ink);margin-bottom:4px}
+.limits{color:var(--muted);font-size:14px}
+.pane-more{display:none}
+.foot{margin-top:8px;padding-top:16px;border-top:1px solid var(--line);font-size:12.5px;color:var(--faint)}
+/* attention: figure parts [data-part], step focus [data-focus], ordered highlights ol.look, dual-coding terms [data-ref] */
+#experiment [data-part]{transition:opacity .28s ease,filter .28s ease,box-shadow .2s ease}
+#experiment.tf-ring [data-part].tf-hot:not(svg *){box-shadow:0 0 0 2px var(--accent),0 0 0 7px color-mix(in srgb,var(--accent) 18%,transparent);border-radius:10px}
+#experiment.tf-ring svg [data-part].tf-hot{filter:drop-shadow(0 0 1px var(--accent)) drop-shadow(0 0 5px color-mix(in srgb,var(--accent) 40%,transparent))}
+.focus-bar{display:flex;align-items:center;gap:12px;min-height:30px;margin:-4px 0 -2px}
+.focus-caption{flex:1;min-width:0;margin:0;font-size:13px;line-height:1.4;color:var(--ink)}.focus-caption:empty{visibility:hidden}
+.focus-caption .look-n{display:inline-grid;place-items:center;min-width:20px;height:20px;margin-right:8px;padding:0 5px;border-radius:999px;background:var(--accent);color:#fff;font:700 11px/1 var(--sans);vertical-align:1px}
+.focus-toggle{flex:none;display:inline-flex;align-items:center;gap:7px;min-height:30px;font-size:12.5px;color:var(--muted);cursor:pointer;white-space:nowrap}.focus-toggle input{width:15px;height:15px;margin:0}
+ol.look{margin:12px 0 8px;padding:0;list-style:none;counter-reset:look}
+ol.look>li{counter-increment:look;position:relative;margin:0 0 6px;padding:8px 10px 8px 38px;border:1px solid var(--line);border-radius:10px;cursor:pointer;color:var(--muted);transition:border-color .15s,background .15s}
+ol.look>li::before{content:counter(look);position:absolute;left:10px;top:9px;display:grid;place-items:center;width:20px;height:20px;border-radius:999px;border:1px solid var(--line-strong);font:650 11px/1 var(--sans);color:var(--muted)}
+ol.look>li:hover{border-color:var(--line-strong)}ol.look>li[aria-current=step]{border-color:var(--accent);background:var(--accent-soft);color:var(--ink)}ol.look>li[aria-current=step]::before{background:var(--accent);border-color:var(--accent);color:#fff}
+.look-nav{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:0 0 14px}.look-nav button{min-height:34px;padding:0 11px;font-size:13px}.look-nav .look-num{min-width:34px;padding:0}.look-nav .look-num[aria-pressed=true]{background:var(--accent);border-color:var(--accent);color:#fff}
+[data-ref]:not(a,button,input,select,label){text-decoration:underline dotted color-mix(in srgb,var(--accent) 70%,transparent);text-decoration-thickness:1.5px;text-underline-offset:3px;cursor:help;border-radius:4px}
+[data-ref].tf-ref-on{background:var(--accent-soft);box-shadow:0 0 0 2px var(--accent-soft);color:var(--ink)}[data-ref][aria-pressed=true]{background:var(--accent-soft);box-shadow:0 0 0 1px var(--accent)}
+.part-tip{position:fixed;z-index:40;pointer-events:none;max-width:240px;padding:5px 9px;border-radius:8px;background:var(--ink);color:var(--bg);font:500 12.5px/1.35 var(--sans);box-shadow:0 4px 14px rgb(0 0 0/.18)}
+@media(min-width:960px) and (min-height:560px){
+.lesson{display:grid;grid-template-columns:minmax(0,1fr) clamp(380px,35vw,500px);height:calc(100dvh - var(--bar))}
+.panel{display:block;grid-column:2;grid-row:1;overflow-y:auto;overscroll-behavior:contain;background:var(--surface);border-left:1px solid var(--line)}
+.figure-pane{grid-column:1;grid-row:1;margin:0;border-radius:0;padding:24px 28px;min-height:0}
+.figure-pane{overflow-y:auto;overscroll-behavior:contain}.figure-pane>*{flex-shrink:0}
+.figure-pane .stage{flex:1}.figure-pane .stage>svg,.figure-pane .stage>canvas{height:100%;max-height:100%}
+.pane-more{display:flex;grid-column:1;grid-row:1;align-self:end;position:relative;z-index:2;justify-content:center;align-items:flex-end;height:76px;padding-bottom:14px;pointer-events:none;background:linear-gradient(color-mix(in srgb,var(--stage) 0%,transparent),var(--stage) 72%)}
+.pane-more button{pointer-events:auto;min-height:32px;padding:0 14px;border-radius:999px;font-size:12.5px;box-shadow:0 2px 10px rgb(0 0 0/.12)}
+.intro{padding:32px 32px 6px}.steps{padding:0 32px 48px}
+.bar{padding:0 20px 0 24px}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+/* /lesson-shell */
+:root{--sun:#e39a0c;--day:#7cb9e3;--night:#25384c;--moon-lit:#f2ebd3;--moon-dark:#5d646b;--blood:#b4532e;--shade:#25384c;--sky:#1d2a3a}
+@media(prefers-color-scheme:dark){:root{--sun:#f4b740;--day:#5aa2d6;--night:#14202d;--moon-lit:#ece4c8;--moon-dark:#2e353c;--blood:#c2603a;--shade:#9fb4c9;--sky:#121a24}}
+.stage{display:flex;flex-direction:column;align-items:stretch}
+.stage>svg{display:block;width:100%;height:auto;touch-action:pan-y}
+.stage>svg:focus-visible{outline:2px solid var(--focus);outline-offset:-2px;border-radius:12px}
+.ptitle{font:600 12.5px var(--sans);fill:var(--muted)}
+.lbl{font:500 11.5px var(--sans);fill:var(--muted)}
+.lbl-ink{font:600 12.5px var(--sans);fill:var(--ink)}
+.lbl-accent{font:650 12.5px var(--sans);fill:var(--accent)}
+.lbl,.lbl-ink,.lbl-accent{paint-order:stroke;stroke:var(--stage);stroke-width:3.5px;stroke-linejoin:round}
+.big{font:650 17px var(--sans);fill:var(--ink)}
+.hit{fill:transparent;cursor:grab}
+.orbit-seg{stroke:var(--line-strong);stroke-width:1.5;stroke-linecap:round}
+.orbit-tick{fill:var(--line-strong)}
+.orbit-arrow{fill:var(--muted)}
+.ecliptic{fill:none;stroke:var(--line);stroke-width:1;stroke-dasharray:3 4}
+.sunball{fill:var(--sun)}.sunglow{fill:var(--sun);opacity:.18}
+.ray{stroke:var(--sun);stroke-width:1.4;stroke-linecap:round;opacity:.8}
+.earth-night{fill:var(--night);stroke:var(--line-strong);stroke-width:1}.earth-day{fill:var(--day)}
+.moon-dark{fill:var(--moon-dark);stroke:var(--line-strong);stroke-width:1}.moon-lit{fill:var(--moon-lit)}
+.moon-blood{fill:var(--blood)}
+.shadow-cone{fill:var(--shade);opacity:.2;stroke:var(--shade);stroke-opacity:.35;stroke-width:1}
+.sight{stroke:var(--accent);stroke-width:1.2;stroke-dasharray:4 3;opacity:.8}
+.eclipse-dot{fill:#000;opacity:.75}
+.sky-bg{fill:var(--sky);stroke:var(--line)}
+.ghost{fill:none;stroke:var(--muted);stroke-width:1.4;stroke-dasharray:5 4}
+.q{font:650 30px var(--sans);fill:var(--muted)}
+.bar-night{fill:var(--night)}.bar-day{fill:var(--sun);opacity:.85}.bar-moon{fill:var(--moon-lit);stroke:var(--muted);stroke-width:1}
+.tick{stroke:var(--line-strong);stroke-width:1}
+.now{stroke:var(--accent);stroke-width:2}
+svg.hide-answer .ans{display:none}
+svg.hide-answer .ans-ghost{display:inline}
+.ans-ghost{display:none}
+.result{margin:0;font-size:13.5px;line-height:1.5;color:var(--text)}
+.viewbar{display:flex;flex-wrap:wrap;align-items:center;gap:6px 14px;font-size:12.5px;color:var(--muted)}
+.viewbar label{display:inline-flex;align-items:center;gap:7px}
+.viewbar input[type=range]{width:118px;accent-color:var(--accent)}
+.viewbar button{min-height:32px;padding:0 10px;font-size:12.5px}
+.seg{display:inline-flex;flex-wrap:wrap;padding:3px;border:1px solid var(--line-strong);border-radius:11px;background:var(--surface)}
+.seg label{position:relative;display:flex;align-items:center;gap:6px;padding:8px 12px;border-radius:8px;cursor:pointer;font-size:13.5px;color:var(--muted)}
+.seg input{position:absolute;opacity:0;pointer-events:none}
+.seg label:has(input:checked){background:var(--ink);color:var(--bg)}
+.seg label:has(input:focus-visible){outline:2px solid var(--focus);outline-offset:1px}
+.field-label{display:block;margin:16px 0 8px;font-weight:600;color:var(--ink)}
+fieldset:disabled .seg,fieldset:disabled .range,fieldset:disabled .chips{opacity:.5}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
+.chips button{min-height:36px;padding:0 10px;border-radius:9px;font-size:12.5px}
+.checklist{list-style:none;margin:12px 0;padding:0;font-size:14px}
+.checklist li{display:flex;gap:8px;align-items:baseline;padding:3px 0;color:var(--muted)}
+.checklist li::before{content:"○";flex:none;width:1em;color:var(--faint)}
+.checklist li.done{color:var(--ink)}.checklist li.done::before{content:"●";color:var(--ok)}
+.equation{margin:12px 0;padding:12px 14px;border-radius:10px;background:var(--bg);font:500 14px/1.7 var(--mono);overflow-wrap:anywhere;color:var(--ink)}
+.note{margin:16px 0 0;padding:12px 14px;border-radius:10px;background:var(--bg);font-size:14px}.note h3{margin-top:0}
+.problem{margin:14px 0 0;padding:14px;border:1px solid var(--line);border-radius:12px;background:var(--bg)}
+.problem .q{margin:0 0 10px;font-weight:600;color:var(--ink)}
+.problem .tag{display:inline-block;margin-bottom:6px;font:600 11px/1 var(--mono);color:var(--accent)}
+.hint{margin:0 0 10px;font-size:13px;color:var(--muted)}
+input[type=number]{font:500 15px var(--sans);color:var(--ink);background:var(--surface);border:1px solid var(--line-strong);border-radius:10px;min-height:42px;width:130px;padding:0 12px}
+.numrow{display:flex;flex-wrap:wrap;align-items:center;gap:10px}
+.score{font-weight:600;color:var(--ink)}
+.readout.masked strong{color:var(--faint)}
+@media(min-width:960px) and (min-height:560px){.figure-pane{padding:18px 24px 16px;gap:10px}.figure-pane .stage{min-height:0}.figure-pane .stage>svg{height:100%;max-height:100%}}
+@media(max-width:700px){.readouts{grid-template-columns:repeat(2,minmax(0,1fr))}}
+</style>
+</head>
+<body>
+<a class="skip" href="#experiment"><span lang="zh">跳到实验</span><span lang="en">Skip to experiment</span></a>
+<header class="bar">
+<a class="back" href="index.html" data-keep-lang>← <span lang="zh">全部示例</span><span lang="en">All examples</span></a>
+<span class="crumb">moon-phases.html</span>
+<div class="lang-switch" role="group" aria-label="语言 / Language"><button type="button" data-set-lang="zh" aria-pressed="false">中文</button><button type="button" data-set-lang="en" aria-pressed="true">EN</button></div>
+</header>
+<main class="lesson">
+<div class="panel">
+<div class="intro">
+<ul class="meta"><li><span lang="zh">天文 · 地球科学</span><span lang="en">Astronomy · Earth science</span></li><li><span lang="zh">可旋转的三维模型</span><span lang="en">Rotatable 3D model</span></li><li><span lang="zh">约 9 分钟</span><span lang="en">~9 min</span></li></ul>
+<h1><span lang="zh">月相是地球的影子造成的吗？</span><span lang="en">Are the Moon’s phases Earth’s shadow?</span></h1>
+<p class="lead" lang="zh">很多人以为，月亮缺掉的那一块是地球的影子。左图有两个视角：一个是可以拖动旋转的太空视角，太阳、地球、月球和地球影子都在里面；另一个是站在地球上抬头看到的月亮。先预测，再转动太空，看看缺掉的那一块到底是什么。</p>
+<p class="lead" lang="en">Many people think the missing part of the Moon is Earth’s shadow. The figure has two views: a space view you can drag to rotate, with the Sun, Earth, the Moon and Earth’s shadow; and the Moon as someone on Earth sees it. Predict first, then turn space around and find out what the missing part really is.</p>
+</div>
+<div class="steps">
+<section class="step" aria-labelledby="predict-title" data-focus="sun moon orbit">
+<h2 id="predict-title"><span class="n">01</span><span lang="zh">预测</span><span lang="en">Predict</span></h2>
+<form id="prediction-form">
+<fieldset>
+<legend><span lang="zh">在左边的<span data-ref="orbit">轨道</span>上，<span data-ref="moon">月球</span>离<span data-ref="sun">太阳方向</span>转过了 90°。从地球（北半球）看，它是什么样子，什么时候在天上最高？</span><span lang="en">On the <span data-ref="orbit">orbit</span> at left, the <span data-ref="moon">Moon</span> has moved 90° from the <span data-ref="sun">Sun’s direction</span>. Seen from Earth (northern hemisphere), what does it look like, and when is it highest in the sky?</span></legend>
+<label class="choice"><input type="radio" name="prediction" value="half" required><span><span lang="zh">右半边亮；日落前后最高。</span><span lang="en">The right half is lit; it is highest around sunset.</span></span></label>
+<label class="choice"><input type="radio" name="prediction" value="shadow"><span><span lang="zh">一弯细细的月牙：大部分被地球的影子挡住了。</span><span lang="en">A thin crescent: Earth’s shadow covers most of it.</span></span></label>
+<label class="choice"><input type="radio" name="prediction" value="full"><span><span lang="zh">满月：地球的影子没挡着它，阳光照亮了整个月亮。</span><span lang="en">Full: Earth’s shadow is not in the way, so sunlight lights the whole Moon.</span></span></label>
+<label class="choice"><input type="radio" name="prediction" value="midnight"><span><span lang="zh">一半亮；半夜最高，因为月亮属于夜晚。</span><span lang="en">Half lit; highest at midnight, because the Moon belongs to the night.</span></span></label>
+</fieldset>
+<div class="controls"><button type="submit" class="primary"><span lang="zh">记下预测</span><span lang="en">Save my prediction</span></button></div>
+<p id="prediction-status" class="small" aria-live="polite"></p>
+</form>
+</section>
+<section class="step" aria-labelledby="try-title">
+<h2 id="try-title"><span class="n">02</span><span lang="zh">绕一个月</span><span lang="en">Go around one month</span></h2>
+<p lang="zh">拖动月球的位置，同时看两个视角。然后转动太空视角：拖动图形，或用图下方的滑块、方向键。从正上方看，再从太阳那边看，月球亮着的部分有没有变？</p>
+<p lang="en">Move the Moon along its orbit and watch both views. Then turn the space view: drag the figure, or use the sliders below it or the arrow keys. Look from straight above, then from the Sun’s side. Does the lit part of the Moon itself ever change?</p>
+<fieldset id="try-controls" disabled>
+<div class="range"><label for="elong"><span><span lang="zh">月球离太阳方向的角度</span><span lang="en">Moon’s angle from the Sun</span></span><output id="elong-out" for="elong"></output></label><input id="elong" type="range" min="0" max="359" step="1" value="90"></div>
+<div class="chips" id="phases">
+<button type="button" data-e="0"><span lang="zh">新月 0°</span><span lang="en">New 0°</span></button>
+<button type="button" data-e="40"><span lang="zh">娥眉月 40°</span><span lang="en">Crescent 40°</span></button>
+<button type="button" data-e="90"><span lang="zh">上弦 90°</span><span lang="en">First quarter 90°</span></button>
+<button type="button" data-e="135"><span lang="zh">盈凸 135°</span><span lang="en">Gibbous 135°</span></button>
+<button type="button" data-e="180"><span lang="zh">满月 180°</span><span lang="en">Full 180°</span></button>
+<button type="button" data-e="270"><span lang="zh">下弦 270°</span><span lang="en">Third quarter 270°</span></button>
+</div>
+<p class="field-label"><span lang="zh">观察者在</span><span lang="en">Observer in the</span></p>
+<div class="seg" role="radiogroup" data-i18n data-zh-aria-label="观察者所在半球" data-en-aria-label="Observer’s hemisphere" aria-label="Observer’s hemisphere">
+<label><input type="radio" name="hemi" value="north" checked><span lang="zh">北半球</span><span lang="en">North</span></label>
+<label><input type="radio" name="hemi" value="south"><span lang="zh">南半球</span><span lang="en">South</span></label>
+</div>
+</fieldset>
+<p class="field-label"><span lang="zh">换个角度看太空</span><span lang="en">View space from</span></p>
+<div class="chips" id="views">
+<button type="button" data-view="above"><span lang="zh">正上方（北）</span><span lang="en">Straight above (north)</span></button>
+<button type="button" data-view="sun"><span lang="zh">太阳那一侧</span><span lang="en">The Sun’s side</span></button>
+<button type="button" data-view="edge"><span lang="zh">侧面贴着轨道</span><span lang="en">Edge-on</span></button>
+</div>
+<ul class="checklist" id="checklist">
+<li id="seen-crescent"><span lang="zh">一个月牙（亮的不到 40%）</span><span lang="en">A crescent (less than 40% lit)</span></li>
+<li id="seen-full"><span lang="zh">一个满月（亮的超过 97%）：它在地球影子里吗？</span><span lang="en">A full Moon (over 97% lit): is it in Earth’s shadow?</span></li>
+<li id="seen-above"><span lang="zh">从正上方看轨道（视角抬到 70° 以上）</span><span lang="en">The orbit from above (tilt the view past 70°)</span></li>
+</ul>
+<p id="try-status" class="status" role="status"></p>
+</section>
+<section id="explanation" class="step" aria-labelledby="explain-title" hidden>
+<h2 id="explain-title"><span class="n">03</span><span lang="zh">解释</span><span lang="en">Explain</span></h2>
+<p id="prediction-feedback" class="callout"></p>
+<p class="small"><span lang="zh">按顺序看图上的五处，每一步只亮起相关的部分。</span><span lang="en">Look at five places in order; each step lights up only what it needs.</span></p>
+<ol class="look">
+<li data-focus="sun moon"><span lang="zh">先看太空里的月球：朝太阳的一半永远是亮的，无论它走到哪里。</span><span lang="en">Start with the Moon in space: the half facing the Sun is always lit, wherever it is.</span></li>
+<li data-focus="moon sky"><span lang="zh">再看地球上的视角：我们只看到朝向地球的那一半，月相就是“亮的一半”里有多少转向了我们。</span><span lang="en">Then the view from Earth: we only see the half facing us, and the phase is how much of the lit half is turned our way.</span></li>
+<li data-focus="orbit moon"><span lang="zh">看轨道上的角度：离太阳方向 90°，亮的一半正好有一半朝向我们。</span><span lang="en">Now the angle on the orbit: at 90° from the Sun, exactly half of the lit half faces us.</span></li>
+<li data-focus="shadow earth"><span lang="zh">看地球的影子：它总是背对太阳。月球只有在满月附近才可能碰到它。</span><span lang="en">Look at Earth’s shadow: it always points away from the Sun. The Moon can only reach it near full Moon.</span></li>
+<li data-focus="clock"><span lang="zh">最后看时间条：月球每离太阳 15°，升起就晚 1 小时。</span><span lang="en">Finally the time bar: every 15° the Moon is from the Sun delays its rising by one hour.</span></li>
+</ol>
+<div lang="zh">
+<h3>1. 月球永远有一半是亮的</h3>
+<p><span data-ref="sun">阳光</span>照亮<span data-ref="moon">月球</span>朝向太阳的那一半，就像地球的白天。从正上方或从太阳那一侧看，你会发现每个位置的月球都是“半亮”的。</p>
+<h3>2. 月相是“亮的一半”里，转向我们的那一部分</h3>
+<p>月球离太阳方向转过的角度叫 E。<span data-ref="sky">我们看到的亮面比例</span>是 (1 − cos E) ÷ 2：0° 时是 0（新月），90° 时是 50%（上弦），180° 时是 100%（满月）。它不是线性的：135° 时已经亮了 85%，不是 75%。</p>
+<h3>3. 地球的影子指向另一边</h3>
+<p><span data-ref="shadow">地球的影子</span>总是背对太阳。月牙出现时，月球几乎在太阳和地球之间，离影子很远。只有满月时月球才在影子那一侧，可那正是它看起来最圆的时候。月球真的进入影子时（月食），整个圆面会变暗、发红，而不是变成月牙。</p>
+<h3>4. 月相决定月出时间</h3>
+<p>月球在太阳东边 E 度，就比太阳晚 E ÷ 15 小时升起。<span data-ref="clock">上弦月中午升起、日落时最高</span>；满月日落时升起；下弦月半夜升起，早上还挂在天上。月球每天在轨道上走约 12.2°，所以每天晚升起约 49 分钟。</p>
+</div>
+<div lang="en">
+<h3>1. Half the Moon is always lit</h3>
+<p><span data-ref="sun">Sunlight</span> lights the half of the <span data-ref="moon">Moon</span> that faces the Sun, just like Earth’s day side. Seen from straight above, or from the Sun’s side, the Moon is half lit at every position.</p>
+<h3>2. The phase is how much of the lit half faces us</h3>
+<p>Call the Moon’s angle from the Sun’s direction E. <span data-ref="sky">The lit fraction we see</span> is (1 − cos E) ÷ 2: zero at 0° (new), 50% at 90° (first quarter), 100% at 180° (full). It is not linear: at 135° the disk is already 85% lit, not 75%.</p>
+<h3>3. Earth’s shadow points the other way</h3>
+<p><span data-ref="shadow">Earth’s shadow</span> always points away from the Sun. A crescent appears when the Moon is nearly between Earth and the Sun, far from the shadow. Only at full Moon is the Moon on the shadow’s side, and that is exactly when it looks fully round. When the Moon really does enter the shadow (a lunar eclipse), the whole disk dims and turns reddish; it does not become a crescent.</p>
+<h3>4. The phase sets the moonrise</h3>
+<p>A Moon E degrees east of the Sun rises E ÷ 15 hours after the Sun. <span data-ref="clock">A first-quarter Moon rises at noon and is highest at sunset</span>; a full Moon rises at sunset; a third-quarter Moon rises at midnight and is still up in the morning. The Moon moves about 12.2° along its orbit each day, so it rises about 49 minutes later each day.</p>
+</div>
+<div class="equation" data-i18n data-zh-aria-label="亮面比例等于一减余弦 E，再除以二。月出时间约等于六点加 E 除以十五度小时。每天推迟二十四小时除以二十九点五三，约四十九分钟。" data-en-aria-label="Lit fraction equals one minus cosine E, over two. Moonrise is about six o'clock plus E over fifteen degrees, in hours. The daily delay is twenty-four hours over twenty-nine point five three, about forty-nine minutes.">lit = (1 − cos E) / 2<br>moonrise ≈ 6:00 + E / 15° h<br>daily delay = 24 h / 29.53 ≈ 49 min</div>
+<h3><span lang="zh">迁移：为什么不是每个月都有月食？</span><span lang="en">Transfer: why isn’t there an eclipse every month?</span></h3>
+<p lang="zh">每个满月，地球的影子都在月球那一侧。可是月食一年只有一两次。月球轨道相对地球轨道倾斜约 5.1°，倾斜的“交线”方向（交点）随时间相对太阳转动。调整下面两个控件，看新月和满月什么时候会发生日食、月食。</p>
+<p lang="en">At every full Moon, Earth’s shadow is on the Moon’s side, yet lunar eclipses happen only once or twice a year. The Moon’s orbit is tilted about 5.1° to Earth’s, and the line where the two planes cross (the nodes) turns relative to the Sun over the year. Change the two controls below and see when the new and full Moons give eclipses.</p>
+<fieldset id="eclipse-controls">
+<p class="field-label"><span lang="zh">月球轨道倾角</span><span lang="en">Tilt of the Moon’s orbit</span></p>
+<div class="seg" role="radiogroup" data-i18n data-zh-aria-label="月球轨道倾角" data-en-aria-label="Tilt of the Moon’s orbit" aria-label="Tilt of the Moon’s orbit">
+<label><input type="radio" name="incl" value="5.145" checked><span lang="zh">真实 5.1°</span><span lang="en">Real 5.1°</span></label>
+<label><input type="radio" name="incl" value="0"><span lang="zh">不倾斜 0°</span><span lang="en">Flat 0°</span></label>
+</div>
+<div class="range"><label for="node"><span><span lang="zh">交点方向与太阳方向的夹角</span><span lang="en">Angle from the Sun to the node line</span></span><output id="node-out" for="node"></output></label><input id="node" type="range" min="0" max="179" step="1" value="90"></div>
+<div class="chips"><button type="button" data-node="90"><span lang="zh">90°（远离食季）</span><span lang="en">90° (far from eclipse season)</span></button><button type="button" data-node="5"><span lang="zh">5°（食季）</span><span lang="en">5° (eclipse season)</span></button></div>
+</fieldset>
+<p id="eclipse-status" class="status" role="status"></p>
+<label for="writing" style="display:block;margin-top:18px"><strong><span lang="zh">用你自己的话解释。</span><span lang="en">Explain it in your own words.</span></strong></label>
+<p class="small"><span lang="zh">“月牙缺掉的部分是 ___。满月的时候不在地球影子里，是因为 ___。”</span><span lang="en">“The missing part of a crescent is ___. A full Moon usually misses Earth’s shadow because ___.”</span></p>
+<textarea id="writing" data-i18n data-zh-placeholder="你的解释只留在这个页面，不会保存或发送。" data-en-placeholder="Your explanation stays on this page. It is not saved or sent."></textarea>
+<form id="transfer-form">
+<fieldset><legend><span lang="zh">那么，为什么不是每个满月都有月食？</span><span lang="en">So why is not every full Moon eclipsed?</span></legend>
+<label class="choice"><input type="radio" name="transfer" value="tilt" required><span><span lang="zh">月球轨道倾斜约 5°，多数满月从影子上方或下方经过；只有交点对着太阳附近时才会撞进影子。</span><span lang="en">The Moon’s orbit is tilted about 5°, so most full Moons pass above or below the shadow; only when the nodes point near the Sun does the Moon run into it.</span></span></label>
+<label class="choice"><input type="radio" name="transfer" value="small"><span><span lang="zh">地球的影子太短，大多数月份够不到月球。</span><span lang="en">Earth’s shadow is too short to reach the Moon most months.</span></span></label>
+<label class="choice"><input type="radio" name="transfer" value="daytime"><span><span lang="zh">其实每个月都有月食，只是常常发生在白天，看不到。</span><span lang="en">There is an eclipse every month; it usually happens in daytime, so nobody sees it.</span></span></label>
+</fieldset>
+<div class="controls"><button type="submit"><span lang="zh">核对答案</span><span lang="en">Check my answer</span></button></div>
+<p id="transfer-feedback" class="status" role="status"></p>
+</form>
+</section>
+<section id="practice" class="step" aria-labelledby="practice-title" hidden>
+<h2 id="practice-title"><span class="n">04</span><span lang="zh">独立练习</span><span lang="en">Independent practice</span></h2>
+<p lang="zh">练习时，地球视角的月亮、时间条和读数会隐藏，月球位置也会锁住；太空视角仍然可以转动。用机制推出答案，核对之后再显示。提示会一题比一题少。</p>
+<p lang="en">During practice the Moon seen from Earth, the time bar and the readouts are hidden, and the Moon’s position locks; you can still turn the space view. Work each case out from the mechanism; after you check, the answer comes back. The hints thin out as you go.</p>
+<div class="controls"><button type="button" id="practice-start" class="primary"><span lang="zh">开始练习</span><span lang="en">Start practice</span></button><button type="button" id="practice-exit" hidden><span lang="zh">结束练习，回到控件</span><span lang="en">Leave practice</span></button></div>
+<div id="problems" hidden>
+<form class="problem" data-problem="0" hidden>
+<span class="tag">1 / 3</span>
+<p class="q"><span lang="zh">月球离太阳方向 135°（读数里有角度）。从地球看，圆面亮了百分之几？</span><span lang="en">The Moon is 135° from the Sun’s direction (the angle readout stays on). What percentage of the disk looks lit from Earth?</span></p>
+<p class="hint"><span lang="zh">提示：亮面比例 = (1 − cos E) ÷ 2。</span><span lang="en">Hint: lit fraction = (1 − cos E) ÷ 2.</span></p>
+<div class="numrow"><input type="number" name="answer" step="0.1" min="0" max="100" required data-i18n data-zh-aria-label="亮面百分比" data-en-aria-label="Percent lit" aria-label="Percent lit"><span>%</span><button type="submit"><span lang="zh">核对</span><span lang="en">Check</span></button></div>
+<p class="status" role="status" data-feedback></p>
+</form>
+<form class="problem" data-problem="1" hidden>
+<span class="tag">2 / 3</span>
+<p class="q"><span lang="zh">月球在 270°（下弦）。它大约什么时候升起？</span><span lang="en">The Moon is at 270° (third quarter). About when does it rise?</span></p>
+<label class="choice"><input type="radio" name="answer" value="sunset" required><span><span lang="zh">日落前后（18:00）</span><span lang="en">Around sunset (18:00)</span></span></label>
+<label class="choice"><input type="radio" name="answer" value="midnight"><span><span lang="zh">半夜（0:00）</span><span lang="en">Around midnight (0:00)</span></span></label>
+<label class="choice"><input type="radio" name="answer" value="noon"><span><span lang="zh">中午（12:00）</span><span lang="en">Around noon (12:00)</span></span></label>
+<label class="choice"><input type="radio" name="answer" value="dark"><span><span lang="zh">天一黑就升起，月亮属于夜晚</span><span lang="en">As soon as it gets dark; the Moon belongs to the night</span></span></label>
+<div class="controls"><button type="submit"><span lang="zh">核对</span><span lang="en">Check</span></button></div>
+<p class="status" role="status" data-feedback></p>
+</form>
+<form class="problem" data-problem="2" hidden>
+<span class="tag">3 / 3</span>
+<p class="q"><span lang="zh">今晚西边天上有一弯细月牙（月球在 40°）。圆面上暗的那部分是什么？</span><span lang="en">Tonight a thin crescent hangs in the west (the Moon is at 40°). What is the dark part of the disk?</span></p>
+<label class="choice"><input type="radio" name="answer" value="shadow" required><span><span lang="zh">地球的影子</span><span lang="en">Earth’s shadow</span></span></label>
+<label class="choice"><input type="radio" name="answer" value="night"><span><span lang="zh">月球自己的夜晚那一面，有一大半转向了我们</span><span lang="en">The Moon’s own night side, mostly turned toward us</span></span></label>
+<label class="choice"><input type="radio" name="answer" value="far"><span><span lang="zh">月球的背面</span><span lang="en">The far side of the Moon</span></span></label>
+<div class="controls"><button type="submit"><span lang="zh">核对</span><span lang="en">Check</span></button></div>
+<p class="status" role="status" data-feedback></p>
+</form>
+<div class="controls"><button type="button" id="practice-next" hidden><span lang="zh">下一题 →</span><span lang="en">Next case →</span></button></div>
+<p id="practice-score" class="score" aria-live="polite"></p>
+</div>
+</section>
+<section class="step limits" aria-labelledby="limits-title">
+<h2 id="limits-title"><span lang="zh">这个模型的适用范围</span><span lang="en">Where this model applies</span></h2>
+<div lang="zh">
+<p>太空视角不按比例：真实的地月距离约是地球直径的 30 倍，太阳还要远约 390 倍。为了看得见，图中把月球轨道的倾角放大了 4 倍，影子也画得更粗。是否发生日食、月食，由模型用真实角度判断：月球离影子中心不到 0.96°（本影半径加月球半径）算月食，离太阳方向不到 1.5°（含视差）算日食；不含半影月食。</p>
+<p>月出时间按赤道、春分秋分、圆轨道计算，不含大气折射和月球轨道的离心率；真实时间会差几十分钟，高纬度差得更多。一个朔望月取 29.53 天。</p>
+</div>
+<div lang="en">
+<p>The space view is not to scale: the real Earth–Moon distance is about 30 Earth diameters, and the Sun is about 390 times farther still. So it is visible, the drawing exaggerates the Moon’s orbital tilt 4× and draws the shadow wider. Whether an eclipse happens is decided by the model with true angles: a lunar eclipse when the Moon is within 0.96° of the shadow’s centre (umbra plus the Moon’s radius), a solar eclipse within 1.5° of the Sun’s direction (including parallax); penumbral eclipses are left out.</p>
+<p>Moonrise times assume the equator, an equinox and a circular orbit, without refraction or the orbit’s eccentricity; real times differ by tens of minutes, more at high latitudes. A lunar month is taken as 29.53 days.</p>
+</div>
+<div class="controls"><button type="button" id="reset"><span lang="zh">全部重置</span><span lang="en">Reset everything</span></button></div>
+<p class="foot"><span lang="zh">离线可用。全部控件都是原生单选框、滑块、输入框和按钮。太空视角获得焦点时，方向键旋转视角，Home 键复位；其他地方没有快捷键。</span><span lang="en">Works offline. Every control is a native radio, slider, input or button. When the space view has focus, the arrow keys turn it and Home resets it; there are no other shortcuts.</span></p>
+</section>
+</div>
+</div>
+<section id="experiment" class="figure-pane" aria-labelledby="fig-title">
+<div class="stage">
+<svg id="figure" viewBox="0 0 900 520" preserveAspectRatio="xMidYMid meet" role="img" tabindex="0" aria-labelledby="fig-title fig-desc">
+<title id="fig-title" data-i18n data-zh="可旋转的太空视角（太阳、地球、月球、地球的影子），地球上看到的月亮，以及月亮升落的时间" data-en="Rotatable space view (Sun, Earth, Moon, Earth’s shadow), the Moon as seen from Earth, and when it rises and sets">Rotatable space view (Sun, Earth, Moon, Earth’s shadow), the Moon as seen from Earth, and when it rises and sets</title>
+<desc id="fig-desc"></desc>
+<g id="g-space"></g>
+<g id="g-sky" data-part="sky" data-zh-label="从地球上看到的月亮" data-en-label="The Moon as seen from Earth"></g>
+<g id="g-clock" data-part="clock" data-zh-label="太阳和月亮在天上的时间" data-en-label="When the Sun and the Moon are up"></g>
+</svg>
+</div>
+<div class="viewbar" role="group" data-i18n data-zh-aria-label="太空视角" data-en-aria-label="Space view" aria-label="Space view">
+<label><span lang="zh">水平转动</span><span lang="en">Turn</span><input id="yaw" type="range" min="0" max="359" step="1" value="270"></label>
+<label><span lang="zh">俯仰</span><span lang="en">Tilt</span><input id="pitch" type="range" min="-10" max="90" step="1" value="28"></label>
+<button type="button" id="view-reset"><span lang="zh">复位视角</span><span lang="en">Reset view</span></button>
+</div>
+<div class="readouts" data-i18n data-zh-aria-label="当前月球位置的读数" data-en-aria-label="Readouts for the Moon’s current position" aria-label="Readouts for the Moon’s current position">
+<div class="readout" data-part="orbit"><span class="k" data-ref="orbit"><span lang="zh">离太阳方向</span><span lang="en">Angle from the Sun</span></span><strong id="ro-angle"></strong><span class="u" id="ro-angle-u"></span></div>
+<div class="readout" data-part="sky"><span class="k" data-ref="sky"><span lang="zh">圆面亮了</span><span lang="en">Disk lit</span></span><strong id="ro-lit"></strong><span class="u" id="ro-lit-u"></span></div>
+<div class="readout" data-part="clock"><span class="k" data-ref="clock"><span lang="zh">月出</span><span lang="en">Moonrise</span></span><strong id="ro-rise"></strong><span class="u" id="ro-rise-u"></span></div>
+<div class="readout" data-part="shadow"><span class="k" data-ref="shadow"><span lang="zh">食</span><span lang="en">Eclipse</span></span><strong id="ro-ecl"></strong><span class="u" id="ro-ecl-u"></span></div>
+</div>
+<p id="summary" class="result" aria-live="polite"></p>
+</section>
+</main>
+<script>
+'use strict';
+/* lesson-shell i18n v2: shared by every example page; keep identical across files.
+   Static copy: paired elements <span lang="zh">…</span><span lang="en">…</span> (CSS hides the other language).
+   Text-only nodes and attributes: data-i18n plus data-zh / data-en (textContent) or data-zh-<attr> / data-en-<attr>.
+   Dynamic copy: tr('中文', 'English'); say(el, () => tr(…)) re-renders the message when the language changes. */
+const I18N = (() => {
+  const KEY = 'tf-lang', LANGS = ['zh', 'en'];
+  const stored = (() => { try { return localStorage.getItem(KEY); } catch { return null; } })();
+  const param = new URLSearchParams(location.search).get('lang');
+  let lang = LANGS.includes(param) ? param : LANGS.includes(stored) ? stored : /^zh\b/i.test(navigator.language || '') ? 'zh' : 'en';
+  const listeners = [];
+  function apply() {
+    const root = document.documentElement;
+    root.lang = lang === 'zh' ? 'zh-CN' : 'en';
+    root.dataset.lang = lang;
+    for (const el of document.querySelectorAll('[data-i18n]')) {
+      for (const { name, value } of [...el.attributes]) {
+        if (name === 'data-' + lang) el.textContent = value;
+        else if (name.startsWith('data-' + lang + '-')) el.setAttribute(name.slice(lang.length + 6), value);
+      }
+    }
+    for (const button of document.querySelectorAll('[data-set-lang]')) button.setAttribute('aria-pressed', String(button.dataset.setLang === lang));
+    for (const link of document.querySelectorAll('a[data-keep-lang]')) {
+      const target = new URL(link.getAttribute('href').split('?')[0], location.href);
+      target.searchParams.set('lang', lang);
+      link.href = target.href;
+    }
+    listeners.forEach(fn => fn(lang));
+  }
+  document.addEventListener('click', event => {
+    const button = event.target.closest('[data-set-lang]');
+    if (!button || button.dataset.setLang === lang) return;
+    lang = button.dataset.setLang;
+    try { localStorage.setItem(KEY, lang); } catch {}
+    try { const here = new URL(location.href); here.searchParams.set('lang', lang); history.replaceState(history.state, '', here); } catch {}
+    apply();
+  });
+  return { get lang() { return lang; }, on(fn) { listeners.push(fn); }, apply };
+})();
+const tr = (zh, en) => I18N.lang === 'zh' ? zh : en;
+const spoken = new Map();
+function say(target, message) {
+  const el = typeof target === 'string' ? document.getElementById(target) : target;
+  spoken.set(el, message);
+  el.textContent = message ? message() : '';
+}
+I18N.on(() => spoken.forEach((message, el) => { el.textContent = message ? message() : ''; }));
+// On short screens the figure pane scrolls on its own; while more of it is below the fold, show a cue that scrolls it.
+(() => {
+  const pane = document.querySelector('.lesson > .figure-pane');
+  if (!pane) return;
+  const cue = document.createElement('div');
+  cue.className = 'pane-more';
+  cue.hidden = true;
+  cue.innerHTML = '<button type="button" tabindex="-1" aria-hidden="true"></button>';
+  const button = cue.firstChild;
+  const label = () => { button.textContent = tr('下方还有内容 ↓', 'More below ↓'); };
+  label();
+  I18N.on(label);
+  button.addEventListener('click', () => pane.scrollBy({ top: pane.clientHeight * 0.75, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' }));
+  pane.after(cue);
+  function update() {
+    const scrolls = getComputedStyle(pane).overflowY !== 'visible' && pane.scrollHeight > pane.clientHeight + 1;
+    cue.hidden = !(scrolls && pane.scrollHeight - pane.clientHeight - pane.scrollTop > 4);
+    if (scrolls) pane.tabIndex = 0; else pane.removeAttribute('tabindex');
+  }
+  const sizes = new ResizeObserver(update);
+  const watch = () => { sizes.disconnect(); sizes.observe(pane); for (const child of pane.children) sizes.observe(child); };
+  new MutationObserver(() => { watch(); update(); }).observe(pane, { childList: true });
+  pane.addEventListener('scroll', update, { passive: true });
+  addEventListener('resize', update);
+  watch();
+  update();
+})();
+/* Attention guide. Figure parts: [data-part="id"] inside #experiment (labels: data-zh-label / data-en-label).
+   Step focus: a panel .step or element with data-focus="id …" dims the other parts while it is the active step
+   (focused element first, else the first visible step crossing the reading line). Ordered highlights: ol.look > li[data-focus].
+   Dual coding: [data-ref="id …"] terms and legend items link to parts both ways. Nothing moves until the learner scrolls, hovers or clicks. */
+(() => {
+  const figure = document.getElementById('experiment');
+  if (!figure || !figure.querySelector('[data-part]')) return;
+  const panel = document.querySelector('.lesson > .panel');
+  const KEY = 'tf-focus-guide', ids = value => (value || '').split(/\s+/).filter(Boolean);
+  let guide = (() => { try { return localStorage.getItem(KEY) !== 'off'; } catch { return true; } })();
+  let stepIds = [], look = null, peek = null, pinned = null, activeStep = null;
+  const style = document.createElement('style');
+  document.head.append(style);
+  const bar = document.createElement('div');
+  bar.className = 'focus-bar';
+  bar.innerHTML = '<p class="focus-caption" aria-live="polite"></p><label class="focus-toggle"><input type="checkbox"><span></span></label>';
+  const caption = bar.firstChild, toggle = bar.querySelector('input'), toggleText = bar.querySelector('.focus-toggle span');
+  toggle.checked = guide;
+  figure.prepend(bar);
+  const tip = document.createElement('div');
+  tip.className = 'part-tip';
+  tip.hidden = true;
+  document.body.append(tip);
+  const fine = matchMedia('(hover: hover) and (pointer: fine)');
+  const sel = list => list.map(id => `[data-part~="${CSS.escape(id)}"]`).join(',');
+  function render() {
+    const hot = pinned || peek || (look && look.ids) || (guide ? stepIds : []);
+    const ring = !!(pinned || peek || look);
+    figure.classList.toggle('tf-ring', ring && hot.length > 0);
+    figure.toggleAttribute('data-focusing', hot.length > 0);
+    style.textContent = hot.length ? `#experiment [data-part]:not(${sel(hot)}){opacity:.24;filter:saturate(.35)}` : '';
+    for (const part of figure.querySelectorAll('[data-part]')) part.classList.toggle('tf-hot', ring && ids(part.dataset.part).some(id => hot.includes(id)));
+  }
+  // Re-rendered figures replace their children; keep the hot class on new parts.
+  new MutationObserver(() => { if (figure.classList.contains('tf-ring')) render(); }).observe(figure, { childList: true, subtree: true });
+  const visible = el => el.offsetParent !== null || el.getClientRects().length > 0;
+  const steps = () => [...document.querySelectorAll('.panel .step, .panel [data-focus]:not(ol.look *)')].filter(visible);
+  function pickStep() {
+    const scroller = panel && getComputedStyle(panel).overflowY !== 'visible' ? panel : null;
+    const box = scroller ? scroller.getBoundingClientRect() : { top: 0, bottom: innerHeight, height: innerHeight };
+    const line = box.top + box.height * 0.3, list = steps();
+    const inView = el => { const r = el.getBoundingClientRect(); return r.bottom > box.top && r.top < box.bottom; };
+    const focused = document.activeElement && list.filter(el => el.contains(document.activeElement)).pop();
+    if (focused && inView(focused)) return focused;
+    let found = null;
+    for (const el of list) { const r = el.getBoundingClientRect(); if (r.bottom > line && r.top < box.bottom && (!found || found.contains(el))) found = el; else if (found && !found.contains(el)) break; }
+    return found;
+  }
+  function update() {
+    const step = pickStep();
+    if (step !== activeStep) {
+      activeStep = step;
+      if (look && !(step && step.contains(look.list))) setLook(null);
+    }
+    const target = step && (step.matches('[data-focus]') ? step : null);
+    stepIds = target ? ids(target.dataset.focus) : [];
+    render();
+  }
+  let queued = false;
+  const schedule = () => { if (!queued) { queued = true; requestAnimationFrame(() => { queued = false; update(); }); } };
+  (panel || document).addEventListener('scroll', schedule, { passive: true });
+  addEventListener('scroll', schedule, { passive: true });
+  addEventListener('resize', schedule);
+  document.addEventListener('focusin', schedule);
+  new MutationObserver(schedule).observe(document.querySelector('.panel') || document.body, { attributes: true, attributeFilter: ['hidden'], subtree: true });
+  toggle.addEventListener('change', () => { guide = toggle.checked; try { localStorage.setItem(KEY, guide ? 'on' : 'off'); } catch {} render(); });
+  // Ordered highlights.
+  const lists = [...document.querySelectorAll('ol.look')];
+  function setLook(next) {
+    look = next;
+    for (const list of lists) {
+      const items = [...list.children];
+      items.forEach((li, i) => { if (next && next.list === list && next.index === i) li.setAttribute('aria-current', 'step'); else li.removeAttribute('aria-current'); });
+      for (const button of list.previousElementSibling.querySelectorAll('.look-num')) button.setAttribute('aria-pressed', String(!!next && next.list === list && Number(button.dataset.index) === next.index));
+    }
+    caption.textContent = '';
+    if (next) {
+      const n = document.createElement('span');
+      n.className = 'look-n';
+      n.textContent = `${next.index + 1}/${next.list.children.length}`;
+      const text = document.createElement('span');
+      text.append(...[...next.list.children[next.index].childNodes].map(node => node.cloneNode(true)));
+      caption.append(n, text);
+    }
+    render();
+  }
+  const go = (list, index) => setLook({ list, index, ids: ids(list.children[index].dataset.focus) });
+  for (const list of lists) {
+    const nav = document.createElement('div');
+    nav.className = 'look-nav';
+    const items = [...list.children];
+    items.forEach((li, i) => {
+      const b = document.createElement('button');
+      b.type = 'button'; b.className = 'look-num'; b.dataset.index = i; b.textContent = i + 1; b.setAttribute('aria-pressed', 'false');
+      b.addEventListener('click', () => go(list, i));
+      nav.append(b);
+      li.addEventListener('click', event => { if (!event.target.closest('a,button,input,[data-ref]')) go(list, i); });
+    });
+    const make = (cls, zh, en, fn) => { const b = document.createElement('button'); b.type = 'button'; b.className = cls; const label = () => { b.textContent = tr(zh, en); }; label(); I18N.on(label); b.addEventListener('click', fn); nav.append(b); };
+    const at = () => (look && look.list === list ? look.index : -1);
+    make('look-prev', '‹ 上一步', '‹ Prev', () => go(list, Math.max(0, at() - 1)));
+    make('look-next', '下一步 ›', 'Next ›', () => go(list, Math.min(items.length - 1, at() + 1)));
+    make('look-clear', '清除', 'Clear', () => setLook(null));
+    list.before(nav);
+  }
+  // Dual coding: terms ↔ parts.
+  const refs = () => document.querySelectorAll('[data-ref]');
+  for (const term of refs()) if (!term.matches('a,button,input,select,textarea,label,[tabindex]')) { term.tabIndex = 0; term.setAttribute('role', 'button'); term.setAttribute('aria-pressed', 'false'); }
+  const termOf = event => event.target.closest && event.target.closest('[data-ref]');
+  let pointer = 'mouse';
+  document.addEventListener('pointerdown', event => { pointer = event.pointerType; }, true);
+  document.addEventListener('pointerover', event => { const term = termOf(event); if (term && event.pointerType === 'mouse') { peek = ids(term.dataset.ref); render(); } });
+  document.addEventListener('pointerout', event => { const term = termOf(event); if (term && !term.contains(event.relatedTarget)) { peek = null; render(); } });
+  document.addEventListener('focusin', event => { const term = termOf(event); if (term) { peek = ids(term.dataset.ref); render(); } });
+  document.addEventListener('focusout', event => { if (termOf(event)) { peek = null; render(); } });
+  function pin(term) {
+    const next = ids(term.dataset.ref).join(' ');
+    pinned = pinned && pinned.join(' ') === next ? null : ids(next);
+    for (const other of refs()) if (other.getAttribute('role') === 'button') other.setAttribute('aria-pressed', String(!!pinned && other.dataset.ref === term.dataset.ref));
+    render();
+  }
+  document.addEventListener('click', event => { const term = termOf(event); if (term && term.getAttribute('role') === 'button' && pointer !== 'mouse') pin(term); });
+  document.addEventListener('keydown', event => {
+    const term = termOf(event);
+    if (term && term.getAttribute('role') === 'button' && (event.key === 'Enter' || event.key === ' ')) { event.preventDefault(); pin(term); }
+    if (event.key === 'Escape' && (look || pinned)) { pinned = null; for (const other of refs()) if (other.getAttribute('role') === 'button') other.setAttribute('aria-pressed', 'false'); setLook(null); }
+  });
+  function partLabel(part) { return part.getAttribute(`data-${I18N.lang}-label`); }
+  figure.addEventListener('pointermove', event => {
+    const part = event.target.closest && event.target.closest('[data-part]');
+    const label = part && partLabel(part);
+    for (const term of refs()) term.classList.toggle('tf-ref-on', !!part && ids(term.dataset.ref).some(id => ids(part.dataset.part).includes(id)));
+    if (!label || !fine.matches || event.pointerType !== 'mouse') { tip.hidden = true; return; }
+    tip.textContent = label;
+    tip.hidden = false;
+    const x = Math.min(event.clientX + 14, innerWidth - tip.offsetWidth - 8), y = event.clientY + 18 + tip.offsetHeight > innerHeight ? event.clientY - tip.offsetHeight - 12 : event.clientY + 18;
+    tip.style.left = x + 'px'; tip.style.top = y + 'px';
+  });
+  figure.addEventListener('pointerleave', () => { tip.hidden = true; for (const term of refs()) term.classList.remove('tf-ref-on'); });
+  const labels = () => { toggleText.textContent = tr('焦点引导', 'Focus guide'); };
+  labels();
+  I18N.on(() => { labels(); if (look) setLook(look); });
+  update();
+})();
+/* /lesson-shell */
+const $ = id => document.getElementById(id);
+const SVGNS = 'http://www.w3.org/2000/svg';
+
+// ---- Pure model -------------------------------------------------------
+// Ecliptic frame: z is ecliptic north; the Sun lies along -x. Angles on the orbit run
+// counter-clockwise seen from the north, starting at the Sun's direction (E = 0 is new Moon).
+const SYNODIC = 29.530589, TRUE_INCL = 5.145, UMBRA_LIMIT = 0.96, SOLAR_LIMIT = 1.5, SUN = [-1, 0, 0], ANTI_SUN = [1, 0, 0];
+const rad = d => d * Math.PI / 180, deg = r => r * 180 / Math.PI;
+const clamp = (v, a, b) => Math.min(b, Math.max(a, v)), mod = (a, n) => ((a % n) + n) % n;
+const dot = (a, b) => a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
+const cross = (a, b) => [a[1] * b[2] - a[2] * b[1], a[2] * b[0] - a[0] * b[2], a[0] * b[1] - a[1] * b[0]];
+const scale = (a, k) => [a[0] * k, a[1] * k, a[2] * k];
+const unit = a => scale(a, 1 / (Math.hypot(...a) || 1));
+const sep = (a, b) => deg(Math.acos(clamp(dot(a, b), -1, 1)));
+const inPlane = a => [-Math.cos(rad(a)), -Math.sin(rad(a)), 0];
+// Direction from Earth to the Moon at orbit angle E, for an orbit tilted by incl about a node line at angle node.
+function moonDir(E, incl, node) {
+  const n = inPlane(node), t = inPlane(node + 90), u = rad(E - node), i = rad(incl);
+  return [n[0] * Math.cos(u) + t[0] * Math.cos(i) * Math.sin(u), n[1] * Math.cos(u) + t[1] * Math.cos(i) * Math.sin(u), Math.sin(i) * Math.sin(u)];
+}
+const PHASES = ['new', 'waxing-crescent', 'first-quarter', 'waxing-gibbous', 'full', 'waning-gibbous', 'third-quarter', 'waning-crescent'];
+const phaseOf = E => PHASES[Math.round(mod(E, 360) / 45) % 8];
+// Which side of the disk is lit for an observer facing the Moon with ecliptic north up (flipped in the south).
+function observerFrame(m, hemi) {
+  let right = unit(cross(m, [0, 0, 1])), up = cross(right, m);
+  if (hemi === 'south') { right = scale(right, -1); up = scale(up, -1); }
+  return {right, up};
+}
+function moon(E, incl = TRUE_INCL, node = 90, hemi = 'north') {
+  const e = mod(E, 360), m = moonDir(e, incl, node), psi = sep(m, SUN);
+  const fromShadow = sep(m, ANTI_SUN), side = dot(SUN, observerFrame(m, hemi).right);
+  return {
+    E: e, dir: m, psi, lit: (1 - Math.cos(rad(psi))) / 2, phase: phaseOf(e), age: e / 360 * SYNODIC,
+    litSide: Math.abs(side) < 0.02 ? 'none' : side > 0 ? 'right' : 'left',
+    rise: mod(6 + e / 15, 24), transit: mod(12 + e / 15, 24), set: mod(18 + e / 15, 24),
+    fromShadow, fromSun: psi, beta: deg(Math.asin(m[2])),
+    eclipse: fromShadow < UMBRA_LIMIT ? 'lunar' : psi < SOLAR_LIMIT ? 'solar' : 'none'
+  };
+}
+// Eclipse outlook for the coming new and full Moons, given the orbit's tilt and node direction.
+function eclipses(incl, node) { const nm = moon(0, incl, node), fm = moon(180, incl, node); return {solar: nm.eclipse === 'solar', lunar: fm.eclipse === 'lunar', newSep: nm.fromSun, fullSep: fm.fromShadow}; }
+// Practice cases: keys come from the model.
+const PROBLEMS = [
+  {E: 135, key: () => moon(135).lit * 100, tol: 3, keep: ['angle']},
+  {E: 270, key: () => moon(270).rise},
+  {E: 40, key: () => moon(40).fromShadow}
+];
+function selfCheck() {
+  const fails = [], near = (a, b, t) => Math.abs(a - b) <= t, check = (ok, name) => { if (!ok) fails.push(name); };
+  check(near(moon(0, 0).lit, 0, 1e-9) && near(moon(180, 0).lit, 1, 1e-9) && near(moon(90, 0).lit, 0.5, 1e-9), 'lit fraction at new, full, quarter');
+  check(near(moon(135, 0).lit, 0.8536, 1e-3), 'lit fraction is not linear in angle');
+  for (const E of [0, 30, 90, 200, 300]) check(near(Math.hypot(...moonDir(E, TRUE_INCL, 37)), 1, 1e-12), 'unit Moon direction');
+  check(near(moon(0).rise, 6, 1e-9) && near(moon(90).rise, 12, 1e-9) && near(moon(180).rise, 18, 1e-9) && near(moon(270).rise, 0, 1e-9), 'moonrise follows the angle');
+  check(moon(90).litSide === 'right' && moon(270).litSide === 'left' && moon(90, TRUE_INCL, 90, 'south').litSide === 'left', 'lit side: waxing right in the north, flipped in the south');
+  check(moon(40).fromShadow > 130, 'a crescent is far from Earth’s shadow');
+  const flat = eclipses(0, 90); check(flat.solar && flat.lunar, 'flat orbit: eclipses every month');
+  const far = eclipses(TRUE_INCL, 90); check(!far.solar && !far.lunar && near(far.fullSep, TRUE_INCL, 0.01), 'nodes square to the Sun: no eclipses');
+  const season = eclipses(TRUE_INCL, 5); check(season.solar && season.lunar, 'eclipse season: both');
+  check(!eclipses(TRUE_INCL, 30).lunar, 'lunar eclipse limit about 11°');
+  check(near(PROBLEMS[0].key(), 85.2, 0.5), 'practice key 1');
+  return fails;
+}
+const failed = selfCheck();
+if (failed.length) throw new Error('moon-phases selfCheck failed: ' + failed.join('; '));
+
+// ---- Formatting -------------------------------------------------------
+const PHASE_NAME = {
+  'new': ['新月', 'New Moon'], 'waxing-crescent': ['娥眉月', 'Waxing crescent'], 'first-quarter': ['上弦月', 'First quarter'], 'waxing-gibbous': ['盈凸月', 'Waxing gibbous'],
+  'full': ['满月', 'Full Moon'], 'waning-gibbous': ['亏凸月', 'Waning gibbous'], 'third-quarter': ['下弦月', 'Third quarter'], 'waning-crescent': ['残月', 'Waning crescent']
+};
+const phaseName = p => tr(...PHASE_NAME[p]);
+function clockText(h) { let hh = Math.floor(h), mm = Math.round((h - hh) * 60); if (mm === 60) { hh += 1; mm = 0; } return `${hh % 24}:${String(mm).padStart(2, '0')}`; }
+const sideText = s => ({right: tr('右侧亮', 'lit on the right'), left: tr('左侧亮', 'lit on the left'), none: ''})[s];
+const withSide = (text, s, joiner) => s === 'none' ? text : text + joiner + sideText(s);
+const ECLIPSE = {none: ['没有', 'None'], lunar: ['月食', 'Lunar eclipse'], solar: ['日食', 'Solar eclipse']};
+const pct = x => (x * 100).toFixed(0) + '%';
+const f1 = x => x.toFixed(1);
+
+// ---- State ------------------------------------------------------------
+const DEFAULT = {E: 90, hemi: 'north', incl: TRUE_INCL, node: 90};
+const DEFAULT_VIEW = {yaw: 270, pitch: 28};
+const PRESETS = {above: {yaw: 270, pitch: 90}, sun: {yaw: 180, pitch: 8}, edge: {yaw: 270, pitch: 0}};
+const state = {...DEFAULT, prediction: null, seen: {crescent: false, full: false, above: false}, unlocked: false, practice: null, saved: null, checked: [], firstTry: []};
+const view = {...DEFAULT_VIEW};
+const VIS_INCL = 4;
+
+// ---- Drawing ----------------------------------------------------------
+function el(name, attrs, parent, text) {
+  const node = document.createElementNS(SVGNS, name);
+  for (const k in attrs) node.setAttribute(k, attrs[k]);
+  if (text != null) node.textContent = text;
+  if (parent) parent.appendChild(node);
+  return node;
+}
+let narrow = false;
+function layout() {
+  return narrow
+    ? {vb: [460, 880], space: {x: 0, y: 0, w: 460, h: 430}, sky: {x: 0, y: 440, w: 460, h: 250}, clock: {x: 0, y: 700, w: 460, h: 180}}
+    : {vb: [900, 520], space: {x: 0, y: 0, w: 560, h: 520}, sky: {x: 572, y: 0, w: 328, h: 292}, clock: {x: 572, y: 302, w: 328, h: 218}};
+}
+function camera(yaw, pitch) {
+  const y = rad(yaw), p = rad(pitch), d = [Math.cos(p) * Math.cos(y), Math.cos(p) * Math.sin(y), Math.sin(p)];
+  const right = [-Math.sin(y), Math.cos(y), 0];
+  return {d, right, up: cross(right, scale(d, -1))};
+}
+// A sphere lit from direction L, seen along toViewer with screen axes right/up: the lit part is the
+// half-disk facing the light plus or minus half of the terminator ellipse.
+function litDisk(g, cx, cy, r, L, right, up, toViewer, cls) {
+  const lx = dot(L, right), ly = dot(L, up), lz = dot(L, toViewer), f = n => n.toFixed(2);
+  el('circle', {cx: f(cx), cy: f(cy), r: f(r), class: cls[0]}, g);
+  if (Math.hypot(lx, ly) < 1e-6) { if (lz > 0) el('circle', {cx: f(cx), cy: f(cy), r: f(r), class: cls[1]}, g); return; }
+  const a = deg(Math.atan2(-ly, lx)), rx = Math.abs(lz) * r;
+  el('path', {d: `M0 ${f(-r)}A${f(r)} ${f(r)} 0 0 1 0 ${f(r)}A${f(rx)} ${f(r)} 0 0 ${lz > 0 ? 1 : 0} 0 ${f(-r)}Z`, transform: `translate(${f(cx)} ${f(cy)}) rotate(${f(a)})`, class: cls[1]}, g);
+}
+function hull(points) {
+  const p = points.slice().sort((a, b) => a[0] - b[0] || a[1] - b[1]), turn = (o, a, b) => (a[0] - o[0]) * (b[1] - o[1]) - (a[1] - o[1]) * (b[0] - o[0]);
+  const lower = [], upper = [];
+  for (const q of p) { while (lower.length > 1 && turn(lower[lower.length - 2], lower[lower.length - 1], q) <= 0) lower.pop(); lower.push(q); }
+  for (const q of p.reverse()) { while (upper.length > 1 && turn(upper[upper.length - 2], upper[upper.length - 1], q) <= 0) upper.pop(); upper.push(q); }
+  return lower.slice(0, -1).concat(upper.slice(0, -1));
+}
+function drawSpace(g, b, m) {
+  g.replaceChildren();
+  el('rect', {x: b.x, y: b.y, width: b.w, height: b.h, class: 'hit'}, g);
+  el('text', {x: b.x + 8, y: b.y + 18, class: 'ptitle'}, g, tr('太空视角（可拖动旋转，不按比例）', 'Space view (drag to turn; not to scale)'));
+  const cam = camera(view.yaw, view.pitch), S = Math.min(b.w, b.h - 40) / 2 / 1.62, cx = b.x + b.w / 2, cy = b.y + (b.h + 26) / 2;
+  const P = p => [cx + S * dot(p, cam.right), cy - S * dot(p, cam.up)], depth = p => dot(p, cam.d);
+  const items = [], add = (z, part, draw) => items.push({z, part, draw});
+  // Ecliptic reference ring and the Moon's (tilt-exaggerated) orbit, as short segments so they sort with the bodies.
+  const vis = state.incl * VIS_INCL, orbitAt = E => moonDir(E, vis, state.node);
+  for (let i = 0; i < 120; i++) {
+    const a = orbitAt(i * 3), c = orbitAt(i * 3 + 3), [x1, y1] = P(a), [x2, y2] = P(c);
+    add(depth(a) + depth(c), 'orbit', gg => el('line', {x1: x1.toFixed(1), y1: y1.toFixed(1), x2: x2.toFixed(1), y2: y2.toFixed(1), class: 'orbit-seg'}, gg));
+  }
+  for (let k = 0; k < 8; k++) {
+    const p = orbitAt(k * 45), [x, y] = P(p);
+    add(depth(p) * 2, 'orbit', gg => el('circle', {cx: x.toFixed(1), cy: y.toFixed(1), r: 2.6, class: 'orbit-tick'}, gg));
+  }
+  const ah = orbitAt(m.E + 24), at = orbitAt(m.E + 30), [hx, hy] = P(ah), [tx, ty] = P(at), ang = deg(Math.atan2(ty - hy, tx - hx));
+  add(depth(at) * 2, 'orbit', gg => el('path', {d: 'M5 0L-4 -4.5L-4 4.5Z', transform: `translate(${tx.toFixed(1)} ${ty.toFixed(1)}) rotate(${ang.toFixed(1)})`, class: 'orbit-arrow'}, gg));
+  // Sun far along -x, with parallel rays toward Earth.
+  const sunP = scale(SUN, 1.4), [sx, sy] = P(sunP);
+  add(depth(sunP) * 2, 'sun', gg => {
+    el('circle', {cx: sx, cy: sy, r: S * 0.21, class: 'sunglow'}, gg);
+    el('circle', {cx: sx, cy: sy, r: S * 0.12, class: 'sunball'}, gg);
+    el('text', {x: sx, y: sy - S * 0.24, 'text-anchor': 'middle', class: 'lbl-ink'}, gg, tr('太阳', 'Sun'));
+  });
+  for (const off of [[0, -0.35, 0], [0, 0.35, 0], [0, 0, 0.32], [0, 0, -0.32]]) {
+    const a = [-1.2 + off[0], off[1], off[2]], c = [-0.9, off[1], off[2]], [x1, y1] = P(a), [x2, y2] = P(c);
+    add(depth(a) + depth(c), 'sun', gg => {
+      el('line', {x1, y1, x2, y2, class: 'ray'}, gg);
+      const t = deg(Math.atan2(y2 - y1, x2 - x1));
+      if (Math.hypot(x2 - x1, y2 - y1) > 8) el('path', {d: 'M0 0L-7 -3.5L-7 3.5Z', transform: `translate(${x2.toFixed(1)} ${y2.toFixed(1)}) rotate(${t.toFixed(1)})`, fill: 'var(--sun)'}, gg);
+    });
+  }
+  // Earth's shadow: a cone pointing away from the Sun, drawn as the hull of its end circles.
+  const ER = 0.16, MR = 0.09, ring = (x, r) => Array.from({length: 24}, (_, i) => [x, r * Math.cos(i * Math.PI / 12), r * Math.sin(i * Math.PI / 12)]);
+  const cone = hull([...ring(0, ER), ...ring(1.25, 0.012)].map(P)), coneMid = [0.62, 0, 0];
+  add(depth(coneMid) * 2, 'shadow', gg => {
+    el('path', {d: 'M' + cone.map(p => p.map(v => v.toFixed(1)).join(' ')).join('L') + 'Z', class: 'shadow-cone'}, gg);
+    const [lx, ly] = P([1.3, 0, 0]);
+    el('text', {x: lx, y: ly + 16, 'text-anchor': 'middle', class: 'lbl'}, gg, tr('地球的影子', 'Earth’s shadow'));
+  });
+  // Earth, with a dark spot when the Moon's shadow falls on it.
+  const [ex, ey] = P([0, 0, 0]);
+  add(0, 'earth', gg => {
+    litDisk(gg, ex, ey, S * ER, SUN, cam.right, cam.up, cam.d, ['earth-night', 'earth-day']);
+    if (m.eclipse === 'solar') { const [dx, dy] = P(scale(SUN, ER * 0.9)); el('circle', {cx: dx, cy: dy, r: 3.2, class: 'eclipse-dot'}, gg); }
+    el('text', {x: ex + S * ER + 6, y: ey - S * ER, class: 'lbl-ink'}, gg, tr('地球', 'Earth'));
+  });
+  // The Moon and the line of sight from Earth.
+  const mp = orbitAt(m.E), [mx, my] = P(mp);
+  add(depth(mp) / 2, 'moon', gg => el('line', {x1: ex, y1: ey, x2: mx, y2: my, class: 'sight'}, gg));
+  add(depth(mp) * 2, 'moon', gg => {
+    if (m.eclipse === 'lunar') { el('circle', {cx: mx, cy: my, r: S * MR, class: 'moon-blood'}, gg); }
+    else litDisk(gg, mx, my, S * MR, SUN, cam.right, cam.up, cam.d, ['moon-dark', 'moon-lit']);
+    el('text', {x: mx, y: my - S * MR - 6, 'text-anchor': 'middle', class: 'lbl-accent'}, gg, tr('月球', 'Moon'));
+  });
+  items.sort((a, c) => a.z - c.z);
+  for (const it of items) it.draw(el('g', {'data-part': it.part}, g));
+  el('text', {x: b.x + 8, y: b.y + b.h - 8, class: 'lbl'}, g, tr(`视角：转 ${view.yaw}°，俯仰 ${view.pitch}° · 轨道倾角放大 ${VIS_INCL} 倍`, `View: turn ${view.yaw}°, tilt ${view.pitch}° · orbit tilt drawn ${VIS_INCL}×`));
+}
+function drawSky(g, b, m, hide) {
+  g.replaceChildren();
+  el('rect', {x: b.x + 4, y: b.y + 4, width: b.w - 8, height: b.h - 8, rx: 14, class: 'sky-bg'}, g);
+  el('text', {x: b.x + 16, y: b.y + 24, class: 'ptitle', style: 'fill:#c9d3dd'}, g, state.hemi === 'south' ? tr('从地球上看（南半球）', 'Seen from Earth (southern hemisphere)') : tr('从地球上看（北半球）', 'Seen from Earth (northern hemisphere)'));
+  const r = Math.min(b.w, b.h) * 0.27, cx = b.x + b.w / 2, cy = b.y + b.h / 2 + 2;
+  if (hide) {
+    el('circle', {cx, cy, r, class: 'ghost'}, g);
+    el('text', {x: cx, y: cy + 10, 'text-anchor': 'middle', class: 'q'}, g, '?');
+    return;
+  }
+  const fr = observerFrame(m.dir, state.hemi);
+  if (m.eclipse === 'lunar') el('circle', {cx, cy, r, class: 'moon-blood'}, g);
+  else litDisk(g, cx, cy, r, SUN, fr.right, fr.up, scale(m.dir, -1), ['moon-dark', 'moon-lit']);
+  el('text', {x: cx, y: b.y + b.h - 20, 'text-anchor': 'middle', style: 'font:650 15px var(--sans);fill:#f3f4f2'}, g, m.eclipse === 'lunar' ? tr('月全食中的满月', 'Full Moon in eclipse') : `${phaseName(m.phase)} · ${pct(m.lit)}`);
+}
+function drawClock(g, b, m, hide) {
+  g.replaceChildren();
+  el('text', {x: b.x + 8, y: b.y + 18, class: 'ptitle'}, g, tr('一天里谁在天上（赤道，春秋分）', 'Who is up during the day (equator, equinox)'));
+  const x0 = b.x + 62, x1 = b.x + b.w - 14, w = x1 - x0, X = h => x0 + w * h / 24;
+  const rows = [[tr('太阳', 'Sun'), b.y + 40, 6, 18, 'bar-day'], [tr('月亮', 'Moon'), b.y + 76, m.rise, m.set, 'bar-moon']];
+  rows.forEach(([name, y, from, to, cls], i) => {
+    el('text', {x: b.x + 8, y: y + 14, class: 'lbl-ink'}, g, name);
+    el('rect', {x: x0, y, width: w, height: 20, rx: 4, class: 'bar-night'}, g);
+    if (i && hide) return;
+    const spans = from < to ? [[from, to]] : [[from, 24], [0, to]];
+    for (const [a, c] of spans) if (c > a) el('rect', {x: X(a), y, width: X(c) - X(a), height: 20, class: cls + (i ? ' ans' : '')}, g);
+  });
+  for (const hr of [0, 6, 12, 18, 24]) {
+    el('line', {x1: X(hr), y1: b.y + 100, x2: X(hr), y2: b.y + 106, class: 'tick'}, g);
+    el('text', {x: X(hr), y: b.y + 120, 'text-anchor': 'middle', class: 'lbl'}, g, hr + ':00');
+  }
+  if (hide) { el('text', {x: b.x + 8, y: b.y + 150, class: 'lbl-ink'}, g, tr('月出：？', 'Moonrise: ?')); return; }
+  el('line', {x1: X(m.transit), y1: b.y + 72, x2: X(m.transit), y2: b.y + 100, class: 'now'}, g);
+  el('text', {x: b.x + 8, y: b.y + 150, class: 'lbl-ink'}, g, tr(`升起 ${clockText(m.rise)} · 最高 ${clockText(m.transit)} · 落下 ${clockText(m.set)}`, `rises ${clockText(m.rise)} · highest ${clockText(m.transit)} · sets ${clockText(m.set)}`));
+  el('text', {x: b.x + 8, y: b.y + 170, class: 'lbl'}, g, tr('橙线：月亮最高的时刻；每天约晚 49 分钟', 'Orange line: when the Moon is highest; about 49 min later each day'));
+}
+function hidden() { return state.prediction == null || (state.practice != null && !state.checked[state.practice]); }
+function draw(m) {
+  const L = layout(), svg = $('figure'), hide = hidden();
+  svg.setAttribute('viewBox', `0 0 ${L.vb[0]} ${L.vb[1]}`);
+  drawSpace($('g-space'), L.space, m); drawSky($('g-sky'), L.sky, m, hide); drawClock($('g-clock'), L.clock, m, hide);
+}
+
+// ---- Rendering --------------------------------------------------------
+const current = () => moon(state.E, state.incl, state.node, state.hemi);
+function summary(m) {
+  const ecl = m.eclipse === 'none' ? tr(`离地球影子中心 ${f1(m.fromShadow)}°，没有食`, `${f1(m.fromShadow)}° from the centre of Earth’s shadow, no eclipse`) : tr(ECLIPSE[m.eclipse][0], ECLIPSE[m.eclipse][1]);
+  return tr(`月球离太阳方向 ${Math.round(m.E)}°（一个月的第 ${f1(m.age)} 天）：${withSide(`${phaseName(m.phase)}，圆面亮 ${pct(m.lit)}`, m.litSide, '，')}。${clockText(m.rise)} 升起，${clockText(m.transit)} 最高，${clockText(m.set)} 落下。${ecl}。`,
+    `The Moon is ${Math.round(m.E)}° from the Sun’s direction (day ${f1(m.age)} of the month): ${withSide(`${phaseName(m.phase)}, ${pct(m.lit)} of the disk lit`, m.litSide, ', ')}. It rises at ${clockText(m.rise)}, is highest at ${clockText(m.transit)} and sets at ${clockText(m.set)}. ${ecl}.`);
+}
+function eclipseText() {
+  const k = eclipses(state.incl, state.node);
+  const nm = k.solar ? tr('新月时：日食（月球挡住太阳）。', 'At new Moon: a solar eclipse (the Moon covers the Sun).') : tr(`新月时：没有日食，月球从太阳旁 ${f1(k.newSep)}° 经过。`, `At new Moon: no solar eclipse; the Moon passes ${f1(k.newSep)}° from the Sun.`);
+  const fm = k.lunar ? tr('满月时：月食（月球进入地球的影子）。', 'At full Moon: a lunar eclipse (the Moon enters Earth’s shadow).') : tr(`满月时：没有月食，月球离影子中心 ${f1(k.fullSep)}°。`, `At full Moon: no lunar eclipse; the Moon passes ${f1(k.fullSep)}° from the shadow’s centre.`);
+  return nm + ' ' + fm;
+}
+function render() {
+  const m = current(), hide = hidden(), keep = state.practice != null ? PROBLEMS[state.practice].keep || [] : ['angle'];
+  draw(m);
+  const show = (id, text, key) => { const masked = hide && !keep.includes(key); $(id).textContent = masked ? '?' : text; $(id).closest('.readout').classList.toggle('masked', masked); return masked; };
+  show('ro-angle', Math.round(m.E) + '°', 'angle');
+  $('ro-angle-u').textContent = tr(`第 ${f1(m.age)} 天 / 29.5`, `day ${f1(m.age)} of 29.5`);
+  const litMasked = show('ro-lit', pct(m.lit), 'lit');
+  $('ro-lit-u').textContent = litMasked ? '' : withSide(phaseName(m.phase), m.litSide, ' · ');
+  const riseMasked = show('ro-rise', clockText(m.rise), 'rise');
+  $('ro-rise-u').textContent = riseMasked ? '' : tr(`最高 ${clockText(m.transit)} · 落下 ${clockText(m.set)}`, `highest ${clockText(m.transit)} · sets ${clockText(m.set)}`);
+  const eclMasked = show('ro-ecl', tr(...ECLIPSE[m.eclipse]), 'ecl');
+  $('ro-ecl-u').textContent = eclMasked ? '' : tr(`离影子中心 ${f1(m.fromShadow)}°`, `${f1(m.fromShadow)}° from the shadow’s centre`);
+  $('elong-out').textContent = Math.round(m.E) + '°';
+  $('node-out').textContent = state.node + '°';
+  $('yaw').value = view.yaw; $('pitch').value = view.pitch;
+  const text = state.prediction == null ? tr(`月球离太阳方向 ${Math.round(m.E)}°。先预测，地球上看到的样子和时间才会显示。`, `The Moon is ${Math.round(m.E)}° from the Sun’s direction. Predict first; the view from Earth and the times appear after.`)
+    : hide ? tr('练习中：答案已隐藏。', 'Practice: answers hidden.') : summary(m);
+  $('summary').textContent = text; $('fig-desc').textContent = text;
+  if (state.unlocked) say('eclipse-status', eclipseText);
+  renderChecklist();
+}
+function observe() {
+  if (!state.prediction || state.practice != null) return;
+  const m = current();
+  if (m.lit < 0.4 && m.lit > 0.02) state.seen.crescent = true;
+  if (m.lit > 0.97) state.seen.full = true;
+  if (view.pitch >= 70) state.seen.above = true;
+  const s = state.seen;
+  if (s.crescent && s.full && s.above && !state.unlocked) {
+    state.unlocked = true; $('explanation').hidden = false; $('practice').hidden = false;
+    say('try-status', () => tr('三项都看过了。解释、迁移和独立练习已在下面展开。', 'You have seen all three. The explanation, transfer and independent practice are open below.'));
+  }
+}
+function renderChecklist() { for (const k of ['crescent', 'full', 'above']) $('seen-' + k).classList.toggle('done', state.seen[k]); }
+function setE(E) { state.E = E; $('elong').value = E; }
+function setHemi(h) { state.hemi = h; for (const r of document.querySelectorAll('input[name=hemi]')) r.checked = r.value === h; }
+function setIncl(i) { state.incl = i; for (const r of document.querySelectorAll('input[name=incl]')) r.checked = Number(r.value) === i; }
+function setNode(n) { state.node = n; $('node').value = n; }
+function setView(yaw, pitch) { view.yaw = mod(Math.round(yaw), 360); view.pitch = clamp(Math.round(pitch), -10, 90); update(); }
+function update() { observe(); render(); }
+
+// ---- Events -----------------------------------------------------------
+const FEEDBACK = {
+  half: () => tr('你预测右半边亮、日落时最高。对：转过 90°，亮的一半正好有一半朝向地球；它在太阳东边 90°，比太阳晚 6 小时，所以中午升起、日落时最高。', 'You predicted the right half, highest at sunset. Right: at 90°, exactly half of the lit half faces Earth; being 90° east of the Sun, it runs 6 hours behind it, rising at noon and highest at sunset.'),
+  shadow: () => tr('你预测是地球的影子。看太空视角：影子指向背对太阳的方向，而月球在 90° 处，离影子有 90° 远。缺掉的部分是月球自己的夜晚那一面。', 'You predicted Earth’s shadow. Look at the space view: the shadow points directly away from the Sun, and the Moon at 90° is 90° away from it. The missing part is the Moon’s own night side.'),
+  full: () => tr('你预测是满月。没有影子挡着并不意味着全亮：阳光永远只能照亮月球的一半，在 90° 处我们只看到这一半的一半。', 'You predicted full. No shadow in the way does not mean fully lit: sunlight only ever lights half the Moon, and at 90° we see half of that half.'),
+  midnight: () => tr('你预测半亮、半夜最高。形状对了，时间不对：月亮不只属于夜晚。它在太阳东边 90°，比太阳晚 6 小时，日落时就已经在最高处，中午就升起了。', 'You predicted half lit, highest at midnight. The shape is right, the time is not: the Moon does not belong only to the night. Being 90° east of the Sun it runs 6 hours behind, highest at sunset and up since noon.')
+};
+$('prediction-form').addEventListener('submit', event => {
+  event.preventDefault();
+  const choice = new FormData(event.target).get('prediction');
+  if (!choice) return;
+  state.prediction = choice;
+  $('try-controls').disabled = false;
+  say('prediction-status', () => tr('已记下。地球上看到的月亮已经显示，现在移动月球、转动太空吧。', 'Saved. The view from Earth is now showing; move the Moon and turn space around.'));
+  say('prediction-feedback', FEEDBACK[choice]);
+  if (!state.unlocked) say('try-status', () => tr('完成上面三项，解释就会展开。', 'Complete the three items above and the explanation opens.'));
+  update();
+});
+$('elong').addEventListener('input', event => { state.E = Number(event.target.value); update(); });
+$('phases').addEventListener('click', event => { const b = event.target.closest('button[data-e]'); if (b && !$('try-controls').disabled) { setE(Number(b.dataset.e)); update(); } });
+$('views').addEventListener('click', event => { const b = event.target.closest('button[data-view]'); if (b) { const p = PRESETS[b.dataset.view]; setView(p.yaw, p.pitch); } });
+$('node').addEventListener('input', event => { state.node = Number(event.target.value); update(); });
+document.querySelector('[data-node]').parentElement.addEventListener('click', event => { const b = event.target.closest('button[data-node]'); if (b && !$('eclipse-controls').disabled) { setNode(Number(b.dataset.node)); update(); } });
+document.addEventListener('change', event => {
+  const t = event.target;
+  if (t.name === 'hemi') state.hemi = t.value;
+  else if (t.name === 'incl') state.incl = Number(t.value);
+  else return;
+  update();
+});
+$('yaw').addEventListener('input', event => setView(Number(event.target.value), view.pitch));
+$('pitch').addEventListener('input', event => setView(view.yaw, Number(event.target.value)));
+$('view-reset').addEventListener('click', () => setView(DEFAULT_VIEW.yaw, DEFAULT_VIEW.pitch));
+const svg = $('figure');
+let drag = null;
+svg.addEventListener('pointerdown', event => {
+  if (!event.target.closest('#g-space')) return;
+  drag = {x: event.clientX, y: event.clientY, yaw: view.yaw, pitch: view.pitch};
+  svg.setPointerCapture(event.pointerId);
+});
+svg.addEventListener('pointermove', event => {
+  if (!drag) return;
+  const k = 300 / Math.max(240, svg.clientWidth);
+  setView(drag.yaw - (event.clientX - drag.x) * k, drag.pitch + (event.clientY - drag.y) * k * 0.7);
+});
+for (const type of ['pointerup', 'pointercancel']) svg.addEventListener(type, () => { drag = null; });
+svg.addEventListener('keydown', event => {
+  const turn = {ArrowLeft: [-10, 0], ArrowRight: [10, 0], ArrowUp: [0, 5], ArrowDown: [0, -5]}[event.key];
+  if (turn) { event.preventDefault(); setView(view.yaw + turn[0], view.pitch + turn[1]); }
+  else if (event.key === 'Home') { event.preventDefault(); setView(DEFAULT_VIEW.yaw, DEFAULT_VIEW.pitch); }
+});
+$('transfer-form').addEventListener('submit', event => {
+  event.preventDefault();
+  const choice = new FormData(event.target).get('transfer');
+  if (!choice) return;
+  const text = {
+    tilt: ['对。倾斜 5.1° 时，满月通常从影子上方或下方 5° 左右经过，而影子加月球的半径还不到 1°。只有交点几乎对着太阳（相差约 11° 以内）的那几周，才会有月食；这样的“食季”大约每半年一次。', 'Correct. With a 5.1° tilt, a full Moon usually passes about 5° above or below the shadow, while the shadow plus the Moon’s radius spans less than 1°. Only in the few weeks when the nodes point within about 11° of the Sun does an eclipse happen; such eclipse seasons come about every six months.'],
+    small: ['不对。地球的本影能伸到约 138 万千米，是地月距离的三倍多，每个满月都够得着。问题在于月球常常从影子上方或下方经过。把倾角切到 0° 看看。', 'Not quite. Earth’s umbra reaches about 1.38 million km, more than three times the Moon’s distance, so it could reach every full Moon. The trouble is that the Moon usually passes above or below it. Switch the tilt to 0° and see.'],
+    daytime: ['不对。月食发生时，整个夜半球都能看到月亮，所以每次月食都有约一半的地球在看。如果每月都有，我们会经常看到。真正的原因是轨道倾斜。', 'Not quite. During a lunar eclipse the whole night side of Earth can see the Moon, so about half the planet watches every one. If they came monthly we would see them all the time. The real reason is the tilted orbit.']
+  }[choice];
+  say('transfer-feedback', () => tr(...text));
+});
+
+// ---- Independent practice ----------------------------------------------
+function loadProblem(i) {
+  state.practice = i;
+  setE(PROBLEMS[i].E); setHemi('north'); setIncl(TRUE_INCL); setNode(90);
+  for (const form of document.querySelectorAll('.problem')) form.hidden = Number(form.dataset.problem) !== i;
+  $('practice-next').hidden = true;
+  render();
+}
+function judge(i, form) {
+  const raw = new FormData(form).get('answer');
+  if (raw == null || raw === '') return null;
+  if (i === 0) {
+    const x = Number(raw), key = PROBLEMS[0].key(), near = v => Math.abs(x - v) <= 3;
+    if (Math.abs(x - key) <= PROBLEMS[0].tol) return {ok: true, msg: () => tr(`对，约 ${key.toFixed(0)}%。(1 − cos 135°) ÷ 2 = (1 + 0.71) ÷ 2 ≈ 0.85。`, `Correct: about ${key.toFixed(0)}%. (1 − cos 135°) ÷ 2 = (1 + 0.71) ÷ 2 ≈ 0.85.`)};
+    if (near(75)) return {ok: false, msg: () => tr('你按角度平均分了（135 ÷ 180 = 75%）。亮面是一个转过来的半球，投影按余弦变化：越接近满月，增长越慢。', 'You split it by angle (135 ÷ 180 = 75%). The lit face is a turning hemisphere, and its projection follows the cosine: it fills quickly at first and slowly near full.')};
+    if (near(50)) return {ok: false, msg: () => tr('月球本身确实永远有一半亮，但我们只看到亮的一半中朝向地球的那部分。135° 时大部分亮面朝着我们。', 'The Moon itself is always half lit, but we only see the part of that lit half facing Earth. At 135° most of it faces us.')};
+    if (near(100 - key)) return {ok: false, msg: () => tr('你算的是暗的部分。135° 已经过了上弦，亮面超过一半。', 'You found the dark part. At 135° the Moon is past first quarter, so more than half is lit.')};
+    return {ok: false, msg: () => tr('把 E = 135° 代入 (1 − cos E) ÷ 2；cos 135° ≈ −0.71。', 'Put E = 135° into (1 − cos E) ÷ 2; cos 135° ≈ −0.71.')};
+  }
+  if (i === 1) {
+    return raw === 'midnight' ? {ok: true, msg: () => tr('对。270° 比太阳晚 270 ÷ 15 = 18 小时，也就是早 6 小时：6:00 − 6 = 0:00 升起，早上 6:00 最高，中午才落下。所以早晨能在天上看到下弦月。', 'Correct. 270° puts it 270 ÷ 15 = 18 hours behind the Sun, which is 6 hours ahead: it rises at 0:00, is highest at 6:00 and sets at noon. That is why a third-quarter Moon hangs in the morning sky.')}
+      : raw === 'sunset' ? {ok: false, msg: () => tr('日落时升起的是满月（180°）。再往前走 90°，就要再晚 6 小时。', 'The full Moon (180°) rises at sunset. Another 90° adds another 6 hours.')}
+      : raw === 'noon' ? {ok: false, msg: () => tr('中午升起的是上弦月（90°），它在太阳东边。下弦月在太阳西边 90°，比太阳早 6 小时升起。', 'The first quarter (90°) rises at noon; it is east of the Sun. The third quarter is 90° west of the Sun and rises 6 hours before it.')}
+      : {ok: false, msg: () => tr('月亮不只属于夜晚：它在天上的时间由它和太阳的角度决定。下弦月半夜才升起，早上还挂在天上。', 'The Moon does not belong only to the night: when it is up depends on its angle from the Sun. A third-quarter Moon rises at midnight and is still up in the morning.')};
+  }
+  const away = f1(PROBLEMS[2].key());
+  return raw === 'night' ? {ok: true, msg: () => tr(`对。40° 时月球几乎在太阳和地球之间，亮的一半大多背对我们，我们看到的主要是它的夜晚那一面。地球的影子在另一边，离月球 ${away}°。`, `Correct. At 40° the Moon is nearly between Earth and the Sun; its lit half mostly faces away, and we mostly see its night side. Earth’s shadow is on the other side, ${away}° away.`)}
+    : raw === 'shadow' ? {ok: false, msg: () => tr(`这正是“影子模型”。转动太空视角：地球的影子背对太阳，离这个月牙有 ${away}° 远。只有满月附近，月球才可能进入影子。`, `That is the shadow model. Turn the space view: Earth’s shadow points away from the Sun, ${away}° from this crescent. Only near full Moon can the Moon enter it.`)}
+    : {ok: false, msg: () => tr('背面是永远背对地球的那一半，我们从来看不到它。暗的部分在正对我们的这一面上，只是这里正是月球的夜晚。', 'The far side is the half that always faces away from Earth; we never see it. The dark part is on the face turned toward us; it is simply night there.')};
+}
+for (const form of document.querySelectorAll('.problem')) {
+  form.addEventListener('submit', event => {
+    event.preventDefault();
+    const i = Number(form.dataset.problem), verdict = judge(i, form);
+    if (!verdict) return;
+    if (state.firstTry[i] == null) state.firstTry[i] = verdict.ok;
+    state.checked[i] = true;
+    say(form.querySelector('[data-feedback]'), () => (verdict.ok ? '' : tr('还不对。', 'Not yet. ')) + verdict.msg() + ' ' + tr('左图的答案已显示，可以对照。', 'The figure now shows the answer for comparison.'));
+    $('practice-next').hidden = i === PROBLEMS.length - 1;
+    const done = state.checked.filter(Boolean).length, first = state.firstTry.filter(Boolean).length;
+    say('practice-score', () => done === PROBLEMS.length ? tr(`完成 3 题，首次就答对 ${first} 题。`, `All 3 done; ${first} right on the first try.`) : '');
+    render();
+  });
+}
+$('practice-start').addEventListener('click', () => {
+  state.saved = {E: state.E, hemi: state.hemi, incl: state.incl, node: state.node};
+  state.checked = []; state.firstTry = [];
+  for (const form of document.querySelectorAll('.problem')) { form.reset(); say(form.querySelector('[data-feedback]'), null); }
+  say('practice-score', null);
+  $('try-controls').disabled = true; $('eclipse-controls').disabled = true;
+  $('problems').hidden = false; $('practice-start').hidden = true; $('practice-exit').hidden = false;
+  loadProblem(0);
+});
+$('practice-next').addEventListener('click', () => loadProblem(state.practice + 1));
+$('practice-exit').addEventListener('click', () => {
+  if (state.practice == null) return;
+  state.practice = null;
+  const s = state.saved; setE(s.E); setHemi(s.hemi); setIncl(s.incl); setNode(s.node);
+  $('try-controls').disabled = !state.prediction; $('eclipse-controls').disabled = false;
+  $('problems').hidden = true; $('practice-start').hidden = false; $('practice-exit').hidden = true;
+  render();
+});
+$('reset').addEventListener('click', () => {
+  state.practice = null;
+  Object.assign(state, DEFAULT, {prediction: null, seen: {crescent: false, full: false, above: false}, unlocked: false, saved: null, checked: [], firstTry: []});
+  Object.assign(view, DEFAULT_VIEW);
+  setE(DEFAULT.E); setHemi(DEFAULT.hemi); setIncl(DEFAULT.incl); setNode(DEFAULT.node);
+  $('prediction-form').reset(); $('transfer-form').reset(); $('writing').value = '';
+  for (const form of document.querySelectorAll('.problem')) { form.reset(); form.hidden = true; say(form.querySelector('[data-feedback]'), null); }
+  $('try-controls').disabled = true; $('eclipse-controls').disabled = false;
+  $('explanation').hidden = true; $('practice').hidden = true; $('problems').hidden = true; $('practice-start').hidden = false; $('practice-exit').hidden = true; $('practice-next').hidden = true;
+  for (const id of ['prediction-status', 'prediction-feedback', 'transfer-feedback', 'try-status', 'eclipse-status', 'practice-score']) say(id, null);
+  render();
+});
+I18N.on(render);
+new ResizeObserver(() => { const n = $('figure').clientWidth < 560; if (n !== narrow) { narrow = n; render(); } }).observe(document.querySelector('#experiment .stage'));
+I18N.apply();
+render();
+</script>
+</body>
+</html>

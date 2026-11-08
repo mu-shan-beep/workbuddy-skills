@@ -1,0 +1,832 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title data-i18n data-zh="忒修斯之船：换掉所有木板后，哪艘才是原来的船？" data-en="Ship of Theseus: after every plank is replaced, which ship is the original?">Ship of Theseus: after every plank is replaced, which ship is the original?</title>
+<style>
+/* lesson-shell v2: shared by every example page; keep identical across files */
+:root{color-scheme:light dark;--bar:56px;--bg:#f7f6f2;--surface:#fff;--stage:#eeece6;--ink:#141618;--text:#2a2e31;--muted:#61676c;--faint:#8b9196;--line:#e4e1d9;--line-strong:#cbc7bd;--accent:#d9480f;--accent-soft:#fcebe2;--focus:#d9480f;--ok:#1d7a4c;--sans:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Noto Sans SC","Microsoft YaHei",sans-serif;--mono:ui-monospace,"SF Mono",SFMono-Regular,Menlo,Consolas,monospace}
+@media(prefers-color-scheme:dark){:root{--bg:#111315;--surface:#181b1e;--stage:#0b0d0f;--ink:#f3f4f2;--text:#dadedc;--muted:#a1a7ab;--faint:#7a8085;--line:#272b2f;--line-strong:#3b4045;--accent:#ff7a45;--accent-soft:#2b1a11;--focus:#ff7a45;--ok:#4cc38a}}
+*{box-sizing:border-box}html{-webkit-text-size-adjust:100%}body{margin:0;background:var(--bg);color:var(--text);font:15.5px/1.6 var(--sans);-webkit-font-smoothing:antialiased}
+[hidden]{display:none!important}html[data-lang=zh] [lang=en],html[data-lang=en] [lang=zh]{display:none!important}
+:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+.skip{position:absolute;left:12px;top:-80px;z-index:30;background:var(--surface);color:var(--ink);padding:8px 12px;border-radius:8px}.skip:focus{top:10px}
+.bar{position:sticky;top:0;z-index:20;height:var(--bar);display:flex;align-items:center;gap:14px;padding:0 16px 0 20px;background:color-mix(in srgb,var(--bg) 90%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.bar .back{display:inline-flex;align-items:center;gap:6px;min-height:40px;color:var(--muted);text-decoration:none;font-size:14px;white-space:nowrap}.bar .back:hover{color:var(--ink)}
+.bar .crumb{min-width:0;font:500 12px/1.2 var(--mono);color:var(--faint);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lang-switch{margin-left:auto;flex:none;display:inline-flex;padding:3px;border:1px solid var(--line);border-radius:999px;background:var(--surface)}
+.lang-switch button{appearance:none;border:0;background:none;cursor:pointer;font:600 12px/1 var(--sans);min-height:30px;min-width:40px;padding:0 11px;border-radius:999px;color:var(--muted)}
+.lang-switch button[aria-pressed=true]{background:var(--ink);color:var(--bg)}
+.lesson{display:flex;flex-direction:column}.panel{display:contents}
+.intro{order:0;padding:28px 20px 6px}
+.figure-pane{order:1;margin:14px 12px 4px;padding:12px;background:var(--stage);border-radius:16px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.steps{order:2;padding:0 20px 40px}
+.stage{position:relative;min-height:0;display:grid;place-items:center}.stage>svg,.stage>canvas{display:block;width:100%;height:auto}
+.fig-caption{margin:0;font-size:12.5px;line-height:1.5;color:var(--muted)}
+.readouts{display:grid;grid-template-columns:repeat(auto-fit,minmax(104px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.readout{background:var(--surface);padding:9px 13px;min-width:0}
+.readout .k{display:block;font:500 12px/1.35 var(--sans);color:var(--muted)}
+.readout strong{display:block;font:650 21px/1.3 var(--sans);font-variant-numeric:tabular-nums;color:var(--ink);letter-spacing:-.01em;overflow-wrap:anywhere}
+.readout .u{display:block;font-size:12px;line-height:1.35;color:var(--faint)}
+.meta{display:flex;flex-wrap:wrap;gap:4px 10px;margin:0 0 14px;padding:0;list-style:none;font:500 12.5px/1.4 var(--sans);color:var(--muted)}.meta li+li::before{content:"/";margin-right:10px;color:var(--line-strong)}
+h1{margin:0 0 12px;font-size:clamp(25px,2.5vw,33px);line-height:1.18;letter-spacing:-.025em;font-weight:700;color:var(--ink);text-wrap:balance}
+.lead{margin:0;color:var(--muted)}
+.step{padding:26px 0 22px;border-top:1px solid var(--line)}.intro+.steps .step:first-child,.steps>.step:first-child{border-top:0}
+.step>h2{display:flex;align-items:center;gap:10px;margin:0 0 12px;font-size:17px;line-height:1.3;letter-spacing:-.01em;color:var(--ink)}
+.step>h2 .n{flex:none;font:600 11px/1 var(--mono);color:var(--accent);border:1px solid currentColor;border-radius:6px;padding:4px 6px}
+h3{margin:20px 0 6px;font-size:14.5px;color:var(--ink)}p{margin:0 0 12px}strong{color:var(--ink)}
+.small{font-size:13.5px;color:var(--muted)}
+fieldset{border:0;padding:0;margin:0;min-width:0}legend{padding:0;margin:0 0 12px;font-weight:600;color:var(--ink)}
+label.choice{display:flex;gap:10px;align-items:flex-start;padding:10px 13px;margin-bottom:8px;border:1px solid var(--line);border-radius:10px;background:var(--surface);cursor:pointer;transition:border-color .12s,box-shadow .12s}
+label.choice:hover{border-color:var(--line-strong)}label.choice:has(input:checked){border-color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink)}label.choice:has(input:disabled){cursor:default}
+label.choice input{flex:none;margin:4px 0 0}input{accent-color:var(--ink)}input[type=radio],input[type=checkbox]{width:17px;height:17px}
+button,select{font:500 14px/1.2 var(--sans);color:var(--ink);background:var(--surface);border:1px solid var(--line-strong);border-radius:10px;padding:0 16px;min-height:42px;cursor:pointer}
+button:hover:not(:disabled),select:hover:not(:disabled){border-color:var(--ink)}button.primary{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+button:disabled,select:disabled{opacity:.45;cursor:not-allowed}
+.controls{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:14px 0}
+.toggle{display:flex;align-items:center;gap:10px;min-height:42px;font-weight:500;color:var(--ink);cursor:pointer}
+.range{margin:16px 0 8px}.range label{display:flex;justify-content:space-between;gap:12px;font-weight:500;color:var(--ink)}.range output{font:500 13px/1.6 var(--mono);color:var(--muted)}
+input[type=range]{width:100%;min-height:32px;margin:4px 0}
+.status{min-height:1.6em;margin:12px 0;padding:10px 12px;border-radius:10px;background:var(--bg);font-size:14px}
+.callout{margin:14px 0;padding:2px 0 2px 14px;border-left:3px solid var(--accent)}
+textarea{display:block;width:100%;min-height:90px;margin-top:8px;padding:10px 12px;font:inherit;color:var(--text);background:var(--bg);border:1px solid var(--line-strong);border-radius:10px;resize:vertical}
+table{border-collapse:collapse;width:100%;margin-top:14px;font-size:14px}th,td{text-align:left;padding:9px 6px;border-bottom:1px solid var(--line);vertical-align:top}th:first-child,td:first-child{padding-left:0}caption{text-align:left;font-weight:600;color:var(--ink);margin-bottom:4px}
+.limits{color:var(--muted);font-size:14px}
+.pane-more{display:none}
+.foot{margin-top:8px;padding-top:16px;border-top:1px solid var(--line);font-size:12.5px;color:var(--faint)}
+/* attention: figure parts [data-part], step focus [data-focus], ordered highlights ol.look, dual-coding terms [data-ref] */
+#experiment [data-part]{transition:opacity .28s ease,filter .28s ease,box-shadow .2s ease}
+#experiment.tf-ring [data-part].tf-hot:not(svg *){box-shadow:0 0 0 2px var(--accent),0 0 0 7px color-mix(in srgb,var(--accent) 18%,transparent);border-radius:10px}
+#experiment.tf-ring svg [data-part].tf-hot{filter:drop-shadow(0 0 1px var(--accent)) drop-shadow(0 0 5px color-mix(in srgb,var(--accent) 40%,transparent))}
+.focus-bar{display:flex;align-items:center;gap:12px;min-height:30px;margin:-4px 0 -2px}
+.focus-caption{flex:1;min-width:0;margin:0;font-size:13px;line-height:1.4;color:var(--ink)}.focus-caption:empty{visibility:hidden}
+.focus-caption .look-n{display:inline-grid;place-items:center;min-width:20px;height:20px;margin-right:8px;padding:0 5px;border-radius:999px;background:var(--accent);color:#fff;font:700 11px/1 var(--sans);vertical-align:1px}
+.focus-toggle{flex:none;display:inline-flex;align-items:center;gap:7px;min-height:30px;font-size:12.5px;color:var(--muted);cursor:pointer;white-space:nowrap}.focus-toggle input{width:15px;height:15px;margin:0}
+ol.look{margin:12px 0 8px;padding:0;list-style:none;counter-reset:look}
+ol.look>li{counter-increment:look;position:relative;margin:0 0 6px;padding:8px 10px 8px 38px;border:1px solid var(--line);border-radius:10px;cursor:pointer;color:var(--muted);transition:border-color .15s,background .15s}
+ol.look>li::before{content:counter(look);position:absolute;left:10px;top:9px;display:grid;place-items:center;width:20px;height:20px;border-radius:999px;border:1px solid var(--line-strong);font:650 11px/1 var(--sans);color:var(--muted)}
+ol.look>li:hover{border-color:var(--line-strong)}ol.look>li[aria-current=step]{border-color:var(--accent);background:var(--accent-soft);color:var(--ink)}ol.look>li[aria-current=step]::before{background:var(--accent);border-color:var(--accent);color:#fff}
+.look-nav{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:0 0 14px}.look-nav button{min-height:34px;padding:0 11px;font-size:13px}.look-nav .look-num{min-width:34px;padding:0}.look-nav .look-num[aria-pressed=true]{background:var(--accent);border-color:var(--accent);color:#fff}
+[data-ref]:not(a,button,input,select,label){text-decoration:underline dotted color-mix(in srgb,var(--accent) 70%,transparent);text-decoration-thickness:1.5px;text-underline-offset:3px;cursor:help;border-radius:4px}
+[data-ref].tf-ref-on{background:var(--accent-soft);box-shadow:0 0 0 2px var(--accent-soft);color:var(--ink)}[data-ref][aria-pressed=true]{background:var(--accent-soft);box-shadow:0 0 0 1px var(--accent)}
+.part-tip{position:fixed;z-index:40;pointer-events:none;max-width:240px;padding:5px 9px;border-radius:8px;background:var(--ink);color:var(--bg);font:500 12.5px/1.35 var(--sans);box-shadow:0 4px 14px rgb(0 0 0/.18)}
+@media(min-width:960px) and (min-height:560px){
+.lesson{display:grid;grid-template-columns:minmax(0,1fr) clamp(380px,35vw,500px);height:calc(100dvh - var(--bar))}
+.panel{display:block;grid-column:2;grid-row:1;overflow-y:auto;overscroll-behavior:contain;background:var(--surface);border-left:1px solid var(--line)}
+.figure-pane{grid-column:1;grid-row:1;margin:0;border-radius:0;padding:24px 28px;min-height:0}
+.figure-pane{overflow-y:auto;overscroll-behavior:contain}.figure-pane>*{flex-shrink:0}
+.figure-pane .stage{flex:1}.figure-pane .stage>svg,.figure-pane .stage>canvas{height:100%;max-height:100%}
+.pane-more{display:flex;grid-column:1;grid-row:1;align-self:end;position:relative;z-index:2;justify-content:center;align-items:flex-end;height:76px;padding-bottom:14px;pointer-events:none;background:linear-gradient(color-mix(in srgb,var(--stage) 0%,transparent),var(--stage) 72%)}
+.pane-more button{pointer-events:auto;min-height:32px;padding:0 14px;border-radius:999px;font-size:12.5px;box-shadow:0 2px 10px rgb(0 0 0/.12)}
+.intro{padding:32px 32px 6px}.steps{padding:0 32px 48px}
+.bar{padding:0 20px 0 24px}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+/* /lesson-shell */
+:root{--oak:#a86d3c;--oak-edge:#7d4d27;--pine:#8fb1cf;--pine-edge:#5f86ab;--hull-line:#3b2c22;--water:#5d8fb8;--mark:#2a1d14}
+@media(prefers-color-scheme:dark){:root{--oak:#bf8550;--oak-edge:#e0ac77;--pine:#56809f;--pine-edge:#8db6d8;--hull-line:#d8c8b6;--water:#4f86b3;--mark:#1a120c}}
+.plank{stroke:var(--stage);stroke-width:1.6;stroke-linejoin:round}.plank.o{fill:var(--oak)}.plank.n{fill:var(--pine)}
+.plank.fresh{animation:fresh .7s ease-out}@keyframes fresh{from{opacity:0}}
+.slot{fill:none;stroke:var(--line-strong);stroke-width:1;stroke-dasharray:3 3}
+.bit{fill:var(--mark);opacity:.55}.miss{fill:none;stroke:var(--accent);stroke-width:1.6}
+.hull-line{fill:none;stroke:var(--hull-line);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.rig{fill:none;stroke:var(--hull-line);stroke-width:1.6;stroke-linecap:round;opacity:.75}
+.sail{fill:var(--surface);stroke:var(--hull-line);stroke-width:1.2;opacity:.9}
+.wave{fill:none;stroke:var(--water);stroke-width:1.6;opacity:.7}
+.ground{stroke:var(--line-strong);stroke-width:1.5}.trestle{fill:none;stroke:var(--faint);stroke-width:2;stroke-linecap:round}
+.divider{stroke:var(--line-strong);stroke-dasharray:2 5}
+.zone{fill:var(--muted);font:600 12px var(--sans);letter-spacing:.06em;text-transform:uppercase}
+.zone-name{fill:var(--ink);font:650 17px var(--sans)}.zone-note{fill:var(--muted);font:13px var(--sans)}
+.plate rect{fill:var(--surface);stroke:var(--hull-line);stroke-width:1.2}.plate text{fill:var(--ink);font:700 10.5px var(--sans);letter-spacing:.12em}
+.stack rect{stroke:var(--stage);stroke-width:1}
+.ghost{pointer-events:none}
+.verdicts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.verdict{background:var(--surface);padding:9px 13px;min-width:0}
+.verdict .k{display:block;font:500 12px/1.35 var(--sans);color:var(--muted)}
+.verdict strong{display:block;font:650 18px/1.3 var(--sans);overflow-wrap:anywhere}
+.verdict .u{display:block;font-size:11.5px;line-height:1.35;color:var(--faint)}
+.verdict[data-v=A] strong{color:var(--ink)}.verdict[data-v=B] strong{color:var(--accent)}.verdict[data-v=both] strong{color:var(--ok)}.verdict[data-v=neither] strong,.verdict[data-v=tie] strong{color:var(--muted)}
+.board-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin:0 0 -4px}
+.board-head h2{margin:0;font:600 12.5px/1.3 var(--sans);color:var(--muted)}
+#v-summary{font:600 13px/1.3 var(--sans);color:var(--ink);text-align:right}
+.legend{display:flex;flex-wrap:wrap;gap:4px 16px;margin:0;padding:0;list-style:none;font-size:12.5px;color:var(--muted)}
+.legend li{display:inline-flex;align-items:center;gap:6px}.sw{width:14px;height:9px;border-radius:2px;display:inline-block}
+.sw.o{background:var(--oak)}.sw.n{background:var(--pine)}.sw.m{border:1.6px solid var(--accent);border-radius:50%;width:9px}
+.criteria td:last-child,.criteria th:last-child{white-space:nowrap}
+.formula{margin:10px 0;padding:12px 14px;border-radius:10px;background:var(--bg);font:500 14.5px/1.6 var(--mono);overflow-wrap:anywhere}
+.note{margin:14px 0;padding:12px 14px;border:1px solid var(--line);border-radius:10px;font-size:14px}
+.note h3{margin-top:0}
+.range output{font-family:var(--sans);font-variant-numeric:tabular-nums}
+@media(max-width:620px){.verdicts{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(min-width:960px) and (min-height:560px){.figure-pane{gap:10px;padding:18px 24px}}
+</style>
+</head>
+<body>
+<a class="skip" href="#experiment"><span lang="zh">跳到实验</span><span lang="en">Skip to experiment</span></a>
+<header class="bar">
+<a class="back" href="index.html" data-keep-lang>← <span lang="zh">全部示例</span><span lang="en">All examples</span></a>
+<span class="crumb">ship-of-theseus.html</span>
+<div class="lang-switch" role="group" aria-label="语言 / Language"><button type="button" data-set-lang="zh" aria-pressed="false">中文</button><button type="button" data-set-lang="en" aria-pressed="true">EN</button></div>
+</header>
+<main class="lesson">
+<div class="panel">
+<div class="intro">
+<ul class="meta"><li><span lang="zh">哲学 · 同一性</span><span lang="en">Philosophy · identity</span></li><li><span lang="zh">信息论</span><span lang="en">Information theory</span></li><li><span lang="zh">约 8 分钟</span><span lang="en">~8 min</span></li></ul>
+<h1><span lang="zh">换掉每一块木板之后，哪艘才是忒修斯之船？</span><span lang="en">Once every plank is replaced, which ship is Theseus’s?</span></h1>
+<p class="lead" lang="zh">雅典人把忒修斯的船保存了几百年，木板烂一块换一块。现在多加一个人：他把换下来的旧木板全收起来，按原样拼回去。你来当修船匠，看看<strong>“同一艘船”</strong>这句话到底由什么决定。</p>
+<p class="lead" lang="en">The Athenians kept Theseus’s ship for centuries, swapping each rotten plank for a new one. Now add a collector who keeps every old plank and rebuilds the ship from them. Run the repairs yourself and watch what <strong>“the same ship”</strong> actually depends on.</p>
+</div>
+<div class="steps">
+<section class="step" aria-labelledby="predict-title" data-focus="shipA shipB name">
+<h2 id="predict-title"><span class="n">01</span><span lang="zh">预测</span><span lang="en">Predict</span></h2>
+<form id="prediction-form">
+<fieldset>
+<legend><span lang="zh"><span data-ref="shipA">船 A</span> 一直在港口服役，所有木板最终都被换成了新的。收藏家用换下来的旧木板拼出了<span data-ref="shipB">船 B</span>。哪艘才是忒修斯之船？</span><span lang="en"><span data-ref="shipA">Ship A</span> stays in service in the harbor until every plank has been replaced. The collector rebuilds <span data-ref="shipB">Ship B</span> from the old planks. Which one is Theseus’s ship?</span></legend>
+<label class="choice"><input type="radio" name="prediction" value="A" required><span><span lang="zh">船 A：一直在用、一直叫这个名字的那艘。</span><span lang="en">Ship A, the one that stayed in use under the name.</span></span></label>
+<label class="choice"><input type="radio" name="prediction" value="B"><span><span lang="zh">船 B：用的是当年的原木板。</span><span lang="en">Ship B, built from the original timber.</span></span></label>
+<label class="choice"><input type="radio" name="prediction" value="both"><span><span lang="zh">两艘都是。</span><span lang="en">Both of them.</span></span></label>
+<label class="choice"><input type="radio" name="prediction" value="neither"><span><span lang="zh">都不是，原来那艘已经不存在了。</span><span lang="en">Neither. The original no longer exists.</span></span></label>
+</fieldset>
+<div class="controls"><button type="submit" class="primary"><span lang="zh">记下预测</span><span lang="en">Save my prediction</span></button></div>
+<p id="prediction-status" class="small" aria-live="polite"></p>
+</form>
+</section>
+<section class="step" aria-labelledby="try-title" data-focus="shipA shipB name verdicts">
+<h2 id="try-title"><span class="n">02</span><span lang="zh">修船</span><span lang="en">Repair the ship</span></h2>
+<p lang="zh">每次修理换掉几块最朽的木板，新板照着被换下的那块仿制。先修几次，再打开收藏家，一直修到船 A 上一块原木板都不剩。边修边看图下方的<span data-ref="verdicts">四条判定标准</span>。</p>
+<p lang="en">Each repair swaps out the most rotten planks; each new plank is copied from the one it replaces. Run a few repairs, switch on the collector, and keep going until no original plank is left on Ship A. Watch <span data-ref="verdicts">the four criteria</span> under the figure as you go.</p>
+<div class="range">
+<label for="year"><span><span lang="zh">修理次数（每年一次）</span><span lang="en">Repairs (one per year)</span></span><output id="year-out" for="year"></output></label>
+<input id="year" type="range" min="0" max="72" step="1" value="0" disabled>
+</div>
+<div class="controls">
+<button id="step-year" class="primary" type="button" disabled><span lang="zh">再修一次</span><span lang="en">Next repair</span></button>
+<button id="play" type="button" disabled></button>
+<button id="reset" type="button"><span lang="zh">重置</span><span lang="en">Reset lesson</span></button>
+</div>
+<label class="toggle"><input id="collector" type="checkbox" disabled><span lang="zh">收藏家保留旧木板，拼成船 B</span><span lang="en">A collector keeps the old planks and rebuilds them as Ship B</span></label>
+<p id="status" class="status" role="status"></p>
+</section>
+<section id="explanation" class="step" aria-labelledby="explain-title" hidden>
+<h2 id="explain-title"><span class="n">03</span><span lang="zh">解释：标准分道扬镳</span><span lang="en">Explain: the criteria come apart</span></h2>
+<p id="prediction-feedback" class="callout"></p>
+<p lang="zh">“同一艘船”平时像是一个判断，其实是四个判断碰巧一致：木料、经历、设计、名字都指向同一个东西。修船本身没让问题变难。<strong>收藏家把这四样东西分到了<span data-ref="shipA shipB">两艘船</span>上</strong>，标准们才第一次给出不同答案。</p>
+<p lang="en">“The same ship” feels like one judgment. It is really four that usually agree: the timber, the history, the design and the name all point at one object. The repairs never made the question harder. <strong>The collector split those four things across <span data-ref="shipA shipB">two ships</span></strong>, and only then did the criteria give different answers.</p>
+<table class="criteria">
+<caption><span lang="zh">四条标准，以及它们在你这次运行中的判定</span><span lang="en">Four criteria, and what each says in your run</span></caption>
+<thead><tr><th scope="col"><span lang="zh">标准</span><span lang="en">Criterion</span></th><th scope="col"><span lang="zh">它追踪什么</span><span lang="en">What it tracks</span></th><th scope="col"><span lang="zh">判定</span><span lang="en">Verdict</span></th></tr></thead>
+<tbody>
+<tr><th scope="row"><span lang="zh">材料</span><span lang="en">Matter</span></th><td><span lang="zh">哪艘船拥有过半原木料</span><span lang="en">Which ship holds most of the original timber</span></td><td id="t-matter"></td></tr>
+<tr><th scope="row"><span lang="zh">时空连续</span><span lang="en">Continuity</span></th><td><span lang="zh">能否用一连串小改动连回最初那艘</span><span lang="en">Whether a chain of small changes leads back to the first ship</span></td><td id="t-continuity"></td></tr>
+<tr><th scope="row"><span lang="zh">形式（设计）</span><span lang="en">Form (design)</span></th><td><span lang="zh">哪艘还保有原设计（≥ ⅔ 的设计信息）</span><span lang="en">Which ship still carries the original design (≥ ⅔ of its information)</span></td><td id="t-form"></td></tr>
+<tr><th scope="row"><span lang="zh">名称（登记）</span><span lang="en">Name (registry)</span></th><td><span lang="zh">城邦把哪艘叫作忒修斯之船、让它继续服役</span><span lang="en">Which ship the city calls Theseus’s and keeps in service</span></td><td id="t-name"></td></tr>
+</tbody>
+</table>
+<ol class="look">
+<li data-focus="shipA name"><span lang="zh">先看船 A：它一直在服役、一直挂着名牌，所以时空连续和名称都跟着它。</span><span lang="en">Start with Ship A: it never left service and kept its name plate, so continuity and the name follow it.</span></li>
+<li data-focus="shipB"><span lang="zh">再看船 B：原木板全在这里，所以材料标准跟着它走。</span><span lang="en">Then Ship B: every original plank ended up here, so the matter criterion follows it.</span></li>
+<li data-focus="info"><span lang="zh">再看设计信息：新板照旧板仿制、没有出错，所以形式标准认出两艘都是。</span><span lang="en">Now the design information: the copies were exact, so the form criterion names both ships.</span></li>
+<li data-focus="verdicts"><span lang="zh">最后看判定板：平时一致的四条标准，被分到了两艘船上。</span><span lang="en">Finally the verdict board: four criteria that normally agree are now split across two ships.</span></li>
+</ol>
+<div lang="zh">
+<h3>一个奇怪的后果</h3>
+<p>如果按材料标准，船 A 是不是忒修斯之船，取决于城另一头有没有一个收藏家。可船 A 本身什么都没变。很多哲学家认为同一性应该只由两个对象自身之间的关系决定（“只看 x 和 y”原则），材料标准在这里违反了它。</p>
+<h3>“两艘都是”为什么也不行</h3>
+<p>同一性是一对一的：如果 A 和 B 都等于原来那艘船，那 A 就等于 B，但它们明明是两艘船，可以开往不同方向。所以“两艘都是”会在逻辑上出问题。四维论者给出另一种说法：从一开始就有两艘重叠的船，它们早年共用同一段历史，后来才分开。</p>
+<h3>这个问题的来历</h3>
+<p>普鲁塔克在《忒修斯传》里记载，雅典人一直保存这艘三十桨船，直到德米特里乌斯·法勒鲁斯的时代，旧木板一坏就换新的，哲学家们拿它当“生长之物”问题的范例。约两千年后，霍布斯在《论物体》（1655）里加了收藏家这一步，并回答：答案取决于你用哪个名称来问，问的是这堆材料、这个形式，还是这整个东西。</p>
+</div>
+<div lang="en">
+<h3>A strange consequence</h3>
+<p>On the matter criterion, whether Ship A is Theseus’s depends on whether a collector exists across town. Nothing about Ship A itself changed. Many philosophers hold that identity should turn only on the two things being compared (the “only x and y” principle). The matter criterion breaks it here.</p>
+<h3>Why “both” fails too</h3>
+<p>Identity is one-to-one. If A and B are each identical to the original, then A is identical to B, yet they are two ships that can sail in different directions. A four-dimensionalist offers another description: there were two overlapping ships all along, sharing their early history and parting later.</p>
+<h3>Where the puzzle comes from</h3>
+<p>Plutarch’s <em>Life of Theseus</em> reports that the Athenians preserved the thirty-oared ship down to the time of Demetrius of Phalerum, replacing decayed timbers as they went, and that philosophers used it as their standard example for “things that grow.” About two thousand years later Hobbes, in <em>De Corpore</em> (1655), added the collector and answered that it depends on the name under which you ask: the matter, the form, or the whole.</p>
+</div>
+<label for="explain-answer"><strong><span lang="zh">用你自己的话说。</span><span lang="en">Put it in your own words.</span></strong></label>
+<p class="small"><span lang="zh">“平时这四条标准一致，是因为 ___；收藏家让 ___ 和 ___ 分开了。”</span><span lang="en">“The criteria normally agree because ___; the collector separated ___ from ___.”</span></p>
+<textarea id="explain-answer" data-i18n data-zh-placeholder="你的解释只留在这个页面，不会保存或发送。" data-en-placeholder="Your explanation stays on this page. It is not saved or sent."></textarea>
+</section>
+<section id="gradual" class="step" aria-labelledby="gradual-title" data-focus="repair verdicts" hidden>
+<h2 id="gradual-title"><span class="n">04</span><span lang="zh">多慢才算“逐渐”？</span><span lang="en">How gradual is gradual?</span></h2>
+<p lang="zh">连续性标准要有个门槛：一次换得太多，就不算“修”，而是“重造”。这个模型规定，单次修理换掉的木板超过容忍值，连续链就断了。试试一次换 24 块：一夜之间整艘船换新。</p>
+<p lang="en">The continuity criterion needs a threshold. Replace too much at once and it is a rebuild, not a repair. In this model the chain breaks when one repair replaces more planks than the tolerance. Try replacing all 24 overnight.</p>
+<div class="range">
+<label for="rate"><span><span lang="zh">每次修理换几块</span><span lang="en">Planks per repair</span></span><output id="rate-out" for="rate"></output></label>
+<input id="rate" type="range" min="1" max="24" step="1" value="2" disabled>
+</div>
+<div class="range">
+<label for="tolerance"><span><span lang="zh">连续性容忍值</span><span lang="en">Continuity tolerance</span></span><output id="tolerance-out" for="tolerance"></output></label>
+<input id="tolerance" type="range" min="1" max="23" step="1" value="6" disabled>
+</div>
+<p lang="zh">现在试着找出那条线：把<span data-ref="repair">每次换的块数</span>调到 7，链断了；再把容忍值调到 7，链又接上了。换 7 块算修理，换 8 块就算重造吗？没有哪一块木板让差别突然变得明显。这就是<strong>连锁悖论</strong>（堆悖论）：每一步都“差不多一样”，但一步步累积起来就完全不同。门槛总得有人去定。</p>
+<p lang="en">Now look for the line. Set <span data-ref="repair">planks per repair</span> to 7 and the chain breaks; raise the tolerance to 7 and it holds again. Is swapping 7 a repair but 8 a rebuild? No single plank makes the difference obvious. This is the <strong>sorites paradox</strong> (the paradox of the heap): every step is “nearly the same,” yet the steps add up to something entirely different. Someone has to choose the threshold.</p>
+</section>
+<section id="drift" class="step" aria-labelledby="drift-title" data-focus="shipA info verdicts" hidden>
+<h2 id="drift-title"><span class="n">05</span><span lang="zh">复印件的复印件</span><span lang="en">A copy of a copy</span></h2>
+<p lang="zh">目前每块新板都和旧板一模一样，所以设计标准说“两艘都是”。真实的工匠会出错。木板上的小点是设计（每块 8 个比特）。设一个抄错率，新板照着<em>它替换的那块</em>来做，错误就会一代代传下去。</p>
+<p lang="en">So far every new plank matched its predecessor exactly, which is why the form criterion says “both.” Real carpenters make mistakes. The dots on each plank are its design, 8 bits per plank. Set a copy error, and since each new plank copies <em>the plank it replaces</em>, errors pass down the generations.</p>
+<form id="drift-form">
+<fieldset>
+<legend><span lang="zh">抄错率是每个比特 5%。每块木板都已被仿制了 3 代。船 A 还保留多少关于原设计的信息？</span><span lang="en">Copy error is 5% per bit. Every plank has been copied three times over. How much information about the original design does Ship A still carry?</span></legend>
+<label class="choice"><input type="radio" name="drift" value="most" required><span><span lang="zh">约 85%：抄三次，每次丢 5%。</span><span lang="en">About 85%: three copies, 5% lost each time.</span></span></label>
+<label class="choice"><input type="radio" name="drift" value="half"><span><span lang="zh">约 70%。</span><span lang="en">About 70%.</span></span></label>
+<label class="choice"><input type="radio" name="drift" value="less"><span><span lang="zh">不到一半。</span><span lang="en">Less than half.</span></span></label>
+</fieldset>
+<div class="controls"><button type="submit"><span lang="zh">记下预测</span><span lang="en">Save this prediction</span></button></div>
+</form>
+<p lang="zh" class="small">记下预测后：把抄错率调到 5%，再让每块板都被仿制 3 代，看图下方的<span data-ref="info">“船 A 的设计信息”</span>。</p>
+<p lang="en" class="small">Then set copy error to 5% and keep repairing until every plank has been copied three times. Read <span data-ref="info">“Design information in A”</span> under the figure.</p>
+<div class="range">
+<label for="error"><span><span lang="zh">抄错率（每比特）</span><span lang="en">Copy error per bit</span></span><output id="error-out" for="error"></output></label>
+<input id="error" type="range" min="0" max="20" step="1" value="0" disabled>
+</div>
+<div class="controls"><button id="three-copies" type="button" disabled><span lang="zh">修到每块板都仿制 3 代</span><span lang="en">Repair until every plank is copied 3 times</span></button></div>
+<label class="toggle"><input id="blueprint" type="checkbox" disabled><span lang="zh">保留原始图纸：每块新板都照图纸做</span><span lang="en">Keep the original blueprint and copy every new plank from it</span></label>
+<p id="drift-feedback" class="status" role="status"></p>
+<div lang="zh">
+<p>每仿制一次，就是让设计通过一条<strong>有噪声的信道</strong>：每个比特有 ε 的概率翻转。复印件再复印，就是把信道串起来。<strong>数据处理不等式</strong>说，串联只会让结果包含的关于原件的信息不增：</p>
+</div>
+<div lang="en">
+<p>Each copy sends the design through a <strong>noisy channel</strong>: every bit flips with probability ε. Copying a copy chains the channels. The <strong>data processing inequality</strong> says a chain can never increase what the result tells you about the original:</p>
+</div>
+<div class="formula">I(X; Y₃) ≤ I(X; Y₂) ≤ I(X; Y₁)<br>ε<sub>g</sub> = (1 − (1 − 2ε)<sup>g</sup>) / 2<br>I = 1 − H(ε<sub>g</sub>) <span data-i18n data-zh="比特 / 每个设计比特" data-en="bits per design bit">bits per design bit</span></div>
+<div lang="zh">
+<p>这里 g 是仿制的代数，H 是二元熵。5% 的错误抄 3 代，翻转率累积到 13.6%，留下的信息只有 43%。</p>
+<p><strong>为什么“相同比特”还有 86%，信息却只剩 43%？</strong>因为瞎猜也能对一半：随机比特和原件有 50% 相同，但信息量是零。信息衡量的是<em>超过瞎猜</em>的那部分，而且按对数计算。</p>
+<p><strong>原始图纸</strong>让每块板都只离原件一步，错误不再累积，信息稳定在 1 − H(ε)。母带、计量基准、权威版本的文本都靠这一招。代价是：设计标准又重新认出“两艘都是”。</p>
+</div>
+<div lang="en">
+<p>Here g is the number of copy generations and H is binary entropy. At 5% per copy, three generations compound to a 13.6% flip rate, leaving only 43% of the information.</p>
+<p><strong>Why do 86% of bits still match while only 43% of the information remains?</strong> Guessing gets half right. Random bits match the original 50% of the time and carry zero information. Information counts only agreement <em>beyond chance</em>, measured on a log scale.</p>
+<p><strong>The blueprint</strong> keeps every plank one step from the source. Errors stop compounding and information holds at 1 − H(ε). Master recordings, measurement standards and authoritative texts all rely on this. The cost: the form criterion goes back to naming both ships.</p>
+</div>
+</section>
+<section id="transfer" class="step" aria-labelledby="transfer-title" hidden>
+<h2 id="transfer-title"><span class="n">06</span><span lang="zh">迁移：传送机</span><span lang="en">Transfer: the teleporter</span></h2>
+<form id="transfer-form">
+<fieldset><legend><span lang="zh">帕菲特的传送机扫描你的全部结构，把你的身体销毁，再在火星用新物质照样造一个你。这一次扫描器出了故障，地球上的你没被销毁。哪条标准会像船 B 那样，同时认出两个“你”？</span><span lang="en">Parfit’s teleporter scans your full structure, destroys your body, and builds you again on Mars from new matter. This time the scanner malfunctions and the you on Earth is not destroyed. Which criterion, like the ship case, now names two of you?</span></legend>
+<label class="choice"><input type="radio" name="transfer" value="matter" required><span><span lang="zh">材料</span><span lang="en">Matter</span></span></label>
+<label class="choice"><input type="radio" name="transfer" value="continuity"><span><span lang="zh">时空连续</span><span lang="en">Continuity</span></span></label>
+<label class="choice"><input type="radio" name="transfer" value="form"><span><span lang="zh">形式（结构与模式）</span><span lang="en">Form (structure and pattern)</span></span></label>
+<label class="choice"><input type="radio" name="transfer" value="name"><span><span lang="zh">名称</span><span lang="en">Name</span></span></label>
+</fieldset>
+<div class="controls"><button type="submit"><span lang="zh">核对答案</span><span lang="en">Check my answer</span></button></div>
+<p id="transfer-feedback" class="status" role="status"></p>
+</form>
+</section>
+<section class="step limits" aria-labelledby="limits-title">
+<h2 id="limits-title"><span lang="zh">这个模型的适用范围</span><span lang="en">Where this model applies</span></h2>
+<div lang="zh">
+<p>船是示意：24 块木板、4 列船板，没有龙骨和肋骨；修理顺序固定，用来代表“最朽的先换”。每块板的设计简化成 8 个比特。</p>
+<p>三个门槛是模型的选择，不是事实：材料按过半计，连续性按容忍值计，设计按 ⅔ 的信息计。改变门槛就会改变判定，这本身就是本课要说的一点。信息量的计算假设原设计的每个比特等可能为 0 或 1，抄错彼此独立（二元对称信道）；“相同比特”用的是固定随机种子下的一次抽样。</p>
+<p>四条标准并不完整。四维论、“没有船”的取消论、帕菲特“同一性并不重要”的观点，都给出不同的处理方式。本页不判定哪种是对的。</p>
+</div>
+<div lang="en">
+<p>The ship is schematic: 24 planks in 4 strakes, with no keel or frames. Repairs follow a fixed order standing in for “most rotten first.” Each plank’s design is reduced to 8 bits.</p>
+<p>The three thresholds are model choices, not facts: matter uses a majority, continuity a tolerance, form two thirds of the information. Moving a threshold changes a verdict, which is part of the lesson. The information measure assumes each design bit is equally likely 0 or 1 and copy errors are independent (a binary symmetric channel). “Bits matching” is one sample from a fixed random seed.</p>
+<p>These four criteria are not the whole field. Four-dimensionalism, eliminativism about ships, and Parfit’s view that identity is not what matters each handle the case differently. This page does not decide between them.</p>
+</div>
+<p class="foot"><span lang="zh">离线可用。用 Tab 切换控件，方向键调节滑块。没有快捷键会干扰你的写作。</span><span lang="en">Works offline. Use Tab to reach controls and arrow keys on sliders. No keyboard shortcuts override your writing.</span></p>
+</section>
+</div>
+</div>
+<section id="experiment" class="figure-pane" aria-labelledby="figure-title">
+<div class="stage">
+<svg id="figure" viewBox="0 0 760 500" role="img" aria-labelledby="figure-title figure-desc">
+<title id="figure-title" data-i18n data-zh="港口里的船 A 与收藏家院子里的船 B（侧视示意）" data-en="Ship A in the harbor and Ship B in the collector’s yard, side view">Ship A in the harbor and Ship B in the collector’s yard, side view</title>
+<desc id="figure-desc"></desc>
+<g id="scene"></g>
+<g id="ghosts"></g>
+</svg>
+</div>
+<div class="readouts" data-i18n data-zh-aria-label="当前状态" data-en-aria-label="Current state" aria-label="Current state">
+<div class="readout" data-part="shipA"><span class="k" data-ref="shipA"><span lang="zh">船 A 的原木料</span><span lang="en">Original timber in A</span></span><strong id="ro-a"></strong><span class="u" id="ro-a-u"></span></div>
+<div class="readout" data-part="shipB"><span class="k" data-ref="shipB"><span lang="zh">船 B 的原木料</span><span lang="en">Original timber in B</span></span><strong id="ro-b"></strong><span class="u" id="ro-b-u"></span></div>
+<div class="readout" data-part="repair" data-zh-label="单次修理换掉的最多木板数" data-en-label="Most planks replaced in one repair"><span class="k"><span lang="zh">单次最大修理</span><span lang="en">Largest single repair</span></span><strong id="ro-repair"></strong><span class="u" id="ro-repair-u"></span></div>
+<div class="readout" data-part="info" data-zh-label="船 A 还保留多少原设计的信息" data-en-label="How much of the original design Ship A still carries"><span class="k"><span lang="zh">船 A 的设计信息</span><span lang="en">Design information in A</span></span><strong id="ro-info"></strong><span class="u" id="ro-info-u"></span></div>
+</div>
+<div class="board-head"><h2><span lang="zh">哪艘是忒修斯之船？</span><span lang="en">Which is Theseus’s ship?</span></h2><span id="v-summary" aria-live="polite"></span></div>
+<div class="verdicts" data-part="verdicts" data-zh-label="四条标准各自的判定" data-en-label="What each of the four criteria says">
+<div class="verdict" id="cell-matter"><span class="k"><span lang="zh">材料</span><span lang="en">Matter</span></span><strong id="v-matter"></strong><span class="u" id="v-matter-u"></span></div>
+<div class="verdict" id="cell-continuity"><span class="k"><span lang="zh">时空连续</span><span lang="en">Continuity</span></span><strong id="v-continuity"></strong><span class="u" id="v-continuity-u"></span></div>
+<div class="verdict" id="cell-form"><span class="k"><span lang="zh">形式（设计）</span><span lang="en">Form (design)</span></span><strong id="v-form"></strong><span class="u" id="v-form-u"></span></div>
+<div class="verdict" id="cell-name"><span class="k"><span lang="zh">名称（登记）</span><span lang="en">Name (registry)</span></span><strong id="v-name"></strong><span class="u" id="v-name-u"></span></div>
+</div>
+<ul class="legend"><li data-ref="shipA shipB"><span class="sw o"></span><span lang="zh">原木板</span><span lang="en">Original timber</span></li><li data-ref="shipA"><span class="sw n"></span><span lang="zh">替换木板</span><span lang="en">Replacement timber</span></li><li data-ref="info"><span class="sw m"></span><span lang="zh">与原设计不同的比特</span><span lang="en">Design bit that differs from the original</span></li></ul>
+</section>
+</main>
+<script>
+'use strict';
+/* lesson-shell i18n v2: shared by every example page; keep identical across files.
+   Static copy: paired elements <span lang="zh">…</span><span lang="en">…</span> (CSS hides the other language).
+   Text-only nodes and attributes: data-i18n plus data-zh / data-en (textContent) or data-zh-<attr> / data-en-<attr>.
+   Dynamic copy: tr('中文', 'English'); say(el, () => tr(…)) re-renders the message when the language changes. */
+const I18N = (() => {
+  const KEY = 'tf-lang', LANGS = ['zh', 'en'];
+  const stored = (() => { try { return localStorage.getItem(KEY); } catch { return null; } })();
+  const param = new URLSearchParams(location.search).get('lang');
+  let lang = LANGS.includes(param) ? param : LANGS.includes(stored) ? stored : /^zh\b/i.test(navigator.language || '') ? 'zh' : 'en';
+  const listeners = [];
+  function apply() {
+    const root = document.documentElement;
+    root.lang = lang === 'zh' ? 'zh-CN' : 'en';
+    root.dataset.lang = lang;
+    for (const el of document.querySelectorAll('[data-i18n]')) {
+      for (const { name, value } of [...el.attributes]) {
+        if (name === 'data-' + lang) el.textContent = value;
+        else if (name.startsWith('data-' + lang + '-')) el.setAttribute(name.slice(lang.length + 6), value);
+      }
+    }
+    for (const button of document.querySelectorAll('[data-set-lang]')) button.setAttribute('aria-pressed', String(button.dataset.setLang === lang));
+    for (const link of document.querySelectorAll('a[data-keep-lang]')) {
+      const target = new URL(link.getAttribute('href').split('?')[0], location.href);
+      target.searchParams.set('lang', lang);
+      link.href = target.href;
+    }
+    listeners.forEach(fn => fn(lang));
+  }
+  document.addEventListener('click', event => {
+    const button = event.target.closest('[data-set-lang]');
+    if (!button || button.dataset.setLang === lang) return;
+    lang = button.dataset.setLang;
+    try { localStorage.setItem(KEY, lang); } catch {}
+    try { const here = new URL(location.href); here.searchParams.set('lang', lang); history.replaceState(history.state, '', here); } catch {}
+    apply();
+  });
+  return { get lang() { return lang; }, on(fn) { listeners.push(fn); }, apply };
+})();
+const tr = (zh, en) => I18N.lang === 'zh' ? zh : en;
+const spoken = new Map();
+function say(target, message) {
+  const el = typeof target === 'string' ? document.getElementById(target) : target;
+  spoken.set(el, message);
+  el.textContent = message ? message() : '';
+}
+I18N.on(() => spoken.forEach((message, el) => { el.textContent = message ? message() : ''; }));
+// On short screens the figure pane scrolls on its own; while more of it is below the fold, show a cue that scrolls it.
+(() => {
+  const pane = document.querySelector('.lesson > .figure-pane');
+  if (!pane) return;
+  const cue = document.createElement('div');
+  cue.className = 'pane-more';
+  cue.hidden = true;
+  cue.innerHTML = '<button type="button" tabindex="-1" aria-hidden="true"></button>';
+  const button = cue.firstChild;
+  const label = () => { button.textContent = tr('下方还有内容 ↓', 'More below ↓'); };
+  label();
+  I18N.on(label);
+  button.addEventListener('click', () => pane.scrollBy({ top: pane.clientHeight * 0.75, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' }));
+  pane.after(cue);
+  function update() {
+    const scrolls = getComputedStyle(pane).overflowY !== 'visible' && pane.scrollHeight > pane.clientHeight + 1;
+    cue.hidden = !(scrolls && pane.scrollHeight - pane.clientHeight - pane.scrollTop > 4);
+    if (scrolls) pane.tabIndex = 0; else pane.removeAttribute('tabindex');
+  }
+  const sizes = new ResizeObserver(update);
+  const watch = () => { sizes.disconnect(); sizes.observe(pane); for (const child of pane.children) sizes.observe(child); };
+  new MutationObserver(() => { watch(); update(); }).observe(pane, { childList: true });
+  pane.addEventListener('scroll', update, { passive: true });
+  addEventListener('resize', update);
+  watch();
+  update();
+})();
+/* Attention guide. Figure parts: [data-part="id"] inside #experiment (labels: data-zh-label / data-en-label).
+   Step focus: a panel .step or element with data-focus="id …" dims the other parts while it is the active step
+   (focused element first, else the first visible step crossing the reading line). Ordered highlights: ol.look > li[data-focus].
+   Dual coding: [data-ref="id …"] terms and legend items link to parts both ways. Nothing moves until the learner scrolls, hovers or clicks. */
+(() => {
+  const figure = document.getElementById('experiment');
+  if (!figure || !figure.querySelector('[data-part]')) return;
+  const panel = document.querySelector('.lesson > .panel');
+  const KEY = 'tf-focus-guide', ids = value => (value || '').split(/\s+/).filter(Boolean);
+  let guide = (() => { try { return localStorage.getItem(KEY) !== 'off'; } catch { return true; } })();
+  let stepIds = [], look = null, peek = null, pinned = null, activeStep = null;
+  const style = document.createElement('style');
+  document.head.append(style);
+  const bar = document.createElement('div');
+  bar.className = 'focus-bar';
+  bar.innerHTML = '<p class="focus-caption" aria-live="polite"></p><label class="focus-toggle"><input type="checkbox"><span></span></label>';
+  const caption = bar.firstChild, toggle = bar.querySelector('input'), toggleText = bar.querySelector('.focus-toggle span');
+  toggle.checked = guide;
+  figure.prepend(bar);
+  const tip = document.createElement('div');
+  tip.className = 'part-tip';
+  tip.hidden = true;
+  document.body.append(tip);
+  const fine = matchMedia('(hover: hover) and (pointer: fine)');
+  const sel = list => list.map(id => `[data-part~="${CSS.escape(id)}"]`).join(',');
+  function render() {
+    const hot = pinned || peek || (look && look.ids) || (guide ? stepIds : []);
+    const ring = !!(pinned || peek || look);
+    figure.classList.toggle('tf-ring', ring && hot.length > 0);
+    figure.toggleAttribute('data-focusing', hot.length > 0);
+    style.textContent = hot.length ? `#experiment [data-part]:not(${sel(hot)}){opacity:.24;filter:saturate(.35)}` : '';
+    for (const part of figure.querySelectorAll('[data-part]')) part.classList.toggle('tf-hot', ring && ids(part.dataset.part).some(id => hot.includes(id)));
+  }
+  // Re-rendered figures replace their children; keep the hot class on new parts.
+  new MutationObserver(() => { if (figure.classList.contains('tf-ring')) render(); }).observe(figure, { childList: true, subtree: true });
+  const visible = el => el.offsetParent !== null || el.getClientRects().length > 0;
+  const steps = () => [...document.querySelectorAll('.panel .step, .panel [data-focus]:not(ol.look *)')].filter(visible);
+  function pickStep() {
+    const scroller = panel && getComputedStyle(panel).overflowY !== 'visible' ? panel : null;
+    const box = scroller ? scroller.getBoundingClientRect() : { top: 0, bottom: innerHeight, height: innerHeight };
+    const line = box.top + box.height * 0.3, list = steps();
+    const inView = el => { const r = el.getBoundingClientRect(); return r.bottom > box.top && r.top < box.bottom; };
+    const focused = document.activeElement && list.filter(el => el.contains(document.activeElement)).pop();
+    if (focused && inView(focused)) return focused;
+    let found = null;
+    for (const el of list) { const r = el.getBoundingClientRect(); if (r.bottom > line && r.top < box.bottom && (!found || found.contains(el))) found = el; else if (found && !found.contains(el)) break; }
+    return found;
+  }
+  function update() {
+    const step = pickStep();
+    if (step !== activeStep) {
+      activeStep = step;
+      if (look && !(step && step.contains(look.list))) setLook(null);
+    }
+    const target = step && (step.matches('[data-focus]') ? step : null);
+    stepIds = target ? ids(target.dataset.focus) : [];
+    render();
+  }
+  let queued = false;
+  const schedule = () => { if (!queued) { queued = true; requestAnimationFrame(() => { queued = false; update(); }); } };
+  (panel || document).addEventListener('scroll', schedule, { passive: true });
+  addEventListener('scroll', schedule, { passive: true });
+  addEventListener('resize', schedule);
+  document.addEventListener('focusin', schedule);
+  new MutationObserver(schedule).observe(document.querySelector('.panel') || document.body, { attributes: true, attributeFilter: ['hidden'], subtree: true });
+  toggle.addEventListener('change', () => { guide = toggle.checked; try { localStorage.setItem(KEY, guide ? 'on' : 'off'); } catch {} render(); });
+  // Ordered highlights.
+  const lists = [...document.querySelectorAll('ol.look')];
+  function setLook(next) {
+    look = next;
+    for (const list of lists) {
+      const items = [...list.children];
+      items.forEach((li, i) => { if (next && next.list === list && next.index === i) li.setAttribute('aria-current', 'step'); else li.removeAttribute('aria-current'); });
+      for (const button of list.previousElementSibling.querySelectorAll('.look-num')) button.setAttribute('aria-pressed', String(!!next && next.list === list && Number(button.dataset.index) === next.index));
+    }
+    caption.textContent = '';
+    if (next) {
+      const n = document.createElement('span');
+      n.className = 'look-n';
+      n.textContent = `${next.index + 1}/${next.list.children.length}`;
+      const text = document.createElement('span');
+      text.append(...[...next.list.children[next.index].childNodes].map(node => node.cloneNode(true)));
+      caption.append(n, text);
+    }
+    render();
+  }
+  const go = (list, index) => setLook({ list, index, ids: ids(list.children[index].dataset.focus) });
+  for (const list of lists) {
+    const nav = document.createElement('div');
+    nav.className = 'look-nav';
+    const items = [...list.children];
+    items.forEach((li, i) => {
+      const b = document.createElement('button');
+      b.type = 'button'; b.className = 'look-num'; b.dataset.index = i; b.textContent = i + 1; b.setAttribute('aria-pressed', 'false');
+      b.addEventListener('click', () => go(list, i));
+      nav.append(b);
+      li.addEventListener('click', event => { if (!event.target.closest('a,button,input,[data-ref]')) go(list, i); });
+    });
+    const make = (cls, zh, en, fn) => { const b = document.createElement('button'); b.type = 'button'; b.className = cls; const label = () => { b.textContent = tr(zh, en); }; label(); I18N.on(label); b.addEventListener('click', fn); nav.append(b); };
+    const at = () => (look && look.list === list ? look.index : -1);
+    make('look-prev', '‹ 上一步', '‹ Prev', () => go(list, Math.max(0, at() - 1)));
+    make('look-next', '下一步 ›', 'Next ›', () => go(list, Math.min(items.length - 1, at() + 1)));
+    make('look-clear', '清除', 'Clear', () => setLook(null));
+    list.before(nav);
+  }
+  // Dual coding: terms ↔ parts.
+  const refs = () => document.querySelectorAll('[data-ref]');
+  for (const term of refs()) if (!term.matches('a,button,input,select,textarea,label,[tabindex]')) { term.tabIndex = 0; term.setAttribute('role', 'button'); term.setAttribute('aria-pressed', 'false'); }
+  const termOf = event => event.target.closest && event.target.closest('[data-ref]');
+  let pointer = 'mouse';
+  document.addEventListener('pointerdown', event => { pointer = event.pointerType; }, true);
+  document.addEventListener('pointerover', event => { const term = termOf(event); if (term && event.pointerType === 'mouse') { peek = ids(term.dataset.ref); render(); } });
+  document.addEventListener('pointerout', event => { const term = termOf(event); if (term && !term.contains(event.relatedTarget)) { peek = null; render(); } });
+  document.addEventListener('focusin', event => { const term = termOf(event); if (term) { peek = ids(term.dataset.ref); render(); } });
+  document.addEventListener('focusout', event => { if (termOf(event)) { peek = null; render(); } });
+  function pin(term) {
+    const next = ids(term.dataset.ref).join(' ');
+    pinned = pinned && pinned.join(' ') === next ? null : ids(next);
+    for (const other of refs()) if (other.getAttribute('role') === 'button') other.setAttribute('aria-pressed', String(!!pinned && other.dataset.ref === term.dataset.ref));
+    render();
+  }
+  document.addEventListener('click', event => { const term = termOf(event); if (term && term.getAttribute('role') === 'button' && pointer !== 'mouse') pin(term); });
+  document.addEventListener('keydown', event => {
+    const term = termOf(event);
+    if (term && term.getAttribute('role') === 'button' && (event.key === 'Enter' || event.key === ' ')) { event.preventDefault(); pin(term); }
+    if (event.key === 'Escape' && (look || pinned)) { pinned = null; for (const other of refs()) if (other.getAttribute('role') === 'button') other.setAttribute('aria-pressed', 'false'); setLook(null); }
+  });
+  function partLabel(part) { return part.getAttribute(`data-${I18N.lang}-label`); }
+  figure.addEventListener('pointermove', event => {
+    const part = event.target.closest && event.target.closest('[data-part]');
+    const label = part && partLabel(part);
+    for (const term of refs()) term.classList.toggle('tf-ref-on', !!part && ids(term.dataset.ref).some(id => ids(part.dataset.part).includes(id)));
+    if (!label || !fine.matches || event.pointerType !== 'mouse') { tip.hidden = true; return; }
+    tip.textContent = label;
+    tip.hidden = false;
+    const x = Math.min(event.clientX + 14, innerWidth - tip.offsetWidth - 8), y = event.clientY + 18 + tip.offsetHeight > innerHeight ? event.clientY - tip.offsetHeight - 12 : event.clientY + 18;
+    tip.style.left = x + 'px'; tip.style.top = y + 'px';
+  });
+  figure.addEventListener('pointerleave', () => { tip.hidden = true; for (const term of refs()) term.classList.remove('tf-ref-on'); });
+  const labels = () => { toggleText.textContent = tr('焦点引导', 'Focus guide'); };
+  labels();
+  I18N.on(() => { labels(); if (look) setLook(look); });
+  update();
+})();
+/* /lesson-shell */
+const $ = id => document.getElementById(id);
+const N = 24, COLS = 6, ROWS = 4, BITS = 8, YEARS = 72;
+// Deterministic hash in [0,1): the same seed gives the same planks, order and copy errors on every load.
+function hash(...values) {
+  let h = 2166136261;
+  for (const v of values) { h ^= v; h = Math.imul(h, 16777619); h ^= h >>> 13; h = Math.imul(h, 0x5bd1e995); h ^= h >>> 15; }
+  return (h >>> 0) / 4294967296;
+}
+const ORIGINAL = Array.from({length:N}, (_, i) => Array.from({length:BITS}, (_, b) => hash(7, i, b) < .5 ? 1 : 0));
+// Most-rotten-first order: a fixed permutation of plank positions.
+const ORDER = Array.from({length:N}, (_, i) => i).sort((a, b) => hash(11, a) - hash(11, b));
+const RANK = ORDER.reduce((rank, pos, j) => (rank[pos] = j, rank), []);
+const H2 = p => p <= 0 || p >= 1 ? 0 : -p*Math.log2(p) - (1-p)*Math.log2(1-p);
+const FORM_SHARE = 2/3;
+
+// Pure teaching model. Everything the figure, readouts and verdicts show comes from here.
+function model({year, rate, tolerance, collector, error, blueprint}) {
+  const eps = error / 100, k = year * rate;
+  const planks = Array.from({length:N}, (_, pos) => {
+    const j = RANK[pos], copies = k > j ? Math.floor((k - 1 - j) / N) + 1 : 0;
+    let bits = ORIGINAL[pos];
+    for (let g = 1; g <= copies; g++) {
+      const source = blueprint ? ORIGINAL[pos] : bits;
+      bits = source.map((bit, b) => hash(23, pos, g, b) < eps ? 1 - bit : bit);
+    }
+    const flip = copies === 0 ? 0 : blueprint ? eps : (1 - (1 - 2*eps) ** copies) / 2;
+    return {pos, copies, original:copies === 0, bits, info:BITS * (1 - H2(flip)),
+      miss:bits.map((bit, b) => bit !== ORIGINAL[pos][b])};
+  });
+  const originalInA = planks.filter(p => p.original).length;
+  const collected = collector ? N - originalInA : 0;
+  const removed = N - originalInA;
+  const infoBits = planks.reduce((sum, p) => sum + p.info, 0);
+  const matchBits = planks.reduce((sum, p) => sum + p.miss.filter(m => !m).length, 0);
+  const largest = year >= 1 ? rate : 0;
+  const broken = year >= 1 && rate > tolerance;
+  const bComplete = collector && collected === N;
+  const matter = originalInA > N/2 ? 'A' : collected > N/2 ? 'B' : collector && collected === N/2 ? 'tie' : 'neither';
+  const formA = infoBits / (N*BITS) >= FORM_SHARE - 1e-9;
+  const form = formA && bComplete ? 'both' : formA ? 'A' : bComplete ? 'B' : 'neither';
+  const verdicts = {matter, continuity:broken ? 'neither' : 'A', form, name:'A'};
+  const distinct = new Set(Object.values(verdicts)).size;
+  return {year, rate, tolerance, collector, error, blueprint, k, planks, originalInA, removed, collected, bComplete,
+    infoBits, infoShare:infoBits / (N*BITS), matchShare:matchBits / (N*BITS), largest, broken, verdicts, distinct,
+    minCopies:Math.min(...planks.map(p => p.copies))};
+}
+
+const state = {year:0, rate:2, tolerance:6, collector:false, error:0, blueprint:false,
+  prediction:null, drift:null, revealed:false, playing:false};
+let current = model(state), timer = 0;
+const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
+const pct = x => Math.round(x * 100) + '%';
+const shipName = v => ({A:tr('船 A','Ship A'), B:tr('船 B','Ship B'), both:tr('两艘都是','Both'), neither:tr('都不是','Neither'), tie:tr('平手','Tie')})[v];
+
+// Geometry: one schematic hull, drawn at two heights.
+const HULL = {x0:84, len:560, top:118, depth:96};
+const DY = 250;
+const sheer = u => HULL.top - (u < .5 ? 44 : 26) * (2*u - 1) ** 2;
+const depthAt = u => HULL.depth * Math.pow(Math.max(0, 1 - Math.abs(2*u - 1) ** 2.6), .6);
+const U0 = .035, U1 = .965;
+const pt = (u, t, dy = 0) => [HULL.x0 + u * HULL.len, sheer(u) + depthAt(u) * t + dy];
+const f = n => n.toFixed(1);
+function plankCells(pos) { const r = Math.floor(pos / COLS), c = pos % COLS, w = (U1 - U0) / COLS; return {r, c, u0:U0 + c*w, u1:U0 + (c+1)*w}; }
+function plankPath(pos, dy) {
+  const {r, u0, u1} = plankCells(pos), top = [], bottom = [];
+  for (let s = 0; s <= 8; s++) { const u = u0 + (u1 - u0) * s / 8; top.push(pt(u, r/ROWS, dy)); bottom.unshift(pt(u, (r+1)/ROWS, dy)); }
+  return 'M' + top.concat(bottom).map(([x, y]) => f(x) + ' ' + f(y)).join('L') + 'Z';
+}
+function plankCenter(pos, dy) { const {r, u0, u1} = plankCells(pos); return pt((u0 + u1) / 2, (r + .5) / ROWS, dy); }
+function marks(plank, dy) {
+  const {r, u0, u1} = plankCells(plank.pos);
+  return plank.bits.map((bit, b) => {
+    const u = u0 + (u1 - u0) * (b + .5) / BITS, [x, y] = pt(u, (r + .5) / ROWS, dy);
+    const rad = Math.max(1.1, Math.min(2.6, depthAt(u) / ROWS * .17));
+    return (bit ? `<circle class="bit" cx="${f(x)}" cy="${f(y)}" r="${f(rad)}"/>` : '') + (plank.miss[b] ? `<circle class="miss" cx="${f(x)}" cy="${f(y)}" r="${f(rad + 1.9)}"/>` : '');
+  }).join('');
+}
+function outline(dy) {
+  const line = t => Array.from({length:41}, (_, s) => pt(U0 + (U1 - U0) * s / 40, t, dy));
+  const d = pts => 'M' + pts.map(([x, y]) => f(x) + ' ' + f(y)).join('L');
+  const [sx, sy] = pt(U0, 0, dy), [bx, by] = pt(U1, 0, dy), [kx, ky] = pt(U1, 1, dy), [tx, ty] = pt(U0, 1, dy);
+  const stern = `M${f(tx)} ${f(ty)}L${f(sx)} ${f(sy)}C${f(sx - 18)} ${f(sy - 10)} ${f(sx - 30)} ${f(sy - 40)} ${f(sx - 12)} ${f(sy - 56)}C${f(sx - 2)} ${f(sy - 64)} ${f(sx + 8)} ${f(sy - 52)} ${f(sx - 2)} ${f(sy - 46)}`;
+  const bow = `M${f(bx)} ${f(by)}L${f(bx + 14)} ${f(by - 14)}M${f(kx)} ${f(ky)}L${f(kx + 34)} ${f(ky + 2)}L${f(kx + 6)} ${f(ky - 9)}`;
+  return `<path class="hull-line" d="${d(line(0))}"/><path class="hull-line" d="${d(line(1))}"/><path class="hull-line" d="${stern}"/><path class="hull-line" d="${bow}"/>`;
+}
+function stackSlot(j) { const col = j % 2, row = Math.floor(j / 2); return [270 + col * 116, DY + 196 - row * 8.5]; }
+function drawScene(m) {
+  const parts = [];
+  const [mx, my] = pt(.47, 0);
+  parts.push(`<defs><linearGradient id="sea-fade" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="var(--water)" stop-opacity=".16"/><stop offset="1" stop-color="var(--water)" stop-opacity="0"/></linearGradient></defs>`);
+  parts.push(`<text class="zone" x="736" y="30" text-anchor="end">${tr('港口 · 一直在服役','Harbor · in service')}</text><text class="zone-name" x="736" y="52" text-anchor="end">${tr('船 A','Ship A')}</text>`);
+  parts.push(`<path d="M0 ${HULL.top + 58}H760V${DY - 20}H0Z" fill="url(#sea-fade)"/>`);
+  parts.push(`<g data-part="shipA" data-zh-label="船 A：一直在港口服役" data-en-label="Ship A: in service the whole time">`);
+  parts.push(`<path class="rig" d="M${f(mx)} ${f(my)}V34M${f(mx - 70)} 46H${f(mx + 70)}"/><path class="sail" d="M${f(mx - 66)} 47H${f(mx + 66)}L${f(mx + 58)} 58H${f(mx - 58)}Z"/><path class="rig" d="M${f(mx)} 34L${f(pt(U0, 0)[0] + 6)} ${f(pt(U0, 0)[1] - 6)}M${f(mx)} 34L${f(pt(U1, 0)[0] - 4)} ${f(pt(U1, 0)[1] - 2)}"/>`);
+  for (const p of m.planks) parts.push(`<path class="plank ${p.original ? 'o' : 'n'}" data-pos="${p.pos}" d="${plankPath(p.pos, 0)}"/>`);
+  for (const p of m.planks) parts.push(marks(p, 0));
+  parts.push(outline(0));
+  parts.push('</g>');
+  const [px, py] = pt(.2, 0);
+  parts.push(`<g class="plate" data-part="name" data-zh-label="名牌：登记的名字跟着船 A" data-en-label="Name plate: the registered name stays with Ship A" transform="translate(${f(px - 34)} ${f(py - 28)})"><rect width="68" height="18" rx="4"/><text x="34" y="12.6" text-anchor="middle">ΘΗΣΕΥΣ</text></g>`);
+  let wave = `M0 ${HULL.top + 58}`;
+  for (let x = 0; x < 760; x += 20) wave += `q5 -4 10 0t10 0`;
+  parts.push(`<path class="wave" d="${wave}"/>`);
+  parts.push(`<line class="divider" x1="16" x2="744" y1="${DY - 12}" y2="${DY - 12}"/>`);
+  parts.push(`<g data-part="shipB" data-zh-label="${m.collector ? '船 B：用换下的原木板拼成' : '仓库：换下的原木板'}" data-en-label="${m.collector ? 'Ship B: rebuilt from the removed original planks' : 'Storehouse: the removed original planks'}">`);
+  if (m.collector) {
+    parts.push(`<text class="zone" x="736" y="${DY + 22}" text-anchor="end">${tr('收藏家的院子','Collector’s yard')}</text><text class="zone-name" x="736" y="${DY + 44}" text-anchor="end">${tr('船 B','Ship B')}</text><text class="zone-note" x="736" y="${DY + 64}" text-anchor="end">${tr(`已收集 ${m.collected} / 24 块原木板`,`${m.collected} of 24 original planks`)}</text>`);
+    const groundY = pt(.5, 1, DY)[1] + 34;
+    for (const u of [.28, .72]) { const [x, y] = pt(u, 1, DY); parts.push(`<path class="trestle" d="M${f(x - 18)} ${f(groundY)}L${f(x)} ${f(y + 2)}L${f(x + 18)} ${f(groundY)}M${f(x - 10)} ${f(y + 18)}H${f(x + 10)}"/>`); }
+    parts.push(`<line class="ground" x1="40" x2="720" y1="${f(groundY)}" y2="${f(groundY)}"/>`);
+    for (const p of m.planks) parts.push(p.original ? `<path class="slot" d="${plankPath(p.pos, DY)}"/>` : `<path class="plank o" data-b="${p.pos}" d="${plankPath(p.pos, DY)}"/>`);
+    for (const p of m.planks) if (!p.original) parts.push(marks({pos:p.pos, bits:ORIGINAL[p.pos], miss:ORIGINAL[p.pos].map(() => false)}, DY));
+    if (m.bComplete) parts.push(outline(DY));
+  } else {
+    parts.push(`<text class="zone" x="736" y="${DY + 22}" text-anchor="end">${tr('仓库','Storehouse')}</text><text class="zone-name" x="736" y="${DY + 44}" text-anchor="end">${tr('换下的旧木板','Old planks')}</text><text class="zone-note" x="736" y="${DY + 64}" text-anchor="end">${tr(`${m.removed} 块原木板堆在这里`,`${m.removed} original planks stacked here`)}</text>`);
+    parts.push(`<line class="ground" x1="40" x2="720" y1="${DY + 206}" y2="${DY + 206}"/>`);
+    if (!m.removed) parts.push(`<rect class="slot" x="262" y="${DY + 92}" width="242" height="112" rx="8"/><text class="zone-note" x="383" y="${DY + 152}" text-anchor="middle">${tr('还没有换下的木板','No planks removed yet')}</text>`);
+    parts.push('<g class="stack">');
+    for (let j = 0; j < m.removed; j++) { const [x, y] = stackSlot(j); parts.push(`<rect x="${x}" y="${y}" width="110" height="8" rx="2" fill="var(--oak)"/>`); }
+    parts.push('</g>');
+  }
+  parts.push('</g>');
+  $('scene').innerHTML = parts.join('');
+}
+function flyPlanks(prev, next) {
+  if (reducedMotion.matches || next.k <= prev.k || next.k - prev.k > N) return;
+  const ghosts = $('ghosts');
+  for (const p of next.planks) {
+    const before = prev.planks[p.pos];
+    if (p.copies === before.copies) continue;
+    $('scene').querySelector(`.plank[data-pos="${p.pos}"]`)?.classList.add('fresh');
+    const [cx, cy] = plankCenter(p.pos, 0);
+    let dx, dy, fade = false;
+    if (before.original && next.collector) [dx, dy] = [0, DY];
+    else if (before.original) { const [sx, sy] = stackSlot(RANK[p.pos]); [dx, dy] = [sx + 55 - cx, sy + 4 - cy]; }
+    else { [dx, dy] = [0, -60]; fade = true; }
+    const ghost = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    ghost.setAttribute('d', plankPath(p.pos, 0));
+    ghost.setAttribute('class', 'plank ghost ' + (before.original ? 'o' : 'n'));
+    ghosts.append(ghost);
+    const anim = ghost.animate([{transform:'translate(0,0)', opacity:1}, {transform:`translate(${dx}px,${dy}px)`, opacity:fade ? 0 : 1}], {duration:720, easing:'cubic-bezier(.4,0,.2,1)'});
+    anim.onfinish = anim.oncancel = () => ghost.remove();
+  }
+}
+
+function setVerdict(key, v, note) {
+  $('cell-' + key).dataset.v = v;
+  say('v-' + key, () => shipName(v));
+  say('v-' + key + '-u', note);
+  say('t-' + key, () => shipName(v));
+}
+function render(prev) {
+  const m = current = model(state);
+  drawScene(m);
+  if (prev) flyPlanks(prev, m);
+  $('year').value = state.year; $('rate').value = state.rate; $('tolerance').value = state.tolerance; $('error').value = state.error;
+  $('collector').checked = state.collector; $('blueprint').checked = state.blueprint;
+  say('year-out', () => tr(`${m.year} 次 · 已换 ${m.k} 块`,`${m.year} · ${m.k} planks swapped`));
+  say('rate-out', () => tr(`${m.rate} 块（${pct(m.rate / N)}）`,`${m.rate} (${pct(m.rate / N)})`));
+  say('tolerance-out', () => tr(`${m.tolerance} 块（${pct(m.tolerance / N)}）`,`${m.tolerance} planks (${pct(m.tolerance / N)})`));
+  say('error-out', () => `${m.error}%`);
+  $('ro-a').textContent = pct(m.originalInA / N);
+  say('ro-a-u', () => tr(`${m.originalInA} / 24 块`,`${m.originalInA} of 24 planks`));
+  say('ro-b', () => m.collector ? pct(m.collected / N) : tr('未拼装','Not built'));
+  say('ro-b-u', () => m.collector ? tr(`${m.collected} / 24 块`,`${m.collected} of 24 planks`) : tr('旧板在仓库里','Old planks in storage'));
+  say('ro-repair', () => m.largest ? tr(`${m.largest} 块`,`${m.largest} planks`) : '—');
+  say('ro-repair-u', () => tr(`超过 ${m.tolerance} 块即断链`,`Chain breaks above ${m.tolerance}`));
+  $('ro-info').textContent = pct(m.infoShare);
+  say('ro-info-u', () => tr(`${Math.round(m.infoBits)} / 192 比特 · ${pct(m.matchShare)} 比特相同`,`${Math.round(m.infoBits)} of 192 bits · ${pct(m.matchShare)} match`));
+  const v = m.verdicts;
+  setVerdict('matter', v.matter, () => tr(`A ${m.originalInA} 块 · B ${m.collected} 块`,`A ${m.originalInA} · B ${m.collected} planks`));
+  setVerdict('continuity', v.continuity, () => m.broken ? tr('一次换得太多，链断了','One repair replaced too much') : tr('每次只换一点','Small steps all the way'));
+  setVerdict('form', v.form, () => tr(`门槛：⅔ 设计信息`,`Threshold: ⅔ of the design`));
+  setVerdict('name', v.name, () => tr('城邦仍叫它这个名字','The city still uses the name'));
+  say('v-summary', () => m.distinct === 1 ? tr('四条标准一致','All four agree') : tr(`四条标准，${m.distinct} 种答案`,`Four criteria, ${m.distinct} answers`));
+  say('play', () => state.playing ? tr('暂停','Pause') : tr('连续修理','Keep repairing'));
+  $('step-year').disabled = $('play').disabled = !state.prediction || (state.year >= YEARS && !state.playing);
+  $('figure-desc').textContent = tr(
+    `已修理 ${m.year} 次，每次换 ${m.rate} 块。船 A 有 ${m.originalInA} 块原木板，保有 ${pct(m.infoShare)} 的原设计信息。` + (m.collector ? `船 B 由 ${m.collected} 块原木板拼成${m.bComplete ? '，已完整' : ''}。` : `${m.removed} 块原木板堆在仓库。`) + `判定：材料 ${shipName(v.matter)}，连续 ${shipName(v.continuity)}，形式 ${shipName(v.form)}，名称 ${shipName(v.name)}。`,
+    `${m.year} repairs of ${m.rate} planks each. Ship A has ${m.originalInA} original planks and carries ${pct(m.infoShare)} of the original design information. ` + (m.collector ? `Ship B is built from ${m.collected} original planks${m.bComplete ? ' and is complete' : ''}. ` : `${m.removed} original planks are in storage. `) + `Verdicts: matter ${shipName(v.matter)}, continuity ${shipName(v.continuity)}, form ${shipName(v.form)}, name ${shipName(v.name)}.`);
+  checkReveal(m);
+  checkDrift(m);
+}
+function update(changes) { const prev = current; Object.assign(state, changes); render(prev); }
+
+function checkReveal(m) {
+  if (state.revealed || !state.prediction || !m.bComplete) return;
+  state.revealed = true;
+  for (const id of ['explanation', 'gradual', 'drift', 'transfer']) $(id).hidden = false;
+  for (const id of ['rate', 'tolerance']) $(id).disabled = false;
+  const p = state.prediction, v = {...m.verdicts};
+  const backers = Object.keys(v).filter(k => v[k] === p);
+  const names = {matter:tr('材料','matter'), continuity:tr('时空连续','continuity'), form:tr('形式','form'), name:tr('名称','name')};
+  const list = keys => keys.map(k => names[k]).join(tr('、',', '));
+  say('prediction-feedback', () => {
+    const chosen = shipName(p);
+    const support = backers.length ? tr(`支持你的标准：${list(backers)}。`,`Criteria that back you: ${list(backers)}. `) : tr('四条标准都没有选它。','None of the four criteria picks it. ');
+    const against = Object.keys(v).filter(k => v[k] !== p);
+    const extra = p === 'both' ? tr('但同一性是一对一的，下面解释为什么这会出问题。','But identity is one-to-one; see below for why that is a problem. ') : p === 'neither' ? tr('这接近一种看法：所有事实（哪块板去了哪里）都已清楚，剩下的只是用哪个词来描述，帕菲特称之为“空问题”。','That is close to one view: every fact about which plank went where is already known, and what remains is a choice of words. Parfit called this an empty question. ') : tr(`不同意的：${list(against)}。`,`Against you: ${list(against)}. `);
+    return tr(`你预测“${chosen}”。`,`You predicted “${chosen}.” `) + support + extra + tr('这里没有标准答案：你的选择说明了你心里默认用的是哪条标准。','There is no answer key here. Your choice shows which criterion you were using.');
+  });
+  say('status', () => tr('船 A 已没有一块原木板，船 B 拼好了。看左下：四条标准给出了不同答案。解释已在下方展开。','No original plank is left on Ship A and Ship B is complete. The four criteria now disagree. The explanation is open below.'));
+  $('explanation').scrollIntoView?.({block:'nearest', behavior:reducedMotion.matches ? 'auto' : 'smooth'});
+}
+function checkDrift(m) {
+  if (!state.drift) return;
+  if (m.error === 0) { say('drift-feedback', () => tr('把抄错率调高一点，再修几次。','Raise the copy error, then run more repairs.')); return; }
+  const lineage = m.blueprint ? tr('每块都照原图纸做，只差一步','every plank copied from the blueprint, one step from the source') : tr(`仿制最少的板也已有 ${m.minCopies} 代`,`the least-copied plank is ${m.minCopies} generations from the original`);
+  const verdict = state.drift === 'less' ? tr('你的预测是“不到一半”。','You predicted less than half. ') : tr('你的预测高于实际。','Your prediction was higher than this. ');
+  say('drift-feedback', () => tr(`抄错率 ${m.error}%，${lineage}：设计信息 ${pct(m.infoShare)}，相同比特 ${pct(m.matchShare)}。`,`Copy error ${m.error}%, ${lineage}: design information ${pct(m.infoShare)}, bits matching ${pct(m.matchShare)}. `) + (m.error === 5 && m.minCopies >= 3 && !m.blueprint ? verdict : ''));
+}
+
+function stopPlay() { clearInterval(timer); timer = 0; if (state.playing) { state.playing = false; render(); } }
+function stepYear() { if (state.year < YEARS) update({year:state.year + 1}); if (state.year >= YEARS) stopPlay(); }
+$('prediction-form').addEventListener('submit', event => {
+  event.preventDefault();
+  state.prediction = new FormData(event.currentTarget).get('prediction');
+  event.currentTarget.querySelectorAll('input,button').forEach(c => c.disabled = true);
+  for (const id of ['year', 'collector']) $(id).disabled = false;
+  say('prediction-status', () => tr('预测已记下。去修船吧。','Prediction saved. Start repairing.'));
+  say('status', () => tr('点“再修一次”，看换下的木板去了哪里。','Press Next repair and watch where the old plank goes.'));
+  render();
+});
+$('step-year').addEventListener('click', () => { stopPlay(); stepYear(); });
+$('play').addEventListener('click', () => {
+  if (state.playing) { stopPlay(); return; }
+  state.playing = true; render();
+  timer = setInterval(stepYear, 650);
+});
+$('year').addEventListener('input', e => { stopPlay(); update({year:Number(e.target.value)}); });
+$('rate').addEventListener('input', e => update({rate:Number(e.target.value)}));
+$('tolerance').addEventListener('input', e => update({tolerance:Number(e.target.value)}));
+$('error').addEventListener('input', e => update({error:Number(e.target.value)}));
+$('collector').addEventListener('change', e => {
+  update({collector:e.target.checked});
+  say('status', () => state.collector ? tr('收藏家把仓库里的旧木板按原位拼回去。继续修理。','The collector puts the stored planks back in their original places. Keep repairing.') : tr('收藏家离开了，旧木板回到仓库。','The collector is gone; the old planks go back into storage.'));
+});
+$('three-copies').addEventListener('click', () => { stopPlay(); update({year:Math.min(YEARS, Math.ceil(3 * N / state.rate))}); });
+$('blueprint').addEventListener('change', e => update({blueprint:e.target.checked}));
+$('drift-form').addEventListener('submit', event => {
+  event.preventDefault();
+  state.drift = new FormData(event.currentTarget).get('drift');
+  event.currentTarget.querySelectorAll('input,button').forEach(c => c.disabled = true);
+  for (const id of ['error', 'blueprint', 'three-copies']) $(id).disabled = false;
+  render();
+});
+$('transfer-form').addEventListener('submit', event => {
+  event.preventDefault();
+  const answer = new FormData(event.currentTarget).get('transfer');
+  say('transfer-feedback', () => (answer === 'form' ? tr('对。','Correct. ') : tr('再想想船 B。','Think back to Ship B. ')) + tr(
+    '火星上的你和地球上的你结构相同，形式标准两个都认，就像抄错率为 0 时它认出两艘船。材料和连续性都只指向地球上的你。帕菲特由此认为，真正重要的也许不是“同一”，而是心理上的连续与关联，而这种关系可以一分为二。换个问题想：如果把神经元一个个换成芯片，连续性标准会怎么说？那正是没有收藏家的船 A。',
+    'The Mars you and the Earth you share one structure, so the form criterion names both, just as it named both ships at zero copy error. Matter and continuity point only to the Earth you. Parfit concluded that identity may not be what matters; what matters is psychological continuity and connectedness, which can branch. Now try a variant: replace your neurons with chips one at a time. What does continuity say? That is Ship A with no collector.'));
+});
+function resetLesson() {
+  clearInterval(timer); timer = 0;
+  Object.assign(state, {year:0, rate:2, tolerance:6, collector:false, error:0, blueprint:false, prediction:null, drift:null, revealed:false, playing:false});
+  for (const form of ['prediction-form', 'drift-form', 'transfer-form']) { $(form).reset(); $(form).querySelectorAll('input,button').forEach(c => c.disabled = false); }
+  for (const id of ['year', 'collector', 'rate', 'tolerance', 'error', 'blueprint', 'three-copies']) $(id).disabled = true;
+  for (const id of ['explanation', 'gradual', 'drift', 'transfer']) $(id).hidden = true;
+  $('explain-answer').value = '';
+  for (const id of ['prediction-feedback', 'drift-feedback', 'transfer-feedback']) say(id, null);
+  say('prediction-status', () => tr('先选一个预测，再开始修船。','Choose a prediction, then start repairing.'));
+  say('status', () => tr('记下预测后即可开始修理。','Save your prediction to start the repairs.'));
+  current = model(state); render();
+}
+$('reset').addEventListener('click', resetLesson);
+function pauseOffscreen() { if (state.playing) stopPlay(); }
+document.addEventListener('visibilitychange', () => { if (document.hidden) pauseOffscreen(); });
+new IntersectionObserver(entries => { if (!entries[0].isIntersecting) pauseOffscreen(); }).observe($('experiment'));
+window.addEventListener('pagehide', () => clearInterval(timer));
+function selfCheck() {
+  const base = {year:0, rate:2, tolerance:6, collector:true, error:0, blueprint:false};
+  const start = model(base), half = model({...base, year:6}), end = model({...base, year:12});
+  if (start.distinct !== 1 || start.verdicts.matter !== 'A') throw new Error('Untouched ship must satisfy every criterion.');
+  if (half.verdicts.matter !== 'tie' || end.verdicts.matter !== 'B' || end.verdicts.form !== 'both' || end.verdicts.continuity !== 'A') throw new Error('Reassembly verdicts are wrong.');
+  if (model({...base, year:1, rate:24}).verdicts.continuity !== 'neither') throw new Error('A full overnight rebuild must break continuity.');
+  let last = 1;
+  for (let year = 12; year <= 72; year += 12) {
+    const share = model({...base, year, error:5}).infoShare;
+    if (share > last + 1e-12) throw new Error('A copy chain must never gain information (data processing inequality).');
+    last = share;
+  }
+  if (Math.abs(model({...base, year:36, error:5}).infoShare - (1 - H2(.1355))) > 1e-9) throw new Error('Three 5% copies must leave 1 - H(0.1355).');
+  if (Math.abs(model({...base, year:72, error:5, blueprint:true}).infoShare - (1 - H2(.05))) > 1e-9) throw new Error('Blueprint copies must stay one channel from the source.');
+  return 'Passed agreement, tie, reassembly, overnight rebuild, monotone information loss, and blueprint checks.';
+}
+selfCheck();
+I18N.on(() => render());
+I18N.apply();
+resetLesson();
+</script>
+</body>
+</html>

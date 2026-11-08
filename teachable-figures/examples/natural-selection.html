@@ -1,0 +1,925 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title data-i18n data-zh="自然选择：树皮变黑后，一只浅色蛾会怎样？" data-en="Natural selection: when the bark turns dark, what happens to a light moth?">Natural selection: when the bark turns dark, what happens to a light moth?</title>
+<style>
+/* lesson-shell v2: shared by every example page; keep identical across files */
+:root{color-scheme:light dark;--bar:56px;--bg:#f7f6f2;--surface:#fff;--stage:#eeece6;--ink:#141618;--text:#2a2e31;--muted:#61676c;--faint:#8b9196;--line:#e4e1d9;--line-strong:#cbc7bd;--accent:#d9480f;--accent-soft:#fcebe2;--focus:#d9480f;--ok:#1d7a4c;--sans:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Noto Sans SC","Microsoft YaHei",sans-serif;--mono:ui-monospace,"SF Mono",SFMono-Regular,Menlo,Consolas,monospace}
+@media(prefers-color-scheme:dark){:root{--bg:#111315;--surface:#181b1e;--stage:#0b0d0f;--ink:#f3f4f2;--text:#dadedc;--muted:#a1a7ab;--faint:#7a8085;--line:#272b2f;--line-strong:#3b4045;--accent:#ff7a45;--accent-soft:#2b1a11;--focus:#ff7a45;--ok:#4cc38a}}
+*{box-sizing:border-box}html{-webkit-text-size-adjust:100%}body{margin:0;background:var(--bg);color:var(--text);font:15.5px/1.6 var(--sans);-webkit-font-smoothing:antialiased}
+[hidden]{display:none!important}html[data-lang=zh] [lang=en],html[data-lang=en] [lang=zh]{display:none!important}
+:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+.skip{position:absolute;left:12px;top:-80px;z-index:30;background:var(--surface);color:var(--ink);padding:8px 12px;border-radius:8px}.skip:focus{top:10px}
+.bar{position:sticky;top:0;z-index:20;height:var(--bar);display:flex;align-items:center;gap:14px;padding:0 16px 0 20px;background:color-mix(in srgb,var(--bg) 90%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.bar .back{display:inline-flex;align-items:center;gap:6px;min-height:40px;color:var(--muted);text-decoration:none;font-size:14px;white-space:nowrap}.bar .back:hover{color:var(--ink)}
+.bar .crumb{min-width:0;font:500 12px/1.2 var(--mono);color:var(--faint);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lang-switch{margin-left:auto;flex:none;display:inline-flex;padding:3px;border:1px solid var(--line);border-radius:999px;background:var(--surface)}
+.lang-switch button{appearance:none;border:0;background:none;cursor:pointer;font:600 12px/1 var(--sans);min-height:30px;min-width:40px;padding:0 11px;border-radius:999px;color:var(--muted)}
+.lang-switch button[aria-pressed=true]{background:var(--ink);color:var(--bg)}
+.lesson{display:flex;flex-direction:column}.panel{display:contents}
+.intro{order:0;padding:28px 20px 6px}
+.figure-pane{order:1;margin:14px 12px 4px;padding:12px;background:var(--stage);border-radius:16px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.steps{order:2;padding:0 20px 40px}
+.stage{position:relative;min-height:0;display:grid;place-items:center}.stage>svg,.stage>canvas{display:block;width:100%;height:auto}
+.fig-caption{margin:0;font-size:12.5px;line-height:1.5;color:var(--muted)}
+.readouts{display:grid;grid-template-columns:repeat(auto-fit,minmax(104px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.readout{background:var(--surface);padding:9px 13px;min-width:0}
+.readout .k{display:block;font:500 12px/1.35 var(--sans);color:var(--muted)}
+.readout strong{display:block;font:650 21px/1.3 var(--sans);font-variant-numeric:tabular-nums;color:var(--ink);letter-spacing:-.01em;overflow-wrap:anywhere}
+.readout .u{display:block;font-size:12px;line-height:1.35;color:var(--faint)}
+.meta{display:flex;flex-wrap:wrap;gap:4px 10px;margin:0 0 14px;padding:0;list-style:none;font:500 12.5px/1.4 var(--sans);color:var(--muted)}.meta li+li::before{content:"/";margin-right:10px;color:var(--line-strong)}
+h1{margin:0 0 12px;font-size:clamp(25px,2.5vw,33px);line-height:1.18;letter-spacing:-.025em;font-weight:700;color:var(--ink);text-wrap:balance}
+.lead{margin:0;color:var(--muted)}
+.step{padding:26px 0 22px;border-top:1px solid var(--line)}.intro+.steps .step:first-child,.steps>.step:first-child{border-top:0}
+.step>h2{display:flex;align-items:center;gap:10px;margin:0 0 12px;font-size:17px;line-height:1.3;letter-spacing:-.01em;color:var(--ink)}
+.step>h2 .n{flex:none;font:600 11px/1 var(--mono);color:var(--accent);border:1px solid currentColor;border-radius:6px;padding:4px 6px}
+h3{margin:20px 0 6px;font-size:14.5px;color:var(--ink)}p{margin:0 0 12px}strong{color:var(--ink)}
+.small{font-size:13.5px;color:var(--muted)}
+fieldset{border:0;padding:0;margin:0;min-width:0}legend{padding:0;margin:0 0 12px;font-weight:600;color:var(--ink)}
+label.choice{display:flex;gap:10px;align-items:flex-start;padding:10px 13px;margin-bottom:8px;border:1px solid var(--line);border-radius:10px;background:var(--surface);cursor:pointer;transition:border-color .12s,box-shadow .12s}
+label.choice:hover{border-color:var(--line-strong)}label.choice:has(input:checked){border-color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink)}label.choice:has(input:disabled){cursor:default}
+label.choice input{flex:none;margin:4px 0 0}input{accent-color:var(--ink)}input[type=radio],input[type=checkbox]{width:17px;height:17px}
+button,select{font:500 14px/1.2 var(--sans);color:var(--ink);background:var(--surface);border:1px solid var(--line-strong);border-radius:10px;padding:0 16px;min-height:42px;cursor:pointer}
+button:hover:not(:disabled),select:hover:not(:disabled){border-color:var(--ink)}button.primary{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+button:disabled,select:disabled{opacity:.45;cursor:not-allowed}
+.controls{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:14px 0}
+.toggle{display:flex;align-items:center;gap:10px;min-height:42px;font-weight:500;color:var(--ink);cursor:pointer}
+.range{margin:16px 0 8px}.range label{display:flex;justify-content:space-between;gap:12px;font-weight:500;color:var(--ink)}.range output{font:500 13px/1.6 var(--mono);color:var(--muted)}
+input[type=range]{width:100%;min-height:32px;margin:4px 0}
+.status{min-height:1.6em;margin:12px 0;padding:10px 12px;border-radius:10px;background:var(--bg);font-size:14px}
+.callout{margin:14px 0;padding:2px 0 2px 14px;border-left:3px solid var(--accent)}
+textarea{display:block;width:100%;min-height:90px;margin-top:8px;padding:10px 12px;font:inherit;color:var(--text);background:var(--bg);border:1px solid var(--line-strong);border-radius:10px;resize:vertical}
+table{border-collapse:collapse;width:100%;margin-top:14px;font-size:14px}th,td{text-align:left;padding:9px 6px;border-bottom:1px solid var(--line);vertical-align:top}th:first-child,td:first-child{padding-left:0}caption{text-align:left;font-weight:600;color:var(--ink);margin-bottom:4px}
+.limits{color:var(--muted);font-size:14px}
+.pane-more{display:none}
+.foot{margin-top:8px;padding-top:16px;border-top:1px solid var(--line);font-size:12.5px;color:var(--faint)}
+/* attention: figure parts [data-part], step focus [data-focus], ordered highlights ol.look, dual-coding terms [data-ref] */
+#experiment [data-part]{transition:opacity .28s ease,filter .28s ease,box-shadow .2s ease}
+#experiment.tf-ring [data-part].tf-hot:not(svg *){box-shadow:0 0 0 2px var(--accent),0 0 0 7px color-mix(in srgb,var(--accent) 18%,transparent);border-radius:10px}
+#experiment.tf-ring svg [data-part].tf-hot{filter:drop-shadow(0 0 1px var(--accent)) drop-shadow(0 0 5px color-mix(in srgb,var(--accent) 40%,transparent))}
+.focus-bar{display:flex;align-items:center;gap:12px;min-height:30px;margin:-4px 0 -2px}
+.focus-caption{flex:1;min-width:0;margin:0;font-size:13px;line-height:1.4;color:var(--ink)}.focus-caption:empty{visibility:hidden}
+.focus-caption .look-n{display:inline-grid;place-items:center;min-width:20px;height:20px;margin-right:8px;padding:0 5px;border-radius:999px;background:var(--accent);color:#fff;font:700 11px/1 var(--sans);vertical-align:1px}
+.focus-toggle{flex:none;display:inline-flex;align-items:center;gap:7px;min-height:30px;font-size:12.5px;color:var(--muted);cursor:pointer;white-space:nowrap}.focus-toggle input{width:15px;height:15px;margin:0}
+ol.look{margin:12px 0 8px;padding:0;list-style:none;counter-reset:look}
+ol.look>li{counter-increment:look;position:relative;margin:0 0 6px;padding:8px 10px 8px 38px;border:1px solid var(--line);border-radius:10px;cursor:pointer;color:var(--muted);transition:border-color .15s,background .15s}
+ol.look>li::before{content:counter(look);position:absolute;left:10px;top:9px;display:grid;place-items:center;width:20px;height:20px;border-radius:999px;border:1px solid var(--line-strong);font:650 11px/1 var(--sans);color:var(--muted)}
+ol.look>li:hover{border-color:var(--line-strong)}ol.look>li[aria-current=step]{border-color:var(--accent);background:var(--accent-soft);color:var(--ink)}ol.look>li[aria-current=step]::before{background:var(--accent);border-color:var(--accent);color:#fff}
+.look-nav{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:0 0 14px}.look-nav button{min-height:34px;padding:0 11px;font-size:13px}.look-nav .look-num{min-width:34px;padding:0}.look-nav .look-num[aria-pressed=true]{background:var(--accent);border-color:var(--accent);color:#fff}
+[data-ref]:not(a,button,input,select,label){text-decoration:underline dotted color-mix(in srgb,var(--accent) 70%,transparent);text-decoration-thickness:1.5px;text-underline-offset:3px;cursor:help;border-radius:4px}
+[data-ref].tf-ref-on{background:var(--accent-soft);box-shadow:0 0 0 2px var(--accent-soft);color:var(--ink)}[data-ref][aria-pressed=true]{background:var(--accent-soft);box-shadow:0 0 0 1px var(--accent)}
+.part-tip{position:fixed;z-index:40;pointer-events:none;max-width:240px;padding:5px 9px;border-radius:8px;background:var(--ink);color:var(--bg);font:500 12.5px/1.35 var(--sans);box-shadow:0 4px 14px rgb(0 0 0/.18)}
+@media(min-width:960px) and (min-height:560px){
+.lesson{display:grid;grid-template-columns:minmax(0,1fr) clamp(380px,35vw,500px);height:calc(100dvh - var(--bar))}
+.panel{display:block;grid-column:2;grid-row:1;overflow-y:auto;overscroll-behavior:contain;background:var(--surface);border-left:1px solid var(--line)}
+.figure-pane{grid-column:1;grid-row:1;margin:0;border-radius:0;padding:24px 28px;min-height:0}
+.figure-pane{overflow-y:auto;overscroll-behavior:contain}.figure-pane>*{flex-shrink:0}
+.figure-pane .stage{flex:1}.figure-pane .stage>svg,.figure-pane .stage>canvas{height:100%;max-height:100%}
+.pane-more{display:flex;grid-column:1;grid-row:1;align-self:end;position:relative;z-index:2;justify-content:center;align-items:flex-end;height:76px;padding-bottom:14px;pointer-events:none;background:linear-gradient(color-mix(in srgb,var(--stage) 0%,transparent),var(--stage) 72%)}
+.pane-more button{pointer-events:auto;min-height:32px;padding:0 14px;border-radius:999px;font-size:12.5px;box-shadow:0 2px 10px rgb(0 0 0/.12)}
+.intro{padding:32px 32px 6px}.steps{padding:0 32px 48px}
+.bar{padding:0 20px 0 24px}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+/* /lesson-shell */
+:root{--moth-ink:#2a2521;--plot-fill:#2a2521}
+@media(prefers-color-scheme:dark){:root{--plot-fill:#c9c2b6}}
+#figure{touch-action:manipulation}
+#figure text{font-family:var(--sans)}
+.scene-frame{fill:none;stroke:var(--line-strong);stroke-width:1}
+.moth{transition:opacity .25s}
+.hunting .moth{cursor:crosshair}
+.hunting .moth:focus{outline:none}.hunting .moth:focus-visible .wing{stroke:var(--focus);stroke-width:2.5}
+.moth.eaten{opacity:0;pointer-events:none}
+.pill{fill:color-mix(in srgb,var(--surface) 88%,transparent);stroke:var(--line)}
+.pill-text{font-size:12.5px;font-weight:600;fill:var(--ink)}
+.timer{font-size:13px;font-weight:700;fill:var(--accent)}
+.axis{stroke:var(--line-strong);stroke-width:1}.grid{stroke:var(--line);stroke-width:1}
+.tick{font-size:11px;fill:var(--faint);font-variant-numeric:tabular-nums}
+.plot-label{font-size:12px;fill:var(--muted)}.plot-title{font-size:12.5px;font-weight:600;fill:var(--ink)}
+.p-line{fill:none;stroke:var(--accent);stroke-width:2.4;stroke-linejoin:round;stroke-linecap:round}
+.e-line{fill:none;stroke:var(--muted);stroke-width:1.4;stroke-dasharray:4 4}
+.col{fill:var(--plot-fill);opacity:.2}
+.qmark{font-size:44px;font-weight:700;fill:var(--line-strong)}
+.faded-note{font-size:13px;fill:var(--muted)}
+.legend{display:flex;flex-wrap:wrap;gap:4px 16px;margin:0;padding:0;list-style:none;font-size:12.5px;color:var(--muted)}
+.legend li{display:flex;align-items:center;gap:6px}.sw{display:inline-block;width:14px;height:10px;border-radius:3px}
+.sw.p{height:3px;background:var(--accent)}.sw.c{background:var(--plot-fill);opacity:.35}.sw.e{height:0;border-top:2px dashed var(--muted);border-radius:0}
+.sw.l{background:#e4e0d3;border:1px solid var(--line-strong)}.sw.d{background:#26221e}
+.faded .readout strong{color:var(--faint)}
+.faded .legend,.faded #summary{visibility:hidden}
+.problem{padding:14px 0 4px;border-top:1px dashed var(--line)}.problem:first-of-type{border-top:0}
+.problem h3{margin-top:0}
+input[type=number]{font:500 15px/1.2 var(--sans);color:var(--ink);background:var(--surface);border:1px solid var(--line-strong);border-radius:10px;padding:0 12px;min-height:42px;width:9em}
+.ok{color:var(--ok)}
+.math{font-family:var(--mono);font-size:13.5px;white-space:nowrap}
+.cite{font-size:13.5px;color:var(--muted)}
+@media(min-width:960px) and (min-height:560px){.figure-pane{gap:10px;padding:18px 24px}}
+</style>
+</head>
+<body>
+<a class="skip" href="#experiment"><span lang="zh">跳到实验</span><span lang="en">Skip to experiment</span></a>
+<header class="bar">
+<a class="back" href="index.html" data-keep-lang>← <span lang="zh">全部示例</span><span lang="en">All examples</span></a>
+<span class="crumb">natural-selection.html</span>
+<div class="lang-switch" role="group" aria-label="语言 / Language"><button type="button" data-set-lang="zh" aria-pressed="false">中文</button><button type="button" data-set-lang="en" aria-pressed="true">EN</button></div>
+</header>
+<main class="lesson">
+<div class="panel">
+<div class="intro">
+<ul class="meta"><li><span lang="zh">生物 · 演化</span><span lang="en">Biology · evolution</span></li><li><span lang="zh">种群遗传模型</span><span lang="en">Population genetics model</span></li><li><span lang="zh">约 10 分钟</span><span lang="en">~10 min</span></li></ul>
+<h1><span lang="zh">树皮变黑之后，一只浅色桦尺蛾会怎样？</span><span lang="en">The bark turns black. What happens to a light peppered moth?</span></h1>
+<p class="lead" lang="zh">19 世纪的英国工业城市里，煤烟把长着地衣的浅色树干熏成了黑色。桦尺蛾白天停在树干上，靠和树皮颜色相近躲过鸟。几十年后，曼彻斯特附近的桦尺蛾几乎全变成了黑色。<strong>“变成”</strong>这个词，到底是谁变了？</p>
+<p class="lead" lang="en">In 19th-century industrial Britain, coal smoke blackened tree trunks that had been pale with lichen. Peppered moths rest on trunks by day and escape birds by matching the bark. Within decades, almost every peppered moth near Manchester was black. But what exactly <strong>“became”</strong> black?</p>
+</div>
+<div class="steps">
+<section class="step" aria-labelledby="predict-title" data-focus="moths">
+<h2 id="predict-title"><span class="n">01</span><span lang="zh">预测</span><span lang="en">Predict</span></h2>
+<form id="prediction-form">
+<fieldset>
+<legend><span lang="zh">煤烟让树皮一年年变黑。一只停在<span data-ref="moths">黑树皮上的浅色桦尺蛾</span>，接下来会怎样？</span><span lang="en">Soot darkens the bark year after year. What happens next to <span data-ref="moths">one light moth resting on the dark bark</span>?</span></legend>
+<label class="choice"><input type="radio" name="prediction" value="darken" required><span><span lang="zh">它的颜色会慢慢变深，好藏得更好。</span><span lang="en">Its color gradually darkens so it can hide better.</span></span></label>
+<label class="choice"><input type="radio" name="prediction" value="select"><span><span lang="zh">它自己不会变。但黑色蛾更不容易被吃掉，下一代里黑色蛾会更多。</span><span lang="en">It stays the same. But dark moths are eaten less, so more of the next generation is dark.</span></span></label>
+<label class="choice"><input type="radio" name="prediction" value="die"><span><span lang="zh">桦尺蛾会被吃光，这个物种在城里灭绝。</span><span lang="en">The moths get eaten out and the species disappears from the city.</span></span></label>
+</fieldset>
+<div class="controls"><button type="submit" class="primary"><span lang="zh">记下预测</span><span lang="en">Save my prediction</span></button></div>
+<p id="prediction-status" class="small" aria-live="polite"></p>
+</form>
+</section>
+<section class="step" aria-labelledby="try-title" data-focus="moths record black survival">
+<h2 id="try-title"><span class="n">02</span><span lang="zh">繁殖几代</span><span lang="en">Breed the population</span></h2>
+<p lang="zh">左边是<span data-ref="moths">一片树皮上的桦尺蛾</span>，右边是<span data-ref="record">每一代的记录</span>。黑色由显性等位基因 <span class="math">C</span> 决定（<span class="math">CC</span> 和 <span class="math">Cc</span> 都是黑色），浅色是 <span class="math">cc</span>。每一代，颜色和树皮差得越多的蛾越容易被鸟吃掉，活下来的蛾产下下一代。</p>
+<p lang="en">On the left, <span data-ref="moths">moths on a patch of bark</span>; on the right, <span data-ref="record">the record of every generation</span>. Black is set by a dominant allele <span class="math">C</span> (both <span class="math">CC</span> and <span class="math">Cc</span> are black); light moths are <span class="math">cc</span>. Each generation, birds eat more of the moths that stand out from the bark, and the survivors breed the next generation.</p>
+<div class="range">
+<label for="bark"><span><span lang="zh">树皮颜色（煤烟程度）</span><span lang="en">Bark darkness (soot)</span></span><output id="bark-out" for="bark"></output></label>
+<input id="bark" type="range" min="0" max="100" step="5" value="90" disabled>
+</div>
+<div class="range">
+<label for="strength"><span><span lang="zh">鸟的捕食强度</span><span lang="en">Bird predation strength</span></span><output id="strength-out" for="strength"></output></label>
+<input id="strength" type="range" min="0" max="50" step="5" value="30" disabled>
+</div>
+<div class="controls">
+<button id="next" class="primary" type="button" disabled><span lang="zh">下一代</span><span lang="en">Next generation</span></button>
+<button id="run10" type="button" disabled><span lang="zh">连跑 10 代</span><span lang="en">Run 10 generations</span></button>
+</div>
+<h3><span lang="zh">你来当鸟</span><span lang="en">Be the bird</span></h3>
+<p class="small"><span lang="zh">8 秒内点击你能找到的蛾，被点中的就被吃掉了。下一代由你没找到的蛾繁殖。</span><span lang="en">You have 8 seconds to click every moth you can spot; each click eats one. The moths you miss breed the next generation.</span></p>
+<div class="controls">
+<button id="hunt" type="button" disabled><span lang="zh">开始捕食一代</span><span lang="en">Hunt one generation</span></button>
+<button id="finish-hunt" type="button" disabled><span lang="zh">结束捕食</span><span lang="en">End the hunt</span></button>
+</div>
+<h3><span lang="zh">换一个种群</span><span lang="en">Change the population</span></h3>
+<p class="small"><span lang="zh">改变下面三项会从第 0 代重新开始。</span><span lang="en">Changing these three starts again from generation 0.</span></p>
+<div class="range">
+<label for="start"><span><span lang="zh">初始黑色等位基因频率</span><span lang="en">Starting dark-allele frequency</span></span><output id="start-out" for="start"></output></label>
+<input id="start" type="range" min="0" max="100" step="1" value="2" disabled>
+</div>
+<div class="controls">
+<label for="pop"><span lang="zh">种群大小</span><span lang="en">Population size</span></label>
+<select id="pop" disabled>
+<option value="20" data-i18n data-zh="20 只（随机漂变很强）" data-en="20 (strong drift)">20 (strong drift)</option>
+<option value="100" data-i18n data-zh="100 只" data-en="100">100</option>
+<option value="1000" selected data-i18n data-zh="1000 只" data-en="1000">1000</option>
+<option value="inf" data-i18n data-zh="无限大（没有漂变）" data-en="Infinite (no drift)">Infinite (no drift)</option>
+</select>
+</div>
+<label class="toggle"><input id="mutation" type="checkbox" disabled><span lang="zh">允许突变：每代每个 <span class="math">c</span> 有 0.1% 的机会变成 <span class="math">C</span></span><span lang="en">Allow mutation: each <span class="math">c</span> has a 0.1% chance per generation of becoming <span class="math">C</span></span></label>
+<div class="controls">
+<button id="restart" type="button" disabled><span lang="zh">从第 0 代重来</span><span lang="en">Restart from generation 0</span></button>
+<button id="reset" type="button"><span lang="zh">重置</span><span lang="en">Reset lesson</span></button>
+</div>
+<p id="status" class="status" role="status"></p>
+</section>
+<section id="explanation" class="step" aria-labelledby="explain-title" hidden>
+<h2 id="explain-title"><span class="n">03</span><span lang="zh">解释</span><span lang="en">Explain</span></h2>
+<p id="prediction-feedback" class="callout"></p>
+<div lang="zh">
+<p><strong>没有一只蛾改变过颜色。</strong>每只蛾一生都保持出生时的颜色。变的是整群蛾里黑色和浅色的比例，而且只在代与代之间变。这需要三个条件同时成立：</p>
+<ol>
+<li><strong>变异</strong>：群体里本来就有黑色和浅色两种。</li>
+<li><strong>遗传</strong>：颜色由基因决定，会传给后代。</li>
+<li><strong data-ref="survival">繁殖差异</strong>：在黑树皮上，黑色蛾活得更久、留下更多后代。</li>
+</ol>
+<p>拿掉任何一个，选择就停了：把初始频率调到 0，不允许突变，树皮再黑也不会出现一只黑蛾；把捕食强度调到 0，比例只会随机晃动。所以说<strong>演化的是种群，不是个体</strong>。</p>
+<h3>为什么回来得那么慢</h3>
+<p>浅色是隐性的。<span data-ref="allele">浅色等位基因</span> <span class="math">c</span> 变少以后，大多数藏在看起来是黑色的 <span class="math">Cc</span> 杂合子里，鸟看不见它，选择也就碰不到它。</p>
+</div>
+<div lang="en">
+<p><strong>No moth ever changed color.</strong> Each moth keeps the color it was born with. What changed was the mix of black and light moths in the population, and only from one generation to the next. That takes three things at once:</p>
+<ol>
+<li><strong>Variation</strong>: the population already contains both black and light moths.</li>
+<li><strong>Heredity</strong>: color is set by genes and passed to offspring.</li>
+<li><strong data-ref="survival">Differential reproduction</strong>: on dark bark, black moths live longer and leave more offspring.</li>
+</ol>
+<p>Remove any one and selection stops. Set the starting frequency to 0 with mutation off, and no black moth ever appears however dark the bark gets. Set predation to 0, and the mix only wanders at random. <strong>Populations evolve; individuals don’t.</strong></p>
+<h3>Why the way back is so slow</h3>
+<p>Light is recessive. Once the <span data-ref="allele">light allele</span> <span class="math">c</span> is rare, most copies sit in <span class="math">Cc</span> heterozygotes that look black. Birds can’t see it, so selection can’t reach it.</p>
+</div>
+<ol class="look">
+<li data-focus="moths"><span lang="zh">先看树皮上的蛾：每一只都保持出生时的颜色，没有一只变过。</span><span lang="en">Start with the moths on the bark: each keeps the colour it was born with; none ever changes.</span></li>
+<li data-focus="survival"><span lang="zh">再看存活率：在黑树皮上，黑色蛾活下来的比例更高。</span><span lang="en">Then survival: on dark bark, a larger share of black moths lives to breed.</span></li>
+<li data-focus="black"><span lang="zh">看记录里的柱子：黑色蛾的比例一代一代往上走，变化只发生在代与代之间。</span><span lang="en">Now the bars in the record: the black share climbs generation by generation, and only between generations.</span></li>
+<li data-focus="allele"><span lang="zh">最后看等位基因频率：它比黑色蛾比例低，因为黑色蛾里有一部分是带着浅色基因的 Cc。</span><span lang="en">Finally the allele frequency: it sits below the black share, because some black moths are Cc and carry the light allele.</span></li>
+</ol>
+<p id="carriers" class="callout" aria-live="polite"></p>
+<div lang="zh">
+<p>试一下：先让黑色蛾占到九成以上，再把树皮调回浅色（1956 年英国《清洁空气法》之后的情形），继续繁殖。浅色蛾一开始几乎不增加，因为它们大多还藏在杂合子里。</p>
+<h3>这个故事的证据</h3>
+<p class="cite">1848 年曼彻斯特首次记录到黑色型，到 1895 年当地约 98% 是黑色。霍尔丹（1924）算出，要这么快扩散，黑色型每代需要约 30% 的生存优势。凯特尔韦尔在 1950 年代做了标记重捕实验，后来被批评释放密度过高、把蛾放在不自然的位置，甚至有书指控造假，但这一指控没有得到证实。马杰勒斯在 2001–2007 年用近 5000 只蛾重做了实验，结果在他去世后发表（Cook 等，2012）：鸟的选择性捕食足以解释黑色型的兴衰。2016 年，研究者找到了黑色型的突变：<em>cortex</em> 基因里约在 1819 年插入的一段转座子（van’t Hof 等，2016）。</p>
+</div>
+<div lang="en">
+<p>Try it: let black moths pass 90%, then turn the bark pale again (the situation after Britain’s 1956 Clean Air Act) and keep breeding. Light moths barely increase at first, because they still hide in heterozygotes.</p>
+<h3>The evidence behind the story</h3>
+<p class="cite">The black form was first recorded in Manchester in 1848; by 1895 about 98% of the local moths were black. Haldane (1924) calculated that so fast a spread needed roughly a 30% survival advantage per generation. Kettlewell’s mark–release–recapture experiments in the 1950s were later criticized for high release densities and unnatural resting sites; one book even alleged fraud, a charge that was never substantiated. Michael Majerus repeated the work with nearly 5,000 moths in 2001–2007; published after his death (Cook et al., 2012), it found that selective bird predation is enough to explain the rise and fall of the black form. In 2016 the mutation itself was found: a transposable element inserted into the <em>cortex</em> gene around 1819 (van’t Hof et al., 2016).</p>
+</div>
+<label for="explain-answer"><strong><span lang="zh">用你自己的话说。</span><span lang="en">Put it in your own words.</span></strong></label>
+<p class="small"><span lang="zh">“黑色蛾变多，不是因为 ___，而是因为 ___。如果一开始 ___，就不会发生。”</span><span lang="en">“Black moths became common not because ___, but because ___. It would not have happened if ___.”</span></p>
+<textarea id="explain-answer" data-i18n data-zh-placeholder="你的解释只留在这个页面，不会保存或发送。" data-en-placeholder="Your explanation stays on this page. It is not saved or sent."></textarea>
+</section>
+<section id="practice" class="step" aria-labelledby="practice-title" hidden>
+<h2 id="practice-title"><span class="n">04</span><span lang="zh">独立练习</span><span lang="en">Independent practice</span></h2>
+<p lang="zh">这一步拿掉辅助：左边的记录图、读数和图例都会隐藏，控件锁定。每道题先自己回答，再看模型给出的结果。</p>
+<p lang="en">This step removes the supports: the record plot, readouts and legend are hidden and the controls are locked. Answer each case yourself, then see what the model does.</p>
+<div class="controls">
+<button id="start-practice" class="primary" type="button"><span lang="zh">开始练习</span><span lang="en">Start practice</span></button>
+<button id="end-practice" type="button" hidden><span lang="zh">恢复图和读数</span><span lang="en">Bring back the plot and readouts</span></button>
+</div>
+<div id="problems" hidden>
+<form id="p1-form" class="problem">
+<h3><span lang="zh">练习 1 · 长颈鹿</span><span lang="en">Practice 1 · Giraffes</span></h3>
+<fieldset><legend><span lang="zh">一只长颈鹿一辈子都伸长脖子够高处的树叶。它的幼崽会因此生来脖子更长吗？</span><span lang="en">A giraffe stretches its neck all its life to reach high leaves. Will its calves be born with longer necks because of that?</span></legend>
+<label class="choice"><input type="radio" name="p1" value="yes" required><span><span lang="zh">会。用得多的部位会变长，并传给后代。</span><span lang="en">Yes. A body part that is used more grows, and passes that on.</span></span></label>
+<label class="choice"><input type="radio" name="p1" value="need"><span><span lang="zh">会。物种需要更长的脖子，所以后代会长出来。</span><span lang="en">Yes. The species needs longer necks, so the offspring grow them.</span></span></label>
+<label class="choice"><input type="radio" name="p1" value="variation"><span><span lang="zh">不会。只有当脖子长短本来就有可遗传的差异、长脖子的个体留下更多后代时，群体的平均脖子才会变长。</span><span lang="en">No. Average neck length rises only if necks already vary heritably and longer-necked giraffes leave more offspring.</span></span></label>
+</fieldset>
+<div class="controls"><button type="submit"><span lang="zh">核对</span><span lang="en">Check</span></button></div>
+<p id="p1-feedback" class="status" role="status"></p>
+</form>
+<form id="p2-form" class="problem">
+<h3><span lang="zh">练习 2 · 没有黑蛾的种群</span><span lang="en">Practice 2 · A population with no black moths</span></h3>
+<p><span lang="zh">左边这个种群里一只黑蛾都没有，黑色等位基因频率为 0，也不会发生突变。树皮保持全黑，鸟的捕食强度 30%，种群很大。</span><span lang="en">The population on the left has no black moths: the dark-allele frequency is 0, and no mutation happens. The bark stays fully black, predation is 30%, and the population is large.</span></p>
+<label for="p2-answer"><span lang="zh">30 代以后，黑色等位基因频率是多少？（0 到 1）</span><span lang="en">After 30 generations, what is the dark-allele frequency? (0 to 1)</span></label>
+<div class="controls"><input id="p2-answer" type="number" min="0" max="1" step="0.01" inputmode="decimal" required><button type="submit"><span lang="zh">核对</span><span lang="en">Check</span></button></div>
+<p id="p2-feedback" class="status" role="status"></p>
+</form>
+<form id="p3-form" class="problem">
+<h3><span lang="zh">练习 3 · 不看图估计</span><span lang="en">Practice 3 · Estimate without the plot</span></h3>
+<p><span lang="zh">左边是树皮刚变全黑时的种群：黑色等位基因频率 2%，约 4% 的蛾是黑色。捕食强度 30%，种群很大，没有突变。</span><span lang="en">On the left is the population just as the bark turns fully black: dark-allele frequency 2%, about 4% of moths black. Predation is 30%, the population is large, no mutation.</span></p>
+<fieldset><legend><span lang="zh">10 代以后，大约多少比例的蛾是黑色？</span><span lang="en">After 10 generations, roughly what share of the moths is black?</span></legend>
+<div id="p3-options"></div>
+</fieldset>
+<div class="controls"><button type="submit"><span lang="zh">核对</span><span lang="en">Check</span></button></div>
+<p id="p3-feedback" class="status" role="status"></p>
+</form>
+<p id="practice-score" class="callout" aria-live="polite" hidden></p>
+</div>
+</section>
+<section id="transfer" class="step" aria-labelledby="transfer-title" hidden>
+<h2 id="transfer-title"><span class="n">05</span><span lang="zh">迁移：抗生素耐药</span><span lang="en">Transfer: antibiotic resistance</span></h2>
+<form id="transfer-form">
+<fieldset><legend><span lang="zh">一位病人吃了几天抗生素，体内细菌里耐药的比例越来越高。哪种解释和桦尺蛾的机制一样？</span><span lang="en">A patient takes antibiotics for a few days, and the share of resistant bacteria in their body keeps rising. Which explanation matches the moth mechanism?</span></legend>
+<label class="choice"><input type="radio" name="transfer" value="learn" required><span><span lang="zh">细菌接触药物后，逐渐学会了抵抗它。</span><span lang="en">After meeting the drug, the bacteria gradually learn to resist it.</span></span></label>
+<label class="choice"><input type="radio" name="transfer" value="select"><span><span lang="zh">少数细菌本来就带有耐药基因；药物杀死了其他细菌，耐药菌的后代占了上风。</span><span lang="en">A few bacteria already carried resistance genes; the drug killed the others, and the resistant ones’ offspring took over.</span></span></label>
+<label class="choice"><input type="radio" name="transfer" value="induce"><span><span lang="zh">药物让细菌为了活下去，专门产生了耐药突变。</span><span lang="en">The drug made the bacteria produce resistance mutations on purpose, in order to survive.</span></span></label>
+</fieldset>
+<div class="controls"><button type="submit"><span lang="zh">核对答案</span><span lang="en">Check my answer</span></button></div>
+<p id="transfer-feedback" class="status" role="status"></p>
+</form>
+</section>
+<section class="step limits" aria-labelledby="limits-title">
+<h2 id="limits-title"><span lang="zh">这个模型的适用范围</span><span lang="en">Where this model applies</span></h2>
+<div lang="zh">
+<p>只有一个基因座、两个等位基因，世代不重叠，随机交配（每代开始时符合哈迪–温伯格比例）。存活只取决于颜色和树皮的差别，用一个“捕食强度”参数表示；真实的存活还受迁入迁出、蛾的停歇位置和其他天敌影响，所以真实的下降比这里快。</p>
+<p>突变率 0.1% 比真实值大得多，只为在几十代内看到效果。随机漂变用固定随机种子抽样，同样的设置每次得到同样的结果。“你来当鸟”是一个游戏，屏幕上的 40 只蛾代表整个种群的比例，不是数据。</p>
+</div>
+<div lang="en">
+<p>One locus with two alleles, non-overlapping generations, random mating (Hardy–Weinberg proportions at the start of each generation). Survival depends only on the mismatch between moth and bark, set by one “predation strength” parameter. Real survival also depends on migration, resting sites and other predators, which is why the real decline was faster than here.</p>
+<p>The 0.1% mutation rate is far higher than real rates, so its effect shows within decades. Drift is sampled from a fixed random seed, so the same settings always give the same run. “Be the bird” is a game: the 40 moths on screen stand for the population’s proportions, not data.</p>
+</div>
+<p class="foot"><span lang="zh">离线可用。用 Tab 切换控件，方向键调节滑块；捕食时蛾也可以用 Tab 选中、回车吃掉。没有快捷键会干扰你的写作。</span><span lang="en">Works offline. Use Tab to reach controls and arrow keys on sliders; during a hunt, moths can be reached with Tab and eaten with Enter. No keyboard shortcuts override your writing.</span></p>
+</section>
+</div>
+</div>
+<section id="experiment" class="figure-pane" aria-labelledby="figure-title">
+<div class="stage">
+<svg id="figure" viewBox="0 0 800 400" role="img" aria-labelledby="figure-title figure-desc">
+<title id="figure-title" data-i18n data-zh="树皮上的桦尺蛾，以及每一代的黑色蛾比例" data-en="Peppered moths on bark, and the share of black moths in each generation">Peppered moths on bark, and the share of black moths in each generation</title>
+<desc id="figure-desc"></desc>
+<defs><clipPath id="scene-clip"><rect id="scene-clip-rect" rx="10"/></clipPath></defs>
+<g id="scene" clip-path="url(#scene-clip)" data-part="moths" data-zh-label="树皮上的蛾：每只一生都保持出生时的颜色" data-en-label="Moths on bark: each keeps the colour it was born with"></g>
+<rect id="scene-frame" class="scene-frame" rx="10"/>
+<g id="scene-labels"></g>
+<g id="plot"></g>
+</svg>
+</div>
+<div class="readouts" data-i18n data-zh-aria-label="当前状态" data-en-aria-label="Current state" aria-label="Current state">
+<div class="readout" data-part="record"><span class="k" data-ref="record"><span lang="zh">世代</span><span lang="en">Generation</span></span><strong id="ro-gen"></strong><span class="u" id="ro-gen-u"></span></div>
+<div class="readout" data-part="allele"><span class="k" data-ref="allele"><span lang="zh">黑色等位基因 C</span><span lang="en">Dark allele C</span></span><strong id="ro-p"></strong><span class="u" id="ro-p-u"></span></div>
+<div class="readout" data-part="black"><span class="k" data-ref="black"><span lang="zh">黑色蛾</span><span lang="en">Black moths</span></span><strong id="ro-dark"></strong><span class="u" id="ro-dark-u"></span></div>
+<div class="readout" data-part="survival" data-zh-label="上一代黑色蛾和浅色蛾各有多少活下来" data-en-label="How many black and light moths survived last generation"><span class="k" data-ref="survival"><span lang="zh">上一代存活率</span><span lang="en">Last survival</span></span><strong id="ro-surv"></strong><span class="u" id="ro-surv-u"></span></div>
+<div class="readout" data-part="survival" data-zh-label="平均适合度：相对存活率的平均" data-en-label="Mean fitness: average relative survival"><span class="k" data-ref="survival"><span lang="zh">平均适合度</span><span lang="en">Mean fitness</span></span><strong id="ro-wbar"></strong><span class="u" id="ro-wbar-u"></span></div>
+</div>
+<ul class="legend"><li data-ref="moths"><span class="sw l"></span><span lang="zh">浅色蛾 cc</span><span lang="en">Light moth (cc)</span></li><li data-ref="moths"><span class="sw d"></span><span lang="zh">黑色蛾 CC / Cc</span><span lang="en">Black moth (CC / Cc)</span></li><li data-ref="black"><span class="sw c"></span><span lang="zh">每代黑色蛾比例</span><span lang="en">Black share per generation</span></li><li data-ref="allele"><span class="sw p"></span><span lang="zh">黑色等位基因频率 p</span><span lang="en">Dark-allele frequency p</span></li><li id="legend-e" data-ref="allele"><span class="sw e"></span><span lang="zh">没有漂变时的预期</span><span lang="en">Expected without drift</span></li></ul>
+<p id="summary" class="fig-caption" aria-live="polite"></p>
+</section>
+</main>
+<script>
+/* lesson-shell i18n v2: shared by every example page; keep identical across files.
+   Static copy: paired elements <span lang="zh">…</span><span lang="en">…</span> (CSS hides the other language).
+   Text-only nodes and attributes: data-i18n plus data-zh / data-en (textContent) or data-zh-<attr> / data-en-<attr>.
+   Dynamic copy: tr('中文', 'English'); say(el, () => tr(…)) re-renders the message when the language changes. */
+const I18N = (() => {
+  const KEY = 'tf-lang', LANGS = ['zh', 'en'];
+  const stored = (() => { try { return localStorage.getItem(KEY); } catch { return null; } })();
+  const param = new URLSearchParams(location.search).get('lang');
+  let lang = LANGS.includes(param) ? param : LANGS.includes(stored) ? stored : /^zh\b/i.test(navigator.language || '') ? 'zh' : 'en';
+  const listeners = [];
+  function apply() {
+    const root = document.documentElement;
+    root.lang = lang === 'zh' ? 'zh-CN' : 'en';
+    root.dataset.lang = lang;
+    for (const el of document.querySelectorAll('[data-i18n]')) {
+      for (const { name, value } of [...el.attributes]) {
+        if (name === 'data-' + lang) el.textContent = value;
+        else if (name.startsWith('data-' + lang + '-')) el.setAttribute(name.slice(lang.length + 6), value);
+      }
+    }
+    for (const button of document.querySelectorAll('[data-set-lang]')) button.setAttribute('aria-pressed', String(button.dataset.setLang === lang));
+    for (const link of document.querySelectorAll('a[data-keep-lang]')) {
+      const target = new URL(link.getAttribute('href').split('?')[0], location.href);
+      target.searchParams.set('lang', lang);
+      link.href = target.href;
+    }
+    listeners.forEach(fn => fn(lang));
+  }
+  document.addEventListener('click', event => {
+    const button = event.target.closest('[data-set-lang]');
+    if (!button || button.dataset.setLang === lang) return;
+    lang = button.dataset.setLang;
+    try { localStorage.setItem(KEY, lang); } catch {}
+    try { const here = new URL(location.href); here.searchParams.set('lang', lang); history.replaceState(history.state, '', here); } catch {}
+    apply();
+  });
+  return { get lang() { return lang; }, on(fn) { listeners.push(fn); }, apply };
+})();
+const tr = (zh, en) => I18N.lang === 'zh' ? zh : en;
+const spoken = new Map();
+function say(target, message) {
+  const el = typeof target === 'string' ? document.getElementById(target) : target;
+  spoken.set(el, message);
+  el.textContent = message ? message() : '';
+}
+I18N.on(() => spoken.forEach((message, el) => { el.textContent = message ? message() : ''; }));
+// On short screens the figure pane scrolls on its own; while more of it is below the fold, show a cue that scrolls it.
+(() => {
+  const pane = document.querySelector('.lesson > .figure-pane');
+  if (!pane) return;
+  const cue = document.createElement('div');
+  cue.className = 'pane-more';
+  cue.hidden = true;
+  cue.innerHTML = '<button type="button" tabindex="-1" aria-hidden="true"></button>';
+  const button = cue.firstChild;
+  const label = () => { button.textContent = tr('下方还有内容 ↓', 'More below ↓'); };
+  label();
+  I18N.on(label);
+  button.addEventListener('click', () => pane.scrollBy({ top: pane.clientHeight * 0.75, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' }));
+  pane.after(cue);
+  function update() {
+    const scrolls = getComputedStyle(pane).overflowY !== 'visible' && pane.scrollHeight > pane.clientHeight + 1;
+    cue.hidden = !(scrolls && pane.scrollHeight - pane.clientHeight - pane.scrollTop > 4);
+    if (scrolls) pane.tabIndex = 0; else pane.removeAttribute('tabindex');
+  }
+  const sizes = new ResizeObserver(update);
+  const watch = () => { sizes.disconnect(); sizes.observe(pane); for (const child of pane.children) sizes.observe(child); };
+  new MutationObserver(() => { watch(); update(); }).observe(pane, { childList: true });
+  pane.addEventListener('scroll', update, { passive: true });
+  addEventListener('resize', update);
+  watch();
+  update();
+})();
+/* Attention guide. Figure parts: [data-part="id"] inside #experiment (labels: data-zh-label / data-en-label).
+   Step focus: a panel .step or element with data-focus="id …" dims the other parts while it is the active step
+   (focused element first, else the first visible step crossing the reading line). Ordered highlights: ol.look > li[data-focus].
+   Dual coding: [data-ref="id …"] terms and legend items link to parts both ways. Nothing moves until the learner scrolls, hovers or clicks. */
+(() => {
+  const figure = document.getElementById('experiment');
+  if (!figure || !figure.querySelector('[data-part]')) return;
+  const panel = document.querySelector('.lesson > .panel');
+  const KEY = 'tf-focus-guide', ids = value => (value || '').split(/\s+/).filter(Boolean);
+  let guide = (() => { try { return localStorage.getItem(KEY) !== 'off'; } catch { return true; } })();
+  let stepIds = [], look = null, peek = null, pinned = null, activeStep = null;
+  const style = document.createElement('style');
+  document.head.append(style);
+  const bar = document.createElement('div');
+  bar.className = 'focus-bar';
+  bar.innerHTML = '<p class="focus-caption" aria-live="polite"></p><label class="focus-toggle"><input type="checkbox"><span></span></label>';
+  const caption = bar.firstChild, toggle = bar.querySelector('input'), toggleText = bar.querySelector('.focus-toggle span');
+  toggle.checked = guide;
+  figure.prepend(bar);
+  const tip = document.createElement('div');
+  tip.className = 'part-tip';
+  tip.hidden = true;
+  document.body.append(tip);
+  const fine = matchMedia('(hover: hover) and (pointer: fine)');
+  const sel = list => list.map(id => `[data-part~="${CSS.escape(id)}"]`).join(',');
+  function render() {
+    const hot = pinned || peek || (look && look.ids) || (guide ? stepIds : []);
+    const ring = !!(pinned || peek || look);
+    figure.classList.toggle('tf-ring', ring && hot.length > 0);
+    figure.toggleAttribute('data-focusing', hot.length > 0);
+    style.textContent = hot.length ? `#experiment [data-part]:not(${sel(hot)}){opacity:.24;filter:saturate(.35)}` : '';
+    for (const part of figure.querySelectorAll('[data-part]')) part.classList.toggle('tf-hot', ring && ids(part.dataset.part).some(id => hot.includes(id)));
+  }
+  // Re-rendered figures replace their children; keep the hot class on new parts.
+  new MutationObserver(() => { if (figure.classList.contains('tf-ring')) render(); }).observe(figure, { childList: true, subtree: true });
+  const visible = el => el.offsetParent !== null || el.getClientRects().length > 0;
+  const steps = () => [...document.querySelectorAll('.panel .step, .panel [data-focus]:not(ol.look *)')].filter(visible);
+  function pickStep() {
+    const scroller = panel && getComputedStyle(panel).overflowY !== 'visible' ? panel : null;
+    const box = scroller ? scroller.getBoundingClientRect() : { top: 0, bottom: innerHeight, height: innerHeight };
+    const line = box.top + box.height * 0.3, list = steps();
+    const inView = el => { const r = el.getBoundingClientRect(); return r.bottom > box.top && r.top < box.bottom; };
+    const focused = document.activeElement && list.filter(el => el.contains(document.activeElement)).pop();
+    if (focused && inView(focused)) return focused;
+    let found = null;
+    for (const el of list) { const r = el.getBoundingClientRect(); if (r.bottom > line && r.top < box.bottom && (!found || found.contains(el))) found = el; else if (found && !found.contains(el)) break; }
+    return found;
+  }
+  function update() {
+    const step = pickStep();
+    if (step !== activeStep) {
+      activeStep = step;
+      if (look && !(step && step.contains(look.list))) setLook(null);
+    }
+    const target = step && (step.matches('[data-focus]') ? step : null);
+    stepIds = target ? ids(target.dataset.focus) : [];
+    render();
+  }
+  let queued = false;
+  const schedule = () => { if (!queued) { queued = true; requestAnimationFrame(() => { queued = false; update(); }); } };
+  (panel || document).addEventListener('scroll', schedule, { passive: true });
+  addEventListener('scroll', schedule, { passive: true });
+  addEventListener('resize', schedule);
+  document.addEventListener('focusin', schedule);
+  new MutationObserver(schedule).observe(document.querySelector('.panel') || document.body, { attributes: true, attributeFilter: ['hidden'], subtree: true });
+  toggle.addEventListener('change', () => { guide = toggle.checked; try { localStorage.setItem(KEY, guide ? 'on' : 'off'); } catch {} render(); });
+  // Ordered highlights.
+  const lists = [...document.querySelectorAll('ol.look')];
+  function setLook(next) {
+    look = next;
+    for (const list of lists) {
+      const items = [...list.children];
+      items.forEach((li, i) => { if (next && next.list === list && next.index === i) li.setAttribute('aria-current', 'step'); else li.removeAttribute('aria-current'); });
+      for (const button of list.previousElementSibling.querySelectorAll('.look-num')) button.setAttribute('aria-pressed', String(!!next && next.list === list && Number(button.dataset.index) === next.index));
+    }
+    caption.textContent = '';
+    if (next) {
+      const n = document.createElement('span');
+      n.className = 'look-n';
+      n.textContent = `${next.index + 1}/${next.list.children.length}`;
+      const text = document.createElement('span');
+      text.append(...[...next.list.children[next.index].childNodes].map(node => node.cloneNode(true)));
+      caption.append(n, text);
+    }
+    render();
+  }
+  const go = (list, index) => setLook({ list, index, ids: ids(list.children[index].dataset.focus) });
+  for (const list of lists) {
+    const nav = document.createElement('div');
+    nav.className = 'look-nav';
+    const items = [...list.children];
+    items.forEach((li, i) => {
+      const b = document.createElement('button');
+      b.type = 'button'; b.className = 'look-num'; b.dataset.index = i; b.textContent = i + 1; b.setAttribute('aria-pressed', 'false');
+      b.addEventListener('click', () => go(list, i));
+      nav.append(b);
+      li.addEventListener('click', event => { if (!event.target.closest('a,button,input,[data-ref]')) go(list, i); });
+    });
+    const make = (cls, zh, en, fn) => { const b = document.createElement('button'); b.type = 'button'; b.className = cls; const label = () => { b.textContent = tr(zh, en); }; label(); I18N.on(label); b.addEventListener('click', fn); nav.append(b); };
+    const at = () => (look && look.list === list ? look.index : -1);
+    make('look-prev', '‹ 上一步', '‹ Prev', () => go(list, Math.max(0, at() - 1)));
+    make('look-next', '下一步 ›', 'Next ›', () => go(list, Math.min(items.length - 1, at() + 1)));
+    make('look-clear', '清除', 'Clear', () => setLook(null));
+    list.before(nav);
+  }
+  // Dual coding: terms ↔ parts.
+  const refs = () => document.querySelectorAll('[data-ref]');
+  for (const term of refs()) if (!term.matches('a,button,input,select,textarea,label,[tabindex]')) { term.tabIndex = 0; term.setAttribute('role', 'button'); term.setAttribute('aria-pressed', 'false'); }
+  const termOf = event => event.target.closest && event.target.closest('[data-ref]');
+  let pointer = 'mouse';
+  document.addEventListener('pointerdown', event => { pointer = event.pointerType; }, true);
+  document.addEventListener('pointerover', event => { const term = termOf(event); if (term && event.pointerType === 'mouse') { peek = ids(term.dataset.ref); render(); } });
+  document.addEventListener('pointerout', event => { const term = termOf(event); if (term && !term.contains(event.relatedTarget)) { peek = null; render(); } });
+  document.addEventListener('focusin', event => { const term = termOf(event); if (term) { peek = ids(term.dataset.ref); render(); } });
+  document.addEventListener('focusout', event => { if (termOf(event)) { peek = null; render(); } });
+  function pin(term) {
+    const next = ids(term.dataset.ref).join(' ');
+    pinned = pinned && pinned.join(' ') === next ? null : ids(next);
+    for (const other of refs()) if (other.getAttribute('role') === 'button') other.setAttribute('aria-pressed', String(!!pinned && other.dataset.ref === term.dataset.ref));
+    render();
+  }
+  document.addEventListener('click', event => { const term = termOf(event); if (term && term.getAttribute('role') === 'button' && pointer !== 'mouse') pin(term); });
+  document.addEventListener('keydown', event => {
+    const term = termOf(event);
+    if (term && term.getAttribute('role') === 'button' && (event.key === 'Enter' || event.key === ' ')) { event.preventDefault(); pin(term); }
+    if (event.key === 'Escape' && (look || pinned)) { pinned = null; for (const other of refs()) if (other.getAttribute('role') === 'button') other.setAttribute('aria-pressed', 'false'); setLook(null); }
+  });
+  function partLabel(part) { return part.getAttribute(`data-${I18N.lang}-label`); }
+  figure.addEventListener('pointermove', event => {
+    const part = event.target.closest && event.target.closest('[data-part]');
+    const label = part && partLabel(part);
+    for (const term of refs()) term.classList.toggle('tf-ref-on', !!part && ids(term.dataset.ref).some(id => ids(part.dataset.part).includes(id)));
+    if (!label || !fine.matches || event.pointerType !== 'mouse') { tip.hidden = true; return; }
+    tip.textContent = label;
+    tip.hidden = false;
+    const x = Math.min(event.clientX + 14, innerWidth - tip.offsetWidth - 8), y = event.clientY + 18 + tip.offsetHeight > innerHeight ? event.clientY - tip.offsetHeight - 12 : event.clientY + 18;
+    tip.style.left = x + 'px'; tip.style.top = y + 'px';
+  });
+  figure.addEventListener('pointerleave', () => { tip.hidden = true; for (const term of refs()) term.classList.remove('tf-ref-on'); });
+  const labels = () => { toggleText.textContent = tr('焦点引导', 'Focus guide'); };
+  labels();
+  I18N.on(() => { labels(); if (look) setLook(look); });
+  update();
+})();
+/* /lesson-shell */
+</script>
+<script>
+// ---------- Truth model: one locus, C (black) dominant over c (light) ----------
+const MU = 0.001, HUNT_SECONDS = 8, SHOWN = 40, SEED = 20240611, MAX_GEN = 200;
+function mulberry32(a) { return () => { a |= 0; a = a + 0x6D2B79F5 | 0; let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+const darkShare = p => 1 - (1 - p) ** 2;                 // CC + Cc under Hardy–Weinberg
+const carriers = p => 2 * p * (1 - p);                   // Cc
+function fitness(bark, s) { return { wD: 1 - s * (1 - bark), wL: 1 - s * bark }; } // mismatch with the bark is what birds see
+function select(p, wD, wL) {
+  const q = 1 - p, wbar = darkShare(p) * wD + q * q * wL;
+  return { p: wbar > 0 ? p * wD / wbar : p, wbar };       // C copies all sit in black moths: p' = p·wD / w̄
+}
+const mutate = (p, mu) => p + mu * (1 - p);
+function drift(p, N, rng) {
+  if (N === Infinity) return p;
+  let k = 0; for (let i = 0; i < 2 * N; i++) if (rng() < p) k++;
+  return k / (2 * N);
+}
+// One generation: adults at frequency p meet the bark; survivors breed; mutation; finite sampling.
+function stepGen(p, env, rng, hunt) {
+  const { wD, wL } = hunt || fitness(env.bark, env.s);
+  const sel = select(p, wD, wL);
+  const pm = env.mutation ? mutate(sel.p, MU) : sel.p;
+  return { p: Math.min(1, Math.max(0, drift(pm, env.N, rng))), expected: pm, wD, wL, wbar: sel.wbar };
+}
+function deterministic(p0, bark, s, gens, mutation = false) {
+  let p = p0; for (let g = 0; g < gens; g++) p = stepGen(p, { bark, s, N: Infinity, mutation }, null).p; return p;
+}
+function selfCheck() {
+  const close = (a, b) => Math.abs(a - b) < 1e-9, fail = [];
+  if (!close(stepGen(0.3, { bark: 1, s: 0, N: Infinity }, null).p, 0.3)) fail.push('s=0 is neutral');
+  if (!close(stepGen(0.3, { bark: 0.5, s: 0.4, N: Infinity }, null).p, 0.3)) fail.push('bark 0.5 is neutral');
+  if (deterministic(0, 1, 0.5, 100) !== 0) fail.push('no variation, no response');
+  if (deterministic(1, 0, 0.5, 100) !== 1) fail.push('fixed allele stays fixed');
+  if (!(deterministic(0.2, 1, 0.3, 1) > 0.2 && deterministic(0.2, 0, 0.3, 1) < 0.2)) fail.push('selection favors the camouflaged morph');
+  if (!close(darkShare(0.3), 0.51)) fail.push('dominance');
+  const a = [], b = []; let r1 = mulberry32(7), r2 = mulberry32(7), x = 0.5, y = 0.5;
+  for (let g = 0; g < 20; g++) { x = stepGen(x, { bark: 0.5, s: 0, N: 20 }, r1).p; y = stepGen(y, { bark: 0.5, s: 0, N: 20 }, r2).p; a.push(x); b.push(y); }
+  if (a.join() !== b.join() || a.every(v => v === 0.5)) fail.push('seeded drift');
+  if (deterministic(0.02, 1, 0.3, 30, true) < deterministic(0.02, 1, 0.3, 30)) fail.push('mutation adds C');
+  if (fail.length) console.error('selfCheck failed:', fail);
+  return fail;
+}
+const CHECK = selfCheck();
+
+// Practice 3 options come from the model, not from a hand-typed key.
+const P3 = (() => {
+  const truth = darkShare(deterministic(0.02, 1, 0.3, 10));
+  const options = [6, 25, 50, 95];
+  const best = options.reduce((m, o) => Math.abs(o / 100 - truth) < Math.abs(m / 100 - truth) ? o : m);
+  return { truth, options, best };
+})();
+
+// ---------- Lesson state ----------
+const $ = id => document.getElementById(id);
+const fmt = (x, d = 1) => (x * 100).toFixed(d) + '%';
+let state;
+function freshRun(keep = {}) {
+  const N = keep.N ?? state?.env.N ?? 1000;
+  const p0 = keep.p0 ?? state?.p0 ?? 0.02;
+  const env = { bark: +$('bark').value / 100, s: +$('strength').value / 100, N, mutation: $('mutation').checked };
+  return { p0, env, rng: mulberry32(SEED), gens: [{ g: 0, p: p0, e: p0, bark: env.bark, wD: null, wL: null, wbar: null, hunt: null }] };
+}
+const lesson = { predicted: null, unlocked: false, hunting: null, practice: null, firstTry: {} };
+function current() { return state.gens[state.gens.length - 1]; }
+function advance(hunt) {
+  if (state.gens.length > MAX_GEN) { say('status', () => tr(`最多记录 ${MAX_GEN} 代。点“从第 0 代重来”。`, `The record holds ${MAX_GEN} generations. Use “Restart from generation 0”.`)); return; }
+  const last = current();
+  state.env.bark = +$('bark').value / 100; state.env.s = +$('strength').value / 100; state.env.mutation = $('mutation').checked;
+  const out = stepGen(last.p, state.env, state.rng, hunt && { wD: hunt.wD, wL: hunt.wL });
+  const exp = stepGen(last.e, { ...state.env, N: Infinity }, null, hunt && { wD: hunt.wD, wL: hunt.wL }).p;
+  state.gens.push({ g: last.g + 1, p: out.p, e: exp, bark: state.env.bark, wD: out.wD, wL: out.wL, wbar: out.wbar, hunt: hunt || null });
+}
+function checkUnlock() {
+  if (lesson.unlocked || !lesson.predicted) return;
+  const start = darkShare(state.gens[0].p), peak = Math.max(...state.gens.map(x => darkShare(x.p)));
+  if (peak - start >= 0.3) {
+    lesson.unlocked = true;
+    for (const id of ['explanation', 'practice', 'transfer']) $(id).hidden = false;
+    say('prediction-feedback', predictionFeedback);
+  }
+}
+function predictionFeedback() {
+  const p = lesson.predicted;
+  if (p === 'select') return tr('你预测对了：没有一只蛾变色，变的是下一代里黑色蛾的比例。', 'You predicted it: no moth changed color. What changed was the share of black moths in each new generation.');
+  if (p === 'darken') return tr('你预测浅色蛾会自己变深。模型里每只蛾的颜色从出生到死亡都不变：上一代的浅色蛾被吃得更多，下一代里浅色蛾就少了。这是最常见的误解：把种群的变化当成了个体的变化。', 'You predicted the light moth would darken itself. In the model, every moth keeps its color from birth to death. Light moths were eaten more, so fewer light moths were born next time. This is the most common misconception: reading a change in the population as a change in individuals.');
+  return tr('你预测桦尺蛾会被吃光。实际上种群一直都在：浅色蛾少了，黑色蛾补了上来。只要群体里已经有能躲过鸟的变异，选择改变的是比例，而不是让物种消失。', 'You predicted the moths would be eaten out. The population never disappeared: light moths dwindled while black moths took their place. When the population already holds a variant that escapes birds, selection changes the mix rather than wiping the species out.');
+}
+
+// ---------- Drawing ----------
+const NS = 'http://www.w3.org/2000/svg';
+function el(tag, attrs = {}, parent) { const n = document.createElementNS(NS, tag); for (const k in attrs) n.setAttribute(k, attrs[k]); if (parent) parent.appendChild(n); return n; }
+const PALE = [214, 209, 192], SOOT = [46, 42, 38], LICHEN = [196, 205, 176];
+const mix = (a, b, t) => a.map((v, i) => Math.round(v + (b[i] - v) * t));
+const rgb = c => `rgb(${c[0]},${c[1]},${c[2]})`;
+function layout() {
+  const narrow = $('experiment').clientWidth < 560;
+  return narrow
+    ? { vb: [400, 640], scene: [0, 0, 400, 330], plot: [44, 396, 388, 590] }
+    : { vb: [800, 400], scene: [0, 0, 392, 400], plot: [450, 46, 790, 352] };
+}
+function mothsFor(gen, p, bark, seedExtra = 0) {
+  const rng = mulberry32(SEED + gen * 7919 + seedExtra);
+  const nDark = Math.round(SHOWN * darkShare(p));
+  const list = [];
+  // Jittered 6 × 7 grid: random-looking spacing without moths sitting on top of each other.
+  const cells = Array.from({ length: 42 }, (_, c) => [rng(), c]).sort((a, b) => a[0] - b[0]).slice(0, SHOWN).map(x => x[1]);
+  for (let i = 0; i < SHOWN; i++) { const c = cells[i]; list.push({ i, dark: false, x: (c % 6 + 0.2 + rng() * 0.6) / 6, y: (Math.floor(c / 6) + 0.25 + rng() * 0.5) / 7, r: rng() * 40 - 20, k: rng() }); }
+  // Which positions are dark is shuffled too, so dark moths don't cluster in one corner.
+  const order = list.map((m, i) => [rng(), i]).sort((a, b) => a[0] - b[0]);
+  for (let j = 0; j < nDark; j++) list[order[j][1]].dark = true;
+  return list;
+}
+function drawScene(L, bark, moths, opts = {}) {
+  const [x0, y0, w, h] = L.scene, g = $('scene'), labels = $('scene-labels');
+  g.replaceChildren(); labels.replaceChildren();
+  for (const id of ['scene-clip-rect', 'scene-frame']) { const r = $(id); r.setAttribute('x', x0); r.setAttribute('y', y0); r.setAttribute('width', w); r.setAttribute('height', h); }
+  const base = mix(PALE, SOOT, bark);
+  el('rect', { x: x0, y: y0, width: w, height: h, fill: rgb(base) }, g);
+  const rng = mulberry32(99);
+  for (let i = 0; i < 34; i++) {           // bark ridges
+    const sx = x0 + rng() * w, sw = 4 + rng() * 16, shade = (rng() - 0.5) * 0.35;
+    const c = shade > 0 ? mix(base, [255, 255, 255], shade * 0.45) : mix(base, [0, 0, 0], -shade * 0.6);
+    el('path', { d: `M${sx} ${y0} C ${sx + 10 * (rng() - .5)} ${y0 + h * .35}, ${sx + 14 * (rng() - .5)} ${y0 + h * .7}, ${sx + 8 * (rng() - .5)} ${y0 + h} L ${sx + sw} ${y0 + h} C ${sx + sw + 10 * (rng() - .5)} ${y0 + h * .6}, ${sx + sw + 8 * (rng() - .5)} ${y0 + h * .3}, ${sx + sw} ${y0} Z`, fill: rgb(c), opacity: 0.7 }, g);
+  }
+  for (let i = 0; i < 22; i++) {           // lichen survives only where the air is clean
+    el('ellipse', { cx: x0 + rng() * w, cy: y0 + rng() * h, rx: 8 + rng() * 22, ry: 5 + rng() * 14, fill: rgb(mix(LICHEN, base, 0.25)), opacity: (0.55 * (1 - bark)).toFixed(3) }, g);
+  }
+  for (let i = 0; i < 420; i++) {          // fine peppering on the bark, the texture a resting moth hides in
+    const c = rng() < 0.5 ? mix(base, [0, 0, 0], 0.35) : mix(base, [255, 255, 255], 0.22);
+    el('circle', { cx: (x0 + rng() * w).toFixed(1), cy: (y0 + rng() * h).toFixed(1), r: (0.6 + rng() * 1.3).toFixed(2), fill: rgb(c), opacity: 0.8 }, g);
+  }
+  for (const m of moths) {
+    const cx = x0 + 8 + m.x * (w - 16), cy = y0 + 8 + m.y * (h - 16), s = 0.85 + m.k * 0.25;
+    const node = el('g', { class: 'moth', transform: `translate(${cx.toFixed(1)} ${cy.toFixed(1)}) rotate(${m.r.toFixed(1)}) scale(${s.toFixed(2)})`, 'data-morph': m.dark ? 'dark' : 'light', 'data-i': m.i }, g);
+    const body = m.dark ? '#2e2a26' : '#dcd7c8', edge = m.dark ? '#24201d' : '#b9b3a2';
+    // Resting peppered moth: wings spread flat into a broad delta, hindwings tucked under the forewings.
+    el('path', { class: 'wing', d: 'M0 -4 C -5 -3, -12 0, -16 5 C -12 8, -6 8, -2 6 L 0 7 L 2 6 C 6 8, 12 8, 16 5 C 12 0, 5 -3, 0 -4 Z', fill: body, stroke: edge, 'stroke-width': .7 }, node);
+    if (!m.dark) for (const [dx, dy] of [[-9, 3], [-5, 1], [-11, 5], [-3, 4], [9, 3], [5, 1], [11, 5], [3, 4], [-7, 5], [7, 5], [-13, 4.5], [13, 4.5]]) el('circle', { cx: dx, cy: dy, r: .75, fill: '#3e3932' }, node);
+    el('ellipse', { cx: 0, cy: 1.5, rx: 1.2, ry: 4.5, fill: m.dark ? '#1f1c19' : '#8a8274' }, node);
+    if (opts.hunt) { node.setAttribute('tabindex', '0'); node.setAttribute('role', 'button'); node.setAttribute('aria-label', tr('一只蛾', 'A moth')); }
+  }
+  if (opts.label) {
+    const t = opts.label, wpx = 14 + t.length * (I18N.lang === 'zh' ? 13 : 7.2);
+    el('rect', { class: 'pill', x: x0 + 10, y: y0 + 10, width: wpx, height: 26, rx: 13 }, labels);
+    el('text', { class: 'pill-text', x: x0 + 17, y: y0 + 27.5 }, labels).textContent = t;
+  }
+  if (opts.timer != null) {
+    el('rect', { class: 'pill', x: x0 + w - 76, y: y0 + 10, width: 66, height: 26, rx: 13 }, labels);
+    const t = el('text', { class: 'timer', x: x0 + w - 43, y: y0 + 27.5, 'text-anchor': 'middle', id: 'timer' }, labels); t.textContent = opts.timer + ' s';
+  }
+}
+function drawPlot(L, hidden) {
+  const g = $('plot'); g.replaceChildren();
+  const [x0, y0, x1, y1] = L.plot;
+  if (hidden) {
+    el('rect', { x: x0, y: y0, width: x1 - x0, height: y1 - y0, rx: 10, fill: 'none', stroke: 'var(--line)', 'stroke-dasharray': '4 5' }, g);
+    el('text', { class: 'qmark', x: (x0 + x1) / 2, y: (y0 + y1) / 2 + 8, 'text-anchor': 'middle' }, g).textContent = '?';
+    el('text', { class: 'faded-note', x: (x0 + x1) / 2, y: (y0 + y1) / 2 + 40, 'text-anchor': 'middle' }, g).textContent = tr('记录图已隐藏', 'Record hidden');
+    tagRecord(g);
+    return;
+  }
+  const gens = state.gens, span = Math.min(MAX_GEN, Math.max(30, Math.ceil((gens.length - 1) / 10) * 10));
+  const X = g2 => x0 + (g2 / span) * (x1 - x0), Y = v => y1 - v * (y1 - y0);
+  el('text', { class: 'plot-title', x: x0, y: y0 - 26 }, g).textContent = tr('每一代的记录', 'Every generation');
+  for (const v of [0, 0.5, 1]) {
+    el('line', { class: v ? 'grid' : 'axis', x1: x0, x2: x1, y1: Y(v), y2: Y(v) }, g);
+    el('text', { class: 'tick', x: x0 - 6, y: Y(v) + 4, 'text-anchor': 'end' }, g).textContent = v === 0.5 ? '0.5' : String(v);
+  }
+  const cw = (x1 - x0) / span;
+  for (const r of gens) {
+    if (r.g > span) break;
+    el('rect', { x: X(r.g) - cw / 2 + 0.5, y: y0 - 14, width: Math.max(1, cw - 1), height: 8, fill: rgb(mix(PALE, SOOT, r.bark)), stroke: 'var(--line-strong)', 'stroke-width': 0.5 }, g);
+    const d = darkShare(r.p);
+    if (d > 0) el('rect', { 'data-part': 'black', 'data-zh-label': '这一代黑色蛾的比例', 'data-en-label': 'Share of black moths in this generation', class: 'col', x: X(r.g) - cw / 2 + 0.5, y: Y(d), width: Math.max(1, cw - 1), height: d * (y1 - y0) }, g);
+  }
+  el('text', { class: 'plot-label', x: x1, y: y0 - 18, 'text-anchor': 'end' }, g).textContent = tr('↑ 树皮', '↑ bark');
+  if (state.env.N !== Infinity) el('path', { 'data-part': 'allele', class: 'e-line', d: gens.filter(r => r.g <= span).map((r, i) => `${i ? 'L' : 'M'}${X(r.g).toFixed(1)} ${Y(r.e).toFixed(1)}`).join(' ') }, g);
+  el('path', { 'data-part': 'allele', 'data-zh-label': '黑色等位基因 C 的频率 p', 'data-en-label': 'Frequency p of the dark allele C', class: 'p-line', d: gens.filter(r => r.g <= span).map((r, i) => `${i ? 'L' : 'M'}${X(r.g).toFixed(1)} ${Y(r.p).toFixed(1)}`).join(' ') }, g);
+  for (let t = 0; t <= span; t += span > 60 ? 50 : 10) el('text', { class: 'tick', x: X(t), y: y1 + 16, 'text-anchor': 'middle' }, g).textContent = t;
+  el('text', { class: 'plot-label', x: (x0 + x1) / 2, y: y1 + 34, 'text-anchor': 'middle' }, g).textContent = tr('世代', 'generation');
+  tagRecord(g);
+}
+// Axes, bark strip and labels form the record; the bars and the allele line are their own parts.
+function tagRecord(g) { for (const n of g.children) if (!n.hasAttribute('data-part')) n.setAttribute('data-part', 'record'); }
+
+// ---------- Render ----------
+function render() {
+  const L = layout(); $('figure').setAttribute('viewBox', `0 0 ${L.vb[0]} ${L.vb[1]}`);
+  $('bark-out').textContent = $('bark').value + '%';
+  $('strength-out').textContent = $('strength').value + '%';
+  $('start-out').textContent = (+$('start').value / 100).toFixed(2);
+  if (lesson.practice) return renderPractice(L);
+  const c = current();
+  const hunt = lesson.hunting;
+  const moths = hunt ? hunt.moths : mothsFor(c.g, c.p, c.bark);
+  drawScene(L, +$('bark').value / 100, moths, { hunt: !!hunt, label: tr(`第 ${c.g} 代`, `Generation ${c.g}`), timer: hunt ? hunt.left : null });
+  if (hunt) for (const m of hunt.eaten) $('scene').querySelector(`[data-i="${m}"]`)?.classList.add('eaten');
+  $('figure').classList.toggle('hunting', !!hunt);
+  drawPlot(L, false);
+  $('legend-e').hidden = state.env.N === Infinity;
+  $('ro-gen').textContent = c.g;
+  $('ro-gen-u').textContent = tr(`树皮 ${$('bark').value}% 黑`, `bark ${$('bark').value}% dark`);
+  $('ro-p').textContent = c.p.toFixed(3);
+  $('ro-p-u').textContent = tr(`浅色等位基因 c：${(1 - c.p).toFixed(3)}`, `light allele c: ${(1 - c.p).toFixed(3)}`);
+  $('ro-dark').textContent = fmt(darkShare(c.p));
+  $('ro-dark-u').textContent = tr(`其中杂合子 Cc ${fmt(carriers(c.p))}`, `of which Cc ${fmt(carriers(c.p))}`);
+  $('ro-surv').textContent = c.wD == null ? '—' : `${fmt(c.wD, 0)} / ${fmt(c.wL, 0)}`;
+  $('ro-surv-u').textContent = c.hunt ? tr('黑 / 浅 · 你捕食的', 'black / light · your hunt') : tr('黑 / 浅', 'black / light');
+  $('ro-wbar').textContent = c.wbar == null ? '—' : c.wbar.toFixed(2);
+  $('ro-wbar-u').textContent = tr('相对存活率的平均', 'average relative survival');
+  const sum = tr(`第 ${c.g} 代，树皮 ${$('bark').value}% 黑。${fmt(darkShare(c.p))} 的蛾是黑色，黑色等位基因频率 ${c.p.toFixed(3)}。`,
+    `Generation ${c.g}, bark ${$('bark').value}% dark. ${fmt(darkShare(c.p))} of moths are black; dark-allele frequency ${c.p.toFixed(3)}.`);
+  $('summary').textContent = sum; $('figure-desc').textContent = sum;
+  const light = (1 - c.p) ** 2, hidden = carriers(c.p);
+  $('carriers').textContent = tr(`现在 ${fmt(light)} 的蛾是浅色（cc），但另有 ${fmt(hidden)} 的蛾是黑色的 Cc，体内藏着浅色等位基因。浅色等位基因中有 ${fmt(c.p < 1 ? hidden / (hidden + 2 * light) : 0, 0)} 藏在杂合子里。`,
+    `Right now ${fmt(light)} of moths are light (cc), while another ${fmt(hidden)} are black Cc moths carrying the light allele out of sight. ${fmt(c.p < 1 ? hidden / (hidden + 2 * light) : 0, 0)} of all light-allele copies are hidden in heterozygotes.`);
+  syncControls();
+}
+function syncControls() {
+  const locked = !lesson.predicted || !!lesson.practice;
+  const hunting = !!lesson.hunting;
+  for (const id of ['bark', 'strength', 'next', 'run10', 'hunt', 'start', 'pop', 'mutation', 'restart']) $(id).disabled = locked || hunting;
+  $('finish-hunt').disabled = !hunting;
+}
+
+// ---------- Hunt ----------
+let timerId = null;
+function startHunt() {
+  const c = current();
+  lesson.hunting = { moths: mothsFor(c.g, c.p, +$('bark').value / 100, 1), eaten: new Set(), left: HUNT_SECONDS };
+  say('status', () => tr('开始！点击你看到的蛾。', 'Go! Click every moth you can see.'));
+  render();
+  timerId = setInterval(() => {
+    if (!lesson.hunting) return;
+    lesson.hunting.left -= 1;
+    if (lesson.hunting.left <= 0) finishHunt();
+    else { const t = $('timer'); if (t) t.textContent = lesson.hunting.left + ' s'; }
+  }, 1000);
+}
+function eat(node) {
+  const h = lesson.hunting; if (!h || !node) return;
+  const i = +node.dataset.i; if (h.eaten.has(i)) return;
+  h.eaten.add(i); node.classList.add('eaten');
+}
+function finishHunt() {
+  clearInterval(timerId); timerId = null;
+  const h = lesson.hunting; if (!h) return;
+  const nD = h.moths.filter(m => m.dark).length, nL = SHOWN - nD;
+  const eD = h.moths.filter(m => m.dark && h.eaten.has(m.i)).length, eL = h.eaten.size - eD;
+  const wD = nD ? 1 - eD / nD : 1, wL = nL ? 1 - eL / nL : 1;
+  lesson.hunting = null;
+  if (wD === 0 && wL === 0) {
+    say('status', () => tr('你把 40 只全吃了。真实种群远大于屏幕上这 40 只，这一代不计入。', 'You ate all 40. The real population is far bigger than the 40 on screen, so this round does not count.'));
+    render(); return;
+  }
+  advance({ wD, wL, eD, eL, nD, nL });
+  say('status', () => tr(`你吃掉了 ${nL} 只浅色蛾中的 ${eL} 只、${nD} 只黑色蛾中的 ${eD} 只。存活率：浅色 ${fmt(wL, 0)}，黑色 ${fmt(wD, 0)}。下一代由幸存者繁殖。`,
+    `You ate ${eL} of ${nL} light moths and ${eD} of ${nD} black moths. Survival: light ${fmt(wL, 0)}, black ${fmt(wD, 0)}. The survivors bred the next generation.`));
+  checkUnlock(); render();
+}
+
+// ---------- Practice: scaffolds faded ----------
+function renderPractice(L) {
+  const P = lesson.practice;
+  const scene = P.scene || { p: current().p, bark: +$('bark').value / 100, g: 0 };
+  drawScene(L, scene.bark, mothsFor(scene.g, scene.p, scene.bark, 5), {});
+  drawPlot(L, true);
+  for (const id of ['ro-gen', 'ro-p', 'ro-dark', 'ro-surv', 'ro-wbar']) { $(id).textContent = '—'; $(id + '-u').textContent = ''; }
+  $('figure-desc').textContent = tr('练习模式：记录图与读数已隐藏。', 'Practice mode: the record and readouts are hidden.');
+  syncControls();
+}
+function startPractice() {
+  lesson.practice = { scene: null, answered: {} };
+  $('experiment').classList.add('faded');
+  $('problems').hidden = false; $('start-practice').hidden = true; $('end-practice').hidden = false;
+  render();
+}
+function endPractice() {
+  lesson.practice = null;
+  $('experiment').classList.remove('faded');
+  $('start-practice').hidden = false; $('end-practice').hidden = true;
+  render();
+}
+function focusScene(scene) { if (lesson.practice) { lesson.practice.scene = scene; render(); } }
+function record(id, correct) {
+  if (!(id in lesson.firstTry)) lesson.firstTry[id] = correct;
+  const done = ['p1', 'p2', 'p3'].filter(k => k in lesson.firstTry);
+  if (done.length === 3) {
+    const n = done.filter(k => lesson.firstTry[k]).length;
+    $('practice-score').hidden = false;
+    say('practice-score', () => tr(`三道题第一次就答对 ${n} 道。`, `${n} of 3 right on the first try.`));
+  }
+}
+function buildP3() {
+  const box = $('p3-options'); box.replaceChildren();
+  for (const o of P3.options) {
+    const lab = document.createElement('label'); lab.className = 'choice';
+    lab.innerHTML = `<input type="radio" name="p3" value="${o}" required><span><span lang="zh">约 ${o}%</span><span lang="en">about ${o}%</span></span>`;
+    box.appendChild(lab);
+  }
+}
+
+// ---------- Wiring ----------
+function restartRun(keep) { if (lesson.hunting) return; state = freshRun(keep); render(); }
+$('prediction-form').addEventListener('submit', e => {
+  e.preventDefault();
+  lesson.predicted = new FormData(e.target).get('prediction');
+  say('prediction-status', () => tr('已记下。现在让种群一代代繁殖，看看结果。', 'Saved. Now breed the population generation by generation and see.'));
+  render();
+});
+$('next').addEventListener('click', () => { advance(); checkUnlock(); render(); });
+$('run10').addEventListener('click', () => { for (let i = 0; i < 10; i++) advance(); checkUnlock(); render(); });
+$('hunt').addEventListener('click', startHunt);
+$('finish-hunt').addEventListener('click', finishHunt);
+$('figure').addEventListener('click', e => { if (lesson.hunting) eat(e.target.closest('.moth')); });
+$('figure').addEventListener('keydown', e => { if (lesson.hunting && (e.key === 'Enter' || e.key === ' ') && e.target.closest?.('.moth')) { e.preventDefault(); eat(e.target.closest('.moth')); } });
+for (const id of ['bark', 'strength']) $(id).addEventListener('input', render);
+$('start').addEventListener('input', () => { restartRun({ p0: +$('start').value / 100 }); say('status', () => tr('新种群，从第 0 代开始。', 'New population, starting at generation 0.')); });
+$('pop').addEventListener('change', () => { restartRun({ N: $('pop').value === 'inf' ? Infinity : +$('pop').value }); say('status', () => tr('新种群，从第 0 代开始。', 'New population, starting at generation 0.')); });
+$('mutation').addEventListener('change', () => { state.env.mutation = $('mutation').checked; render(); });
+$('restart').addEventListener('click', () => { restartRun(); say('status', () => tr('同样的设置、同样的随机种子，从第 0 代重来。', 'Same settings and the same random seed, from generation 0.')); });
+$('start-practice').addEventListener('click', startPractice);
+$('end-practice').addEventListener('click', endPractice);
+$('p1-form').addEventListener('submit', e => {
+  e.preventDefault(); const v = new FormData(e.target).get('p1'); focusScene(null);
+  const msg = {
+    yes: () => tr('误解：获得性状遗传（拉马克式）。伸脖子改变的是这只长颈鹿自己的身体，不改变它的基因，幼崽不会继承。', 'Misconception: inheritance of acquired traits (Lamarckian). Stretching changes this giraffe’s body, not its genes; its calves don’t inherit it.'),
+    need: () => tr('误解：需要驱动变化。“需要”不会产生新性状，就像黑树皮没有让任何一只浅色蛾变黑。选择只能筛选已有的可遗传差异。', 'Misconception: need drives change. Needing a trait doesn’t produce it, just as dark bark never turned a light moth black. Selection can only sort heritable differences that already exist.'),
+    variation: () => tr('对。和桦尺蛾一样：变异、遗传、繁殖差异，三者缺一不可。', 'Right. Same as the moths: variation, heredity and differential reproduction, all three.'),
+  }[v];
+  say('p1-feedback', msg); $('p1-feedback').classList.toggle('ok', v === 'variation'); record('p1', v === 'variation');
+});
+$('p2-form').addEventListener('submit', e => {
+  e.preventDefault();
+  const v = parseFloat($('p2-answer').value), truth = deterministic(0, 1, 0.3, 30);
+  const ok = Math.abs(v - truth) < 0.005;
+  focusScene({ p: truth, bark: 1, g: 30 });
+  say('p2-feedback', () => ok
+    ? tr(`对，还是 ${truth}。左边是第 30 代：一只黑蛾也没有。没有变异，选择就没有可以筛选的东西。`, `Right, still ${truth}. On the left is generation 30: not one black moth. Without variation there is nothing for selection to sort.`)
+    : tr(`模型给出 ${truth}，左边是第 30 代：一只黑蛾也没有。误解：环境会创造它所偏好的性状。选择只能改变已有变异的比例；频率为 0、又没有突变时，黑色等位基因不会出现。`, `The model gives ${truth}; on the left is generation 30, without a single black moth. Misconception: the environment creates the trait it favors. Selection only shifts variants that already exist; at frequency 0 with no mutation, the dark allele never appears.`));
+  $('p2-feedback').classList.toggle('ok', ok); record('p2', ok);
+});
+$('p3-form').addEventListener('submit', e => {
+  e.preventDefault(); const v = +new FormData(e.target).get('p3'); const ok = v === P3.best;
+  focusScene({ p: deterministic(0.02, 1, 0.3, 10), bark: 1, g: 10 });
+  const truth = fmt(P3.truth, 0);
+  const msg = ok ? () => tr(`对。模型给出 ${truth}。每代黑色等位基因乘以约 1/w̄，增长会累积，所以 10 代就从 4% 到了一半左右。`, `Right. The model gives ${truth}. Each generation multiplies the dark allele by about 1/w̄, so the gains compound: 4% to about half in 10 generations.`)
+    : v < P3.best ? () => tr(`模型给出 ${truth}。误解：把选择当成每代加一点点的线性变化。黑色等位基因每代按比例增长（约 ×1/w̄），增长会累积。`, `The model gives ${truth}. Misconception: treating selection as adding a fixed small amount each generation. The dark allele grows by a proportion each generation (about ×1/w̄), so gains compound.`)
+    : () => tr(`模型给出 ${truth}。误解：选择是瞬间完成的。第 1 代时大多数蛾仍是浅色，每一代只能改变一部分比例。`, `The model gives ${truth}. Misconception: selection acts all at once. In generation 1 most moths are still light; each generation shifts the mix only part of the way.`);
+  say('p3-feedback', msg); $('p3-feedback').classList.toggle('ok', ok); record('p3', ok);
+});
+$('transfer-form').addEventListener('submit', e => {
+  e.preventDefault(); const v = new FormData(e.target).get('transfer');
+  const msg = {
+    select: () => tr('正确。药物就是“黑树皮”：它不制造耐药，只是让已有的耐药菌留下更多后代。这也是为什么滥用抗生素会加快耐药的扩散。', 'Correct. The drug plays the part of the dark bark: it doesn’t create resistance, it lets resistant bacteria that already exist leave more offspring. That is why overusing antibiotics speeds the spread of resistance.'),
+    learn: () => tr('不对。这是把种群的变化当成了个体的学习。单个细菌不会因为接触药物而“学会”耐药；变的是耐药菌在群体中的比例。', 'Not quite. That reads a population change as individual learning. A single bacterium doesn’t learn resistance by meeting the drug; what changes is the share of resistant bacteria.'),
+    induce: () => tr('不对。突变是随机发生的，不会因为“需要”而定向出现，就像练习 2 里黑树皮没有造出黑色等位基因。药物只是筛选已有的突变。', 'Not quite. Mutations arise at random, not on demand, just as the dark bark in Practice 2 never created a dark allele. The drug only selects among mutations already present.'),
+  }[v];
+  say('transfer-feedback', msg); $('transfer-feedback').classList.toggle('ok', v === 'select');
+});
+$('reset').addEventListener('click', () => {
+  clearInterval(timerId); timerId = null;
+  Object.assign(lesson, { predicted: null, unlocked: false, hunting: null, practice: null, firstTry: {} });
+  for (const f of document.querySelectorAll('form')) f.reset();
+  $('bark').value = 90; $('strength').value = 30; $('start').value = 2; $('pop').value = '1000'; $('mutation').checked = false;
+  for (const id of ['explanation', 'practice', 'transfer', 'problems', 'practice-score', 'end-practice']) $(id).hidden = true;
+  $('start-practice').hidden = false; $('experiment').classList.remove('faded');
+  for (const id of ['prediction-status', 'status', 'prediction-feedback', 'p1-feedback', 'p2-feedback', 'p3-feedback', 'transfer-feedback', 'practice-score']) say(id, null);
+  $('explain-answer').value = '';
+  state = null; state = freshRun({ p0: 0.02, N: 1000 }); render();
+});
+buildP3();
+I18N.on(render);
+new ResizeObserver(() => render()).observe($('experiment'));
+state = freshRun({ p0: 0.02, N: 1000 });
+I18N.apply();
+</script>
+</body>
+</html>

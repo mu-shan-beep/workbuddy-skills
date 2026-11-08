@@ -1,0 +1,1053 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title data-i18n data-zh="发动机为什么要转两圈才做一次功？" data-en="Why does an engine turn twice for every power stroke?">Why does an engine turn twice for every power stroke?</title>
+<style>
+/* lesson-shell v2: shared by every example page; keep identical across files */
+:root{color-scheme:light dark;--bar:56px;--bg:#f7f6f2;--surface:#fff;--stage:#eeece6;--ink:#141618;--text:#2a2e31;--muted:#61676c;--faint:#8b9196;--line:#e4e1d9;--line-strong:#cbc7bd;--accent:#d9480f;--accent-soft:#fcebe2;--focus:#d9480f;--ok:#1d7a4c;--sans:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Noto Sans SC","Microsoft YaHei",sans-serif;--mono:ui-monospace,"SF Mono",SFMono-Regular,Menlo,Consolas,monospace}
+@media(prefers-color-scheme:dark){:root{--bg:#111315;--surface:#181b1e;--stage:#0b0d0f;--ink:#f3f4f2;--text:#dadedc;--muted:#a1a7ab;--faint:#7a8085;--line:#272b2f;--line-strong:#3b4045;--accent:#ff7a45;--accent-soft:#2b1a11;--focus:#ff7a45;--ok:#4cc38a}}
+*{box-sizing:border-box}html{-webkit-text-size-adjust:100%}body{margin:0;background:var(--bg);color:var(--text);font:15.5px/1.6 var(--sans);-webkit-font-smoothing:antialiased}
+[hidden]{display:none!important}html[data-lang=zh] [lang=en],html[data-lang=en] [lang=zh]{display:none!important}
+:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+.skip{position:absolute;left:12px;top:-80px;z-index:30;background:var(--surface);color:var(--ink);padding:8px 12px;border-radius:8px}.skip:focus{top:10px}
+.bar{position:sticky;top:0;z-index:20;height:var(--bar);display:flex;align-items:center;gap:14px;padding:0 16px 0 20px;background:color-mix(in srgb,var(--bg) 90%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.bar .back{display:inline-flex;align-items:center;gap:6px;min-height:40px;color:var(--muted);text-decoration:none;font-size:14px;white-space:nowrap}.bar .back:hover{color:var(--ink)}
+.bar .crumb{min-width:0;font:500 12px/1.2 var(--mono);color:var(--faint);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lang-switch{margin-left:auto;flex:none;display:inline-flex;padding:3px;border:1px solid var(--line);border-radius:999px;background:var(--surface)}
+.lang-switch button{appearance:none;border:0;background:none;cursor:pointer;font:600 12px/1 var(--sans);min-height:30px;min-width:40px;padding:0 11px;border-radius:999px;color:var(--muted)}
+.lang-switch button[aria-pressed=true]{background:var(--ink);color:var(--bg)}
+.lesson{display:flex;flex-direction:column}.panel{display:contents}
+.intro{order:0;padding:28px 20px 6px}
+.figure-pane{order:1;margin:14px 12px 4px;padding:12px;background:var(--stage);border-radius:16px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.steps{order:2;padding:0 20px 40px}
+.stage{position:relative;min-height:0;display:grid;place-items:center}.stage>svg,.stage>canvas{display:block;width:100%;height:auto}
+.fig-caption{margin:0;font-size:12.5px;line-height:1.5;color:var(--muted)}
+.readouts{display:grid;grid-template-columns:repeat(auto-fit,minmax(104px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.readout{background:var(--surface);padding:9px 13px;min-width:0}
+.readout .k{display:block;font:500 12px/1.35 var(--sans);color:var(--muted)}
+.readout strong{display:block;font:650 21px/1.3 var(--sans);font-variant-numeric:tabular-nums;color:var(--ink);letter-spacing:-.01em;overflow-wrap:anywhere}
+.readout .u{display:block;font-size:12px;line-height:1.35;color:var(--faint)}
+.meta{display:flex;flex-wrap:wrap;gap:4px 10px;margin:0 0 14px;padding:0;list-style:none;font:500 12.5px/1.4 var(--sans);color:var(--muted)}.meta li+li::before{content:"/";margin-right:10px;color:var(--line-strong)}
+h1{margin:0 0 12px;font-size:clamp(25px,2.5vw,33px);line-height:1.18;letter-spacing:-.025em;font-weight:700;color:var(--ink);text-wrap:balance}
+.lead{margin:0;color:var(--muted)}
+.step{padding:26px 0 22px;border-top:1px solid var(--line)}.intro+.steps .step:first-child,.steps>.step:first-child{border-top:0}
+.step>h2{display:flex;align-items:center;gap:10px;margin:0 0 12px;font-size:17px;line-height:1.3;letter-spacing:-.01em;color:var(--ink)}
+.step>h2 .n{flex:none;font:600 11px/1 var(--mono);color:var(--accent);border:1px solid currentColor;border-radius:6px;padding:4px 6px}
+h3{margin:20px 0 6px;font-size:14.5px;color:var(--ink)}p{margin:0 0 12px}strong{color:var(--ink)}
+.small{font-size:13.5px;color:var(--muted)}
+fieldset{border:0;padding:0;margin:0;min-width:0}legend{padding:0;margin:0 0 12px;font-weight:600;color:var(--ink)}
+label.choice{display:flex;gap:10px;align-items:flex-start;padding:10px 13px;margin-bottom:8px;border:1px solid var(--line);border-radius:10px;background:var(--surface);cursor:pointer;transition:border-color .12s,box-shadow .12s}
+label.choice:hover{border-color:var(--line-strong)}label.choice:has(input:checked){border-color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink)}label.choice:has(input:disabled){cursor:default}
+label.choice input{flex:none;margin:4px 0 0}input{accent-color:var(--ink)}input[type=radio],input[type=checkbox]{width:17px;height:17px}
+button,select{font:500 14px/1.2 var(--sans);color:var(--ink);background:var(--surface);border:1px solid var(--line-strong);border-radius:10px;padding:0 16px;min-height:42px;cursor:pointer}
+button:hover:not(:disabled),select:hover:not(:disabled){border-color:var(--ink)}button.primary{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+button:disabled,select:disabled{opacity:.45;cursor:not-allowed}
+.controls{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:14px 0}
+.toggle{display:flex;align-items:center;gap:10px;min-height:42px;font-weight:500;color:var(--ink);cursor:pointer}
+.range{margin:16px 0 8px}.range label{display:flex;justify-content:space-between;gap:12px;font-weight:500;color:var(--ink)}.range output{font:500 13px/1.6 var(--mono);color:var(--muted)}
+input[type=range]{width:100%;min-height:32px;margin:4px 0}
+.status{min-height:1.6em;margin:12px 0;padding:10px 12px;border-radius:10px;background:var(--bg);font-size:14px}
+.callout{margin:14px 0;padding:2px 0 2px 14px;border-left:3px solid var(--accent)}
+textarea{display:block;width:100%;min-height:90px;margin-top:8px;padding:10px 12px;font:inherit;color:var(--text);background:var(--bg);border:1px solid var(--line-strong);border-radius:10px;resize:vertical}
+table{border-collapse:collapse;width:100%;margin-top:14px;font-size:14px}th,td{text-align:left;padding:9px 6px;border-bottom:1px solid var(--line);vertical-align:top}th:first-child,td:first-child{padding-left:0}caption{text-align:left;font-weight:600;color:var(--ink);margin-bottom:4px}
+.limits{color:var(--muted);font-size:14px}
+.pane-more{display:none}
+.foot{margin-top:8px;padding-top:16px;border-top:1px solid var(--line);font-size:12.5px;color:var(--faint)}
+/* attention: figure parts [data-part], step focus [data-focus], ordered highlights ol.look, dual-coding terms [data-ref] */
+#experiment [data-part]{transition:opacity .28s ease,filter .28s ease,box-shadow .2s ease}
+#experiment.tf-ring [data-part].tf-hot:not(svg *){box-shadow:0 0 0 2px var(--accent),0 0 0 7px color-mix(in srgb,var(--accent) 18%,transparent);border-radius:10px}
+#experiment.tf-ring svg [data-part].tf-hot{filter:drop-shadow(0 0 1px var(--accent)) drop-shadow(0 0 5px color-mix(in srgb,var(--accent) 40%,transparent))}
+.focus-bar{display:flex;align-items:center;gap:12px;min-height:30px;margin:-4px 0 -2px}
+.focus-caption{flex:1;min-width:0;margin:0;font-size:13px;line-height:1.4;color:var(--ink)}.focus-caption:empty{visibility:hidden}
+.focus-caption .look-n{display:inline-grid;place-items:center;min-width:20px;height:20px;margin-right:8px;padding:0 5px;border-radius:999px;background:var(--accent);color:#fff;font:700 11px/1 var(--sans);vertical-align:1px}
+.focus-toggle{flex:none;display:inline-flex;align-items:center;gap:7px;min-height:30px;font-size:12.5px;color:var(--muted);cursor:pointer;white-space:nowrap}.focus-toggle input{width:15px;height:15px;margin:0}
+ol.look{margin:12px 0 8px;padding:0;list-style:none;counter-reset:look}
+ol.look>li{counter-increment:look;position:relative;margin:0 0 6px;padding:8px 10px 8px 38px;border:1px solid var(--line);border-radius:10px;cursor:pointer;color:var(--muted);transition:border-color .15s,background .15s}
+ol.look>li::before{content:counter(look);position:absolute;left:10px;top:9px;display:grid;place-items:center;width:20px;height:20px;border-radius:999px;border:1px solid var(--line-strong);font:650 11px/1 var(--sans);color:var(--muted)}
+ol.look>li:hover{border-color:var(--line-strong)}ol.look>li[aria-current=step]{border-color:var(--accent);background:var(--accent-soft);color:var(--ink)}ol.look>li[aria-current=step]::before{background:var(--accent);border-color:var(--accent);color:#fff}
+.look-nav{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:0 0 14px}.look-nav button{min-height:34px;padding:0 11px;font-size:13px}.look-nav .look-num{min-width:34px;padding:0}.look-nav .look-num[aria-pressed=true]{background:var(--accent);border-color:var(--accent);color:#fff}
+[data-ref]:not(a,button,input,select,label){text-decoration:underline dotted color-mix(in srgb,var(--accent) 70%,transparent);text-decoration-thickness:1.5px;text-underline-offset:3px;cursor:help;border-radius:4px}
+[data-ref].tf-ref-on{background:var(--accent-soft);box-shadow:0 0 0 2px var(--accent-soft);color:var(--ink)}[data-ref][aria-pressed=true]{background:var(--accent-soft);box-shadow:0 0 0 1px var(--accent)}
+.part-tip{position:fixed;z-index:40;pointer-events:none;max-width:240px;padding:5px 9px;border-radius:8px;background:var(--ink);color:var(--bg);font:500 12.5px/1.35 var(--sans);box-shadow:0 4px 14px rgb(0 0 0/.18)}
+@media(min-width:960px) and (min-height:560px){
+.lesson{display:grid;grid-template-columns:minmax(0,1fr) clamp(380px,35vw,500px);height:calc(100dvh - var(--bar))}
+.panel{display:block;grid-column:2;grid-row:1;overflow-y:auto;overscroll-behavior:contain;background:var(--surface);border-left:1px solid var(--line)}
+.figure-pane{grid-column:1;grid-row:1;margin:0;border-radius:0;padding:24px 28px;min-height:0}
+.figure-pane{overflow-y:auto;overscroll-behavior:contain}.figure-pane>*{flex-shrink:0}
+.figure-pane .stage{flex:1}.figure-pane .stage>svg,.figure-pane .stage>canvas{height:100%;max-height:100%}
+.pane-more{display:flex;grid-column:1;grid-row:1;align-self:end;position:relative;z-index:2;justify-content:center;align-items:flex-end;height:76px;padding-bottom:14px;pointer-events:none;background:linear-gradient(color-mix(in srgb,var(--stage) 0%,transparent),var(--stage) 72%)}
+.pane-more button{pointer-events:auto;min-height:32px;padding:0 14px;border-radius:999px;font-size:12.5px;box-shadow:0 2px 10px rgb(0 0 0/.12)}
+.intro{padding:32px 32px 6px}.steps{padding:0 32px 48px}
+.bar{padding:0 20px 0 24px}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+/* /lesson-shell */
+:root{--intake:#2f7fd1;--comp:#7a5bd1;--power:#e8590c;--exhaust:#858b90;--spark:#f2b705;--cut:#b9beb6;--cut-line:#6b726f;--cavity:#dedbd1;--cavity-deep:#cdc9bd}
+@media(prefers-color-scheme:dark){:root{--intake:#5aa2e6;--comp:#a08ceb;--power:#ff8a4c;--exhaust:#9aa1a7;--spark:#ffd23f;--cut:#4a5156;--cut-line:#8c959a;--cavity:#1b1f23;--cavity-deep:#14171a}}
+.stage{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);grid-template-rows:minmax(0,1fr);gap:6px;align-items:center;justify-items:center}
+.stage>svg{display:block;width:100%;height:auto}
+#engine{--anatomy-paper:#c7d0d0;--anatomy-top:#f7f7ed;--anatomy-shade-0:#66767a;--anatomy-shade-1:#90a0a2;--anatomy-shade-2:#b9c5c6;--anatomy-shade-3:#e0e6e1;--anatomy-hi:#243d43;--anatomy-mid:#627b80;--anatomy-lo:#8da3a5;--anatomy-faint:#a7b6b6;--anatomy-dot:#455c63;--anatomy-weight:.7px}
+@media(prefers-color-scheme:dark){#engine{--anatomy-paper:#799095;--anatomy-top:#d9e5e0;--anatomy-shade-0:#314a53;--anatomy-shade-1:#4d6870;--anatomy-shade-2:#789196;--anatomy-shade-3:#a2b8b8;--anatomy-hi:#dce9e6;--anatomy-mid:#9cb6bc;--anatomy-lo:#627f89;--anatomy-faint:#78969d;--anatomy-dot:#deebe6}}
+#engine path,#engine circle{vector-effect:non-scaling-stroke}
+.iso-fill{fill:var(--anatomy-paper);stroke:none}
+.iso-shade,.iso-top{stroke:none}
+.iso-shade[data-shade="0"]{fill:var(--anatomy-shade-0)}.iso-shade[data-shade="1"]{fill:var(--anatomy-shade-1)}.iso-shade[data-shade="2"]{fill:var(--anatomy-shade-2)}.iso-shade[data-shade="3"]{fill:var(--anatomy-shade-3)}
+.iso-top{fill:var(--anatomy-top)}
+.iso-solid[data-seamless]>.iso-shade,.iso-solid[data-seamless]>.iso-top{stroke-width:.4;stroke-linejoin:round}
+.iso-solid[data-seamless]>.iso-shade[data-shade="0"]{stroke:var(--anatomy-shade-0)}.iso-solid[data-seamless]>.iso-shade[data-shade="1"]{stroke:var(--anatomy-shade-1)}.iso-solid[data-seamless]>.iso-shade[data-shade="2"]{stroke:var(--anatomy-shade-2)}.iso-solid[data-seamless]>.iso-shade[data-shade="3"]{stroke:var(--anatomy-shade-3)}.iso-solid[data-seamless]>.iso-top{stroke:var(--anatomy-top)}
+.iso-line{fill:none;stroke:var(--anatomy-lo);stroke-width:var(--anatomy-weight);stroke-linecap:round;stroke-linejoin:round}
+.iso-line[data-tone="hi"]{stroke:var(--anatomy-hi)}.iso-line[data-tone="mid"]{stroke:var(--anatomy-mid)}.iso-line[data-tone="faint"]{stroke:var(--anatomy-faint)}
+.floor{fill:var(--ink);opacity:.07}
+.cavity{fill:var(--cavity);stroke:none}.cavity.deep{fill:var(--cavity-deep)}
+.hatch-bg{fill:var(--cut)}.hatch-line{stroke:var(--cut-line);stroke-width:1.1;opacity:.45}
+.cut{fill:url(#hatch);stroke:var(--cut-line);stroke-width:1;stroke-linejoin:round}
+.cut-edge{stroke:var(--cut-line);stroke-width:1;stroke-dasharray:3 3}
+.slab-back{fill:var(--anatomy-shade-0);stroke:var(--anatomy-hi);stroke-width:.7}
+.slab-front{fill:var(--anatomy-shade-2);stroke:var(--anatomy-hi);stroke-width:.9;stroke-linejoin:round}
+.slab-side{fill:var(--anatomy-shade-1);stroke:none}
+.counter{fill:var(--anatomy-shade-0);opacity:.75}
+.pin-dot{fill:var(--anatomy-hi)}
+.spring{fill:none;stroke:var(--anatomy-mid);stroke-width:1.3;stroke-linejoin:round}
+.gas{transition:fill .2s}
+.flow{fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.spark-star{fill:var(--spark);stroke:var(--ink);stroke-width:.6}
+.flame{fill:var(--spark);opacity:.35}
+.phantom{fill:none;stroke:var(--muted);stroke-width:1;stroke-dasharray:4 3;opacity:.8}
+.sprocket{fill:none;stroke:var(--muted);stroke-width:1.2;opacity:.9}
+.mark{fill:var(--accent);stroke:var(--surface);stroke-width:1.2}
+.mark-line{stroke:var(--accent);stroke-width:1.6;stroke-linecap:round}
+.lbl{font:500 11.5px var(--sans);fill:var(--muted)}
+.lbl-ink{font:600 12.5px var(--sans);fill:var(--ink)}
+.lbl-accent{font:650 12.5px var(--sans);fill:var(--accent)}
+.lbl,.lbl-ink,.lbl-accent{paint-order:stroke;stroke:var(--stage);stroke-width:3.5px;stroke-linejoin:round}
+.tick{stroke:var(--line-strong);stroke-width:1}
+.sector{stroke:var(--stage);stroke-width:2}
+.sector-intake{fill:var(--intake)}.sector-compression{fill:var(--comp)}.sector-power{fill:var(--power)}.sector-exhaust{fill:var(--exhaust)}
+.sector-label{font:650 13px var(--sans);text-anchor:middle;dominant-baseline:central}
+.dial-face{fill:var(--surface);stroke:var(--line)}
+.hand-cycle{stroke:var(--ink);stroke-width:3;stroke-linecap:round}
+.hand-crank{stroke:var(--accent);stroke-width:2.2;stroke-linecap:round}
+.hub{fill:var(--ink)}
+.gridline{stroke:var(--line);stroke-width:1}
+.axis{stroke:var(--line-strong);stroke-width:1.2}
+.trace{fill:none;stroke-width:2;stroke-linejoin:round}
+.now-dot{fill:var(--accent);stroke:var(--surface);stroke-width:2}
+.panel-bg{fill:var(--surface);stroke:var(--line)}
+#side.practice .sector-label,#side.practice .pv-hide{display:none}
+#engine [data-part=crank],#engine [data-part=rod]{cursor:grab;touch-action:none}
+.result{margin:0;font-size:13.5px;line-height:1.5;color:var(--text)}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
+.chips button{min-height:36px;padding:0 10px;border-radius:9px;font-size:12.5px}
+fieldset:disabled .chips,fieldset:disabled .range{opacity:.5}
+.qgroup{margin:0 0 14px}
+.checklist{list-style:none;margin:12px 0;padding:0;font-size:14px}
+.checklist li{display:flex;gap:8px;align-items:baseline;padding:3px 0;color:var(--muted)}
+.checklist li::before{content:"○";flex:none;width:1em;color:var(--faint)}
+.checklist li.done{color:var(--ink)}.checklist li.done::before{content:"●";color:var(--ok)}
+.equation{margin:12px 0;padding:12px 14px;border-radius:10px;background:var(--bg);font:500 14px/1.7 var(--mono);overflow-wrap:anywhere;color:var(--ink)}
+.note{margin:16px 0 0;padding:12px 14px;border-radius:10px;background:var(--bg);font-size:14px}.note h3{margin-top:0}
+.problem{margin:14px 0 0;padding:14px;border:1px solid var(--line);border-radius:12px;background:var(--bg)}
+.problem .q{margin:0 0 10px;font-weight:600;color:var(--ink)}
+.problem .tag{display:inline-block;margin-bottom:6px;font:600 11px/1 var(--mono);color:var(--accent)}
+.problem .hint{margin:0 0 10px;font-size:13.5px;color:var(--muted)}
+input[type=number]{font:500 15px var(--sans);color:var(--ink);background:var(--surface);border:1px solid var(--line-strong);border-radius:10px;min-height:42px;width:130px;padding:0 12px}
+.numrow{display:flex;flex-wrap:wrap;align-items:center;gap:10px}
+.score{font-weight:600;color:var(--ink)}
+.readout.masked strong{color:var(--faint)}
+.legend{display:flex;flex-wrap:wrap;gap:4px 14px;margin:0;padding:0;list-style:none;font-size:12.5px;color:var(--muted)}
+.legend li{display:flex;align-items:center;gap:6px;border-radius:6px;padding:1px 4px}
+.legend i{width:11px;height:11px;border-radius:3px;display:inline-block}
+@media(min-width:960px) and (min-height:560px){.figure-pane{padding:16px 22px 14px;gap:8px}.figure-pane .stage{min-height:0}.figure-pane .stage>svg{height:100%;max-height:100%}}
+@media(max-width:640px){.stage{grid-template-columns:1fr;grid-template-rows:auto}}
+@media(max-width:700px){.readouts{grid-template-columns:repeat(2,minmax(0,1fr))}}
+</style>
+</head>
+<body>
+<a class="skip" href="#experiment"><span lang="zh">跳到实验</span><span lang="en">Skip to experiment</span></a>
+<header class="bar">
+<a class="back" href="index.html" data-keep-lang>← <span lang="zh">全部示例</span><span lang="en">All examples</span></a>
+<span class="crumb">four-stroke-engine.html</span>
+<div class="lang-switch" role="group" aria-label="语言 / Language"><button type="button" data-set-lang="zh" aria-pressed="false">中文</button><button type="button" data-set-lang="en" aria-pressed="true">EN</button></div>
+</header>
+<main class="lesson">
+<div class="panel">
+<div class="intro">
+<ul class="meta"><li><span lang="zh">物理 · 机械</span><span lang="en">Physics · machines</span></li><li><span lang="zh">三维剖面机构</span><span lang="en">3D cutaway mechanism</span></li><li><span lang="zh">约 10 分钟</span><span lang="en">~10 min</span></li></ul>
+<h1><span lang="zh">发动机为什么要转两圈才做一次功？</span><span lang="en">Why does an engine turn twice for every power stroke?</span></h1>
+<p class="lead" lang="zh">左边是一台单缸四冲程汽油机的剖面：前半个缸体和缸盖被切掉了，露出活塞、连杆、曲轴、两个气门、火花塞和凸轮轴。前面的虚线是正时皮带。右边的圆盘把一个完整循环画成一圈，下面的图记录缸内压力和容积。拖动曲轴（或用滑块），自己找出这台机器的节奏。</p>
+<p class="lead" lang="en">On the left is a cutaway of a single-cylinder four-stroke petrol engine: the front half of the block and head is cut away to show the piston, connecting rod, crankshaft, two valves, spark plug and camshafts. The dashed loop in front is the timing belt. On the right, the dial draws one full cycle as one lap, and the chart below records cylinder pressure against volume. Drag the crank (or use the slider) and find the machine’s rhythm yourself.</p>
+</div>
+<div class="steps">
+<section class="step" aria-labelledby="predict-title" data-focus="piston valves plug">
+<h2 id="predict-title"><span class="n">01</span><span lang="zh">预测</span><span lang="en">Predict</span></h2>
+<form id="prediction-form">
+<fieldset class="qgroup">
+<legend><span lang="zh">从一次<span data-ref="plug">火花塞点火</span>到下一次，曲轴要转几整圈？</span><span lang="en">From one firing of the <span data-ref="plug">spark plug</span> to the next, how many full turns does the crankshaft make?</span></legend>
+<label class="choice"><input type="radio" name="turns" value="1" required><span><span lang="zh">1 圈：每转一圈点一次火。</span><span lang="en">1 turn: it fires once every revolution.</span></span></label>
+<label class="choice"><input type="radio" name="turns" value="2"><span><span lang="zh">2 圈。</span><span lang="en">2 turns.</span></span></label>
+<label class="choice"><input type="radio" name="turns" value="4"><span><span lang="zh">4 圈：四个冲程，每个冲程一圈。</span><span lang="en">4 turns: four strokes, one turn each.</span></span></label>
+</fieldset>
+<fieldset class="qgroup">
+<legend><span lang="zh">进气冲程结束后，<span data-ref="piston">活塞</span>往上走，两个<span data-ref="valves">气门</span>都关着。这时在做什么？</span><span lang="en">After the intake stroke the <span data-ref="piston">piston</span> rises with both <span data-ref="valves">valves</span> closed. What is it doing?</span></legend>
+<label class="choice"><input type="radio" name="next" value="compression" required><span><span lang="zh">压缩刚吸进来的混合气。</span><span lang="en">Squeezing the mixture it just drew in.</span></span></label>
+<label class="choice"><input type="radio" name="next" value="exhaust"><span><span lang="zh">把废气推出去。</span><span lang="en">Pushing exhaust gas out.</span></span></label>
+<label class="choice"><input type="radio" name="next" value="power"><span><span lang="zh">被燃烧的气体推着走。</span><span lang="en">Being driven by burning gas.</span></span></label>
+</fieldset>
+<div class="controls"><button type="submit" class="primary"><span lang="zh">记下预测</span><span lang="en">Save my prediction</span></button></div>
+<p id="prediction-status" class="small" aria-live="polite"></p>
+</form>
+</section>
+<section class="step" aria-labelledby="try-title">
+<h2 id="try-title"><span class="n">02</span><span lang="zh">转动曲轴</span><span lang="en">Turn the crank</span></h2>
+<p lang="zh">从上止点（0°）开始，一点一点往前转。盯住两个气门和火花塞：它们在哪一段动？右边圆盘的黑色指针走一圈，是一个完整循环；橙色短指针是曲轴本身。</p>
+<p lang="en">Start at top dead centre (0°) and turn forward a little at a time. Watch the two valves and the spark plug: in which part of the turn does each act? The black hand on the dial makes one lap per complete cycle; the short orange hand is the crankshaft itself.</p>
+<fieldset id="try-controls" disabled>
+<div class="range"><label for="angle"><span><span lang="zh">循环中的曲轴转角</span><span lang="en">Crank angle in the cycle</span></span><output id="angle-out" for="angle"></output></label><input id="angle" type="range" min="0" max="720" step="1" value="0"></div>
+<div class="chips" id="steps">
+<button type="button" data-step="-45">−45°</button>
+<button type="button" data-step="45">+45°</button>
+<button type="button" data-step="180"><span lang="zh">+180°（一个冲程）</span><span lang="en">+180° (one stroke)</span></button>
+<button type="button" data-step="360"><span lang="zh">+360°（一整圈）</span><span lang="en">+360° (one turn)</span></button>
+<button type="button" id="play" aria-pressed="false"><span lang="zh">连续转动</span><span lang="en">Run</span></button>
+</div>
+<p class="small"><span lang="zh">也可以直接拖动左图的曲轴圆盘；滑块获得焦点后，方向键每次转 1°。</span><span lang="en">You can also drag the crank disc in the figure; with the slider focused, the arrow keys turn it 1° at a time.</span></p>
+</fieldset>
+<ul class="checklist" id="checklist">
+<li id="seen-compress"><span lang="zh">找到两个气门都关着、活塞往上走的一段</span><span lang="en">Find the stretch where both valves are shut and the piston rises</span></li>
+<li id="seen-spark"><span lang="zh">看到火花塞点火</span><span lang="en">See the spark plug fire</span></li>
+<li id="seen-cycle"><span lang="zh">走完四个冲程：进气、压缩、做功、排气</span><span lang="en">Go through all four strokes: intake, compression, power, exhaust</span></li>
+</ul>
+<p id="try-status" class="status" role="status"></p>
+</section>
+<section class="step" aria-labelledby="belt-title" data-focus="belt cams crank">
+<h2 id="belt-title"><span class="n">03</span><span lang="zh">看正时记号</span><span lang="en">Watch the timing marks</span></h2>
+<p lang="zh">回到 0°，三个<span data-ref="belt">皮带轮</span>上的橙色记号都朝上。按一次“+360°”：曲轴转了整整一圈，它的记号回到了顶上。两个<span data-ref="cams">凸轮</span>的记号在哪里？要再转多少，三个记号才会同时朝上？</p>
+<p lang="en">Go back to 0°: the orange marks on all three <span data-ref="belt">belt wheels</span> point up. Press “+360°” once. The crank has made one full turn and its mark is back at the top. Where are the marks on the two <span data-ref="cams">cams</span>? How much further before all three point up together?</p>
+<p id="belt-status" class="status" role="status"></p>
+</section>
+<section id="explanation" class="step" aria-labelledby="explain-title" hidden>
+<h2 id="explain-title"><span class="n">04</span><span lang="zh">解释</span><span lang="en">Explain</span></h2>
+<p id="prediction-feedback" class="callout"></p>
+<p class="small"><span lang="zh">按顺序看图上的六处，每一步只亮起一个部分。</span><span lang="en">Look at six places in order; each step lights up one part.</span></p>
+<ol class="look">
+<li data-focus="crank rod piston"><span lang="zh">曲轴转一圈，活塞下去一次、上来一次：一圈只有两个冲程。</span><span lang="en">One crank turn takes the piston down once and up once: a turn holds only two strokes.</span></li>
+<li data-focus="valves"><span lang="zh">进气门只在第一个冲程打开，排气门只在第四个冲程打开。第二、三冲程两个都关着。</span><span lang="en">The intake valve opens only in the first stroke, the exhaust valve only in the fourth. In strokes two and three both stay shut.</span></li>
+<li data-focus="plug chamber"><span lang="zh">火花塞只在压缩冲程的末尾点一次火，燃气把活塞推下去：这是唯一出力的冲程。</span><span lang="en">The plug fires once, at the end of compression, and the burning gas drives the piston down: the only stroke that delivers work.</span></li>
+<li data-focus="cams belt"><span lang="zh">凸轮轮的直径是曲轴轮的两倍，所以凸轮只转半速：曲轴两圈，每个气门才开一次。</span><span lang="en">The cam wheels are twice the crank wheel’s diameter, so the cams turn at half speed: each valve opens once per two crank turns.</span></li>
+<li data-focus="cycle"><span lang="zh">四个冲程 × 180° = 720°。圆盘上的长指针走一圈，曲轴短指针走了两圈。</span><span lang="en">Four strokes × 180° = 720°. While the long hand on the dial laps once, the short crank hand laps twice.</span></li>
+<li data-focus="pv"><span lang="zh">压力–容积图：做功冲程的曲线高、压缩冲程的低，两条之间围出的面积就是一个循环的净功。</span><span lang="en">The pressure–volume chart: the power curve runs high, the compression curve low, and the area between them is the net work of one cycle.</span></li>
+</ol>
+<div lang="zh">
+<h3>1. 一圈只够两个冲程</h3>
+<p><span data-ref="piston">活塞</span>通过<span data-ref="rod">连杆</span>挂在<span data-ref="crank">曲轴</span>的偏心销上，所以曲轴每转一圈，活塞只能从上止点下到下止点、再回来。四个冲程（进气、压缩、做功、排气）各占半圈，合起来是 720°，也就是两圈。</p>
+<h3>2. 为什么不能每圈都点火</h3>
+<p>活塞往上走有两种用途：压缩新鲜混合气，或者把废气推出去。往下走也有两种：吸进新气，或者被燃气推着做功。几何上两圈一模一样，区别只在<span data-ref="valves">气门</span>开没开、<span data-ref="plug">火花塞</span>点没点。如果每圈都点火，排气冲程末尾缸里只有废气，点了也烧不起来。</p>
+<h3>3. 凸轮轴为什么是半速</h3>
+<p>每个气门在一个循环里只开一次，而一个循环是曲轴两圈，所以控制气门的<span data-ref="cams">凸轮</span>必须每两圈转一圈。<span data-ref="belt">正时皮带</span>上，凸轮轮的齿数是曲轴轮的两倍，就做到了这一点。修车时“对正时记号”也是因为这个：曲轴转一圈记号就回来了，凸轮要两圈。</p>
+<h3>4. 功从哪里来</h3>
+<p>同一个容积下，做功冲程的压力远高于压缩冲程（看<span data-ref="pv">压力–容积图</span>）。燃气推活塞做的功，比压缩时花掉的多，差值就是一个循环的净功。进气和排气两个冲程几乎不出力，只是在换气。</p>
+</div>
+<div lang="en">
+<h3>1. One turn only holds two strokes</h3>
+<p>The <span data-ref="piston">piston</span> hangs from an offset pin on the <span data-ref="crank">crankshaft</span> through the <span data-ref="rod">connecting rod</span>, so each crank turn can only carry it from top dead centre to bottom dead centre and back. The four strokes (intake, compression, power, exhaust) take half a turn each: 720° in all, two turns.</p>
+<h3>2. Why it can’t fire every turn</h3>
+<p>A rising piston can do two jobs: squeeze fresh mixture, or push exhaust out. A falling piston can also do two: draw in fresh mixture, or be driven by burning gas. The two turns are geometrically identical; what differs is whether the <span data-ref="valves">valves</span> are open and whether the <span data-ref="plug">plug</span> fires. Fire on every turn and the spark at the end of the exhaust stroke meets only spent gas, with nothing left to burn.</p>
+<h3>3. Why the camshaft runs at half speed</h3>
+<p>Each valve opens once per cycle, and a cycle is two crank turns, so the <span data-ref="cams">cams</span> that push the valves must turn once every two crank turns. On the <span data-ref="belt">timing belt</span>, each cam wheel has twice the crank wheel’s teeth, which does exactly that. It is also why mechanics “line up the timing marks”: the crank mark comes back after one turn, the cam marks only after two.</p>
+<h3>4. Where the work comes from</h3>
+<p>At any given volume the power stroke runs at far higher pressure than compression (see the <span data-ref="pv">pressure–volume chart</span>). The gas pushes the piston harder on the way down than the piston pushed the gas on the way up, and the difference is the cycle’s net work. Intake and exhaust do almost no work; they only swap the gas.</p>
+</div>
+<div class="equation" data-i18n data-zh-aria-label="一个循环等于四个冲程，每个冲程 180 度，共 720 度，即曲轴两圈。凸轮轴转速等于曲轴转速的一半。每秒做功次数等于转速除以 60 再除以 2。" data-en-aria-label="One cycle is four strokes of 180 degrees, 720 degrees, two crank turns. Camshaft speed is half the crank speed. Power strokes per second equal rpm over 60 over 2.">cycle = 4 strokes × 180° = 720° = 2 turns<br>n<sub>cam</sub> = n<sub>crank</sub> / 2<br>power strokes per second = (rpm / 60) / 2</div>
+<div class="note">
+<div lang="zh">
+<h3>二冲程发动机呢？</h3>
+<p class="small">摩托艇、链锯上的二冲程机确实每圈做一次功：它们不用气门，而是在活塞接近下止点时打开缸壁上的气口，一边排废气一边灌新气。代价是有一部分新鲜混合气会直接跑掉，所以更费油、更脏。</p>
+</div>
+<div lang="en">
+<h3>What about two-stroke engines?</h3>
+<p class="small">Two-strokes on chainsaws and outboard motors really do deliver one power stroke per turn. They have no valves; ports in the cylinder wall open near bottom dead centre and swap exhaust for fresh mixture at once. The price is that some fresh mixture escapes straight out, so they burn more fuel and run dirtier.</p>
+</div>
+</div>
+<label for="writing" style="display:block;margin-top:18px"><strong><span lang="zh">用你自己的话解释。</span><span lang="en">Explain it in your own words.</span></strong></label>
+<p class="small"><span lang="zh">“四冲程发动机转两圈才做一次功，因为 ___。凸轮轴要用半速，因为 ___。”</span><span lang="en">“A four-stroke engine needs two turns per power stroke because ___. The camshaft runs at half speed because ___.”</span></p>
+<textarea id="writing" data-i18n data-zh-placeholder="你的解释只留在这个页面，不会保存或发送。" data-en-placeholder="Your explanation stays on this page. It is not saved or sent."></textarea>
+<h3><span lang="zh">迁移：多缸发动机</span><span lang="en">Transfer question</span></h3>
+<form id="transfer-form">
+<fieldset><legend><span lang="zh">一台四缸发动机，四个缸轮流点火，间隔相等。相邻两次点火之间，曲轴转多少度？</span><span lang="en">A four-cylinder engine fires its cylinders in turn at equal intervals. How far does the crank turn between one firing and the next?</span></legend>
+<label class="choice"><input type="radio" name="transfer" value="180" required><span>180°</span></label>
+<label class="choice"><input type="radio" name="transfer" value="90"><span>90°</span></label>
+<label class="choice"><input type="radio" name="transfer" value="720"><span>720°</span></label>
+</fieldset>
+<div class="controls"><button type="submit"><span lang="zh">核对答案</span><span lang="en">Check my answer</span></button></div>
+<p id="transfer-feedback" class="status" role="status"></p>
+</form>
+</section>
+<section id="practice" class="step" aria-labelledby="practice-title" hidden>
+<h2 id="practice-title"><span class="n">05</span><span lang="zh">独立练习</span><span lang="en">Independent practice</span></h2>
+<p lang="zh">练习时，控件会锁住，冲程、气门和压力的读数会隐藏，圆盘上的冲程名称也会去掉。提示一题比一题少。核对之后，读数再显示出来。</p>
+<p lang="en">During practice the controls lock, the stroke, valve and pressure readouts hide, and the stroke names leave the dial. Each case gives less help than the one before. After you check, the readouts come back.</p>
+<div class="controls"><button type="button" id="practice-start" class="primary"><span lang="zh">开始练习</span><span lang="en">Start practice</span></button><button type="button" id="practice-exit" hidden><span lang="zh">结束练习，回到控件</span><span lang="en">Leave practice</span></button></div>
+<div id="problems" hidden>
+<form class="problem" data-problem="0" hidden>
+<span class="tag">1 / 3</span>
+<p class="q"><span lang="zh">左图停在循环中的 450°，活塞正往下走。这是哪个冲程？哪个气门开着？</span><span lang="en">The figure is stopped at 450° in the cycle, piston moving down. Which stroke is it, and which valve is open?</span></p>
+<p class="hint"><span lang="zh">提示：450° = 360° + 90°。360° 那一刻发生了什么？</span><span lang="en">Hint: 450° = 360° + 90°. What happened at 360°?</span></p>
+<label class="choice"><input type="radio" name="answer" value="power" required><span><span lang="zh">做功冲程，两个气门都关着。</span><span lang="en">Power stroke, both valves shut.</span></span></label>
+<label class="choice"><input type="radio" name="answer" value="intake"><span><span lang="zh">进气冲程，进气门开着。</span><span lang="en">Intake stroke, intake valve open.</span></span></label>
+<label class="choice"><input type="radio" name="answer" value="exhaust"><span><span lang="zh">排气冲程，排气门开着。</span><span lang="en">Exhaust stroke, exhaust valve open.</span></span></label>
+<div class="controls"><button type="submit"><span lang="zh">核对</span><span lang="en">Check</span></button></div>
+<p class="status" role="status" data-feedback></p>
+</form>
+<form class="problem" data-problem="1" hidden>
+<span class="tag">2 / 3</span>
+<p class="q"><span lang="zh">这台单缸机以每分钟 3000 转运行。它每秒做功几次？</span><span lang="en">This single-cylinder engine runs at 3000 rpm. How many power strokes does it make per second?</span></p>
+<div class="numrow"><input type="number" name="answer" step="0.5" min="0" max="10000" required data-i18n data-zh-aria-label="每秒做功次数" data-en-aria-label="Power strokes per second" aria-label="Power strokes per second"><span lang="zh">次/秒</span><span lang="en">per second</span><button type="submit"><span lang="zh">核对</span><span lang="en">Check</span></button></div>
+<p class="status" role="status" data-feedback></p>
+</form>
+<form class="problem" data-problem="2" hidden>
+<span class="tag">3 / 3</span>
+<p class="q"><span lang="zh">修车师傅装错了零件：凸轮轮和曲轴轮一样大。发动机会怎样？</span><span lang="en">A mechanic fits the wrong part: the cam wheels are the same size as the crank wheel. What happens?</span></p>
+<label class="choice"><input type="radio" name="answer" value="every" required><span><span lang="zh">每个气门每圈都开一次，进气门会在做功冲程里也打开。</span><span lang="en">Each valve opens every turn, so the intake valve also opens during the power stroke.</span></span></label>
+<label class="choice"><input type="radio" name="answer" value="faster"><span><span lang="zh">没问题，只是气门动得更快，发动机转速更高。</span><span lang="en">No problem; the valves just move faster and the engine revs higher.</span></span></label>
+<label class="choice"><input type="radio" name="answer" value="spark"><span><span lang="zh">只影响点火：火花塞会提前点火。</span><span lang="en">Only the ignition is affected: the plug fires early.</span></span></label>
+<div class="controls"><button type="submit"><span lang="zh">核对</span><span lang="en">Check</span></button></div>
+<p class="status" role="status" data-feedback></p>
+</form>
+<div class="controls"><button type="button" id="practice-next" hidden><span lang="zh">下一题 →</span><span lang="en">Next case →</span></button></div>
+<p id="practice-score" class="score" aria-live="polite"></p>
+</div>
+</section>
+<section class="step limits" aria-labelledby="limits-title">
+<h2 id="limits-title"><span lang="zh">这个模型的适用范围</span><span lang="en">Where this model applies</span></h2>
+<div lang="zh">
+<p>气门正时按理想情况画：进气门正好在 0°–180° 打开，排气门正好在 540°–720°。真实发动机的气门会提前打开、推迟关闭，进排气门在上止点附近还会同时开一小段（气门重叠），点火也在上止点之前几度。</p>
+<p>压力是理想奥托循环：进气、排气按大气压附近的常数，压缩和膨胀按多变指数 1.3，燃烧当作在上止点瞬间完成，峰值压力取压缩末压力的 3.2 倍。数值只用来比较大小。</p>
+<p>尺寸是虚构的（缸径 84 mm、行程 72 mm、压缩比 10），不对应任何真实型号。剖面是正交投影，零件按比例；皮带画成前方的虚线，以免挡住剖面。</p>
+</div>
+<div lang="en">
+<p>Valve timing is idealised: intake open from exactly 0° to 180°, exhaust from 540° to 720°. Real engines open valves early and close them late, keep both slightly open together around top dead centre (valve overlap), and fire a few degrees before top dead centre.</p>
+<p>Pressure follows an ideal Otto cycle: intake and exhaust near atmospheric, compression and expansion with a polytropic exponent of 1.3, combustion treated as instant at top dead centre, and a peak of 3.2 times the end-of-compression pressure. The numbers are for comparison only.</p>
+<p>Dimensions are invented (84 mm bore, 72 mm stroke, compression ratio 10) and match no real model. The cutaway is an orthographic projection with parts to scale; the belt is drawn as a dashed phantom in front so it doesn’t hide the section.</p>
+</div>
+<div class="controls"><button type="button" id="reset"><span lang="zh">全部重置</span><span lang="en">Reset everything</span></button></div>
+<p class="foot"><span lang="zh">离线可用。全部控件都是原生单选框、滑块、输入框和按钮，可以用 Tab、方向键和空格操作。没有快捷键会干扰你的写作。三维零件由 Anatomy 工具包的回转体生成。</span><span lang="en">Works offline. Every control is a native radio, slider, input or button, reachable with Tab, arrow keys and Space. No keyboard shortcuts override your writing. The 3D parts are turned solids generated with the Anatomy kit.</span></p>
+</section>
+</div>
+</div>
+<section id="experiment" class="figure-pane" aria-labelledby="fig-title">
+<div class="stage">
+<svg id="engine" viewBox="0 0 456 600" preserveAspectRatio="xMidYMid meet" role="img" aria-labelledby="fig-title fig-desc">
+<title id="fig-title" data-i18n data-zh="单缸四冲程发动机剖面、720° 循环圆盘和压力–容积图" data-en="Cutaway of a single-cylinder four-stroke engine, a 720° cycle dial and a pressure–volume chart">Cutaway of a single-cylinder four-stroke engine, a 720° cycle dial and a pressure–volume chart</title>
+<desc id="fig-desc"></desc>
+<!-- ENGINE_ART_START --><g id="engine-art" data-geometry='{"P":{"origin":[228,455],"scale":3.05,"azimuth":70,"elevation":14},"CRANK":12,"ROD":40,"PIN_UP":6,"CROWN":10,"BORE":14,"DECK":64.67,"TDC_PIN":52,"TILT_DEG":20,"SEAT_X":7,"STEM":26,"CAM_BASE":4.5,"LIFT":3.5,"cams":[[-17.57,0,94.3],[17.57,0,94.3]],"axes":[[-0.342,0,0.9397],[0.342,0,0.9397]]}'><defs><pattern id="hatch" width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="5" height="5" class="hatch-bg"/><line x1="0" y1="0" x2="0" y2="5" class="hatch-line"/></pattern></defs><ellipse cx="228" cy="582.27" rx="120" ry="12" class="floor"/><g data-part="chamber" data-zh-label="燃烧室：活塞顶和缸盖之间的气体" data-en-label="Chamber: the gas between piston and head"><path class="cavity" d="M278.8 217.4L278.8 395.9L278.8 395.9L285.9 403.5L292.2 411.7L297.5 420.7L301.7 430.1L304.9 440L306.9 450L307.7 460.1L307.4 470.2L305.8 480L303.1 489.5L299.2 498.4L294.3 506.7L288.3 514.2L281.5 520.8L273.9 526.4L265.6 531L256.7 534.4L247.4 536.6L237.8 537.6L228 537.4L218.2 535.9L208.6 533.2L199.3 529.3L190.4 524.3L182.1 518.3L174.5 511.4L167.7 503.5L161.7 495L156.8 485.8L152.9 476.2L150.2 466.3L148.6 456.2L148.3 446.1L149.1 436.1L151.1 426.4L154.3 417.1L158.5 408.4L163.8 400.4L170.1 393.3L177.2 387L177.2 387L177.2 208.5Z"/><path class="cavity deep" d="M222.2 212.4L214.2 193L191.7 167.8L144.6 162.2L144.6 186.9L173.6 191.7L183 209Z"/><path class="cavity deep" d="M233.8 213.4L241.8 195.4L264.3 174.2L311.4 176.8L311.4 201.6L282.4 201.2L273 216.9Z"/><g id="rt-gas"></g></g><g data-part="crank" data-zh-label="曲轴：活塞往复，曲轴转圈" data-en-label="Crankshaft: the piston slides, the crank turns"><g class="iso-solid"><path class="iso-fill" d="M227.3 444L227.4 442.6L227.5 441.1L227.9 439.8L228.3 438.4L228.9 437.1L229.6 435.9L230.4 434.8L231.3 433.8L232.3 432.8L233.3 432L242.6 425.9L243.7 425.1L245 424.5L246.3 424.1L247.6 423.7L249 423.5L250.3 423.4L251.8 423.5L253.2 423.7L254.5 424L255.9 424.5L257.3 425L258.5 425.7L259.8 426.6L260.9 427.5L262 428.5L263 429.6L263.9 430.8L264.7 432.1L265.4 433.4L265.9 434.8L266.4 436.2L266.7 437.6L266.9 439.1L267 440.6L266.9 442L266.7 443.4L266.4 444.8L265.9 446.1L265.4 447.4L264.7 448.6L263.9 449.8L263 450.8L262 451.7L260.9 452.6L251.7 458.7L250.5 459.4L249.3 460L248 460.5L246.7 460.8L245.3 461.1L243.9 461.1L242.5 461.1L241.1 460.9L239.7 460.6L238.3 460.1L237 459.5L235.7 458.8L234.5 458L233.3 457.1L232.3 456.1L231.3 455L230.4 453.8L229.6 452.5L228.9 451.2L228.3 449.8L227.9 448.4L227.5 446.9L227.4 445.5Z"/><path class="iso-shade" data-shade="0" d="M263.5 430.3L264.4 431.6L265.2 433L265.8 434.4L266.3 435.9L266.7 437.5L266.9 439L267 440.6L266.9 442.1L266.7 443.6L266.3 445.1L265.8 446.5L265.2 447.8L264.4 449.1L263.5 450.2L262.5 451.3L261.4 452.2L260.2 453L251 459.2L252.2 458.4L253.3 457.4L254.3 456.4L255.2 455.2L255.9 453.9L256.6 452.6L257.1 451.2L257.4 449.7L257.7 448.2L257.7 446.7L257.7 445.1L257.4 443.6L257.1 442.1L256.6 440.6L255.9 439.1L255.2 437.7L254.3 436.4Z"/><path class="iso-shade" data-shade="1" d="M261.4 427.9L262.5 429L263.5 430.3L254.3 436.4L253.3 435.2L252.2 434Z"/><path class="iso-shade" data-shade="2" d="M258.9 426L260.2 426.9L261.4 427.9L252.2 434L251 433L249.7 432.1ZM227.3 444L227.4 442.5L227.6 441L227.9 439.5L228.4 438.1L229.1 436.8L229.9 435.5L230.7 434.3L231.7 433.3L232.9 432.3L234.1 431.5L235.3 430.9L236.7 430.3L238.1 429.9L239.5 429.7L241 429.6L242.5 429.6L244 429.8L245.5 430.2L246.9 430.7L248.3 431.3L249.7 432.1L251 433L252.2 434L253.3 435.2L254.3 436.4L255.2 437.7L255.9 439.1L256.6 440.6L257.1 442.1L257.4 443.6L257.7 445.1L257.7 446.7L257.7 448.2L257.4 449.7L257.1 451.2L256.6 452.6L255.9 453.9L255.2 455.2L254.3 456.4L253.3 457.4L252.2 458.4L251 459.2L249.7 459.9L248.3 460.4L246.9 460.8L245.5 461L244 461.1L242.5 461.1L241 460.9L239.5 460.5L238.1 460L236.7 459.4L235.3 458.6L234.1 457.7L232.9 456.7L231.7 455.5L230.7 454.3L229.9 453L229.1 451.6L228.4 450.1L227.9 448.6L227.6 447.1L227.4 445.6L227.3 444L242.5 445.4L242.5 445.4L242.5 445.4L242.5 445.4L242.5 445.4L242.5 445.4L242.5 445.4L242.5 445.4L242.5 445.4L242.5 445.4L242.5 445.4L242.5 445.4L242.5 445.4L242.5 445.4L242.5 445.4L242.5 445.4L242.5 445.4L242.5 445.4L242.5 445.4L242.5 445.4L242.5 445.4L242.5 445.4L242.5 445.4L242.5 445.4L242.5 445.4L242.5 445.4L242.5 445.4L242.5 445.4L242.5 445.4L242.5 445.4L242.5 445.4L242.5 445.4L242.5 445.4L242.5 445.4L242.5 445.4L242.5 445.4L242.5 445.4L242.5 445.4L242.5 445.4L242.5 445.4L242.5 445.4L242.5 445.4L242.5 445.4L242.5 445.4L242.5 445.4L242.5 445.4L242.5 445.4L242.5 445.4L242.5 445.4L242.5 445.4L242.5 445.4L242.5 445.4L242.5 445.4L242.5 445.4L242.5 445.4L242.5 445.4L242.5 445.4L242.5 445.4L242.5 445.4L242.5 445.4L242.5 445.4L242.5 445.4L242.5 445.4L242.5 445.4L242.5 445.4Z"/><path class="iso-shade" data-shade="3" d="M254.7 424.1L256.2 424.6L257.6 425.2L258.9 426L249.7 432.1L248.3 431.3L246.9 430.7L245.5 430.2Z"/><path class="iso-top" d="M243.3 425.4L244.6 424.7L245.9 424.2L247.3 423.8L248.8 423.5L250.3 423.4L251.8 423.5L253.2 423.7L254.7 424.1L245.5 430.2L244 429.8L242.5 429.6L241 429.6L239.5 429.7L238.1 429.9L236.7 430.3L235.3 430.9L234.1 431.5Z"/><path class="iso-line iso-crease" data-tone="faint" d="M233.5 431.9L234.7 431.2L236 430.6L237.3 430.1L238.6 429.8L240 429.6L241.4 429.6L242.8 429.7L244.2 429.9L245.6 430.2L246.9 430.7L248.3 431.3L249.5 432L250.7 432.9L251.9 433.8L253 434.8L253.9 436L254.8 437.2L255.6 438.5L256.3 439.8L256.8 441.2L257.2 442.6L257.5 444L257.7 445.5L257.7 447L257.7 448.4L257.4 449.8L257.1 451.2L256.6 452.5L256 453.8L255.3 455L254.5 456.1L253.6 457.1L252.6 458L251.5 458.8"/><path class="iso-line iso-edge" data-tone="mid" d="M227.3 444L227.4 442.6L227.5 441.1L227.9 439.8L228.3 438.4L228.9 437.1L229.6 435.9L230.4 434.8L231.3 433.8L232.3 432.8L233.3 432L242.6 425.9L243.7 425.1L245 424.5L246.3 424.1L247.6 423.7L249 423.5L250.3 423.4L251.8 423.5L253.2 423.7L254.5 424L255.9 424.5L257.3 425L258.5 425.7L259.8 426.6L260.9 427.5L262 428.5L263 429.6L263.9 430.8L264.7 432.1L265.4 433.4L265.9 434.8L266.4 436.2L266.7 437.6L266.9 439.1L267 440.6L266.9 442L266.7 443.4L266.4 444.8L265.9 446.1L265.4 447.4L264.7 448.6L263.9 449.8L263 450.8L262 451.7L260.9 452.6L251.7 458.7L250.5 459.4L249.3 460L248 460.5L246.7 460.8L245.3 461.1L243.9 461.1L242.5 461.1L241.1 460.9L239.7 460.6L238.3 460.1L237 459.5L235.7 458.8L234.5 458L233.3 457.1L232.3 456.1L231.3 455L230.4 453.8L229.6 452.5L228.9 451.2L228.3 449.8L227.9 448.4L227.5 446.9L227.4 445.5Z"/></g><g class="iso-solid"><path class="iso-fill" d="M175.6 443.4L175.6 442L175.7 440.5L175.8 439.1L175.9 437.6L176 436.2L176.2 434.8L176.4 433.4L176.6 432L176.9 430.6L177.2 429.2L177.5 427.8L177.9 426.4L178.3 425L178.7 423.7L179.2 422.4L179.7 421L180.2 419.7L180.7 418.4L181.3 417.2L181.9 415.9L182.6 414.7L183.2 413.4L183.9 412.2L184.6 411.1L185.4 409.9L186.2 408.7L187 407.6L187.8 406.5L188.6 405.4L189.5 404.4L190.4 403.3L191.4 402.3L192.3 401.3L193.3 400.4L194.3 399.4L195.3 398.5L196.3 397.6L197.4 396.8L198.5 396L199.6 395.2L200.7 394.4L206 390.9L207.1 390.1L208.3 389.4L209.5 388.7L210.7 388.1L211.9 387.4L213.1 386.8L214.4 386.3L215.6 385.7L216.9 385.2L218.2 384.7L219.5 384.3L220.8 383.9L222.1 383.5L223.5 383.2L224.8 382.8L226.2 382.6L227.5 382.3L228.9 382.1L230.3 381.9L231.7 381.8L233 381.6L234.4 381.6L235.8 381.5L237.2 381.5L238.6 381.5L240.1 381.5L241.5 381.6L242.9 381.7L244.3 381.9L245.7 382.1L247.1 382.3L248.5 382.5L249.9 382.8L251.3 383.1L252.7 383.5L254.1 383.9L255.4 384.3L256.8 384.7L258.2 385.2L259.5 385.7L260.9 386.2L262.2 386.8L263.6 387.4L264.9 388L266.2 388.7L267.5 389.4L268.8 390.1L270 390.8L271.3 391.6L272.5 392.4L273.7 393.2L274.9 394.1L276.1 395L277.3 395.9L278.5 396.8L279.6 397.8L280.7 398.8L281.8 399.8L282.9 400.8L283.9 401.9L285 402.9L286 404.1L287 405.2L287.9 406.3L288.9 407.5L289.8 408.7L290.7 409.9L291.5 411.1L292.4 412.3L293.2 413.6L294 414.9L294.7 416.2L295.5 417.5L296.2 418.8L296.9 420.1L297.5 421.5L298.1 422.8L298.7 424.2L299.3 425.6L299.8 427L300.3 428.4L300.8 429.8L301.2 431.2L301.6 432.6L302 434.1L302.4 435.5L302.7 436.9L303 438.4L303.2 439.8L303.5 441.3L303.7 442.8L303.8 444.2L303.9 445.7L304 447.1L304.1 448.6L304.1 450.1L304.1 451.5L304.1 453L304 454.4L303.9 455.8L303.8 457.3L303.7 458.7L303.5 460.1L303.2 461.6L303 463L302.7 464.4L302.4 465.7L302 467.1L301.6 468.5L301.2 469.8L300.8 471.2L300.3 472.5L299.8 473.8L299.3 475.1L298.7 476.4L298.1 477.7L297.5 478.9L296.9 480.2L296.2 481.4L295.5 482.6L294.7 483.7L294 484.9L293.2 486L292.4 487.1L291.5 488.2L290.7 489.3L289.8 490.4L288.9 491.4L287.9 492.4L287 493.4L286 494.3L285 495.2L283.9 496.1L282.9 497L281.8 497.8L280.7 498.7L279.6 499.5L278.5 500.2L273.2 503.7L272 504.5L270.9 505.2L269.7 505.8L268.5 506.5L267.2 507.1L266 507.7L264.7 508.2L263.5 508.8L262.2 509.2L260.9 509.7L259.6 510.1L258.3 510.5L256.9 510.9L255.6 511.2L254.3 511.5L252.9 511.8L251.5 512L250.2 512.2L248.8 512.4L247.4 512.5L246 512.6L244.6 512.7L243.2 512.7L241.8 512.7L240.4 512.7L239 512.6L237.6 512.5L236.2 512.4L234.8 512.2L233.4 512L232 511.8L230.6 511.5L229.2 511.2L227.8 510.9L226.4 510.5L225 510.2L223.6 509.7L222.3 509.3L220.9 508.8L219.5 508.3L218.2 507.7L216.9 507.1L215.5 506.5L214.2 505.9L212.9 505.2L211.6 504.5L210.4 503.8L209.1 503L207.9 502.2L206.6 501.4L205.4 500.6L204.2 499.7L203 498.8L201.9 497.9L200.7 496.9L199.6 495.9L198.5 494.9L197.4 493.9L196.3 492.9L195.3 491.8L194.3 490.7L193.3 489.6L192.3 488.5L191.4 487.3L190.4 486.1L189.5 484.9L188.6 483.7L187.8 482.5L187 481.2L186.2 480L185.4 478.7L184.6 477.4L183.9 476.1L183.2 474.8L182.6 473.4L181.9 472.1L181.3 470.7L180.7 469.3L180.2 467.9L179.7 466.5L179.2 465.1L178.7 463.7L178.3 462.3L177.9 460.9L177.5 459.4L177.2 458L176.9 456.5L176.6 455.1L176.4 453.6L176.2 452.2L176 450.7L175.9 449.3L175.8 447.8L175.7 446.3L175.6 444.9Z"/><path class="iso-shade" data-shade="0" d="M290.2 409.2L293.8 414.5L296.9 420.1L299.5 426L301.5 432.1L303 438.3L303.8 444.5L304.1 450.8L303.8 457L303 463.1L301.5 469L299.5 474.7L296.9 480.1L293.8 485.2L290.2 489.9L286.1 494.2L281.6 498L276.8 501.3L271.5 504.8L276.3 501.5L280.8 497.7L284.9 493.4L288.5 488.7L291.6 483.6L294.2 478.2L296.2 472.5L297.7 466.6L298.6 460.5L298.9 454.3L298.6 448L297.7 441.8L296.2 435.6L294.2 429.5L291.6 423.6L288.5 418L284.9 412.7Z"/><path class="iso-shade" data-shade="1" d="M281.6 399.6L286.1 404.2L290.2 409.2L284.9 412.7L280.8 407.7L276.3 403.1Z"/><path class="iso-shade" data-shade="2" d="M271.6 391.8L276.8 395.5L281.6 399.6L276.3 403.1L271.5 399L266.3 395.3ZM175.6 443.4L175.9 437.2L176.8 431.1L178.3 425.2L180.3 419.5L182.9 414.1L186 409L189.6 404.3L193.7 400L198.1 396.2L203 392.9L208.2 390.2L213.7 388L219.3 386.4L225.2 385.4L231.2 385L237.2 385.2L243.3 386.1L249.3 387.5L255.1 389.5L260.8 392.1L266.3 395.3L271.5 399L276.3 403.1L280.8 407.7L284.9 412.7L288.5 418L291.6 423.6L294.2 429.5L296.2 435.6L297.7 441.8L298.6 448L298.9 454.3L298.6 460.5L297.7 466.6L296.2 472.5L294.2 478.2L291.6 483.6L288.5 488.7L284.9 493.4L280.8 497.7L276.3 501.5L271.5 504.8L266.3 507.5L260.8 509.7L255.1 511.3L249.3 512.3L243.3 512.7L237.2 512.5L231.2 511.7L225.2 510.2L219.3 508.2L213.7 505.6L208.2 502.4L203 498.8L198.1 494.6L193.7 490L189.6 485L186 479.7L182.9 474.1L180.3 468.2L178.3 462.1L176.8 456L175.9 449.7L175.6 443.4L237.2 448.9L237.2 448.9L237.2 448.9L237.2 448.9L237.2 448.9L237.2 448.9L237.2 448.9L237.2 448.9L237.2 448.9L237.2 448.9L237.2 448.9L237.2 448.9L237.2 448.9L237.2 448.9L237.2 448.9L237.2 448.9L237.2 448.9L237.2 448.9L237.2 448.9L237.2 448.9L237.2 448.9L237.2 448.9L237.2 448.9L237.2 448.9L237.2 448.9L237.2 448.9L237.2 448.9L237.2 448.9L237.2 448.9L237.2 448.9L237.2 448.9L237.2 448.9L237.2 448.9L237.2 448.9L237.2 448.9L237.2 448.9L237.2 448.9L237.2 448.9L237.2 448.9L237.2 448.9L237.2 448.9L237.2 448.9L237.2 448.9L237.2 448.9L237.2 448.9L237.2 448.9L237.2 448.9L237.2 448.9L237.2 448.9L237.2 448.9L237.2 448.9L237.2 448.9L237.2 448.9L237.2 448.9L237.2 448.9L237.2 448.9L237.2 448.9L237.2 448.9L237.2 448.9L237.2 448.9L237.2 448.9L237.2 448.9L237.2 448.9L237.2 448.9L237.2 448.9Z"/><path class="iso-shade" data-shade="3" d="M254.5 384L260.4 386L266.1 388.6L271.6 391.8L266.3 395.3L260.8 392.1L255.1 389.5L249.3 387.5Z"/><path class="iso-top" d="M208.3 389.4L213.5 386.7L218.9 384.5L224.6 382.9L230.5 381.9L236.5 381.5L242.5 381.7L248.6 382.6L254.5 384L249.3 387.5L243.3 386.1L237.2 385.2L231.2 385L225.2 385.4L219.3 386.4L213.7 388L208.2 390.2L203 392.9Z"/><path class="iso-line iso-crease" data-tone="faint" d="M200.9 394.2L202.1 393.5L203.2 392.8L204.4 392.1L205.6 391.5L206.8 390.8L208.1 390.2L209.3 389.7L210.6 389.1L211.8 388.6L213.1 388.2L214.4 387.7L215.7 387.3L217 387L218.4 386.6L219.7 386.3L221.1 386L222.4 385.8L223.8 385.6L225.2 385.4L226.5 385.2L227.9 385.1L229.3 385.1L230.7 385L232.1 385L233.5 385L234.9 385.1L236.3 385.1L237.7 385.3L239.1 385.4L240.5 385.6L241.9 385.8L243.3 386.1L244.7 386.3L246.1 386.7L247.5 387L248.9 387.4L250.2 387.8L251.6 388.2L253 388.7L254.3 389.2L255.7 389.8L257 390.3L258.3 390.9L259.6 391.5L260.9 392.2L262.2 392.9L263.5 393.6L264.8 394.3L266 395.1L267.2 395.9L268.5 396.7L269.7 397.6L270.8 398.5L272 399.4L273.2 400.3L274.3 401.3L275.4 402.2L276.5 403.3L277.6 404.3L278.6 405.3L279.6 406.4L280.6 407.5L281.6 408.6L282.6 409.8L283.5 410.9L284.4 412.1L285.3 413.3L286.2 414.5L287 415.8L287.9 417L288.6 418.3L289.4 419.6L290.1 420.9L290.8 422.2L291.5 423.5L292.2 424.8L292.8 426.2L293.4 427.6L293.9 428.9L294.5 430.3L295 431.7L295.5 433.1L295.9 434.5L296.3 436L296.7 437.4L297.1 438.8L297.4 440.3L297.7 441.7L297.9 443.1L298.2 444.6L298.4 446.1L298.5 447.5L298.7 449L298.8 450.4L298.8 451.9L298.9 453.3L298.9 454.8L298.8 456.2L298.8 457.7L298.7 459.1L298.6 460.5L298.4 461.9L298.2 463.4L298 464.8L297.8 466.2L297.5 467.6L297.2 469L296.8 470.3L296.5 471.7L296.1 473.1L295.6 474.4L295.2 475.7L294.7 477L294.1 478.3L293.6 479.6L293 480.9L292.4 482.1L291.7 483.4L291.1 484.6L290.4 485.8L289.7 486.9L288.9 488.1L288.1 489.2L287.3 490.4L286.5 491.5L285.6 492.5L284.8 493.6L283.8 494.6L282.9 495.6L282 496.6L281 497.5L280 498.5L279 499.4L277.9 500.2L276.9 501.1L275.8 501.9L274.7 502.7L273.5 503.5"/><path class="iso-line iso-bevel" data-tone="faint" d="M200.9 394.2L203.1 395.1L204.3 394.4L205.5 393.7L206.7 393.1L207.9 392.5L209.1 391.9L210.4 391.3L211.6 390.8L212.9 390.3L214.2 389.8L215.5 389.4L216.8 389L218.1 388.6L219.5 388.3L220.8 388L222.2 387.8L223.5 387.5L224.9 387.3L226.3 387.2L227.6 387L229 387L230.4 386.9L231.8 386.9L233.2 386.9L234.6 386.9L236 387L237.4 387.1L238.8 387.3L240.2 387.4L241.6 387.6L243 387.9L244.4 388.2L245.8 388.5L247.2 388.8L248.6 389.2L249.9 389.6L251.3 390.1L252.7 390.5L254 391.1L255.4 391.6L256.7 392.2L258 392.8L259.3 393.4L260.6 394.1L261.9 394.8L263.2 395.5L264.4 396.2L265.7 397L266.9 397.8L268.1 398.7L269.3 399.5L270.5 400.4L271.6 401.4L272.8 402.3L273.9 403.3L275 404.3L276.1 405.3L277.1 406.3L278.2 407.4L279.2 408.5L280.2 409.6L281.1 410.8L282.1 411.9L283 413.1L283.9 414.3L284.7 415.5L285.6 416.7L286.4 418L287.2 419.3L287.9 420.5L288.7 421.8L289.4 423.2L290 424.5L290.7 425.8L291.3 427.2L291.9 428.5L292.4 429.9L293 431.3L293.5 432.7L293.9 434.1L294.4 435.5L294.8 437L295.1 438.4L295.5 439.8L295.8 441.3L296 442.7L296.3 444.2L296.5 445.6L296.7 447.1L296.8 448.5L296.9 450L297 451.4L297 452.9L297.1 454.3L297 455.8L297 457.2L296.9 458.6L296.8 460.1L296.6 461.5L296.4 462.9L296.2 464.3L296 465.7L295.7 467.1L295.4 468.5L295 469.9L294.7 471.2L294.2 472.6L293.8 473.9L293.3 475.3L292.8 476.6L292.3 477.9L291.7 479.1L291.1 480.4L290.5 481.6L289.9 482.9L289.2 484.1L288.5 485.3L287.7 486.4L287 487.6L286.2 488.7L285.4 489.8L284.5 490.9L283.6 491.9L282.7 493L281.8 494L280.9 495L279.9 495.9L278.9 496.8L277.9 497.8L276.8 498.6L275.8 499.5L274.7 500.3L273.6 501.1L273.5 503.5"/><path class="iso-line iso-edge" data-tone="mid" d="M175.6 443.4L175.6 442L175.7 440.5L175.8 439.1L175.9 437.6L176 436.2L176.2 434.8L176.4 433.4L176.6 432L176.9 430.6L177.2 429.2L177.5 427.8L177.9 426.4L178.3 425L178.7 423.7L179.2 422.4L179.7 421L180.2 419.7L180.7 418.4L181.3 417.2L181.9 415.9L182.6 414.7L183.2 413.4L183.9 412.2L184.6 411.1L185.4 409.9L186.2 408.7L187 407.6L187.8 406.5L188.6 405.4L189.5 404.4L190.4 403.3L191.4 402.3L192.3 401.3L193.3 400.4L194.3 399.4L195.3 398.5L196.3 397.6L197.4 396.8L198.5 396L199.6 395.2L200.7 394.4L206 390.9L207.1 390.1L208.3 389.4L209.5 388.7L210.7 388.1L211.9 387.4L213.1 386.8L214.4 386.3L215.6 385.7L216.9 385.2L218.2 384.7L219.5 384.3L220.8 383.9L222.1 383.5L223.5 383.2L224.8 382.8L226.2 382.6L227.5 382.3L228.9 382.1L230.3 381.9L231.7 381.8L233 381.6L234.4 381.6L235.8 381.5L237.2 381.5L238.6 381.5L240.1 381.5L241.5 381.6L242.9 381.7L244.3 381.9L245.7 382.1L247.1 382.3L248.5 382.5L249.9 382.8L251.3 383.1L252.7 383.5L254.1 383.9L255.4 384.3L256.8 384.7L258.2 385.2L259.5 385.7L260.9 386.2L262.2 386.8L263.6 387.4L264.9 388L266.2 388.7L267.5 389.4L268.8 390.1L270 390.8L271.3 391.6L272.5 392.4L273.7 393.2L274.9 394.1L276.1 395L277.3 395.9L278.5 396.8L279.6 397.8L280.7 398.8L281.8 399.8L282.9 400.8L283.9 401.9L285 402.9L286 404.1L287 405.2L287.9 406.3L288.9 407.5L289.8 408.7L290.7 409.9L291.5 411.1L292.4 412.3L293.2 413.6L294 414.9L294.7 416.2L295.5 417.5L296.2 418.8L296.9 420.1L297.5 421.5L298.1 422.8L298.7 424.2L299.3 425.6L299.8 427L300.3 428.4L300.8 429.8L301.2 431.2L301.6 432.6L302 434.1L302.4 435.5L302.7 436.9L303 438.4L303.2 439.8L303.5 441.3L303.7 442.8L303.8 444.2L303.9 445.7L304 447.1L304.1 448.6L304.1 450.1L304.1 451.5L304.1 453L304 454.4L303.9 455.8L303.8 457.3L303.7 458.7L303.5 460.1L303.2 461.6L303 463L302.7 464.4L302.4 465.7L302 467.1L301.6 468.5L301.2 469.8L300.8 471.2L300.3 472.5L299.8 473.8L299.3 475.1L298.7 476.4L298.1 477.7L297.5 478.9L296.9 480.2L296.2 481.4L295.5 482.6L294.7 483.7L294 484.9L293.2 486L292.4 487.1L291.5 488.2L290.7 489.3L289.8 490.4L288.9 491.4L287.9 492.4L287 493.4L286 494.3L285 495.2L283.9 496.1L282.9 497L281.8 497.8L280.7 498.7L279.6 499.5L278.5 500.2L273.2 503.7L272 504.5L270.9 505.2L269.7 505.8L268.5 506.5L267.2 507.1L266 507.7L264.7 508.2L263.5 508.8L262.2 509.2L260.9 509.7L259.6 510.1L258.3 510.5L256.9 510.9L255.6 511.2L254.3 511.5L252.9 511.8L251.5 512L250.2 512.2L248.8 512.4L247.4 512.5L246 512.6L244.6 512.7L243.2 512.7L241.8 512.7L240.4 512.7L239 512.6L237.6 512.5L236.2 512.4L234.8 512.2L233.4 512L232 511.8L230.6 511.5L229.2 511.2L227.8 510.9L226.4 510.5L225 510.2L223.6 509.7L222.3 509.3L220.9 508.8L219.5 508.3L218.2 507.7L216.9 507.1L215.5 506.5L214.2 505.9L212.9 505.2L211.6 504.5L210.4 503.8L209.1 503L207.9 502.2L206.6 501.4L205.4 500.6L204.2 499.7L203 498.8L201.9 497.9L200.7 496.9L199.6 495.9L198.5 494.9L197.4 493.9L196.3 492.9L195.3 491.8L194.3 490.7L193.3 489.6L192.3 488.5L191.4 487.3L190.4 486.1L189.5 484.9L188.6 483.7L187.8 482.5L187 481.2L186.2 480L185.4 478.7L184.6 477.4L183.9 476.1L183.2 474.8L182.6 473.4L181.9 472.1L181.3 470.7L180.7 469.3L180.2 467.9L179.7 466.5L179.2 465.1L178.7 463.7L178.3 462.3L177.9 460.9L177.5 459.4L177.2 458L176.9 456.5L176.6 455.1L176.4 453.6L176.2 452.2L176 450.7L175.9 449.3L175.8 447.8L175.7 446.3L175.6 444.9Z"/></g><g id="rt-crank"></g></g><g data-part="cams" data-zh-label="凸轮轴：顶开气门，转速只有曲轴一半" data-en-label="Camshafts: open the valves at half crank speed"><g class="iso-solid"><path class="iso-fill" d="M159 93.9L159 93.1L159.1 92.3L159.3 91.6L159.6 90.8L159.9 90.1L160.3 89.5L160.8 88.9L161.3 88.3L161.9 87.8L162.5 87.4L174.4 79.5L175.1 79.1L175.8 78.9L176.5 78.6L177.3 78.5L178 78.5L178.8 78.5L179.6 78.6L180.4 78.8L181.1 79.1L181.9 79.4L182.6 79.8L183.3 80.3L183.9 80.8L184.5 81.4L185 82.1L185.5 82.7L185.9 83.5L186.2 84.2L186.5 85L186.6 85.8L186.8 86.6L186.8 87.4L186.8 88.2L186.6 89L186.5 89.8L186.2 90.5L185.9 91.2L185.5 91.9L185 92.5L184.5 93.1L183.9 93.5L183.3 94L171.4 101.9L170.7 102.2L170 102.5L169.3 102.7L168.5 102.8L167.7 102.9L166.9 102.9L166.2 102.8L165.4 102.6L164.6 102.3L163.9 102L163.2 101.6L162.5 101.1L161.9 100.5L161.3 100L160.8 99.3L160.3 98.6L159.9 97.9L159.6 97.1L159.3 96.3L159.1 95.5L159 94.7Z"/><path class="iso-shade" data-shade="0" d="M185 82.1L185.5 82.7L185.9 83.5L186.2 84.2L186.5 85L186.6 85.8L186.8 86.6L186.8 87.4L186.8 88.2L186.6 89L186.5 89.8L186.2 90.5L185.9 91.2L185.5 91.9L185 92.5L184.5 93.1L183.9 93.5L183.3 94L171.4 101.9L172 101.4L172.6 100.9L173.1 100.4L173.6 99.8L174 99.1L174.3 98.4L174.6 97.7L174.8 96.9L174.9 96.1L174.9 95.3L174.9 94.5L174.8 93.7L174.6 92.9L174.3 92.1L174 91.4L173.6 90.6L173.1 89.9Z"/><path class="iso-shade" data-shade="1" d="M183.9 80.8L184.5 81.4L185 82.1L173.1 89.9L172.6 89.3L172 88.7Z"/><path class="iso-shade" data-shade="2" d="M182.6 79.8L183.3 80.3L183.9 80.8L172 88.7L171.4 88.2L170.7 87.7ZM159 93.9L159 93.1L159.1 92.3L159.3 91.6L159.6 90.8L159.9 90.1L160.3 89.5L160.8 88.9L161.3 88.3L161.9 87.8L162.5 87.4L163.2 87L163.9 86.7L164.6 86.5L165.4 86.4L166.2 86.4L166.9 86.4L167.7 86.5L168.5 86.7L169.3 86.9L170 87.3L170.7 87.7L171.4 88.2L172 88.7L172.6 89.3L173.1 89.9L173.6 90.6L174 91.4L174.3 92.1L174.6 92.9L174.8 93.7L174.9 94.5L174.9 95.3L174.9 96.1L174.8 96.9L174.6 97.7L174.3 98.4L174 99.1L173.6 99.8L173.1 100.4L172.6 100.9L172 101.4L171.4 101.9L170.7 102.2L170 102.5L169.3 102.7L168.5 102.8L167.7 102.9L166.9 102.9L166.2 102.8L165.4 102.6L164.6 102.3L163.9 102L163.2 101.6L162.5 101.1L161.9 100.5L161.3 100L160.8 99.3L160.3 98.6L159.9 97.9L159.6 97.1L159.3 96.3L159.1 95.5L159 94.7L159 93.9L166.9 94.6L166.9 94.6L166.9 94.6L166.9 94.6L166.9 94.6L166.9 94.6L166.9 94.6L166.9 94.6L166.9 94.6L166.9 94.6L166.9 94.6L166.9 94.6L166.9 94.6L166.9 94.6L166.9 94.6L166.9 94.6L166.9 94.6L166.9 94.6L166.9 94.6L166.9 94.6L166.9 94.6L166.9 94.6L166.9 94.6L166.9 94.6L166.9 94.6L166.9 94.6L166.9 94.6L166.9 94.6L166.9 94.6L166.9 94.6L166.9 94.6L166.9 94.6L166.9 94.6L166.9 94.6L166.9 94.6L166.9 94.6L166.9 94.6L166.9 94.6L166.9 94.6L166.9 94.6L166.9 94.6L166.9 94.6L166.9 94.6L166.9 94.6L166.9 94.6L166.9 94.6L166.9 94.6L166.9 94.6L166.9 94.6L166.9 94.6L166.9 94.6L166.9 94.6L166.9 94.6L166.9 94.6L166.9 94.6L166.9 94.6L166.9 94.6L166.9 94.6L166.9 94.6L166.9 94.6L166.9 94.6L166.9 94.6L166.9 94.6L166.9 94.6L166.9 94.6Z"/><path class="iso-shade" data-shade="3" d="M180.4 78.8L181.1 79.1L181.9 79.4L182.6 79.8L170.7 87.7L170 87.3L169.3 86.9L168.5 86.7Z"/><path class="iso-top" d="M174.4 79.5L175.1 79.1L175.8 78.9L176.5 78.6L177.3 78.5L178 78.5L178.8 78.5L179.6 78.6L180.4 78.8L168.5 86.7L167.7 86.5L166.9 86.4L166.2 86.4L165.4 86.4L164.6 86.5L163.9 86.7L163.2 87L162.5 87.4Z"/><path class="iso-line iso-crease" data-tone="faint" d="M162.2 87.6L163.4 86.9L164.7 86.5L166.1 86.4L167.5 86.5L168.9 86.8L170.2 87.4L171.4 88.2L172.5 89.2L173.4 90.3L174.1 91.6L174.6 93L174.9 94.4L174.9 95.9L174.7 97.3L174.2 98.6L173.6 99.8L172.7 100.8L171.6 101.7"/><path class="iso-line iso-edge" data-tone="mid" d="M159 93.9L159 93.1L159.1 92.3L159.3 91.6L159.6 90.8L159.9 90.1L160.3 89.5L160.8 88.9L161.3 88.3L161.9 87.8L162.5 87.4L174.4 79.5L175.1 79.1L175.8 78.9L176.5 78.6L177.3 78.5L178 78.5L178.8 78.5L179.6 78.6L180.4 78.8L181.1 79.1L181.9 79.4L182.6 79.8L183.3 80.3L183.9 80.8L184.5 81.4L185 82.1L185.5 82.7L185.9 83.5L186.2 84.2L186.5 85L186.6 85.8L186.8 86.6L186.8 87.4L186.8 88.2L186.6 89L186.5 89.8L186.2 90.5L185.9 91.2L185.5 91.9L185 92.5L184.5 93.1L183.9 93.5L183.3 94L171.4 101.9L170.7 102.2L170 102.5L169.3 102.7L168.5 102.8L167.7 102.9L166.9 102.9L166.2 102.8L165.4 102.6L164.6 102.3L163.9 102L163.2 101.6L162.5 101.1L161.9 100.5L161.3 100L160.8 99.3L160.3 98.6L159.9 97.9L159.6 97.1L159.3 96.3L159.1 95.5L159 94.7Z"/></g><g class="iso-solid"><path class="iso-fill" d="M286.4 105.1L286.4 104.3L286.5 103.5L286.7 102.8L287 102L287.3 101.3L287.7 100.7L288.2 100.1L288.7 99.5L289.3 99L289.9 98.6L301.8 90.7L302.4 90.4L303.2 90.1L303.9 89.9L304.6 89.7L305.4 89.7L306.2 89.7L307 89.8L307.8 90L308.5 90.3L309.3 90.6L310 91L310.6 91.5L311.3 92L311.8 92.6L312.4 93.3L312.8 94L313.2 94.7L313.6 95.4L313.8 96.2L314 97L314.1 97.8L314.2 98.7L314.1 99.5L314 100.2L313.8 101L313.6 101.7L313.2 102.4L312.8 103.1L312.4 103.7L311.8 104.3L311.3 104.8L310.6 105.2L298.8 113.1L298.1 113.4L297.4 113.7L296.6 113.9L295.9 114.1L295.1 114.1L294.3 114.1L293.5 114L292.8 113.8L292 113.5L291.3 113.2L290.6 112.8L289.9 112.3L289.3 111.8L288.7 111.2L288.2 110.5L287.7 109.8L287.3 109.1L287 108.3L286.7 107.6L286.5 106.8L286.4 105.9Z"/><path class="iso-shade" data-shade="0" d="M312.4 93.3L312.8 94L313.2 94.7L313.6 95.4L313.8 96.2L314 97L314.1 97.8L314.2 98.7L314.1 99.5L314 100.2L313.8 101L313.6 101.7L313.2 102.4L312.8 103.1L312.4 103.7L311.8 104.3L311.3 104.8L310.6 105.2L298.8 113.1L299.4 112.7L300 112.2L300.5 111.6L301 111L301.4 110.3L301.7 109.6L302 108.9L302.2 108.1L302.3 107.3L302.3 106.5L302.3 105.7L302.2 104.9L302 104.1L301.7 103.3L301.4 102.6L301 101.8L300.5 101.2Z"/><path class="iso-shade" data-shade="1" d="M311.3 92L311.8 92.6L312.4 93.3L300.5 101.2L300 100.5L299.4 99.9Z"/><path class="iso-shade" data-shade="2" d="M310 91L310.6 91.5L311.3 92L299.4 99.9L298.8 99.4L298.1 98.9ZM286.4 105.1L286.4 104.3L286.5 103.5L286.7 102.8L287 102L287.3 101.3L287.7 100.7L288.2 100.1L288.7 99.5L289.3 99L289.9 98.6L290.6 98.2L291.3 98L292 97.8L292.8 97.6L293.5 97.6L294.3 97.6L295.1 97.7L295.9 97.9L296.6 98.2L297.4 98.5L298.1 98.9L298.8 99.4L299.4 99.9L300 100.5L300.5 101.2L301 101.8L301.4 102.6L301.7 103.3L302 104.1L302.2 104.9L302.3 105.7L302.3 106.5L302.3 107.3L302.2 108.1L302 108.9L301.7 109.6L301.4 110.3L301 111L300.5 111.6L300 112.2L299.4 112.7L298.8 113.1L298.1 113.4L297.4 113.7L296.6 113.9L295.9 114.1L295.1 114.1L294.3 114.1L293.5 114L292.8 113.8L292 113.5L291.3 113.2L290.6 112.8L289.9 112.3L289.3 111.8L288.7 111.2L288.2 110.5L287.7 109.8L287.3 109.1L287 108.3L286.7 107.6L286.5 106.8L286.4 105.9L286.4 105.1L294.3 105.8L294.3 105.8L294.3 105.8L294.3 105.8L294.3 105.8L294.3 105.8L294.3 105.8L294.3 105.8L294.3 105.8L294.3 105.8L294.3 105.8L294.3 105.8L294.3 105.8L294.3 105.8L294.3 105.8L294.3 105.8L294.3 105.8L294.3 105.8L294.3 105.8L294.3 105.8L294.3 105.8L294.3 105.8L294.3 105.8L294.3 105.8L294.3 105.8L294.3 105.8L294.3 105.8L294.3 105.8L294.3 105.8L294.3 105.8L294.3 105.8L294.3 105.8L294.3 105.8L294.3 105.8L294.3 105.8L294.3 105.8L294.3 105.8L294.3 105.8L294.3 105.8L294.3 105.8L294.3 105.8L294.3 105.8L294.3 105.8L294.3 105.8L294.3 105.8L294.3 105.8L294.3 105.8L294.3 105.8L294.3 105.8L294.3 105.8L294.3 105.8L294.3 105.8L294.3 105.8L294.3 105.8L294.3 105.8L294.3 105.8L294.3 105.8L294.3 105.8L294.3 105.8L294.3 105.8L294.3 105.8L294.3 105.8L294.3 105.8L294.3 105.8L294.3 105.8Z"/><path class="iso-shade" data-shade="3" d="M307.8 90L308.5 90.3L309.3 90.6L310 91L298.1 98.9L297.4 98.5L296.6 98.2L295.9 97.9Z"/><path class="iso-top" d="M301.8 90.7L302.4 90.4L303.2 90.1L303.9 89.9L304.6 89.7L305.4 89.7L306.2 89.7L307 89.8L307.8 90L295.9 97.9L295.1 97.7L294.3 97.6L293.5 97.6L292.8 97.6L292 97.8L291.3 98L290.6 98.2L289.9 98.6Z"/><path class="iso-line iso-crease" data-tone="faint" d="M289.6 98.8L290.8 98.1L292.1 97.7L293.5 97.6L294.9 97.7L296.2 98L297.6 98.6L298.8 99.4L299.9 100.4L300.8 101.6L301.5 102.9L302 104.2L302.3 105.7L302.3 107.1L302.1 108.5L301.6 109.8L300.9 111L300.1 112.1L299 112.9"/><path class="iso-line iso-edge" data-tone="mid" d="M286.4 105.1L286.4 104.3L286.5 103.5L286.7 102.8L287 102L287.3 101.3L287.7 100.7L288.2 100.1L288.7 99.5L289.3 99L289.9 98.6L301.8 90.7L302.4 90.4L303.2 90.1L303.9 89.9L304.6 89.7L305.4 89.7L306.2 89.7L307 89.8L307.8 90L308.5 90.3L309.3 90.6L310 91L310.6 91.5L311.3 92L311.8 92.6L312.4 93.3L312.8 94L313.2 94.7L313.6 95.4L313.8 96.2L314 97L314.1 97.8L314.2 98.7L314.1 99.5L314 100.2L313.8 101L313.6 101.7L313.2 102.4L312.8 103.1L312.4 103.7L311.8 104.3L311.3 104.8L310.6 105.2L298.8 113.1L298.1 113.4L297.4 113.7L296.6 113.9L295.9 114.1L295.1 114.1L294.3 114.1L293.5 114L292.8 113.8L292 113.5L291.3 113.2L290.6 112.8L289.9 112.3L289.3 111.8L288.7 111.2L288.2 110.5L287.7 109.8L287.3 109.1L287 108.3L286.7 107.6L286.5 106.8L286.4 105.9Z"/></g><g id="rt-cams"></g></g><g data-part="rod" data-zh-label="连杆：把活塞的推力传给曲轴" data-en-label="Connecting rod: carries the push to the crank"><g id="rt-rod"></g></g><g data-part="block" data-zh-label="缸体与缸盖（剖面）" data-en-label="Block and head (cut away)"><path class="cut" fill-rule="evenodd" d="M133.7 559L322.3 575.6L340.4 558.5L340.4 420L300.5 371.5L300.5 219.3L155.5 206.5L155.5 358.8L115.6 400.2L115.6 538.7ZM278.8 217.4L278.8 395.9L278.8 395.9L285.9 403.5L292.2 411.7L297.5 420.7L301.7 430.1L304.9 440L306.9 450L307.7 460.1L307.4 470.2L305.8 480L303.1 489.5L299.2 498.4L294.3 506.7L288.3 514.2L281.5 520.8L273.9 526.4L265.6 531L256.7 534.4L247.4 536.6L237.8 537.6L228 537.4L218.2 535.9L208.6 533.2L199.3 529.3L190.4 524.3L182.1 518.3L174.5 511.4L167.7 503.5L161.7 495L156.8 485.8L152.9 476.2L150.2 466.3L148.6 456.2L148.3 446.1L149.1 436.1L151.1 426.4L154.3 417.1L158.5 408.4L163.8 400.4L170.1 393.3L177.2 387L177.2 387L177.2 208.5Z"/></g><g data-part="piston" data-zh-label="活塞" data-en-label="Piston"><g id="piston-solid"><g class="iso-solid"><path class="iso-fill" d="M175.5 226.6L175.6 226.2L175.6 225.8L175.8 225.5L175.9 225.1L177.8 221.4L178 221.1L178.3 220.7L178.5 220.4L178.8 220.1L179.2 219.7L179.6 219.4L180 219.1L180.5 218.7L181 218.4L181.6 218.1L182.2 217.8L182.8 217.4L183.5 217.1L184.2 216.8L184.9 216.5L185.7 216.2L186.5 215.9L187.3 215.7L188.2 215.4L189.1 215.1L190 214.8L191 214.6L192 214.3L193 214.1L194.1 213.9L195.1 213.6L196.3 213.4L197.4 213.2L198.6 213L199.7 212.8L200.9 212.6L202.2 212.4L203.4 212.2L204.7 212.1L206 211.9L207.3 211.8L208.6 211.6L210 211.5L211.3 211.4L212.7 211.3L214.1 211.2L215.5 211.1L216.9 211L218.3 210.9L219.7 210.8L221.1 210.8L222.6 210.8L224 210.7L225.4 210.7L226.9 210.7L228.3 210.7L229.8 210.7L231.2 210.7L232.6 210.7L234.1 210.8L235.5 210.8L236.9 210.9L238.4 210.9L239.8 211L241.2 211.1L242.5 211.2L243.9 211.3L245.3 211.4L246.6 211.5L248 211.7L249.3 211.8L250.6 212L251.9 212.1L253.1 212.3L254.4 212.5L255.6 212.7L256.8 212.9L258 213.1L259.1 213.3L260.2 213.5L261.3 213.7L262.4 214L263.5 214.2L264.5 214.4L265.5 214.7L266.4 215L267.3 215.2L268.2 215.5L269.1 215.8L269.9 216.1L270.7 216.4L271.4 216.7L272.2 217L272.8 217.3L273.5 217.6L274.1 217.9L274.7 218.2L275.2 218.5L275.7 218.9L276.2 219.2L276.6 219.5L277 219.9L277.3 220.2L277.6 220.6L277.9 220.9L278.1 221.2L280 224.9L280.2 225.3L280.3 225.6L280.4 226L280.5 226.4L280.5 226.7L279.7 282.9L279.7 283.2L279.6 283.6L279.5 284L279.3 284.3L279.1 284.7L278.9 285L278.6 285.4L278.3 285.7L277.9 286.1L277.5 286.4L277.1 286.7L276.6 287.1L276.1 287.4L275.5 287.7L274.9 288.1L274.2 288.4L273.6 288.7L272.9 289L272.1 289.3L271.3 289.6L270.5 289.9L269.6 290.2L268.7 290.5L267.8 290.8L266.9 291.1L265.9 291.3L264.8 291.6L263.8 291.8L262.7 292.1L261.6 292.3L260.5 292.5L259.3 292.8L258.1 293L256.9 293.2L255.7 293.4L254.4 293.6L253.1 293.7L251.8 293.9L250.5 294.1L249.2 294.2L247.8 294.4L246.4 294.5L245.1 294.6L243.7 294.7L242.2 294.8L240.8 294.9L239.4 295L237.9 295.1L236.5 295.1L235 295.2L233.6 295.2L232.1 295.3L230.6 295.3L229.1 295.3L227.7 295.3L226.2 295.3L224.7 295.3L223.2 295.3L221.8 295.2L220.3 295.2L218.9 295.1L217.4 295L216 295L214.5 294.9L213.1 294.8L211.7 294.7L210.3 294.6L208.9 294.4L207.6 294.3L206.2 294.1L204.9 294L203.6 293.8L202.3 293.7L201 293.5L199.8 293.3L198.5 293.1L197.3 292.9L196.2 292.7L195 292.4L193.9 292.2L192.8 292L191.7 291.7L190.7 291.5L189.7 291.2L188.7 290.9L187.8 290.7L186.9 290.4L186 290.1L185.1 289.8L184.3 289.5L183.6 289.2L182.8 288.9L182.1 288.6L181.5 288.3L180.8 287.9L180.3 287.6L179.7 287.3L179.2 286.9L178.7 286.6L178.3 286.3L177.9 285.9L177.6 285.6L177.3 285.2L177 284.9L176.8 284.5L176.6 284.2L176.5 283.8L176.4 283.4L176.3 283.1L176.3 282.7Z"/><path class="iso-shade" data-shade="0" d="M279.6 282.3L279.6 283.5L279.1 284.7L278.1 285.9L276.6 287.1L274.6 288.2L272.2 289.3L269.4 290.3L266.1 291.3L262.5 292.1L258.6 292.9L254.3 293.6L249.8 294.1L245.2 294.6L240.3 295L235.3 295.2L230.3 295.3L225.2 295.3L225.1 239.3L230.3 239.3L235.4 239.2L240.5 239L245.4 238.6L250.2 238.2L254.7 237.6L259 236.9L263 236.1L266.7 235.2L270 234.3L272.9 233.2L275.3 232.1L277.3 231L278.8 229.8L279.9 228.6L280.4 227.3L280.4 226.1ZM279.9 224.9L280.4 226.1L280.4 227.3L279.9 228.6L278.8 229.8L277.3 231L275.3 232.1L272.9 233.2L270 234.3L266.7 235.2L263 236.1L259 236.9L257.9 232.8L261.7 232L265.3 231.2L268.4 230.2L271.2 229.3L273.6 228.2L275.5 227.1L277 225.9L278 224.8L278.5 223.6L278.5 222.4L278 221.2Z"/><path class="iso-shade" data-shade="1" d="M225.2 295.3L220.1 295.2L215.2 294.9L210.3 294.6L210.1 238.6L215 238.9L220 239.2L225.1 239.3ZM259 236.9L254.7 237.6L250.2 238.2L245.4 238.6L240.5 239L240 234.8L244.8 234.4L249.4 234L253.7 233.4L257.9 232.8Z"/><path class="iso-shade" data-shade="2" d="M210.3 294.6L205.6 294.1L201.2 293.5L197 292.8L193.1 292L192.6 236L196.5 236.8L200.8 237.5L205.3 238.1L210.1 238.6ZM240.5 239L235.4 239.2L230.3 239.3L225.1 239.3L220 239.2L220.3 235L225.2 235.1L230.2 235.1L235.1 235L240 234.8Z"/><path class="iso-shade" data-shade="3" d="M193.1 292L189.5 291.2L186.3 290.2L183.5 289.2L181.1 288.1L179.2 287L177.8 285.8L176.8 284.6L176.1 228.4L177 229.7L178.5 230.9L180.4 232L182.8 233.1L185.7 234.2L188.9 235.1L192.6 236ZM220 239.2L215 238.9L210.1 238.6L205.3 238.1L200.8 237.5L201.8 233.4L206.1 233.9L210.7 234.4L215.5 234.8L220.3 235Z"/><path class="iso-top" d="M176.8 284.6L176.4 283.4L175.6 227.2L176.1 228.4ZM200.8 237.5L196.5 236.8L192.6 236L188.9 235.1L185.7 234.2L182.8 233.1L180.4 232L178.5 230.9L177 229.7L176.1 228.4L175.6 227.2L175.6 226L176.1 224.7L178 221.1L177.5 222.2L177.5 223.4L178 224.6L178.9 225.8L180.3 227L182.2 228.1L184.5 229.1L187.2 230.1L190.4 231.1L193.9 231.9L197.7 232.7L201.8 233.4ZM245.3 211.4L249.9 211.9L254.2 212.5L258.3 213.1L262.1 213.9L265.6 214.7L268.8 215.7L271.5 216.7L273.8 217.7L275.7 218.9L277.1 220L278 221.2L278.5 222.4L278.5 223.6L278 224.8L277 225.9L275.5 227.1L273.6 228.2L271.2 229.3L268.4 230.2L265.3 231.2L261.7 232L257.9 232.8L253.7 233.4L249.4 234L244.8 234.4L240 234.8L235.1 235L230.2 235.1L225.2 235.1L220.3 235L215.5 234.8L210.7 234.4L206.1 233.9L201.8 233.4L197.7 232.7L193.9 231.9L190.4 231.1L187.2 230.1L184.5 229.1L182.2 228.1L180.3 227L178.9 225.8L178 224.6L177.5 223.4L177.5 222.2L178 221.1L179 219.9L180.5 218.7L182.4 217.6L184.8 216.6L187.6 215.6L190.7 214.7L194.3 213.8L198.1 213.1L202.3 212.4L206.6 211.8L211.2 211.4L216 211L220.9 210.8L225.8 210.7L230.8 210.7L235.7 210.8L240.5 211.1L245.3 211.4L228 222.9L228 222.9L228 222.9L228 222.9L228 222.9L228 222.9L228 222.9L228 222.9L228 222.9L228 222.9L228 222.9L228 222.9L228 222.9L228 222.9L228 222.9L228 222.9L228 222.9L228 222.9L228 222.9L228 222.9L228 222.9L228 222.9L228 222.9L228 222.9L228 222.9L228 222.9L228 222.9L228 222.9L228 222.9L228 222.9L228 222.9L228 222.9L228 222.9L228 222.9L228 222.9L228 222.9L228 222.9L228 222.9L228 222.9L228 222.9L228 222.9L228 222.9L228 222.9L228 222.9L228 222.9L228 222.9L228 222.9L228 222.9L228 222.9L228 222.9L228 222.9L228 222.9L228 222.9L228 222.9L228 222.9L228 222.9L228 222.9L228 222.9L228 222.9L228 222.9L228 222.9L228 222.9L228 222.9L228 222.9L228 222.9Z"/><path class="iso-line iso-crease" data-tone="faint" d="M280.5 226.7L280.4 227.1L280.4 227.4L280.3 227.8L280.1 228.1L279.9 228.5L279.7 228.9L279.4 229.2L279.1 229.6L278.7 229.9L278.3 230.3L277.9 230.6L277.4 231L276.8 231.3L276.3 231.6L275.7 232L275 232.3L274.3 232.6L273.6 232.9L272.9 233.2L272.1 233.5L271.3 233.8L270.4 234.1L269.5 234.4L268.6 234.7L267.6 235L266.6 235.3L265.6 235.5L264.5 235.8L263.4 236L262.3 236.3L261.2 236.5L260 236.7L258.8 236.9L257.6 237.1L256.3 237.3L255 237.5L253.8 237.7L252.4 237.9L251.1 238.1L249.8 238.2L248.4 238.4L247 238.5L245.6 238.6L244.2 238.7L242.8 238.8L241.3 238.9L239.9 239L238.4 239.1L236.9 239.2L235.5 239.2L234 239.3L232.5 239.3L231 239.3L229.5 239.3L228 239.3L226.5 239.3L225 239.3L223.5 239.3L222 239.3L220.5 239.2L219.1 239.2L217.6 239.1L216.1 239L214.7 238.9L213.2 238.8L211.8 238.7L210.4 238.6L209 238.5L207.6 238.4L206.2 238.2L204.9 238.1L203.6 237.9L202.2 237.7L201 237.5L199.7 237.3L198.4 237.1L197.2 236.9L196 236.7L194.8 236.5L193.7 236.3L192.6 236L191.5 235.8L190.4 235.5L189.4 235.3L188.4 235L187.4 234.7L186.5 234.4L185.6 234.1L184.7 233.8L183.9 233.5L183.1 233.2L182.4 232.9L181.7 232.6L181 232.3L180.3 232L179.7 231.6L179.2 231.3L178.6 231L178.1 230.6L177.7 230.3L177.3 229.9L176.9 229.6L176.6 229.2L176.3 228.9L176.1 228.5L175.9 228.1L175.7 227.8L175.6 227.4L175.6 227.1L175.5 226.7M278.1 221.4L278.3 221.7L278.4 222.1L278.5 222.5L278.5 222.8L278.5 223.2L278.5 223.5L278.4 223.9L278.2 224.3L278 224.6L277.8 225L277.5 225.3L277.2 225.7L276.9 226L276.5 226.4L276 226.7L275.5 227.1L275 227.4L274.4 227.7L273.8 228.1L273.2 228.4L272.5 228.7L271.8 229L271 229.3L270.2 229.6L269.4 229.9L268.5 230.2L267.6 230.5L266.6 230.8L265.7 231.1L264.6 231.3L263.6 231.6L262.5 231.8L261.4 232.1L260.3 232.3L259.1 232.5L257.9 232.8L256.7 233L255.5 233.2L254.2 233.4L252.9 233.5L251.6 233.7L250.3 233.9L249 234L247.6 234.2L246.2 234.3L244.8 234.4L243.4 234.6L242 234.7L240.5 234.8L239.1 234.8L237.6 234.9L236.2 235L234.7 235L233.2 235.1L231.7 235.1L230.2 235.1L228.7 235.1L227.3 235.1L225.8 235.1L224.3 235.1L222.8 235.1L221.3 235L219.8 235L218.4 234.9L216.9 234.8L215.5 234.8L214 234.7L212.6 234.6L211.2 234.4L209.8 234.3L208.4 234.2L207 234L205.7 233.9L204.4 233.7L203.1 233.5L201.8 233.4L200.5 233.2L199.3 233L198.1 232.8L196.9 232.5L195.7 232.3L194.6 232.1L193.5 231.8L192.4 231.6L191.4 231.3L190.3 231.1L189.4 230.8L188.4 230.5L187.5 230.2L186.6 229.9L185.8 229.6L185 229.3L184.2 229L183.5 228.7L182.8 228.4L182.2 228.1L181.6 227.7L181 227.4L180.5 227.1L180 226.7L179.5 226.4L179.1 226L178.8 225.7L178.5 225.3L178.2 225L178 224.6L177.8 224.3L177.6 223.9L177.5 223.5L177.5 223.2L177.5 222.8L177.5 222.5L177.6 222.1L177.7 221.7L177.9 221.4"/><path class="iso-line iso-bevel" data-tone="faint" d="M278.1 221.4L276.8 221.8L276.9 222.2L277 222.5L277 222.9L277 223.2L276.9 223.6L276.8 224L276.6 224.3L276.4 224.7L276.2 225L275.9 225.4L275.6 225.7L275.2 226.1L274.8 226.4L274.3 226.8L273.8 227.1L273.2 227.5L272.6 227.8L272 228.1L271.3 228.4L270.6 228.8L269.8 229.1L269 229.4L268.2 229.7L267.3 230L266.4 230.3L265.5 230.5L264.5 230.8L263.5 231.1L262.4 231.3L261.3 231.6L260.2 231.8L259.1 232.1L257.9 232.3L256.7 232.5L255.5 232.7L254.2 232.9L253 233.1L251.7 233.3L250.3 233.5L249 233.6L247.6 233.8L246.3 233.9L244.9 234L243.5 234.2L242 234.3L240.6 234.4L239.1 234.5L237.7 234.5L236.2 234.6L234.7 234.7L233.2 234.7L231.7 234.7L230.2 234.8L228.7 234.8L227.3 234.8L225.8 234.8L224.3 234.7L222.8 234.7L221.3 234.7L219.8 234.6L218.3 234.5L216.9 234.5L215.4 234.4L214 234.3L212.5 234.2L211.1 234L209.7 233.9L208.4 233.8L207 233.6L205.7 233.5L204.3 233.3L203 233.1L201.8 232.9L200.5 232.7L199.3 232.5L198.1 232.3L196.9 232.1L195.8 231.8L194.7 231.6L193.6 231.3L192.5 231.1L191.5 230.8L190.5 230.5L189.6 230.3L188.7 230L187.8 229.7L187 229.4L186.2 229.1L185.4 228.8L184.7 228.4L184 228.1L183.4 227.8L182.8 227.5L182.2 227.1L181.7 226.8L181.2 226.4L180.8 226.1L180.4 225.7L180.1 225.4L179.8 225L179.6 224.7L179.4 224.3L179.2 224L179.1 223.6L179 223.2L179 222.9L179 222.5L179.1 222.2L179.2 221.8L177.9 221.4"/><path class="iso-line iso-edge" data-tone="mid" d="M175.5 226.6L175.6 226.2L175.6 225.8L175.8 225.5L175.9 225.1L177.8 221.4L178 221.1L178.3 220.7L178.5 220.4L178.8 220.1L179.2 219.7L179.6 219.4L180 219.1L180.5 218.7L181 218.4L181.6 218.1L182.2 217.8L182.8 217.4L183.5 217.1L184.2 216.8L184.9 216.5L185.7 216.2L186.5 215.9L187.3 215.7L188.2 215.4L189.1 215.1L190 214.8L191 214.6L192 214.3L193 214.1L194.1 213.9L195.1 213.6L196.3 213.4L197.4 213.2L198.6 213L199.7 212.8L200.9 212.6L202.2 212.4L203.4 212.2L204.7 212.1L206 211.9L207.3 211.8L208.6 211.6L210 211.5L211.3 211.4L212.7 211.3L214.1 211.2L215.5 211.1L216.9 211L218.3 210.9L219.7 210.8L221.1 210.8L222.6 210.8L224 210.7L225.4 210.7L226.9 210.7L228.3 210.7L229.8 210.7L231.2 210.7L232.6 210.7L234.1 210.8L235.5 210.8L236.9 210.9L238.4 210.9L239.8 211L241.2 211.1L242.5 211.2L243.9 211.3L245.3 211.4L246.6 211.5L248 211.7L249.3 211.8L250.6 212L251.9 212.1L253.1 212.3L254.4 212.5L255.6 212.7L256.8 212.9L258 213.1L259.1 213.3L260.2 213.5L261.3 213.7L262.4 214L263.5 214.2L264.5 214.4L265.5 214.7L266.4 215L267.3 215.2L268.2 215.5L269.1 215.8L269.9 216.1L270.7 216.4L271.4 216.7L272.2 217L272.8 217.3L273.5 217.6L274.1 217.9L274.7 218.2L275.2 218.5L275.7 218.9L276.2 219.2L276.6 219.5L277 219.9L277.3 220.2L277.6 220.6L277.9 220.9L278.1 221.2L280 224.9L280.2 225.3L280.3 225.6L280.4 226L280.5 226.4L280.5 226.7L279.7 282.9L279.7 283.2L279.6 283.6L279.5 284L279.3 284.3L279.1 284.7L278.9 285L278.6 285.4L278.3 285.7L277.9 286.1L277.5 286.4L277.1 286.7L276.6 287.1L276.1 287.4L275.5 287.7L274.9 288.1L274.2 288.4L273.6 288.7L272.9 289L272.1 289.3L271.3 289.6L270.5 289.9L269.6 290.2L268.7 290.5L267.8 290.8L266.9 291.1L265.9 291.3L264.8 291.6L263.8 291.8L262.7 292.1L261.6 292.3L260.5 292.5L259.3 292.8L258.1 293L256.9 293.2L255.7 293.4L254.4 293.6L253.1 293.7L251.8 293.9L250.5 294.1L249.2 294.2L247.8 294.4L246.4 294.5L245.1 294.6L243.7 294.7L242.2 294.8L240.8 294.9L239.4 295L237.9 295.1L236.5 295.1L235 295.2L233.6 295.2L232.1 295.3L230.6 295.3L229.1 295.3L227.7 295.3L226.2 295.3L224.7 295.3L223.2 295.3L221.8 295.2L220.3 295.2L218.9 295.1L217.4 295L216 295L214.5 294.9L213.1 294.8L211.7 294.7L210.3 294.6L208.9 294.4L207.6 294.3L206.2 294.1L204.9 294L203.6 293.8L202.3 293.7L201 293.5L199.8 293.3L198.5 293.1L197.3 292.9L196.2 292.7L195 292.4L193.9 292.2L192.8 292L191.7 291.7L190.7 291.5L189.7 291.2L188.7 290.9L187.8 290.7L186.9 290.4L186 290.1L185.1 289.8L184.3 289.5L183.6 289.2L182.8 288.9L182.1 288.6L181.5 288.3L180.8 287.9L180.3 287.6L179.7 287.3L179.2 286.9L178.7 286.6L178.3 286.3L177.9 285.9L177.6 285.6L177.3 285.2L177 284.9L176.8 284.5L176.6 284.2L176.5 283.8L176.4 283.4L176.3 283.1L176.3 282.7Z"/></g><path class="iso-line" data-tone="hi" d="M280.4 231L280.3 231.3L280.2 231.7L280 232L279.8 232.4L279.6 232.8L279.3 233.1L278.9 233.5L278.5 233.8L278.1 234.2L277.6 234.5L277.1 234.8L276.6 235.2L276 235.5L275.4 235.8L274.7 236.2L274 236.5L273.3 236.8L272.5 237.1L271.7 237.4L270.9 237.7L270 238L269.1 238.3L268.1 238.6L267.1 238.9L266.1 239.1L265.1 239.4L264 239.6L262.9 239.9L261.8 240.1L260.6 240.3L259.4 240.6L258.2 240.8L257 241L255.7 241.2L254.4 241.4L253.1 241.5L251.8 241.7L250.5 241.9L249.1 242L247.7 242.2L246.3 242.3L244.9 242.4L243.5 242.5L242 242.6L240.6 242.7L239.1 242.8L237.7 242.9L236.2 242.9L234.7 243L233.2 243L231.7 243.1L230.2 243.1L228.7 243.1L227.3 243.1L225.8 243.1L224.3 243.1L222.8 243L221.3 243L219.8 242.9L218.3 242.9L216.9 242.8L215.4 242.7L214 242.6L212.5 242.5L211.1 242.4L209.7 242.3L208.3 242.2L206.9 242L205.5 241.9L204.2 241.7L202.9 241.5L201.6 241.4L200.3 241.2L199 241L197.8 240.8L196.6 240.6L195.4 240.3L194.2 240.1L193.1 239.9L192 239.6L190.9 239.4L189.9 239.1L188.9 238.9L187.9 238.6L186.9 238.3L186 238L185.1 237.7L184.3 237.4L183.5 237.1L182.7 236.8L182 236.5L181.3 236.2L180.6 235.8L180 235.5L179.4 235.2L178.9 234.8L178.4 234.5L177.9 234.2L177.5 233.8L177.1 233.5L176.7 233.1L176.4 232.8L176.2 232.4L176 232L175.8 231.7L175.7 231.3L175.6 231"/><path class="iso-line" data-tone="hi" d="M280.4 236.2L280.3 236.6L280.2 236.9L280 237.3L279.8 237.6L279.6 238L279.3 238.4L278.9 238.7L278.5 239.1L278.1 239.4L277.6 239.7L277.1 240.1L276.6 240.4L276 240.8L275.4 241.1L274.7 241.4L274 241.7L273.3 242L272.5 242.4L271.7 242.7L270.9 243L270 243.3L269.1 243.5L268.1 243.8L267.1 244.1L266.1 244.4L265.1 244.6L264 244.9L262.9 245.1L261.8 245.4L260.6 245.6L259.4 245.8L258.2 246L257 246.2L255.7 246.4L254.4 246.6L253.1 246.8L251.8 247L250.5 247.1L249.1 247.3L247.7 247.4L246.3 247.5L244.9 247.7L243.5 247.8L242 247.9L240.6 248L239.1 248L237.7 248.1L236.2 248.2L234.7 248.2L233.2 248.3L231.7 248.3L230.2 248.3L228.7 248.3L227.3 248.3L225.8 248.3L224.3 248.3L222.8 248.3L221.3 248.2L219.8 248.2L218.3 248.1L216.9 248L215.4 248L214 247.9L212.5 247.8L211.1 247.7L209.7 247.5L208.3 247.4L206.9 247.3L205.5 247.1L204.2 247L202.9 246.8L201.6 246.6L200.3 246.4L199 246.2L197.8 246L196.6 245.8L195.4 245.6L194.2 245.4L193.1 245.1L192 244.9L190.9 244.6L189.9 244.4L188.9 244.1L187.9 243.8L186.9 243.5L186 243.3L185.1 243L184.3 242.7L183.5 242.4L182.7 242L182 241.7L181.3 241.4L180.6 241.1L180 240.8L179.4 240.4L178.9 240.1L178.4 239.7L177.9 239.4L177.5 239.1L177.1 238.7L176.7 238.4L176.4 238L176.2 237.6L176 237.3L175.8 236.9L175.7 236.6L175.6 236.2"/><path class="iso-line" data-tone="hi" d="M280.4 241.4L280.3 241.8L280.2 242.2L280 242.5L279.8 242.9L279.6 243.2L279.3 243.6L278.9 243.9L278.5 244.3L278.1 244.6L277.6 245L277.1 245.3L276.6 245.7L276 246L275.4 246.3L274.7 246.7L274 247L273.3 247.3L272.5 247.6L271.7 247.9L270.9 248.2L270 248.5L269.1 248.8L268.1 249.1L267.1 249.3L266.1 249.6L265.1 249.9L264 250.1L262.9 250.4L261.8 250.6L260.6 250.8L259.4 251L258.2 251.3L257 251.5L255.7 251.7L254.4 251.8L253.1 252L251.8 252.2L250.5 252.4L249.1 252.5L247.7 252.6L246.3 252.8L244.9 252.9L243.5 253L242 253.1L240.6 253.2L239.1 253.3L237.7 253.4L236.2 253.4L234.7 253.5L233.2 253.5L231.7 253.5L230.2 253.6L228.7 253.6L227.3 253.6L225.8 253.6L224.3 253.5L222.8 253.5L221.3 253.5L219.8 253.4L218.3 253.4L216.9 253.3L215.4 253.2L214 253.1L212.5 253L211.1 252.9L209.7 252.8L208.3 252.6L206.9 252.5L205.5 252.4L204.2 252.2L202.9 252L201.6 251.8L200.3 251.7L199 251.5L197.8 251.3L196.6 251L195.4 250.8L194.2 250.6L193.1 250.4L192 250.1L190.9 249.9L189.9 249.6L188.9 249.3L187.9 249.1L186.9 248.8L186 248.5L185.1 248.2L184.3 247.9L183.5 247.6L182.7 247.3L182 247L181.3 246.7L180.6 246.3L180 246L179.4 245.7L178.9 245.3L178.4 245L177.9 244.6L177.5 244.3L177.1 243.9L176.7 243.6L176.4 243.2L176.2 242.9L176 242.5L175.8 242.2L175.7 241.8L175.6 241.4"/></g></g><g data-part="block" data-zh-label="缸体与缸盖（剖面）" data-en-label="Block and head (cut away)"><path class="cut" fill-rule="evenodd" d="M144.6 205.6L311.4 220.3L311.4 171.6L296.9 155.4L159.1 143.2L144.6 156.9ZM222.2 212.4L214.2 193L191.7 167.8L144.6 162.2L144.6 186.9L173.6 191.7L183 209ZM233.8 213.4L241.8 195.4L264.3 174.2L311.4 176.8L311.4 201.6L282.4 201.2L273 216.9ZM219.7 212.2L236.3 213.7L236.3 150L219.7 148.6ZM198.4 181.8L183.5 138.3L174.6 140.8L189.5 184.3ZM266.5 191.1L281.4 150.2L272.5 146.1L257.6 187Z"/><path class="cut-edge" d="M177.2 208.5L278.8 217.4"/></g><g data-part="valves" data-zh-label="进气门（左）与排气门（右）" data-en-label="Intake valve (left) and exhaust valve (right)"><g id="rt-springs"></g><g id="valve-in"><g class="iso-solid"><path class="iso-fill" d="M182.9 215.2L182.9 215.1L182.8 214.9L182.8 214.8L182.7 214.7L182.7 214.5L182.6 214.4L182.6 214.3L182.6 214.2L182.5 214L182.5 213.9L182.4 213.8L182.4 213.6L182.3 213.5L182.3 213.4L182.3 213.3L182.2 213.1L182.2 213L182.1 212.9L182.1 212.7L182 212.6L182 212.5L181.9 212.4L181.9 212.2L181.9 212.1L181.8 211.9L182.4 211L182.6 210.8L182.8 210.6L183.1 210.4L183.3 210.2L183.5 210L183.7 209.7L184 209.5L184.2 209.3L184.4 209.1L184.7 208.9L184.9 208.7L185.1 208.5L185.4 208.2L185.6 208L185.8 207.8L186.1 207.6L186.3 207.4L186.5 207.2L186.8 207L187 206.8L187.2 206.5L187.5 206.3L187.7 206.1L187.9 205.9L188.1 205.7L188.4 205.5L188.6 205.3L188.8 205L189.1 204.8L189.3 204.6L189.5 204.4L189.8 204.2L190 204L190.2 203.8L190.5 203.5L190.7 203.3L190.9 203.1L191.2 202.9L191.4 202.7L191.6 202.5L191.8 202.3L192.1 202.1L192.3 201.8L192.5 201.6L192.8 201.4L193 201.2L193.2 201L193.2 201L193.3 200.8L193.4 200.6L193.4 200.5L193.5 200.3L193.6 200.1L193.7 200L193.7 199.8L193.8 199.6L193.9 199.5L193.9 199.3L194 199.1L194.1 199L194.1 198.8L194.2 198.6L194.3 198.5L194.3 198.3L194.4 198.1L194.5 198L194.6 197.8L194.6 197.6L194.7 197.5L194.8 197.3L194.8 197.3L194.8 197.3L194.8 197.2L194.9 197.2L194.9 197.1L195 197.1L195.1 197L195.2 197L195.4 196.9L195.5 196.8L195.6 196.7L195.8 196.7L196 196.6L196.2 196.5L196.4 196.4L196.6 196.3L196.8 196.3L197 196.2L197.2 196.1L197.4 196L197.7 195.9L197.9 195.8L198.1 195.7L198.4 195.7L198.6 195.6L198.9 195.5L199.1 195.4L199.3 195.4L199.6 195.3L199.8 195.2L200 195.2L200.2 195.1L200.4 195.1L200.6 195L200.8 195L201 194.9L201.1 194.9L201.3 194.9L201.4 194.8L201.6 194.8L201.7 194.8L201.8 194.8L201.9 194.8L201.9 194.8L202 194.8L202 194.8L202 194.8L202.2 194.9L202.3 195L202.5 195.1L202.6 195.2L202.8 195.3L203 195.4L203.1 195.5L203.3 195.5L203.4 195.6L203.6 195.7L203.7 195.8L203.9 195.9L204.1 196L204.2 196.1L204.4 196.2L204.5 196.3L204.7 196.3L204.8 196.4L205 196.5L205.1 196.6L205.3 196.7L205.5 196.8L205.5 196.8L205.8 196.8L206.1 196.9L206.4 196.9L206.7 196.9L207 196.9L207.4 197L207.7 197L208 197L208.3 197L208.6 197.1L208.9 197.1L209.2 197.1L209.6 197.2L209.9 197.2L210.2 197.2L210.5 197.2L210.8 197.3L211.1 197.3L211.4 197.3L211.8 197.3L212.1 197.4L212.4 197.4L212.7 197.4L213 197.5L213.3 197.5L213.6 197.5L213.9 197.5L214.3 197.6L214.6 197.6L214.9 197.6L215.2 197.6L215.5 197.7L215.8 197.7L216.1 197.7L216.5 197.8L216.8 197.8L217.1 197.8L217.4 197.8L217.7 197.9L218 197.9L218.3 197.9L218.7 197.9L219 198L219.3 198L219.6 198L219.9 198.1L220.2 198.1L221.2 198.4L221.3 198.6L221.3 198.8L221.4 198.9L221.4 199L221.5 199.1L221.5 199.3L221.5 199.4L221.6 199.5L221.6 199.7L221.7 199.8L221.7 199.9L221.8 200L221.8 200.2L221.9 200.3L221.9 200.4L221.9 200.6L222 200.7L222 200.8L222.1 200.9L222.1 201.1L222.2 201.2L222.2 201.3L222.2 201.5L222.3 201.6L222.3 201.7L222.3 201.7L222.3 201.9L222.3 202.1L222.1 202.3L221.9 202.5L221.5 202.8L221.1 203.1L220.6 203.4L220.1 203.7L219.4 204.1L218.7 204.5L217.9 204.9L217.1 205.3L216.2 205.7L215.2 206.1L214.2 206.6L213.1 207L212 207.5L210.9 207.9L209.7 208.4L208.5 208.9L207.2 209.3L206 209.8L204.7 210.2L203.4 210.7L202.1 211.1L200.8 211.6L199.5 212L198.3 212.4L197 212.7L195.8 213.1L194.6 213.4L193.4 213.8L192.3 214.1L191.2 214.3L190.2 214.6L189.2 214.8L188.3 215L187.5 215.2L186.7 215.3L185.9 215.4L185.3 215.5L184.7 215.5L184.2 215.6L183.8 215.5L183.4 215.5L183.2 215.4L183 215.3L182.9 215.2Z"/><path class="iso-shade" data-shade="0" d="M222.3 201.7L222.3 202L222.1 202.3L221.6 202.7L221 203.2L220.2 203.6L219.3 204.2L218.2 204.8L216.9 205.4L215.5 206L214 206.7L212.3 207.4L210.6 208.1L208.8 208.8L206.9 209.4L205.8 206.2L207.7 205.5L209.5 204.8L211.2 204.1L212.8 203.4L214.4 202.7L215.8 202.1L217 201.5L218.2 200.9L219.1 200.4L219.9 199.9L220.5 199.5L220.9 199.1L221.2 198.7L221.2 198.5Z"/><path class="iso-shade" data-shade="1" d="M206.9 209.4L205 210.1L203.1 210.8L201.1 211.4L199.2 212.1L197.3 212.6L196.2 209.4L198.1 208.8L200 208.2L202 207.5L203.9 206.9L205.8 206.2Z"/><path class="iso-shade" data-shade="2" d="M197.3 212.6L195.5 213.2L193.7 213.7L192 214.1L190.5 214.5L189 214.8L187.7 215.1L186.5 215.3L185.4 215.5L184.6 215.5L183.9 215.5L183.4 215.5L183 215.3L182.9 215.2L181.8 211.9L181.9 212.1L182.3 212.2L182.8 212.3L183.5 212.3L184.3 212.2L185.4 212.1L186.6 211.9L187.9 211.6L189.3 211.3L190.9 210.9L192.6 210.4L194.4 209.9L196.2 209.4ZM205.6 196.8L205.6 196.9L205.6 197L205.5 197.1L205.4 197.2L205.2 197.4L204.9 197.5L204.6 197.7L201.5 195.3L201.7 195.2L201.8 195.1L201.9 195.1L202 195L202.1 194.9L202.1 194.9L202 194.8Z"/><path class="iso-shade" data-shade="3" d="M204.6 197.7L204.3 197.9L203.9 198L203.4 198.3L203 198.5L202.5 198.7L201.9 198.9L201.3 199.1L200.8 199.3L199.2 196.3L199.5 196.2L199.9 196L200.2 195.9L200.5 195.8L200.8 195.7L201 195.5L201.3 195.4L201.5 195.3Z"/><path class="iso-top" d="M220.2 198.1L220.8 198.2L221.1 198.3L221.2 198.5L221.2 198.7L220.9 199.1L220.5 199.5L219.9 199.9L219.1 200.4L218.2 200.9L217 201.5L215.8 202.1L214.4 202.7L212.8 203.4L211.2 204.1L209.5 204.8L207.7 205.5L205.8 206.2L203.9 206.9L202 207.5L200 208.2L198.1 208.8L196.2 209.4L194.4 209.9L192.6 210.4L190.9 210.9L189.3 211.3L187.9 211.6L186.6 211.9L185.4 212.1L184.3 212.2L183.5 212.3L182.8 212.3L182.3 212.2L181.9 212.1L181.8 211.9L181.8 211.6L182.1 211.3L193.3 200.9L193.2 201L193.2 201.1L193.2 201.2L193.3 201.2L193.5 201.3L193.7 201.3L194 201.2L194.3 201.2L194.7 201.1L195.1 201L195.6 200.9L196.1 200.8L196.6 200.7L197.2 200.5L197.7 200.3L198.3 200.2L198.9 200L199.5 199.8L200.2 199.5L200.8 199.3L201.3 199.1L201.9 198.9L202.5 198.7L203 198.5L203.4 198.3L203.9 198L204.3 197.9L204.6 197.7L204.9 197.5L205.2 197.4L205.4 197.2L205.5 197.1L205.6 197L205.6 196.9L205.6 196.8L205.5 196.8L205.3 196.8ZM200.8 199.3L200.2 199.5L199.5 199.8L198.9 200L198.3 200.2L197.7 200.3L197.2 200.5L196.6 200.7L196.1 200.8L195.6 200.9L195.1 201L194.7 201.1L194.3 201.2L194 201.2L193.7 201.3L193.5 201.3L193.3 201.2L193.2 201.2L193.2 201.1L193.2 201L194.8 197.3L194.8 197.4L194.8 197.4L194.8 197.4L194.9 197.4L195.1 197.4L195.2 197.4L195.4 197.4L195.6 197.4L195.9 197.3L196.2 197.2L196.4 197.2L196.8 197.1L197.1 197L197.4 196.9L197.8 196.8L198.1 196.7L198.5 196.6L198.8 196.4L199.2 196.3ZM199.7 195.2L200.1 195.1L200.4 195.1L200.7 195L200.9 194.9L201.2 194.9L201.4 194.8L201.6 194.8L201.7 194.8L201.9 194.8L202 194.8L202 194.8L202.1 194.9L202.1 194.9L202 195L201.9 195.1L201.8 195.1L201.7 195.2L201.5 195.3L201.3 195.4L201 195.5L200.8 195.7L200.5 195.8L200.2 195.9L199.9 196L199.5 196.2L199.2 196.3L198.8 196.4L198.5 196.6L198.1 196.7L197.8 196.8L197.4 196.9L197.1 197L196.8 197.1L196.4 197.2L196.2 197.2L195.9 197.3L195.6 197.4L195.4 197.4L195.2 197.4L195.1 197.4L194.9 197.4L194.8 197.4L194.8 197.4L194.8 197.4L194.8 197.3L194.8 197.2L194.9 197.2L195 197.1L195.1 197L195.3 196.9L195.5 196.8L195.8 196.7L196 196.6L196.3 196.4L196.6 196.3L196.9 196.2L197.3 196.1L197.6 195.9L198 195.8L198.3 195.7L198.7 195.6L199 195.4L199.4 195.3L199.7 195.2L198.4 196.1L198.4 196.1L198.4 196.1L198.4 196.1L198.4 196.1L198.4 196.1L198.4 196.1L198.4 196.1L198.4 196.1L198.4 196.1L198.4 196.1L198.4 196.1L198.4 196.1L198.4 196.1L198.4 196.1L198.4 196.1L198.4 196.1L198.4 196.1L198.4 196.1L198.4 196.1L198.4 196.1L198.4 196.1L198.4 196.1L198.4 196.1L198.4 196.1L198.4 196.1L198.4 196.1L198.4 196.1L198.4 196.1L198.4 196.1L198.4 196.1L198.4 196.1L198.4 196.1L198.4 196.1L198.4 196.1L198.4 196.1L198.4 196.1L198.4 196.1L198.4 196.1L198.4 196.1L198.4 196.1L198.4 196.1L198.4 196.1L198.4 196.1L198.4 196.1L198.4 196.1L198.4 196.1L198.4 196.1L198.4 196.1L198.4 196.1L198.4 196.1L198.4 196.1L198.4 196.1L198.4 196.1L198.4 196.1L198.4 196.1L198.4 196.1L198.4 196.1L198.4 196.1L198.4 196.1L198.4 196.1L198.4 196.1L198.4 196.1L198.4 196.1L198.4 196.1Z"/><path class="iso-line iso-crease" data-tone="faint" d="M221.2 198.4L221.2 198.6L221.1 198.8L220.9 199.1L220.6 199.3L220.2 199.7L219.8 200L219.2 200.3L218.5 200.7L217.7 201.1L216.9 201.6L216 202L215 202.5L213.9 202.9L212.8 203.4L211.6 203.9L210.4 204.4L209.1 204.9L207.8 205.4L206.4 205.9L205.1 206.4L203.7 206.9L202.3 207.4L200.9 207.9L199.5 208.4L198.1 208.8L196.7 209.2L195.3 209.6L194 210L192.7 210.4L191.5 210.7L190.3 211L189.2 211.3L188.1 211.5L187.1 211.7L186.2 211.9L185.3 212.1L184.6 212.2L183.9 212.2L183.3 212.3L182.8 212.3L182.4 212.2L182.1 212.2L181.9 212.1L181.8 211.9M205.5 196.8L205.6 197L205.3 197.3L204.8 197.6L203.9 198L202.9 198.5L201.7 199L200.3 199.5L198.9 200L197.6 200.4L196.3 200.7L195.2 201L194.3 201.2L193.6 201.3L193.3 201.2L193.2 201.1M202 194.8L202 195L201.4 195.4L200.5 195.8L199.2 196.3L197.9 196.8L196.6 197.1L195.6 197.4L194.9 197.4L194.8 197.3"/><path class="iso-line iso-edge" data-tone="mid" d="M182.9 215.2L182.9 215.1L182.8 214.9L182.8 214.8L182.7 214.7L182.7 214.5L182.6 214.4L182.6 214.3L182.6 214.2L182.5 214L182.5 213.9L182.4 213.8L182.4 213.6L182.3 213.5L182.3 213.4L182.3 213.3L182.2 213.1L182.2 213L182.1 212.9L182.1 212.7L182 212.6L182 212.5L181.9 212.4L181.9 212.2L181.9 212.1L181.8 211.9L182.4 211L182.6 210.8L182.8 210.6L183.1 210.4L183.3 210.2L183.5 210L183.7 209.7L184 209.5L184.2 209.3L184.4 209.1L184.7 208.9L184.9 208.7L185.1 208.5L185.4 208.2L185.6 208L185.8 207.8L186.1 207.6L186.3 207.4L186.5 207.2L186.8 207L187 206.8L187.2 206.5L187.5 206.3L187.7 206.1L187.9 205.9L188.1 205.7L188.4 205.5L188.6 205.3L188.8 205L189.1 204.8L189.3 204.6L189.5 204.4L189.8 204.2L190 204L190.2 203.8L190.5 203.5L190.7 203.3L190.9 203.1L191.2 202.9L191.4 202.7L191.6 202.5L191.8 202.3L192.1 202.1L192.3 201.8L192.5 201.6L192.8 201.4L193 201.2L193.2 201L193.2 201L193.3 200.8L193.4 200.6L193.4 200.5L193.5 200.3L193.6 200.1L193.7 200L193.7 199.8L193.8 199.6L193.9 199.5L193.9 199.3L194 199.1L194.1 199L194.1 198.8L194.2 198.6L194.3 198.5L194.3 198.3L194.4 198.1L194.5 198L194.6 197.8L194.6 197.6L194.7 197.5L194.8 197.3M222.3 201.7L222.3 201.6L222.2 201.5L222.2 201.3L222.2 201.2L222.1 201.1L222.1 200.9L222 200.8L222 200.7L221.9 200.6L221.9 200.4L221.9 200.3L221.8 200.2L221.8 200L221.7 199.9L221.7 199.8L221.6 199.7L221.6 199.5L221.5 199.4L221.5 199.3L221.5 199.1L221.4 199L221.4 198.9L221.3 198.8L221.3 198.6L221.2 198.4L220.2 198.1L219.9 198.1L219.6 198L219.3 198L219 198L218.7 197.9L218.3 197.9L218 197.9L217.7 197.9L217.4 197.8L217.1 197.8L216.8 197.8L216.5 197.8L216.1 197.7L215.8 197.7L215.5 197.7L215.2 197.6L214.9 197.6L214.6 197.6L214.3 197.6L213.9 197.5L213.6 197.5L213.3 197.5L213 197.5L212.7 197.4L212.4 197.4L212.1 197.4L211.8 197.3L211.4 197.3L211.1 197.3L210.8 197.3L210.5 197.2L210.2 197.2L209.9 197.2L209.6 197.2L209.2 197.1L208.9 197.1L208.6 197.1L208.3 197L208 197L207.7 197L207.4 197L207 196.9L206.7 196.9L206.4 196.9L206.1 196.9L205.8 196.8L205.5 196.8L205.5 196.8L205.3 196.7L205.1 196.6L205 196.5L204.8 196.4L204.7 196.3L204.5 196.3L204.4 196.2L204.2 196.1L204.1 196L203.9 195.9L203.7 195.8L203.6 195.7L203.4 195.6L203.3 195.5L203.1 195.5L203 195.4L202.8 195.3L202.6 195.2L202.5 195.1L202.3 195L202.2 194.9L202 194.8M194.8 197.3L194.8 197.3L194.8 197.2L194.9 197.2L194.9 197.1L195 197.1L195.1 197L195.2 197L195.4 196.9L195.5 196.8L195.6 196.7L195.8 196.7L196 196.6L196.2 196.5L196.4 196.4L196.6 196.3L196.8 196.3L197 196.2L197.2 196.1L197.4 196L197.7 195.9L197.9 195.8L198.1 195.7L198.4 195.7L198.6 195.6L198.9 195.5L199.1 195.4L199.3 195.4L199.6 195.3L199.8 195.2L200 195.2L200.2 195.1L200.4 195.1L200.6 195L200.8 195L201 194.9L201.1 194.9L201.3 194.9L201.4 194.8L201.6 194.8L201.7 194.8L201.8 194.8L201.9 194.8L201.9 194.8L202 194.8L202 194.8M222.3 201.7L222.3 201.9L222.3 202.1L222.1 202.3L221.9 202.5L221.5 202.8L221.1 203.1L220.6 203.4L220.1 203.7L219.4 204.1L218.7 204.5L217.9 204.9L217.1 205.3L216.2 205.7L215.2 206.1L214.2 206.6L213.1 207L212 207.5L210.9 207.9L209.7 208.4L208.5 208.9L207.2 209.3L206 209.8L204.7 210.2L203.4 210.7L202.1 211.1L200.8 211.6L199.5 212L198.3 212.4L197 212.7L195.8 213.1L194.6 213.4L193.4 213.8L192.3 214.1L191.2 214.3L190.2 214.6L189.2 214.8L188.3 215L187.5 215.2L186.7 215.3L185.9 215.4L185.3 215.5L184.7 215.5L184.2 215.6L183.8 215.5L183.4 215.5L183.2 215.4L183 215.3L182.9 215.2"/></g><g class="iso-solid"><path class="iso-fill" d="M166.9 115.3L166.9 115.3L167 115.2L167 115.2L167.1 115.1L167.3 115L167.5 114.9L167.7 114.8L167.9 114.7L168.1 114.6L168.4 114.5L168.7 114.3L169 114.2L169.3 114.1L169.6 114L170 113.9L170.3 113.7L170.6 113.6L171 113.5L171.3 113.4L171.6 113.3L171.9 113.2L172.2 113.2L172.5 113.1L172.8 113L173 113L173.2 112.9L173.4 112.9L173.6 112.9L173.7 112.9L173.8 112.9L173.8 112.9L173.9 113L202.4 196.4L202.4 196.4L202.3 196.5L202.2 196.6L202.1 196.6L202 196.7L201.8 196.8L201.6 196.9L201.4 197L201.2 197.1L200.9 197.3L200.6 197.4L200.3 197.5L200 197.6L199.7 197.7L199.3 197.9L199 198L198.6 198.1L198.3 198.2L198 198.3L197.6 198.4L197.3 198.5L197 198.6L196.8 198.6L196.5 198.7L196.3 198.7L196.1 198.8L195.9 198.8L195.7 198.8L195.6 198.8L195.5 198.8L195.5 198.8L195.4 198.7Z"/><path class="iso-shade" data-shade="0" d="M202.4 196.4L202.4 196.4L202.3 196.5L202.2 196.6L202.1 196.6L202 196.7L201.8 196.8L201.6 196.9L201.4 197L201.2 197.1L200.9 197.3L200.6 197.4L200.3 197.5L200 197.6L199.7 197.7L171.1 114.3L171.5 114.2L171.8 114.1L172.1 114L172.4 113.8L172.6 113.7L172.9 113.6L173.1 113.5L173.3 113.4L173.5 113.3L173.6 113.2L173.7 113.1L173.8 113.1L173.8 113L173.9 113Z"/><path class="iso-shade" data-shade="1" d="M199.7 197.7L199.3 197.9L199 198L198.6 198.1L198.3 198.2L198 198.3L169.5 114.9L169.8 114.8L170.1 114.7L170.5 114.6L170.8 114.4L171.1 114.3Z"/><path class="iso-shade" data-shade="2" d="M198 198.3L197.6 198.4L197.3 198.5L197 198.6L196.8 198.6L196.5 198.7L196.3 198.7L196.1 198.8L195.9 198.8L195.7 198.8L195.6 198.8L195.5 198.8L195.5 198.8L195.4 198.7L166.9 115.3L166.9 115.4L167 115.4L167.1 115.4L167.2 115.4L167.4 115.4L167.5 115.4L167.8 115.3L168 115.3L168.2 115.2L168.5 115.1L168.8 115.1L169.1 115L169.5 114.9Z"/><path class="iso-top" d="M171.6 113.3L171.9 113.2L172.2 113.2L172.5 113.1L172.8 113L173 113L173.2 112.9L173.4 112.9L173.6 112.9L173.7 112.9L173.8 112.9L173.8 112.9L173.9 113L173.8 113L173.8 113.1L173.7 113.1L173.6 113.2L173.5 113.3L173.3 113.4L173.1 113.5L172.9 113.6L172.6 113.7L172.4 113.8L172.1 114L171.8 114.1L171.5 114.2L171.1 114.3L170.8 114.4L170.5 114.6L170.1 114.7L169.8 114.8L169.5 114.9L169.1 115L168.8 115.1L168.5 115.1L168.2 115.2L168 115.3L167.8 115.3L167.5 115.4L167.4 115.4L167.2 115.4L167.1 115.4L167 115.4L166.9 115.4L166.9 115.3L166.9 115.3L167 115.2L167 115.2L167.1 115.1L167.3 115L167.5 114.9L167.7 114.8L167.9 114.7L168.1 114.6L168.4 114.5L168.7 114.3L169 114.2L169.3 114.1L169.6 114L170 113.9L170.3 113.7L170.6 113.6L171 113.5L171.3 113.4L171.6 113.3L170.4 114.2L170.4 114.2L170.4 114.2L170.4 114.2L170.4 114.2L170.4 114.2L170.4 114.2L170.4 114.2L170.4 114.2L170.4 114.2L170.4 114.2L170.4 114.2L170.4 114.2L170.4 114.2L170.4 114.2L170.4 114.2L170.4 114.2L170.4 114.2L170.4 114.2L170.4 114.2L170.4 114.2L170.4 114.2L170.4 114.2L170.4 114.2L170.4 114.2L170.4 114.2L170.4 114.2L170.4 114.2L170.4 114.2L170.4 114.2L170.4 114.2L170.4 114.2L170.4 114.2L170.4 114.2L170.4 114.2L170.4 114.2L170.4 114.2L170.4 114.2L170.4 114.2L170.4 114.2L170.4 114.2L170.4 114.2L170.4 114.2L170.4 114.2L170.4 114.2L170.4 114.2L170.4 114.2L170.4 114.2L170.4 114.2L170.4 114.2L170.4 114.2L170.4 114.2L170.4 114.2L170.4 114.2L170.4 114.2L170.4 114.2L170.4 114.2L170.4 114.2L170.4 114.2L170.4 114.2L170.4 114.2L170.4 114.2L170.4 114.2L170.4 114.2L170.4 114.2Z"/><path class="iso-line iso-crease" data-tone="faint" d="M173.9 113L173.6 113.2L172.9 113.6L171.8 114.1L170.5 114.5L169.2 115L168 115.3L167.2 115.4L166.9 115.3"/><path class="iso-line iso-edge" data-tone="mid" d="M166.9 115.3L166.9 115.3L167 115.2L167 115.2L167.1 115.1L167.3 115L167.5 114.9L167.7 114.8L167.9 114.7L168.1 114.6L168.4 114.5L168.7 114.3L169 114.2L169.3 114.1L169.6 114L170 113.9L170.3 113.7L170.6 113.6L171 113.5L171.3 113.4L171.6 113.3L171.9 113.2L172.2 113.2L172.5 113.1L172.8 113L173 113L173.2 112.9L173.4 112.9L173.6 112.9L173.7 112.9L173.8 112.9L173.8 112.9L173.9 113L202.4 196.4L202.4 196.4L202.3 196.5L202.2 196.6L202.1 196.6L202 196.7L201.8 196.8L201.6 196.9L201.4 197L201.2 197.1L200.9 197.3L200.6 197.4L200.3 197.5L200 197.6L199.7 197.7L199.3 197.9L199 198L198.6 198.1L198.3 198.2L198 198.3L197.6 198.4L197.3 198.5L197 198.6L196.8 198.6L196.5 198.7L196.3 198.7L196.1 198.8L195.9 198.8L195.7 198.8L195.6 198.8L195.5 198.8L195.5 198.8L195.4 198.7Z"/></g><g class="iso-solid"><path class="iso-fill" d="M161.7 126.8L161.7 126.7L161.8 126.5L162.1 126.3L162.5 126L162.9 125.7L163.5 125.4L164.2 125L164.9 124.7L165.7 124.3L166.6 123.9L167.6 123.5L168.6 123.1L169.7 122.7L170.8 122.3L171.9 121.9L173.1 121.5L174.2 121.1L175.4 120.7L176.5 120.4L177.6 120L178.6 119.8L179.6 119.5L180.6 119.3L181.4 119.1L182.2 118.9L182.9 118.8L183.5 118.7L184.1 118.7L184.5 118.6L184.8 118.7L185 118.8L185 118.9L186.3 122.5L186.3 122.7L186.1 122.9L185.9 123.1L185.5 123.3L185 123.6L184.5 124L183.8 124.3L183.1 124.7L182.2 125L181.3 125.4L180.3 125.8L179.3 126.2L178.3 126.7L177.1 127.1L176 127.5L174.9 127.9L173.7 128.3L172.6 128.6L171.5 129L170.4 129.3L169.3 129.6L168.3 129.8L167.4 130.1L166.5 130.3L165.7 130.4L165 130.6L164.4 130.6L163.9 130.7L163.5 130.7L163.2 130.6L163 130.6L162.9 130.5Z"/><path class="iso-shade" data-shade="0" d="M186.3 122.5L186.3 122.7L186.1 122.9L185.9 123.1L185.5 123.3L185 123.6L184.5 124L183.8 124.3L183.1 124.7L182.2 125L181.3 125.4L180.3 125.8L179.3 126.2L178.3 126.7L177.1 127.1L175.9 123.4L177 123L178.1 122.6L179.1 122.2L180.1 121.8L181 121.4L181.8 121L182.6 120.7L183.2 120.3L183.8 120L184.3 119.7L184.6 119.5L184.9 119.2L185 119L185 118.9Z"/><path class="iso-shade" data-shade="1" d="M177.1 127.1L176 127.5L174.9 127.9L173.7 128.3L172.6 128.6L171.5 129L170.2 125.3L171.3 125L172.5 124.6L173.6 124.2L174.8 123.9L175.9 123.4Z"/><path class="iso-shade" data-shade="2" d="M171.5 129L170.4 129.3L169.3 129.6L168.3 129.8L167.4 130.1L166.5 130.3L165.7 130.4L165 130.6L164.4 130.6L163.9 130.7L163.5 130.7L163.2 130.6L163 130.6L162.9 130.5L161.7 126.8L161.8 126.9L162 127L162.3 127.1L162.7 127.1L163.2 127L163.8 126.9L164.5 126.8L165.3 126.6L166.2 126.5L167.1 126.2L168.1 126L169.1 125.7L170.2 125.3Z"/><path class="iso-top" d="M177.6 120L178.6 119.8L179.6 119.5L180.6 119.3L181.4 119.1L182.2 118.9L182.9 118.8L183.5 118.7L184.1 118.7L184.5 118.6L184.8 118.7L185 118.8L185 118.9L185 119L184.9 119.2L184.6 119.5L184.3 119.7L183.8 120L183.2 120.3L182.6 120.7L181.8 121L181 121.4L180.1 121.8L179.1 122.2L178.1 122.6L177 123L175.9 123.4L174.8 123.9L173.6 124.2L172.5 124.6L171.3 125L170.2 125.3L169.1 125.7L168.1 126L167.1 126.2L166.2 126.5L165.3 126.6L164.5 126.8L163.8 126.9L163.2 127L162.7 127.1L162.3 127.1L162 127L161.8 126.9L161.7 126.8L161.7 126.7L161.8 126.5L162.1 126.3L162.5 126L162.9 125.7L163.5 125.4L164.2 125L164.9 124.7L165.7 124.3L166.6 123.9L167.6 123.5L168.6 123.1L169.7 122.7L170.8 122.3L171.9 121.9L173.1 121.5L174.2 121.1L175.4 120.7L176.5 120.4L177.6 120L173.4 122.9L173.4 122.9L173.4 122.9L173.4 122.9L173.4 122.9L173.4 122.9L173.4 122.9L173.4 122.9L173.4 122.9L173.4 122.9L173.4 122.9L173.4 122.9L173.4 122.9L173.4 122.9L173.4 122.9L173.4 122.9L173.4 122.9L173.4 122.9L173.4 122.9L173.4 122.9L173.4 122.9L173.4 122.9L173.4 122.9L173.4 122.9L173.4 122.9L173.4 122.9L173.4 122.9L173.4 122.9L173.4 122.9L173.4 122.9L173.4 122.9L173.4 122.9L173.4 122.9L173.4 122.9L173.4 122.9L173.4 122.9L173.4 122.9L173.4 122.9L173.4 122.9L173.4 122.9L173.4 122.9L173.4 122.9L173.4 122.9L173.4 122.9L173.4 122.9L173.4 122.9L173.4 122.9L173.4 122.9L173.4 122.9L173.4 122.9L173.4 122.9L173.4 122.9L173.4 122.9L173.4 122.9L173.4 122.9L173.4 122.9L173.4 122.9L173.4 122.9L173.4 122.9L173.4 122.9L173.4 122.9L173.4 122.9L173.4 122.9L173.4 122.9L173.4 122.9Z"/><path class="iso-line iso-crease" data-tone="faint" d="M185 118.9L185 119.1L184.8 119.3L184.4 119.6L183.9 119.9L183.2 120.3L182.4 120.7L181.4 121.2L180.4 121.7L179.2 122.2L177.9 122.7L176.6 123.2L175.2 123.7L173.8 124.2L172.4 124.7L171 125.1L169.6 125.5L168.3 125.9L167.1 126.2L166 126.5L164.9 126.7L164 126.9L163.2 127L162.6 127.1L162.1 127.1L161.8 127L161.7 126.8"/><path class="iso-line iso-edge" data-tone="mid" d="M161.7 126.8L161.7 126.7L161.8 126.5L162.1 126.3L162.5 126L162.9 125.7L163.5 125.4L164.2 125L164.9 124.7L165.7 124.3L166.6 123.9L167.6 123.5L168.6 123.1L169.7 122.7L170.8 122.3L171.9 121.9L173.1 121.5L174.2 121.1L175.4 120.7L176.5 120.4L177.6 120L178.6 119.8L179.6 119.5L180.6 119.3L181.4 119.1L182.2 118.9L182.9 118.8L183.5 118.7L184.1 118.7L184.5 118.6L184.8 118.7L185 118.8L185 118.9L186.3 122.5L186.3 122.7L186.1 122.9L185.9 123.1L185.5 123.3L185 123.6L184.5 124L183.8 124.3L183.1 124.7L182.2 125L181.3 125.4L180.3 125.8L179.3 126.2L178.3 126.7L177.1 127.1L176 127.5L174.9 127.9L173.7 128.3L172.6 128.6L171.5 129L170.4 129.3L169.3 129.6L168.3 129.8L167.4 130.1L166.5 130.3L165.7 130.4L165 130.6L164.4 130.6L163.9 130.7L163.5 130.7L163.2 130.6L163 130.6L162.9 130.5Z"/></g></g><g id="valve-ex"><g class="iso-solid"><path class="iso-fill" d="M233.8 205.8L233.8 205.7L233.9 205.6L233.9 205.4L234 205.3L234 205.2L234.1 205.1L234.1 204.9L234.2 204.8L234.2 204.7L234.2 204.6L234.3 204.5L234.3 204.3L234.4 204.2L234.4 204.1L234.5 204L234.5 203.9L234.5 203.7L234.6 203.6L234.6 203.5L234.7 203.4L234.7 203.3L234.8 203.1L234.8 203L234.9 202.9L235.1 202.3L244.5 200.2L244.7 200.2L244.9 200.3L245.1 200.3L245.2 200.3L245.4 200.3L245.6 200.3L245.8 200.3L246 200.4L246.2 200.4L246.4 200.4L246.6 200.4L246.8 200.4L246.9 200.4L247.1 200.5L247.3 200.5L247.5 200.5L247.7 200.5L247.9 200.5L248.1 200.5L248.3 200.6L248.4 200.6L248.6 200.6L248.8 200.6L249 200.6L249.2 200.6L249.4 200.7L249.6 200.7L249.8 200.7L250 200.7L250.1 200.7L250.3 200.7L250.5 200.8L250.7 200.8L250.9 200.8L251.1 200.8L251.3 200.8L251.5 200.8L251.6 200.9L251.8 200.9L252 200.9L252.2 200.9L252.4 200.9L252.6 200.9L252.8 201L253 201L253.2 201L253 201L251.1 201.2L251.2 201.2L251.4 201.1L251.5 201L251.7 200.9L251.8 200.9L252 200.8L252.1 200.7L252.3 200.7L252.4 200.6L252.5 200.5L252.7 200.5L252.8 200.4L253 200.3L253.1 200.2L253.3 200.2L253.4 200.1L253.6 200L253.7 200L253.9 199.9L254 199.8L254.2 199.8L254.3 199.7L254.3 199.7L254.4 199.6L254.5 199.6L254.7 199.6L254.8 199.5L255 199.5L255.1 199.5L255.3 199.5L255.5 199.5L255.7 199.5L255.9 199.6L256.1 199.6L256.3 199.6L256.5 199.7L256.8 199.7L257 199.8L257.2 199.8L257.5 199.9L257.7 200L257.9 200.1L258.2 200.1L258.4 200.2L258.6 200.3L258.8 200.4L259.1 200.5L259.3 200.6L259.5 200.7L259.7 200.8L259.9 201L260 201.1L260.2 201.2L260.4 201.3L260.5 201.4L260.6 201.5L260.8 201.6L260.9 201.8L261 201.9L261.1 202L261.1 202.1L261.2 202.2L261.2 202.2L261.2 202.3L261.3 202.5L261.4 202.6L261.4 202.8L261.5 202.9L261.6 203.1L261.6 203.2L261.7 203.4L261.8 203.5L261.8 203.7L261.9 203.8L262 204L262 204.1L262.1 204.2L262.2 204.4L262.2 204.5L262.3 204.7L262.4 204.8L262.4 205L262.5 205.1L262.6 205.3L262.6 205.4L261.3 204L261.2 203.9L261.4 204L261.5 204.1L261.7 204.3L261.8 204.4L262 204.5L262.1 204.6L262.3 204.7L262.5 204.8L262.6 204.9L262.8 205L262.9 205.1L263.1 205.2L263.2 205.3L263.4 205.4L263.5 205.5L263.7 205.7L263.8 205.8L264 205.9L264.2 206L264.3 206.1L264.5 206.2L264.6 206.3L264.8 206.4L264.9 206.5L265.1 206.6L265.2 206.7L265.4 206.8L265.6 207L265.7 207.1L265.9 207.2L266 207.3L266.2 207.4L266.3 207.5L266.5 207.6L266.6 207.7L266.8 207.8L266.9 207.9L267.1 208L267.3 208.1L267.4 208.2L267.6 208.4L267.7 208.5L267.9 208.6L268 208.7L268.2 208.8L268.3 208.9L274.2 216.5L274 217.1L274 217.3L273.9 217.4L273.9 217.5L273.8 217.6L273.8 217.7L273.7 217.9L273.7 218L273.7 218.1L273.6 218.2L273.6 218.3L273.5 218.5L273.5 218.6L273.4 218.7L273.4 218.8L273.4 219L273.3 219.1L273.3 219.2L273.2 219.3L273.2 219.4L273.1 219.6L273.1 219.7L273 219.8L273 219.9L273 220L273 220L272.8 220.5L272.5 220.8L272.1 221.2L271.7 221.5L271.1 221.8L270.5 222.1L269.9 222.3L269.1 222.4L268.3 222.5L267.4 222.6L266.5 222.7L265.5 222.7L264.5 222.6L263.4 222.5L262.2 222.4L261.1 222.3L259.9 222.1L258.6 221.8L257.4 221.5L256.1 221.2L254.8 220.9L253.5 220.5L252.2 220L250.9 219.6L249.7 219.1L248.4 218.6L247.2 218.1L246 217.5L244.8 216.9L243.6 216.4L242.5 215.8L241.5 215.1L240.5 214.5L239.5 213.9L238.6 213.2L237.8 212.6L237.1 212L236.4 211.3L235.8 210.7L235.2 210.1L234.7 209.5L234.4 208.9L234.1 208.3L233.8 207.8L233.7 207.2L233.6 206.7L233.7 206.2L233.8 205.8Z"/><path class="iso-shade" data-shade="0" d="M273 219.7L272.8 220.4L272.4 220.9L271.8 221.5L271 221.9L270 222.2L268.9 222.5L267.6 222.6L266.2 222.7L264.7 222.6L263.1 222.5L261.3 222.3L259.5 222L257.7 221.6L255.8 221.1L253.8 220.6L251.9 219.9L253 216.9L255 217.5L256.9 218L258.8 218.5L260.7 218.9L262.5 219.2L264.2 219.4L265.8 219.6L267.4 219.6L268.8 219.5L270 219.4L271.1 219.1L272.1 218.8L272.9 218.4L273.5 217.9L273.9 217.3L274.2 216.6ZM262.7 205.5L262.8 205.7L262.8 206L262.8 206.2L262.7 206.4L262.6 206.6L262.4 206.7L262.1 206.9L261.8 207L261.5 207.1L261.1 207.1L260.7 207.1L260.2 207.1L259.7 207.1L259.1 207L259.1 203.1L259.4 203.1L259.7 203.1L260 203.1L260.2 203.1L260.5 203.1L260.7 203L260.9 203L261 202.9L261.1 202.8L261.2 202.7L261.2 202.6L261.2 202.5L261.2 202.3L261.2 202.2Z"/><path class="iso-shade" data-shade="1" d="M251.9 219.9L250 219.2L248.1 218.5L246.3 217.7L247.4 214.6L249.2 215.4L251.1 216.2L253 216.9ZM270.6 210.7L271.7 211.6L272.5 212.5L273.2 213.4L273.7 214.3L274.1 215.1L274.2 215.9L274.2 216.6L273.9 217.3L273.5 217.9L272.9 218.4L272.1 218.8L271.1 219.1L270 219.4L268.8 219.5L267.4 219.6L260.7 207.1L261.1 207.1L261.5 207.1L261.8 207L262.1 206.9L262.4 206.7L262.6 206.6L262.7 206.4L262.8 206.2L262.8 206L262.8 205.7L262.7 205.5L262.5 205.2L262.3 204.9L262 204.6L261.7 204.3ZM259.1 207L258.5 206.9L258 206.8L257.4 206.6L258 202.8L258.4 202.9L258.7 203L259.1 203.1Z"/><path class="iso-shade" data-shade="2" d="M246.3 217.7L244.5 216.8L242.8 215.9L241.2 215L242.3 211.9L243.9 212.8L245.6 213.7L247.4 214.6ZM268.1 208.7L269.4 209.7L270.6 210.7L261.7 204.3L261.3 204L260.9 203.7ZM267.4 219.6L265.8 219.6L264.2 219.4L262.5 219.2L260.7 218.9L258.8 218.5L256.9 218L255 217.5L256.7 206.5L257.4 206.6L258 206.8L258.5 206.9L259.1 207L259.7 207.1L260.2 207.1L260.7 207.1ZM257.4 206.6L256.7 206.5L256.1 206.3L255.5 206L254.9 205.8L256.6 202.4L257 202.5L257.3 202.6L257.7 202.7L258 202.8Z"/><path class="iso-shade" data-shade="3" d="M241.2 215L239.8 214L238.4 213.1L237.2 212.1L238.3 209L239.5 210L240.9 211L242.3 211.9ZM255 217.5L253 216.9L251.1 216.2L249.2 215.4L247.4 214.6L245.6 213.7L243.9 212.8L253.3 205L253.8 205.3L254.4 205.5L254.9 205.8L255.5 206L256.1 206.3L256.7 206.5ZM254.9 205.8L254.4 205.5L253.8 205.3L253.3 205L255.6 201.9L255.9 202L256.3 202.2L256.6 202.4ZM258.9 200.5L259.2 200.6L259.6 200.8L259.8 200.9L260.1 201.1L260.4 201.3L260.6 201.5L260.8 201.7L260.9 201.8L261.1 202L261.2 202.2L261.2 202.3L261.2 202.5L261.2 202.6L261.2 202.7L261.1 202.8L261 202.9L260.9 203L260.7 203L260.5 203.1L260.2 203.1L260 203.1L259.7 203.1L259.4 203.1L259.1 203.1L258.7 203L258.4 202.9L258 202.8L257.7 202.7L257.3 202.6L257 202.5L256.6 202.4L256.3 202.2L255.9 202L255.6 201.9L255.3 201.7L255.1 201.5L254.8 201.4L254.6 201.2L254.4 201L254.3 200.8L254.1 200.7L254 200.5L254 200.3L253.9 200.2L253.9 200.1L254 199.9L254.1 199.8L254.2 199.7L254.3 199.7L254.5 199.6L254.7 199.6L255 199.5L255.2 199.5L255.5 199.5L255.8 199.5L256.1 199.6L256.5 199.6L256.8 199.7L257.2 199.8L257.5 199.9L257.9 200L258.2 200.2L258.6 200.3L258.9 200.5L257.6 201.3L257.6 201.3L257.6 201.3L257.6 201.3L257.6 201.3L257.6 201.3L257.6 201.3L257.6 201.3L257.6 201.3L257.6 201.3L257.6 201.3L257.6 201.3L257.6 201.3L257.6 201.3L257.6 201.3L257.6 201.3L257.6 201.3L257.6 201.3L257.6 201.3L257.6 201.3L257.6 201.3L257.6 201.3L257.6 201.3L257.6 201.3L257.6 201.3L257.6 201.3L257.6 201.3L257.6 201.3L257.6 201.3L257.6 201.3L257.6 201.3L257.6 201.3L257.6 201.3L257.6 201.3L257.6 201.3L257.6 201.3L257.6 201.3L257.6 201.3L257.6 201.3L257.6 201.3L257.6 201.3L257.6 201.3L257.6 201.3L257.6 201.3L257.6 201.3L257.6 201.3L257.6 201.3L257.6 201.3L257.6 201.3L257.6 201.3L257.6 201.3L257.6 201.3L257.6 201.3L257.6 201.3L257.6 201.3L257.6 201.3L257.6 201.3L257.6 201.3L257.6 201.3L257.6 201.3L257.6 201.3L257.6 201.3L257.6 201.3L257.6 201.3L257.6 201.3Z"/><path class="iso-top" d="M237.2 212.1L236.2 211.2L235.3 210.2L234.6 209.3L234.1 208.5L233.8 207.6L233.7 206.8L233.7 206.1L234.8 203.1L234.8 203.8L234.9 204.6L235.2 205.4L235.8 206.3L236.4 207.2L237.3 208.1L238.3 209ZM243.9 212.8L242.3 211.9L240.9 211L239.5 210L238.3 209L237.3 208.1L236.4 207.2L235.8 206.3L235.2 205.4L234.9 204.6L234.8 203.8L234.8 203.1L235.1 202.4L235.5 201.8L236.1 201.3L236.9 200.9L237.8 200.6L239 200.3L240.2 200.2L241.6 200.1L243.2 200.1L244.8 200.2L253.5 201L253 201L252.6 201L252.1 201L251.7 201.1L251.4 201.1L251.1 201.2L250.8 201.4L250.6 201.5L250.5 201.7L250.4 201.9L250.4 202.1L250.4 202.4L250.5 202.6L250.7 202.9L250.9 203.2L251.2 203.5L251.5 203.8L251.9 204.1L252.3 204.4L252.8 204.7L253.3 205ZM253.3 205L252.8 204.7L252.3 204.4L251.9 204.1L251.5 203.8L251.2 203.5L250.9 203.2L250.7 202.9L250.5 202.6L250.4 202.4L250.4 202.1L250.4 201.9L250.5 201.7L250.6 201.5L250.8 201.4L251.1 201.2L254.3 199.7L254.2 199.7L254.1 199.8L254 199.9L253.9 200.1L253.9 200.2L254 200.3L254 200.5L254.1 200.7L254.3 200.8L254.4 201L254.6 201.2L254.8 201.4L255.1 201.5L255.3 201.7L255.6 201.9Z"/><path class="iso-line iso-crease" data-tone="faint" d="M274.1 217L273.8 217.4L273.5 217.8L273.1 218.2L272.6 218.6L272 218.9L271.3 219.1L270.5 219.3L269.7 219.4L268.7 219.5L267.7 219.6L266.6 219.6L265.5 219.6L264.3 219.5L263 219.3L261.7 219.1L260.4 218.9L259.1 218.6L257.7 218.3L256.3 217.9L254.9 217.5L253.5 217L252.1 216.5L250.7 216L249.3 215.4L248 214.9L246.6 214.2L245.4 213.6L244.2 213L243 212.3L241.9 211.6L240.8 210.9L239.8 210.2L238.9 209.5L238.1 208.8L237.4 208.1L236.7 207.5L236.1 206.8L235.7 206.1L235.3 205.5L235 204.9L234.8 204.3L234.8 203.7L234.8 203.2L234.9 202.7M262.7 205.5L262.8 206.1L262.6 206.5L262.1 206.9L261.4 207.1L260.4 207.1L259.2 207L257.9 206.8L256.5 206.4L255.2 205.9L253.9 205.3L252.7 204.7L251.7 204L251 203.3L250.5 202.7L250.4 202.1L250.5 201.6L251 201.3M261.2 202.2L261.2 202.7L260.7 203L259.8 203.1L258.5 203L257.1 202.6L255.8 202L254.8 201.3L254.1 200.7L253.9 200.1L254.3 199.7"/><path class="iso-line iso-edge" data-tone="mid" d="M233.8 205.8L233.8 205.7L233.9 205.6L233.9 205.4L234 205.3L234 205.2L234.1 205.1L234.1 204.9L234.2 204.8L234.2 204.7L234.2 204.6L234.3 204.5L234.3 204.3L234.4 204.2L234.4 204.1L234.5 204L234.5 203.9L234.5 203.7L234.6 203.6L234.6 203.5L234.7 203.4L234.7 203.3L234.8 203.1L234.8 203L234.9 202.9L235.1 202.3L244.5 200.2L244.7 200.2L244.9 200.3L245.1 200.3L245.2 200.3L245.4 200.3L245.6 200.3L245.8 200.3L246 200.4L246.2 200.4L246.4 200.4L246.6 200.4L246.8 200.4L246.9 200.4L247.1 200.5L247.3 200.5L247.5 200.5L247.7 200.5L247.9 200.5L248.1 200.5L248.3 200.6L248.4 200.6L248.6 200.6L248.8 200.6L249 200.6L249.2 200.6L249.4 200.7L249.6 200.7L249.8 200.7L250 200.7L250.1 200.7L250.3 200.7L250.5 200.8L250.7 200.8L250.9 200.8L251.1 200.8L251.3 200.8L251.5 200.8L251.6 200.9L251.8 200.9L252 200.9L252.2 200.9L252.4 200.9L252.6 200.9L252.8 201L253 201L253.2 201L253 201L251.1 201.2L251.2 201.2L251.4 201.1L251.5 201L251.7 200.9L251.8 200.9L252 200.8L252.1 200.7L252.3 200.7L252.4 200.6L252.5 200.5L252.7 200.5L252.8 200.4L253 200.3L253.1 200.2L253.3 200.2L253.4 200.1L253.6 200L253.7 200L253.9 199.9L254 199.8L254.2 199.8L254.3 199.7M273 220L273 219.9L273 219.8L273.1 219.7L273.1 219.6L273.2 219.4L273.2 219.3L273.3 219.2L273.3 219.1L273.4 219L273.4 218.8L273.4 218.7L273.5 218.6L273.5 218.5L273.6 218.3L273.6 218.2L273.7 218.1L273.7 218L273.7 217.9L273.8 217.7L273.8 217.6L273.9 217.5L273.9 217.4L274 217.3L274 217.1L274.2 216.5L268.3 208.9L268.2 208.8L268 208.7L267.9 208.6L267.7 208.5L267.6 208.4L267.4 208.2L267.3 208.1L267.1 208L266.9 207.9L266.8 207.8L266.6 207.7L266.5 207.6L266.3 207.5L266.2 207.4L266 207.3L265.9 207.2L265.7 207.1L265.6 207L265.4 206.8L265.2 206.7L265.1 206.6L264.9 206.5L264.8 206.4L264.6 206.3L264.5 206.2L264.3 206.1L264.2 206L264 205.9L263.8 205.8L263.7 205.7L263.5 205.5L263.4 205.4L263.2 205.3L263.1 205.2L262.9 205.1L262.8 205L262.6 204.9L262.5 204.8L262.3 204.7L262.1 204.6L262 204.5L261.8 204.4L261.7 204.3L261.5 204.1L261.4 204L261.2 203.9L261.3 204L262.6 205.4L262.6 205.3L262.5 205.1L262.4 205L262.4 204.8L262.3 204.7L262.2 204.5L262.2 204.4L262.1 204.2L262 204.1L262 204L261.9 203.8L261.8 203.7L261.8 203.5L261.7 203.4L261.6 203.2L261.6 203.1L261.5 202.9L261.4 202.8L261.4 202.6L261.3 202.5L261.2 202.3L261.2 202.2M254.3 199.7L254.4 199.6L254.5 199.6L254.7 199.6L254.8 199.5L255 199.5L255.1 199.5L255.3 199.5L255.5 199.5L255.7 199.5L255.9 199.6L256.1 199.6L256.3 199.6L256.5 199.7L256.8 199.7L257 199.8L257.2 199.8L257.5 199.9L257.7 200L257.9 200.1L258.2 200.1L258.4 200.2L258.6 200.3L258.8 200.4L259.1 200.5L259.3 200.6L259.5 200.7L259.7 200.8L259.9 201L260 201.1L260.2 201.2L260.4 201.3L260.5 201.4L260.6 201.5L260.8 201.6L260.9 201.8L261 201.9L261.1 202L261.1 202.1L261.2 202.2M273 220L272.8 220.5L272.5 220.8L272.1 221.2L271.7 221.5L271.1 221.8L270.5 222.1L269.9 222.3L269.1 222.4L268.3 222.5L267.4 222.6L266.5 222.7L265.5 222.7L264.5 222.6L263.4 222.5L262.2 222.4L261.1 222.3L259.9 222.1L258.6 221.8L257.4 221.5L256.1 221.2L254.8 220.9L253.5 220.5L252.2 220L250.9 219.6L249.7 219.1L248.4 218.6L247.2 218.1L246 217.5L244.8 216.9L243.6 216.4L242.5 215.8L241.5 215.1L240.5 214.5L239.5 213.9L238.6 213.2L237.8 212.6L237.1 212L236.4 211.3L235.8 210.7L235.2 210.1L234.7 209.5L234.4 208.9L234.1 208.3L233.8 207.8L233.7 207.2L233.6 206.7L233.7 206.2L233.8 205.8"/></g><g class="iso-solid"><path class="iso-fill" d="M253.6 201.6L253.6 201.5L282.2 123.1L282.2 123L282.3 122.9L282.4 122.8L282.5 122.7L282.7 122.7L282.9 122.6L283.1 122.6L283.4 122.6L283.6 122.6L283.9 122.6L284.2 122.6L284.5 122.7L284.9 122.8L285.2 122.9L285.5 123L285.9 123.1L286.2 123.2L286.5 123.3L286.9 123.5L287.2 123.6L287.5 123.8L287.8 123.9L288 124.1L288.2 124.3L288.5 124.4L288.6 124.6L288.8 124.8L288.9 124.9L289 125.1L289.1 125.2L289.1 125.4L289.1 125.5L260.6 203.9L260.5 204L260.4 204.1L260.3 204.2L260.2 204.3L260 204.3L259.8 204.4L259.6 204.4L259.4 204.4L259.1 204.4L258.8 204.4L258.5 204.3L258.2 204.3L257.9 204.2L257.5 204.1L257.2 204L256.8 203.9L256.5 203.8L256.2 203.7L255.8 203.5L255.5 203.4L255.2 203.2L255 203.1L254.7 202.9L254.5 202.7L254.3 202.5L254.1 202.4L253.9 202.2L253.8 202.1L253.7 201.9L253.7 201.8Z"/><path class="iso-shade" data-shade="0" d="M260.6 203.9L260.5 204L260.4 204.1L260.3 204.2L260.2 204.3L260 204.3L259.8 204.4L259.6 204.4L259.4 204.4L259.1 204.4L258.8 204.4L258.5 204.3L258.2 204.3L257.9 204.2L257.5 204.1L257.2 204L256.8 203.9L285.4 125.5L285.7 125.6L286 125.7L286.4 125.8L286.7 125.9L287 125.9L287.3 126L287.6 126L287.9 126L288.1 126L288.3 126L288.5 125.9L288.7 125.9L288.9 125.8L289 125.7L289 125.6L289.1 125.5Z"/><path class="iso-shade" data-shade="1" d="M256.8 203.9L256.5 203.8L256.2 203.7L255.8 203.5L284.4 125.1L284.7 125.3L285 125.4L285.4 125.5Z"/><path class="iso-shade" data-shade="2" d="M255.8 203.5L255.5 203.4L255.2 203.2L255 203.1L283.5 124.7L283.8 124.8L284.1 125L284.4 125.1Z"/><path class="iso-shade" data-shade="3" d="M255 203.1L254.7 202.9L254.5 202.7L254.3 202.5L282.8 124.2L283 124.3L283.2 124.5L283.5 124.7ZM286.9 123.5L287.2 123.6L287.5 123.8L287.8 123.9L288 124.1L288.2 124.3L288.5 124.4L288.6 124.6L288.8 124.8L288.9 124.9L289 125.1L289.1 125.2L289.1 125.4L289.1 125.5L289 125.6L289 125.7L288.9 125.8L288.7 125.9L288.5 125.9L288.3 126L288.1 126L287.9 126L287.6 126L287.3 126L287 125.9L286.7 125.9L286.4 125.8L286 125.7L285.7 125.6L285.4 125.5L285 125.4L284.7 125.3L284.4 125.1L284.1 125L283.8 124.8L283.5 124.7L283.2 124.5L283 124.3L282.8 124.2L282.6 124L282.4 123.8L282.3 123.7L282.2 123.5L282.2 123.4L282.1 123.2L282.2 123.1L282.2 123L282.3 122.9L282.4 122.8L282.5 122.7L282.7 122.7L282.9 122.6L283.1 122.6L283.4 122.6L283.6 122.6L283.9 122.6L284.2 122.6L284.5 122.7L284.9 122.8L285.2 122.9L285.5 123L285.9 123.1L286.2 123.2L286.5 123.3L286.9 123.5L285.6 124.3L285.6 124.3L285.6 124.3L285.6 124.3L285.6 124.3L285.6 124.3L285.6 124.3L285.6 124.3L285.6 124.3L285.6 124.3L285.6 124.3L285.6 124.3L285.6 124.3L285.6 124.3L285.6 124.3L285.6 124.3L285.6 124.3L285.6 124.3L285.6 124.3L285.6 124.3L285.6 124.3L285.6 124.3L285.6 124.3L285.6 124.3L285.6 124.3L285.6 124.3L285.6 124.3L285.6 124.3L285.6 124.3L285.6 124.3L285.6 124.3L285.6 124.3L285.6 124.3L285.6 124.3L285.6 124.3L285.6 124.3L285.6 124.3L285.6 124.3L285.6 124.3L285.6 124.3L285.6 124.3L285.6 124.3L285.6 124.3L285.6 124.3L285.6 124.3L285.6 124.3L285.6 124.3L285.6 124.3L285.6 124.3L285.6 124.3L285.6 124.3L285.6 124.3L285.6 124.3L285.6 124.3L285.6 124.3L285.6 124.3L285.6 124.3L285.6 124.3L285.6 124.3L285.6 124.3L285.6 124.3L285.6 124.3L285.6 124.3L285.6 124.3L285.6 124.3Z"/><path class="iso-top" d="M254.3 202.5L254.1 202.4L253.9 202.2L253.8 202.1L253.7 201.9L253.7 201.8L253.6 201.6L253.6 201.5L282.2 123.1L282.1 123.2L282.2 123.4L282.2 123.5L282.3 123.7L282.4 123.8L282.6 124L282.8 124.2Z"/><path class="iso-line iso-crease" data-tone="faint" d="M289.1 125.5L288.6 125.9L287.7 126L286.5 125.9L285.2 125.5L283.9 124.9L282.9 124.2L282.3 123.6L282.2 123"/><path class="iso-line iso-edge" data-tone="mid" d="M253.6 201.6L253.6 201.5L282.2 123.1L282.2 123L282.3 122.9L282.4 122.8L282.5 122.7L282.7 122.7L282.9 122.6L283.1 122.6L283.4 122.6L283.6 122.6L283.9 122.6L284.2 122.6L284.5 122.7L284.9 122.8L285.2 122.9L285.5 123L285.9 123.1L286.2 123.2L286.5 123.3L286.9 123.5L287.2 123.6L287.5 123.8L287.8 123.9L288 124.1L288.2 124.3L288.5 124.4L288.6 124.6L288.8 124.8L288.9 124.9L289 125.1L289.1 125.2L289.1 125.4L289.1 125.5L260.6 203.9L260.5 204L260.4 204.1L260.3 204.2L260.2 204.3L260 204.3L259.8 204.4L259.6 204.4L259.4 204.4L259.1 204.4L258.8 204.4L258.5 204.3L258.2 204.3L257.9 204.2L257.5 204.1L257.2 204L256.8 203.9L256.5 203.8L256.2 203.7L255.8 203.5L255.5 203.4L255.2 203.2L255 203.1L254.7 202.9L254.5 202.7L254.3 202.5L254.1 202.4L253.9 202.2L253.8 202.1L253.7 201.9L253.7 201.8Z"/></g><g class="iso-solid"><path class="iso-fill" d="M269.7 132.3L269.7 131.9L271 128.5L271.1 128.1L271.4 127.7L271.7 127.4L272.2 127.2L272.8 127L273.4 126.8L274.2 126.7L275 126.7L275.9 126.7L276.9 126.8L277.9 126.9L279 127.1L280.1 127.3L281.2 127.6L282.4 127.9L283.5 128.3L284.7 128.7L285.8 129.2L286.9 129.7L287.9 130.2L288.9 130.7L289.8 131.3L290.7 131.8L291.5 132.4L292.2 133L292.8 133.5L293.3 134.1L293.7 134.6L294 135.1L294.2 135.6L294.3 136.1L294.3 136.5L293.1 139.9L292.9 140.3L292.7 140.6L292.3 140.9L291.8 141.2L291.3 141.4L290.6 141.5L289.9 141.6L289 141.7L288.1 141.6L287.1 141.6L286.1 141.4L285.1 141.3L283.9 141L282.8 140.7L281.7 140.4L280.5 140L279.4 139.6L278.3 139.2L277.2 138.7L276.1 138.2L275.1 137.7L274.2 137.1L273.3 136.5L272.5 136L271.8 135.4L271.2 134.8L270.7 134.3L270.3 133.8L270 133.2L269.8 132.7Z"/><path class="iso-shade" data-shade="0" d="M293.1 139.9L292.9 140.3L292.7 140.6L292.3 140.9L291.8 141.2L291.3 141.4L290.6 141.5L289.9 141.6L289 141.7L288.1 141.6L287.1 141.6L286.1 141.4L285.1 141.3L283.9 141L282.8 140.7L281.7 140.4L280.5 140L281.8 136.6L282.9 137L284.1 137.3L285.2 137.6L286.3 137.9L287.4 138L288.4 138.2L289.4 138.2L290.3 138.3L291.1 138.2L291.8 138.1L292.5 138L293.1 137.8L293.5 137.5L293.9 137.2L294.2 136.9L294.3 136.5Z"/><path class="iso-shade" data-shade="1" d="M280.5 140L279.4 139.6L278.3 139.2L277.2 138.7L278.4 135.3L279.5 135.8L280.6 136.2L281.8 136.6Z"/><path class="iso-shade" data-shade="2" d="M277.2 138.7L276.1 138.2L275.1 137.7L274.2 137.1L275.4 133.7L276.4 134.2L277.4 134.8L278.4 135.3Z"/><path class="iso-shade" data-shade="3" d="M274.2 137.1L273.3 136.5L272.5 136L271.8 135.4L273.1 132L273.8 132.6L274.6 133.1L275.4 133.7ZM286.9 129.7L287.9 130.2L288.9 130.7L289.8 131.3L290.7 131.8L291.5 132.4L292.2 133L292.8 133.5L293.3 134.1L293.7 134.6L294 135.1L294.2 135.6L294.3 136.1L294.3 136.5L294.2 136.9L293.9 137.2L293.5 137.5L293.1 137.8L292.5 138L291.8 138.1L291.1 138.2L290.3 138.3L289.4 138.2L288.4 138.2L287.4 138L286.3 137.9L285.2 137.6L284.1 137.3L282.9 137L281.8 136.6L280.6 136.2L279.5 135.8L278.4 135.3L277.4 134.8L276.4 134.2L275.4 133.7L274.6 133.1L273.8 132.6L273.1 132L272.5 131.4L271.9 130.9L271.5 130.3L271.2 129.8L271 129.3L271 128.9L271 128.5L271.1 128.1L271.4 127.7L271.7 127.4L272.2 127.2L272.8 127L273.4 126.8L274.2 126.7L275 126.7L275.9 126.7L276.9 126.8L277.9 126.9L279 127.1L280.1 127.3L281.2 127.6L282.4 127.9L283.5 128.3L284.7 128.7L285.8 129.2L286.9 129.7L282.6 132.5L282.6 132.5L282.6 132.5L282.6 132.5L282.6 132.5L282.6 132.5L282.6 132.5L282.6 132.5L282.6 132.5L282.6 132.5L282.6 132.5L282.6 132.5L282.6 132.5L282.6 132.5L282.6 132.5L282.6 132.5L282.6 132.5L282.6 132.5L282.6 132.5L282.6 132.5L282.6 132.5L282.6 132.5L282.6 132.5L282.6 132.5L282.6 132.5L282.6 132.5L282.6 132.5L282.6 132.5L282.6 132.5L282.6 132.5L282.6 132.5L282.6 132.5L282.6 132.5L282.6 132.5L282.6 132.5L282.6 132.5L282.6 132.5L282.6 132.5L282.6 132.5L282.6 132.5L282.6 132.5L282.6 132.5L282.6 132.5L282.6 132.5L282.6 132.5L282.6 132.5L282.6 132.5L282.6 132.5L282.6 132.5L282.6 132.5L282.6 132.5L282.6 132.5L282.6 132.5L282.6 132.5L282.6 132.5L282.6 132.5L282.6 132.5L282.6 132.5L282.6 132.5L282.6 132.5L282.6 132.5L282.6 132.5L282.6 132.5L282.6 132.5L282.6 132.5Z"/><path class="iso-top" d="M271.8 135.4L271.2 134.8L270.7 134.3L270.3 133.8L270 133.2L269.8 132.7L269.7 132.3L269.7 131.9L271 128.5L271 128.9L271 129.3L271.2 129.8L271.5 130.3L271.9 130.9L272.5 131.4L273.1 132Z"/><path class="iso-line iso-crease" data-tone="faint" d="M294.2 136.7L294 137.1L293.6 137.5L293 137.8L292.2 138.1L291.4 138.2L290.4 138.3L289.3 138.2L288 138.1L286.8 137.9L285.4 137.7L284 137.3L282.6 136.9L281.2 136.4L279.8 135.9L278.5 135.3L277.2 134.7L276 134L274.9 133.3L273.9 132.6L273 131.9L272.3 131.3L271.7 130.6L271.3 129.9L271 129.3L270.9 128.8L271 128.3"/><path class="iso-line iso-edge" data-tone="mid" d="M269.7 132.3L269.7 131.9L271 128.5L271.1 128.1L271.4 127.7L271.7 127.4L272.2 127.2L272.8 127L273.4 126.8L274.2 126.7L275 126.7L275.9 126.7L276.9 126.8L277.9 126.9L279 127.1L280.1 127.3L281.2 127.6L282.4 127.9L283.5 128.3L284.7 128.7L285.8 129.2L286.9 129.7L287.9 130.2L288.9 130.7L289.8 131.3L290.7 131.8L291.5 132.4L292.2 133L292.8 133.5L293.3 134.1L293.7 134.6L294 135.1L294.2 135.6L294.3 136.1L294.3 136.5L293.1 139.9L292.9 140.3L292.7 140.6L292.3 140.9L291.8 141.2L291.3 141.4L290.6 141.5L289.9 141.6L289 141.7L288.1 141.6L287.1 141.6L286.1 141.4L285.1 141.3L283.9 141L282.8 140.7L281.7 140.4L280.5 140L279.4 139.6L278.3 139.2L277.2 138.7L276.1 138.2L275.1 137.7L274.2 137.1L273.3 136.5L272.5 136L271.8 135.4L271.2 134.8L270.7 134.3L270.3 133.8L270 133.2L269.8 132.7Z"/></g></g></g><g data-part="plug" data-zh-label="火花塞：只在做功冲程开始时点火" data-en-label="Spark plug: fires only as the power stroke begins"><g class="iso-solid"><path class="iso-fill" d="M226.1 215.2L226.1 215.1L226.1 215.1L226.1 215.1L226.2 215L226.3 215L226.4 214.9L226.5 214.9L226.6 214.9L226.7 214.8L226.9 214.8L227 214.8L227.2 214.8L227.4 214.7L227.5 214.7L227.7 214.7L227.9 214.7L228.1 214.7L228.3 214.7L228.5 214.7L228.7 214.7L228.8 214.8L229 214.8L229.2 214.8L229.3 214.8L229.4 214.9L229.6 214.9L229.7 214.9L229.7 215L229.8 215L229.9 215.1L229.9 215.1L229.9 215.2L229.9 218.9L229.9 218.9L229.9 219L229.9 219L229.8 219.1L229.7 219.1L229.6 219.2L229.5 219.2L229.4 219.2L229.3 219.3L229.1 219.3L229 219.3L228.8 219.3L228.6 219.4L228.5 219.4L228.3 219.4L228.1 219.4L227.9 219.4L227.7 219.4L227.5 219.4L227.3 219.4L227.2 219.3L227 219.3L226.8 219.3L226.7 219.3L226.6 219.2L226.4 219.2L226.3 219.2L226.3 219.1L226.2 219.1L226.1 219L226.1 219L226.1 218.9Z"/><path class="iso-shade" data-shade="0" d="M229.9 218.9L229.9 218.9L229.9 219L229.9 219L229.8 219.1L229.7 219.1L229.6 219.2L229.5 219.2L229.4 219.2L229.3 219.3L229.1 219.3L229 219.3L228.8 219.3L228.6 219.4L228.5 219.4L228.3 219.4L228.1 219.4L228.1 215.6L228.3 215.6L228.5 215.6L228.6 215.6L228.8 215.6L229 215.6L229.1 215.6L229.3 215.5L229.4 215.5L229.5 215.5L229.6 215.4L229.7 215.4L229.8 215.3L229.9 215.3L229.9 215.2L229.9 215.2L229.9 215.2Z"/><path class="iso-shade" data-shade="1" d="M228.1 219.4L227.9 219.4L227.7 219.4L227.5 219.4L227.3 219.4L227.3 215.6L227.5 215.6L227.7 215.6L227.9 215.6L228.1 215.6Z"/><path class="iso-shade" data-shade="2" d="M227.3 219.4L227.2 219.3L227 219.3L226.8 219.3L226.7 219.3L226.7 215.5L226.8 215.5L227 215.6L227.2 215.6L227.3 215.6Z"/><path class="iso-shade" data-shade="3" d="M226.7 219.3L226.6 219.2L226.4 219.2L226.3 219.2L226.3 219.1L226.2 219.1L226.1 219L226.1 215.3L226.2 215.3L226.3 215.4L226.3 215.4L226.4 215.5L226.6 215.5L226.7 215.5Z"/><path class="iso-top" d="M226.1 219L226.1 219L226.1 218.9L226.1 215.2L226.1 215.2L226.1 215.3ZM228.7 214.7L228.8 214.8L229 214.8L229.2 214.8L229.3 214.8L229.4 214.9L229.6 214.9L229.7 214.9L229.7 215L229.8 215L229.9 215.1L229.9 215.1L229.9 215.2L229.9 215.2L229.9 215.2L229.9 215.3L229.8 215.3L229.7 215.4L229.6 215.4L229.5 215.5L229.4 215.5L229.3 215.5L229.1 215.6L229 215.6L228.8 215.6L228.6 215.6L228.5 215.6L228.3 215.6L228.1 215.6L227.9 215.6L227.7 215.6L227.5 215.6L227.3 215.6L227.2 215.6L227 215.6L226.8 215.5L226.7 215.5L226.6 215.5L226.4 215.5L226.3 215.4L226.3 215.4L226.2 215.3L226.1 215.3L226.1 215.2L226.1 215.2L226.1 215.1L226.1 215.1L226.1 215.1L226.2 215L226.3 215L226.4 214.9L226.5 214.9L226.6 214.9L226.7 214.8L226.9 214.8L227 214.8L227.2 214.8L227.4 214.7L227.5 214.7L227.7 214.7L227.9 214.7L228.1 214.7L228.3 214.7L228.5 214.7L228.7 214.7L228 215.2L228 215.2L228 215.2L228 215.2L228 215.2L228 215.2L228 215.2L228 215.2L228 215.2L228 215.2L228 215.2L228 215.2L228 215.2L228 215.2L228 215.2L228 215.2L228 215.2L228 215.2L228 215.2L228 215.2L228 215.2L228 215.2L228 215.2L228 215.2L228 215.2L228 215.2L228 215.2L228 215.2L228 215.2L228 215.2L228 215.2L228 215.2L228 215.2L228 215.2L228 215.2L228 215.2L228 215.2L228 215.2L228 215.2L228 215.2L228 215.2L228 215.2L228 215.2L228 215.2L228 215.2L228 215.2L228 215.2L228 215.2L228 215.2L228 215.2L228 215.2L228 215.2L228 215.2L228 215.2L228 215.2L228 215.2L228 215.2L228 215.2L228 215.2L228 215.2L228 215.2L228 215.2L228 215.2L228 215.2L228 215.2Z"/><path class="iso-line iso-crease" data-tone="faint" d="M229.9 215.2L229.6 215.4L228.6 215.6L227.4 215.6L226.4 215.4L226.1 215.2"/><path class="iso-line iso-edge" data-tone="mid" d="M226.1 215.2L226.1 215.1L226.1 215.1L226.1 215.1L226.2 215L226.3 215L226.4 214.9L226.5 214.9L226.6 214.9L226.7 214.8L226.9 214.8L227 214.8L227.2 214.8L227.4 214.7L227.5 214.7L227.7 214.7L227.9 214.7L228.1 214.7L228.3 214.7L228.5 214.7L228.7 214.7L228.8 214.8L229 214.8L229.2 214.8L229.3 214.8L229.4 214.9L229.6 214.9L229.7 214.9L229.7 215L229.8 215L229.9 215.1L229.9 215.1L229.9 215.2L229.9 218.9L229.9 218.9L229.9 219L229.9 219L229.8 219.1L229.7 219.1L229.6 219.2L229.5 219.2L229.4 219.2L229.3 219.3L229.1 219.3L229 219.3L228.8 219.3L228.6 219.4L228.5 219.4L228.3 219.4L228.1 219.4L227.9 219.4L227.7 219.4L227.5 219.4L227.3 219.4L227.2 219.3L227 219.3L226.8 219.3L226.7 219.3L226.6 219.2L226.4 219.2L226.3 219.2L226.3 219.1L226.2 219.1L226.1 219L226.1 219L226.1 218.9Z"/></g><g class="iso-solid"><path class="iso-fill" d="M220.7 177.8L220.7 177.6L220.8 177.5L220.9 177.3L221.1 177.1L221.4 177L221.7 176.8L222.1 176.7L222.6 176.5L223.1 176.4L223.7 176.3L224.3 176.2L224.9 176.1L225.6 176.1L226.3 176L227 176L227.7 176L228.4 176L229.1 176L229.8 176L230.5 176.1L231.2 176.1L231.8 176.2L232.4 176.3L233 176.4L233.5 176.6L233.9 176.7L234.3 176.8L234.6 177L234.9 177.2L235.1 177.3L235.3 177.5L235.3 177.7L235.3 215.8L235.3 216L235.2 216.2L235.1 216.4L234.9 216.5L234.6 216.7L234.3 216.8L233.9 217L233.4 217.1L232.9 217.2L232.3 217.4L231.7 217.4L231.1 217.5L230.4 217.6L229.7 217.6L229 217.7L228.3 217.7L227.6 217.7L226.9 217.7L226.2 217.6L225.5 217.6L224.8 217.5L224.2 217.4L223.6 217.3L223 217.2L222.5 217.1L222.1 217L221.7 216.8L221.4 216.7L221.1 216.5L220.9 216.3L220.7 216.2L220.7 216Z"/><path class="iso-shade" data-shade="0" d="M235.3 215.8L235.3 216L235.2 216.2L235.1 216.4L234.9 216.5L234.6 216.7L234.3 216.8L233.9 217L233.4 217.1L232.9 217.2L232.3 217.4L231.7 217.4L231.1 217.5L230.4 217.6L229.7 217.6L229 217.7L228.3 217.7L228.3 179.5L229 179.5L229.7 179.5L230.4 179.4L231.1 179.3L231.7 179.3L232.3 179.2L232.9 179.1L233.4 178.9L233.9 178.8L234.3 178.7L234.6 178.5L234.9 178.3L235.1 178.2L235.2 178L235.3 177.8L235.3 177.7Z"/><path class="iso-shade" data-shade="1" d="M228.3 217.7L227.6 217.7L226.9 217.7L226.2 217.6L225.5 217.6L225.5 179.4L226.2 179.5L226.9 179.5L227.6 179.5L228.3 179.5Z"/><path class="iso-shade" data-shade="2" d="M225.5 217.6L224.8 217.5L224.2 217.4L223.6 217.3L223 217.2L223 179L223.6 179.2L224.2 179.3L224.8 179.3L225.5 179.4Z"/><path class="iso-shade" data-shade="3" d="M223 217.2L222.5 217.1L222.1 217L221.7 216.8L221.4 216.7L221.1 216.5L220.9 216.3L220.9 178.2L221.1 178.3L221.4 178.5L221.7 178.6L222.1 178.8L222.5 178.9L223 179Z"/><path class="iso-top" d="M220.9 216.3L220.7 216.2L220.7 216L220.7 177.8L220.7 178L220.9 178.2ZM230.5 176.1L231.2 176.1L231.8 176.2L232.4 176.3L233 176.4L233.5 176.6L233.9 176.7L234.3 176.8L234.6 177L234.9 177.2L235.1 177.3L235.3 177.5L235.3 177.7L235.3 177.8L235.2 178L235.1 178.2L234.9 178.3L234.6 178.5L234.3 178.7L233.9 178.8L233.4 178.9L232.9 179.1L232.3 179.2L231.7 179.3L231.1 179.3L230.4 179.4L229.7 179.5L229 179.5L228.3 179.5L227.6 179.5L226.9 179.5L226.2 179.5L225.5 179.4L224.8 179.3L224.2 179.3L223.6 179.2L223 179L222.5 178.9L222.1 178.8L221.7 178.6L221.4 178.5L221.1 178.3L220.9 178.2L220.7 178L220.7 177.8L220.7 177.6L220.8 177.5L220.9 177.3L221.1 177.1L221.4 177L221.7 176.8L222.1 176.7L222.6 176.5L223.1 176.4L223.7 176.3L224.3 176.2L224.9 176.1L225.6 176.1L226.3 176L227 176L227.7 176L228.4 176L229.1 176L229.8 176L230.5 176.1L228 177.7L228 177.7L228 177.7L228 177.7L228 177.7L228 177.7L228 177.7L228 177.7L228 177.7L228 177.7L228 177.7L228 177.7L228 177.7L228 177.7L228 177.7L228 177.7L228 177.7L228 177.7L228 177.7L228 177.7L228 177.7L228 177.7L228 177.7L228 177.7L228 177.7L228 177.7L228 177.7L228 177.7L228 177.7L228 177.7L228 177.7L228 177.7L228 177.7L228 177.7L228 177.7L228 177.7L228 177.7L228 177.7L228 177.7L228 177.7L228 177.7L228 177.7L228 177.7L228 177.7L228 177.7L228 177.7L228 177.7L228 177.7L228 177.7L228 177.7L228 177.7L228 177.7L228 177.7L228 177.7L228 177.7L228 177.7L228 177.7L228 177.7L228 177.7L228 177.7L228 177.7L228 177.7L228 177.7L228 177.7L228 177.7Z"/><path class="iso-line iso-crease" data-tone="faint" d="M235.3 177.7L235.2 178.1L234.8 178.4L234.1 178.7L233.2 179L232.1 179.2L230.8 179.4L229.4 179.5L228 179.5L226.6 179.5L225.2 179.4L223.9 179.2L222.8 179L221.9 178.7L221.2 178.4L220.8 178.1L220.7 177.7"/><path class="iso-line iso-edge" data-tone="mid" d="M220.7 177.8L220.7 177.6L220.8 177.5L220.9 177.3L221.1 177.1L221.4 177L221.7 176.8L222.1 176.7L222.6 176.5L223.1 176.4L223.7 176.3L224.3 176.2L224.9 176.1L225.6 176.1L226.3 176L227 176L227.7 176L228.4 176L229.1 176L229.8 176L230.5 176.1L231.2 176.1L231.8 176.2L232.4 176.3L233 176.4L233.5 176.6L233.9 176.7L234.3 176.8L234.6 177L234.9 177.2L235.1 177.3L235.3 177.5L235.3 177.7L235.3 215.8L235.3 216L235.2 216.2L235.1 216.4L234.9 216.5L234.6 216.7L234.3 216.8L233.9 217L233.4 217.1L232.9 217.2L232.3 217.4L231.7 217.4L231.1 217.5L230.4 217.6L229.7 217.6L229 217.7L228.3 217.7L227.6 217.7L226.9 217.7L226.2 217.6L225.5 217.6L224.8 217.5L224.2 217.4L223.6 217.3L223 217.2L222.5 217.1L222.1 217L221.7 216.8L221.4 216.7L221.1 216.5L220.9 216.3L220.7 216.2L220.7 216Z"/></g><g class="iso-solid"><path class="iso-fill" d="M215.3 164.4L215.3 164.1L215.4 163.8L215.7 163.5L216 163.2L216.5 162.9L217.1 162.7L217.8 162.4L218.6 162.2L219.5 162L220.5 161.8L221.5 161.6L222.6 161.5L223.8 161.4L225 161.3L226.2 161.2L227.4 161.2L228.7 161.2L229.9 161.2L231.2 161.3L232.4 161.4L233.5 161.5L234.6 161.6L235.6 161.8L236.6 162L237.5 162.2L238.3 162.4L239 162.7L239.5 163L240 163.2L240.4 163.5L240.6 163.8L240.7 164.1L240.7 177.6L240.7 177.9L240.6 178.2L240.3 178.5L240 178.8L239.5 179.1L238.9 179.3L238.2 179.6L237.4 179.8L236.5 180L235.5 180.2L234.5 180.4L233.4 180.5L232.2 180.6L231 180.7L229.8 180.8L228.6 180.8L227.3 180.8L226.1 180.8L224.8 180.7L223.6 180.6L222.5 180.5L221.4 180.4L220.4 180.2L219.4 180L218.5 179.8L217.7 179.6L217 179.3L216.5 179L216 178.8L215.6 178.5L215.4 178.2L215.3 177.9Z"/><path class="iso-shade" data-shade="0" d="M240.7 177.6L240.7 177.9L240.6 178.2L240.3 178.5L240 178.8L239.5 179.1L238.9 179.3L238.2 179.6L237.4 179.8L236.5 180L235.5 180.2L234.5 180.4L233.4 180.5L232.2 180.6L231 180.7L229.8 180.8L228.6 180.8L228.6 167.3L229.8 167.3L231 167.3L232.2 167.2L233.4 167.1L234.5 166.9L235.5 166.7L236.5 166.6L237.4 166.3L238.2 166.1L238.9 165.9L239.5 165.6L240 165.3L240.3 165L240.6 164.7L240.7 164.4L240.7 164.1Z"/><path class="iso-shade" data-shade="1" d="M228.6 180.8L227.3 180.8L226.1 180.8L224.8 180.7L223.6 180.6L223.6 167.2L224.8 167.2L226.1 167.3L227.3 167.3L228.6 167.3Z"/><path class="iso-shade" data-shade="2" d="M223.6 180.6L222.5 180.5L221.4 180.4L220.4 180.2L219.4 180L219.4 166.5L220.4 166.7L221.4 166.9L222.5 167L223.6 167.2Z"/><path class="iso-shade" data-shade="3" d="M219.4 180L218.5 179.8L217.7 179.6L217 179.3L216.5 179L216 178.8L215.6 178.5L215.6 165L216 165.3L216.5 165.6L217 165.8L217.7 166.1L218.5 166.3L219.4 166.5Z"/><path class="iso-top" d="M215.6 178.5L215.4 178.2L215.3 177.9L215.3 164.4L215.4 164.7L215.6 165ZM232.4 161.4L233.5 161.5L234.6 161.6L235.6 161.8L236.6 162L237.5 162.2L238.3 162.4L239 162.7L239.5 163L240 163.2L240.4 163.5L240.6 163.8L240.7 164.1L240.7 164.4L240.6 164.7L240.3 165L240 165.3L239.5 165.6L238.9 165.9L238.2 166.1L237.4 166.3L236.5 166.6L235.5 166.7L234.5 166.9L233.4 167.1L232.2 167.2L231 167.3L229.8 167.3L228.6 167.3L227.3 167.3L226.1 167.3L224.8 167.2L223.6 167.2L222.5 167L221.4 166.9L220.4 166.7L219.4 166.5L218.5 166.3L217.7 166.1L217 165.8L216.5 165.6L216 165.3L215.6 165L215.4 164.7L215.3 164.4L215.3 164.1L215.4 163.8L215.7 163.5L216 163.2L216.5 162.9L217.1 162.7L217.8 162.4L218.6 162.2L219.5 162L220.5 161.8L221.5 161.6L222.6 161.5L223.8 161.4L225 161.3L226.2 161.2L227.4 161.2L228.7 161.2L229.9 161.2L231.2 161.3L232.4 161.4L228 164.3L228 164.3L228 164.3L228 164.3L228 164.3L228 164.3L228 164.3L228 164.3L228 164.3L228 164.3L228 164.3L228 164.3L228 164.3L228 164.3L228 164.3L228 164.3L228 164.3L228 164.3L228 164.3L228 164.3L228 164.3L228 164.3L228 164.3L228 164.3L228 164.3L228 164.3L228 164.3L228 164.3L228 164.3L228 164.3L228 164.3L228 164.3L228 164.3L228 164.3L228 164.3L228 164.3L228 164.3L228 164.3L228 164.3L228 164.3L228 164.3L228 164.3L228 164.3L228 164.3L228 164.3L228 164.3L228 164.3L228 164.3L228 164.3L228 164.3L228 164.3L228 164.3L228 164.3L228 164.3L228 164.3L228 164.3L228 164.3L228 164.3L228 164.3L228 164.3L228 164.3L228 164.3L228 164.3L228 164.3L228 164.3Z"/><path class="iso-line iso-crease" data-tone="faint" d="M240.7 164.3L240.6 164.6L240.4 165L240 165.3L239.4 165.6L238.6 166L237.8 166.2L236.7 166.5L235.6 166.7L234.4 166.9L233 167.1L231.7 167.2L230.2 167.3L228.7 167.3L227.3 167.3L225.8 167.3L224.3 167.2L223 167.1L221.6 166.9L220.4 166.7L219.3 166.5L218.2 166.2L217.4 166L216.6 165.6L216 165.3L215.6 165L215.4 164.6L215.3 164.3"/><path class="iso-line iso-edge" data-tone="mid" d="M215.3 164.4L215.3 164.1L215.4 163.8L215.7 163.5L216 163.2L216.5 162.9L217.1 162.7L217.8 162.4L218.6 162.2L219.5 162L220.5 161.8L221.5 161.6L222.6 161.5L223.8 161.4L225 161.3L226.2 161.2L227.4 161.2L228.7 161.2L229.9 161.2L231.2 161.3L232.4 161.4L233.5 161.5L234.6 161.6L235.6 161.8L236.6 162L237.5 162.2L238.3 162.4L239 162.7L239.5 163L240 163.2L240.4 163.5L240.6 163.8L240.7 164.1L240.7 177.6L240.7 177.9L240.6 178.2L240.3 178.5L240 178.8L239.5 179.1L238.9 179.3L238.2 179.6L237.4 179.8L236.5 180L235.5 180.2L234.5 180.4L233.4 180.5L232.2 180.6L231 180.7L229.8 180.8L228.6 180.8L227.3 180.8L226.1 180.8L224.8 180.7L223.6 180.6L222.5 180.5L221.4 180.4L220.4 180.2L219.4 180L218.5 179.8L217.7 179.6L217 179.3L216.5 179L216 178.8L215.6 178.5L215.4 178.2L215.3 177.9Z"/></g><g class="iso-solid"><path class="iso-fill" d="M219.1 164.4L219.1 164.1L220.7 130.9L223.8 121.5L223.8 121.4L223.9 121.3L224 121.2L224.2 121.1L224.4 121.1L224.6 121L224.9 120.9L225.2 120.8L225.5 120.8L225.8 120.7L226.2 120.7L226.6 120.6L227 120.6L227.4 120.6L227.8 120.6L228.2 120.6L228.6 120.6L229.1 120.6L229.5 120.6L229.8 120.7L230.2 120.7L230.5 120.8L230.9 120.8L231.2 120.9L231.4 121L231.7 121.1L231.8 121.2L232 121.2L232.1 121.3L232.2 121.4L232.2 121.5L235.3 130.9L236.9 164.2L236.9 164.4L236.8 164.6L236.6 164.8L236.3 165L236 165.2L235.6 165.4L235.1 165.6L234.5 165.7L233.9 165.9L233.2 166L232.5 166.1L231.8 166.2L230.9 166.3L230.1 166.3L229.3 166.4L228.4 166.4L227.5 166.4L226.7 166.4L225.8 166.3L225 166.3L224.2 166.2L223.4 166.1L222.7 166L222 165.8L221.4 165.7L220.8 165.5L220.4 165.4L220 165.2L219.6 165L219.4 164.8L219.2 164.6Z"/><path class="iso-shade" data-shade="0" d="M236.9 164.2L236.9 164.4L236.8 164.6L236.6 164.8L236.3 165L236 165.2L235.6 165.4L235.1 165.6L234.5 165.7L233.9 165.9L233.2 166L232.5 166.1L231.8 166.2L230.9 166.3L230.1 166.3L229.3 166.4L228.4 166.4L228.3 132.7L229 132.7L229.7 132.7L230.4 132.6L231.1 132.6L231.7 132.5L232.3 132.4L232.9 132.3L233.4 132.1L233.9 132L234.3 131.9L234.6 131.7L234.9 131.6L235.1 131.4L235.2 131.2L235.3 131L235.3 130.9ZM235.3 130.9L235.3 131L235.2 131.2L235.1 131.4L234.9 131.6L234.6 131.7L234.3 131.9L233.9 132L233.4 132.1L232.9 132.3L232.3 132.4L231.7 132.5L231.1 132.6L229.8 122.5L230.2 122.5L230.5 122.4L230.8 122.4L231.1 122.3L231.4 122.2L231.6 122.1L231.8 122L232 121.9L232.1 121.8L232.2 121.7L232.2 121.6L232.2 121.5Z"/><path class="iso-shade" data-shade="1" d="M228.4 166.4L227.5 166.4L226.7 166.4L225.8 166.3L226.2 132.7L226.9 132.7L227.6 132.7L228.3 132.7ZM231.1 132.6L230.4 132.6L229.7 132.7L229 132.7L228.3 132.7L228.2 122.6L228.6 122.6L229 122.6L229.4 122.6L229.8 122.5Z"/><path class="iso-shade" data-shade="2" d="M225.8 166.3L225 166.3L224.2 166.2L223.4 166.1L222.7 166L223.6 132.4L224.2 132.5L224.8 132.5L225.5 132.6L226.2 132.7ZM228.3 132.7L227.6 132.7L226.9 132.7L226.2 132.7L225.5 132.6L226.5 122.6L226.9 122.6L227.4 122.6L227.8 122.6L228.2 122.6Z"/><path class="iso-shade" data-shade="3" d="M222.7 166L222 165.8L221.4 165.7L220.8 165.5L220.4 165.4L220 165.2L221.4 131.7L221.7 131.9L222.1 132L222.5 132.1L223 132.3L223.6 132.4ZM225.5 132.6L224.8 132.5L224.2 132.5L223.6 132.4L225.5 122.4L225.8 122.5L226.2 122.5L226.5 122.6Z"/><path class="iso-top" d="M220 165.2L219.6 165L219.4 164.8L219.2 164.6L219.1 164.4L219.1 164.1L220.7 130.9L220.7 131L220.7 131.2L220.9 131.4L221.1 131.5L221.4 131.7ZM223.6 132.4L223 132.3L222.5 132.1L222.1 132L221.7 131.9L221.4 131.7L221.1 131.5L220.9 131.4L220.7 131.2L220.7 131L220.7 130.9L223.8 121.5L223.8 121.6L223.8 121.7L223.9 121.8L224 121.9L224.2 122L224.3 122.1L224.6 122.2L224.8 122.3L225.1 122.3L225.5 122.4ZM229.5 120.6L229.8 120.7L230.2 120.7L230.5 120.8L230.9 120.8L231.2 120.9L231.4 121L231.7 121.1L231.8 121.2L232 121.2L232.1 121.3L232.2 121.4L232.2 121.5L232.2 121.6L232.2 121.7L232.1 121.8L232 121.9L231.8 122L231.6 122.1L231.4 122.2L231.1 122.3L230.8 122.4L230.5 122.4L230.2 122.5L229.8 122.5L229.4 122.6L229 122.6L228.6 122.6L228.2 122.6L227.8 122.6L227.4 122.6L226.9 122.6L226.5 122.6L226.2 122.5L225.8 122.5L225.5 122.4L225.1 122.3L224.8 122.3L224.6 122.2L224.3 122.1L224.2 122L224 121.9L223.9 121.8L223.8 121.7L223.8 121.6L223.8 121.5L223.8 121.4L223.9 121.3L224 121.2L224.2 121.1L224.4 121.1L224.6 121L224.9 120.9L225.2 120.8L225.5 120.8L225.8 120.7L226.2 120.7L226.6 120.6L227 120.6L227.4 120.6L227.8 120.6L228.2 120.6L228.6 120.6L229.1 120.6L229.5 120.6L228 121.6L228 121.6L228 121.6L228 121.6L228 121.6L228 121.6L228 121.6L228 121.6L228 121.6L228 121.6L228 121.6L228 121.6L228 121.6L228 121.6L228 121.6L228 121.6L228 121.6L228 121.6L228 121.6L228 121.6L228 121.6L228 121.6L228 121.6L228 121.6L228 121.6L228 121.6L228 121.6L228 121.6L228 121.6L228 121.6L228 121.6L228 121.6L228 121.6L228 121.6L228 121.6L228 121.6L228 121.6L228 121.6L228 121.6L228 121.6L228 121.6L228 121.6L228 121.6L228 121.6L228 121.6L228 121.6L228 121.6L228 121.6L228 121.6L228 121.6L228 121.6L228 121.6L228 121.6L228 121.6L228 121.6L228 121.6L228 121.6L228 121.6L228 121.6L228 121.6L228 121.6L228 121.6L228 121.6L228 121.6L228 121.6Z"/><path class="iso-line iso-crease" data-tone="faint" d="M235.3 130.9L235.2 131.3L234.8 131.6L234.1 131.9L233.2 132.2L232.1 132.4L230.8 132.6L229.4 132.7L228 132.7L226.6 132.7L225.2 132.6L223.9 132.4L222.8 132.2L221.9 131.9L221.2 131.6L220.8 131.3L220.7 130.9M232.2 121.5L232.1 121.8L231.5 122.2L230.6 122.4L229.4 122.6L228 122.6L226.6 122.6L225.4 122.4L224.5 122.2L223.9 121.8L223.8 121.5"/><path class="iso-line iso-edge" data-tone="mid" d="M219.1 164.4L219.1 164.1L220.7 130.9L223.8 121.5L223.8 121.4L223.9 121.3L224 121.2L224.2 121.1L224.4 121.1L224.6 121L224.9 120.9L225.2 120.8L225.5 120.8L225.8 120.7L226.2 120.7L226.6 120.6L227 120.6L227.4 120.6L227.8 120.6L228.2 120.6L228.6 120.6L229.1 120.6L229.5 120.6L229.8 120.7L230.2 120.7L230.5 120.8L230.9 120.8L231.2 120.9L231.4 121L231.7 121.1L231.8 121.2L232 121.2L232.1 121.3L232.2 121.4L232.2 121.5L235.3 130.9L236.9 164.2L236.9 164.4L236.8 164.6L236.6 164.8L236.3 165L236 165.2L235.6 165.4L235.1 165.6L234.5 165.7L233.9 165.9L233.2 166L232.5 166.1L231.8 166.2L230.9 166.3L230.1 166.3L229.3 166.4L228.4 166.4L227.5 166.4L226.7 166.4L225.8 166.3L225 166.3L224.2 166.2L223.4 166.1L222.7 166L222 165.8L221.4 165.7L220.8 165.5L220.4 165.4L220 165.2L219.6 165L219.4 164.8L219.2 164.6Z"/></g><g id="rt-spark"></g></g><g data-part="belt" data-zh-label="正时皮带：曲轴小轮转两圈，凸轮大轮转一圈" data-en-label="Timing belt: small crank wheel turns twice per cam turn"><g id="rt-belt"></g></g><g id="rt-labels"></g></g><!-- ENGINE_ART_END -->
+</svg>
+<svg id="side" viewBox="0 0 380 600" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+<g id="g-cycle" data-part="cycle" data-zh-label="一个循环 = 720°：长指针一圈，曲轴短指针两圈" data-en-label="One cycle = 720°: one lap of the long hand, two of the crank hand"></g>
+<g id="g-pv" data-part="pv" data-zh-label="压力–容积图：围出的面积是净功" data-en-label="Pressure–volume: the enclosed area is net work"></g>
+</svg>
+</div>
+<div class="readouts" data-i18n data-zh-aria-label="当前曲轴位置的读数" data-en-aria-label="Readouts for the current crank position" aria-label="Readouts for the current crank position">
+<div class="readout" data-part="crank"><span class="k" data-ref="crank cycle"><span lang="zh">曲轴转角</span><span lang="en">Crank angle</span></span><strong id="ro-angle"></strong><span class="u" id="ro-angle-u"></span></div>
+<div class="readout" data-part="cycle"><span class="k" data-ref="cycle"><span lang="zh">冲程</span><span lang="en">Stroke</span></span><strong id="ro-stroke"></strong><span class="u" id="ro-stroke-u"></span></div>
+<div class="readout" data-part="valves"><span class="k" data-ref="valves"><span lang="zh">气门</span><span lang="en">Valves</span></span><strong id="ro-valves"></strong><span class="u" id="ro-valves-u"></span></div>
+<div class="readout" data-part="pv"><span class="k" data-ref="pv chamber"><span lang="zh">容积 · 压力</span><span lang="en">Volume · pressure</span></span><strong id="ro-p"></strong><span class="u" id="ro-p-u"></span></div>
+</div>
+<ul class="legend" data-i18n data-zh-aria-label="颜色图例" data-en-aria-label="Colour legend" aria-label="Colour legend">
+<li data-ref="cycle chamber"><i style="background:var(--intake)"></i><span lang="zh">进气</span><span lang="en">Intake</span></li>
+<li data-ref="cycle chamber"><i style="background:var(--comp)"></i><span lang="zh">压缩</span><span lang="en">Compression</span></li>
+<li data-ref="cycle chamber plug"><i style="background:var(--power)"></i><span lang="zh">做功</span><span lang="en">Power</span></li>
+<li data-ref="cycle chamber"><i style="background:var(--exhaust)"></i><span lang="zh">排气</span><span lang="en">Exhaust</span></li>
+<li data-ref="belt cams"><i style="background:var(--accent);border-radius:50%"></i><span lang="zh">正时记号</span><span lang="en">Timing mark</span></li>
+</ul>
+<p id="summary" class="result" aria-live="polite"></p>
+</section>
+</main>
+<script>
+'use strict';
+/* lesson-shell i18n v2: shared by every example page; keep identical across files.
+   Static copy: paired elements <span lang="zh">…</span><span lang="en">…</span> (CSS hides the other language).
+   Text-only nodes and attributes: data-i18n plus data-zh / data-en (textContent) or data-zh-<attr> / data-en-<attr>.
+   Dynamic copy: tr('中文', 'English'); say(el, () => tr(…)) re-renders the message when the language changes. */
+const I18N = (() => {
+  const KEY = 'tf-lang', LANGS = ['zh', 'en'];
+  const stored = (() => { try { return localStorage.getItem(KEY); } catch { return null; } })();
+  const param = new URLSearchParams(location.search).get('lang');
+  let lang = LANGS.includes(param) ? param : LANGS.includes(stored) ? stored : /^zh\b/i.test(navigator.language || '') ? 'zh' : 'en';
+  const listeners = [];
+  function apply() {
+    const root = document.documentElement;
+    root.lang = lang === 'zh' ? 'zh-CN' : 'en';
+    root.dataset.lang = lang;
+    for (const el of document.querySelectorAll('[data-i18n]')) {
+      for (const { name, value } of [...el.attributes]) {
+        if (name === 'data-' + lang) el.textContent = value;
+        else if (name.startsWith('data-' + lang + '-')) el.setAttribute(name.slice(lang.length + 6), value);
+      }
+    }
+    for (const button of document.querySelectorAll('[data-set-lang]')) button.setAttribute('aria-pressed', String(button.dataset.setLang === lang));
+    for (const link of document.querySelectorAll('a[data-keep-lang]')) {
+      const target = new URL(link.getAttribute('href').split('?')[0], location.href);
+      target.searchParams.set('lang', lang);
+      link.href = target.href;
+    }
+    listeners.forEach(fn => fn(lang));
+  }
+  document.addEventListener('click', event => {
+    const button = event.target.closest('[data-set-lang]');
+    if (!button || button.dataset.setLang === lang) return;
+    lang = button.dataset.setLang;
+    try { localStorage.setItem(KEY, lang); } catch {}
+    try { const here = new URL(location.href); here.searchParams.set('lang', lang); history.replaceState(history.state, '', here); } catch {}
+    apply();
+  });
+  return { get lang() { return lang; }, on(fn) { listeners.push(fn); }, apply };
+})();
+const tr = (zh, en) => I18N.lang === 'zh' ? zh : en;
+const spoken = new Map();
+function say(target, message) {
+  const el = typeof target === 'string' ? document.getElementById(target) : target;
+  spoken.set(el, message);
+  el.textContent = message ? message() : '';
+}
+I18N.on(() => spoken.forEach((message, el) => { el.textContent = message ? message() : ''; }));
+// On short screens the figure pane scrolls on its own; while more of it is below the fold, show a cue that scrolls it.
+(() => {
+  const pane = document.querySelector('.lesson > .figure-pane');
+  if (!pane) return;
+  const cue = document.createElement('div');
+  cue.className = 'pane-more';
+  cue.hidden = true;
+  cue.innerHTML = '<button type="button" tabindex="-1" aria-hidden="true"></button>';
+  const button = cue.firstChild;
+  const label = () => { button.textContent = tr('下方还有内容 ↓', 'More below ↓'); };
+  label();
+  I18N.on(label);
+  button.addEventListener('click', () => pane.scrollBy({ top: pane.clientHeight * 0.75, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' }));
+  pane.after(cue);
+  function update() {
+    const scrolls = getComputedStyle(pane).overflowY !== 'visible' && pane.scrollHeight > pane.clientHeight + 1;
+    cue.hidden = !(scrolls && pane.scrollHeight - pane.clientHeight - pane.scrollTop > 4);
+    if (scrolls) pane.tabIndex = 0; else pane.removeAttribute('tabindex');
+  }
+  const sizes = new ResizeObserver(update);
+  const watch = () => { sizes.disconnect(); sizes.observe(pane); for (const child of pane.children) sizes.observe(child); };
+  new MutationObserver(() => { watch(); update(); }).observe(pane, { childList: true });
+  pane.addEventListener('scroll', update, { passive: true });
+  addEventListener('resize', update);
+  watch();
+  update();
+})();
+/* Attention guide. Figure parts: [data-part="id"] inside #experiment (labels: data-zh-label / data-en-label).
+   Step focus: a panel .step or element with data-focus="id …" dims the other parts while it is the active step
+   (focused element first, else the first visible step crossing the reading line). Ordered highlights: ol.look > li[data-focus].
+   Dual coding: [data-ref="id …"] terms and legend items link to parts both ways. Nothing moves until the learner scrolls, hovers or clicks. */
+(() => {
+  const figure = document.getElementById('experiment');
+  if (!figure || !figure.querySelector('[data-part]')) return;
+  const panel = document.querySelector('.lesson > .panel');
+  const KEY = 'tf-focus-guide', ids = value => (value || '').split(/\s+/).filter(Boolean);
+  let guide = (() => { try { return localStorage.getItem(KEY) !== 'off'; } catch { return true; } })();
+  let stepIds = [], look = null, peek = null, pinned = null, activeStep = null;
+  const style = document.createElement('style');
+  document.head.append(style);
+  const bar = document.createElement('div');
+  bar.className = 'focus-bar';
+  bar.innerHTML = '<p class="focus-caption" aria-live="polite"></p><label class="focus-toggle"><input type="checkbox"><span></span></label>';
+  const caption = bar.firstChild, toggle = bar.querySelector('input'), toggleText = bar.querySelector('.focus-toggle span');
+  toggle.checked = guide;
+  figure.prepend(bar);
+  const tip = document.createElement('div');
+  tip.className = 'part-tip';
+  tip.hidden = true;
+  document.body.append(tip);
+  const fine = matchMedia('(hover: hover) and (pointer: fine)');
+  const sel = list => list.map(id => `[data-part~="${CSS.escape(id)}"]`).join(',');
+  function render() {
+    const hot = pinned || peek || (look && look.ids) || (guide ? stepIds : []);
+    const ring = !!(pinned || peek || look);
+    figure.classList.toggle('tf-ring', ring && hot.length > 0);
+    figure.toggleAttribute('data-focusing', hot.length > 0);
+    style.textContent = hot.length ? `#experiment [data-part]:not(${sel(hot)}){opacity:.24;filter:saturate(.35)}` : '';
+    for (const part of figure.querySelectorAll('[data-part]')) part.classList.toggle('tf-hot', ring && ids(part.dataset.part).some(id => hot.includes(id)));
+  }
+  // Re-rendered figures replace their children; keep the hot class on new parts.
+  new MutationObserver(() => { if (figure.classList.contains('tf-ring')) render(); }).observe(figure, { childList: true, subtree: true });
+  const visible = el => el.offsetParent !== null || el.getClientRects().length > 0;
+  const steps = () => [...document.querySelectorAll('.panel .step, .panel [data-focus]:not(ol.look *)')].filter(visible);
+  function pickStep() {
+    const scroller = panel && getComputedStyle(panel).overflowY !== 'visible' ? panel : null;
+    const box = scroller ? scroller.getBoundingClientRect() : { top: 0, bottom: innerHeight, height: innerHeight };
+    const line = box.top + box.height * 0.3, list = steps();
+    const inView = el => { const r = el.getBoundingClientRect(); return r.bottom > box.top && r.top < box.bottom; };
+    const focused = document.activeElement && list.filter(el => el.contains(document.activeElement)).pop();
+    if (focused && inView(focused)) return focused;
+    let found = null;
+    for (const el of list) { const r = el.getBoundingClientRect(); if (r.bottom > line && r.top < box.bottom && (!found || found.contains(el))) found = el; else if (found && !found.contains(el)) break; }
+    return found;
+  }
+  function update() {
+    const step = pickStep();
+    if (step !== activeStep) {
+      activeStep = step;
+      if (look && !(step && step.contains(look.list))) setLook(null);
+    }
+    const target = step && (step.matches('[data-focus]') ? step : null);
+    stepIds = target ? ids(target.dataset.focus) : [];
+    render();
+  }
+  let queued = false;
+  const schedule = () => { if (!queued) { queued = true; requestAnimationFrame(() => { queued = false; update(); }); } };
+  (panel || document).addEventListener('scroll', schedule, { passive: true });
+  addEventListener('scroll', schedule, { passive: true });
+  addEventListener('resize', schedule);
+  document.addEventListener('focusin', schedule);
+  new MutationObserver(schedule).observe(document.querySelector('.panel') || document.body, { attributes: true, attributeFilter: ['hidden'], subtree: true });
+  toggle.addEventListener('change', () => { guide = toggle.checked; try { localStorage.setItem(KEY, guide ? 'on' : 'off'); } catch {} render(); });
+  // Ordered highlights.
+  const lists = [...document.querySelectorAll('ol.look')];
+  function setLook(next) {
+    look = next;
+    for (const list of lists) {
+      const items = [...list.children];
+      items.forEach((li, i) => { if (next && next.list === list && next.index === i) li.setAttribute('aria-current', 'step'); else li.removeAttribute('aria-current'); });
+      for (const button of list.previousElementSibling.querySelectorAll('.look-num')) button.setAttribute('aria-pressed', String(!!next && next.list === list && Number(button.dataset.index) === next.index));
+    }
+    caption.textContent = '';
+    if (next) {
+      const n = document.createElement('span');
+      n.className = 'look-n';
+      n.textContent = `${next.index + 1}/${next.list.children.length}`;
+      const text = document.createElement('span');
+      text.append(...[...next.list.children[next.index].childNodes].map(node => node.cloneNode(true)));
+      caption.append(n, text);
+    }
+    render();
+  }
+  const go = (list, index) => setLook({ list, index, ids: ids(list.children[index].dataset.focus) });
+  for (const list of lists) {
+    const nav = document.createElement('div');
+    nav.className = 'look-nav';
+    const items = [...list.children];
+    items.forEach((li, i) => {
+      const b = document.createElement('button');
+      b.type = 'button'; b.className = 'look-num'; b.dataset.index = i; b.textContent = i + 1; b.setAttribute('aria-pressed', 'false');
+      b.addEventListener('click', () => go(list, i));
+      nav.append(b);
+      li.addEventListener('click', event => { if (!event.target.closest('a,button,input,[data-ref]')) go(list, i); });
+    });
+    const make = (cls, zh, en, fn) => { const b = document.createElement('button'); b.type = 'button'; b.className = cls; const label = () => { b.textContent = tr(zh, en); }; label(); I18N.on(label); b.addEventListener('click', fn); nav.append(b); };
+    const at = () => (look && look.list === list ? look.index : -1);
+    make('look-prev', '‹ 上一步', '‹ Prev', () => go(list, Math.max(0, at() - 1)));
+    make('look-next', '下一步 ›', 'Next ›', () => go(list, Math.min(items.length - 1, at() + 1)));
+    make('look-clear', '清除', 'Clear', () => setLook(null));
+    list.before(nav);
+  }
+  // Dual coding: terms ↔ parts.
+  const refs = () => document.querySelectorAll('[data-ref]');
+  for (const term of refs()) if (!term.matches('a,button,input,select,textarea,label,[tabindex]')) { term.tabIndex = 0; term.setAttribute('role', 'button'); term.setAttribute('aria-pressed', 'false'); }
+  const termOf = event => event.target.closest && event.target.closest('[data-ref]');
+  let pointer = 'mouse';
+  document.addEventListener('pointerdown', event => { pointer = event.pointerType; }, true);
+  document.addEventListener('pointerover', event => { const term = termOf(event); if (term && event.pointerType === 'mouse') { peek = ids(term.dataset.ref); render(); } });
+  document.addEventListener('pointerout', event => { const term = termOf(event); if (term && !term.contains(event.relatedTarget)) { peek = null; render(); } });
+  document.addEventListener('focusin', event => { const term = termOf(event); if (term) { peek = ids(term.dataset.ref); render(); } });
+  document.addEventListener('focusout', event => { if (termOf(event)) { peek = null; render(); } });
+  function pin(term) {
+    const next = ids(term.dataset.ref).join(' ');
+    pinned = pinned && pinned.join(' ') === next ? null : ids(next);
+    for (const other of refs()) if (other.getAttribute('role') === 'button') other.setAttribute('aria-pressed', String(!!pinned && other.dataset.ref === term.dataset.ref));
+    render();
+  }
+  document.addEventListener('click', event => { const term = termOf(event); if (term && term.getAttribute('role') === 'button' && pointer !== 'mouse') pin(term); });
+  document.addEventListener('keydown', event => {
+    const term = termOf(event);
+    if (term && term.getAttribute('role') === 'button' && (event.key === 'Enter' || event.key === ' ')) { event.preventDefault(); pin(term); }
+    if (event.key === 'Escape' && (look || pinned)) { pinned = null; for (const other of refs()) if (other.getAttribute('role') === 'button') other.setAttribute('aria-pressed', 'false'); setLook(null); }
+  });
+  function partLabel(part) { return part.getAttribute(`data-${I18N.lang}-label`); }
+  figure.addEventListener('pointermove', event => {
+    const part = event.target.closest && event.target.closest('[data-part]');
+    const label = part && partLabel(part);
+    for (const term of refs()) term.classList.toggle('tf-ref-on', !!part && ids(term.dataset.ref).some(id => ids(part.dataset.part).includes(id)));
+    if (!label || !fine.matches || event.pointerType !== 'mouse') { tip.hidden = true; return; }
+    tip.textContent = label;
+    tip.hidden = false;
+    const x = Math.min(event.clientX + 14, innerWidth - tip.offsetWidth - 8), y = event.clientY + 18 + tip.offsetHeight > innerHeight ? event.clientY - tip.offsetHeight - 12 : event.clientY + 18;
+    tip.style.left = x + 'px'; tip.style.top = y + 'px';
+  });
+  figure.addEventListener('pointerleave', () => { tip.hidden = true; for (const term of refs()) term.classList.remove('tf-ref-on'); });
+  const labels = () => { toggleText.textContent = tr('焦点引导', 'Focus guide'); };
+  labels();
+  I18N.on(() => { labels(); if (look) setLook(look); });
+  update();
+})();
+/* /lesson-shell */
+const $ = id => document.getElementById(id);
+const SVGNS = 'http://www.w3.org/2000/svg';
+
+// ---- Pure model -------------------------------------------------------
+// Geometry in drawing units (1 unit = 3 mm): crank radius 12, rod 40, bore radius 14. Cycle position φ runs 0–720°.
+const GEO = JSON.parse(document.getElementById('engine-art').dataset.geometry);
+const MM = 3, AREA_CM2 = Math.PI * (GEO.BORE * MM / 10) ** 2, SWEPT = AREA_CM2 * 2 * GEO.CRANK * MM / 10, CR = 10, V_MIN = SWEPT / (CR - 1), V_MAX = V_MIN + SWEPT;
+const P_IN = 0.9, P_EX = 1.1, N = 1.3, P_TDC = P_IN * CR ** N, P_PEAK = 3.2 * P_TDC;
+const STROKES = ['intake', 'compression', 'power', 'exhaust'];
+const OPEN = {intake: 0, exhaust: 540};
+const rad = d => d * Math.PI / 180;
+const wrap = phi => ((phi % 720) + 720) % 720;
+function pinHeight(phi) { const t = rad(phi); return GEO.CRANK * Math.cos(t) + Math.sqrt(GEO.ROD ** 2 - (GEO.CRANK * Math.sin(t)) ** 2); }
+function volume(phi) { return V_MIN + AREA_CM2 * (GEO.TDC_PIN - pinHeight(phi)) * MM / 10; }
+function strokeOf(phi) { return STROKES[Math.min(3, Math.floor(wrap(phi) / 180))]; }
+function lift(phi, valve) { const t = wrap(phi - OPEN[valve]) / 180; return t > 0 && t < 1 ? GEO.LIFT * Math.sin(Math.PI * t) : 0; }
+function sparking(phi) { const p = wrap(phi); return p >= 352 && p < 368; }
+function pressure(phi) {
+  const p = wrap(phi), v = volume(p), s = strokeOf(p);
+  if (s === 'intake') return P_IN;
+  if (s === 'compression') return P_IN * (V_MAX / v) ** N;
+  if (s === 'power') return P_PEAK * (V_MIN / v) ** N;
+  return P_EX;
+}
+function engine(phi) {
+  const p = phi === 720 ? 720 : wrap(phi); // 720° is shown as the end of the cycle, not folded back to 0°
+  return {phi: p, turn: p < 360 ? 1 : 2, stroke: strokeOf(p), pin: pinHeight(p), volume: volume(p), pressure: pressure(p), intake: lift(p, 'intake'), exhaust: lift(p, 'exhaust'), spark: sparking(p), cam: p / 2, crank: p % 360, rising: Math.sin(rad(p)) < -1e-9, dead: p % 360 === 0 ? 'tdc' : p % 180 === 0 ? 'bdc' : null};
+}
+const PROBLEMS = [
+  {phi: 450, key: () => strokeOf(450)},
+  {phi: 0, key: () => 3000 / 60 / (720 / 360), tol: 0.01},
+  {phi: 0, key: () => 'every'}
+];
+function selfCheck() {
+  const fails = [], near = (a, b, t) => Math.abs(a - b) <= t, check = (ok, name) => { if (!ok) fails.push(name); };
+  check(near(pinHeight(0), 52, 1e-9) && near(pinHeight(180), 28, 1e-9), 'pin at TDC 52, BDC 28');
+  for (let p = 1; p <= 180; p++) if (!(pinHeight(p) < pinHeight(p - 1))) { check(false, 'piston falls monotonically from TDC to BDC'); break; }
+  check(near(volume(180) / volume(0), CR, 1e-9), 'compression ratio 10');
+  check(near(SWEPT, 399, 1), 'swept volume ≈ 399 cm³');
+  check(strokeOf(90) === 'intake' && strokeOf(270) === 'compression' && strokeOf(450) === 'power' && strokeOf(630) === 'exhaust', 'stroke order');
+  let sparks = 0, wasSpark = false;
+  for (let p = 0; p < 1440; p++) {
+    const e = engine(p);
+    if (e.spark && !wasSpark) sparks++;
+    wasSpark = e.spark;
+    if ((e.stroke === 'compression' || e.stroke === 'power') && (e.intake > 0 || e.exhaust > 0)) { check(false, 'both valves shut in compression and power'); break; }
+    if (e.intake > 0 && e.stroke !== 'intake') { check(false, 'intake opens only in the intake stroke'); break; }
+    if (e.exhaust > 0 && e.stroke !== 'exhaust') { check(false, 'exhaust opens only in the exhaust stroke'); break; }
+  }
+  check(sparks === 2, 'one spark per 720° (two in two cycles)');
+  check(near(engine(720).cam % 360, engine(0).cam, 1e-9) && !near(engine(360).cam % 360, engine(0).cam, 1), 'cam returns only after 720°');
+  check(pressure(361) > 2.5 * pressure(359) && near(pressure(359), P_IN * (V_MAX / volume(359)) ** N, 1e-9), 'pressure jumps at the spark');
+  check(pressure(450) > pressure(270), 'power runs above compression at equal volume');
+  check(near(PROBLEMS[1].key(), 25, 1e-9), '3000 rpm → 25 power strokes per second');
+  check(720 / 4 === 180, 'four cylinders fire every 180°');
+  return fails;
+}
+const failed = selfCheck();
+if (failed.length) throw new Error('four-stroke selfCheck failed: ' + failed.join('; '));
+
+// ---- Projection (same orthographic camera as the Anatomy build) ----------
+const CAM = (() => { const P = GEO.P, a = rad(P.azimuth), e = rad(P.elevation); return {ox: P.origin[0], oy: P.origin[1], sinA: Math.sin(a), cosA: Math.cos(a), sinE: Math.sin(e), cosE: Math.cos(e), k: P.scale * Math.sqrt(1.6)}; })();
+function iso(x, y, z) { const c = CAM; return [c.ox + (x * c.sinA - y * c.cosA) * c.k, c.oy + ((x * c.cosA + y * c.sinA) * c.sinE - z * c.cosE) * c.k]; }
+const r1 = v => Math.round(v * 10) / 10;
+const pathOf = (pts, closed = true) => pts.map((p, i) => (i ? 'L' : 'M') + r1(p[0]) + ' ' + r1(p[1])).join('') + (closed ? 'Z' : '');
+const onPlane = (pts, y) => pts.map(([x, z]) => iso(x, y, z));
+const circle2 = (cx, cz, r, n = 28) => Array.from({length: n}, (_, i) => { const a = i / n * 2 * Math.PI; return [cx + r * Math.cos(a), cz + r * Math.sin(a)]; });
+function hull(points) {
+  const p = points.slice().sort((a, b) => a[0] - b[0] || a[1] - b[1]), cross = (o, a, b) => (a[0] - o[0]) * (b[1] - o[1]) - (a[1] - o[1]) * (b[0] - o[0]);
+  const lo = [], hi = [];
+  for (const q of p) { while (lo.length > 1 && cross(lo[lo.length - 2], lo[lo.length - 1], q) <= 0) lo.pop(); lo.push(q); }
+  for (const q of p.reverse()) { while (hi.length > 1 && cross(hi[hi.length - 2], hi[hi.length - 1], q) <= 0) hi.pop(); hi.push(q); }
+  return lo.slice(0, -1).concat(hi.slice(0, -1));
+}
+function el(name, attrs, parent, text) {
+  const node = document.createElementNS(SVGNS, name);
+  for (const [k, v] of Object.entries(attrs)) node.setAttribute(k, v);
+  if (text != null) node.textContent = text;
+  if (parent) parent.appendChild(node);
+  return node;
+}
+// A flat part of depth y0..y1 seen from the front: back face, swept sides, front face.
+function slab(g, shape, y0, y1) {
+  const back = onPlane(shape, y0), front = onPlane(shape, y1);
+  el('path', {d: pathOf(back), class: 'slab-back'}, g);
+  el('path', {d: pathOf(hull([...back, ...front])), class: 'slab-side'}, g);
+  el('path', {d: pathOf(front), class: 'slab-front'}, g);
+}
+const STROKE_VAR = {intake: '--intake', compression: '--comp', power: '--power', exhaust: '--exhaust'};
+const color = s => `var(${STROKE_VAR[s]})`;
+
+// ---- State ------------------------------------------------------------
+const state = {phi: 0, prediction: null, seen: {compress: false, spark: false, strokes: new Set()}, unlocked: false, practice: null, saved: null, checked: [], firstTry: [], playing: false};
+let narrow = false, playTimer = null, lastFrame = 0;
+const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+
+// ---- Drawing ------------------------------------------------------------
+function drawEngine(m) {
+  const gas = $('rt-gas'); gas.replaceChildren();
+  const top = m.pin + GEO.CROWN, B = GEO.BORE - 0.2;
+  const fill = m.stroke === 'power' ? `color-mix(in srgb, var(--power) ${Math.round(85 - 55 * (m.phi - 360) / 180)}%, var(--cavity))` : `color-mix(in srgb, ${color(m.stroke)} ${m.stroke === 'compression' ? 30 + Math.round(40 * (m.phi - 180) / 180) : 35}%, var(--cavity))`;
+  el('path', {d: pathOf(onPlane([[-B, top - 1], [B, top - 1], [B, GEO.DECK], [-B, GEO.DECK]], -1)), class: 'gas', fill}, gas);
+  // Gas flow through the open port.
+  const flow = (side, inward, s) => {
+    const x0 = side * 21, x1 = side * 9, z0 = GEO.DECK + 8.5, z1 = GEO.DECK + 4;
+    const pts = inward ? [[x0, z0], [x1, z1], [side * 7, GEO.DECK - 3]] : [[side * 7, GEO.DECK - 3], [x1, z1], [x0, z0]];
+    const end = pts[2], prev = pts[1], ang = Math.atan2(end[1] - prev[1], end[0] - prev[0]);
+    const head = [[end[0] - 2.6 * Math.cos(ang - .5), end[1] - 2.6 * Math.sin(ang - .5)], end, [end[0] - 2.6 * Math.cos(ang + .5), end[1] - 2.6 * Math.sin(ang + .5)]];
+    el('path', {d: pathOf(onPlane(pts, 1), false) + pathOf(onPlane(head, 1), false), class: 'flow', stroke: color(s)}, gas);
+  };
+  if (m.intake > 0.4) flow(-1, true, 'intake');
+  if (m.exhaust > 0.4) flow(1, false, 'exhaust');
+
+  // Crank: counterweight on the web face, pin, timing dot.
+  const crank = $('rt-crank'); crank.replaceChildren();
+  const t = rad(m.phi), px = GEO.CRANK * Math.sin(t), pz = GEO.CRANK * Math.cos(t), pinAngle = Math.atan2(pz, px);
+  const cw = [];
+  for (let i = 0; i <= 20; i++) { const a = pinAngle + Math.PI - 1.15 + 2.3 * i / 20; cw.push([15.6 * Math.cos(a), 15.6 * Math.sin(a)]); }
+  for (let i = 20; i >= 0; i--) { const a = pinAngle + Math.PI - 1.15 + 2.3 * i / 20; cw.push([5.5 * Math.cos(a), 5.5 * Math.sin(a)]); }
+  el('path', {d: pathOf(onPlane(cw, -7)), class: 'counter'}, crank);
+  slab(crank, circle2(px, pz, 3.4), -7, -2);
+
+  // Connecting rod from crank pin to wrist pin.
+  const rod = $('rt-rod'); rod.replaceChildren();
+  slab(rod, hull([...circle2(px, pz, 5.4), ...circle2(0, m.pin, 3.2)]), -2, 2);
+  el('circle', {cx: r1(iso(px, 2, pz)[0]), cy: r1(iso(px, 2, pz)[1]), r: 2.4, class: 'pin-dot'}, rod);
+
+  // Piston and valves: Anatomy solids moved along their own axes.
+  const shift = (dx, dy, dz) => { const a = iso(0, 0, 0), b = iso(dx, dy, dz); return `translate(${r1(b[0] - a[0])} ${r1(b[1] - a[1])})`; };
+  $('piston-solid').setAttribute('transform', shift(0, 0, m.pin - GEO.TDC_PIN));
+  const [ai, ae] = GEO.axes;
+  $('valve-in').setAttribute('transform', shift(-ai[0] * m.intake, 0, -ai[2] * m.intake));
+  $('valve-ex').setAttribute('transform', shift(-ae[0] * m.exhaust, 0, -ae[2] * m.exhaust));
+
+  // Valve springs between the head and each retainer.
+  const springs = $('rt-springs'); springs.replaceChildren();
+  [[ai, -1, m.intake], [ae, 1, m.exhaust]].forEach(([a, side, l]) => {
+    const seat = [side * GEO.SEAT_X, GEO.DECK + .6], n = [a[2], -a[0]], s0 = 17.6, s1 = GEO.STEM - 3.4 - l, pts = [];
+    for (let i = 0; i <= 14; i++) { const s = s0 + (s1 - s0) * i / 14, w = i === 0 || i === 14 ? 0 : (i % 2 ? 2.7 : -2.7); pts.push([seat[0] + a[0] * s + n[0] * w, seat[1] + a[2] * s + n[1] * w]); }
+    el('path', {d: pathOf(onPlane(pts, 0), false), class: 'spring'}, springs);
+  });
+
+  // Cams: lobe profile turned at half crank speed; contact radius equals the valve lift.
+  const cams = $('rt-cams'); cams.replaceChildren();
+  GEO.cams.forEach(([cx, , cz], i) => {
+    const a = GEO.axes[i], valve = i ? 'exhaust' : 'intake', gamma = Math.atan2(-a[2], -a[0]);
+    const betaC = -45 + wrap(m.phi - OPEN[valve]) / 2, shape = [];
+    for (let j = 0; j < 72; j++) {
+      const beta = ((j * 5 + 180) % 360) - 180, rho = GEO.CAM_BASE + (Math.abs(beta) <= 45 ? GEO.LIFT * Math.sin(Math.PI * (beta + 45) / 90) : 0), w = gamma + rad(beta - betaC);
+      shape.push([cx + rho * Math.cos(w), cz + rho * Math.sin(w)]);
+    }
+    slab(cams, shape, -2.5, 2.5);
+    el('circle', {cx: r1(iso(cx, 2.5, cz)[0]), cy: r1(iso(cx, 2.5, cz)[1]), r: 2.2, class: 'pin-dot'}, cams);
+  });
+
+  // Spark.
+  const spark = $('rt-spark'); spark.replaceChildren();
+  if (m.spark) {
+    const [sx, sy] = iso(0, 0, GEO.DECK - 2.2);
+    el('circle', {cx: r1(sx), cy: r1(sy + 8), r: 16, class: 'flame'}, spark);
+    const star = [];
+    for (let i = 0; i < 16; i++) { const r = i % 2 ? 3 : 9, a = i / 16 * 2 * Math.PI; star.push([sx + r * Math.cos(a), sy + 4 + r * Math.sin(a)]); }
+    el('path', {d: pathOf(star), class: 'spark-star'}, spark);
+  }
+
+  // Timing belt in front (phantom) with marks: the crank wheel turns at φ, the cam wheels at φ/2.
+  const belt = $('rt-belt'); belt.replaceChildren();
+  const YB = 7, wheels = [[0, 0, 5, m.phi], ...GEO.cams.map(([cx, , cz]) => [cx, cz, 10, m.phi / 2])];
+  el('path', {d: pathOf(onPlane(hull(wheels.flatMap(([x, z, r]) => circle2(x, z, r + 1.2, 36))), YB)), class: 'phantom'}, belt);
+  for (const [x, z, r, turn] of wheels) {
+    el('path', {d: pathOf(onPlane(circle2(x, z, r, 36), YB)), class: 'sprocket'}, belt);
+    const a = rad(90 - turn), tip = iso(x + r * .78 * Math.cos(a), YB, z + r * .78 * Math.sin(a)), c = iso(x, YB, z);
+    el('line', {x1: r1(c[0]), y1: r1(c[1]), x2: r1(tip[0]), y2: r1(tip[1]), class: 'mark-line'}, belt);
+    el('circle', {cx: r1(tip[0]), cy: r1(tip[1]), r: 3.4, class: 'mark'}, belt);
+  }
+
+  // Labels.
+  const labels = $('rt-labels'); labels.replaceChildren();
+  const text = (x, z, s, anchor, cls = 'lbl') => { const [sx, sy] = iso(x, 0, z); el('text', {x: r1(sx), y: r1(sy), 'text-anchor': anchor, class: cls}, labels, s); };
+  text(-24.5, GEO.DECK + 7, tr('进气', 'Intake'), 'end', m.intake > 0 ? 'lbl-accent' : 'lbl');
+  text(24.5, GEO.DECK + 7, tr('排气', 'Exhaust'), 'start', m.exhaust > 0 ? 'lbl-accent' : 'lbl');
+  const tick = (z, s) => { const a = iso(-22, 0, z), b = iso(-25, 0, z); el('line', {x1: r1(a[0]), y1: r1(a[1]), x2: r1(b[0]), y2: r1(b[1]), class: 'tick'}, labels); el('text', {x: r1(b[0] - 3), y: r1(b[1] + 4), 'text-anchor': 'end', class: 'lbl'}, labels, s); };
+  tick(GEO.TDC_PIN + GEO.CROWN, tr('上止点', 'TDC'));
+  tick(GEO.TDC_PIN - 2 * GEO.CRANK + GEO.CROWN, tr('下止点', 'BDC'));
+}
+
+function drawSide(m) {
+  const svg = $('side'), masked = state.practice != null && !state.checked[state.practice];
+  svg.classList.toggle('practice', masked);
+  const W = narrow ? 420 : 380, H = narrow ? 270 : 600;
+  svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
+  const g = $('g-cycle'); g.replaceChildren();
+  const cx = narrow ? 104 : 190, cy = narrow ? 130 : 170, R = narrow ? 86 : 132, w = narrow ? 22 : 30, tickAt = narrow ? 20 : 26;
+  el('circle', {cx, cy, r: R + 8, class: 'dial-face'}, g);
+  const polar = (deg, r) => [cx + r * Math.sin(rad(deg)), cy - r * Math.cos(rad(deg))];
+  STROKES.forEach((s, i) => {
+    const a0 = i * 90, a1 = a0 + 90, pts = [];
+    for (let j = 0; j <= 18; j++) pts.push(polar(a0 + (a1 - a0) * j / 18, R));
+    for (let j = 18; j >= 0; j--) pts.push(polar(a0 + (a1 - a0) * j / 18, R - w));
+    el('path', {d: pathOf(pts), class: 'sector sector-' + s, opacity: s === m.stroke ? 1 : .55}, g);
+    const [lx, ly] = polar(a0 + 45, R - w - (narrow ? 22 : 30));
+    el('text', {x: r1(lx), y: r1(ly), class: 'sector-label', fill: color(s)}, g, {intake: tr('进气', 'Intake'), compression: tr('压缩', 'Compress'), power: tr('做功', 'Power'), exhaust: tr('排气', 'Exhaust')}[s]);
+  });
+  for (let d = 0; d < 720; d += 90) {
+    const [x1, y1] = polar(d / 2, R + 8), [x2, y2] = polar(d / 2, R + 15), [tx, ty] = polar(d / 2, R + tickAt);
+    el('line', {x1: r1(x1), y1: r1(y1), x2: r1(x2), y2: r1(y2), class: 'tick'}, g);
+    if (d % 180 === 0 && (!narrow || d % 360 === 0)) el('text', {x: r1(tx), y: r1(ty + 4), 'text-anchor': 'middle', class: 'lbl'}, g, d + '°');
+  }
+  const [hx, hy] = polar(m.phi / 2, R - w - 6), [kx, ky] = polar(m.phi % 360, (R - w) * .55);
+  el('line', {x1: cx, y1: cy, x2: r1(kx), y2: r1(ky), class: 'hand-crank'}, g);
+  el('line', {x1: cx, y1: cy, x2: r1(hx), y2: r1(hy), class: 'hand-cycle'}, g);
+  el('circle', {cx, cy, r: 5, class: 'hub'}, g);
+  el('text', {x: cx, y: cy + R + (narrow ? 0 : 44), 'text-anchor': 'middle', class: 'lbl', display: narrow ? 'none' : null}, g, tr(`长指针：循环 · 短指针：曲轴（第 ${m.turn} 圈）`, `long hand: cycle · short hand: crank (turn ${m.turn})`));
+
+  const p = $('g-pv'); p.replaceChildren();
+  const box = narrow ? {x: 272, y: 40, w: 134, h: 170} : {x: 54, y: 380, w: 300, h: 180};
+  el('rect', {x: box.x - 44, y: box.y - 18, width: box.w + 56, height: box.h + 52, rx: 12, class: 'panel-bg'}, p);
+  const X = v => box.x + (v - 0) / 500 * box.w, Y = pr => box.y + box.h - pr / 65 * box.h;
+  for (const pr of [0, 20, 40, 60]) { el('line', {x1: box.x, y1: r1(Y(pr)), x2: box.x + box.w, y2: r1(Y(pr)), class: 'gridline'}, p); el('text', {x: box.x - 6, y: r1(Y(pr) + 4), 'text-anchor': 'end', class: 'lbl'}, p, pr); }
+  el('line', {x1: box.x, y1: box.y + box.h, x2: box.x + box.w, y2: box.y + box.h, class: 'axis'}, p);
+  el('text', {x: box.x + box.w, y: box.y + box.h + 30, 'text-anchor': 'end', class: 'lbl'}, p, tr('容积 cm³ →', 'volume cm³ →'));
+  el('text', {x: box.x, y: box.y - 4, class: 'lbl'}, p, tr('压力 bar', 'pressure bar'));
+  for (const v of narrow ? [200, 400] : [100, 200, 300, 400]) el('text', {x: r1(X(v)), y: box.y + box.h + 14, 'text-anchor': 'middle', class: 'lbl'}, p, v);
+  STROKES.forEach((s, i) => {
+    const pts = [];
+    for (let d = i * 180; d <= i * 180 + 180; d += 3) { const q = d === i * 180 + 180 ? d - .001 : d; pts.push([X(volume(q)), Y(pressure(q))]); }
+    el('path', {d: pathOf(pts, false), class: 'trace' + (s === 'intake' || s === 'exhaust' ? ' pv-hide' : ''), stroke: color(s), opacity: s === m.stroke ? 1 : .55}, p);
+  });
+  el('circle', {cx: r1(X(m.volume)), cy: r1(Y(m.pressure)), r: 5.5, class: 'now-dot pv-hide'}, p);
+}
+
+function summary(m) {
+  const sName = STROKE_NAME[m.stroke]();
+  return tr(`曲轴在循环的 ${Math.round(m.phi)}°（第 ${m.turn} 圈），${sName}冲程，${motion(m)}。进气门${m.intake > 0 ? '开' : '关'}，排气门${m.exhaust > 0 ? '开' : '关'}${m.spark ? '，火花塞正在点火' : ''}。缸内 ${Math.round(m.volume)} cm³，${m.pressure.toFixed(1)} bar。凸轮转了 ${Math.round(m.cam)}°。`,
+    `Crank at ${Math.round(m.phi)}° in the cycle (turn ${m.turn}), ${sName.toLowerCase()} stroke, ${motion(m)}. Intake valve ${m.intake > 0 ? 'open' : 'shut'}, exhaust valve ${m.exhaust > 0 ? 'open' : 'shut'}${m.spark ? ', spark plug firing' : ''}. ${Math.round(m.volume)} cm³ at ${m.pressure.toFixed(1)} bar. The cams have turned ${Math.round(m.cam)}°.`);
+}
+const motion = m => m.dead === 'tdc' ? tr('活塞在上止点', 'piston at top dead centre') : m.dead === 'bdc' ? tr('活塞在下止点', 'piston at bottom dead centre') : m.rising ? tr('活塞上行', 'piston rising') : tr('活塞下行', 'piston falling');
+const STROKE_NAME = {intake: () => tr('进气', 'Intake'), compression: () => tr('压缩', 'Compression'), power: () => tr('做功', 'Power'), exhaust: () => tr('排气', 'Exhaust')};
+function render() {
+  const m = engine(state.phi), masked = state.practice != null && !state.checked[state.practice];
+  drawEngine(m); drawSide(m);
+  $('ro-angle').textContent = Math.round(m.phi) + '°';
+  $('ro-angle-u').textContent = tr(`第 ${m.turn} 圈 · 凸轮 ${Math.round(m.cam)}°`, `turn ${m.turn} of 2 · cams ${Math.round(m.cam)}°`);
+  for (const id of ['ro-stroke', 'ro-valves', 'ro-p']) $(id).closest('.readout').classList.toggle('masked', masked);
+  $('ro-stroke').textContent = masked ? '—' : STROKE_NAME[m.stroke]();
+  $('ro-stroke-u').textContent = masked ? '' : motion(m) + (m.spark ? tr(' · 点火', ' · spark') : '');
+  const open = m.intake > 0 ? tr('进气门开', 'Intake open') : m.exhaust > 0 ? tr('排气门开', 'Exhaust open') : tr('都关', 'Both shut');
+  $('ro-valves').textContent = masked ? '—' : open;
+  $('ro-valves-u').textContent = masked ? '' : tr(`升程 ${Math.max(m.intake, m.exhaust) * MM >= .05 ? (Math.max(m.intake, m.exhaust) * MM).toFixed(1) : '0'} mm`, `lift ${Math.max(m.intake, m.exhaust) * MM >= .05 ? (Math.max(m.intake, m.exhaust) * MM).toFixed(1) : '0'} mm`);
+  $('ro-p').textContent = masked ? '—' : `${m.pressure.toFixed(1)} bar`;
+  $('ro-p-u').textContent = masked ? '' : `${Math.round(m.volume)} cm³`;
+  $('angle-out').textContent = Math.round(m.phi) + '°';
+  $('fig-desc').textContent = summary(m);
+  $('summary').textContent = masked ? tr('练习中：读数已隐藏。', 'Practice: readouts hidden.') : summary(m);
+}
+
+// ---- Observation and unlocking -------------------------------------------
+function observe(from, to) {
+  if (!state.prediction || state.practice != null) return;
+  const lo = Math.min(from, to), hi = Math.max(from, to);
+  const visit = (a, b) => {
+    for (let s = 0; s < 4; s++) if (b >= s * 180 && a < s * 180 + 180) state.seen.strokes.add(STROKES[s]);
+    if (b >= 200 && a <= 340) state.seen.compress = true;
+    if ((a <= 360 && b >= 352) || (a < 368 && b >= 360)) state.seen.spark = true;
+  };
+  if (hi - lo <= 360) { if (lo === hi) visit(lo, lo); else visit(lo, hi); }
+  else { visit(0, lo); visit(hi, 720); }
+  const s = state.seen, done = s.compress && s.spark && s.strokes.size === 4;
+  $('seen-compress').classList.toggle('done', s.compress);
+  $('seen-spark').classList.toggle('done', s.spark);
+  $('seen-cycle').classList.toggle('done', s.strokes.size === 4);
+  if (done && !state.unlocked) {
+    state.unlocked = true; $('explanation').hidden = false; $('practice').hidden = false;
+    say('try-status', () => tr('三项都看到了。解释已经展开，往下读。', 'All three seen. The explanation is open below.'));
+  }
+}
+function setPhi(phi, {track = true} = {}) {
+  const before = state.phi, target = Math.round(phi * 10) / 10;
+  // A forward step past 720 wraps; the observation covers both pieces.
+  if (track && state.prediction && state.practice == null) {
+    if (target > 720) { observe(before, 720); observe(0, target - 720); }
+    else if (target < 0) { observe(0, before); observe(target + 720, 720); }
+    else observe(before, target);
+  }
+  state.phi = target === 720 ? 720 : wrap(target);
+  $('angle').value = state.phi;
+  beltCheck();
+  render();
+}
+function beltCheck() {
+  if (!state.prediction) return;
+  const p = state.phi;
+  if (p === 0 || p === 720) say('belt-status', () => tr('三个记号都朝上。现在按一次 +360°。', 'All three marks point up. Now press +360° once.'));
+  else if (p === 360) say('belt-status', () => tr('曲轴记号回到顶上了，可两个凸轮记号朝下：凸轮只转了半圈。再转 360°，三个记号才会一起朝上。', 'The crank mark is back on top, but both cam marks point down: the cams have made only half a turn. Another 360° and all three line up again.'));
+}
+
+// ---- Events -----------------------------------------------------------
+const FEEDBACK = {
+  turns: {
+    '1': () => tr('你预测每圈点一次火。转过来会看到：0°–360° 这一圈里火花塞没有动，第二圈的开头（360°）才点火。一圈只装得下两个冲程。', 'You predicted a spark every turn. Turning it shows otherwise: the plug stays idle through 0°–360° and fires only at the start of turn two (360°). One turn holds only two strokes.'),
+    '2': () => tr('你预测两圈。对：四个冲程各占半圈，点火只在压缩末尾，所以每 720° 一次。', 'You predicted two turns. Right: each of the four strokes takes half a turn, and the spark comes only at the end of compression, once every 720°.'),
+    '4': () => tr('你预测四圈。其实一个冲程只是活塞从一端走到另一端，曲轴转半圈就够了。四个冲程合计两圈。', 'You predicted four turns. A stroke is just the piston travelling from one end to the other, which takes half a crank turn. Four strokes make two turns.')
+  },
+  next: {
+    compression: () => tr('后一题你选了压缩，这也对：混合气被关在缸里，体积缩小到原来的十分之一。', 'On the second question you chose compression, also right: the mixture is trapped and squeezed to a tenth of its volume.'),
+    exhaust: () => tr('后一题你选了排气。排气门这时关着，废气出不去；推出废气是第四个冲程，那时排气门开着。', 'On the second question you chose exhaust. The exhaust valve is shut here, so nothing can leave; pushing gas out is the fourth stroke, with the exhaust valve open.'),
+    power: () => tr('后一题你选了做功。做功时活塞是被往下推的；往上走、两个气门都关着，是在压缩混合气，为点火做准备。', 'On the second question you chose power. In the power stroke the piston is driven down; rising with both valves shut is compression, getting the mixture ready to burn.')
+  }
+};
+$('prediction-form').addEventListener('submit', event => {
+  event.preventDefault();
+  const data = new FormData(event.target), turns = data.get('turns'), next = data.get('next');
+  if (!turns || !next) return;
+  state.prediction = {turns, next};
+  $('try-controls').disabled = false;
+  say('prediction-status', () => tr('已记下。现在转动曲轴吧。', 'Saved. Now turn the crank.'));
+  say('prediction-feedback', () => FEEDBACK.turns[turns]() + ' ' + FEEDBACK.next[next]());
+  if (!state.unlocked) say('try-status', () => tr('勾完上面三项，解释就会展开。', 'Tick all three above and the explanation opens.'));
+  state.beltFrom0 = state.phi === 0;
+  beltCheck();
+  render();
+});
+$('angle').addEventListener('input', event => { stopPlay(); state.beltFrom0 = false; setPhi(Number(event.target.value)); });
+$('steps').addEventListener('click', event => {
+  const b = event.target.closest('button[data-step]');
+  if (!b) return;
+  stopPlay();
+  const step = Number(b.dataset.step);
+  const start = state.phi === 720 ? 0 : state.phi;
+  if (step === 360) state.beltFrom0 = start === 0;
+  if (start !== state.phi) state.phi = start;
+  setPhi(start + step);
+});
+function stopPlay() {
+  if (!state.playing) return;
+  state.playing = false; clearInterval(playTimer); cancelAnimationFrame(playTimer); playTimer = null;
+  $('play').setAttribute('aria-pressed', 'false');
+}
+function tick(now) {
+  if (!state.playing) return;
+  const dt = Math.min(100, now - (lastFrame || now)); lastFrame = now;
+  setPhi((state.phi === 720 ? 0 : state.phi) + dt * 0.12);
+  playTimer = requestAnimationFrame(tick);
+}
+$('play').addEventListener('click', () => {
+  if (state.playing) { stopPlay(); return; }
+  state.playing = true; $('play').setAttribute('aria-pressed', 'true');
+  if (reduced.matches) playTimer = setInterval(() => setPhi((state.phi === 720 ? 0 : state.phi) + 30), 450);
+  else { lastFrame = 0; playTimer = requestAnimationFrame(tick); }
+});
+// Drag the crank disc: the screen angle around the crank centre drives φ (clockwise = forward).
+(() => {
+  const svg = $('engine');
+  let last = null;
+  const angleAt = event => {
+    const pt = svg.createSVGPoint(); pt.x = event.clientX; pt.y = event.clientY;
+    const p = pt.matrixTransform(svg.getScreenCTM().inverse()), c = iso(0, 0, 0);
+    return Math.atan2(c[1] - p.y, p.x - c[0]) * 180 / Math.PI;
+  };
+  for (const part of document.querySelectorAll('#engine [data-part=crank], #engine [data-part=rod]')) {
+    part.addEventListener('pointerdown', event => {
+      if (!state.prediction || state.practice != null) return;
+      stopPlay(); state.beltFrom0 = false; last = angleAt(event); part.setPointerCapture(event.pointerId); event.preventDefault();
+    });
+    part.addEventListener('pointermove', event => {
+      if (last == null) return;
+      const a = angleAt(event); let d = last - a; d = ((d + 540) % 360) - 180; last = a;
+      if (Math.abs(d) > 0.2) setPhi((state.phi === 720 && d > 0 ? 0 : state.phi) + d);
+    });
+    part.addEventListener('pointerup', () => { last = null; });
+    part.addEventListener('pointercancel', () => { last = null; });
+  }
+})();
+$('transfer-form').addEventListener('submit', event => {
+  event.preventDefault();
+  const choice = new FormData(event.target).get('transfer');
+  if (!choice) return;
+  const text = {
+    '180': ['对。每个缸每 720° 点一次火，四个缸平分这 720°，所以每 180° 有一个缸在做功，曲轴几乎一直被推着走。常见的点火顺序是 1-3-4-2，让相邻两次点火落在不同的缸上。', 'Correct. Each cylinder fires once every 720°, and four cylinders share those 720° evenly, so a cylinder fires every 180° and the crank is almost always being pushed. A common firing order is 1-3-4-2, so consecutive firings land on different cylinders.'],
+    '90': ['不对。90° 来自“每缸每圈点一次火”：360° ÷ 4。可每个缸要两圈（720°）才点一次，所以是 720° ÷ 4 = 180°。', 'Not quite. 90° comes from “each cylinder fires every turn”: 360° ÷ 4. But each cylinder fires only once per two turns (720°), so it is 720° ÷ 4 = 180°.'],
+    '720': ['不对。720° 是单个缸两次点火的间隔。四个缸错开排列，就是为了把这 720° 平分：每 180° 一次，扭矩更平顺。', 'Not quite. 720° is the gap between firings of a single cylinder. Four cylinders are staggered precisely to split those 720° evenly: one firing every 180°, for smoother torque.']
+  }[choice];
+  say('transfer-feedback', () => tr(...text));
+});
+
+// ---- Independent practice ----------------------------------------------
+function loadProblem(i) {
+  state.practice = i;
+  setPhi(PROBLEMS[i].phi, {track: false});
+  for (const form of document.querySelectorAll('.problem')) form.hidden = Number(form.dataset.problem) !== i;
+  $('practice-next').hidden = true;
+  render();
+}
+function judge(i, form) {
+  const raw = new FormData(form).get('answer');
+  if (raw == null || raw === '') return null;
+  if (i === 0) {
+    if (raw === 'power') return {ok: true, msg: () => tr('对。360° 是压缩结束、火花塞点火的时刻；再往下走 90°，正是燃气推着活塞的做功冲程，两个气门都关着。', 'Correct. 360° is the end of compression, when the plug fires; 90° later the burning gas is driving the piston down in the power stroke, with both valves shut.')};
+    if (raw === 'intake') return {ok: false, msg: () => tr('这是“活塞往下走就是进气”的想法。往下走有两种：第一圈的进气，第二圈的做功。450° 在第二圈，刚点过火。', 'That is the “falling piston means intake” idea. The piston falls twice per cycle: intake in turn one, power in turn two. 450° is in turn two, just after the spark.')};
+    return {ok: false, msg: () => tr('排气冲程活塞是往上走的（540°–720°），把废气推出去。450° 活塞在往下走，而且刚点过火。', 'In the exhaust stroke the piston rises (540°–720°) and pushes gas out. At 450° the piston is falling, just after the spark.')};
+  }
+  if (i === 2) {
+    if (raw === 'every') return {ok: true, msg: () => tr('对。凸轮和曲轴同速，每个气门每 360° 就开一次。进气门会在做功冲程中间打开，燃气从进气道倒冲出去；排气门会在压缩冲程打开，混合气漏掉。这台机器根本转不起来。', 'Correct. With the cams at crank speed, each valve opens every 360°. The intake valve opens in the middle of the power stroke and burning gas blows back into the intake; the exhaust valve opens during compression and the mixture escapes. The engine will not run.')};
+    if (raw === 'faster') return {ok: false, msg: () => tr('气门的快慢不是重点，重点是“在哪个冲程打开”。凸轮转一圈，每个气门开一次；凸轮和曲轴同速，就变成每圈都开，包括做功和压缩冲程。', 'Speed is not the point; when the valves open is. Each cam lap opens its valve once. At crank speed that means every turn, including during compression and power.')};
+    return {ok: false, msg: () => tr('点火由点火系统决定，和凸轮轮大小无关。被打乱的是气门：每圈都开一次，做功冲程里进气门也会打开。', 'Ignition has its own timing, not set by the cam wheel. What breaks is the valves: they open every turn, so the intake opens during the power stroke too.')};
+  }
+  const x = Number(raw), key = PROBLEMS[1].key();
+  if (Math.abs(x - key) <= PROBLEMS[1].tol) return {ok: true, msg: () => tr('对，25 次。3000 转/分 = 50 转/秒；每两转做一次功，所以 25 次/秒。', 'Correct: 25. 3000 rpm is 50 turns per second; one power stroke per two turns gives 25 per second.')};
+  if (Math.abs(x - 50) < 0.5) return {ok: false, msg: () => tr('50 是每秒转数。这里假设每圈点一次火；四冲程机要两圈才做一次功。', '50 is the turns per second. That assumes a spark every turn; a four-stroke needs two turns per power stroke.')};
+  if (Math.abs(x - 100) < 0.5) return {ok: false, msg: () => tr('100 是每秒冲程数（每圈两个冲程）。四个冲程里只有一个做功。', '100 is strokes per second (two per turn). Only one stroke in four delivers work.')};
+  if (Math.abs(x - 1500) < 1) return {ok: false, msg: () => tr('1500 是每分钟做功次数。题目问的是每秒：再除以 60。', '1500 is power strokes per minute. The question asks per second: divide by 60.')};
+  if (Math.abs(x - 12.5) < 0.3) return {ok: false, msg: () => tr('你除了 4（每个冲程一圈）。一个冲程是半圈，四个冲程是两圈。', 'You divided by 4, as if each stroke took a turn. A stroke is half a turn; four strokes are two turns.')};
+  return {ok: false, msg: () => tr('先把每分钟转数换成每秒转数，再想：几圈才做一次功？', 'First turn rpm into turns per second, then ask: how many turns per power stroke?')};
+}
+for (const form of document.querySelectorAll('.problem')) {
+  form.addEventListener('submit', event => {
+    event.preventDefault();
+    const i = Number(form.dataset.problem), verdict = judge(i, form);
+    if (!verdict) return;
+    if (state.firstTry[i] == null) state.firstTry[i] = verdict.ok;
+    state.checked[i] = true;
+    say(form.querySelector('[data-feedback]'), () => (verdict.ok ? '' : tr('还不对。', 'Not yet. ')) + verdict.msg() + ' ' + tr('读数已恢复，可以对照。', 'The readouts are back for comparison.'));
+    $('practice-next').hidden = i === PROBLEMS.length - 1;
+    const done = state.checked.filter(Boolean).length, first = state.firstTry.filter(Boolean).length;
+    say('practice-score', () => done === PROBLEMS.length ? tr(`完成 3 题，首次就答对 ${first} 题。`, `All 3 done; ${first} right on the first try.`) : '');
+    render();
+  });
+}
+$('practice-start').addEventListener('click', () => {
+  stopPlay();
+  state.saved = state.phi;
+  state.checked = []; state.firstTry = [];
+  for (const form of document.querySelectorAll('.problem')) { form.reset(); say(form.querySelector('[data-feedback]'), null); }
+  say('practice-score', null);
+  $('try-controls').disabled = true;
+  $('problems').hidden = false; $('practice-start').hidden = true; $('practice-exit').hidden = false;
+  loadProblem(0);
+});
+$('practice-next').addEventListener('click', () => loadProblem(state.practice + 1));
+$('practice-exit').addEventListener('click', () => {
+  if (state.practice == null) return;
+  state.practice = null;
+  setPhi(state.saved, {track: false});
+  $('try-controls').disabled = !state.prediction;
+  $('problems').hidden = true; $('practice-start').hidden = false; $('practice-exit').hidden = true;
+  render();
+});
+$('reset').addEventListener('click', () => {
+  stopPlay();
+  Object.assign(state, {phi: 0, prediction: null, seen: {compress: false, spark: false, strokes: new Set()}, unlocked: false, practice: null, saved: null, checked: [], firstTry: [], beltFrom0: false});
+  $('angle').value = 0;
+  $('prediction-form').reset(); $('transfer-form').reset(); $('writing').value = '';
+  for (const form of document.querySelectorAll('.problem')) { form.reset(); form.hidden = true; say(form.querySelector('[data-feedback]'), null); }
+  $('try-controls').disabled = true;
+  $('explanation').hidden = true; $('practice').hidden = true; $('problems').hidden = true; $('practice-start').hidden = false; $('practice-exit').hidden = true; $('practice-next').hidden = true;
+  for (const id of ['seen-compress', 'seen-spark', 'seen-cycle']) $(id).classList.remove('done');
+  for (const id of ['prediction-status', 'prediction-feedback', 'transfer-feedback', 'try-status', 'belt-status', 'practice-score']) say(id, null);
+  render();
+});
+I18N.on(render);
+new ResizeObserver(() => { const n = $('side').getBoundingClientRect().width > 0 && innerWidth <= 640; if (n !== narrow) { narrow = n; render(); } }).observe(document.querySelector('#experiment .stage'));
+I18N.apply();
+render();
+// Fit the engine viewBox to the generated art once, with room for labels and the belt.
+(() => { const b = $('engine-art').getBBox(); if (b.width) $('engine').setAttribute('viewBox', `${Math.floor(b.x - 34)} ${Math.floor(b.y - 10)} ${Math.ceil(b.width + 68)} ${Math.ceil(b.height + 20)}`); })();
+</script>
+</body>
+</html>

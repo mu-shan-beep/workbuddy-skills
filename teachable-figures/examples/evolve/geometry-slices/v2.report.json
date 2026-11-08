@@ -1,0 +1,323 @@
+{
+  "ok": true,
+  "artifact": "geometry-slices",
+  "from": 1,
+  "to": 2,
+  "patch": "patch-1.json",
+  "checks": [
+    {
+      "name": "base self-check",
+      "ok": true
+    },
+    {
+      "name": "state version",
+      "ok": true
+    },
+    {
+      "name": "component present: area-tiles",
+      "ok": true
+    },
+    {
+      "name": "component present: tile-probe",
+      "ok": true
+    },
+    {
+      "name": "invariant area-tiles/area-multiple-matches-model @ 0",
+      "ok": true
+    },
+    {
+      "name": "invariant area-tiles/side-is-radius-ratio @ 0",
+      "ok": true
+    },
+    {
+      "name": "invariant area-tiles/area-is-side-squared @ 0",
+      "ok": true
+    },
+    {
+      "name": "invariant area-tiles/whole-tiles-drawn @ 0",
+      "ok": true
+    },
+    {
+      "name": "invariant area-tiles/display-matches @ 0",
+      "ok": true
+    },
+    {
+      "name": "invariant tile-probe/answer-key-from-model @ 0",
+      "ok": true
+    },
+    {
+      "name": "invariant tile-probe/key-is-offered @ 0",
+      "ok": true
+    },
+    {
+      "name": "invariant area-tiles/area-multiple-matches-model @ 1",
+      "ok": true
+    },
+    {
+      "name": "invariant area-tiles/side-is-radius-ratio @ 1",
+      "ok": true
+    },
+    {
+      "name": "invariant area-tiles/area-is-side-squared @ 1",
+      "ok": true
+    },
+    {
+      "name": "invariant area-tiles/whole-tiles-drawn @ 1",
+      "ok": true
+    },
+    {
+      "name": "invariant area-tiles/display-matches @ 1",
+      "ok": true
+    },
+    {
+      "name": "invariant tile-probe/answer-key-from-model @ 1",
+      "ok": true
+    },
+    {
+      "name": "invariant tile-probe/key-is-offered @ 1",
+      "ok": true
+    },
+    {
+      "name": "invariant area-tiles/area-multiple-matches-model @ 2",
+      "ok": true
+    },
+    {
+      "name": "invariant area-tiles/side-is-radius-ratio @ 2",
+      "ok": true
+    },
+    {
+      "name": "invariant area-tiles/area-is-side-squared @ 2",
+      "ok": true
+    },
+    {
+      "name": "invariant area-tiles/whole-tiles-drawn @ 2",
+      "ok": true
+    },
+    {
+      "name": "invariant area-tiles/display-matches @ 2",
+      "ok": true
+    },
+    {
+      "name": "invariant tile-probe/answer-key-from-model @ 2",
+      "ok": true
+    },
+    {
+      "name": "invariant tile-probe/key-is-offered @ 2",
+      "ok": true
+    },
+    {
+      "name": "invariant area-tiles/area-multiple-matches-model @ 3.3",
+      "ok": true
+    },
+    {
+      "name": "invariant area-tiles/side-is-radius-ratio @ 3.3",
+      "ok": true
+    },
+    {
+      "name": "invariant area-tiles/area-is-side-squared @ 3.3",
+      "ok": true
+    },
+    {
+      "name": "invariant area-tiles/whole-tiles-drawn @ 3.3",
+      "ok": true
+    },
+    {
+      "name": "invariant area-tiles/display-matches @ 3.3",
+      "ok": true
+    },
+    {
+      "name": "invariant tile-probe/answer-key-from-model @ 3.3",
+      "ok": true
+    },
+    {
+      "name": "invariant tile-probe/key-is-offered @ 3.3",
+      "ok": true
+    },
+    {
+      "name": "invariant area-tiles/area-multiple-matches-model @ 4",
+      "ok": true
+    },
+    {
+      "name": "invariant area-tiles/side-is-radius-ratio @ 4",
+      "ok": true
+    },
+    {
+      "name": "invariant area-tiles/area-is-side-squared @ 4",
+      "ok": true
+    },
+    {
+      "name": "invariant area-tiles/whole-tiles-drawn @ 4",
+      "ok": true
+    },
+    {
+      "name": "invariant area-tiles/display-matches @ 4",
+      "ok": true
+    },
+    {
+      "name": "invariant tile-probe/answer-key-from-model @ 4",
+      "ok": true
+    },
+    {
+      "name": "invariant tile-probe/key-is-offered @ 4",
+      "ok": true
+    },
+    {
+      "name": "invariant area-tiles/area-multiple-matches-model @ 6",
+      "ok": true
+    },
+    {
+      "name": "invariant area-tiles/side-is-radius-ratio @ 6",
+      "ok": true
+    },
+    {
+      "name": "invariant area-tiles/area-is-side-squared @ 6",
+      "ok": true
+    },
+    {
+      "name": "invariant area-tiles/whole-tiles-drawn @ 6",
+      "ok": true
+    },
+    {
+      "name": "invariant area-tiles/display-matches @ 6",
+      "ok": true
+    },
+    {
+      "name": "invariant tile-probe/answer-key-from-model @ 6",
+      "ok": true
+    },
+    {
+      "name": "invariant tile-probe/key-is-offered @ 6",
+      "ok": true
+    },
+    {
+      "name": "invariant area-tiles/area-multiple-matches-model @ 8",
+      "ok": true
+    },
+    {
+      "name": "invariant area-tiles/side-is-radius-ratio @ 8",
+      "ok": true
+    },
+    {
+      "name": "invariant area-tiles/area-is-side-squared @ 8",
+      "ok": true
+    },
+    {
+      "name": "invariant area-tiles/whole-tiles-drawn @ 8",
+      "ok": true
+    },
+    {
+      "name": "invariant area-tiles/display-matches @ 8",
+      "ok": true
+    },
+    {
+      "name": "invariant tile-probe/answer-key-from-model @ 8",
+      "ok": true
+    },
+    {
+      "name": "invariant tile-probe/key-is-offered @ 8",
+      "ok": true
+    },
+    {
+      "name": "preserved answer: prediction",
+      "ok": true
+    },
+    {
+      "name": "preserved answer: explanation",
+      "ok": true
+    },
+    {
+      "name": "scaffold formula-hint is hidden",
+      "ok": true
+    },
+    {
+      "name": "no horizontal overflow @ 1440×900",
+      "ok": true
+    },
+    {
+      "name": "component area-tiles laid out @ 1440×900",
+      "ok": true
+    },
+    {
+      "name": "component tile-probe laid out @ 1440×900",
+      "ok": true
+    },
+    {
+      "name": "no page errors @ 1440×900",
+      "ok": true
+    },
+    {
+      "name": "no network @ 1440×900",
+      "ok": true
+    },
+    {
+      "name": "no horizontal overflow @ 1280×720",
+      "ok": true
+    },
+    {
+      "name": "component area-tiles laid out @ 1280×720",
+      "ok": true
+    },
+    {
+      "name": "component tile-probe laid out @ 1280×720",
+      "ok": true
+    },
+    {
+      "name": "no page errors @ 1280×720",
+      "ok": true
+    },
+    {
+      "name": "no network @ 1280×720",
+      "ok": true
+    },
+    {
+      "name": "no horizontal overflow @ 360×800",
+      "ok": true
+    },
+    {
+      "name": "component area-tiles laid out @ 360×800",
+      "ok": true
+    },
+    {
+      "name": "component tile-probe laid out @ 360×800",
+      "ok": true
+    },
+    {
+      "name": "no page errors @ 360×800",
+      "ok": true
+    },
+    {
+      "name": "no network @ 360×800",
+      "ok": true
+    }
+  ],
+  "diff": {
+    "components": {
+      "before": [],
+      "after": [
+        "area-tiles",
+        "tile-probe"
+      ],
+      "added": [
+        "area-tiles",
+        "tile-probe"
+      ],
+      "removed": []
+    },
+    "scaffolds": {
+      "formula-hint": "visible → hidden"
+    },
+    "preserved": [
+      "prediction",
+      "explanation"
+    ],
+    "operations": [
+      "add_representation (structural) → slot:figure [area-tiles]",
+      "add_probe (structural) → slot:steps [tile-probe]",
+      "remove_scaffold (structural) → scaffold:formula-hint"
+    ],
+    "bytes": {
+      "before": 50039,
+      "after": 61184
+    }
+  }
+}

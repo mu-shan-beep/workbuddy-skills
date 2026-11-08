@@ -19,14 +19,10 @@ Thumbs.db
 .idea/
 .vscode/
 
-# --- 非自建技能：市场/技能中心/GitHub 安装，上游可随时重装，不纳入备份 ---
-/ima-skills__skillhub/
-/totorosir-workbuddy-checkin/
-/teachable-figures/
-# teachable-figures 来自 github.com/ywEdAi/teachable-figures（MIT），当前版本与上游
-# commit 1acdd97 逐字节一致，本地零改造，重装即可完整复原，故不纳入备份。
-# 恢复方式：git clone 该仓库，rsync 覆盖到 ~/.workbuddy/skills/teachable-figures/（排除 .git）
-# 今后新安装的第三方技能按同样方式在此追加，保持仓库只含自建内容
+# --- 技能目录：一律全量备份，不区分自建与他源（2026-11-08 用户裁定）---
+# 本仓库是「本机全部技能」的快照，市场/技能中心/GitHub 安装的第三方技能同样入库，
+# 不因「上游可重装」而排除。新增技能目录无需改此文件，直接提交即可。
+# 仅排除下文的运行时数据、凭证与本机垃圾，别的一概备份。
 
 # --- WorkBuddy 运行时目录（记忆、自动化等应用数据，非技能内容）---
 /.workbuddy/

@@ -1,0 +1,1100 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title data-i18n data-zh="离太阳更近，才是夏天吗？" data-en="Is summer when Earth is closer to the Sun?">Is summer when Earth is closer to the Sun?</title>
+<style>
+/* lesson-shell v2: shared by every example page; keep identical across files */
+:root{color-scheme:light dark;--bar:56px;--bg:#f7f6f2;--surface:#fff;--stage:#eeece6;--ink:#141618;--text:#2a2e31;--muted:#61676c;--faint:#8b9196;--line:#e4e1d9;--line-strong:#cbc7bd;--accent:#d9480f;--accent-soft:#fcebe2;--focus:#d9480f;--ok:#1d7a4c;--sans:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Noto Sans SC","Microsoft YaHei",sans-serif;--mono:ui-monospace,"SF Mono",SFMono-Regular,Menlo,Consolas,monospace}
+@media(prefers-color-scheme:dark){:root{--bg:#111315;--surface:#181b1e;--stage:#0b0d0f;--ink:#f3f4f2;--text:#dadedc;--muted:#a1a7ab;--faint:#7a8085;--line:#272b2f;--line-strong:#3b4045;--accent:#ff7a45;--accent-soft:#2b1a11;--focus:#ff7a45;--ok:#4cc38a}}
+*{box-sizing:border-box}html{-webkit-text-size-adjust:100%}body{margin:0;background:var(--bg);color:var(--text);font:15.5px/1.6 var(--sans);-webkit-font-smoothing:antialiased}
+[hidden]{display:none!important}html[data-lang=zh] [lang=en],html[data-lang=en] [lang=zh]{display:none!important}
+:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+.skip{position:absolute;left:12px;top:-80px;z-index:30;background:var(--surface);color:var(--ink);padding:8px 12px;border-radius:8px}.skip:focus{top:10px}
+.bar{position:sticky;top:0;z-index:20;height:var(--bar);display:flex;align-items:center;gap:14px;padding:0 16px 0 20px;background:color-mix(in srgb,var(--bg) 90%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.bar .back{display:inline-flex;align-items:center;gap:6px;min-height:40px;color:var(--muted);text-decoration:none;font-size:14px;white-space:nowrap}.bar .back:hover{color:var(--ink)}
+.bar .crumb{min-width:0;font:500 12px/1.2 var(--mono);color:var(--faint);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lang-switch{margin-left:auto;flex:none;display:inline-flex;padding:3px;border:1px solid var(--line);border-radius:999px;background:var(--surface)}
+.lang-switch button{appearance:none;border:0;background:none;cursor:pointer;font:600 12px/1 var(--sans);min-height:30px;min-width:40px;padding:0 11px;border-radius:999px;color:var(--muted)}
+.lang-switch button[aria-pressed=true]{background:var(--ink);color:var(--bg)}
+.lesson{display:flex;flex-direction:column}.panel{display:contents}
+.intro{order:0;padding:28px 20px 6px}
+.figure-pane{order:1;margin:14px 12px 4px;padding:12px;background:var(--stage);border-radius:16px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.steps{order:2;padding:0 20px 40px}
+.stage{position:relative;min-height:0;display:grid;place-items:center}.stage>svg,.stage>canvas{display:block;width:100%;height:auto}
+.fig-caption{margin:0;font-size:12.5px;line-height:1.5;color:var(--muted)}
+.readouts{display:grid;grid-template-columns:repeat(auto-fit,minmax(104px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.readout{background:var(--surface);padding:9px 13px;min-width:0}
+.readout .k{display:block;font:500 12px/1.35 var(--sans);color:var(--muted)}
+.readout strong{display:block;font:650 21px/1.3 var(--sans);font-variant-numeric:tabular-nums;color:var(--ink);letter-spacing:-.01em;overflow-wrap:anywhere}
+.readout .u{display:block;font-size:12px;line-height:1.35;color:var(--faint)}
+.meta{display:flex;flex-wrap:wrap;gap:4px 10px;margin:0 0 14px;padding:0;list-style:none;font:500 12.5px/1.4 var(--sans);color:var(--muted)}.meta li+li::before{content:"/";margin-right:10px;color:var(--line-strong)}
+h1{margin:0 0 12px;font-size:clamp(25px,2.5vw,33px);line-height:1.18;letter-spacing:-.025em;font-weight:700;color:var(--ink);text-wrap:balance}
+.lead{margin:0;color:var(--muted)}
+.step{padding:26px 0 22px;border-top:1px solid var(--line)}.intro+.steps .step:first-child,.steps>.step:first-child{border-top:0}
+.step>h2{display:flex;align-items:center;gap:10px;margin:0 0 12px;font-size:17px;line-height:1.3;letter-spacing:-.01em;color:var(--ink)}
+.step>h2 .n{flex:none;font:600 11px/1 var(--mono);color:var(--accent);border:1px solid currentColor;border-radius:6px;padding:4px 6px}
+h3{margin:20px 0 6px;font-size:14.5px;color:var(--ink)}p{margin:0 0 12px}strong{color:var(--ink)}
+.small{font-size:13.5px;color:var(--muted)}
+fieldset{border:0;padding:0;margin:0;min-width:0}legend{padding:0;margin:0 0 12px;font-weight:600;color:var(--ink)}
+label.choice{display:flex;gap:10px;align-items:flex-start;padding:10px 13px;margin-bottom:8px;border:1px solid var(--line);border-radius:10px;background:var(--surface);cursor:pointer;transition:border-color .12s,box-shadow .12s}
+label.choice:hover{border-color:var(--line-strong)}label.choice:has(input:checked){border-color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink)}label.choice:has(input:disabled){cursor:default}
+label.choice input{flex:none;margin:4px 0 0}input{accent-color:var(--ink)}input[type=radio],input[type=checkbox]{width:17px;height:17px}
+button,select{font:500 14px/1.2 var(--sans);color:var(--ink);background:var(--surface);border:1px solid var(--line-strong);border-radius:10px;padding:0 16px;min-height:42px;cursor:pointer}
+button:hover:not(:disabled),select:hover:not(:disabled){border-color:var(--ink)}button.primary{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+button:disabled,select:disabled{opacity:.45;cursor:not-allowed}
+.controls{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:14px 0}
+.toggle{display:flex;align-items:center;gap:10px;min-height:42px;font-weight:500;color:var(--ink);cursor:pointer}
+.range{margin:16px 0 8px}.range label{display:flex;justify-content:space-between;gap:12px;font-weight:500;color:var(--ink)}.range output{font:500 13px/1.6 var(--mono);color:var(--muted)}
+input[type=range]{width:100%;min-height:32px;margin:4px 0}
+.status{min-height:1.6em;margin:12px 0;padding:10px 12px;border-radius:10px;background:var(--bg);font-size:14px}
+.callout{margin:14px 0;padding:2px 0 2px 14px;border-left:3px solid var(--accent)}
+textarea{display:block;width:100%;min-height:90px;margin-top:8px;padding:10px 12px;font:inherit;color:var(--text);background:var(--bg);border:1px solid var(--line-strong);border-radius:10px;resize:vertical}
+table{border-collapse:collapse;width:100%;margin-top:14px;font-size:14px}th,td{text-align:left;padding:9px 6px;border-bottom:1px solid var(--line);vertical-align:top}th:first-child,td:first-child{padding-left:0}caption{text-align:left;font-weight:600;color:var(--ink);margin-bottom:4px}
+.limits{color:var(--muted);font-size:14px}
+.pane-more{display:none}
+.foot{margin-top:8px;padding-top:16px;border-top:1px solid var(--line);font-size:12.5px;color:var(--faint)}
+/* attention: figure parts [data-part], step focus [data-focus], ordered highlights ol.look, dual-coding terms [data-ref] */
+#experiment [data-part]{transition:opacity .28s ease,filter .28s ease,box-shadow .2s ease}
+#experiment.tf-ring [data-part].tf-hot:not(svg *){box-shadow:0 0 0 2px var(--accent),0 0 0 7px color-mix(in srgb,var(--accent) 18%,transparent);border-radius:10px}
+#experiment.tf-ring svg [data-part].tf-hot{filter:drop-shadow(0 0 1px var(--accent)) drop-shadow(0 0 5px color-mix(in srgb,var(--accent) 40%,transparent))}
+.focus-bar{display:flex;align-items:center;gap:12px;min-height:30px;margin:-4px 0 -2px}
+.focus-caption{flex:1;min-width:0;margin:0;font-size:13px;line-height:1.4;color:var(--ink)}.focus-caption:empty{visibility:hidden}
+.focus-caption .look-n{display:inline-grid;place-items:center;min-width:20px;height:20px;margin-right:8px;padding:0 5px;border-radius:999px;background:var(--accent);color:#fff;font:700 11px/1 var(--sans);vertical-align:1px}
+.focus-toggle{flex:none;display:inline-flex;align-items:center;gap:7px;min-height:30px;font-size:12.5px;color:var(--muted);cursor:pointer;white-space:nowrap}.focus-toggle input{width:15px;height:15px;margin:0}
+ol.look{margin:12px 0 8px;padding:0;list-style:none;counter-reset:look}
+ol.look>li{counter-increment:look;position:relative;margin:0 0 6px;padding:8px 10px 8px 38px;border:1px solid var(--line);border-radius:10px;cursor:pointer;color:var(--muted);transition:border-color .15s,background .15s}
+ol.look>li::before{content:counter(look);position:absolute;left:10px;top:9px;display:grid;place-items:center;width:20px;height:20px;border-radius:999px;border:1px solid var(--line-strong);font:650 11px/1 var(--sans);color:var(--muted)}
+ol.look>li:hover{border-color:var(--line-strong)}ol.look>li[aria-current=step]{border-color:var(--accent);background:var(--accent-soft);color:var(--ink)}ol.look>li[aria-current=step]::before{background:var(--accent);border-color:var(--accent);color:#fff}
+.look-nav{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:0 0 14px}.look-nav button{min-height:34px;padding:0 11px;font-size:13px}.look-nav .look-num{min-width:34px;padding:0}.look-nav .look-num[aria-pressed=true]{background:var(--accent);border-color:var(--accent);color:#fff}
+[data-ref]:not(a,button,input,select,label){text-decoration:underline dotted color-mix(in srgb,var(--accent) 70%,transparent);text-decoration-thickness:1.5px;text-underline-offset:3px;cursor:help;border-radius:4px}
+[data-ref].tf-ref-on{background:var(--accent-soft);box-shadow:0 0 0 2px var(--accent-soft);color:var(--ink)}[data-ref][aria-pressed=true]{background:var(--accent-soft);box-shadow:0 0 0 1px var(--accent)}
+.part-tip{position:fixed;z-index:40;pointer-events:none;max-width:240px;padding:5px 9px;border-radius:8px;background:var(--ink);color:var(--bg);font:500 12.5px/1.35 var(--sans);box-shadow:0 4px 14px rgb(0 0 0/.18)}
+@media(min-width:960px) and (min-height:560px){
+.lesson{display:grid;grid-template-columns:minmax(0,1fr) clamp(380px,35vw,500px);height:calc(100dvh - var(--bar))}
+.panel{display:block;grid-column:2;grid-row:1;overflow-y:auto;overscroll-behavior:contain;background:var(--surface);border-left:1px solid var(--line)}
+.figure-pane{grid-column:1;grid-row:1;margin:0;border-radius:0;padding:24px 28px;min-height:0}
+.figure-pane{overflow-y:auto;overscroll-behavior:contain}.figure-pane>*{flex-shrink:0}
+.figure-pane .stage{flex:1}.figure-pane .stage>svg,.figure-pane .stage>canvas{height:100%;max-height:100%}
+.pane-more{display:flex;grid-column:1;grid-row:1;align-self:end;position:relative;z-index:2;justify-content:center;align-items:flex-end;height:76px;padding-bottom:14px;pointer-events:none;background:linear-gradient(color-mix(in srgb,var(--stage) 0%,transparent),var(--stage) 72%)}
+.pane-more button{pointer-events:auto;min-height:32px;padding:0 14px;border-radius:999px;font-size:12.5px;box-shadow:0 2px 10px rgb(0 0 0/.12)}
+.intro{padding:32px 32px 6px}.steps{padding:0 32px 48px}
+.bar{padding:0 20px 0 24px}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+/* /lesson-shell */
+:root{--sun:#e39a0c;--sun-soft:#fbe3b0;--day:#7cb9e3;--night:#25384c;--axis:#141618;--south:#61676c}
+@media(prefers-color-scheme:dark){:root{--sun:#f4b740;--sun-soft:#4a3713;--day:#5aa2d6;--night:#14202d;--axis:#f3f4f2;--south:#a1a7ab}}
+.stage{display:flex;flex-direction:column;align-items:stretch}
+.stage>svg{display:block;width:100%;height:auto}
+.ptitle{font:600 12.5px var(--sans);fill:var(--muted)}
+.lbl{font:500 11.5px var(--sans);fill:var(--muted)}
+.lbl-ink{font:600 12.5px var(--sans);fill:var(--ink)}
+.lbl-accent{font:650 12.5px var(--sans);fill:var(--accent)}
+.lbl,.lbl-ink,.lbl-accent{paint-order:stroke;stroke:var(--stage);stroke-width:3.5px;stroke-linejoin:round}
+.range output{font-family:var(--sans)}
+.orbit{fill:none;stroke:var(--line-strong);stroke-width:1.4}
+.sunball{fill:var(--sun)}.sunglow{fill:var(--sun);opacity:.18}
+.ray{stroke:var(--sun);stroke-width:1.6;stroke-linecap:round}
+.earth-night{fill:var(--night);stroke:var(--line-strong);stroke-width:1}.earth-day{fill:var(--day)}
+.earth-axis{stroke:var(--axis);stroke-width:1.8;stroke-linecap:round}
+.equator{stroke:var(--ink);stroke-width:1;stroke-dasharray:4 3;opacity:.55;fill:none}
+.parallel{stroke:var(--accent);stroke-width:2.4;stroke-linecap:round}
+.parallel,.parallel-night,.earth-axis{fill:none}.parallel-night{stroke:var(--accent);stroke-width:1.6;stroke-dasharray:3 3;opacity:.7}
+#figure{touch-action:pan-y pinch-zoom}#g-orbit .hit,#g-globe{cursor:grab}#figure.turning,#figure.turning *{cursor:grabbing}
+.view3d{display:grid;grid-template-columns:1fr 1fr auto;gap:0 16px;align-items:end;margin-top:6px}.view3d .range{margin:8px 0 4px}.view3d button{margin-bottom:6px}
+.view3d .note{grid-column:1/-1;margin:2px 0 0}
+@media(max-width:560px){.view3d{grid-template-columns:1fr}}
+.noon-dot{fill:var(--accent);stroke:var(--surface);stroke-width:2}
+.dist{stroke:var(--muted);stroke-width:1;stroke-dasharray:3 3}
+.tick{stroke:var(--line-strong);stroke-width:1}
+.ground{stroke:var(--ink);stroke-width:1.6}
+.beam{fill:var(--sun);opacity:.35}.beam-edge{stroke:var(--sun);stroke-width:1.2}
+.patch{fill:var(--sun)}.ghost{fill:none;stroke:var(--muted);stroke-width:1;stroke-dasharray:4 3}
+.bar-night{fill:var(--night)}.bar-day{fill:var(--sun)}
+.curve{fill:none;stroke:var(--accent);stroke-width:2.2;stroke-linejoin:round}
+.curve-s{fill:none;stroke:var(--south);stroke-width:1.6;stroke-dasharray:5 4}
+.gridline{stroke:var(--line);stroke-width:1}
+.now{stroke:var(--ink);stroke-width:1;opacity:.6}
+.panel-bg{fill:var(--surface);stroke:var(--line)}
+svg.practice .num,svg.practice .year,svg.practice .clock{display:none}
+.result{margin:0;font-size:13.5px;line-height:1.5;color:var(--text)}
+.seg{display:inline-flex;flex-wrap:wrap;padding:3px;border:1px solid var(--line-strong);border-radius:11px;background:var(--surface)}
+.seg label{position:relative;display:flex;align-items:center;gap:6px;padding:8px 12px;border-radius:8px;cursor:pointer;font-size:13.5px;color:var(--muted)}
+.seg input{position:absolute;opacity:0;pointer-events:none}
+.seg label:has(input:checked){background:var(--ink);color:var(--bg)}
+.seg label:has(input:focus-visible){outline:2px solid var(--focus);outline-offset:1px}
+.field-label{display:block;margin:16px 0 8px;font-weight:600;color:var(--ink)}
+fieldset:disabled .seg,fieldset:disabled .range,fieldset:disabled .chips{opacity:.5}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
+.chips button{min-height:36px;padding:0 10px;border-radius:9px;font-size:12.5px}
+.chips button small{color:var(--faint);font-size:11px;margin-left:4px}
+.checklist{list-style:none;margin:12px 0;padding:0;font-size:14px}
+.checklist li{display:flex;gap:8px;align-items:baseline;padding:3px 0;color:var(--muted)}
+.checklist li::before{content:"○";flex:none;width:1em;color:var(--faint)}
+.checklist li.done{color:var(--ink)}.checklist li.done::before{content:"●";color:var(--ok)}
+.equation{margin:12px 0;padding:12px 14px;border-radius:10px;background:var(--bg);font:500 14px/1.7 var(--mono);overflow-wrap:anywhere;color:var(--ink)}
+.note{margin:16px 0 0;padding:12px 14px;border-radius:10px;background:var(--bg);font-size:14px}.note h3{margin-top:0}
+.problem{margin:14px 0 0;padding:14px;border:1px solid var(--line);border-radius:12px;background:var(--bg)}
+.problem .q{margin:0 0 10px;font-weight:600;color:var(--ink)}
+.problem .tag{display:inline-block;margin-bottom:6px;font:600 11px/1 var(--mono);color:var(--accent)}
+input[type=number]{font:500 15px var(--sans);color:var(--ink);background:var(--surface);border:1px solid var(--line-strong);border-radius:10px;min-height:42px;width:130px;padding:0 12px}
+.numrow{display:flex;flex-wrap:wrap;align-items:center;gap:10px}
+.score{font-weight:600;color:var(--ink)}
+.readout.masked strong{color:var(--faint)}
+@media(min-width:960px) and (min-height:560px){.figure-pane{padding:18px 24px 16px;gap:10px}.figure-pane .stage{min-height:0}.figure-pane .stage>svg{height:100%;max-height:100%}}
+@media(max-width:700px){.readouts{grid-template-columns:repeat(2,minmax(0,1fr))}}
+</style>
+</head>
+<body>
+<a class="skip" href="#experiment"><span lang="zh">跳到实验</span><span lang="en">Skip to experiment</span></a>
+<header class="bar">
+<a class="back" href="index.html" data-keep-lang>← <span lang="zh">全部示例</span><span lang="en">All examples</span></a>
+<span class="crumb">seasons.html</span>
+<div class="lang-switch" role="group" aria-label="语言 / Language"><button type="button" data-set-lang="zh" aria-pressed="false">中文</button><button type="button" data-set-lang="en" aria-pressed="true">EN</button></div>
+</header>
+<main class="lesson">
+<div class="panel">
+<div class="intro">
+<ul class="meta"><li><span lang="zh">地球科学</span><span lang="en">Earth science</span></li><li><span lang="zh">轨道几何模型</span><span lang="en">Orbital geometry model</span></li><li><span lang="zh">约 8 分钟</span><span lang="en">~8 min</span></li></ul>
+<h1><span lang="zh">离太阳更近，才是夏天吗？</span><span lang="en">Is summer when Earth is closer to the Sun?</span></h1>
+<p class="lead" lang="zh">地球绕太阳的轨道略呈椭圆，所以“近了就热”听起来很合理。左图把一年拆成四个视角：从斜上方看的轨道、侧面看的地球、照到地面的一束阳光，以及一整年每天收到的日照。拖动日期和纬度，看看到底是哪一样在变。</p>
+<p class="lead" lang="en">Earth’s orbit is slightly oval, so “closer means warmer” sounds reasonable. The figure splits a year into four views: the orbit from above at an angle, Earth from the side, one beam of sunlight hitting the ground, and the sunlight each day of the year receives. Drag the date and the latitude and find out what actually changes.</p>
+</div>
+<div class="steps">
+<section class="step" aria-labelledby="predict-title" data-focus="orbit globe beam">
+<h2 id="predict-title"><span class="n">01</span><span lang="zh">预测</span><span lang="en">Predict</span></h2>
+<form id="prediction-form">
+<fieldset>
+<legend><span lang="zh">七月，北京是夏天。主要原因是什么？先看左边的<span data-ref="orbit">轨道</span>和<span data-ref="beam">地面上的那束阳光</span>。</span><span lang="en">In July it is summer in Beijing. What is the main reason? Start with the <span data-ref="orbit">orbit</span> and the <span data-ref="beam">sunbeam on the ground</span>.</span></legend>
+<label class="choice"><input type="radio" name="prediction" value="distance" required><span><span lang="zh">七月地球离太阳更近。</span><span lang="en">In July Earth is closer to the Sun.</span></span></label>
+<label class="choice"><input type="radio" name="prediction" value="tilt"><span><span lang="zh">地轴倾斜，让北半球的阳光更直、白天更长。</span><span lang="en">Earth’s tilt makes northern sunlight more direct and the days longer.</span></span></label>
+<label class="choice"><input type="radio" name="prediction" value="hotter"><span><span lang="zh">太阳本身在七月更热。</span><span lang="en">The Sun itself burns hotter in July.</span></span></label>
+</fieldset>
+<div class="controls"><button type="submit" class="primary"><span lang="zh">记下预测</span><span lang="en">Save my prediction</span></button></div>
+<p id="prediction-status" class="small" aria-live="polite"></p>
+</form>
+</section>
+<section class="step" aria-labelledby="try-title">
+<h2 id="try-title"><span class="n">02</span><span lang="zh">走过一年</span><span lang="en">Travel through a year</span></h2>
+<p lang="zh">先在北京看七月和一月，再换到悉尼看同一天。留意左下的年度曲线：实线是你选的纬度，虚线是南北对称的另一个半球。</p>
+<p lang="en">Look at Beijing in July and in January, then switch to Sydney on the same days. Watch the year chart at the bottom left: the solid line is your latitude, the dashed line the mirror latitude in the other hemisphere.</p>
+<fieldset id="try-controls" disabled>
+<div class="range"><label for="day"><span><span lang="zh">日期</span><span lang="en">Date</span></span><output id="day-out" for="day"></output></label><input id="day" type="range" min="1" max="365" step="1" value="79"></div>
+<div class="chips" id="dates">
+<button type="button" data-day="79"><span lang="zh">3月20日</span><span lang="en">Mar 20</span></button>
+<button type="button" data-day="172"><span lang="zh">6月21日</span><span lang="en">Jun 21</span></button>
+<button type="button" data-day="265"><span lang="zh">9月22日</span><span lang="en">Sep 22</span></button>
+<button type="button" data-day="355"><span lang="zh">12月21日</span><span lang="en">Dec 21</span></button>
+<button type="button" data-day="3"><span lang="zh">1月3日</span><span lang="en">Jan 3</span><small><span lang="zh">最近</span><span lang="en">closest</span></small></button>
+<button type="button" data-day="185"><span lang="zh">7月4日</span><span lang="en">Jul 4</span><small><span lang="zh">最远</span><span lang="en">farthest</span></small></button>
+</div>
+<p class="field-label"><span lang="zh">地点</span><span lang="en">Place</span></p>
+<div class="seg" role="radiogroup" data-i18n data-zh-aria-label="地点" data-en-aria-label="Place" aria-label="Place">
+<label><input type="radio" name="place" value="beijing" checked><span lang="zh">北京</span><span lang="en">Beijing</span></label>
+<label><input type="radio" name="place" value="singapore"><span lang="zh">新加坡</span><span lang="en">Singapore</span></label>
+<label><input type="radio" name="place" value="sydney"><span lang="zh">悉尼</span><span lang="en">Sydney</span></label>
+<label><input type="radio" name="place" value="tromso"><span lang="zh">特罗姆瑟</span><span lang="en">Tromsø</span></label>
+</div>
+<div class="range"><label for="lat"><span><span lang="zh">纬度</span><span lang="en">Latitude</span></span><output id="lat-out" for="lat"></output></label><input id="lat" type="range" min="-90" max="90" step="0.1" value="39.9"></div>
+</fieldset>
+<ul class="checklist" id="checklist">
+<li id="seen-nsummer"><span lang="zh">北半球的夏天（6–8 月，北纬 10° 以北）</span><span lang="en">A northern summer day (Jun–Aug, north of 10°N)</span></li>
+<li id="seen-nwinter"><span lang="zh">北半球的冬天（12–2 月，北纬 10° 以北）</span><span lang="en">A northern winter day (Dec–Feb, north of 10°N)</span></li>
+<li id="seen-south"><span lang="zh">南半球的同一个月份（南纬 10° 以南）</span><span lang="en">The same months in the south (south of 10°S)</span></li>
+</ul>
+<p id="try-status" class="status" role="status"></p>
+</section>
+<section class="step" aria-labelledby="planet-title" data-focus="orbit globe close year">
+<h2 id="planet-title"><span class="n">03</span><span lang="zh">换一颗行星</span><span lang="en">Change the planet</span></h2>
+<p lang="zh">把倾角调到 0°，年度曲线几乎变平。再把轨道改成“夸张椭圆”：季节回来了，但比较一下两条曲线，南北半球还是相反的吗？</p>
+<p lang="en">Set the tilt to 0° and the year chart goes nearly flat. Then switch to the exaggerated oval: seasons come back. Compare the two curves. Are the hemispheres still opposite?</p>
+<fieldset id="planet-controls" disabled>
+<div class="range"><label for="tilt"><span><span lang="zh">地轴倾角</span><span lang="en">Axial tilt</span></span><output id="tilt-out" for="tilt"></output></label><input id="tilt" type="range" min="0" max="90" step="0.1" value="23.4"></div>
+<div class="chips"><button type="button" data-tilt="23.44"><span lang="zh">地球 23.4°</span><span lang="en">Earth 23.4°</span></button><button type="button" data-tilt="0">0°</button></div>
+<p class="field-label"><span lang="zh">轨道形状</span><span lang="en">Orbit shape</span></p>
+<div class="seg" role="radiogroup" data-i18n data-zh-aria-label="轨道形状" data-en-aria-label="Orbit shape" aria-label="Orbit shape">
+<label><input type="radio" name="ecc" value="0"><span lang="zh">正圆</span><span lang="en">Circle</span></label>
+<label><input type="radio" name="ecc" value="0.0167" checked><span lang="zh">地球（e = 0.017）</span><span lang="en">Earth (e = 0.017)</span></label>
+<label><input type="radio" name="ecc" value="0.2"><span lang="zh">夸张椭圆（e = 0.2）</span><span lang="en">Exaggerated (e = 0.2)</span></label>
+</div>
+</fieldset>
+<p id="planet-status" class="status" role="status"></p>
+</section>
+<section id="explanation" class="step" aria-labelledby="explain-title" hidden>
+<h2 id="explain-title"><span class="n">04</span><span lang="zh">解释</span><span lang="en">Explain</span></h2>
+<p id="prediction-feedback" class="callout"></p>
+<p class="small"><span lang="zh">按顺序看图上的五处，每一步只亮起一个部分。</span><span lang="en">Look at five places in order; each step lights up one part.</span></p>
+<ol class="look">
+<li data-focus="beam"><span lang="zh">先看地面上的光束：太阳越低，同一束光摊得越开，每平方米分到的越少。</span><span lang="en">Start with the beam on the ground: the lower the Sun, the wider the same light spreads, so each square metre gets less.</span></li>
+<li data-focus="clock"><span lang="zh">再看白天长度：夏天的白天更长，收集阳光的时间也更长。</span><span lang="en">Then the daylight bars: summer days are longer, so they collect light for longer.</span></li>
+<li data-focus="orbit"><span lang="zh">看轨道：地球一月最近、七月最远，最近的时候恰好是北京的冬天。</span><span lang="en">Now the orbit: Earth is closest in January and farthest in July, and closest falls in Beijing’s winter.</span></li>
+<li data-focus="year"><span lang="zh">看年度曲线：实线和虚线正好相反，两个半球的季节互相对调。</span><span lang="en">Look at the year chart: the solid and dashed curves are mirror images, so the hemispheres swap seasons.</span></li>
+<li data-focus="globe"><span lang="zh">转动三维视图看地球：地轴一年到头指向同一方向；六月北半球朝太阳倾，所在纬度圈亮的部分超过一半，白天就超过 12 小时。</span><span lang="en">Turn the 3D view and watch the globe: the axis points the same way all year; in June the north leans sunward, so more than half of your latitude circle is lit and the day lasts over 12 hours.</span></li>
+<li data-focus="close"><span lang="zh">最后看侧视图：倾斜的地轴让太阳直射点在南北回归线之间来回。</span><span lang="en">Finally the side view: the tilted axis swings the overhead Sun between the two tropics.</span></li>
+</ol>
+<div lang="zh">
+<h3>1. 太阳低，同一束光就摊得更开</h3>
+<p><span data-ref="beam">北京正午的太阳</span>，6 月 21 日高 73.5°，12 月 21 日只有 26.7°。同一束阳光照到地面，面积要乘以 1/sin(高度角)：夏天是 1.04 倍，冬天是 2.23 倍。每平方米分到的光，冬天只有夏天的一半左右。</p>
+<h3>2. 白天更长，光照时间就更长</h3>
+<p>同样两天，北京的<span data-ref="clock">白天是 14.8 小时和 9.2 小时</span>。角度和时长叠加起来，6 月 21 日每天收到的阳光（大气层顶）约是 12 月 21 日的 3.1 倍。</p>
+<h3>3. 用“距离”来解释，会被两个事实推翻</h3>
+<p>地球在 <span data-ref="orbit">1 月 3 日前后离太阳最近（0.983 AU）</span>，7 月 4 日前后最远（1.017 AU）。阳光强度随 1/r² 变化，只有约 ±3.4%，而且最强的时候正是北京的冬天。更关键的是：同一天、同一个距离，<span data-ref="year">悉尼却是相反的季节</span>。如果是距离造成季节，两个半球应该同时变冷变热。</p>
+<h3>4. 倾角决定季节有多强</h3>
+<p><span data-ref="close">太阳直射点</span>在南北纬“倾角”度之间来回，所以回归线在 ±23.4°，极圈在 90° − 23.4° = 66.6°。倾角为 0，就没有季节；倾角越大，季节越极端。</p>
+</div>
+<div lang="en">
+<h3>1. A low Sun spreads the same beam thinner</h3>
+<p><span data-ref="beam">Beijing’s noon Sun</span> stands 73.5° high on June 21 and only 26.7° on December 21. One beam of sunlight covers 1/sin(elevation) as much ground: 1.04× in summer, 2.23× in winter. Each square metre gets roughly half as much light in winter.</p>
+<h3>2. Longer days collect light for longer</h3>
+<p>On the same two days Beijing has <span data-ref="clock">14.8 and 9.2 hours of daylight</span>. Angle and duration together give about 3.1 times as much sunlight per day (top of the atmosphere) on June 21 as on December 21.</p>
+<h3>3. Two facts sink the distance explanation</h3>
+<p>Earth is <span data-ref="orbit">closest to the Sun around January 3 (0.983 AU)</span> and farthest around July 4 (1.017 AU). Sunlight scales as 1/r², so it changes by only about ±3.4%, and it peaks during Beijing’s winter. More decisively: on the same day, at the same distance, <span data-ref="year">Sydney has the opposite season</span>. If distance caused seasons, both hemispheres would warm and cool together.</p>
+<h3>4. The tilt sets how strong seasons are</h3>
+<p>The <span data-ref="close">overhead Sun</span> swings between “tilt” degrees north and south, which is why the tropics sit at ±23.4° and the polar circles at 90° − 23.4° = 66.6°. With no tilt there are no seasons; the bigger the tilt, the harsher they get.</p>
+</div>
+<div class="equation" data-i18n data-zh-aria-label="正午太阳高度等于 90 度减去纬度与直射点纬度之差的绝对值。日出时角满足 cos h0 等于负 tan 纬度乘 tan 直射点纬度。白天长度等于 24 乘 h0 除以 pi。" data-en-aria-label="Noon elevation equals 90 degrees minus the absolute difference between latitude and the Sun’s declination. The sunrise hour angle satisfies cos h0 equals minus tan latitude times tan declination. Day length equals 24 times h0 over pi.">α<sub>noon</sub> = 90° − |φ − δ|<br>cos h₀ = −tan φ · tan δ　day = 24 h · h₀/π<br>Q = (S₀/π)(1/r²)(h₀ sin φ sin δ + cos φ cos δ sin h₀)</div>
+<div class="note">
+<div lang="zh">
+<h3>距离真的不重要吗？</h3>
+<p class="small">对一年里的季节来说不重要，但在万年尺度上它很重要。地轴缓慢进动，让近日点在季节中移动，周期约 2.1 万年。大约 1 万年前，近日点落在北半球的夏天，北方夏季的日照比现在强得多。米兰科维奇认为，这类轨道变化调节了冰期的节奏。</p>
+</div>
+<div lang="en">
+<h3>Does distance never matter?</h3>
+<p class="small">Not for the yearly cycle, but it does over millennia. Earth’s axis slowly precesses, moving perihelion through the seasons about every 21,000 years. Roughly 10,000 years ago perihelion fell in northern summer, and northern summers received noticeably more sunlight than today. Milankovitch proposed that such orbital changes pace the ice ages.</p>
+</div>
+</div>
+<label for="writing" style="display:block;margin-top:18px"><strong><span lang="zh">用你自己的话解释。</span><span lang="en">Explain it in your own words.</span></strong></label>
+<p class="small"><span lang="zh">“七月北京热，是因为 ___。同一个七月悉尼冷，是因为 ___。”</span><span lang="en">“Beijing is warm in July because ___. Sydney is cold in the same July because ___.”</span></p>
+<textarea id="writing" data-i18n data-zh-placeholder="你的解释只留在这个页面，不会保存或发送。" data-en-placeholder="Your explanation stays on this page. It is not saved or sent."></textarea>
+<h3><span lang="zh">迁移：换一颗行星</span><span lang="en">Transfer question</span></h3>
+<form id="transfer-form">
+<fieldset><legend><span lang="zh">天王星的地轴倾角约 98°，几乎“躺着”公转，一年约 84 个地球年。它的两极会怎样？</span><span lang="en">Uranus is tilted about 98°, nearly on its side, and its year lasts about 84 Earth years. What happens at its poles?</span></legend>
+<label class="choice"><input type="radio" name="transfer" value="poles" required><span><span lang="zh">每个极点约 42 年白天，接着约 42 年黑夜。</span><span lang="en">Each pole gets about 42 years of daylight, then about 42 years of night.</span></span></label>
+<label class="choice"><input type="radio" name="transfer" value="mild"><span><span lang="zh">几乎没有季节：它离太阳太远，倾角影响不大。</span><span lang="en">Hardly any seasons: it is so far from the Sun that tilt barely matters.</span></span></label>
+<label class="choice"><input type="radio" name="transfer" value="equator"><span><span lang="zh">和地球一样，赤道全年得到最多阳光。</span><span lang="en">As on Earth, the equator gets the most sunlight all year.</span></span></label>
+</fieldset>
+<div class="controls"><button type="submit"><span lang="zh">核对答案</span><span lang="en">Check my answer</span></button></div>
+<p id="transfer-feedback" class="status" role="status"></p>
+</form>
+</section>
+<section id="practice" class="step" aria-labelledby="practice-title" hidden>
+<h2 id="practice-title"><span class="n">05</span><span lang="zh">独立练习</span><span lang="en">Independent practice</span></h2>
+<p lang="zh">练习时，左图只保留形状：数字、年度曲线和昼夜条都会隐藏，控件也会锁住。用机制推出答案，核对之后再显示这个情形的数字。</p>
+<p lang="en">During practice the figure keeps only its shapes: the numbers, the year chart and the daylight bars disappear, and the controls lock. Work each case out from the mechanism; after you check, the case’s numbers come back.</p>
+<div class="controls"><button type="button" id="practice-start" class="primary"><span lang="zh">开始练习</span><span lang="en">Start practice</span></button><button type="button" id="practice-exit" hidden><span lang="zh">结束练习，回到控件</span><span lang="en">Leave practice</span></button></div>
+<div id="problems" hidden>
+<form class="problem" data-problem="0" hidden>
+<span class="tag">1 / 3</span>
+<p class="q"><span lang="zh">一座北纬 30° 的城市，6 月 21 日正午，太阳离地平线多少度？</span><span lang="en">A town at 30°N on June 21. How many degrees above the horizon is the noon Sun?</span></p>
+<div class="numrow"><input type="number" name="answer" step="0.1" min="-90" max="90" required data-i18n data-zh-aria-label="正午太阳高度（度）" data-en-aria-label="Noon elevation in degrees" aria-label="Noon elevation in degrees"><span>°</span><button type="submit"><span lang="zh">核对</span><span lang="en">Check</span></button></div>
+<p class="status" role="status" data-feedback></p>
+</form>
+<form class="problem" data-problem="1" hidden>
+<span class="tag">2 / 3</span>
+<p class="q"><span lang="zh">轨道和现在的地球一样，但地轴倾角是 0°。北京七月和一月，每天收到的阳光相比如何？</span><span lang="en">The orbit is Earth’s, but the tilt is 0°. How does Beijing’s daily sunlight in July compare with January?</span></p>
+<label class="choice"><input type="radio" name="answer" value="july" required><span><span lang="zh">七月多得多，毕竟七月是夏天。</span><span lang="en">July gets much more; July is summer after all.</span></span></label>
+<label class="choice"><input type="radio" name="answer" value="same"><span><span lang="zh">全年完全一样。</span><span lang="en">Exactly the same all year.</span></span></label>
+<label class="choice"><input type="radio" name="answer" value="jan"><span><span lang="zh">几乎一样，一月约多 7%。</span><span lang="en">Nearly the same; January gets about 7% more.</span></span></label>
+<div class="controls"><button type="submit"><span lang="zh">核对</span><span lang="en">Check</span></button></div>
+<p class="status" role="status" data-feedback></p>
+</form>
+<form class="problem" data-problem="2" hidden>
+<span class="tag">3 / 3</span>
+<p class="q"><span lang="zh">挪威特罗姆瑟，北纬 69.6°，12 月 21 日。白天有几个小时？</span><span lang="en">Tromsø, Norway, at 69.6°N on December 21. How many hours of daylight?</span></p>
+<div class="numrow"><input type="number" name="answer" step="0.1" min="0" max="24" required data-i18n data-zh-aria-label="白天时长（小时）" data-en-aria-label="Hours of daylight" aria-label="Hours of daylight"><span lang="zh">小时</span><span lang="en">hours</span><button type="submit"><span lang="zh">核对</span><span lang="en">Check</span></button></div>
+<p class="status" role="status" data-feedback></p>
+</form>
+<div class="controls"><button type="button" id="practice-next" hidden><span lang="zh">下一题 →</span><span lang="en">Next case →</span></button></div>
+<p id="practice-score" class="score" aria-live="polite"></p>
+</div>
+</section>
+<section class="step limits" aria-labelledby="limits-title">
+<h2 id="limits-title"><span lang="zh">这个模型的适用范围</span><span lang="en">Where this model applies</span></h2>
+<div lang="zh">
+<p>“每天的阳光”是大气层顶的日平均值，不含云、大气吸收、海洋和陆地的热容量。真实气温比日照晚约一个月达到峰值，所以最热的是七月下旬，而不是 6 月 21 日。</p>
+<p>日出日落按太阳中心通过几何地平线计算，不含大气折射和日面半径，真实白天会长几分钟。日期按 365 天、近日点固定在 1 月 3 日计算，正午指太阳正午，不含时差。太阳的输出视为恒定（真实变化约 0.1%）。</p>
+<p>轨道图为了看清，从斜上方投影，地球和太阳的大小都不按比例。</p>
+</div>
+<div lang="en">
+<p>“Daily sunlight” is the daily mean at the top of the atmosphere; it leaves out clouds, absorption, and the heat capacity of oceans and land. Real temperatures peak about a month after sunlight does, which is why late July, not June 21, is hottest.</p>
+<p>Sunrise and sunset use the Sun’s centre crossing a geometric horizon, without refraction or the Sun’s radius; real days run a few minutes longer. Dates use a 365-day year with perihelion fixed on January 3, and noon is solar noon, without the equation of time. The Sun’s output is held constant (it really varies by about 0.1%).</p>
+<p>The orbit view is an oblique projection; Earth and Sun are not to scale.</p>
+</div>
+<div class="controls"><button type="button" id="reset"><span lang="zh">全部重置</span><span lang="en">Reset everything</span></button></div>
+<p class="foot"><span lang="zh">离线可用。全部控件都是原生单选框、滑块、输入框和按钮，可以用 Tab、方向键和空格操作。没有快捷键会干扰你的写作。</span><span lang="en">Works offline. Every control is a native radio, slider, input or button, reachable with Tab, arrow keys and Space. No keyboard shortcuts override your writing.</span></p>
+</section>
+</div>
+</div>
+<section id="experiment" class="figure-pane" aria-labelledby="fig-title">
+<div class="stage">
+<svg id="figure" viewBox="0 0 900 560" preserveAspectRatio="xMidYMid meet" role="img" aria-labelledby="fig-title fig-desc">
+<title id="fig-title" data-i18n data-zh="三维地球轨道、侧视地球、一束阳光、昼夜长度和全年日照" data-en="Earth’s orbit in 3D, Earth from the side, one sunbeam, daylight bars and a year of sunlight">Earth’s orbit in 3D, Earth from the side, one sunbeam, daylight bars and a year of sunlight</title>
+<desc id="fig-desc"></desc>
+<defs><clipPath id="beam-clip"><rect id="beam-clip-rect" x="0" y="0" width="0" height="0"/></clipPath></defs>
+<g id="g-orbit" data-part="orbit" data-zh-label="公转轨道：地轴方向在空间中固定" data-en-label="Orbit: the axis keeps pointing the same way"></g>
+<g id="g-globe" data-part="globe" data-zh-label="地球（放大）：亮的一半朝向太阳，纬度圈上亮的部分就是白天" data-en-label="Earth (enlarged): the lit half faces the Sun; the lit share of your latitude circle is the daylight"></g>
+<g id="g-orbit-front" data-part="orbit" data-zh-label="公转轨道：地轴方向在空间中固定" data-en-label="Orbit: the axis keeps pointing the same way"></g>
+<g id="g-close" data-part="close" data-zh-label="侧视：地轴倾斜与太阳直射点" data-en-label="Side view: the tilt and the overhead Sun"></g>
+<g id="g-beam" data-part="beam" data-zh-label="一束阳光落在地面上" data-en-label="One sunbeam on the ground"></g>
+<g id="g-clock" class="clock" data-part="clock" data-zh-label="白天长度：所选纬度与对称纬度" data-en-label="Daylight: your latitude and its mirror"></g>
+<g id="g-year" class="year" data-part="year" data-zh-label="一年的每日日照量曲线" data-en-label="Daily sunlight through the year"></g>
+</svg>
+</div>
+<div class="readouts" data-i18n data-zh-aria-label="当前日期和地点的读数" data-en-aria-label="Readouts for the current date and place" aria-label="Readouts for the current date and place">
+<div class="readout" data-part="beam"><span class="k" data-ref="beam"><span lang="zh">正午太阳高度</span><span lang="en">Noon Sun height</span></span><strong id="ro-noon"></strong><span class="u" id="ro-noon-u"></span></div>
+<div class="readout" data-part="clock"><span class="k" data-ref="clock"><span lang="zh">白天长度</span><span lang="en">Daylight</span></span><strong id="ro-day"></strong><span class="u" id="ro-day-u"></span></div>
+<div class="readout" data-part="year"><span class="k" data-ref="year"><span lang="zh">每天的阳光</span><span lang="en">Daily sunlight</span></span><strong id="ro-q"></strong><span class="u"><span lang="zh">W/m²，大气层顶日均</span><span lang="en">W/m², daily mean, top of atmosphere</span></span></div>
+<div class="readout" data-part="orbit"><span class="k" data-ref="orbit"><span lang="zh">日地距离</span><span lang="en">Earth–Sun distance</span></span><strong id="ro-r"></strong><span class="u" id="ro-r-u"></span></div>
+</div>
+<div class="view3d" role="group" data-i18n data-zh-aria-label="三维视角" data-en-aria-label="3D view" aria-label="3D view">
+<div class="range"><label for="view-az"><span><span lang="zh">转动视角</span><span lang="en">Turn view</span></span><output id="view-az-out" for="view-az"></output></label><input id="view-az" type="range" min="-180" max="180" step="1" value="0"></div>
+<div class="range"><label for="view-el"><span><span lang="zh">俯仰视角</span><span lang="en">Tilt view</span></span><output id="view-el-out" for="view-el"></output></label><input id="view-el" type="range" min="-80" max="90" step="1" value="28"></div>
+<button type="button" id="view-reset"><span lang="zh">复位视角</span><span lang="en">Reset view</span></button>
+<p class="small note"><span lang="zh">转动视角只改变你看的方向，不改变任何读数。<span data-ref="globe">地球上那圈纬度线</span>：亮的部分占整圈的比例，就是这一天白天占 24 小时的比例。</span><span lang="en">Turning the view changes only where you look from, never a readout. On <span data-ref="globe">the globe’s latitude circle</span>, the lit share of the circle is the share of the 24 hours in daylight.</span></p>
+</div>
+<p id="summary" class="result" aria-live="polite"></p>
+</section>
+</main>
+<script>
+'use strict';
+/* lesson-shell i18n v2: shared by every example page; keep identical across files.
+   Static copy: paired elements <span lang="zh">…</span><span lang="en">…</span> (CSS hides the other language).
+   Text-only nodes and attributes: data-i18n plus data-zh / data-en (textContent) or data-zh-<attr> / data-en-<attr>.
+   Dynamic copy: tr('中文', 'English'); say(el, () => tr(…)) re-renders the message when the language changes. */
+const I18N = (() => {
+  const KEY = 'tf-lang', LANGS = ['zh', 'en'];
+  const stored = (() => { try { return localStorage.getItem(KEY); } catch { return null; } })();
+  const param = new URLSearchParams(location.search).get('lang');
+  let lang = LANGS.includes(param) ? param : LANGS.includes(stored) ? stored : /^zh\b/i.test(navigator.language || '') ? 'zh' : 'en';
+  const listeners = [];
+  function apply() {
+    const root = document.documentElement;
+    root.lang = lang === 'zh' ? 'zh-CN' : 'en';
+    root.dataset.lang = lang;
+    for (const el of document.querySelectorAll('[data-i18n]')) {
+      for (const { name, value } of [...el.attributes]) {
+        if (name === 'data-' + lang) el.textContent = value;
+        else if (name.startsWith('data-' + lang + '-')) el.setAttribute(name.slice(lang.length + 6), value);
+      }
+    }
+    for (const button of document.querySelectorAll('[data-set-lang]')) button.setAttribute('aria-pressed', String(button.dataset.setLang === lang));
+    for (const link of document.querySelectorAll('a[data-keep-lang]')) {
+      const target = new URL(link.getAttribute('href').split('?')[0], location.href);
+      target.searchParams.set('lang', lang);
+      link.href = target.href;
+    }
+    listeners.forEach(fn => fn(lang));
+  }
+  document.addEventListener('click', event => {
+    const button = event.target.closest('[data-set-lang]');
+    if (!button || button.dataset.setLang === lang) return;
+    lang = button.dataset.setLang;
+    try { localStorage.setItem(KEY, lang); } catch {}
+    try { const here = new URL(location.href); here.searchParams.set('lang', lang); history.replaceState(history.state, '', here); } catch {}
+    apply();
+  });
+  return { get lang() { return lang; }, on(fn) { listeners.push(fn); }, apply };
+})();
+const tr = (zh, en) => I18N.lang === 'zh' ? zh : en;
+const spoken = new Map();
+function say(target, message) {
+  const el = typeof target === 'string' ? document.getElementById(target) : target;
+  spoken.set(el, message);
+  el.textContent = message ? message() : '';
+}
+I18N.on(() => spoken.forEach((message, el) => { el.textContent = message ? message() : ''; }));
+// On short screens the figure pane scrolls on its own; while more of it is below the fold, show a cue that scrolls it.
+(() => {
+  const pane = document.querySelector('.lesson > .figure-pane');
+  if (!pane) return;
+  const cue = document.createElement('div');
+  cue.className = 'pane-more';
+  cue.hidden = true;
+  cue.innerHTML = '<button type="button" tabindex="-1" aria-hidden="true"></button>';
+  const button = cue.firstChild;
+  const label = () => { button.textContent = tr('下方还有内容 ↓', 'More below ↓'); };
+  label();
+  I18N.on(label);
+  button.addEventListener('click', () => pane.scrollBy({ top: pane.clientHeight * 0.75, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' }));
+  pane.after(cue);
+  function update() {
+    const scrolls = getComputedStyle(pane).overflowY !== 'visible' && pane.scrollHeight > pane.clientHeight + 1;
+    cue.hidden = !(scrolls && pane.scrollHeight - pane.clientHeight - pane.scrollTop > 4);
+    if (scrolls) pane.tabIndex = 0; else pane.removeAttribute('tabindex');
+  }
+  const sizes = new ResizeObserver(update);
+  const watch = () => { sizes.disconnect(); sizes.observe(pane); for (const child of pane.children) sizes.observe(child); };
+  new MutationObserver(() => { watch(); update(); }).observe(pane, { childList: true });
+  pane.addEventListener('scroll', update, { passive: true });
+  addEventListener('resize', update);
+  watch();
+  update();
+})();
+/* Attention guide. Figure parts: [data-part="id"] inside #experiment (labels: data-zh-label / data-en-label).
+   Step focus: a panel .step or element with data-focus="id …" dims the other parts while it is the active step
+   (focused element first, else the first visible step crossing the reading line). Ordered highlights: ol.look > li[data-focus].
+   Dual coding: [data-ref="id …"] terms and legend items link to parts both ways. Nothing moves until the learner scrolls, hovers or clicks. */
+(() => {
+  const figure = document.getElementById('experiment');
+  if (!figure || !figure.querySelector('[data-part]')) return;
+  const panel = document.querySelector('.lesson > .panel');
+  const KEY = 'tf-focus-guide', ids = value => (value || '').split(/\s+/).filter(Boolean);
+  let guide = (() => { try { return localStorage.getItem(KEY) !== 'off'; } catch { return true; } })();
+  let stepIds = [], look = null, peek = null, pinned = null, activeStep = null;
+  const style = document.createElement('style');
+  document.head.append(style);
+  const bar = document.createElement('div');
+  bar.className = 'focus-bar';
+  bar.innerHTML = '<p class="focus-caption" aria-live="polite"></p><label class="focus-toggle"><input type="checkbox"><span></span></label>';
+  const caption = bar.firstChild, toggle = bar.querySelector('input'), toggleText = bar.querySelector('.focus-toggle span');
+  toggle.checked = guide;
+  figure.prepend(bar);
+  const tip = document.createElement('div');
+  tip.className = 'part-tip';
+  tip.hidden = true;
+  document.body.append(tip);
+  const fine = matchMedia('(hover: hover) and (pointer: fine)');
+  const sel = list => list.map(id => `[data-part~="${CSS.escape(id)}"]`).join(',');
+  function render() {
+    const hot = pinned || peek || (look && look.ids) || (guide ? stepIds : []);
+    const ring = !!(pinned || peek || look);
+    figure.classList.toggle('tf-ring', ring && hot.length > 0);
+    figure.toggleAttribute('data-focusing', hot.length > 0);
+    style.textContent = hot.length ? `#experiment [data-part]:not(${sel(hot)}){opacity:.24;filter:saturate(.35)}` : '';
+    for (const part of figure.querySelectorAll('[data-part]')) part.classList.toggle('tf-hot', ring && ids(part.dataset.part).some(id => hot.includes(id)));
+  }
+  // Re-rendered figures replace their children; keep the hot class on new parts.
+  new MutationObserver(() => { if (figure.classList.contains('tf-ring')) render(); }).observe(figure, { childList: true, subtree: true });
+  const visible = el => el.offsetParent !== null || el.getClientRects().length > 0;
+  const steps = () => [...document.querySelectorAll('.panel .step, .panel [data-focus]:not(ol.look *)')].filter(visible);
+  function pickStep() {
+    const scroller = panel && getComputedStyle(panel).overflowY !== 'visible' ? panel : null;
+    const box = scroller ? scroller.getBoundingClientRect() : { top: 0, bottom: innerHeight, height: innerHeight };
+    const line = box.top + box.height * 0.3, list = steps();
+    const inView = el => { const r = el.getBoundingClientRect(); return r.bottom > box.top && r.top < box.bottom; };
+    const focused = document.activeElement && list.filter(el => el.contains(document.activeElement)).pop();
+    if (focused && inView(focused)) return focused;
+    let found = null;
+    for (const el of list) { const r = el.getBoundingClientRect(); if (r.bottom > line && r.top < box.bottom && (!found || found.contains(el))) found = el; else if (found && !found.contains(el)) break; }
+    return found;
+  }
+  function update() {
+    const step = pickStep();
+    if (step !== activeStep) {
+      activeStep = step;
+      if (look && !(step && step.contains(look.list))) setLook(null);
+    }
+    const target = step && (step.matches('[data-focus]') ? step : null);
+    stepIds = target ? ids(target.dataset.focus) : [];
+    render();
+  }
+  let queued = false;
+  const schedule = () => { if (!queued) { queued = true; requestAnimationFrame(() => { queued = false; update(); }); } };
+  (panel || document).addEventListener('scroll', schedule, { passive: true });
+  addEventListener('scroll', schedule, { passive: true });
+  addEventListener('resize', schedule);
+  document.addEventListener('focusin', schedule);
+  new MutationObserver(schedule).observe(document.querySelector('.panel') || document.body, { attributes: true, attributeFilter: ['hidden'], subtree: true });
+  toggle.addEventListener('change', () => { guide = toggle.checked; try { localStorage.setItem(KEY, guide ? 'on' : 'off'); } catch {} render(); });
+  // Ordered highlights.
+  const lists = [...document.querySelectorAll('ol.look')];
+  function setLook(next) {
+    look = next;
+    for (const list of lists) {
+      const items = [...list.children];
+      items.forEach((li, i) => { if (next && next.list === list && next.index === i) li.setAttribute('aria-current', 'step'); else li.removeAttribute('aria-current'); });
+      for (const button of list.previousElementSibling.querySelectorAll('.look-num')) button.setAttribute('aria-pressed', String(!!next && next.list === list && Number(button.dataset.index) === next.index));
+    }
+    caption.textContent = '';
+    if (next) {
+      const n = document.createElement('span');
+      n.className = 'look-n';
+      n.textContent = `${next.index + 1}/${next.list.children.length}`;
+      const text = document.createElement('span');
+      text.append(...[...next.list.children[next.index].childNodes].map(node => node.cloneNode(true)));
+      caption.append(n, text);
+    }
+    render();
+  }
+  const go = (list, index) => setLook({ list, index, ids: ids(list.children[index].dataset.focus) });
+  for (const list of lists) {
+    const nav = document.createElement('div');
+    nav.className = 'look-nav';
+    const items = [...list.children];
+    items.forEach((li, i) => {
+      const b = document.createElement('button');
+      b.type = 'button'; b.className = 'look-num'; b.dataset.index = i; b.textContent = i + 1; b.setAttribute('aria-pressed', 'false');
+      b.addEventListener('click', () => go(list, i));
+      nav.append(b);
+      li.addEventListener('click', event => { if (!event.target.closest('a,button,input,[data-ref]')) go(list, i); });
+    });
+    const make = (cls, zh, en, fn) => { const b = document.createElement('button'); b.type = 'button'; b.className = cls; const label = () => { b.textContent = tr(zh, en); }; label(); I18N.on(label); b.addEventListener('click', fn); nav.append(b); };
+    const at = () => (look && look.list === list ? look.index : -1);
+    make('look-prev', '‹ 上一步', '‹ Prev', () => go(list, Math.max(0, at() - 1)));
+    make('look-next', '下一步 ›', 'Next ›', () => go(list, Math.min(items.length - 1, at() + 1)));
+    make('look-clear', '清除', 'Clear', () => setLook(null));
+    list.before(nav);
+  }
+  // Dual coding: terms ↔ parts.
+  const refs = () => document.querySelectorAll('[data-ref]');
+  for (const term of refs()) if (!term.matches('a,button,input,select,textarea,label,[tabindex]')) { term.tabIndex = 0; term.setAttribute('role', 'button'); term.setAttribute('aria-pressed', 'false'); }
+  const termOf = event => event.target.closest && event.target.closest('[data-ref]');
+  let pointer = 'mouse';
+  document.addEventListener('pointerdown', event => { pointer = event.pointerType; }, true);
+  document.addEventListener('pointerover', event => { const term = termOf(event); if (term && event.pointerType === 'mouse') { peek = ids(term.dataset.ref); render(); } });
+  document.addEventListener('pointerout', event => { const term = termOf(event); if (term && !term.contains(event.relatedTarget)) { peek = null; render(); } });
+  document.addEventListener('focusin', event => { const term = termOf(event); if (term) { peek = ids(term.dataset.ref); render(); } });
+  document.addEventListener('focusout', event => { if (termOf(event)) { peek = null; render(); } });
+  function pin(term) {
+    const next = ids(term.dataset.ref).join(' ');
+    pinned = pinned && pinned.join(' ') === next ? null : ids(next);
+    for (const other of refs()) if (other.getAttribute('role') === 'button') other.setAttribute('aria-pressed', String(!!pinned && other.dataset.ref === term.dataset.ref));
+    render();
+  }
+  document.addEventListener('click', event => { const term = termOf(event); if (term && term.getAttribute('role') === 'button' && pointer !== 'mouse') pin(term); });
+  document.addEventListener('keydown', event => {
+    const term = termOf(event);
+    if (term && term.getAttribute('role') === 'button' && (event.key === 'Enter' || event.key === ' ')) { event.preventDefault(); pin(term); }
+    if (event.key === 'Escape' && (look || pinned)) { pinned = null; for (const other of refs()) if (other.getAttribute('role') === 'button') other.setAttribute('aria-pressed', 'false'); setLook(null); }
+  });
+  function partLabel(part) { return part.getAttribute(`data-${I18N.lang}-label`); }
+  figure.addEventListener('pointermove', event => {
+    const part = event.target.closest && event.target.closest('[data-part]');
+    const label = part && partLabel(part);
+    for (const term of refs()) term.classList.toggle('tf-ref-on', !!part && ids(term.dataset.ref).some(id => ids(part.dataset.part).includes(id)));
+    if (!label || !fine.matches || event.pointerType !== 'mouse') { tip.hidden = true; return; }
+    tip.textContent = label;
+    tip.hidden = false;
+    const x = Math.min(event.clientX + 14, innerWidth - tip.offsetWidth - 8), y = event.clientY + 18 + tip.offsetHeight > innerHeight ? event.clientY - tip.offsetHeight - 12 : event.clientY + 18;
+    tip.style.left = x + 'px'; tip.style.top = y + 'px';
+  });
+  figure.addEventListener('pointerleave', () => { tip.hidden = true; for (const term of refs()) term.classList.remove('tf-ref-on'); });
+  const labels = () => { toggleText.textContent = tr('焦点引导', 'Focus guide'); };
+  labels();
+  I18N.on(() => { labels(); if (look) setLook(look); });
+  update();
+})();
+/* /lesson-shell */
+const $ = id => document.getElementById(id);
+const SVGNS = 'http://www.w3.org/2000/svg';
+
+// ---- Pure model -------------------------------------------------------
+const S0 = 1361, PERI_DAY = 3, YEAR = 365.256, LON_PERI = 282.94, EARTH_TILT = 23.44, EARTH_E = 0.0167;
+const PLACES = {beijing: 39.9, singapore: 1.3, sydney: -33.9, tromso: 69.6};
+const rad = d => d * Math.PI / 180, deg = r => r * 180 / Math.PI;
+const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
+function orbit(day, e) {
+  const M = 2 * Math.PI * (day - PERI_DAY) / YEAR;
+  let E = M;
+  for (let i = 0; i < 30; i++) E -= (E - e * Math.sin(E) - M) / (1 - e * Math.cos(E));
+  const nu = 2 * Math.atan2(Math.sqrt(1 + e) * Math.sin(E / 2), Math.sqrt(1 - e) * Math.cos(E / 2));
+  return {r: 1 - e * Math.cos(E), lambda: ((deg(nu) + LON_PERI) % 360 + 360) % 360};
+}
+function sky(day, lat, tilt, e) {
+  const o = orbit(day, e);
+  const dec = deg(Math.asin(Math.sin(rad(tilt)) * Math.sin(rad(o.lambda))));
+  const phi = rad(clamp(lat, -89.99, 89.99)), d = rad(dec);
+  const c = -Math.tan(phi) * Math.tan(d);
+  const h0 = c >= 1 ? 0 : c <= -1 ? Math.PI : Math.acos(c);
+  const noon = 90 - Math.abs(lat - dec);
+  const Q = S0 / Math.PI / (o.r * o.r) * (h0 * Math.sin(phi) * Math.sin(d) + Math.cos(phi) * Math.cos(d) * Math.sin(h0));
+  return {...o, dec, noon, dayHours: 24 * h0 / Math.PI, Q: Math.max(0, Q), spread: noon > 0 ? 1 / Math.sin(rad(noon)) : Infinity};
+}
+function yearCurve(lat, tilt, e) { return Array.from({length: 365}, (_, i) => sky(i + 1, lat, tilt, e).Q); }
+function correlation(a, b) {
+  const n = a.length, ma = a.reduce((s, x) => s + x, 0) / n, mb = b.reduce((s, x) => s + x, 0) / n;
+  let sab = 0, saa = 0, sbb = 0;
+  for (let i = 0; i < n; i++) { sab += (a[i] - ma) * (b[i] - mb); saa += (a[i] - ma) ** 2; sbb += (b[i] - mb) ** 2; }
+  return {r: saa && sbb ? sab / Math.sqrt(saa * sbb) : 0, swing: Math.sqrt(saa / n) / (ma || 1)};
+}
+// How the two hemispheres' seasons relate: none (flat), together, or opposite.
+function hemispheres(lat, tilt, e) {
+  if (Math.abs(lat) < 5) return 'equator';
+  const a = yearCurve(lat, tilt, e), b = yearCurve(-lat, tilt, e), k = correlation(a, b);
+  if (k.swing < 0.03 && correlation(b, a).swing < 0.03) return 'flat';
+  return k.r > 0.5 ? 'together' : k.r < -0.5 ? 'opposite' : 'mixed';
+}
+function lesson(state) {
+  const here = sky(state.day, state.lat, state.tilt, state.e), mirror = sky(state.day, -state.lat, state.tilt, state.e);
+  return {here, mirror, curve: yearCurve(state.lat, state.tilt, state.e), curveS: yearCurve(-state.lat, state.tilt, state.e)};
+}
+// Practice cases: keys come from the model, not from hand-typed numbers.
+const PROBLEMS = [
+  {state: {day: 172, lat: 30, tilt: EARTH_TILT, e: EARTH_E}, key: () => sky(172, 30, EARTH_TILT, EARTH_E).noon, tol: 1.5},
+  {state: {day: 185, lat: 39.9, tilt: 0, e: EARTH_E}, key: () => sky(3, 39.9, 0, EARTH_E).Q / sky(185, 39.9, 0, EARTH_E).Q},
+  {state: {day: 355, lat: 69.6, tilt: EARTH_TILT, e: EARTH_E}, key: () => sky(355, 69.6, EARTH_TILT, EARTH_E).dayHours, tol: 0.3}
+];
+function selfCheck() {
+  const fails = [], near = (a, b, t) => Math.abs(a - b) <= t, check = (ok, name) => { if (!ok) fails.push(name); };
+  check(near(sky(172, 0, EARTH_TILT, EARTH_E).dec, 23.44, 0.3), 'June solstice declination');
+  check(near(sky(355, 0, EARTH_TILT, EARTH_E).dec, -23.44, 0.3), 'December solstice declination');
+  for (const lat of [-60, -20, 10, 45, 65]) check(near(sky(80, lat, EARTH_TILT, EARTH_E).dayHours, 12, 0.25), 'equinox day near 12 h at ' + lat);
+  for (const [day, lat] of [[40, 30], [172, 50], [300, 70]]) check(near(sky(day, lat, EARTH_TILT, EARTH_E).dayHours + sky(day, -lat, EARTH_TILT, EARTH_E).dayHours, 24, 1e-9), 'mirror days sum to 24 h');
+  check(near(sky(3, 0, EARTH_TILT, EARTH_E).r, 1 - EARTH_E, 1e-4) && near(sky(185, 0, EARTH_TILT, EARTH_E).r, 1 + EARTH_E, 2e-4), 'perihelion Jan 3, aphelion Jul 4');
+  const flat = yearCurve(39.9, 0, 0); check(Math.max(...flat) - Math.min(...flat) < 1e-6, 'no tilt, circular orbit: no seasons');
+  check(near(sky(172, 50, EARTH_TILT, 0).Q, sky(355, -50, EARTH_TILT, 0).Q, 0.5), 'circular orbit: hemispheres mirror');
+  check(sky(355, 69.6, EARTH_TILT, EARTH_E).dayHours === 0 && sky(355, 69.6, EARTH_TILT, EARTH_E).noon < 0, 'polar night at Tromsø');
+  check(hemispheres(39.9, EARTH_TILT, EARTH_E) === 'opposite' && hemispheres(39.9, 0, 0.2) === 'together' && hemispheres(39.9, 0, 0) === 'flat', 'hemisphere phase');
+  check(near(PROBLEMS[1].key(), 1.069, 0.005), 'distance-only ratio ≈ 7%');
+  return fails;
+}
+const failed = selfCheck();
+if (failed.length) throw new Error('seasons selfCheck failed: ' + failed.join('; '));
+
+// ---- Formatting -------------------------------------------------------
+const MONTHS = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+const MON_EN = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+function dateOf(day) { let m = 0, d = day; while (d > MONTHS[m]) d -= MONTHS[m++]; return {m, d}; }
+function dateText(day) { const {m, d} = dateOf(day); return tr(`${m + 1}月${d}日`, `${MON_EN[m]} ${d}`); }
+function latText(lat) {
+  const a = Math.abs(lat).toFixed(1);
+  if (Math.abs(lat) < 0.05) return tr('赤道', 'Equator');
+  return lat > 0 ? tr(`北纬 ${a}°`, `${a}°N`) : tr(`南纬 ${a}°`, `${a}°S`);
+}
+function hoursText(h) {
+  let hh = Math.floor(h), mm = Math.round((h - hh) * 60);
+  if (mm === 60) { hh += 1; mm = 0; }
+  return tr(`${hh} 小时 ${mm} 分`, `${hh} h ${mm} min`);
+}
+const placeName = p => ({beijing: tr('北京', 'Beijing'), singapore: tr('新加坡', 'Singapore'), sydney: tr('悉尼', 'Sydney'), tromso: tr('特罗姆瑟', 'Tromsø')})[p];
+const where = () => state.place ? placeName(state.place) : latText(state.lat);
+
+// ---- State ------------------------------------------------------------
+const DEFAULT = {day: 79, lat: 39.9, place: 'beijing', tilt: EARTH_TILT, e: EARTH_E};
+const state = {...DEFAULT, prediction: null, seen: {nsummer: false, nwinter: false, south: false}, unlocked: false, practice: null, saved: null, checked: [], firstTry: []};
+
+// ---- Drawing ----------------------------------------------------------
+function el(name, attrs, parent, text) {
+  const node = document.createElementNS(SVGNS, name);
+  for (const k in attrs) node.setAttribute(k, attrs[k]);
+  if (text != null) node.textContent = text;
+  if (parent) parent.appendChild(node);
+  return node;
+}
+const f1 = x => x.toFixed(1);
+let narrow = false;
+function layout() {
+  return narrow
+    ? {vb: [460, 1070], orbit: {x: 0, y: 0, w: 460, h: 270}, close: {x: 0, y: 280, w: 460, h: 260}, beam: {x: 0, y: 550, w: 460, h: 160}, clock: {x: 0, y: 720, w: 460, h: 120}, year: {x: 0, y: 850, w: 460, h: 215}}
+    : {vb: [900, 560], orbit: {x: 0, y: 0, w: 470, h: 262}, close: {x: 480, y: 0, w: 420, h: 262}, beam: {x: 0, y: 272, w: 430, h: 128}, clock: {x: 450, y: 272, w: 450, h: 128}, year: {x: 0, y: 410, w: 900, h: 150}};
+}
+// 3D orbit view: orthographic camera turned by azimuth (about the ecliptic pole) and elevation.
+// World frame: ecliptic in x–y, z toward ecliptic north; the June-solstice lean points along +x.
+const VIEW0 = {az: 0, el: 28};
+const view = {...VIEW0};
+const add = (a, b, k = 1) => [a[0] + b[0] * k, a[1] + b[1] * k, a[2] + b[2] * k];
+const dot = (a, b) => a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
+const norm = a => { const l = Math.hypot(...a) || 1; return a.map(v => v / l); };
+const cross = (a, b) => [a[1] * b[2] - a[2] * b[1], a[2] * b[0] - a[0] * b[2], a[0] * b[1] - a[1] * b[0]];
+function camera() {
+  const ca = Math.cos(rad(view.az)), sa = Math.sin(rad(view.az)), ce = Math.cos(rad(view.el)), se = Math.sin(rad(view.el));
+  // Returns [screen x, screen y (down), depth toward the viewer] for a world vector.
+  const P = p => { const x = p[0] * ca - p[1] * sa, y = p[0] * sa + p[1] * ca; return [x, y * se - p[2] * ce, y * ce + p[2] * se]; };
+  return {P, toward: [sa * ce, ca * ce, se]};
+}
+function helio(lambda, r) { const L = rad(lambda + 180); return [r * Math.sin(L), -r * Math.cos(L), 0]; }
+// The globe: lit half faces the Sun, the axis keeps one direction, the latitude circle's lit share is the daylight.
+function globeGeometry(m) {
+  const t = rad(state.tilt), A = [Math.sin(t), 0, Math.cos(t)], e1 = [Math.cos(t), 0, -Math.sin(t)], e2 = [0, 1, 0];
+  const s = norm(helio(m.here.lambda, -1));
+  const circle = (phi, n = 144) => Array.from({length: n + 1}, (_, i) => { const a = i * 2 * Math.PI / n; return add(add([0, 0, 0], A, Math.sin(phi)), add(e1.map(v => v * Math.cos(a)), e2, Math.sin(a)), Math.cos(phi)); });
+  return {A, s, circle};
+}
+function drawOrbit(g, gFront, gGlobe, b, m) {
+  for (const node of [g, gFront, gGlobe]) node.replaceChildren();
+  g.dataset.view = `${view.az},${view.el}`;
+  el('rect', {x: b.x, y: b.y, width: b.w, height: b.h, fill: 'none', 'pointer-events': 'all', class: 'hit'}, g);
+  el('text', {x: b.x + 8, y: b.y + 18, class: 'ptitle'}, gFront, tr('三维轨道（拖动转动；地球放大了）', 'Orbit in 3D (drag to turn; Earth enlarged)'));
+  const {P, toward} = camera(), e = state.e, se = Math.abs(Math.sin(rad(view.el)));
+  const cx = b.x + b.w / 2, cy = b.y + b.h / 2 + 10, re = narrow ? 26 : 30, rs = 13;
+  const R = Math.min((b.w / 2 - 48) / (1 + e), (b.h / 2 - 54) / ((1 + e) * Math.max(se, 0.05)), narrow ? 190 : 200);
+  const S = p => { const q = P(p); return [cx + q[0] * R, cy + q[1] * R, q[2] * R]; };
+  // Orbit, cut where it enters a sphere, then sorted against the Sun and Earth by depth (exact for line vs sphere).
+  const E = helio(m.here.lambda, m.here.r), sE = S(E), sSun = [cx, cy, 0];
+  const spheres = [{c: sSun, r: rs, part: 'sun'}, {c: sE, r: re, part: 'earth'}].sort((a, b2) => a.c[2] - b2.c[2]);
+  const inside = q => spheres.some(o => Math.hypot(q[0] - o.c[0], q[1] - o.c[1], q[2] - o.c[2]) < o.r);
+  const band = d => spheres.filter(o => d > o.c[2]).length;
+  const runs = [[], [], []]; let prev = null;
+  for (let i = 0; i <= 360; i++) {
+    const nu = rad(i), r = (1 - e * e) / (1 + e * Math.cos(nu)), q = S(helio(deg(nu) + LON_PERI, r));
+    if (prev && !inside(q) && !inside(prev)) {
+      const k = band((q[2] + prev[2]) / 2), list = runs[k], last = list[list.length - 1];
+      if (last && last.end === i - 1) { last.pts.push(q); last.end = i; } else list.push({pts: [prev, q], end: i});
+    }
+    prev = q;
+  }
+  const poly = (parent, k) => { for (const run of runs[k]) el('polyline', {points: run.pts.map(q => f1(q[0]) + ',' + f1(q[1])).join(' '), class: 'orbit'}, parent); };
+  const sun = parent => { el('circle', {cx, cy, r: rs * 1.9, class: 'sunglow'}, parent); el('circle', {cx, cy, r: rs, class: 'sunball'}, parent); };
+  // Back layer: everything behind Earth; the globe; front layer: everything in front of Earth.
+  const earthFirst = spheres[0].part === 'earth';
+  poly(g, 0);
+  if (!earthFirst) { sun(g); poly(g, 1); }
+  drawGlobe(gGlobe, m, P, sE, re, toward);
+  if (earthFirst) { poly(gFront, 1); sun(gFront); }
+  poly(gFront, 2);
+  // Season markers and closest/farthest, labelled outside the orbit unless the globe sits there.
+  const clear = o => Math.hypot(o[0] - sE[0], o[1] - sE[1]) > re + 22;
+  for (const [lambda, zh, en] of [[90, '6月', 'Jun'], [180, '9月', 'Sep'], [270, '12月', 'Dec'], [0, '3月', 'Mar']]) {
+    const nu = rad(lambda - LON_PERI), r = (1 - e * e) / (1 + e * Math.cos(nu)), q = S(helio(lambda, r)), o = S(helio(lambda, r + 0.17));
+    el('circle', {cx: q[0], cy: q[1], r: 2.4, fill: 'var(--line-strong)'}, gFront);
+    if (clear(o)) el('text', {x: o[0], y: o[1] + 4, 'text-anchor': 'middle', class: 'lbl'}, gFront, tr(zh, en));
+  }
+  for (const [nu, zh, en] of [[0, '近日点', 'closest'], [180, '远日点', 'farthest']]) {
+    const r = (1 - e * e) / (1 + e * Math.cos(rad(nu))), q = S(helio(nu + LON_PERI, r)), o = S(helio(nu + LON_PERI, r + 0.17));
+    el('path', {d: `M${f1(q[0])} ${f1(q[1] - 6)}l4 6-4 6-4-6z`, fill: 'var(--muted)'}, gFront);
+    const ly = o[1] + (o[1] < q[1] ? -8 : 18);
+    if (clear([o[0], ly - 4])) el('text', {x: o[0], y: ly, 'text-anchor': 'middle', class: 'lbl num'}, gFront, tr(zh, en));
+  }
+  // Sun–Earth distance, drawn between the two limbs.
+  const dx = sE[0] - cx, dy = sE[1] - cy, dl = Math.hypot(dx, dy);
+  if (dl > rs * 1.9 + re + 8) {
+    const ux = dx / dl, uy = dy / dl;
+    el('line', {x1: cx + ux * rs * 1.9, y1: cy + uy * rs * 1.9, x2: sE[0] - ux * (re + 3), y2: sE[1] - uy * (re + 3), class: 'dist'}, gFront);
+    el('text', {x: (cx + sE[0]) / 2 - uy * 14, y: (cy + sE[1]) / 2 + ux * 14 + 4, 'text-anchor': 'middle', class: 'lbl num'}, gFront, m.here.r.toFixed(3) + ' AU');
+  }
+  el('text', {x: b.x + 8, y: b.y + b.h - 6, class: 'lbl-ink num'}, gFront, dateText(state.day));
+}
+function drawGlobe(g, m, P, c, re, toward) {
+  const {A, s, circle} = globeGeometry(m), v = toward;
+  const at = p => { const q = P(p); return [c[0] + q[0] * re, c[1] + q[1] * re, q[2]]; };
+  el('circle', {cx: c[0], cy: c[1], r: re, class: 'earth-night'}, g);
+  // Lit region on the visible disc: half the limb plus the visible half of the terminator.
+  const a = cross(s, v), sv = dot(s, v);
+  if (Math.hypot(...a) < 1e-6) { if (sv > 0) el('circle', {cx: c[0], cy: c[1], r: re, class: 'earth-day'}, g); }
+  else {
+    const an = norm(a), bt = norm(cross(s, an)), bv = dot(bt, v) >= 0 ? bt : bt.map(x => -x), lc = norm(cross(v, an)), lv = dot(lc, s) >= 0 ? lc : lc.map(x => -x);
+    const pts = [];
+    for (let i = 0; i <= 48; i++) { const th = Math.PI * i / 48; pts.push(at(add(an.map(x => x * Math.cos(th)), bv, Math.sin(th)))); }
+    for (let i = 0; i <= 48; i++) { const th = Math.PI - Math.PI * i / 48; pts.push(at(add(an.map(x => x * Math.cos(th)), lv, Math.sin(th)))); }
+    el('path', {d: 'M' + pts.map(q => f1(q[0]) + ' ' + f1(q[1])).join('L') + 'Z', class: 'earth-day'}, g);
+  }
+  // Equator and the learner's latitude circle: front half only, lit arc solid, night arc dashed.
+  const arcs = (pts, lit, cls, cls2) => {
+    let cur = null, key = null, prevQ = null;
+    for (const p of pts) {
+      const vis = dot(p, v) > 0, k = vis ? (lit && dot(p, s) <= 0 ? cls2 : cls) : null, q = at(p);
+      if (k !== key) { if (cur && key) el('polyline', {points: cur.join(' '), class: key}, g); cur = []; key = k; if (k && prevQ) cur.push(prevQ); }
+      if (k) cur.push(f1(q[0]) + ',' + f1(q[1]));
+      prevQ = f1(q[0]) + ',' + f1(q[1]);
+    }
+    if (cur && key) el('polyline', {points: cur.join(' '), class: key}, g);
+  };
+  arcs(circle(0), false, 'equator');
+  const phi = rad(clamp(state.lat, -89.5, 89.5)), ring = circle(phi);
+  arcs(ring, true, 'parallel', 'parallel-night');
+  g.dataset.litShare = (ring.slice(1).filter(p => dot(p, s) > 0).length / (ring.length - 1)).toFixed(4);
+  // Local noon on that circle faces the Sun; the subsolar point marks the declination.
+  const w = norm(add(s, A, -dot(s, A))), noon = add(A.map(x => x * Math.sin(phi)), w, Math.cos(phi));
+  if (dot(s, v) > 0) { const q = at(s); el('circle', {cx: q[0], cy: q[1], r: 2.8, fill: 'var(--sun)', stroke: 'var(--surface)', 'stroke-width': 1.2}, g); }
+  if (dot(noon, v) > 0 && Math.cos(phi) > 0.02) { const q = at(noon); el('circle', {cx: q[0], cy: q[1], r: 3.6, class: 'noon-dot'}, g); }
+  // Axis: only the parts outside the globe and not hidden behind it.
+  let seg = null;
+  for (let i = 0; i <= 60; i++) {
+    const k = -1.55 + 3.1 * i / 60, p = A.map(x => x * k), q = at(p), rho = Math.hypot(q[0] - c[0], q[1] - c[1]);
+    const shown = Math.abs(k) > 1 && !(rho < re && q[2] < 0);
+    if (shown) { seg = seg || []; seg.push(f1(q[0]) + ',' + f1(q[1])); }
+    if ((!shown || i === 60) && seg) { if (seg.length > 1) el('polyline', {points: seg.join(' '), class: 'earth-axis'}, g); seg = null; }
+  }
+  const tip = at(A.map(x => x * 1.85));
+  el('text', {x: tip[0], y: tip[1] + 4, 'text-anchor': 'middle', class: 'lbl-ink'}, g, 'N');
+}
+function drawClose(g, b, m) {
+  g.replaceChildren();
+  el('text', {x: b.x + 8, y: b.y + 18, class: 'ptitle'}, g, tr('侧面看地球（阳光从左边来）', 'Earth from the side (sunlight from the left)'));
+  const R = Math.min(b.w * 0.25, b.h * 0.31), cx = b.x + b.w * 0.6, cy = b.y + b.h / 2 + 4;
+  for (let i = -2; i <= 2; i++) { const y = cy + i * R * 0.42; el('line', {x1: b.x + 14, y1: y, x2: cx - R - 14, y2: y, class: 'ray'}, g); el('path', {d: `M${f1(cx - R - 14)} ${f1(y)}l-7 -4v8z`, fill: 'var(--sun)'}, g); }
+  el('circle', {cx, cy, r: R, class: 'earth-night'}, g);
+  el('path', {d: `M${cx} ${cy - R}A${R} ${R} 0 0 0 ${cx} ${cy + R}Z`, class: 'earth-day'}, g);
+  const d = rad(m.here.dec), n = [-Math.sin(d), -Math.cos(d)], p = [Math.cos(d), -Math.sin(d)];
+  el('line', {x1: cx - n[0] * R * 1.25, y1: cy - n[1] * R * 1.25, x2: cx + n[0] * R * 1.25, y2: cy + n[1] * R * 1.25, class: 'earth-axis'}, g);
+  el('text', {x: cx + n[0] * R * 1.38, y: cy + n[1] * R * 1.38 + 4, 'text-anchor': 'middle', class: 'lbl-ink'}, g, 'N');
+  el('line', {x1: cx - p[0] * R, y1: cy - p[1] * R, x2: cx + p[0] * R, y2: cy + p[1] * R, class: 'equator'}, g);
+  const phi = rad(state.lat), c0 = [cx + n[0] * R * Math.sin(phi), cy + n[1] * R * Math.sin(phi)], hw = R * Math.cos(phi);
+  el('line', {x1: c0[0] - p[0] * hw, y1: c0[1] - p[1] * hw, x2: c0[0] + p[0] * hw, y2: c0[1] + p[1] * hw, class: 'parallel'}, g);
+  const noon = [c0[0] - p[0] * hw, c0[1] - p[1] * hw];
+  el('circle', {cx: noon[0], cy: noon[1], r: 5, class: 'noon-dot'}, g);
+  el('text', {x: noon[0] - 9, y: noon[1] - 9, 'text-anchor': 'end', class: 'lbl-accent'}, g, where());
+  // The subsolar point is the limb point facing the Sun; its latitude is the declination.
+  el('circle', {cx: cx - R, cy, r: 3.5, fill: 'var(--sun)', stroke: 'var(--surface)', 'stroke-width': 1.5}, g);
+  el('text', {x: cx, y: b.y + b.h - 4, 'text-anchor': 'middle', class: 'lbl-ink num'}, g, tr(`太阳直射 ${latText(m.here.dec)}`, `Sun overhead at ${latText(m.here.dec)}`));
+}
+function drawBeam(g, b, m) {
+  g.replaceChildren();
+  el('text', {x: b.x + 8, y: b.y + 18, class: 'ptitle'}, g, tr('正午，同一束阳光照到地面', 'At noon, one beam of sunlight on the ground'));
+  const gy = b.y + b.h - 18, W = 34, hit = b.x + b.w * 0.58, a = m.here.noon;
+  $('beam-clip-rect').setAttribute('x', b.x); $('beam-clip-rect').setAttribute('y', b.y + 26);
+  $('beam-clip-rect').setAttribute('width', b.w); $('beam-clip-rect').setAttribute('height', b.h - 26);
+  const clip = el('g', {'clip-path': 'url(#beam-clip)'}, g);
+  const gx = b.x + 40;
+  el('rect', {x: gx - W / 2, y: b.y + 30, width: W, height: gy - b.y - 30, class: 'ghost'}, clip);
+  el('text', {x: gx, y: gy + 14, 'text-anchor': 'middle', class: 'lbl num'}, g, tr('头顶直射', 'overhead'));
+  el('line', {x1: b.x + 8, y1: gy, x2: b.x + b.w - 8, y2: gy, class: 'ground'}, g);
+  if (a <= 0) {
+    el('text', {x: hit, y: gy - 30, 'text-anchor': 'middle', class: 'lbl-ink'}, g, tr('正午太阳仍在地平线下', 'The noon Sun stays below the horizon'));
+    return;
+  }
+  const s = Math.sin(rad(a)), c = Math.cos(rad(a)), L = W / s, len = 200, x0 = hit - L / 2, x1 = hit + L / 2;
+  el('path', {d: `M${f1(x0)} ${gy}L${f1(x1)} ${gy}L${f1(x1 - c * len)} ${f1(gy - s * len)}L${f1(x0 - c * len)} ${f1(gy - s * len)}Z`, class: 'beam'}, clip);
+  el('line', {x1: x0, y1: gy, x2: x0 - c * len, y2: gy - s * len, class: 'beam-edge'}, clip);
+  el('line', {x1: x1, y1: gy, x2: x1 - c * len, y2: gy - s * len, class: 'beam-edge'}, clip);
+  el('rect', {x: Math.max(b.x + 8, x0), y: gy - 2, width: Math.min(b.x + b.w - 8, x1) - Math.max(b.x + 8, x0), height: 5, class: 'patch'}, g);
+  el('path', {d: `M${f1(hit + 30)} ${gy}A30 30 0 0 0 ${f1(hit + 30 * Math.cos(rad(a)))} ${f1(gy - 30 * Math.sin(rad(a)))}`, fill: 'none', stroke: 'var(--ink)', 'stroke-width': 1}, g);
+  el('text', {x: b.x + b.w - 10, y: b.y + 40, 'text-anchor': 'end', class: 'lbl-ink num'}, g, tr(`高度 ${f1(a)}°`, `Elevation ${f1(a)}°`));
+  el('text', {x: b.x + b.w - 10, y: b.y + 56, 'text-anchor': 'end', class: 'lbl num'}, g, tr(`摊开到 ${m.here.spread.toFixed(2)} 倍面积`, `spread over ${m.here.spread.toFixed(2)}× the ground`));
+}
+function drawClock(g, b, m) {
+  g.replaceChildren();
+  el('text', {x: b.x + 8, y: b.y + 18, class: 'ptitle'}, g, tr('一天 24 小时里的白天', 'Daylight within 24 hours'));
+  const x0 = b.x + 118, x1 = b.x + b.w - 26, w = x1 - x0;
+  [[m.here, state.lat, 34], [m.mirror, -state.lat, 74]].forEach(([s, lat, dy], i) => {
+    const y = b.y + dy, h = i ? 14 : 20, day = s.dayHours, a = x0 + w * (12 - day / 2) / 24;
+    el('text', {x: b.x + 8, y: y + h / 2 + 4, class: i ? 'lbl' : 'lbl-ink'}, g, latText(lat));
+    el('rect', {x: x0, y, width: w, height: h, rx: 4, class: 'bar-night'}, g);
+    if (day > 0) el('rect', {x: a, y, width: w * day / 24, height: h, rx: day >= 24 ? 4 : 0, class: 'bar-day'}, g);
+    el('text', {x: x1, y: y - 4, 'text-anchor': 'end', class: (i ? 'lbl' : 'lbl-ink') + ' num'}, g, hoursText(day));
+  });
+  for (const hr of [0, 6, 12, 18, 24]) {
+    const x = x0 + w * hr / 24;
+    el('line', {x1: x, y1: b.y + 92, x2: x, y2: b.y + 97, class: 'tick'}, g);
+    el('text', {x, y: b.y + 110, 'text-anchor': 'middle', class: 'lbl'}, g, hr + ':00');
+  }
+}
+function drawYear(g, b, m) {
+  g.replaceChildren();
+  const left = b.x + 44, right = b.x + b.w - 12, top = b.y + 30, bottom = b.y + b.h - 22;
+  el('text', {x: b.x + 8, y: b.y + 16, class: 'ptitle'}, g, tr('一年里每天的阳光（W/m²）', 'Daily sunlight through the year (W/m²)'));
+  const legX = right; el('text', {x: legX, y: b.y + 16, 'text-anchor': 'end', class: 'lbl'}, g, tr(`实线 ${latText(state.lat)} · 虚线 ${latText(-state.lat)} · ▲ 近日点、远日点`, `solid ${latText(state.lat)} · dashed ${latText(-state.lat)} · ▲ closest, farthest`));
+  const peak = Math.max(...m.curve, ...m.curveS), top100 = Math.max(600, Math.ceil(peak / 100) * 100);
+  const X = d => left + (right - left) * (d - 1) / 364, Y = q => bottom - (bottom - top) * q / top100;
+  for (let q = 0; q <= top100; q += top100 > 900 ? 400 : 200) {
+    el('line', {x1: left, y1: Y(q), x2: right, y2: Y(q), class: 'gridline'}, g);
+    el('text', {x: left - 6, y: Y(q) + 4, 'text-anchor': 'end', class: 'lbl'}, g, q);
+  }
+  let day = 1;
+  MONTHS.forEach((len, i) => { el('text', {x: X(day + len / 2), y: bottom + 15, 'text-anchor': 'middle', class: 'lbl'}, g, tr(`${i + 1}月`, MON_EN[i][0])); day += len; });
+  const path = c => c.map((q, i) => `${i ? 'L' : 'M'}${f1(X(i + 1))} ${f1(Y(q))}`).join('');
+  el('path', {d: path(m.curveS), class: 'curve-s'}, g);
+  el('path', {d: path(m.curve), class: 'curve'}, g);
+  for (const [d, zh, en] of [[PERI_DAY, '近日点', 'closest'], [185, '远日点', 'farthest']]) {
+    el('path', {d: `M${f1(X(d))} ${bottom}l-4 6h8z`, fill: 'var(--muted)'}, g);
+  }
+  el('line', {x1: X(state.day), y1: top - 6, x2: X(state.day), y2: bottom, class: 'now'}, g);
+  el('circle', {cx: X(state.day), cy: Y(m.here.Q), r: 4.5, class: 'noon-dot'}, g);
+}
+function draw(m) {
+  const L = layout(), svg = $('figure');
+  svg.setAttribute('viewBox', `0 0 ${L.vb[0]} ${L.vb[1]}`);
+  drawOrbit($('g-orbit'), $('g-orbit-front'), $('g-globe'), L.orbit, m); drawClose($('g-close'), L.close, m); drawBeam($('g-beam'), L.beam, m); drawClock($('g-clock'), L.clock, m); drawYear($('g-year'), L.year, m);
+  svg.classList.toggle('practice', state.practice != null && !state.checked[state.practice]);
+}
+
+// ---- Rendering --------------------------------------------------------
+function summary(m) {
+  const h = m.here;
+  const sun = h.noon > 0 ? tr(`正午太阳高 ${f1(h.noon)}°`, `the noon Sun stands ${f1(h.noon)}° high`) : tr('正午太阳在地平线下', 'the noon Sun stays below the horizon');
+  return tr(`${dateText(state.day)}，${where()}：${sun}，白天 ${hoursText(h.dayHours)}，每天阳光 ${Math.round(h.Q)} W/m²，日地距离 ${h.r.toFixed(3)} AU。同一天${latText(-state.lat)}的白天是 ${hoursText(m.mirror.dayHours)}。`,
+    `${dateText(state.day)}, ${where()}: ${sun}, ${hoursText(h.dayHours)} of daylight, ${Math.round(h.Q)} W/m² of daily sunlight, ${h.r.toFixed(3)} AU from the Sun. The same day at ${latText(-state.lat)} has ${hoursText(m.mirror.dayHours)} of daylight.`);
+}
+const phaseText = {
+  opposite: () => tr('两条曲线此起彼伏：南北半球的季节相反。', 'The curves rise and fall in turn: the hemispheres have opposite seasons.'),
+  together: () => tr('两条曲线同起同落：季节在两个半球同时发生。地球上的季节不是这样，所以不是距离造成的。', 'The curves rise and fall together: both hemispheres share the same season. Earth’s seasons are not like this, so distance is not their cause.'),
+  flat: () => tr('两条曲线几乎是平的：没有季节。', 'Both curves are nearly flat: no seasons.'),
+  mixed: () => tr('两条曲线有相反的部分，也有同步的部分：倾角和距离同时在起作用。', 'The curves partly oppose and partly move together: tilt and distance are both at work.'),
+  equator: () => tr('赤道附近两条曲线几乎重合；选一个离赤道远些的纬度再比较。', 'Near the equator the two curves almost coincide; pick a latitude farther from the equator to compare.')
+};
+function render() {
+  const m = lesson(state), masked = state.practice != null && !state.checked[state.practice];
+  draw(m);
+  const h = m.here;
+  const show = (id, text) => { $(id).textContent = masked ? '?' : text; $(id).closest('.readout').classList.toggle('masked', masked); };
+  show('ro-noon', h.noon > 0 ? f1(h.noon) + '°' : tr('地平线下', 'Below horizon'));
+  $('ro-noon-u').textContent = masked ? '' : tr(`光摊开 ${h.noon > 0 ? h.spread.toFixed(2) + ' 倍' : '—'}`, `beam spread ${h.noon > 0 ? h.spread.toFixed(2) + '×' : '—'}`);
+  show('ro-day', hoursText(h.dayHours));
+  $('ro-day-u').textContent = masked ? '' : tr(`${latText(-state.lat)}：${hoursText(m.mirror.dayHours)}`, `${latText(-state.lat)}: ${hoursText(m.mirror.dayHours)}`);
+  show('ro-q', String(Math.round(h.Q)));
+  show('ro-r', h.r.toFixed(3) + ' AU');
+  $('ro-r-u').textContent = masked ? '' : tr(`阳光强度 ${(100 / (h.r * h.r)).toFixed(1)}%（1 AU = 100%）`, `sunlight ${(100 / (h.r * h.r)).toFixed(1)}% of 1 AU`);
+  $('day-out').textContent = dateText(state.day);
+  $('lat-out').textContent = latText(state.lat);
+  $('tilt-out').textContent = f1(state.tilt) + '°';
+  const text = masked ? tr('练习中：数字已隐藏。', 'Practice: numbers hidden.') : summary(m);
+  $('summary').textContent = text; $('fig-desc').textContent = text;
+  if (state.prediction) say('planet-status', phaseText[hemispheres(state.lat, state.tilt, state.e)]);
+  renderChecklist();
+}
+function observe() {
+  if (!state.prediction || state.practice != null) return;
+  const {m} = dateOf(state.day), summer = m >= 5 && m <= 7, winter = m === 11 || m <= 1;
+  if (state.lat > 10 && summer) state.seen.nsummer = true;
+  if (state.lat > 10 && winter) state.seen.nwinter = true;
+  if (state.lat < -10 && (summer || winter)) state.seen.south = true;
+  const s = state.seen;
+  if (s.nsummer && s.nwinter && s.south && !state.unlocked) {
+    state.unlocked = true; $('explanation').hidden = false; $('practice').hidden = false;
+    say('try-status', () => tr('三种情形都看过了。解释和独立练习已在下面展开。', 'You have seen all three. The explanation and independent practice are open below.'));
+  }
+}
+function renderChecklist() {
+  $('seen-nsummer').classList.toggle('done', state.seen.nsummer);
+  $('seen-nwinter').classList.toggle('done', state.seen.nwinter);
+  $('seen-south').classList.toggle('done', state.seen.south);
+}
+function setPlace(place) {
+  state.place = place; if (place) state.lat = PLACES[place];
+  for (const r of document.querySelectorAll('input[name=place]')) r.checked = r.value === place;
+  $('lat').value = state.lat;
+}
+function setDay(day) { state.day = day; $('day').value = day; }
+function setTilt(t) { state.tilt = t; $('tilt').value = t; }
+function setEcc(e) { state.e = e; for (const r of document.querySelectorAll('input[name=ecc]')) r.checked = Number(r.value) === e; }
+function update() { observe(); render(); }
+
+// ---- Events -----------------------------------------------------------
+const FEEDBACK = {
+  distance: () => tr('你预测是距离。其实地球在 1 月 3 日前后离太阳最近，那正是北京的冬天。而且北京过夏天时，悉尼在过冬天，可它们和太阳的距离是一样的。', 'You predicted distance. In fact Earth is closest to the Sun around January 3, in Beijing’s winter. And while Beijing has summer, Sydney has winter, at exactly the same distance from the Sun.'),
+  tilt: () => tr('你预测是倾斜。对：倾角决定了正午太阳有多高、白天有多长。距离只让阳光变化约 ±3.4%，而且最强的时候在一月。', 'You predicted the tilt. Right: it sets how high the noon Sun climbs and how long it stays up. Distance changes sunlight by only about ±3.4%, and that peak comes in January.'),
+  hotter: () => tr('你预测是太阳变热。太阳的输出只变化约 0.1%，远不足以造成季节；而且它会让两个半球同时变热，可悉尼的七月是冬天。', 'You predicted a hotter Sun. The Sun’s output varies by only about 0.1%, far too little, and it would warm both hemispheres at once, yet July is winter in Sydney.')
+};
+$('prediction-form').addEventListener('submit', event => {
+  event.preventDefault();
+  const choice = new FormData(event.target).get('prediction');
+  if (!choice) return;
+  state.prediction = choice;
+  $('try-controls').disabled = false; $('planet-controls').disabled = false;
+  say('prediction-status', () => tr('已记下。现在拖动日期和纬度吧。', 'Saved. Now drag the date and the latitude.'));
+  say('prediction-feedback', FEEDBACK[choice]);
+  if (!state.unlocked) say('try-status', () => tr('看完上面三种情形，解释就会展开。', 'Visit the three situations above and the explanation opens.'));
+  update();
+});
+$('day').addEventListener('input', event => { state.day = Number(event.target.value); update(); });
+$('lat').addEventListener('input', event => {
+  state.lat = Number(event.target.value);
+  const match = Object.keys(PLACES).find(p => Math.abs(PLACES[p] - state.lat) < 0.05);
+  setPlace(match || null); state.lat = Number(event.target.value); $('lat').value = state.lat;
+  update();
+});
+$('tilt').addEventListener('input', event => { state.tilt = Number(event.target.value); update(); });
+document.addEventListener('change', event => {
+  const t = event.target;
+  if (t.name === 'place') setPlace(t.value);
+  else if (t.name === 'ecc') state.e = Number(t.value);
+  else return;
+  update();
+});
+$('dates').addEventListener('click', event => { const b = event.target.closest('button[data-day]'); if (b) { setDay(Number(b.dataset.day)); update(); } });
+document.querySelector('[data-tilt]').parentElement.addEventListener('click', event => { const b = event.target.closest('button[data-tilt]'); if (b) { setTilt(Number(b.dataset.tilt)); update(); } });
+$('transfer-form').addEventListener('submit', event => {
+  event.preventDefault();
+  const choice = new FormData(event.target).get('transfer');
+  if (!choice) return;
+  const text = {
+    poles: ['对。98° 的倾角让地轴几乎指着轨道方向。转到一侧时，一个极点整整半个公转（约 42 年）都对着太阳，另一个一直在黑暗里。你可以把上面的倾角拉到 82° 附近试试（98° 和 82° 的日照图案相同，只是自转方向相反）。', 'Correct. At 98° the axis lies almost in the orbital plane. For half an orbit, about 42 years, one pole faces the Sun while the other stays dark. Try a tilt near 82° above (98° gives the same sunlight pattern, with the spin reversed).'],
+    mild: ['不对。距离让天王星整体很冷，但季节的形态由倾角决定，与离太阳多远无关。98° 的倾角让季节极端：每个极点约 42 年白天、42 年黑夜。', 'Not quite. Distance makes Uranus cold overall, but the shape of its seasons comes from tilt, not distance. A 98° tilt makes them extreme: about 42 years of day, then 42 of night, at each pole.'],
+    equator: ['不对。赤道得到最多阳光，是因为地球倾角小。倾角接近 90° 时，夏至前后的极点几乎被直射，赤道反而只有低斜的阳光。把倾角拉到 82° 附近，看看年度曲线。', 'Not quite. The equator wins on Earth because the tilt is small. Near 90°, the summer pole sits almost under the Sun and the equator gets only low sunlight. Push the tilt toward 82° and watch the year chart.']
+  }[choice];
+  say('transfer-feedback', () => tr(...text));
+});
+
+// ---- Independent practice ----------------------------------------------
+function loadProblem(i) {
+  state.practice = i;
+  Object.assign(state, PROBLEMS[i].state, {place: null});
+  const match = Object.keys(PLACES).find(p => Math.abs(PLACES[p] - state.lat) < 0.05);
+  setPlace(match || null); setDay(state.day); setTilt(state.tilt); setEcc(state.e);
+  for (const form of document.querySelectorAll('.problem')) form.hidden = Number(form.dataset.problem) !== i;
+  $('practice-next').hidden = true;
+  render();
+}
+function judge(i, form) {
+  const raw = new FormData(form).get('answer');
+  if (raw == null || raw === '') return null;
+  if (i === 1) {
+    return raw === 'jan' ? {ok: true, msg: () => tr(`对。没有倾角，正午高度和白天长度全年不变，只剩距离：一月比七月多约 ${((PROBLEMS[1].key() - 1) * 100).toFixed(1)}%。`, `Correct. With no tilt, noon height and day length never change; only distance remains, so January gets about ${((PROBLEMS[1].key() - 1) * 100).toFixed(1)}% more than July.`)}
+      : raw === 'july' ? {ok: false, msg: () => tr('这是“七月就是夏天”的习惯在作答。没有倾角，七月没有任何特别之处；唯一的变化是距离，而地球一月离太阳最近。', 'That is the “July is summer” habit answering. With no tilt nothing makes July special; the only change left is distance, and Earth is closest in January.')}
+      : {ok: false, msg: () => tr('接近了，但距离还在变：日照随 1/r² 变化约 ±3.4%，所以一月比七月多约 7%。', 'Close, but distance still changes: sunlight varies as 1/r², about ±3.4%, so January gets about 7% more than July.')};
+  }
+  const x = Number(raw), key = PROBLEMS[i].key(), ok = Math.abs(x - key) <= PROBLEMS[i].tol, near = v => Math.abs(x - v) <= 2;
+  if (i === 0) {
+    if (ok) return {ok, msg: () => tr(`对，约 ${f1(key)}°。6 月 21 日太阳直射北纬 23.4°，北纬 30° 只差 6.6°，所以 90° − 6.6° ≈ 83.4°。`, `Correct: about ${f1(key)}°. On June 21 the Sun is overhead at 23.4°N; 30°N is only 6.6° away, so 90° − 6.6° ≈ 83.4°.`)};
+    if (near(60)) return {ok, msg: () => tr('你用的是春分秋分的太阳（90° − 30° = 60°）。6 月 21 日直射点已经移到北纬 23.4°，离北纬 30° 很近。', 'You used the equinox Sun (90° − 30° = 60°). On June 21 the overhead Sun has moved to 23.4°N, close to 30°N.')};
+    if (near(36.6)) return {ok, msg: () => tr('你把倾斜的方向弄反了：那是 12 月的答案。6 月北半球朝向太阳，直射点在北纬 23.4°。', 'You tilted the wrong way: that is December’s answer. In June the north leans toward the Sun, overhead at 23.4°N.')};
+    if (near(53.4)) return {ok, msg: () => tr('你把倾角加到了纬度上。正午高度 = 90° 减去“你和直射点之间的纬度差”：|30° − 23.4°| = 6.6°。', 'You added the tilt to the latitude. Noon height is 90° minus your distance from the overhead Sun: |30° − 23.4°| = 6.6°.')};
+    return {ok, msg: () => tr('先找到这天太阳直射的纬度（北纬 23.4°），再算你离它几度，正午高度就是 90° 减去这个差。', 'First find where the Sun is overhead today (23.4°N), then how many degrees you are from it; noon height is 90° minus that gap.')};
+  }
+  if (ok) return {ok, msg: () => tr('对，0 小时：极夜。北极圈在 90° − 23.4° = 66.6°，12 月北半球背向太阳，圈内的地方太阳整天不出来。', 'Correct: 0 hours, polar night. The Arctic Circle lies at 90° − 23.4° = 66.6°; in December the north leans away and inside the circle the Sun never rises.')};
+  if (Math.abs(x - 12) <= 1) return {ok, msg: () => tr('12 小时是春分秋分时全球的白天长度，不是冬至。', '12 hours is everyone’s day length at the equinoxes, not at the solstice.')};
+  if (x >= 22) return {ok, msg: () => tr('那是六月的特罗姆瑟（极昼）。12 月北极背向太阳，是黑暗的季节。', 'That is Tromsø in June (midnight sun). In December the north pole leans away; this is the dark season.')};
+  return {ok, msg: () => tr('你默认太阳每天都会升起。北极圈（北纬 66.6°）以内，冬至前后太阳整天都在地平线下。', 'You assumed the Sun rises every day. Inside the Arctic Circle (66.6°N) the December Sun stays below the horizon all day.')};
+}
+for (const form of document.querySelectorAll('.problem')) {
+  form.addEventListener('submit', event => {
+    event.preventDefault();
+    const i = Number(form.dataset.problem), verdict = judge(i, form);
+    if (!verdict) return;
+    if (state.firstTry[i] == null) state.firstTry[i] = verdict.ok;
+    state.checked[i] = true;
+    say(form.querySelector('[data-feedback]'), () => (verdict.ok ? '' : tr('还不对。', 'Not yet. ')) + verdict.msg() + ' ' + tr('左图的数字已恢复，可以对照。', 'The figure’s numbers are back for comparison.'));
+    $('practice-next').hidden = i === PROBLEMS.length - 1;
+    const done = state.checked.filter(Boolean).length, first = state.firstTry.filter(Boolean).length;
+    say('practice-score', () => done === PROBLEMS.length ? tr(`完成 3 题，首次就答对 ${first} 题。`, `All 3 done; ${first} right on the first try.`) : '');
+    render();
+  });
+}
+$('practice-start').addEventListener('click', () => {
+  state.saved = {day: state.day, lat: state.lat, place: state.place, tilt: state.tilt, e: state.e};
+  state.checked = []; state.firstTry = [];
+  for (const form of document.querySelectorAll('.problem')) { form.reset(); say(form.querySelector('[data-feedback]'), null); }
+  say('practice-score', null);
+  $('try-controls').disabled = true; $('planet-controls').disabled = true;
+  $('problems').hidden = false; $('practice-start').hidden = true; $('practice-exit').hidden = false;
+  loadProblem(0);
+});
+$('practice-next').addEventListener('click', () => loadProblem(state.practice + 1));
+function leavePractice() {
+  if (state.practice == null) return;
+  state.practice = null;
+  const s = state.saved; setPlace(s.place); state.lat = s.lat; $('lat').value = s.lat; setDay(s.day); setTilt(s.tilt); setEcc(s.e);
+  $('try-controls').disabled = !state.prediction; $('planet-controls').disabled = !state.prediction;
+  $('problems').hidden = true; $('practice-start').hidden = false; $('practice-exit').hidden = true;
+  render();
+}
+$('practice-exit').addEventListener('click', leavePractice);
+function setView(az, el2) {
+  view.az = ((Math.round(az) + 540) % 360) - 180; view.el = clamp(Math.round(el2), -80, 90);
+  $('view-az').value = view.az; $('view-el').value = view.el;
+  $('view-az-out').textContent = view.az + '°'; $('view-el-out').textContent = view.el + '°';
+}
+$('view-az').addEventListener('input', e => { setView(Number(e.target.value), view.el); render(); });
+$('view-el').addEventListener('input', e => { setView(view.az, Number(e.target.value)); render(); });
+$('view-reset').addEventListener('click', () => { setView(VIEW0.az, VIEW0.el); render(); });
+// Drag on the orbit panel turns the camera (horizontal on touch, so vertical swipes still scroll).
+{
+  const svg = $('figure'); let drag = null;
+  const inOrbit = ev => { const pt = new DOMPoint(ev.clientX, ev.clientY).matrixTransform(svg.getScreenCTM().inverse()), b = layout().orbit; return pt.x >= b.x && pt.x <= b.x + b.w && pt.y >= b.y && pt.y <= b.y + b.h; };
+  svg.addEventListener('pointerdown', ev => { if (ev.button || !inOrbit(ev)) return; drag = {x: ev.clientX, y: ev.clientY, az: view.az, el: view.el, id: ev.pointerId}; svg.setPointerCapture(ev.pointerId); svg.classList.add('turning'); });
+  svg.addEventListener('pointermove', ev => { if (!drag || ev.pointerId !== drag.id) return; setView(drag.az - (ev.clientX - drag.x) * 0.6, drag.el + (ev.clientY - drag.y) * 0.5); render(); });
+  const end = ev => { if (drag && ev.pointerId === drag.id) { drag = null; svg.classList.remove('turning'); } };
+  svg.addEventListener('pointerup', end); svg.addEventListener('pointercancel', end);
+}
+$('reset').addEventListener('click', () => {
+  setView(VIEW0.az, VIEW0.el);
+  state.practice = null;
+  Object.assign(state, DEFAULT, {prediction: null, seen: {nsummer: false, nwinter: false, south: false}, unlocked: false, saved: null, checked: [], firstTry: []});
+  setPlace(DEFAULT.place); setDay(DEFAULT.day); setTilt(DEFAULT.tilt); setEcc(DEFAULT.e);
+  $('prediction-form').reset(); $('transfer-form').reset(); $('writing').value = '';
+  for (const form of document.querySelectorAll('.problem')) { form.reset(); form.hidden = true; say(form.querySelector('[data-feedback]'), null); }
+  $('try-controls').disabled = true; $('planet-controls').disabled = true;
+  $('explanation').hidden = true; $('practice').hidden = true; $('problems').hidden = true; $('practice-start').hidden = false; $('practice-exit').hidden = true; $('practice-next').hidden = true;
+  for (const id of ['prediction-status', 'prediction-feedback', 'transfer-feedback', 'try-status', 'planet-status', 'practice-score']) say(id, null);
+  render();
+});
+I18N.on(render);
+new ResizeObserver(() => { const n = $('figure').clientWidth < 560; if (n !== narrow) { narrow = n; render(); } }).observe(document.querySelector('#experiment .stage'));
+I18N.apply();
+setTilt(DEFAULT.tilt);
+setView(VIEW0.az, VIEW0.el);
+render();
+</script>
+</body>
+</html>

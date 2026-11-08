@@ -1,0 +1,27 @@
+{
+  "schema": "teachable-figures/evidence@1",
+  "artifact": {
+    "id": "geometry-slices",
+    "version": 1,
+    "components": [],
+    "scaffolds_visible": ["formula-hint"]
+  },
+  "after_change": null,
+  "session": { "started": "2026-11-01T09:12:04.000Z", "lang": "en", "viewport": "wide" },
+  "events": [
+    { "t": 8420, "type": "prediction", "value": "4" },
+    { "t": 15110, "type": "trial", "h": 2 },
+    { "t": 17950, "type": "trial", "h": 4 },
+    { "t": 26300, "type": "set", "control": "height", "value": 6 },
+    { "t": 31840, "type": "check", "result": "match" },
+    { "t": 74210, "type": "explanation", "text": "The area doubles too, because h doubled and the slice just gets bigger by the same amount. The readout said 4 so I picked 4." },
+    { "t": 90560, "type": "transfer", "value": "3", "correct": false },
+    { "t": 93020, "type": "export" }
+  ],
+  "answers": {
+    "prediction": "4",
+    "explanation": "The area doubles too, because h doubled and the slice just gets bigger by the same amount. The readout said 4 so I picked 4.",
+    "transfer": "3"
+  },
+  "privacy": "No name or account. Typed text is kept as typed; audio is never stored."
+}

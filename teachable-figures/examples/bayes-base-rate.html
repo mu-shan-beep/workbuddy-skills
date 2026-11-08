@@ -1,0 +1,930 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title data-i18n data-zh="检测阳性，就一定有病吗？基础比率与贝叶斯" data-en="A positive test: how likely are you sick? Base rates and Bayes">A positive test: how likely are you sick? Base rates and Bayes</title>
+<style>
+/* lesson-shell v2: shared by every example page; keep identical across files */
+:root{color-scheme:light dark;--bar:56px;--bg:#f7f6f2;--surface:#fff;--stage:#eeece6;--ink:#141618;--text:#2a2e31;--muted:#61676c;--faint:#8b9196;--line:#e4e1d9;--line-strong:#cbc7bd;--accent:#d9480f;--accent-soft:#fcebe2;--focus:#d9480f;--ok:#1d7a4c;--sans:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Noto Sans SC","Microsoft YaHei",sans-serif;--mono:ui-monospace,"SF Mono",SFMono-Regular,Menlo,Consolas,monospace}
+@media(prefers-color-scheme:dark){:root{--bg:#111315;--surface:#181b1e;--stage:#0b0d0f;--ink:#f3f4f2;--text:#dadedc;--muted:#a1a7ab;--faint:#7a8085;--line:#272b2f;--line-strong:#3b4045;--accent:#ff7a45;--accent-soft:#2b1a11;--focus:#ff7a45;--ok:#4cc38a}}
+*{box-sizing:border-box}html{-webkit-text-size-adjust:100%}body{margin:0;background:var(--bg);color:var(--text);font:15.5px/1.6 var(--sans);-webkit-font-smoothing:antialiased}
+[hidden]{display:none!important}html[data-lang=zh] [lang=en],html[data-lang=en] [lang=zh]{display:none!important}
+:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+.skip{position:absolute;left:12px;top:-80px;z-index:30;background:var(--surface);color:var(--ink);padding:8px 12px;border-radius:8px}.skip:focus{top:10px}
+.bar{position:sticky;top:0;z-index:20;height:var(--bar);display:flex;align-items:center;gap:14px;padding:0 16px 0 20px;background:color-mix(in srgb,var(--bg) 90%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.bar .back{display:inline-flex;align-items:center;gap:6px;min-height:40px;color:var(--muted);text-decoration:none;font-size:14px;white-space:nowrap}.bar .back:hover{color:var(--ink)}
+.bar .crumb{min-width:0;font:500 12px/1.2 var(--mono);color:var(--faint);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lang-switch{margin-left:auto;flex:none;display:inline-flex;padding:3px;border:1px solid var(--line);border-radius:999px;background:var(--surface)}
+.lang-switch button{appearance:none;border:0;background:none;cursor:pointer;font:600 12px/1 var(--sans);min-height:30px;min-width:40px;padding:0 11px;border-radius:999px;color:var(--muted)}
+.lang-switch button[aria-pressed=true]{background:var(--ink);color:var(--bg)}
+.lesson{display:flex;flex-direction:column}.panel{display:contents}
+.intro{order:0;padding:28px 20px 6px}
+.figure-pane{order:1;margin:14px 12px 4px;padding:12px;background:var(--stage);border-radius:16px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.steps{order:2;padding:0 20px 40px}
+.stage{position:relative;min-height:0;display:grid;place-items:center}.stage>svg,.stage>canvas{display:block;width:100%;height:auto}
+.fig-caption{margin:0;font-size:12.5px;line-height:1.5;color:var(--muted)}
+.readouts{display:grid;grid-template-columns:repeat(auto-fit,minmax(104px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.readout{background:var(--surface);padding:9px 13px;min-width:0}
+.readout .k{display:block;font:500 12px/1.35 var(--sans);color:var(--muted)}
+.readout strong{display:block;font:650 21px/1.3 var(--sans);font-variant-numeric:tabular-nums;color:var(--ink);letter-spacing:-.01em;overflow-wrap:anywhere}
+.readout .u{display:block;font-size:12px;line-height:1.35;color:var(--faint)}
+.meta{display:flex;flex-wrap:wrap;gap:4px 10px;margin:0 0 14px;padding:0;list-style:none;font:500 12.5px/1.4 var(--sans);color:var(--muted)}.meta li+li::before{content:"/";margin-right:10px;color:var(--line-strong)}
+h1{margin:0 0 12px;font-size:clamp(25px,2.5vw,33px);line-height:1.18;letter-spacing:-.025em;font-weight:700;color:var(--ink);text-wrap:balance}
+.lead{margin:0;color:var(--muted)}
+.step{padding:26px 0 22px;border-top:1px solid var(--line)}.intro+.steps .step:first-child,.steps>.step:first-child{border-top:0}
+.step>h2{display:flex;align-items:center;gap:10px;margin:0 0 12px;font-size:17px;line-height:1.3;letter-spacing:-.01em;color:var(--ink)}
+.step>h2 .n{flex:none;font:600 11px/1 var(--mono);color:var(--accent);border:1px solid currentColor;border-radius:6px;padding:4px 6px}
+h3{margin:20px 0 6px;font-size:14.5px;color:var(--ink)}p{margin:0 0 12px}strong{color:var(--ink)}
+.small{font-size:13.5px;color:var(--muted)}
+fieldset{border:0;padding:0;margin:0;min-width:0}legend{padding:0;margin:0 0 12px;font-weight:600;color:var(--ink)}
+label.choice{display:flex;gap:10px;align-items:flex-start;padding:10px 13px;margin-bottom:8px;border:1px solid var(--line);border-radius:10px;background:var(--surface);cursor:pointer;transition:border-color .12s,box-shadow .12s}
+label.choice:hover{border-color:var(--line-strong)}label.choice:has(input:checked){border-color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink)}label.choice:has(input:disabled){cursor:default}
+label.choice input{flex:none;margin:4px 0 0}input{accent-color:var(--ink)}input[type=radio],input[type=checkbox]{width:17px;height:17px}
+button,select{font:500 14px/1.2 var(--sans);color:var(--ink);background:var(--surface);border:1px solid var(--line-strong);border-radius:10px;padding:0 16px;min-height:42px;cursor:pointer}
+button:hover:not(:disabled),select:hover:not(:disabled){border-color:var(--ink)}button.primary{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+button:disabled,select:disabled{opacity:.45;cursor:not-allowed}
+.controls{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:14px 0}
+.toggle{display:flex;align-items:center;gap:10px;min-height:42px;font-weight:500;color:var(--ink);cursor:pointer}
+.range{margin:16px 0 8px}.range label{display:flex;justify-content:space-between;gap:12px;font-weight:500;color:var(--ink)}.range output{font:500 13px/1.6 var(--mono);color:var(--muted)}
+input[type=range]{width:100%;min-height:32px;margin:4px 0}
+.status{min-height:1.6em;margin:12px 0;padding:10px 12px;border-radius:10px;background:var(--bg);font-size:14px}
+.callout{margin:14px 0;padding:2px 0 2px 14px;border-left:3px solid var(--accent)}
+textarea{display:block;width:100%;min-height:90px;margin-top:8px;padding:10px 12px;font:inherit;color:var(--text);background:var(--bg);border:1px solid var(--line-strong);border-radius:10px;resize:vertical}
+table{border-collapse:collapse;width:100%;margin-top:14px;font-size:14px}th,td{text-align:left;padding:9px 6px;border-bottom:1px solid var(--line);vertical-align:top}th:first-child,td:first-child{padding-left:0}caption{text-align:left;font-weight:600;color:var(--ink);margin-bottom:4px}
+.limits{color:var(--muted);font-size:14px}
+.pane-more{display:none}
+.foot{margin-top:8px;padding-top:16px;border-top:1px solid var(--line);font-size:12.5px;color:var(--faint)}
+/* attention: figure parts [data-part], step focus [data-focus], ordered highlights ol.look, dual-coding terms [data-ref] */
+#experiment [data-part]{transition:opacity .28s ease,filter .28s ease,box-shadow .2s ease}
+#experiment.tf-ring [data-part].tf-hot:not(svg *){box-shadow:0 0 0 2px var(--accent),0 0 0 7px color-mix(in srgb,var(--accent) 18%,transparent);border-radius:10px}
+#experiment.tf-ring svg [data-part].tf-hot{filter:drop-shadow(0 0 1px var(--accent)) drop-shadow(0 0 5px color-mix(in srgb,var(--accent) 40%,transparent))}
+.focus-bar{display:flex;align-items:center;gap:12px;min-height:30px;margin:-4px 0 -2px}
+.focus-caption{flex:1;min-width:0;margin:0;font-size:13px;line-height:1.4;color:var(--ink)}.focus-caption:empty{visibility:hidden}
+.focus-caption .look-n{display:inline-grid;place-items:center;min-width:20px;height:20px;margin-right:8px;padding:0 5px;border-radius:999px;background:var(--accent);color:#fff;font:700 11px/1 var(--sans);vertical-align:1px}
+.focus-toggle{flex:none;display:inline-flex;align-items:center;gap:7px;min-height:30px;font-size:12.5px;color:var(--muted);cursor:pointer;white-space:nowrap}.focus-toggle input{width:15px;height:15px;margin:0}
+ol.look{margin:12px 0 8px;padding:0;list-style:none;counter-reset:look}
+ol.look>li{counter-increment:look;position:relative;margin:0 0 6px;padding:8px 10px 8px 38px;border:1px solid var(--line);border-radius:10px;cursor:pointer;color:var(--muted);transition:border-color .15s,background .15s}
+ol.look>li::before{content:counter(look);position:absolute;left:10px;top:9px;display:grid;place-items:center;width:20px;height:20px;border-radius:999px;border:1px solid var(--line-strong);font:650 11px/1 var(--sans);color:var(--muted)}
+ol.look>li:hover{border-color:var(--line-strong)}ol.look>li[aria-current=step]{border-color:var(--accent);background:var(--accent-soft);color:var(--ink)}ol.look>li[aria-current=step]::before{background:var(--accent);border-color:var(--accent);color:#fff}
+.look-nav{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:0 0 14px}.look-nav button{min-height:34px;padding:0 11px;font-size:13px}.look-nav .look-num{min-width:34px;padding:0}.look-nav .look-num[aria-pressed=true]{background:var(--accent);border-color:var(--accent);color:#fff}
+[data-ref]:not(a,button,input,select,label){text-decoration:underline dotted color-mix(in srgb,var(--accent) 70%,transparent);text-decoration-thickness:1.5px;text-underline-offset:3px;cursor:help;border-radius:4px}
+[data-ref].tf-ref-on{background:var(--accent-soft);box-shadow:0 0 0 2px var(--accent-soft);color:var(--ink)}[data-ref][aria-pressed=true]{background:var(--accent-soft);box-shadow:0 0 0 1px var(--accent)}
+.part-tip{position:fixed;z-index:40;pointer-events:none;max-width:240px;padding:5px 9px;border-radius:8px;background:var(--ink);color:var(--bg);font:500 12.5px/1.35 var(--sans);box-shadow:0 4px 14px rgb(0 0 0/.18)}
+@media(min-width:960px) and (min-height:560px){
+.lesson{display:grid;grid-template-columns:minmax(0,1fr) clamp(380px,35vw,500px);height:calc(100dvh - var(--bar))}
+.panel{display:block;grid-column:2;grid-row:1;overflow-y:auto;overscroll-behavior:contain;background:var(--surface);border-left:1px solid var(--line)}
+.figure-pane{grid-column:1;grid-row:1;margin:0;border-radius:0;padding:24px 28px;min-height:0}
+.figure-pane{overflow-y:auto;overscroll-behavior:contain}.figure-pane>*{flex-shrink:0}
+.figure-pane .stage{flex:1}.figure-pane .stage>svg,.figure-pane .stage>canvas{height:100%;max-height:100%}
+.pane-more{display:flex;grid-column:1;grid-row:1;align-self:end;position:relative;z-index:2;justify-content:center;align-items:flex-end;height:76px;padding-bottom:14px;pointer-events:none;background:linear-gradient(color-mix(in srgb,var(--stage) 0%,transparent),var(--stage) 72%)}
+.pane-more button{pointer-events:auto;min-height:32px;padding:0 14px;border-radius:999px;font-size:12.5px;box-shadow:0 2px 10px rgb(0 0 0/.12)}
+.intro{padding:32px 32px 6px}.steps{padding:0 32px 48px}
+.bar{padding:0 20px 0 24px}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+/* /lesson-shell */
+:root{--sick:#d9480f;--healthy:#c4bfb3;--ring:#141618;--tree-line:#b9b4a8}
+@media(prefers-color-scheme:dark){:root{--sick:#ff7a45;--healthy:#4a5157;--ring:#f3f4f2;--tree-line:#4a5056}}
+#figure{font-family:var(--sans)}
+#figure .h{font:600 13px var(--sans);fill:var(--ink)}
+#figure .s{font:500 11.5px var(--sans);fill:var(--muted)}
+#figure .num{font:700 17px var(--sans);fill:var(--ink);font-variant-numeric:tabular-nums}
+#figure .lbl{font:500 11px var(--sans);fill:var(--muted)}
+#figure .dot{transition:opacity .25s}
+#figure .node rect{fill:var(--surface);stroke:var(--line-strong)}
+#figure .node.pos rect{stroke:var(--ring);stroke-width:1.6}
+#figure .node.blank .num{fill:var(--faint)}
+#figure .link{stroke:var(--tree-line);stroke-width:1.5;fill:none}
+#figure .link.pos{stroke:var(--ring);stroke-width:2}
+#figure .seg-sick{fill:var(--sick)}#figure .seg-healthy{fill:var(--healthy)}
+#figure .bar-frame{fill:none;stroke:var(--ring);stroke-width:1.5}
+#figure .on-sick{font:700 12px var(--sans);fill:#fff}
+#figure .on-healthy{font:700 12px var(--sans);fill:var(--ink)}
+#figure .note{font:500 15px var(--sans);fill:var(--muted)}
+#figure.narrow .h{font-size:17px}#figure.narrow .s{font-size:15px}#figure.narrow .num{font-size:23px}#figure.narrow .lbl{font-size:14px}#figure.narrow .on-sick,#figure.narrow .on-healthy{font-size:15px}#figure.narrow .note{font-size:19px}
+.legend{display:flex;flex-wrap:wrap;gap:6px 16px;margin:0;padding:0;list-style:none;font-size:12.5px;color:var(--muted)}
+.legend li{display:flex;align-items:center;gap:6px}
+.sw{width:11px;height:11px;border-radius:50%;display:inline-block}.sw.sick{background:var(--sick)}.sw.healthy{background:var(--healthy)}.sw.ring{border:1.6px solid var(--ring);width:13px;height:13px}
+.fig-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}
+.fig-head h2{margin:0;font-size:14px;color:var(--ink)}
+#round-badge{font-size:12.5px;color:var(--muted)}
+input[type=number]{font:500 15px/1.2 var(--sans);color:var(--ink);background:var(--surface);border:1px solid var(--line-strong);border-radius:10px;padding:0 12px;min-height:42px;width:120px}
+.answer{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:12px 0}
+.answer label{font-weight:500;color:var(--ink)}
+.odds{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:12px 0;padding:0;list-style:none;font-size:13.5px}
+.odds li{padding:6px 10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);font-variant-numeric:tabular-nums}
+.odds li.op{border:0;background:none;padding:0 2px;color:var(--muted)}
+.odds li.now{border-color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink)}
+.formula{margin:12px 0;padding:12px 14px;border-radius:10px;background:var(--bg);font-size:14px;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.problem{margin:12px 0;padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:var(--bg)}
+.problem .tag{display:block;font-size:12px;font-weight:600;color:var(--accent);margin-bottom:6px}
+.fb-ok{color:var(--ok)}
+dl.refs{font-size:13px;color:var(--muted)}dl.refs dt{font-weight:600;color:var(--text)}dl.refs dd{margin:0 0 8px}
+</style>
+</head>
+<body>
+<a class="skip" href="#experiment"><span lang="zh">跳到实验</span><span lang="en">Skip to experiment</span></a>
+<header class="bar">
+<a class="back" href="index.html" data-keep-lang>← <span lang="zh">全部示例</span><span lang="en">All examples</span></a>
+<span class="crumb">bayes-base-rate.html</span>
+<div class="lang-switch" role="group" aria-label="语言 / Language"><button type="button" data-set-lang="zh" aria-pressed="false">中文</button><button type="button" data-set-lang="en" aria-pressed="true">EN</button></div>
+</header>
+<main class="lesson">
+<div class="panel">
+<div class="intro">
+<ul class="meta"><li><span lang="zh">概率 · 医学推理</span><span lang="en">Probability · medical reasoning</span></li><li><span lang="zh">2D 计数模型</span><span lang="en">2D count model</span></li><li><span lang="zh">约 10 分钟</span><span lang="en">~10 min</span></li></ul>
+<h1><span lang="zh">检测结果阳性，你有多大可能真的生病？</span><span lang="en">You test positive. How likely is it that you’re sick?</span></h1>
+<p class="lead" lang="zh">一项检测能查出 90% 的病人，听起来很准。可阳性结果到底意味着什么，还取决于一个常被忽略的数：这种病本来有多常见。左边是 1000 个人，你会亲手数出答案。</p>
+<p class="lead" lang="en">A test that catches 90% of sick people sounds reliable. What a positive result means, though, also depends on a number people tend to skip: how common the disease is in the first place. On the left are 1,000 people. You will count the answer yourself.</p>
+</div>
+<div class="steps">
+<section class="step" aria-labelledby="predict-title" data-focus="grid">
+<h2 id="predict-title"><span class="n">01</span><span lang="zh">预测</span><span lang="en">Predict</span></h2>
+<form id="prediction-form">
+<fieldset>
+<legend><span lang="zh">某种病在人群中占 1%。检测能查出 90% 的病人；健康的人里有 9% 也会被误报为阳性。你的结果是阳性。你真的患病的可能性大约是多少？</span><span lang="en">A disease affects 1% of people. The test catches 90% of those who have it, and wrongly flags 9% of healthy people. Your result is positive. Roughly how likely is it that you have the disease?</span></legend>
+<label class="choice"><input type="radio" name="prediction" value="90" required><span><span lang="zh">约 90%。检测查出了 90% 的病人。</span><span lang="en">About 90%. The test catches 90% of cases.</span></span></label>
+<label class="choice"><input type="radio" name="prediction" value="50"><span><span lang="zh">约 50%。准确，但也会误报，差不多一半一半。</span><span lang="en">About 50%. It is accurate but makes false alarms, so roughly a coin flip.</span></span></label>
+<label class="choice"><input type="radio" name="prediction" value="9"><span><span lang="zh">约 9%。大多数阳性其实是误报。</span><span lang="en">About 9%. Most positives are false alarms.</span></span></label>
+</fieldset>
+<div class="controls"><button type="submit" class="primary"><span lang="zh">记下预测</span><span lang="en">Save my prediction</span></button></div>
+<p id="prediction-status" class="small" aria-live="polite"></p>
+</form>
+</section>
+<section class="step" aria-labelledby="count-title" data-focus="grid bar ppv">
+<h2 id="count-title"><span class="n">02</span><span lang="zh">数一数阳性的人</span><span lang="en">Count the positives</span></h2>
+<p lang="zh">记下预测后，左边会给 <span data-ref="grid">1000 个人</span>都做一次检测：带黑圈的是检测阳性的人，橙色是真的患病的人。只留下阳性的人，看看他们当中有多少是橙色的。</p>
+<p lang="en">Once you save a prediction, all <span data-ref="grid">1,000 people</span> on the left take the test. A dark ring means a positive result; orange means the person really is sick. Keep only the positives, then see how many of them are orange.</p>
+<label class="toggle"><input id="positives-only" type="checkbox" disabled><span lang="zh">只看检测阳性的人</span><span lang="en">Show only people who tested positive</span></label>
+<form id="estimate-form">
+<fieldset id="estimate-fields" disabled>
+<div class="answer">
+<label for="estimate"><span lang="zh">阳性的人里，真正患病的占</span><span lang="en">Of everyone who tested positive, the share who are sick is</span></label>
+<span><input id="estimate" type="number" min="0" max="100" step="0.1" inputmode="decimal" required> %</span>
+<button type="submit" id="estimate-check"><span lang="zh">核对</span><span lang="en">Check my count</span></button>
+</div>
+</fieldset>
+<p id="estimate-feedback" class="status" role="status"></p>
+</form>
+</section>
+<section id="explanation" class="step" aria-labelledby="explain-title" hidden>
+<h2 id="explain-title"><span class="n">03</span><span lang="zh">解释：问题被问反了</span><span lang="en">Explain: the question got turned around</span></h2>
+<p id="prediction-feedback" class="callout"></p>
+<p class="small"><span lang="zh">按顺序看图上的四处，每一步只亮起相关的部分。</span><span lang="en">Look at four places in order; each step lights up only what it needs.</span></p>
+<ol class="look">
+<li data-focus="grid"><span lang="zh">先看点阵：1000 人里只有 10 个橙色的病人。这就是基础比率。</span><span lang="en">Start with the grid: only 10 of the 1,000 people are orange. That is the base rate.</span></li>
+<li data-focus="tree tp"><span lang="zh">看树的左支：10 个病人里有 9 个测出阳性。这是 90% 的来处。</span><span lang="en">Follow the tree’s left branch: 9 of the 10 sick people test positive. That is where the 90% comes from.</span></li>
+<li data-focus="tree fp"><span lang="zh">再看右支：990 个健康人的 9% 也是阳性，共 89 个误报。</span><span lang="en">Now the right branch: 9% of the 990 healthy people also test positive, 89 false alarms.</span></li>
+<li data-focus="bar ppv"><span lang="zh">最后只看阳性的人：9 个病人对 89 个健康人，患病的只占 9.2%。</span><span lang="en">Finally keep only the positives: 9 sick against 89 healthy, so only 9.2% are sick.</span></li>
+</ol>
+<p lang="zh">“90%”回答的是另一个问题：<strong>病人里</strong>有多少会测出阳性，即 P(阳性 | 患病)。你要的是 <strong>阳性的人里</strong>有多少真的患病，即 P(患病 | 阳性)。把两者弄混，叫作“条件倒置”。</p>
+<p lang="en">“90%” answers a different question: <strong>of the sick</strong>, how many test positive, P(positive | sick). You want <strong>of the positives</strong>, how many are sick, P(sick | positive). Mixing them up is called the confusion of the inverse.</p>
+<p lang="zh">这两个数为什么差这么远？因为健康的人太多了。1000 人里只有 10 个病人，却有 990 个健康人；9% 的误报率作用在 990 人身上，就是 <span data-ref="fp">89 个假阳性</span>，远多于 <span data-ref="tp">9 个真阳性</span>。这就是<strong data-ref="grid">基础比率</strong>：检测前就已知的患病比例。忽略它，叫作基础比率谬误。</p>
+<p lang="en">Why are the two so far apart? Because healthy people vastly outnumber sick ones. Of 1,000 people only 10 are sick and 990 are healthy; a 9% false-alarm rate applied to 990 people makes <span data-ref="fp">89 false positives</span>, swamping the <span data-ref="tp">9 true ones</span>. That starting share is the <strong data-ref="grid">base rate</strong>, and leaving it out is the base-rate fallacy.</p>
+<h3><span lang="zh">同一件事，用比值来算</span><span lang="en">The same thing, in odds</span></h3>
+<p lang="zh">贝叶斯法则的比值形式：<strong>检测后的比值 = 检测前的比值 × 似然比</strong>。<span data-ref="lr">阳性的似然比 LR⁺</span> = 敏感度 ÷ 误报率，表示一个阳性结果把“患病对健康”的比值放大多少倍。</p>
+<p lang="en">Bayes’ rule in odds form: <strong>posterior odds = prior odds × likelihood ratio</strong>. For a positive result, <span data-ref="lr">LR⁺</span> = sensitivity ÷ false-positive rate: how many times a positive multiplies the odds of sick to healthy.</p>
+<p id="odds-line" class="formula" aria-live="polite"></p>
+<h3><span lang="zh">为什么数人头更容易</span><span lang="en">Why counting people helps</span></h3>
+<p lang="zh">1978 年，研究者问哈佛医学院附属医院的医生和学生一道类似的题，最常见的答案是 95%，正确答案约 2%。Gigerenzer 与 Hoffrage 在 1995 年发现，把同样的题改写成“1000 人中有几个”的<strong>自然频数</strong>，答对的人大约多了两倍。<span data-ref="grid">左边的点阵</span>就是自然频数。</p>
+<p lang="en">In 1978 researchers gave a similar problem to physicians and students at Harvard-affiliated hospitals. The most common answer was 95%; the correct one was about 2%. Gigerenzer and Hoffrage found in 1995 that rewriting the same problems as <strong>natural frequencies</strong> (“so many out of 1,000 people”) roughly tripled the share of correct answers. The <span data-ref="grid">dot grid on the left</span> is a natural-frequency picture.</p>
+<label for="writing"><strong><span lang="zh">用自己的话写：一项很准的检测，为什么阳性结果仍然可能大概率是误报？</span><span lang="en">In your own words: how can a positive from an accurate test still most likely be a false alarm?</span></strong></label>
+<textarea id="writing" data-i18n data-zh-placeholder="因为……健康的人……" data-en-placeholder="Because healthy people…"></textarea>
+</section>
+<section id="explore" class="step" aria-labelledby="explore-title" hidden>
+<h2 id="explore-title"><span class="n">04</span><span lang="zh">改变基础比率</span><span lang="en">Change the base rate</span></h2>
+<p lang="zh">保持检测不变，只把病变得更常见：同样一个阳性，意义完全不同。再试试提高敏感度和降低误报率，哪个对阳性结果的可信度影响更大？</p>
+<p lang="en">Keep the test fixed and make the disease more common: the same positive now means something quite different. Then try raising sensitivity versus lowering the false-positive rate. Which moves the meaning of a positive more?</p>
+<div class="range">
+<label for="prevalence"><span><span lang="zh">患病率（基础比率）</span><span lang="en">Prevalence (base rate)</span></span><output id="prevalence-out" for="prevalence"></output></label>
+<input id="prevalence" type="range" min="0" max="8" step="1" value="3">
+</div>
+<div class="range">
+<label for="sensitivity"><span><span lang="zh">敏感度：病人测出阳性</span><span lang="en">Sensitivity: sick people who test positive</span></span><output id="sensitivity-out" for="sensitivity"></output></label>
+<input id="sensitivity" type="range" min="50" max="100" step="1" value="90">
+</div>
+<div class="range">
+<label for="fpr"><span><span lang="zh">误报率：健康人测出阳性</span><span lang="en">False-positive rate: healthy people who test positive</span></span><output id="fpr-out" for="fpr"></output></label>
+<input id="fpr" type="range" min="0.5" max="30" step="0.5" value="9">
+</div>
+<div class="controls"><button id="defaults" type="button"><span lang="zh">回到 1% / 90% / 9%</span><span lang="en">Back to 1% / 90% / 9%</span></button></div>
+</section>
+<section id="retest-step" class="step" aria-labelledby="retest-title" data-focus="bar ppv" hidden>
+<h2 id="retest-title"><span class="n">05</span><span lang="zh">再测一次</span><span lang="en">Test again</span></h2>
+<p lang="zh">把所有阳性的人再测一次。第一次检测后的概率，就成了第二次检测前的基础比率。每多一个独立的阳性，比值就再乘一次似然比。</p>
+<p lang="en">Retest everyone who was positive. The probability after the first test becomes the base rate for the second. Each further independent positive multiplies the odds by the likelihood ratio once more.</p>
+<div class="controls">
+<button id="retest" type="button" class="primary"><span lang="zh">给阳性的人再测一次</span><span lang="en">Retest the positives</span></button>
+<button id="retest-reset" type="button"><span lang="zh">回到第一次检测</span><span lang="en">Back to one test</span></button>
+</div>
+<ol id="odds-ladder" class="odds" data-i18n data-zh-aria-label="比值阶梯" data-en-aria-label="Odds ladder" aria-label="Odds ladder"></ol>
+<p class="small"><span lang="zh">这假设两次检测在“已知是否患病”的条件下相互独立。现实中，同一个原因（比如交叉反应）常会让同一个人反复误报，真实的提升会小得多。</span><span lang="en">This assumes the two tests are independent given disease status. In practice the same cause (a cross-reacting antibody, say) often makes the same person test falsely positive twice, so the real gain is smaller.</span></p>
+</section>
+<section id="practice" class="step" aria-labelledby="practice-title" hidden>
+<h2 id="practice-title"><span class="n">06</span><span lang="zh">独立练习</span><span lang="en">Independent practice</span></h2>
+<p lang="zh">三道新题，提示一道比一道少：第一题只有点阵，没有数字；第二题只有空白的树；第三题没有图。</p>
+<p lang="en">Three new cases, each with less support: the first gives you only the dots, no numbers; the second a blank tree; the third no figure at all.</p>
+<div class="controls"><button id="practice-start" type="button" class="primary"><span lang="zh">开始练习</span><span lang="en">Start practice</span></button></div>
+<div id="practice-card" class="problem" hidden>
+<span id="practice-tag" class="tag"></span>
+<p id="practice-text"></p>
+<form id="practice-form">
+<div class="answer">
+<label for="practice-answer"><span lang="zh">阳性的人真正患病的概率</span><span lang="en">Chance a positive person is sick</span></label>
+<span><input id="practice-answer" type="number" min="0" max="100" step="0.1" inputmode="decimal" required> %</span>
+<button type="submit" id="practice-check"><span lang="zh">核对</span><span lang="en">Check answer</span></button>
+</div>
+</form>
+<p id="practice-feedback" class="status" role="status"></p>
+<div class="controls"><button id="practice-next" type="button" hidden></button></div>
+</div>
+<p id="practice-summary" class="callout" hidden></p>
+</section>
+<section id="transfer" class="step" aria-labelledby="transfer-title" hidden>
+<h2 id="transfer-title"><span class="n">07</span><span lang="zh">迁移：机场安检</span><span lang="en">Transfer: airport screening</span></h2>
+<form id="transfer-form">
+<fieldset><legend><span lang="zh">每一百万名旅客里约有 1 人携带违禁武器。扫描仪能发现 99% 的武器，也会对 1% 的普通行李报警。警报响了。最可能的情况是？</span><span lang="en">About 1 in a million passengers carries a weapon. The scanner catches 99% of weapons and alarms on 1% of ordinary bags. The alarm goes off. What is most likely?</span></legend>
+<label class="choice"><input type="radio" name="transfer" value="weapon" required><span><span lang="zh">约 99% 是真有武器。</span><span lang="en">About 99% that there is a weapon.</span></span></label>
+<label class="choice"><input type="radio" name="transfer" value="half"><span><span lang="zh">一半一半。</span><span lang="en">About even odds.</span></span></label>
+<label class="choice"><input type="radio" name="transfer" value="false"><span><span lang="zh">几乎可以肯定是误报。</span><span lang="en">It is almost certainly a false alarm.</span></span></label>
+</fieldset>
+<div class="controls"><button type="submit"><span lang="zh">核对答案</span><span lang="en">Check my answer</span></button></div>
+<p id="transfer-feedback" class="status" role="status"></p>
+</form>
+</section>
+<section class="step limits" aria-labelledby="limits-title">
+<h2 id="limits-title"><span lang="zh">这个模型的适用范围</span><span lang="en">Where this model applies</span></h2>
+<div lang="zh">
+<p>点阵画的是期望人数，不是一次抽样：真实的 1000 人里，病人可能是 7 个，也可能是 13 个。点的数量取整，概率按精确公式计算。</p>
+<p>数字是示意，不对应某一项真实检测。敏感度和误报率被当作固定值；现实中它们会随人群和病情轻重而变化。重复检测假设条件独立，这在现实中常常不成立。</p>
+<p>“患病率”指的是被检测人群中的比例。有症状才来做检测的人，基础比率远高于普通人群，同一个阳性会更可信。</p>
+</div>
+<div lang="en">
+<p>The dots show expected counts, not a random sample: a real group of 1,000 might hold 7 sick people or 13. Dot counts are rounded; probabilities use the exact formulas.</p>
+<p>The numbers are illustrative and do not describe a specific real test. Sensitivity and false-positive rate are treated as fixed, though in practice they shift with the population and how advanced the illness is. Repeat testing assumes conditional independence, which often fails in practice.</p>
+<p>“Prevalence” means the share among the people being tested. People who come in with symptoms have a much higher base rate than the general population, so the same positive is more trustworthy for them.</p>
+</div>
+<dl class="refs">
+<dt>Casscells, Schoenberger &amp; Graboys (1978)</dt><dd>Interpretation by physicians of clinical laboratory results. <i>New England Journal of Medicine</i> 299, 999–1001.</dd>
+<dt>Gigerenzer &amp; Hoffrage (1995)</dt><dd>How to improve Bayesian reasoning without instruction: frequency formats. <i>Psychological Review</i> 102, 684–704.</dd>
+</dl>
+<p class="foot"><span lang="zh">离线可用。用 Tab 切换控件，方向键调节滑块。</span><span lang="en">Works offline. Use Tab to reach controls and arrow keys on sliders.</span></p>
+<div class="controls"><button id="reset" type="button"><span lang="zh">重置整课</span><span lang="en">Reset lesson</span></button></div>
+</section>
+</div>
+</div>
+<section id="experiment" class="figure-pane" aria-labelledby="figure-title">
+<div class="fig-head"><h2 id="fig-heading"></h2><span id="round-badge"></span></div>
+<div class="stage">
+<svg id="figure" viewBox="0 0 900 440" role="img" aria-labelledby="figure-title figure-desc">
+<title id="figure-title" data-i18n data-zh="1000 人的检测结果：点阵、频数树和阳性人群的构成" data-en="Test results for 1,000 people: dot grid, frequency tree and who the positives are">Test results for 1,000 people: dot grid, frequency tree and who the positives are</title>
+<desc id="figure-desc"></desc>
+<g id="g-grid" data-part="grid" data-zh-label="1000 人点阵：橙色患病，黑圈阳性" data-en-label="1,000 people: orange is sick, a ring is positive"></g>
+<g id="g-tree" data-part="tree" data-zh-label="自然频数树：按患病与否、再按检测结果分开" data-en-label="Natural-frequency tree: split by disease, then by result"></g>
+<g id="g-bar" data-part="bar" data-zh-label="阳性的人都是谁" data-en-label="Who the positives are"></g>
+<g id="g-note"></g>
+</svg>
+</div>
+<div class="readouts" data-i18n data-zh-aria-label="当前结果" data-en-aria-label="Current results" aria-label="Current results">
+<div class="readout" data-part="ppv"><span class="k" data-ref="ppv"><span lang="zh">阳性者患病概率</span><span lang="en">Sick, given positive</span></span><strong id="r-ppv"></strong><span class="u" id="r-ppv-u"></span></div>
+<div class="readout" data-part="tp"><span class="k" data-ref="tp"><span lang="zh">真阳性</span><span lang="en">True positives</span></span><strong id="r-tp"></strong><span class="u" id="r-tp-u"></span></div>
+<div class="readout" data-part="fp"><span class="k" data-ref="fp"><span lang="zh">假阳性</span><span lang="en">False positives</span></span><strong id="r-fp"></strong><span class="u" id="r-fp-u"></span></div>
+<div class="readout" data-part="npv"><span class="k" data-ref="npv"><span lang="zh">阴性者健康概率</span><span lang="en">Healthy, given negative</span></span><strong id="r-npv"></strong><span class="u" id="r-npv-u"></span></div>
+<div class="readout" data-part="lr"><span class="k" data-ref="lr"><span lang="zh">阳性似然比</span><span lang="en">Likelihood ratio</span></span><strong id="r-lr"></strong><span class="u" id="r-lr-u"></span></div>
+</div>
+<ul class="legend" id="legend"><li data-ref="grid"><span class="sw sick"></span><span lang="zh">患病</span><span lang="en">Sick</span></li><li data-ref="grid"><span class="sw healthy"></span><span lang="zh">健康</span><span lang="en">Healthy</span></li><li data-ref="grid bar"><span class="sw ring"></span><span lang="zh">检测阳性</span><span lang="en">Tested positive</span></li></ul>
+<p class="fig-caption" id="summary" aria-live="polite"></p>
+</section>
+</main>
+<script>
+'use strict';
+/* lesson-shell i18n v2: shared by every example page; keep identical across files.
+   Static copy: paired elements <span lang="zh">…</span><span lang="en">…</span> (CSS hides the other language).
+   Text-only nodes and attributes: data-i18n plus data-zh / data-en (textContent) or data-zh-<attr> / data-en-<attr>.
+   Dynamic copy: tr('中文', 'English'); say(el, () => tr(…)) re-renders the message when the language changes. */
+const I18N = (() => {
+  const KEY = 'tf-lang', LANGS = ['zh', 'en'];
+  const stored = (() => { try { return localStorage.getItem(KEY); } catch { return null; } })();
+  const param = new URLSearchParams(location.search).get('lang');
+  let lang = LANGS.includes(param) ? param : LANGS.includes(stored) ? stored : /^zh\b/i.test(navigator.language || '') ? 'zh' : 'en';
+  const listeners = [];
+  function apply() {
+    const root = document.documentElement;
+    root.lang = lang === 'zh' ? 'zh-CN' : 'en';
+    root.dataset.lang = lang;
+    for (const el of document.querySelectorAll('[data-i18n]')) {
+      for (const { name, value } of [...el.attributes]) {
+        if (name === 'data-' + lang) el.textContent = value;
+        else if (name.startsWith('data-' + lang + '-')) el.setAttribute(name.slice(lang.length + 6), value);
+      }
+    }
+    for (const button of document.querySelectorAll('[data-set-lang]')) button.setAttribute('aria-pressed', String(button.dataset.setLang === lang));
+    for (const link of document.querySelectorAll('a[data-keep-lang]')) {
+      const target = new URL(link.getAttribute('href').split('?')[0], location.href);
+      target.searchParams.set('lang', lang);
+      link.href = target.href;
+    }
+    listeners.forEach(fn => fn(lang));
+  }
+  document.addEventListener('click', event => {
+    const button = event.target.closest('[data-set-lang]');
+    if (!button || button.dataset.setLang === lang) return;
+    lang = button.dataset.setLang;
+    try { localStorage.setItem(KEY, lang); } catch {}
+    try { const here = new URL(location.href); here.searchParams.set('lang', lang); history.replaceState(history.state, '', here); } catch {}
+    apply();
+  });
+  return { get lang() { return lang; }, on(fn) { listeners.push(fn); }, apply };
+})();
+const tr = (zh, en) => I18N.lang === 'zh' ? zh : en;
+const spoken = new Map();
+function say(target, message) {
+  const el = typeof target === 'string' ? document.getElementById(target) : target;
+  spoken.set(el, message);
+  el.textContent = message ? message() : '';
+}
+I18N.on(() => spoken.forEach((message, el) => { el.textContent = message ? message() : ''; }));
+// On short screens the figure pane scrolls on its own; while more of it is below the fold, show a cue that scrolls it.
+(() => {
+  const pane = document.querySelector('.lesson > .figure-pane');
+  if (!pane) return;
+  const cue = document.createElement('div');
+  cue.className = 'pane-more';
+  cue.hidden = true;
+  cue.innerHTML = '<button type="button" tabindex="-1" aria-hidden="true"></button>';
+  const button = cue.firstChild;
+  const label = () => { button.textContent = tr('下方还有内容 ↓', 'More below ↓'); };
+  label();
+  I18N.on(label);
+  button.addEventListener('click', () => pane.scrollBy({ top: pane.clientHeight * 0.75, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' }));
+  pane.after(cue);
+  function update() {
+    const scrolls = getComputedStyle(pane).overflowY !== 'visible' && pane.scrollHeight > pane.clientHeight + 1;
+    cue.hidden = !(scrolls && pane.scrollHeight - pane.clientHeight - pane.scrollTop > 4);
+    if (scrolls) pane.tabIndex = 0; else pane.removeAttribute('tabindex');
+  }
+  const sizes = new ResizeObserver(update);
+  const watch = () => { sizes.disconnect(); sizes.observe(pane); for (const child of pane.children) sizes.observe(child); };
+  new MutationObserver(() => { watch(); update(); }).observe(pane, { childList: true });
+  pane.addEventListener('scroll', update, { passive: true });
+  addEventListener('resize', update);
+  watch();
+  update();
+})();
+/* Attention guide. Figure parts: [data-part="id"] inside #experiment (labels: data-zh-label / data-en-label).
+   Step focus: a panel .step or element with data-focus="id …" dims the other parts while it is the active step
+   (focused element first, else the first visible step crossing the reading line). Ordered highlights: ol.look > li[data-focus].
+   Dual coding: [data-ref="id …"] terms and legend items link to parts both ways. Nothing moves until the learner scrolls, hovers or clicks. */
+(() => {
+  const figure = document.getElementById('experiment');
+  if (!figure || !figure.querySelector('[data-part]')) return;
+  const panel = document.querySelector('.lesson > .panel');
+  const KEY = 'tf-focus-guide', ids = value => (value || '').split(/\s+/).filter(Boolean);
+  let guide = (() => { try { return localStorage.getItem(KEY) !== 'off'; } catch { return true; } })();
+  let stepIds = [], look = null, peek = null, pinned = null, activeStep = null;
+  const style = document.createElement('style');
+  document.head.append(style);
+  const bar = document.createElement('div');
+  bar.className = 'focus-bar';
+  bar.innerHTML = '<p class="focus-caption" aria-live="polite"></p><label class="focus-toggle"><input type="checkbox"><span></span></label>';
+  const caption = bar.firstChild, toggle = bar.querySelector('input'), toggleText = bar.querySelector('.focus-toggle span');
+  toggle.checked = guide;
+  figure.prepend(bar);
+  const tip = document.createElement('div');
+  tip.className = 'part-tip';
+  tip.hidden = true;
+  document.body.append(tip);
+  const fine = matchMedia('(hover: hover) and (pointer: fine)');
+  const sel = list => list.map(id => `[data-part~="${CSS.escape(id)}"]`).join(',');
+  function render() {
+    const hot = pinned || peek || (look && look.ids) || (guide ? stepIds : []);
+    const ring = !!(pinned || peek || look);
+    figure.classList.toggle('tf-ring', ring && hot.length > 0);
+    figure.toggleAttribute('data-focusing', hot.length > 0);
+    style.textContent = hot.length ? `#experiment [data-part]:not(${sel(hot)}){opacity:.24;filter:saturate(.35)}` : '';
+    for (const part of figure.querySelectorAll('[data-part]')) part.classList.toggle('tf-hot', ring && ids(part.dataset.part).some(id => hot.includes(id)));
+  }
+  // Re-rendered figures replace their children; keep the hot class on new parts.
+  new MutationObserver(() => { if (figure.classList.contains('tf-ring')) render(); }).observe(figure, { childList: true, subtree: true });
+  const visible = el => el.offsetParent !== null || el.getClientRects().length > 0;
+  const steps = () => [...document.querySelectorAll('.panel .step, .panel [data-focus]:not(ol.look *)')].filter(visible);
+  function pickStep() {
+    const scroller = panel && getComputedStyle(panel).overflowY !== 'visible' ? panel : null;
+    const box = scroller ? scroller.getBoundingClientRect() : { top: 0, bottom: innerHeight, height: innerHeight };
+    const line = box.top + box.height * 0.3, list = steps();
+    const inView = el => { const r = el.getBoundingClientRect(); return r.bottom > box.top && r.top < box.bottom; };
+    const focused = document.activeElement && list.filter(el => el.contains(document.activeElement)).pop();
+    if (focused && inView(focused)) return focused;
+    let found = null;
+    for (const el of list) { const r = el.getBoundingClientRect(); if (r.bottom > line && r.top < box.bottom && (!found || found.contains(el))) found = el; else if (found && !found.contains(el)) break; }
+    return found;
+  }
+  function update() {
+    const step = pickStep();
+    if (step !== activeStep) {
+      activeStep = step;
+      if (look && !(step && step.contains(look.list))) setLook(null);
+    }
+    const target = step && (step.matches('[data-focus]') ? step : null);
+    stepIds = target ? ids(target.dataset.focus) : [];
+    render();
+  }
+  let queued = false;
+  const schedule = () => { if (!queued) { queued = true; requestAnimationFrame(() => { queued = false; update(); }); } };
+  (panel || document).addEventListener('scroll', schedule, { passive: true });
+  addEventListener('scroll', schedule, { passive: true });
+  addEventListener('resize', schedule);
+  document.addEventListener('focusin', schedule);
+  new MutationObserver(schedule).observe(document.querySelector('.panel') || document.body, { attributes: true, attributeFilter: ['hidden'], subtree: true });
+  toggle.addEventListener('change', () => { guide = toggle.checked; try { localStorage.setItem(KEY, guide ? 'on' : 'off'); } catch {} render(); });
+  // Ordered highlights.
+  const lists = [...document.querySelectorAll('ol.look')];
+  function setLook(next) {
+    look = next;
+    for (const list of lists) {
+      const items = [...list.children];
+      items.forEach((li, i) => { if (next && next.list === list && next.index === i) li.setAttribute('aria-current', 'step'); else li.removeAttribute('aria-current'); });
+      for (const button of list.previousElementSibling.querySelectorAll('.look-num')) button.setAttribute('aria-pressed', String(!!next && next.list === list && Number(button.dataset.index) === next.index));
+    }
+    caption.textContent = '';
+    if (next) {
+      const n = document.createElement('span');
+      n.className = 'look-n';
+      n.textContent = `${next.index + 1}/${next.list.children.length}`;
+      const text = document.createElement('span');
+      text.append(...[...next.list.children[next.index].childNodes].map(node => node.cloneNode(true)));
+      caption.append(n, text);
+    }
+    render();
+  }
+  const go = (list, index) => setLook({ list, index, ids: ids(list.children[index].dataset.focus) });
+  for (const list of lists) {
+    const nav = document.createElement('div');
+    nav.className = 'look-nav';
+    const items = [...list.children];
+    items.forEach((li, i) => {
+      const b = document.createElement('button');
+      b.type = 'button'; b.className = 'look-num'; b.dataset.index = i; b.textContent = i + 1; b.setAttribute('aria-pressed', 'false');
+      b.addEventListener('click', () => go(list, i));
+      nav.append(b);
+      li.addEventListener('click', event => { if (!event.target.closest('a,button,input,[data-ref]')) go(list, i); });
+    });
+    const make = (cls, zh, en, fn) => { const b = document.createElement('button'); b.type = 'button'; b.className = cls; const label = () => { b.textContent = tr(zh, en); }; label(); I18N.on(label); b.addEventListener('click', fn); nav.append(b); };
+    const at = () => (look && look.list === list ? look.index : -1);
+    make('look-prev', '‹ 上一步', '‹ Prev', () => go(list, Math.max(0, at() - 1)));
+    make('look-next', '下一步 ›', 'Next ›', () => go(list, Math.min(items.length - 1, at() + 1)));
+    make('look-clear', '清除', 'Clear', () => setLook(null));
+    list.before(nav);
+  }
+  // Dual coding: terms ↔ parts.
+  const refs = () => document.querySelectorAll('[data-ref]');
+  for (const term of refs()) if (!term.matches('a,button,input,select,textarea,label,[tabindex]')) { term.tabIndex = 0; term.setAttribute('role', 'button'); term.setAttribute('aria-pressed', 'false'); }
+  const termOf = event => event.target.closest && event.target.closest('[data-ref]');
+  let pointer = 'mouse';
+  document.addEventListener('pointerdown', event => { pointer = event.pointerType; }, true);
+  document.addEventListener('pointerover', event => { const term = termOf(event); if (term && event.pointerType === 'mouse') { peek = ids(term.dataset.ref); render(); } });
+  document.addEventListener('pointerout', event => { const term = termOf(event); if (term && !term.contains(event.relatedTarget)) { peek = null; render(); } });
+  document.addEventListener('focusin', event => { const term = termOf(event); if (term) { peek = ids(term.dataset.ref); render(); } });
+  document.addEventListener('focusout', event => { if (termOf(event)) { peek = null; render(); } });
+  function pin(term) {
+    const next = ids(term.dataset.ref).join(' ');
+    pinned = pinned && pinned.join(' ') === next ? null : ids(next);
+    for (const other of refs()) if (other.getAttribute('role') === 'button') other.setAttribute('aria-pressed', String(!!pinned && other.dataset.ref === term.dataset.ref));
+    render();
+  }
+  document.addEventListener('click', event => { const term = termOf(event); if (term && term.getAttribute('role') === 'button' && pointer !== 'mouse') pin(term); });
+  document.addEventListener('keydown', event => {
+    const term = termOf(event);
+    if (term && term.getAttribute('role') === 'button' && (event.key === 'Enter' || event.key === ' ')) { event.preventDefault(); pin(term); }
+    if (event.key === 'Escape' && (look || pinned)) { pinned = null; for (const other of refs()) if (other.getAttribute('role') === 'button') other.setAttribute('aria-pressed', 'false'); setLook(null); }
+  });
+  function partLabel(part) { return part.getAttribute(`data-${I18N.lang}-label`); }
+  figure.addEventListener('pointermove', event => {
+    const part = event.target.closest && event.target.closest('[data-part]');
+    const label = part && partLabel(part);
+    for (const term of refs()) term.classList.toggle('tf-ref-on', !!part && ids(term.dataset.ref).some(id => ids(part.dataset.part).includes(id)));
+    if (!label || !fine.matches || event.pointerType !== 'mouse') { tip.hidden = true; return; }
+    tip.textContent = label;
+    tip.hidden = false;
+    const x = Math.min(event.clientX + 14, innerWidth - tip.offsetWidth - 8), y = event.clientY + 18 + tip.offsetHeight > innerHeight ? event.clientY - tip.offsetHeight - 12 : event.clientY + 18;
+    tip.style.left = x + 'px'; tip.style.top = y + 'px';
+  });
+  figure.addEventListener('pointerleave', () => { tip.hidden = true; for (const term of refs()) term.classList.remove('tf-ref-on'); });
+  const labels = () => { toggleText.textContent = tr('焦点引导', 'Focus guide'); };
+  labels();
+  I18N.on(() => { labels(); if (look) setLook(look); });
+  update();
+})();
+/* /lesson-shell */
+const $ = id => document.getElementById(id);
+const SVG = 'http://www.w3.org/2000/svg';
+const N = 1000;
+const PREVALENCES = [0.001, 0.002, 0.005, 0.01, 0.02, 0.05, 0.1, 0.2, 0.5];
+const DEFAULTS = { prevIdx: 3, se: 0.9, f: 0.09 };
+
+// ---- Pure model: everything displayed is read from here. ----
+// round = number of positive results in a row (1 = the first test).
+function model({ p, se, f, round = 1 }) {
+  const sick = N * p, healthy = N - sick;
+  const before = { sick: sick * se ** (round - 1), healthy: healthy * f ** (round - 1) };
+  const tp = before.sick * se, fp = before.healthy * f;
+  const fn = before.sick - tp, tn = before.healthy - fp;
+  const ppv = tp / (tp + fp);
+  const firstFn = sick * (1 - se), firstTn = healthy * (1 - f);
+  const npv = firstTn / (firstTn + firstFn);
+  const lr = se / f;
+  const priorOdds = p / (1 - p);
+  const postOdds = priorOdds * lr ** round;
+  // Icon counts: rounded, and nested so each retest keeps a subset of the previous positives.
+  const icons = { sick: Math.round(sick), tp: Math.min(Math.round(tp), Math.round(sick)), fp: Math.min(Math.round(fp), Math.round(healthy)) };
+  return { p, se, f, round, sick, healthy, before, tp, fp, fn, tn, ppv, npv, lr, priorOdds, postOdds, oddsProb: postOdds / (1 + postOdds), icons };
+}
+
+// Practice cases. The key comes from the same model.
+const PRACTICE = [
+  { p: 0.02, se: 0.95, f: 0.05, fade: 'grid' },
+  { p: 0.1, se: 0.8, f: 0.1, fade: 'tree' },
+  { p: 0.02, se: 0.8, f: 0.04, fade: 'none', odds: true },
+];
+const TOL = 1.5; // percentage points
+
+function diagnose(answer, c) {
+  const m = model(c);
+  const truth = m.ppv * 100;
+  if (Math.abs(answer - truth) <= TOL) return { key: 'correct', truth };
+  const candidates = [
+    { key: 'inverse', v: c.se * 100 },
+    { key: 'specificity', v: (1 - c.f) * 100 },
+    { key: 'base', v: c.p * 100 },
+    { key: 'joint', v: c.p * c.se * 100 },
+  ];
+  if (c.odds) candidates.push({ key: 'oddsprob', v: c.p * m.lr * 100 });
+  let best = null;
+  for (const cand of candidates) {
+    const d = Math.abs(answer - cand.v);
+    if (d <= Math.max(1, cand.v * 0.05) && Math.abs(cand.v - truth) > TOL && (!best || d < best.d)) best = { ...cand, d };
+  }
+  return { key: best ? best.key : 'other', truth };
+}
+
+function selfCheck() {
+  const fail = msg => { throw new Error('selfCheck: ' + msg); };
+  const d = model({ p: 0.01, se: 0.9, f: 0.09 });
+  if (Math.abs(d.ppv - 9 / 98.1) > 1e-12) fail('default PPV');
+  if (d.icons.tp !== 9 || d.icons.fp !== 89 || d.icons.sick !== 10) fail('default icons');
+  for (const p of PREVALENCES) for (const se of [0.5, 0.9, 1]) for (const f of [0.005, 0.09, 0.3]) {
+    let last = null;
+    for (let round = 1; round <= 4; round++) {
+      const m = model({ p, se, f, round });
+      if (Math.abs(m.tp + m.fp + m.fn + m.tn - (m.before.sick + m.before.healthy)) > 1e-9) fail('counts sum');
+      if (Math.abs(m.ppv - m.oddsProb) > 1e-9) fail('odds form equals counts');
+      if (last && (m.tp > last.tp + 1e-12 || m.fp > last.fp + 1e-12)) fail('pools nest');
+      if (last && se > f && m.ppv < last.ppv - 1e-12) fail('retest raises PPV when LR > 1');
+      last = m;
+    }
+  }
+  for (let i = 1; i < PREVALENCES.length; i++) if (model({ p: PREVALENCES[i], se: 0.9, f: 0.09 }).ppv <= model({ p: PREVALENCES[i - 1], se: 0.9, f: 0.09 }).ppv) fail('PPV rises with prevalence');
+  const keys = PRACTICE.map(c => +(model(c).ppv * 100).toFixed(1)).join();
+  if (keys !== '27.9,47.1,29') fail('practice keys ' + keys);
+  if (diagnose(95, PRACTICE[0]).key !== 'inverse' || diagnose(40, PRACTICE[2]).key !== 'oddsprob' || diagnose(8, PRACTICE[1]).key !== 'joint') fail('diagnosis');
+}
+selfCheck();
+
+// ---- Formatting ----
+const pct = (x, digits = 1) => x * 100 >= 99.95 && x < 1 ? '>99.9%' : (x * 100).toFixed(digits) + '%';
+const num = x => Math.abs(x - Math.round(x)) < 0.05 ? Math.round(x).toLocaleString('en-US') : x.toFixed(1);
+// First-test counts are whole people; later rounds keep one decimal so the pools stay honest.
+const cnt = (x, round = 1) => round === 1 ? Math.round(x).toLocaleString('en-US') : num(x);
+const short = x => { const r = Math.round(x * 10) / 10; return Number.isInteger(r) ? r.toLocaleString('en-US') : r.toFixed(1); };
+const prevLabel = p => { const inN = Math.round(1 / p); return tr(`${short(p * 100)}%（每 ${inN.toLocaleString('en-US')} 人中 1 人）`, `${short(p * 100)}% (1 in ${inN.toLocaleString('en-US')})`); };
+
+// ---- State ----
+const fresh = () => ({ predicted: null, positivesOnly: false, everPositivesOnly: false, estimated: false, unlocked: false, ...DEFAULTS, round: 1, practice: null });
+let state = fresh();
+const params = () => ({ p: PREVALENCES[state.prevIdx], se: state.se, f: state.f, round: state.round });
+
+// ---- Figure ----
+let layout = null, dots = [];
+function geometry(narrow) {
+  return narrow
+    ? { w: 520, h: 760, grid: { x: 11, y: 30 }, tree: { x0: 0, x1: 520, y0: 384, y1: 618 }, bar: { x: 11, y: 670, w: 498 }, note: { x: 260, y: 300 } }
+    : { w: 900, h: 440, grid: { x: 0, y: 30 }, tree: { x0: 530, x1: 900, y0: 36, y1: 330 }, bar: { x: 0, y: 372, w: 900 }, note: { x: 450, y: 200 } };
+}
+const CELL = 12, GAP = 6;
+const cellPos = (i, g) => {
+  const col = i % 40, row = Math.floor(i / 40);
+  return [g.grid.x + col * CELL + Math.floor(col / 10) * GAP + CELL / 2, g.grid.y + row * CELL + Math.floor(row / 5) * GAP + CELL / 2];
+};
+function el(name, attrs, parent, text) {
+  const node = document.createElementNS(SVG, name);
+  for (const [k, v] of Object.entries(attrs)) node.setAttribute(k, v);
+  if (text != null) node.textContent = text;
+  if (parent) parent.append(node);
+  return node;
+}
+function buildGrid(g) {
+  const root = $('g-grid');
+  root.replaceChildren();
+  el('text', { x: g.grid.x, y: 16, class: 'h', id: 'grid-title' }, root);
+  dots = [];
+  for (let i = 0; i < N; i++) {
+    const [cx, cy] = cellPos(i, g);
+    const group = el('g', { class: 'dot' }, root);
+    const fill = el('circle', { cx, cy, r: 4.1 }, group);
+    const ring = el('circle', { cx, cy, r: 5.3, fill: 'none', stroke: 'var(--ring)', 'stroke-width': 1.3 }, group);
+    dots.push({ group, fill, ring });
+  }
+}
+function setLayout() {
+  const narrow = $('figure').getBoundingClientRect().width < 560;
+  if (layout && layout.narrow === narrow) return;
+  const g = geometry(narrow);
+  layout = { narrow, g };
+  $('figure').setAttribute('viewBox', `0 0 ${g.w} ${g.h}`);
+  $('figure').classList.toggle('narrow', narrow);
+  buildGrid(g);
+}
+
+function drawGrid(c, opts) {
+  const m = model(c);
+  const sick = m.icons.sick;
+  // People are ordered: sick who stay positive, other sick, healthy who stay positive, other healthy.
+  for (let i = 0; i < N; i++) {
+    const isSick = i < sick;
+    const positive = opts.showTests && (isSick ? i < m.icons.tp : i - sick < m.icons.fp);
+    const d = dots[i];
+    d.fill.setAttribute('fill', isSick ? 'var(--sick)' : 'var(--healthy)');
+    d.ring.setAttribute('display', positive ? 'inline' : 'none');
+    d.group.style.opacity = opts.showTests && opts.filter && !positive ? 0.13 : 1;
+  }
+}
+
+function node(parent, x, y, count, label, cls, w = 84) {
+  const big = layout.narrow, h = big ? 60 : 48;
+  if (big) w = Math.round(w * 1.3);
+  const g = el('g', { class: 'node ' + (cls || ''), transform: `translate(${x - w / 2},${y - h / 2})` }, parent);
+  el('rect', { width: w, height: h, rx: 9 }, g);
+  el('text', { x: w / 2, y: big ? 28 : 22, 'text-anchor': 'middle', class: 'num' }, g, count);
+  el('text', { x: w / 2, y: big ? 49 : 38, 'text-anchor': 'middle', class: 'lbl' }, g, label);
+}
+function drawTree(c, { blank = false, highlight = false } = {}) {
+  const root = $('g-tree');
+  root.replaceChildren();
+  const g = layout.g.tree, m = model(c);
+  const W = g.x1 - g.x0, X = f => g.x0 + W * f, Y = f => g.y0 + (g.y1 - g.y0) * f;
+  const pts = { root: [X(0.5), Y(0.08)], sick: [X(0.25), Y(0.48)], healthy: [X(0.75), Y(0.48)], tp: [X(0.12), Y(0.9)], fn: [X(0.37), Y(0.9)], fp: [X(0.63), Y(0.9)], tn: [X(0.88), Y(0.9)] };
+  const hh = layout.narrow ? 30 : 24;
+  const link = (a, b, pos) => el('path', { d: `M${pts[a][0]},${pts[a][1] + hh} C${pts[a][0]},${(pts[a][1] + pts[b][1]) / 2} ${pts[b][0]},${(pts[a][1] + pts[b][1]) / 2} ${pts[b][0]},${pts[b][1] - hh}`, class: 'link' + (pos ? ' pos' : '') }, root);
+  link('root', 'sick'); link('root', 'healthy');
+  link('sick', 'tp', highlight); link('sick', 'fn'); link('healthy', 'fp', highlight); link('healthy', 'tn');
+  const q = blank ? '?' : null;
+  const r1 = c.round === 1;
+  const n = x => q || cnt(x, c.round);
+  node(root, ...pts.root, cnt(m.before.sick + m.before.healthy, c.round), r1 ? tr('人', 'people') : tr(`前 ${c.round - 1} 次都阳性`, `positive ${c.round - 1}× so far`), '', 150);
+  node(root, ...pts.sick, n(m.before.sick), tr('患病', 'sick'), blank ? 'blank' : '');
+  node(root, ...pts.healthy, n(m.before.healthy), tr('健康', 'healthy'), blank ? 'blank' : '');
+  node(root, ...pts.tp, n(m.tp), tr('阳性', 'positive'), (highlight ? 'pos ' : '') + (blank ? 'blank' : ''));
+  node(root, ...pts.fn, n(m.fn), tr('阴性', 'negative'), blank ? 'blank' : '');
+  node(root, ...pts.fp, n(m.fp), tr('阳性', 'positive'), (highlight ? 'pos ' : '') + (blank ? 'blank' : ''));
+  node(root, ...pts.tn, n(m.tn), tr('阴性', 'negative'), blank ? 'blank' : '');
+}
+function drawBar(c) {
+  const root = $('g-bar');
+  root.replaceChildren();
+  const b = layout.g.bar, m = model(c), total = m.tp + m.fp, k = x => cnt(x, c.round);
+  const ws = b.w * m.tp / total;
+  el('text', { x: b.x, y: b.y, class: 'h' }, root, tr(`所有检测阳性的人：${k(total)}`, `Everyone who tested positive: ${k(total)}`));
+  const y = b.y + 10, h = layout.narrow ? 36 : 30;
+  el('rect', { x: b.x, y, width: Math.max(ws, 0.5), height: h, class: 'seg-sick' }, root);
+  el('rect', { x: b.x + ws, y, width: b.w - ws, height: h, class: 'seg-healthy' }, root);
+  el('rect', { x: b.x, y, width: b.w, height: h, rx: 2, class: 'bar-frame' }, root);
+  const sickText = tr(`${k(m.tp)} 患病`, `${k(m.tp)} sick`), healthyText = tr(`${k(m.fp)} 健康`, `${k(m.fp)} healthy`);
+  if (ws > 70) el('text', { x: b.x + 8, y: y + h / 2 + 5, class: 'on-sick' }, root, sickText);
+  if (b.w - ws > 80) el('text', { x: b.x + b.w - 8, y: y + h / 2 + 5, 'text-anchor': 'end', class: 'on-healthy' }, root, healthyText);
+  const outside = [ws <= 70 ? sickText : null, b.w - ws <= 80 ? healthyText : null].filter(Boolean).join(' · ');
+  el('text', { x: b.x, y: y + h + 20, class: 's' }, root, (outside ? outside + ' — ' : '') + tr(`阳性者中患病的占 ${pct(m.ppv)}`, `${pct(m.ppv)} of the positives are sick`));
+}
+
+function show(id, on) { $(id).setAttribute('display', on ? 'inline' : 'none'); }
+
+function render() {
+  setLayout();
+  const pr = state.practice;
+  const inPractice = pr && pr.i < PRACTICE.length;
+  const c = inPractice ? { ...PRACTICE[pr.i], round: 1 } : params();
+  const m = model(c);
+  const tested = !!state.predicted;
+  const noteRoot = $('g-note');
+  noteRoot.replaceChildren();
+  $('legend').hidden = false;
+  if (inPractice) {
+    const fade = PRACTICE[pr.i].fade, g = layout.g;
+    // Crop the view to whatever support is left, so a faded figure doesn't sit in an empty half.
+    $('figure').setAttribute('viewBox', fade === 'grid' ? `0 6 ${g.w === 900 ? 500 : 520} 352` : fade === 'tree' ? (g.w === 900 ? '520 18 390 324' : '0 362 520 280') : `0 0 ${g.w} ${g.h}`);
+    show('g-grid', fade === 'grid'); show('g-tree', fade === 'tree'); show('g-bar', false);
+    if (fade === 'grid') { drawGrid(c, { showTests: true, filter: false }); $('grid-title').textContent = tr('1000 人。自己数。', '1,000 people. Count them yourself.'); }
+    if (fade === 'tree') drawTree(c, { blank: true });
+    if (fade === 'none') { el('text', { x: layout.g.note.x, y: layout.g.note.y, 'text-anchor': 'middle', class: 'note' }, noteRoot, tr('这一题没有图。', 'No figure for this one.')); $('legend').hidden = true; }
+    say('fig-heading', () => tr(`练习 ${pr.i + 1} / ${PRACTICE.length}`, `Practice ${pr.i + 1} of ${PRACTICE.length}`));
+    say('round-badge', () => tr('提示已撤掉', 'Supports removed'));
+    for (const id of ['r-ppv', 'r-tp', 'r-fp', 'r-npv', 'r-lr']) { $(id).textContent = '?'; $(id + '-u').textContent = ''; }
+    say('summary', () => fade === 'grid' ? tr('练习 1：点阵没有数字，阳性的人带圈。', 'Practice 1: the dot grid has no numbers; positives are ringed.') : fade === 'tree' ? tr('练习 2：频数树只有结构，数字是问号。', 'Practice 2: the frequency tree shows structure only; numbers are question marks.') : tr('练习 3：没有图。', 'Practice 3: no figure.'));
+    $('figure-desc').textContent = $('summary').textContent;
+    return;
+  }
+  $('figure').setAttribute('viewBox', `0 0 ${layout.g.w} ${layout.g.h}`);
+  show('g-grid', true); show('g-tree', tested); show('g-bar', tested && state.positivesOnly);
+  drawGrid(c, { showTests: tested, filter: state.positivesOnly || state.round > 1 });
+  $('grid-title').textContent = !tested ? tr(`1000 人，其中 ${num(m.sick)} 人患病`, `1,000 people, ${num(m.sick)} of them sick`) : state.round === 1 ? tr('1000 人都做了检测', 'All 1,000 people tested') : tr(`连续 ${state.round} 次阳性的人`, `People positive ${state.round} times in a row`);
+  if (tested) drawTree(c, { highlight: state.positivesOnly || state.round > 1 });
+  if (tested && state.positivesOnly) drawBar(c);
+  if (!tested) el('text', { x: layout.narrow ? 260 : 715, y: layout.narrow ? 470 : 190, 'text-anchor': 'middle', class: 'note' }, noteRoot, tr('先记下你的预测，再看检测结果。', 'Save a prediction to see the test results.'));
+  say('fig-heading', () => tr('1000 个人，一次检测', '1,000 people, one test'));
+  say('round-badge', () => !tested ? tr('还没检测', 'Not tested yet') : state.round === 1 ? tr('第 1 次检测', 'Test 1') : tr(`第 ${state.round} 次检测（只测前几次都阳性的人）`, `Test ${state.round} (only those positive every time)`));
+  const dash = '—';
+  $('r-ppv').textContent = tested ? pct(m.ppv) : dash;
+  say('r-ppv-u', () => tested ? (state.round === 1 ? tr('P(患病 | 阳性)', 'P(sick | positive)') : tr(`连续 ${state.round} 次阳性之后`, `after ${state.round} positives in a row`)) : '');
+  $('r-tp').textContent = tested ? cnt(m.tp, c.round) : dash;
+  say('r-tp-u', () => tested ? tr('患病且阳性', 'sick and positive') : '');
+  $('r-fp').textContent = tested ? cnt(m.fp, c.round) : dash;
+  say('r-fp-u', () => tested ? tr('健康但阳性', 'healthy but positive') : '');
+  $('r-npv').textContent = tested ? pct(m.npv) : dash;
+  say('r-npv-u', () => tested ? tr('第一次检测，P(健康 | 阴性)', 'first test, P(healthy | negative)') : '');
+  $('r-lr').textContent = tested ? '×' + short(m.lr) : dash;
+  say('r-lr-u', () => tested ? tr(`${short(c.se * 100)}% ÷ ${short(c.f * 100)}%`, `${short(c.se * 100)}% ÷ ${short(c.f * 100)}%`) : '');
+  say('summary', () => !tested
+    ? tr(`1000 人中 ${num(m.sick)} 人患病，${num(m.healthy)} 人健康。记下预测后显示检测结果。`, `${num(m.sick)} of 1,000 people are sick and ${num(m.healthy)} are healthy. Test results appear after you save a prediction.`)
+    : tr(`${cnt(m.tp + m.fp, c.round)} 人检测阳性：${cnt(m.tp, c.round)} 人真的患病，${cnt(m.fp, c.round)} 人是误报。阳性者患病的概率是 ${pct(m.ppv)}。`, `${cnt(m.tp + m.fp, c.round)} people test positive: ${cnt(m.tp, c.round)} are really sick and ${cnt(m.fp, c.round)} are false alarms. The chance a positive person is sick is ${pct(m.ppv)}.`));
+  $('figure-desc').textContent = $('summary').textContent;
+  renderOdds(c, m);
+}
+
+function renderOdds(c, m) {
+  const prior = (1 - c.p) / c.p;
+  say('odds-line', () => tr(
+    `检测前比值 1 : ${short(prior)} × 似然比 ${short(m.lr)}（${short(c.se * 100)}% ÷ ${short(c.f * 100)}%）= ${short(m.lr)} : ${short(prior)}，换成概率是 ${short(m.lr)} ÷ (${short(m.lr)} + ${short(prior)}) = ${pct(model({ ...c, round: 1 }).ppv)}。`,
+    `Prior odds 1 : ${short(prior)} × likelihood ratio ${short(m.lr)} (${short(c.se * 100)}% ÷ ${short(c.f * 100)}%) = ${short(m.lr)} : ${short(prior)}. As a probability: ${short(m.lr)} ÷ (${short(m.lr)} + ${short(prior)}) = ${pct(model({ ...c, round: 1 }).ppv)}.`));
+  const ladder = $('odds-ladder');
+  ladder.replaceChildren();
+  const item = (text, cls) => { const li = document.createElement('li'); li.textContent = text; if (cls) li.className = cls; ladder.append(li); };
+  item(tr(`检测前 1 : ${short(prior)}（${pct(c.p)}）`, `Before 1 : ${short(prior)} (${pct(c.p)})`));
+  for (let r = 1; r <= Math.max(3, state.round); r++) {
+    const mr = model({ ...c, round: r });
+    item('× ' + short(mr.lr), 'op');
+    item(tr(`${r} 次阳性 → ${pct(mr.ppv)}`, `${r} positive${r > 1 ? 's' : ''} → ${pct(mr.ppv)}`), r === state.round ? 'now' : '');
+  }
+}
+
+// ---- Feedback text ----
+function misconception(key, c) {
+  const m = model(c), msg = {
+    inverse: () => tr(`你给出的是敏感度 P(阳性 | 患病)：病人里有多少测出阳性。题目问的是反方向 P(患病 | 阳性)。把两者弄混，叫作“条件倒置”。`, `That’s the sensitivity, P(positive | sick): how many sick people test positive. The question runs the other way, P(sick | positive). Swapping the two is called the confusion of the inverse.`),
+    specificity: () => tr(`你给出的是特异度（1 − 误报率）：健康人里有多少正确地测出阴性。它还没告诉你阳性的人有多少。`, `That’s the specificity, 1 − false-positive rate: how many healthy people correctly test negative. It doesn’t yet tell you who the positives are.`),
+    base: () => tr(`这只是基础比率，是检测之前的数。阳性结果应该让它变大；变大多少，由似然比决定。`, `That’s the base rate alone, the number before the test. A positive should raise it; the likelihood ratio says by how much.`),
+    joint: () => tr(`这是“既患病又阳性”的人占所有人的比例。题目只问阳性的人，所以要除以阳性总数，而不是除以所有人。`, `That’s the share of everyone who is sick and positive. The question is only about the positives, so divide by all positives, not by everyone.`),
+    oddsprob: () => tr(`你把概率 ${short(c.p * 100)}% 直接乘了似然比 ${short(m.lr)}。似然比乘的是比值：1 : ${short((1 - c.p) / c.p)} × ${short(m.lr)} = ${short(m.lr)} : ${short((1 - c.p) / c.p)}。`, `You multiplied the probability ${short(c.p * 100)}% by the likelihood ratio ${short(m.lr)}. The ratio multiplies odds, not probabilities: 1 : ${short((1 - c.p) / c.p)} × ${short(m.lr)} = ${short(m.lr)} : ${short((1 - c.p) / c.p)}.`),
+    other: () => tr(`还不对。设想 1000 人：先算有多少人患病、其中多少阳性；再算健康人里多少阳性。答案 = 患病阳性 ÷ 全部阳性。`, `Not quite. Picture 1,000 people: how many are sick, and how many of those test positive? How many healthy people test positive? The answer is sick positives ÷ all positives.`),
+  };
+  return msg[key]();
+}
+const worked = c => { const m = model(c), k = x => cnt(x); return tr(`1000 人中 ${k(m.sick)} 人患病，${k(m.tp)} 人阳性；${k(m.healthy)} 个健康人里约 ${k(m.fp)} 人阳性。${k(m.tp)} ÷ ${k(m.tp + m.fp)} ≈ ${pct(m.ppv)}。`, `Of 1,000 people, ${k(m.sick)} are sick and ${k(m.tp)} of them test positive; about ${k(m.fp)} of the ${k(m.healthy)} healthy people test positive. ${k(m.tp)} ÷ ${k(m.tp + m.fp)} ≈ ${pct(m.ppv)}.`); };
+
+// ---- Controls ----
+const PRED_TEXT = { '90': ['约 90%', 'about 90%'], '50': ['约 50%', 'about 50%'], '9': ['约 9%', 'about 9%'] };
+function syncControls() {
+  const tested = !!state.predicted;
+  $('positives-only').disabled = !tested || !!state.practice;
+  $('positives-only').checked = state.positivesOnly;
+  $('estimate-fields').disabled = !tested || !state.everPositivesOnly;
+  for (const id of ['explanation', 'explore', 'retest-step', 'practice', 'transfer']) $(id).hidden = !state.unlocked;
+  $('prevalence').value = state.prevIdx; $('sensitivity').value = Math.round(state.se * 100); $('fpr').value = state.f * 100;
+  $('prevalence-out').textContent = prevLabel(PREVALENCES[state.prevIdx]);
+  $('sensitivity-out').textContent = short(state.se * 100) + '%';
+  $('fpr-out').textContent = short(state.f * 100) + '%';
+  const locked = !!state.practice && state.practice.i < PRACTICE.length;
+  for (const id of ['prevalence', 'sensitivity', 'fpr', 'defaults', 'retest', 'retest-reset']) $(id).disabled = locked;
+  $('retest').disabled = locked || state.round >= 4;
+  $('retest-reset').disabled = locked || state.round === 1;
+}
+I18N.on(() => { syncControls(); render(); renderPractice(); });
+
+$('prediction-form').addEventListener('submit', e => {
+  e.preventDefault();
+  const v = new FormData(e.target).get('prediction');
+  if (!v) return;
+  state.predicted = v;
+  say('prediction-status', () => tr(`已记下：${PRED_TEXT[v][0]}。左边的人都做了检测。`, `Saved: ${PRED_TEXT[v][1]}. Everyone on the left has now been tested.`));
+  syncControls(); render();
+});
+$('positives-only').addEventListener('change', e => {
+  state.positivesOnly = e.target.checked;
+  if (state.positivesOnly) state.everPositivesOnly = true;
+  syncControls(); render();
+});
+$('estimate-form').addEventListener('submit', e => {
+  e.preventDefault();
+  const v = parseFloat($('estimate').value);
+  if (!Number.isFinite(v)) return;
+  const c = { p: 0.01, se: 0.9, f: 0.09 }, d = diagnose(v, c);
+  say('estimate-feedback', () => d.key === 'correct'
+    ? tr(`对。${worked(c)}`, `Right. ${worked(c)}`)
+    : misconception(d.key, c) + ' ' + worked(c));
+  $('estimate-feedback').classList.toggle('fb-ok', d.key === 'correct');
+  state.estimated = true; state.unlocked = true;
+  const p = state.predicted;
+  say('prediction-feedback', () => p === '9'
+    ? tr('你预测的是约 9%，正好。下面看看为什么多数人的直觉会给出 90%。', 'You predicted about 9%, which is right. Here is why most people’s intuition says 90%.')
+    : p === '50'
+      ? tr('你预测的是约 50%。你考虑了误报，但还不够：健康人的数量是病人的 99 倍，误报几乎淹没了真阳性。', 'You predicted about 50%. You allowed for false alarms, but not enough: healthy people outnumber sick ones 99 to 1, so false alarms swamp the true positives.')
+      : tr('你预测的是约 90%，这是最常见的答案，也正是医生们在 1978 年那项研究里的直觉。实际只有约 9%。', 'You predicted about 90%: the most common answer, and the same intuition the physicians in the 1978 study had. The actual figure is about 9%.'));
+  syncControls(); render();
+});
+const onSlider = () => { state.prevIdx = +$('prevalence').value; state.se = +$('sensitivity').value / 100; state.f = +$('fpr').value / 100; syncControls(); render(); };
+for (const id of ['prevalence', 'sensitivity', 'fpr']) $(id).addEventListener('input', onSlider);
+$('defaults').addEventListener('click', () => { Object.assign(state, DEFAULTS); syncControls(); render(); });
+$('retest').addEventListener('click', () => { if (state.round < 4) state.round++; if (!state.positivesOnly) { state.positivesOnly = true; state.everPositivesOnly = true; } syncControls(); render(); });
+$('retest-reset').addEventListener('click', () => { state.round = 1; syncControls(); render(); });
+
+// ---- Practice ----
+function practiceText(i) {
+  const c = PRACTICE[i];
+  if (i === 0) return tr(`另一种病占人群的 2%。检测能查出 95% 的病人，对 5% 的健康人误报。左边的点阵是 1000 人的结果，但没有数字。`, `Another disease affects 2% of people. The test catches 95% of cases and wrongly flags 5% of healthy people. The grid on the left shows 1,000 people’s results, without numbers.`);
+  if (i === 1) return tr(`一种常见感染，就诊人群中占 10%。快速检测能查出 80% 的感染者，对 10% 的未感染者误报。左边的树只剩结构。`, `A common infection affects 10% of the patients being tested. A rapid test catches 80% of infections and wrongly flags 10% of uninfected patients. The tree on the left has only its structure.`);
+  return tr(`筛查前，风险是每 50 人中 1 人（2%）。这项筛查能查出 80% 的病例，对 4% 的健康人误报，也就是似然比 ${short(model(c).lr)}。结果阳性。`, `Before screening, the risk is 1 in 50 (2%). The screen catches 80% of cases and flags 4% of healthy people, a likelihood ratio of ${short(model(c).lr)}. The result is positive.`);
+}
+function renderPractice() {
+  const pr = state.practice;
+  $('practice-start').hidden = !!pr;
+  $('practice-card').hidden = !pr || pr.i >= PRACTICE.length;
+  $('practice-summary').hidden = !pr || pr.i < PRACTICE.length;
+  if (!pr) return;
+  if (pr.i >= PRACTICE.length) {
+    const right = pr.first.filter(Boolean).length;
+    say('practice-summary', () => tr(`三道题里，你第一次就答对了 ${right} 道。图和读数已经恢复。`, `You got ${right} of 3 right on the first try. The figure and readouts are back.`));
+    return;
+  }
+  say('practice-tag', () => tr(`练习 ${pr.i + 1} / ${PRACTICE.length}`, `Practice ${pr.i + 1} of ${PRACTICE.length}`));
+  say('practice-text', () => practiceText(pr.i));
+  const next = $('practice-next');
+  next.hidden = !pr.done;
+  say(next, () => pr.i === PRACTICE.length - 1 ? tr('完成练习', 'Finish practice') : tr('下一题', 'Next case'));
+}
+$('practice-start').addEventListener('click', () => {
+  state.practice = { i: 0, tries: 0, done: false, first: [] };
+  state.positivesOnly = false;
+  $('practice-answer').value = ''; say('practice-feedback', null);
+  syncControls(); render(); renderPractice();
+  $('practice-answer').focus();
+});
+$('practice-form').addEventListener('submit', e => {
+  e.preventDefault();
+  const pr = state.practice;
+  if (!pr || pr.done) return;
+  const v = parseFloat($('practice-answer').value);
+  if (!Number.isFinite(v)) return;
+  const c = PRACTICE[pr.i], d = diagnose(v, c);
+  pr.tries++;
+  if (pr.tries === 1) pr.first[pr.i] = d.key === 'correct';
+  if (d.key === 'correct') { pr.done = true; say('practice-feedback', () => tr(`对，${pct(model(c).ppv)}。`, `Right: ${pct(model(c).ppv)}.`) + ' ' + worked(c)); }
+  else if (pr.tries >= 2) { pr.done = true; say('practice-feedback', () => misconception(d.key, c) + ' ' + tr('完整算法：', 'Worked through: ') + worked(c)); }
+  else say('practice-feedback', () => misconception(d.key, c) + ' ' + tr('再试一次。', 'Try once more.'));
+  $('practice-feedback').classList.toggle('fb-ok', d.key === 'correct');
+  renderPractice();
+  if (pr.done) $('practice-next').focus();
+});
+$('practice-next').addEventListener('click', () => {
+  const pr = state.practice;
+  pr.i++; pr.tries = 0; pr.done = false;
+  $('practice-answer').value = ''; say('practice-feedback', null);
+  syncControls(); render(); renderPractice();
+  if (pr.i < PRACTICE.length) $('practice-answer').focus();
+});
+
+// ---- Transfer ----
+$('transfer-form').addEventListener('submit', e => {
+  e.preventDefault();
+  const v = new FormData(e.target).get('transfer');
+  if (!v) return;
+  const m = model({ p: 1e-6, se: 0.99, f: 0.01 });
+  const why = () => tr(`一百万名旅客里约 1 人带武器，扫描仪会对他报警；其余 999,999 人中约 10,000 人会被误报。警报响了，真有武器的概率约 ${(m.ppv * 100).toFixed(4)}%，大约万分之一。`, `In a million passengers about 1 carries a weapon and sets off the alarm; about 10,000 of the other 999,999 set it off too. When the alarm sounds, the chance of a weapon is about ${(m.ppv * 100).toFixed(4)}%, roughly 1 in 10,000.`);
+  say('transfer-feedback', () => v === 'false'
+    ? tr('对。', 'Correct. ') + why()
+    : (v === 'weapon' ? tr('这是把 99% 的检出率当成了答案，即条件倒置。', 'That takes the 99% catch rate as the answer: the confusion of the inverse. ') : tr('还差得远：误报的人数是真携带者的一万倍。', 'Not close: false alarms outnumber real carriers about 10,000 to 1. ')) + why());
+  $('transfer-feedback').classList.toggle('fb-ok', v === 'false');
+});
+
+// ---- Reset ----
+$('reset').addEventListener('click', () => {
+  state = fresh();
+  for (const f of ['prediction-form', 'estimate-form', 'transfer-form', 'practice-form']) $(f).reset();
+  $('writing').value = '';
+  for (const id of ['prediction-status', 'estimate-feedback', 'prediction-feedback', 'transfer-feedback', 'practice-feedback']) { say(id, null); $(id).classList.remove('fb-ok'); }
+  syncControls(); render(); renderPractice();
+  window.scrollTo(0, 0);
+});
+
+new ResizeObserver(() => { const before = layout && layout.narrow; setLayout(); if (layout.narrow !== before) render(); }).observe($('experiment'));
+I18N.apply();
+</script>
+</body>
+</html>

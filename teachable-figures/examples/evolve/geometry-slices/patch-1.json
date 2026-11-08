@@ -1,0 +1,63 @@
+{
+  "schema": "teachable-figures/patch@1",
+  "artifact_id": "geometry-slices",
+  "from_version": 1,
+  "to_version": 2,
+  "created": "2026-11-01",
+  "evidence_ref": "evidence-1.json",
+  "hypothesis": {
+    "statement": {
+      "zh": "学习者能选出“4 倍”，但解释说“面积也加倍”，迁移题选了 3 倍。他可能是照读数选的答案，心里仍认为面积和长度按同一比例变化。",
+      "en": "The learner picks “four times” but explains that “the area doubles too” and answers 3× on transfer. They may have copied the readout while still believing area scales like length."
+    },
+    "confidence": "moderate",
+    "supporting": ["explanation: 'The area doubles too, because h doubled'", "explanation: 'The readout said 4 so I picked 4'", "transfer: 3 (linear) instead of 9"],
+    "against": ["prediction 4 was chosen before any trial (t = 8.4 s)"],
+    "alternatives": ["Knows the square law but wrote a careless explanation; the transfer error argues against this."]
+  },
+  "decision": {
+    "action": "Add a representation that makes the square visible as countable tiles, then probe by counting; remove the formula hint so the readout cannot be copied.",
+    "expected_signal": "The next explanation mentions squaring, rows × columns, or k², and the tile probe is answered 9.",
+    "fallback": "If the probe is answered 3 or 6, restore the formula hint and add a numeric table of h, r, r² at h = 2, 4, 6."
+  },
+  "preserve": ["prediction", "explanation"],
+  "operations": [
+    {
+      "op": "add_representation",
+      "target": "slot:figure",
+      "reason": { "zh": "把“半径的平方”画成可以数的方块，与滑块联动。", "en": "Show the squared radius as countable tiles, linked to the slider." },
+      "component": {
+        "id": "area-tiles",
+        "markup": "@components/area-tiles.html",
+        "css": "@components/area-tiles.css",
+        "js": "@components/area-tiles.js",
+        "invariants": [
+          { "id": "area-multiple-matches-model", "description": "Displayed area multiple equals the truth model's area ratio to h = 2.", "expr": "Math.abs(evolve.read('area-tiles').areaMultiple - lesson.derive(lesson.state.h).area / lesson.derive(2).area) < 1e-9" },
+          { "id": "side-is-radius-ratio", "description": "The square's side k equals r / r0 from the model.", "expr": "Math.abs(evolve.read('area-tiles').k - lesson.derive(lesson.state.h).radius / lesson.derive(2).radius) < 1e-9" },
+          { "id": "area-is-side-squared", "description": "Area multiple is the square of the length multiple.", "expr": "Math.abs(evolve.read('area-tiles').areaMultiple - evolve.read('area-tiles').k ** 2) < 1e-9" },
+          { "id": "whole-tiles-drawn", "description": "The figure draws floor(k)² whole tiles.", "expr": "document.querySelectorAll('#tiles-draw rect.tile.full').length === Math.floor(evolve.read('area-tiles').k + 1e-9) ** 2" },
+          { "id": "display-matches", "description": "The printed multiple matches the computed one.", "expr": "evolve.read('area-tiles').shown === '×' + evolve.read('area-tiles').areaMultiple.toFixed(2)" }
+        ]
+      }
+    },
+    {
+      "op": "add_probe",
+      "target": "slot:steps",
+      "reason": { "zh": "用数方块来检验“平方”，题目和原来的迁移题不同。", "en": "Probe the square law by counting, a different task from the original transfer item." },
+      "component": {
+        "id": "tile-probe",
+        "markup": "@components/tile-probe.html",
+        "js": "@components/tile-probe.js",
+        "invariants": [
+          { "id": "answer-key-from-model", "description": "The answer key equals (r(6) / r(2))² from the model.", "expr": "evolve.read('tile-probe').key === (lesson.derive(6).radius / lesson.derive(2).radius) ** 2" },
+          { "id": "key-is-offered", "description": "The correct answer is one of the choices.", "expr": "evolve.read('tile-probe').choices.includes(evolve.read('tile-probe').key)" }
+        ]
+      }
+    },
+    {
+      "op": "remove_scaffold",
+      "target": "scaffold:formula-hint",
+      "reason": { "zh": "学习者照着读数和公式选答案；先拿掉公式提示，让他靠方块推理。", "en": "The learner copied the readout; hide the formula hint so reasoning goes through the tiles." }
+    }
+  ]
+}

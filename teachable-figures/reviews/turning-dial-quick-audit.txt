@@ -1,0 +1,49 @@
+clearance: 0 problems
+clearance apart: 0 problems
+terminals: 0 ends not on a mount
+loose ends: 0
+screen folds: 0
+support: 0 unsupported solids · 0 hanging tubes · 0 sunk pairs
+depth order: 0 problems
+through in mid-flight: 0 pairs
+self-overlap: 0 chunks whose outline crosses itself on screen
+wobble: 0 smoothed profiles whose slope turns between its ends
+saddles off their host apart: 0
+stand-in shapes: 0 items whose recorded shape covers too little of what it draws
+crowding: 0 pairs where a bend or end touches another line on screen
+audit · 7 tubes · 87 solids · 13 items · 1 depth states · 20 overlaps · 20 order rules · 0.6 s
+audit passed
+separation: 0
+unseparated: 0
+cycles: 0
+forced: 0
+swaps: 0
+layers: 0
+rigid: 0
+swept: 0
+posed: 0
+folds: 0
+self: 0
+crowding: 4
+  cable.green end × hand.f3.p1 (rod) at 165.00°: outlines 0.88 apart px
+  cable.red end × hand.f1.p1 (rod) at 210.00°: outlines 0.75 apart px
+  cable.blue end × hand.f3.p1 (rod) at 210.00°: outlines overlap 6.23 px
+  cable.green end × hand.piston.rod (rod) at 285.00°: outlines 0.44 apart px
+endon: 0
+coverage: 0
+depth: 0
+continuity: 0
+worst tone step 2 · worst birth 11.18 px² · worst dot α step 0.050 · worst faded α step 0.094 · merges 0 · outline motion over bound 0.000 px · halving 0 of 100
+order changes: 755 states with swaps · 1993 order states · 455 posed states · 1084 planes (tightest margin -0.028) · depth oracle 18 states, 4554 overlapping pairs
+  sweep at 96.000: 448 pairs reorder (hand.f3.k0+ / cable.red:0; hand.f3.k0+ / cable.red:1; hand.f3.k0+ / cable.red:2; hand.f3.k0+ / cable.red:3)
+  sweep at 110.000: 322 pairs reorder (hand.f2.k1+ / cable.red:0; hand.f2.k1+ / cable.red:1; hand.f2.k1+ / cable.red:2; hand.f2.k1+ / cable.red:3)
+  sweep at 419.000: 272 pairs reorder (hand.f1.k2+ / hand.f1.junction; hand.connector / hand.f1.p1; hand.connector / hand.f1.p2; hand.connector / hand.f1.p3)
+  sweep at 779.000: 272 pairs reorder (hand.f1.k2+ / hand.f1.junction; hand.connector / hand.f1.p1; hand.connector / hand.f1.p2; hand.connector / hand.f1.p3)
+  sweep at 1139.000: 272 pairs reorder (hand.f1.k2+ / hand.f1.junction; hand.connector / hand.f1.p1; hand.connector / hand.f1.p2; hand.connector / hand.f1.p3)
+  sweep at 409.000: 267 pairs reorder (hand.connector / hand.f2.p1; hand.connector / hand.f2.p2; hand.connector / hand.f2.p3; hand.connector / hand.f2.k0-)
+  sweep at 769.000: 267 pairs reorder (hand.connector / hand.f2.p1; hand.connector / hand.f2.p2; hand.connector / hand.f2.p3; hand.connector / hand.f2.k0-)
+  sweep at 1129.000: 267 pairs reorder (hand.connector / hand.f2.p1; hand.connector / hand.f2.p2; hand.connector / hand.f2.p3; hand.connector / hand.f2.k0-)
+  sweep at 128.000: 264 pairs reorder (hand.f2.k1- / cable.red:0; hand.f2.k1- / cable.red:1; hand.f2.k1- / cable.red:2; hand.f2.k1- / cable.red:3)
+  sweep at 239.000: 246 pairs reorder (dial.hub / hand.f2.p1; dial.hub / hand.f2.k0-; dial.hub / hand.f2.k0+; dial.hub / hand.f2.k1+)
+turn audit · 53.02 s
+turn audit failed: 4 problems (quick run, undersampled: the full run is the proof)
