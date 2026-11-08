@@ -7,9 +7,10 @@
 把 .pptx 逐页渲染成 PNG，供逐字稿排版时作「页面定位图」使用。
 
 用法：
-    python3 ppt2png.py --pptx 课件.pptx --outdir assets/ppt [--dpi 110]
+    python3 ppt2png.py --pptx 课件.pptx --outdir assets/ppt [--dpi 110] [--format jpg|png]
 
-输出：outdir/p01.png、p02.png …… 与课件页码一一对应（从 1 起）。
+输出：默认 outdir/p01.jpg、p02.jpg …… 与课件页码一一对应（从 1 起）。
+      jpg 为默认格式（体积约为 png 的 1/10），--format png 可切回无损。
 同一课件只渲染一次即可，后续排版直接复用这些图。
 """
 

@@ -5,7 +5,7 @@
 ========================================
 
 A4 单栏连续排版：思源黑体标题 + 楷体台词，162mm 版心，
-页眉左侧固定 30×12mm 的 Logo 区（有图插图标、无图给标准占位框），
+页眉左侧固定 30×12mm 的 Logo 区（有图插图标、无图用「木老师原创课件」文字 Logo），
 章节标题居中 15pt、逐页标题左标题右时间，教师／学生／提示按字重与灰度分层。
 
 版式常量以 references/unified-spec.md 第 1 章为唯一权威；改动前先出预览、经用户确认。
@@ -39,9 +39,10 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from docx import Document
 from docx.enum.table import WD_TABLE_ALIGNMENT, WD_CELL_VERTICAL_ALIGNMENT
 from docx.enum.text import WD_ALIGN_PARAGRAPH, WD_LINE_SPACING, WD_TAB_ALIGNMENT
+from docx.enum.style import WD_STYLE_TYPE
 from docx.oxml import OxmlElement
 from docx.oxml.ns import qn
-from docx.shared import Cm, Mm, Pt
+from docx.shared import Cm, Mm, Pt, RGBColor
 
 from xuexqingdan_typeset import (  # noqa: E402  同目录复用底层构件
     Ctx, add_page_field, add_rich, add_run, fmt_para,
@@ -245,6 +246,75 @@ def emit_line(doc, text):
     return p
 
 
+# ─────────────────── 真段落样式（2026-11-08） ───────────────────
+# 此前分层全靠 run 局部格式，成品里 189 个非空段落都挂 Normal，后续改版式得逐段改。
+# 这里补命名段落样式，只在渲染末尾把 p.style 指过去，不动任何 run：视觉与旧版完全一致，
+# 但「标题／教师台词／操作提示／应对提示」在 Word 样式面板里成了可维护的独立对象。
+ZJG_STYLES = {
+    "ZJG 文档标题": (FS_TITLE,  INK,    True,  LINE_TITLE,  "head"),
+    "ZJG 副标题":   (FS_SUB,    INK,    False, LINE_TITLE,  "head"),
+    "ZJG 章节标题": (FS_CH,     INK,    True,  LINE_CH,     "head"),
+    "ZJG 小标题":   (FS_PAGE,   GREEN,  True,  LINE_TITLE,  "head"),
+    "ZJG 逐页标题": (FS_PAGE,   GREEN,  True,  LINE_TITLE,  "head"),
+    "ZJG 教师台词": (FS_TEA,    INK,    True,  LINE_TEA,    "body"),
+    "ZJG 学生台词": (FS_STU,    INK,    True,  LINE_STU,    "body"),
+    "ZJG 预设回答": (FS_PRESET, MUTED,  True,  LINE_PRESET, "body"),
+    "ZJG 操作提示": (FS_OP,     MUTED,  True,  LINE_OP,     "body"),
+    "ZJG 板书提示": (FS_BOARD,  GREEN,  True,  LINE_OP,     "body"),
+    "ZJG 应对提示": (FS_OP,     MUTED,  True,  LINE_OP,     "body"),
+    "ZJG 正文":     (FS_BODY,   INK,    False, LINE_BODY,   "body"),
+    "ZJG 图注":     (FS_CAP,    AUX,    False, LINE_CAP,    "body"),
+}
+KIND2STYLE = {
+    "tea": "ZJG 教师台词", "stu": "ZJG 学生台词", "preset": "ZJG 预设回答",
+    "op": "ZJG 操作提示", "board": "ZJG 板书提示", "note": "ZJG 应对提示",
+    "body": "ZJG 正文",
+}
+
+
+def ensure_styles(doc):
+    """建样式，不改任何既有 run 格式；样式里只放静态属性，悬挂缩进仍由 _para 动态算。"""
+    normal = doc.styles["Normal"]
+    for name, (size, color, bold, line, family) in ZJG_STYLES.items():
+        st = doc.styles.add_style(name, WD_STYLE_TYPE.PARAGRAPH)
+        st.base_style = normal
+        font = Ctx.head if family == "head" else Ctx.body
+        st.font.name = font
+        st.font.size = Pt(size)
+        st.font.bold = bold
+        st.font.color.rgb = RGBColor.from_string(color)
+        try:
+            st.element.rPr.rFonts.set(qn("w:eastAsia"), font)
+        except AttributeError:
+            pass
+        st.paragraph_format.line_spacing = line
+        st.quick_style = True       # 出现在 Word 样式库，方便教师／后续维护
+
+
+def apply_styles(doc, titles=(), subtitles=(), chapters=(), subheads=()):
+    titles, subtitles = set(titles), set(subtitles)
+    chapters, subheads = set(chapters), set(subheads)
+    for par in doc.paragraphs:
+        t = par.text.strip()
+        if not t:
+            continue                      # 图片段无文字，保持原样
+        if t in titles:
+            name = "ZJG 文档标题"
+        elif t in subtitles:
+            name = "ZJG 副标题"
+        elif t in chapters:
+            name = "ZJG 章节标题"
+        elif t in subheads:
+            name = "ZJG 小标题"
+        elif re.match(r"^第\s*\d+\s*页", t):
+            name = "ZJG 逐页标题"
+        elif t.startswith("（缺图"):
+            name = "ZJG 图注"
+        else:
+            name = KIND2STYLE.get(style_of(t), "ZJG 正文")
+        par.style = doc.styles[name]
+
+
 # ─────────────────── 页眉 / 页脚 ───────────────────
 
 # build_header 已统一收口到 xuexqingdan_typeset（四类文档共用，避免多份 copy 漂移），见上方 import。
@@ -306,7 +376,7 @@ def figure(doc, path, caption="", width_cm=DEFAULT_IMG_W_CM):
 
     p = doc.add_paragraph()
     _para(p, before=SP_IMG_BEF, after=SP_CAP_GAP, line=1.0,
-          align=WD_ALIGN_PARAGRAPH.CENTER, keep_next=bool(caption))
+          align=WD_ALIGN_PARAGRAPH.CENTER, keep_next=True)
     p.add_run().add_picture(path, width=Cm(w))
 
     if caption:
@@ -455,6 +525,7 @@ def build(md, out_path, header="", images_dir=None, img_width=None,
     st.font.name = Ctx.body
     st.font.size = Pt(FS_BODY)
     st.element.rPr.rFonts.set(qn("w:eastAsia"), Ctx.body)
+    ensure_styles(doc)
 
     sec = doc.sections[0]
     sec.page_width, sec.page_height = Cm(PAGE_W), Cm(PAGE_H)
@@ -474,6 +545,10 @@ def build(md, out_path, header="", images_dir=None, img_width=None,
     blocks = parse(md)
     seen_title = False
     sub_done = False
+    subtitle = ""
+    style_titles = [x for k, x in blocks if k == "title"]
+    style_chapters = [x for k, x in blocks if k == "chapter"]
+    style_subheads = [x for k, x in blocks if k == "subhead"]
 
     for kind, payload in blocks:
         if kind == "title":
@@ -490,6 +565,7 @@ def build(md, out_path, header="", images_dir=None, img_width=None,
             _para(p, before=0, after=SP_SUB_AFT, line=LINE_TITLE,
                   align=WD_ALIGN_PARAGRAPH.CENTER)
             add_run(p, payload, size=FS_SUB, color=INK, font=Ctx.head)
+            subtitle = payload
             sub_done = True
             continue
 
@@ -566,6 +642,9 @@ def build(md, out_path, header="", images_dir=None, img_width=None,
         else:
             break
 
+    apply_styles(doc, style_titles, [subtitle] if subtitle else [],
+                   style_chapters, style_subheads)
+
     doc.save(out_path)
     return out_path
 
@@ -579,7 +658,7 @@ def main():
                     help="课件截图目录，内含 p01.jpg、p02.jpg …（也接受 png，优先 jpg）")
     ap.add_argument("--img-width", type=float, default=None,
                     help="截图宽度 cm，默认 12.0，上限为版心 16.2")
-    ap.add_argument("--logo", default=None, help="品牌 Logo 图片；给了就替代占位框")
+    ap.add_argument("--logo", default=None, help="品牌 Logo 图片；给了就替代文字 Logo")
     ap.add_argument("--logo-mode", default="placeholder", choices=["placeholder", "hidden"],
                     help="无 Logo 时：placeholder=保留虚线占位框（默认）／hidden=隐藏但留位")
     ap.add_argument("--mirror", action="store_true",

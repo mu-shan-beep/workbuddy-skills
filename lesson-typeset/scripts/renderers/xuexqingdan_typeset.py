@@ -26,7 +26,7 @@ import tempfile
 from docx import Document
 from docx.enum.table import (WD_TABLE_ALIGNMENT, WD_CELL_VERTICAL_ALIGNMENT,
                              WD_ROW_HEIGHT_RULE)
-from docx.enum.text import WD_ALIGN_PARAGRAPH, WD_LINE_SPACING
+from docx.enum.text import WD_ALIGN_PARAGRAPH, WD_LINE_SPACING, WD_TAB_ALIGNMENT
 from docx.oxml import OxmlElement
 from docx.oxml.ns import qn
 from docx.shared import Cm, Mm, Pt, RGBColor
@@ -775,10 +775,14 @@ def _cell_dashed(cell):
 
 
 def build_header(sec, cw, text="", logo=None, logo_mode="placeholder"):
-    """页眉：左 30×12mm Logo 预留区 ＋ 右品牌文字，底边一条 0.5pt #CBD5CD 分隔线。
+    """页眉：左 30×12mm Logo 区 ＋ 右课题名，底边一条 0.5pt #CBD5CD 分隔线。
 
-    无论有没有 Logo，预留区尺寸与正文起始位置都不变；四类文档（教学设计开放式、
+    无论有没有 Logo，Logo 区尺寸与正文起始位置都不变；四类文档（教学设计开放式、
     逐字稿、学习清单、制作笔记）共用此实现，保证页眉外观完全一致。
+
+    Logo 文字固定「木老师原创课件」（2026-11-05 裁定①，2026-11-08 用户重申）：
+    品牌文字本身就是 Logo，**不使用「LOGO占位」占位符，也不把品牌名拆到右侧独立位置**。
+    只有传入 logo 图片时才换成实图；logo_mode="hidden" 时隐藏文字但仍留位。
     """
     hdr = sec.header
     hdr.is_linked_to_previous = False
@@ -866,7 +870,7 @@ def build(md, out_path, header, title=None, mirror=False,
     doc_title = title or (("%s｜%s" % (h1.strip(), kind_line.strip()))
                           if kind_line else h1.strip())
 
-    # 页眉：四类统一的 Logo 区（左 30×12mm 木老师占位框 ＋ 右课题 ＋ CBD5CD 分隔线），全页生效
+    # 页眉：四类统一的 Logo 区（左 30×12mm「木老师原创课件」文字 Logo ＋ 右课题 ＋ CBD5CD 分隔线）
     build_header(sec, CONTENT_W, text=doc_title, logo=None, logo_mode="placeholder")
 
     # 页脚：页码（首页也要，全文一致）

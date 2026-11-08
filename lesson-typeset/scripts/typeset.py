@@ -5,7 +5,7 @@
 ================================================================
 
 一份规范（references/unified-spec.md）＋ 一支入口命令。
-基础层常量在本文只定义一次；四类文档的差异只剩 PROFILES 里的四行参数档；
+版式常量以规范第 1 章为准，本文不重复定义；四类文档的差异只剩 PROFILES 四行参数档；
 独有构件按块语法按需启用。renderers/ 是已验证的内部渲染模块，不直接调用。
 
 用法：
@@ -30,22 +30,8 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 RENDERERS = os.path.join(HERE, "renderers")
 SPEC = os.path.join(os.path.dirname(HERE), "references", "unified-spec.md")
 
-# ─────────────── 第一章 统一基础层（唯一常量表，四类共用） ───────────────
-# 权威数值见 references/unified-spec.md 第 1 章；本表供入口校验与文档说明使用。
-PAGE_W, PAGE_H = 21.0, 29.7            # A4 纵向
-FONT_HEAD, FONT_BODY = "思源黑体", "楷体"
-GREEN, INK, MUTED = "315A4B", "2B302C", "596960"
-BAND, LINE, SEP, FOOT = "EDF3EE", "9BA9A0", "CBD5CD", "666666"
-PH_BORDER, PH_TEXT = "B8B8B8", "999999"
-
-FS_BODY, FS_CELL, FS_TH = 11.0, 10.5, 10.5
-FS_HF, FS_CAP, FS_PH = 9.0, 9.5, 8.0
-LINE_BODY, LINE_CELL, LINE_TITLE = 1.45, 1.3, 1.2
-CELL_MAR = (170, 170, 142, 142)        # 3 / 3 / 2.5 / 2.5 mm
-BORDER_OUT, BORDER_IN = 6, 4           # 0.75pt / 0.5pt
-ROW_H = 12.0                           # 表格最小行高 12mm
-LOGO_W_MM, LOGO_H_MM = 30.0, 12.0     # 页眉占位区，build_header() 单点实现
-IMG_W_CM = 11.0                        # 通用插图上限（逐字稿课件截图 12cm 见 PROFILES）
+# 版式常量（色板／字号／间距／框线）只定义在 references/unified-spec.md 第 1 章，
+# 渲染实现在 renderers/；本入口不重复定义第二份，避免两处数值漂移。
 
 # ─────────────── 第三章 参数档差分表（只有这四行允许不同） ───────────────
 # m = 上/下/左/右 mm；fs = 主标题 / 一级标题；extras = 独有构件开关
