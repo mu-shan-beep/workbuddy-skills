@@ -14,10 +14,11 @@
         --header "20 牛和鹅" --mode preview      # 只写 /tmp
     python3 typeset.py --root "<课题目录>" \
         --input ".workbuddy/牛和鹅-教学设计-源.md" \
-        --header "20 牛和鹅" --mode commit       # 原子覆盖，旧版进废纸篓
+        --header "20 牛和鹅" --mode commit       # 落「交付文件/」，旧版进废纸篓
     python3 typeset.py --dry-run                  # 命名推导与配图探测
 
 不接受手填 --output；成品名一律由源稿名推导（见第 5 章命名规范）。
+交付目录由 output_folder() 单点决定（2026-11-09 规则：课题根目录下新建「交付文件/」）。
 """
 import argparse
 import os
@@ -47,8 +48,9 @@ PROFILES = {
                  fs=(20.0, 14.0), extras="一级标题分隔线、强调块、图配图注"),
 }
 PROFILE_BY_TYPE = {k: k for k in PROFILES}
-# 规范 4.2：制作笔记不交付，成品落 .workbuddy/；其余落课题根目录
+# 规范 4.2：制作笔记不交付，成品落 .workbuddy/；其余落课题根目录下新建的「交付文件/」
 OUTPUT_SUBDIR = {"制作笔记": ".workbuddy"}
+DELIVERY_DIR = "交付文件"
 
 # ─────────────── 第五章 命名与输出规范 ───────────────
 TYPES = ["单元教学设计", "教学设计", "互动课件", "板书设计", "教学反思",
@@ -162,8 +164,23 @@ def commit(tmp_docx, dst):
 
 
 def output_folder(root, typ):
-    """按规范 4.2：制作笔记落 .workbuddy/，其余落课题根目录。"""
-    return os.path.join(root, OUTPUT_SUBDIR.get(typ, ""))
+    """按规范 4.2：制作笔记落 .workbuddy/，其余落课题根目录下新建的「交付文件/」。"""
+    if typ in OUTPUT_SUBDIR:
+        return os.path.join(root, OUTPUT_SUBDIR[typ])
+    return os.path.join(root, DELIVERY_DIR)
+
+
+def retire_legacy_output(root, name):
+    """2026-11-09 交付目录规则：仍留在课题根目录的同名旧落位成品移入系统废纸篓。
+
+    既保证「同课题同类型只有一个成品」，也让旧课题平滑迁到 交付文件/。
+    只处理交付类文档；制作笔记本就不落根目录，不参与。
+    """
+    legacy = os.path.join(root, name)
+    if os.path.isfile(legacy):
+        subprocess.run([_trash_bin(), legacy], check=True)
+        return True
+    return False
 
 
 def assert_single_output(folder, name, typ):
@@ -241,8 +258,10 @@ def main():
         folder = output_folder(root, typ)
         dst = os.path.join(folder, name)
         replaced = commit(tmp_docx, dst)
+        legacy = retire_legacy_output(root, name) if typ not in OUTPUT_SUBDIR else False
         assert_single_output(folder, name, typ)
-        print("已落地：%s%s" % (dst, "（旧成品已移入系统废纸篓）" if replaced else ""))
+        print("已落地：%s%s" % (dst, "（旧成品已移入系统废纸篓）"
+                               if replaced or legacy else ""))
     else:
         print("预览模式：课题目录未改动；确认后改用 --mode commit")
 
