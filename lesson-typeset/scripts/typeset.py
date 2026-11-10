@@ -18,7 +18,8 @@
     python3 typeset.py --dry-run                  # 命名推导与配图探测
 
 不接受手填 --output；成品名一律由源稿名推导（见第 5 章命名规范）。
-交付目录由 output_folder() 单点决定（2026-11-09 规则：课题根目录下新建「交付文件/」）。
+交付目录由 output_folder() 单点决定（2026-11-09 规则：课题根目录下新建「交付文件/」；
+2026-11-10 加严：所有类型都进包，commit 后 sweep_copies() 清掉包外同名副本）。
 """
 import argparse
 import os
@@ -48,9 +49,13 @@ PROFILES = {
                  fs=(20.0, 14.0), extras="一级标题分隔线、强调块、图配图注"),
 }
 PROFILE_BY_TYPE = {k: k for k in PROFILES}
-# 规范 4.2：制作笔记不交付，成品落 .workbuddy/；其余落课题根目录下新建的「交付文件/」
-OUTPUT_SUBDIR = {"制作笔记": ".workbuddy"}
+# 规范 4.2（2026-11-10 改）：所有类型统一落课题根目录下新建的「交付文件/」，
+# 制作笔记不再单独落 .workbuddy/——交付包是唯一成品出处，包外不留任何成品副本。
+OUTPUT_SUBDIR = {}
 DELIVERY_DIR = "交付文件"
+# 兼容：用户可能把交付包改名（如「交付件」）。已存在的交付目录优先复用，
+# 不再新建第二个交付文件夹——否则成品会被劈成两处。
+DELIVERY_ALIASES = ("交付文件", "交付件", "交付")
 
 # ─────────────── 第五章 命名与输出规范 ───────────────
 TYPES = ["单元教学设计", "教学设计", "互动课件", "板书设计", "教学反思",
@@ -164,23 +169,37 @@ def commit(tmp_docx, dst):
 
 
 def output_folder(root, typ):
-    """按规范 4.2：制作笔记落 .workbuddy/，其余落课题根目录下新建的「交付文件/」。"""
+    """按规范 4.2（2026-11-10 改）：所有成品统一落课题根目录下的「交付文件/」。
+
+    OUTPUT_SUBDIR 保留为扩展点，现为空——制作笔记也进交付包，包外不留成品。
+    """
     if typ in OUTPUT_SUBDIR:
         return os.path.join(root, OUTPUT_SUBDIR[typ])
+    for alias in DELIVERY_ALIASES:       # 已存在的交付目录优先，避免劈成两个
+        cand = os.path.join(root, alias)
+        if os.path.isdir(cand):
+            return cand
     return os.path.join(root, DELIVERY_DIR)
 
 
-def retire_legacy_output(root, name):
-    """2026-11-09 交付目录规则：仍留在课题根目录的同名旧落位成品移入系统废纸篓。
+def sweep_copies(root, name):
+    """把 交付文件/ 之外的同名成品副本一律移入系统废纸篓。
 
-    既保证「同课题同类型只有一个成品」，也让旧课题平滑迁到 交付文件/。
-    只处理交付类文档；制作笔记本就不落根目录，不参与。
+    规范 4.3 第 7 条（2026-11-10 用户新增）：整理成交付文件包之后，
+    包外的副本必须清掉。检查两处历史落位：
+      · 课题根目录          —— 2026-11-09 之前的落位
+      · .workbuddy/<name>   —— 制作笔记 2026-11-10 之前的内部落位
+    只清同名成品，绝不动 `-源.md` 源稿；移交系统废纸篓，可恢复。
+    返回被移走的相对路径列表，供调用方如实汇报。
     """
-    legacy = os.path.join(root, name)
-    if os.path.isfile(legacy):
-        subprocess.run([_trash_bin(), legacy], check=True)
-        return True
-    return False
+    moved = []
+    for folder in (root, os.path.join(root, ".workbuddy")):
+        p = os.path.join(folder, name)
+        if os.path.isfile(p):
+            subprocess.run([_trash_bin(), p], check=True)
+            moved.append(os.path.relpath(p, root))
+    return moved
+
 
 
 def assert_single_output(folder, name, typ):
@@ -258,10 +277,14 @@ def main():
         folder = output_folder(root, typ)
         dst = os.path.join(folder, name)
         replaced = commit(tmp_docx, dst)
-        legacy = retire_legacy_output(root, name) if typ not in OUTPUT_SUBDIR else False
+        moved = sweep_copies(root, name)
         assert_single_output(folder, name, typ)
-        print("已落地：%s%s" % (dst, "（旧成品已移入系统废纸篓）"
-                               if replaced or legacy else ""))
+        note = []
+        if replaced:
+            note.append("旧成品已移入系统废纸篓")
+        if moved:
+            note.append("包外副本已清理：" + "、".join(moved))
+        print("已落地：%s%s" % (dst, "（%s）" % "；".join(note) if note else ""))
     else:
         print("预览模式：课题目录未改动；确认后改用 --mode commit")
 
