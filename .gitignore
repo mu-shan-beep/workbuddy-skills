@@ -42,6 +42,8 @@ Thumbs.db
 checkin-cred.json
 checkin-rt.json
 notify_config.json
+# 网盘类技能自动写入的会话 Cookie（夸克 cookie.txt 含真实登录态，严禁入库）
+cookie.txt
 *.key
 *.pem
 *.p12

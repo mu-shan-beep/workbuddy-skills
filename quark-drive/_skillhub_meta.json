@@ -1,0 +1,11 @@
+{
+  "name": "夸克网盘助手",
+  "installedAt": 1794315724076,
+  "source": "marketplace",
+  "version": "1.0.0",
+  "skillId": "skill_2099415856622804992",
+  "pay_mode": 0,
+  "description_zh": "夸克网盘自动化工具：自动转存（别人的分享链接存入自己网盘）、自动分享（生成链接和提取码）、目录监控自动分享，以及列目录/搜索/删除/重命名/移动等文件管理，附 Cookie 自动获取。基于网页端抓包 API，已实测 3600+ 部批量转存零风控。",
+  "description_en": "Quark cloud drive automation save (others' share links to your drive), share (generate links with passcodes), directory monitoring with auto-sharing, and file management (list/search/delete/rename/move), with auto Cookie acquisition. Based on real web-capture APIs, battle-tested with 3600+ batch saves without risk control.",
+  "iconSource": "letter:auto"
+}
