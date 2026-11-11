@@ -1,0 +1,4 @@
+interface:
+  display_name: "课件｜模板与批量制作"
+  short_description: "按当前任务处理模板与批量制作，保留已确认要求，按需读取说明并检查实际结果"
+  default_prompt: "使用 $ppt-master 完成本次任务，保留已确认内容并交付检查后的结果。"

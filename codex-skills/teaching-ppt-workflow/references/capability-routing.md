@@ -37,6 +37,7 @@ Do not copy an executor's commands, schemas or troubleshooting guide into this w
 | Build one operable teaching mechanism, cutaway or spatial model | `teachable-figures`, when available | Use for predict–try–explain learning figures and requested rotation, separation or parameter-driven changes. Read its current skill and selected renderer only; do not use it for static posters or ordinary PPT pages. An HTML model and a PPTX are distinct deliverables. |
 | Read or edit an existing presentation file | `presentations:Presentations` | Only existing-file work or a temporary image-only Canva import container; never directly create a new editable PPTX. |
 | Read or revise a saved PPTX by slide and shape path | `officecli-pptx` | Use for targeted text, sizing, alignment and other deterministic file-level edits. Read only affected slides; batch related mutations; validate and preview changed pages. Test a copy first when the deck has complex animation, media or masters. |
+| Modify an existing presentation in the open local PowerPoint application | `ppt-mcp` | Identify the actual target file. Pin it in every call and batch related operations with `ppt_execute_batch` when applicable. Inspect the partial result before retrying a failed write. |
 | Inspect or make an authorized bounded change to an existing template-based PPT | `ppt-master` | Do not use this as a new editable-PPTX production route. |
 | Modify an existing presentation in the open local WPS application | `wps-ppt` | Use for bounded text, image, layout, media, transition and ordinary animation edits. Pass only the affected slides and change list. |
 | Build or revise an editable visual-first design in Canva | Canva connector | New courseware stays in Canva; do not automatically add a native presentation stage. Verify any requested playback capability in the actual destination. |
@@ -48,6 +49,18 @@ Do not copy an executor's commands, schemas or troubleshooting guide into this w
 | Audit an animated PPTX | `ppt-native-animator:ppt-animation-auditor` | Use for missing targets, click-order errors, separated containers, media changes and OOXML validity. |
 | Find a missing external capability or connected service | `plugin-management:plugin-management` | Discover an appropriate plugin instead of expanding this workflow with application-specific procedures. |
 
+## 教案包专项交接
+
+| 用户需要 | 执行入口 | 共用依据 |
+|---|---|---|
+| 课件风格、美化或按内容选择版式 | 自有 `ppt-visual-style` 风格库；已有课件用其实际编辑工具 | 以批准单页与风格锁为准；PowerPoint 的 `ppt_get_visual_style` 读取同一风格目录。单做风格时限于指定页面或选择任务 |
+| 课堂逐字稿、逐页审核 | 可用时使用 `lesson-transcript`，以现有逐字稿提示词承接全文要求 | 以实际课件定位每页、素材和操作，按教材核对知识。整套教案包额外核对已确认教案的教学约束；有冲突先标明页码和活动，不补造课件内容。沿用同一份逐字稿和检查记录 |
+| 已确认源稿排成 Word | 用户指定自有版式时使用 `lesson-typeset`；普通 Word 编辑用对应文档工具 | 排版从最终源稿开始，保持原有正文与页码。教案包默认 Markdown，明确委托 Word 时进入排版 |
+| 小红书文字笔记 | `xhs-lesson-notes` | 用真实课题和资源清单写文案；封面及真实原页拼图按教案包宣传规则制作 |
+| 交互式网页课件 | `interactive-courseware` | 以交互任务和可运行网页为主产物。按知识机制选 `teachable-figures`，复杂形体还原用 `img2threejs`，精细机械剖视用 `anatomy`。用户明确要求配套时才与 PPT 教案包衔接 |
+
+各入口只处理本轮产物。复用已确认的课时、大纲、文件和实测记录；同一产物的具体写作、编辑或审核只走一条主流程。
+
 ## Common route chains
 
 ### Existing PPT revision decision
@@ -55,7 +68,7 @@ Do not copy an executor's commands, schemas or troubleshooting guide into this w
 Choose one primary editor for each modification pass:
 
 1. For a saved PPTX and targeted, deterministic edits, invoke `officecli-pptx`. Read the affected slide and stable shape IDs, then use one batch for related edits. Save back to the canonical path and compare the changed pages; do not create numbered deliverable copies.
-2. If WPS currently owns unsaved edits or the task requires live application behavior, finish that editor session and invoke `wps-ppt`. Do not let OfficeCLI and WPS mutate the same file at once.
+2. If a desktop editor owns unsaved edits or the task requires live application behavior, use the editor that owns the file. Use `wps-ppt` for WPS and `ppt-mcp` for PowerPoint. Pin the same target file, batch compatible operations and save through the active editor before any file-level handoff. Keep one writer per pass.
 3. If OfficeCLI cannot express the change or a complex deck fails its compatibility check, use `presentations:Presentations`, `ppt-master`, or a verified package-level edit according to the scope. Avoid repeated retries on the canonical file.
 4. A full rebuild or new deck is courseware production, not a bounded edit; follow the Canva route instead of directly producing an editable PPTX.
 5. Run the native-animation planner, writer and auditor only after the static edits are stable. Do not mix animation writing with layout changes in the same pass.

@@ -1,0 +1,4 @@
+interface:
+  display_name: "【本机】课件视觉风格库"
+  short_description: "按课型选择十二种视觉方向，锁定媒介与角色，随内容变化布局，保留已确认页面"
+  default_prompt: "使用 $ppt-visual-style 完成本次任务，保留已确认内容并交付检查后的结果。"

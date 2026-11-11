@@ -98,6 +98,14 @@ HEAD_REF_RE = re.compile(r"翻页前|上一页|前一页|前一屏|刚才那页"
 FIND_N_RE = re.compile(r"找(?:出|一找)?\s*([两二三四五六七八九十\d]+)\s*处")
 GOT_N_RE = re.compile(r"([两二三四五六七八九十\d]+)\s*处\s*(?:都|也|全)?\s*(?:找到|说了|说有|有)")
 DICT_RE = re.compile(r"听写\s*([一两二三四五六七八九十\d]+)\s*个\s*([字词])[：:]\s*([^。\n]+)")
+# 全局红线：逐字稿正文严禁出现教材页码数字（如“翻到第85页”、“课本第12页”）
+BOOK_PAGE_RE = re.compile(
+    r"(?:翻[到开]|看|查|读|在)?\s*(?:课本|教材|语文书|书本)\s*第?\s*\d+\s*页"
+    r"|翻[到开]\s*第?\s*\d+\s*页"
+    r"|第\s*\d+\s*页\s*(?:课文|生字|插图|课后习题|课后第)"
+)
+BRACKET_WARN_RE = re.compile(r"^[【\[](操作|学生可能说|板书|停顿|应对提示)[】\]]")
+STU_SAY_RE = re.compile(r"^[〔【\[]学生说[〕】\]]")
 
 CN_NUM = {"一": 1, "两": 2, "二": 2, "三": 3, "四": 4, "五": 5,
           "六": 6, "七": 7, "八": 8, "九": 9, "十": 10}
@@ -505,11 +513,25 @@ def main():
                 warns.append("[数字] 第 %d 页“听写%s个%s”，实际是 %d %s"
                              % (p["page"], m.group(1), units, real, label))
 
-    # ── 行首标记格式 ──────────────────────────────────────────
+    # ── 行首标记格式与教材页码红线 ────────────────────────────
     for p in pages:
         for l in p["body"].split("\n"):
             l = l.strip()
-            if not l or l.startswith(("〔", "【", "#", "|", "::", "!")):
+            if not l:
+                continue
+            # 全局红线：教材页码拦截
+            m_bp = BOOK_PAGE_RE.search(l)
+            if m_bp:
+                errors.append("[页码] 第 %d 页出现教材页码“%s”——全局红线禁止出现教材页码数字，请用课文标题/段落/课后题定位"
+                              % (p["page"], m_bp.group(0)))
+            # 标记括号规范拦截
+            if BRACKET_WARN_RE.match(l):
+                warns.append("[标记] 第 %d 页标记“%s”使用方括号，应使用标准六角括号“〔%s〕”，防排版引擎兼容隐患"
+                             % (p["page"], l[:8], BRACKET_WARN_RE.match(l).group(1)))
+            if STU_SAY_RE.match(l):
+                errors.append("[标记] 第 %d 页写“〔学生说〕”漏写“可能”，规范 8.1 规定预设回答必须为“〔学生可能说〕”"
+                              % p["page"])
+            if l.startswith(("〔", "【", "#", "|", "::", "!")):
                 continue
             if re.match(r"^(师|生)[^\s：:]{1,8}$", l) or (
                     re.match(r"^(师|生)[（(]", l) and not LBL_RE.match(l)):

@@ -1,0 +1,4 @@
+interface:
+  display_name: "【本机】教案包制作"
+  short_description: "教学设计、可画课件与配套资料按课时制作，逐阶段检查并等待确认"
+  default_prompt: "使用 $teaching-ppt-workflow 接续当前教案包，展示本阶段成果并等待确认。"

@@ -55,7 +55,7 @@ Check the task boundary too: a standalone style analysis must not generate image
 - 每页字体不超过2种，整套不超过3种；优先微软雅黑、思源黑体、楷体等常用且目标电脑已安装的字体。原生课件检查真实字体与替代情况；图片样稿只按可见字形核对风格，真实字体家族标为未验证，不以提示词代替检查。
 - Text is readable from classroom distance.
 - Images are clear, proportionally cropped and relevant.
-- PPT样稿与正式页按[单页绘图验收](lesson-pack.md#单页绘图的两项优先验收)采用超清画质，优先使用可用高质量、高分辨率设置；首张核对实际尺寸、比例、文字和细小图示，清楚可读后再继续。默认不强制原生4K，不因未达3840×2160暂停或换工具；用户另行明确精确指标时再据此验收。保存及可画导入保留原图清晰度，有导出交付时另核对实际导出结果。如实报告尺寸，不把提示词、DPI、画布大小或放大图冒充原生细节；其他资源按用途验收，已有页面不自动回改。
+- PPT 样稿与正式页按 [视觉分镜、逐页绘图与验收](visual-planning.md) 核对原图、连续页和实际文件。保存、导入及交付时比对实际尺寸与清晰度。
 - No object extends outside the safe area or overlaps another unintentionally.
 - The page layout follows the actual reading or learning relationship: observation, comparison, process, practice or conclusion, rather than a repeated card/icon recipe.
 - Titles and tasks say something concrete, without empty motivational or research-report language. Repeated design choices improve familiarity without making every page identical.
@@ -86,7 +86,7 @@ Check the task boundary too: a standalone style analysis must not generate image
 - Record each affected dynamic page as `已播放通过`, `播放失败`, or `未验证`, with the tested application; never report `未验证` as passed.
 - Delivery filenames are clear and free of temporary suffixes.
 - 图片交付前验证实际文件存在、可解码及尺寸/数量；ZIP实际打开并检查条目、完整性及内容与交付图片一致。文件可读与用户端可下载分别报告：本地检查不等于已验证用户下载。用户反馈无法下载时，先检查交付文件和当前有效的附件/下载入口，必要时重新附上已核对文件；未经复现不把中文文件名、签名过期或其他猜测写成根因。不只重发同一失效入口，也不把其他聊天的 sandbox 路径或临时链接当作当前可用交付。
-- The delivery folder excludes extracted assets, work logs and obsolete drafts.
+- 整包交付验收仅核对教学设计、PPT课件、制作笔记、逐字稿、学习清单五项及各自采用版本。源稿、大纲、样稿、素材、工作日志、旧版、重复格式和额外压缩包不进入最终交付。
 
 ## Delivery report
 
