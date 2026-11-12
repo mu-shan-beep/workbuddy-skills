@@ -1,0 +1,16 @@
+{
+  "slug": "wps-office-suite",
+  "name": "WPS全家桶·办公管家.Skill",
+  "version": "5.2.10",
+  "installedAt": 1794455146591,
+  "source": "skillhub",
+  "namespace": "user_185644ed",
+  "canonicalName": "@user_185644ed/wps-office-suite",
+  "iconSource": "https://skillhub-1388575217.cos.accelerate.myqcloud.com/skill-icons/uploads/702064/f24f51ee2cf54f5dbd352780b7c3fde4.png",
+  "labels": {
+    "pricing_type": "alipay",
+    "requires_api_key": "false"
+  },
+  "iconLocalPath": "/Users/mushan/.workbuddy/skills/wps-office-suite__skillhub/_icon.png",
+  "iconDownloadedFrom": "https://skillhub-1388575217.cos.accelerate.myqcloud.com/skill-icons/uploads/702064/f24f51ee2cf54f5dbd352780b7c3fde4.png"
+}

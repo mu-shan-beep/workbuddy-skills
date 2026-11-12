@@ -5404,7 +5404,8 @@ def create_pptx_with_native_svg(
 
                     # Build relationships XML
                     rels_dir = extract_dir / 'ppt' / 'slides' / '_rels'
-                    rels_dir.mkdir(exist_ok=True)
+                    if not rels_dir.exists():
+                        rels_dir.mkdir(parents=True, exist_ok=True)
                     rels_path = rels_dir / f'slide{slide_num}.xml.rels'
 
                     extra_rels = ''

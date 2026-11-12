@@ -479,7 +479,7 @@ N 课时完整教学设计，把【落点】落到实处 👇
 | 端 | 指定能力 | 本技能要它做的事 |
 |---|---|---|
 | 夸克 | skill `quark-drive` | 查「我的分享」、按 `first_fid` 认当课目录、创建永久分享、预览分享核对文件数 |
-| 百度 | 官方 `baidu-netdisk` Connector（MCP）为主，`baidu-pan-ops` skill 作兜底 | 核对目录与 fsid、创建永久分享、校验提取码、浏览分享内容 |
+| 百度 | 官方 `baidu-netdisk` Connector（MCP）为主（**连接器形态，不在 `~/.workbuddy/skills/`**；是否可用按第 0 步预检），`baidu-pan-ops` skill 作兜底 | 核对目录与 fsid、创建永久分享、校验提取码、浏览分享内容 |
 | 能力缺装／未授权 | `search_and_install_skills`（装技能）、`list_installed_plugins` + `reconnect_plugin`（连接器授权） | 开场补齐能力，不中途才发现 |
 
 > 本技能**不写网盘 API 调用、不记录生成命令与参数、不代跑对应能力的登录初始化命令**。能力名可以指定，参数一律回去读对应文档。

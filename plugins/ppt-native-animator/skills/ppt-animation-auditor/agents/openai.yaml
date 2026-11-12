@@ -1,6 +1,0 @@
-interface:
-  display_name: "PPT 动画审计员"
-  short_description: "检查动画遗漏、点击规则和PPT内容完整性"
-  default_prompt: "Use $ppt-animation-auditor to compare this animated PowerPoint with its source and report any animation or integrity problems."
-policy:
-  allow_implicit_invocation: true

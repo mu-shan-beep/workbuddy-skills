@@ -21,7 +21,7 @@ After execution, retain only:
 
 Do not copy an executor's commands, schemas or troubleshooting guide into this workflow. Do not load executors for later stages in advance.
 
-本用户固定不直接制作可编辑PPTX。下面的本地PPT工具仅供已有文件的明确修改或检查；新课件按整页绘图→可画组装完成，不能由模板、动画或工具选择绕过此约束。
+本用户固定不直接制作可编辑PPTX；课件默认交付可画设计链接，仅当用户明确要求交付可编辑 pptx 文件时才制作并交付 .pptx。下面的本地PPT工具仅供已有文件的明确修改或检查；新课件按整页绘图→可画组装完成，不能由模板、动画或工具选择绕过此约束。
 
 ## Route by capability
 

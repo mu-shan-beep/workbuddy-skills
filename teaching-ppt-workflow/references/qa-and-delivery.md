@@ -10,8 +10,8 @@ Choose checks for the current output; do not turn an isolated task into a full-p
 | Pure on-slide outline | Page order, complete student-facing text, staged answers; no teacher notes, timing, visual instructions, field labels or explanatory preface in the outline body. Needed reference-search keywords belong in a separate copy area; omit them when references are sufficient or only the pure outline is requested. |
 | Style-reference analysis | Images actually inspected; concise reusable style description only; no unsolicited drawing, sample page, new keyword list or copied composition |
 | Preview images | Drawing uses available references, reusable analysis, an approved direction/template, or explicit autonomous-design instructions; needed reference analysis may happen inside the drawing task. No repeated search/decomposition deliverable; independently organized lesson content, one image per page, correct dimensions and copy, source-supported diagrams, classroom readability and consistent visual language |
-| Courseware production / existing PPT edit | Never directly create an editable PPTX. New decks follow the Canva whole-image route; verify the actual saved design and link. File-integrity and media-preservation checks apply only to explicitly requested edits of an existing local PPT or a temporary image-only import container. |
-| Verbatim script | Actual slide/activity sequence, natural spoken language, clear questions/transitions, realistic interaction and media time; hypothetical student replies labeled |
+| Courseware production / existing PPT edit | Default deliverable is the Canva design link; produce an editable .pptx only when the user explicitly requests a deliverable pptx file. Never directly create an editable PPTX. New decks follow the Canva whole-image route; verify the actual saved design and link. File-integrity and media-preservation checks apply only to explicitly requested edits of an existing local PPT or a temporary image-only import container. |
+| Verbatim script | Actual finished-deck page sequence (课件成品页序), natural spoken language, clear questions/transitions, realistic interaction and media time; hypothetical student replies labeled |
 | Teaching-content review | Evidence-based problems with exact locations and actionable advice; use provided artifacts only, no mutations or technical audit |
 | Materials analysis | Traceable confirmed requirements, useful source inventory, reference versus requirement distinction, only consequential open questions |
 | Repaired Canva design | Correct copy, missing/duplicate/fragmented layers, edges and backgrounds, faithful redrawing, tested editability, actual saved result; see `canva-layer-repair.md` |
@@ -40,7 +40,8 @@ Check the task boundary too: a standalone style analysis must not generate image
 
 ## Cross-document synchronization
 
-- PPT and lesson plan preserve the confirmed activity order and meaning; student-facing titles need not repeat formal lesson-plan section names.
+- PPT／大纲／讲稿须遵循教学设计已确认的活动顺序与含义；差异一律改下游（PPT／大纲／讲稿）以匹配上游权威，不反过来改教学设计去适配。学生上屏标题不必重复教学设计的形式栏目名。
+- **全流程同类全扫**：任一产物发现缺陷进行修复时，必须回查本阶段及关联阶段同类全部对象并实际代入验证（改动一处填空扫全课填空，改动一页上屏扫连续页与后续讲稿），严禁点状替换。
 - PPT and verbatim script use the same questions, conclusions and media cues.
 - Classroom timing is plausible after adding discussion and media duration.
 - Teacher language sounds natural and is not copied onto slides unnecessarily.
@@ -86,7 +87,10 @@ Check the task boundary too: a standalone style analysis must not generate image
 - Record each affected dynamic page as `已播放通过`, `播放失败`, or `未验证`, with the tested application; never report `未验证` as passed.
 - Delivery filenames are clear and free of temporary suffixes.
 - 图片交付前验证实际文件存在、可解码及尺寸/数量；ZIP实际打开并检查条目、完整性及内容与交付图片一致。文件可读与用户端可下载分别报告：本地检查不等于已验证用户下载。用户反馈无法下载时，先检查交付文件和当前有效的附件/下载入口，必要时重新附上已核对文件；未经复现不把中文文件名、签名过期或其他猜测写成根因。不只重发同一失效入口，也不把其他聊天的 sandbox 路径或临时链接当作当前可用交付。
-- 整包交付验收仅核对教学设计、PPT课件、制作笔记、逐字稿、学习清单五项及各自采用版本。源稿、大纲、样稿、素材、工作日志、旧版、重复格式和额外压缩包不进入最终交付。
+- 整包交付验收仅核对教学设计、PPT课件、制作笔记、逐字稿、学习清单五项及各自采用版本。必须严格落实末端交付契约：
+  - **交付落位**：成品必须以 `--mode commit` 直接输出至课题根目录下的 `交付文件/` 文件夹中。
+  - **格式约束**：课件默认交付可画设计链接（用户明确要求时才交付 `.pptx` 文件）；其余四项（教学设计、逐字稿、学习清单、制作笔记）**一律只交 Word（`.docx`），严禁保留或交付 `.pdf`**。
+  - **安全清理**：未排版的旧稿、旧命名版本或包外副本统一使用 `/usr/bin/trash` 移入系统废纸篓；源稿、大纲、样稿、素材、工作日志、旧版、重复格式和额外压缩包不进入最终交付。
 
 ## Delivery report
 
@@ -97,4 +101,4 @@ Check the task boundary too: a standalone style analysis must not generate image
 - **处理状态**：已修并复查、待用户修正、仍待处理或可选优化；只读检查保持只读，不能把建议写成已完成修复。历史轮次不能当作本次新检查。
 - **未验证项**：仅列与该阶段相关的实际边界。大纲文字审查不能证明字号、范字显示、答案显隐、投影可读性或课堂用时已通过；这些留到相应样稿、成品或试教阶段验证。
 
-评分只在已有明确标准或用户要求时提供，不为大纲自动沿用教案总分或随意报90分。质检简表放在聊天中，不混进逐页上屏文字、学生学习单等成果正文；默认不另建质检报告副本。检查结果不能代替流程要求的用户确认，也不因有待后续阶段验证的项目自动新增关卡。
+评分只在已有明确标准或用户要求时提供，教案口径按 [lesson-pack.md](lesson-pack.md) 的两种模式执行，不为大纲自动沿用教案总分或随意报90分。质检简表放在聊天中，不混进逐页上屏文字、学生学习单等成果正文；默认不另建质检报告副本。检查结果不能代替流程要求的用户确认，也不因有待后续阶段验证的项目自动新增关卡。

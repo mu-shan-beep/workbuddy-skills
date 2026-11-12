@@ -1,5 +1,7 @@
 # Source of Truth and Change Propagation
 
+**规则文件之间发生冲突时，按 `SKILL.md`「规则权威层级」裁决；本文件的 Authority order 只适用于素材、文案与版本来源，不用于裁决规则条文。一切以最新确认版本为准。**
+
 Use this reference when a commissioned multi-artifact project must align a PPT with a lesson plan, script, media or feedback. The page matrix is an internal control document, not the user-facing PPT outline. A standalone writing or review task does not need a project matrix or all source types.
 
 ## Project brief fields
@@ -57,7 +59,7 @@ Apply authority by purpose rather than treating the newest uploaded image as a n
 
 | Change type | Check these linked items |
 |---|---|
-| Section name | Transition slide, page header, navigation, lesson plan heading, script transition, summary |
+| Section name（源自已确认教学设计） | 其变化须先落到教学设计，再由 Transition slide、page header、navigation、script transition、summary 跟随；**不得为对齐幻灯片而改教学设计标题** |
 | Knowledge point | Evidence/example, teacher explanation, student question, conclusion, homework |
 | Activity order | Slide order, script order, timing, media cue, animation order |
 | Customer wording | Every repeated instance and quotation mark/punctuation consistency |

@@ -1,8 +1,12 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-逐字稿「课件对齐 + 时间轴 + 硬伤」校验 V6
+逐字稿「课件对齐 + 时间轴 + 硬伤」校验 V8
 ==========================================
+
+（V7，2026-11-12 加固：对已有 `[时间]`/`[课件]` 标签增补两类判据。
+ V8，2026-11-12 加固：改硬 `[时间]`（阶段预算 + 机动余量）与 `[PPT]`（动画分步充分性），
+ 仍属「改硬已有标签」而非「新增标签种类／新增台账条目」，符合 LL-007 收敛原则。）
 
 核心口径（2026-11-07 用户裁定）：**逐字稿只服务课件，必须完全匹配课件**。
 课件是唯一依据；教学设计不进入校验——它既不提供页数、页切分，也不提供检查项。
@@ -12,17 +16,25 @@
   [课件]   稿页数 ＝ 课件页数；页标题有公共片段（否则 WARN：自造标题）
   [课件]   课件该页问句逐条落地（漏问／换问 → ERROR）；顺序指令条未落地 → WARN；
            「读顺这一处再继续」被写成「再从头」→ ERROR
+  [课件]   课件该页「任务型陈述」（含 交流/讨论/圈画/查找/朗读… 等动词的长句，4.3 任务
+           表述）须在稿中体现实施；整段核心动词+对象都未出现 → WARN（换说法体现请忽略）
   [PPT]    稿中写“依次出现／飞入／淡入”等：课件该页有 <p:timing> 才算有依据；
            只有 <p:transition>（切页效果）→ WARN 待人工确认；两者皆无 → ERROR；
            课件无法解析 → 未验证（不得据此判通过，也不得判错）
+  [PPT]    动画分步充分性（V8 加固）：页单击组数 ≥4 但〔操作〕未出现分步线索
+           （逐一点击／先…再…／单击 N 次／共 N 次单击）→ WARN，避免教师单击一次误以为已全显
 
 时间类（全部按稿自己的页区间推算，不看教学设计）
   [页数]   使用说明自述的课件页数 ＝ 实际稿页数
   [时间轴] 页号 1…N 连续、首尾相接、首页 0:00、末页 ＝ 课时长
   [时间]   页内预算：活动 ＋ 台词 ≤ 页时长（零容差）；余量「页时长 − 活动」按
            单击次数／师台词字数分档 ≥ 40／50／60 秒，容差盖不住的偏紧页才报得出来
+  [时间]   难点页（标题含 核心追问／思辨／深入／难点）时长低于 4.0 分钟（代码 HARD_PAGE_MIN=240）→ WARN，
+           核心难点须留足师生思辨与板书时间（加固：原只按单击密度分档，漏判难点页偏紧）
   [时间]   页内自述“约 N 分钟”不得超过页时长；学生活动占比 < 40% 提示；
            语速默认 4.0 字/秒（--rate 可改），报表同时给 4.0 与 3.5 两档占用
+  [时间]   阶段预算（--stages "1-10:15,11-15:16,16-17:6"）：非末段实耗超预算 >1 分钟 → WARN（前松后紧），
+           末段超预算视作含机动、仅提示不报错；全课机动余量 <3 分钟 → WARN（两段均按稿页区间算，不读教学设计）
   [配图]   截图张数 ＝ 稿页数
 
 内容类
@@ -39,6 +51,7 @@
     python3 audit_script.py 逐字稿-源.md --pptx 课件.pptx --images assets/ppt-第一课时
     python3 audit_script.py 逐字稿-源.md --pptx 课件.pptx --board-keys 事情,心情,原因
     python3 audit_script.py 逐字稿-源.md --pptx 课件.pptx --rate 3.5
+    python3 audit_script.py 逐字稿-源.md --pptx 课件.pptx --stages "1-10:15,11-15:16,16-17:6"
 
 复盘加固（V6，2026-11-08）：不新增工具，把约束硬化进本脚本
   [复盘]   读取 references/lessons-learned.md：
@@ -112,6 +125,10 @@ CN_NUM = {"一": 1, "两": 2, "二": 2, "三": 3, "四": 4, "五": 5,
 SEG_MIN_RE = re.compile(r"(\d+|[一二两三四五六七八九十])\s*分(半|钟)?")
 SEG_SEC_RE = re.compile(r"(\d+)\s*秒")
 
+# V8 加固：[PPT] 动画分步充分性——页单击组数≥4 时，〔操作〕须点明分步点击顺序
+MULTISTEP_RE = re.compile(
+    r"逐一点击|逐一出示|逐页|分步|依次|逐个|先.{0,12}再|逐项|逐条|单击\s*\d+\s*次|点击\s*\d+\s*次|共\s*\d+\s*次单击|分\s*\d+\s*次")
+
 RATE = 4.5          # 教师朗读速率，字/秒
 OPS_SLACK_MIN = 0.3  # 纯操作时长的容差：超过它说明学生活动本身就塞不进这一页
 # 余量＝页时长 −〔操作〕活动，要装下教师语言、单击、切换与反馈。
@@ -119,6 +136,19 @@ OPS_SLACK_MIN = 0.3  # 纯操作时长的容差：超过它说明学生活动本
 REST_FLOOR_LIGHT = 40   # 静态短页：无单击且师台词 < 100 字
 REST_FLOOR_BASE = 50    # 一般页
 REST_FLOOR_HEAVY = 60   # 重点页：单击 ≥ 3 次或师台词 ≥ 180 字
+
+# 加固（V7，2026-11-12）：难点页最低时长——核心追问/思辨页须留足师生思辨与板书时间
+HARD_PAGE_RE = re.compile(r"核心追问|思辨|深入|难点")
+HARD_PAGE_MIN = 240     # 秒，4.0 分钟（核心追问/思辨页最低建议；原 3:50 偏紧页会被抓住）
+# 加固（V7，2026-11-12）：课件「任务型陈述」落地（4.3 任务表述须在稿中体现实施）。
+# 只取强任务动词，避免「了解/思考/探究」等通用词及「朗读」等易匹配页面标签的词造成误报；
+# 换说法体现者属正常，WARN 须人工判断。
+TASK_VB_RE = re.compile(
+    r"交流|讨论|圈画|圈出|查找资料|查找|齐读|背诵|书写|练写|合作|观察|分享")
+# 课件里的版式装饰标签（「任务一：」「朗读指南：」「交流支架：」「核心问题 … 焦点：」）
+# 不是学生要做的任务表述，整句跳过以免误报。
+DECOR_RE = re.compile(
+    r"(任务[一二三四五六七八九十\d]*|指南|支架|要求|焦点|提示|核心问题|自主学习|朗读指南|交流支架)\s*[：:]")
 
 
 def cn2int(s):
@@ -165,6 +195,19 @@ def fmt(sec):
     return "%d:%02d" % (sec // 60, sec % 60)
 
 
+def parse_stages(s):
+    """解析 --stages 参数：'1-10:15,11-15:16,16-17:6' → [(1,10,15.0),(11,15,16.0),(16,17,6.0)]。"""
+    out = []
+    for part in s.split(","):
+        part = part.strip()
+        if not part:
+            continue
+        m = re.match(r"^(\d+)-(\d+):(\d+(?:\.\d+)?)$", part)
+        if m:
+            out.append((int(m.group(1)), int(m.group(2)), float(m.group(3))))
+    return out
+
+
 def slide_effects(pptx):
     """每页效果：对象动画 <p:timing> 与切页效果 <p:transition> 分开记。
 
@@ -180,6 +223,22 @@ def slide_effects(pptx):
             xml = z.read(n).decode("utf-8", "replace")
             out.append(("<p:timing" in xml, "<p:transition" in xml))
         return out
+    except Exception:
+        return None
+
+
+def slide_click_groups(pptx):
+    """每页的单击入场组数（nodeType=\"clickEffect\" 出现次数）。
+
+    返回 [int,...]；课件无法解析时返回 None（＝未验证，不得据此判错）。
+    用于在 [PPT] 动画分步充分性检查里判断「该页动画是否多到需要分步提示」。
+    """
+    try:
+        z = zipfile.ZipFile(pptx)
+        names = sorted([n for n in z.namelist() if SLIDE_RE.match(n)],
+                       key=lambda n: int(SLIDE_RE.match(n).group(1)))
+        return [xml.count('nodeType="clickEffect"')
+                for xml in (z.read(n).decode("utf-8", "replace") for n in names)]
     except Exception:
         return None
 
@@ -292,6 +351,9 @@ def main():
     ap.add_argument("--board-keys", help="板书必须覆盖的列名，逗号分隔，如 事情,心情,原因")
     ap.add_argument("--rate", type=float, default=4.0,
                     help="教师口语折算速率（字/秒），默认 4.0；四年级课堂常用 3.5—4.0")
+    ap.add_argument("--stages", default="",
+                    help="阶段预算，格式 '起-止:分钟,起-止:分钟'（如 '1-10:15,11-15:16,16-17:6'）；"
+                         "非末段超预算>1分钟报 WARN，末段超预算视为机动仅提示；不填则不查阶段预算")
     ap.add_argument("--quiet", action="store_true", help="只打印结论（不关闭复盘提醒）")
     ap.add_argument("--no-lessons", action="store_true",
                     help="仅供脚本调试：不打印 [复盘] 提醒区；正式校验不许使用")
@@ -315,10 +377,11 @@ def main():
         body = text[m.end():bounds[i + 1]]
         pages.append({"page": p, "title": title, "start": s, "end": e, "body": body})
 
-    errors, warns, unver = [], [], []
+    errors, warns, unver, notes = [], [], [], []
 
     # ── 课件对齐（第一优先）──────────────────────────────────
     effects = slide_effects(a.pptx) if a.pptx else None
+    click_counts = slide_click_groups(a.pptx) if a.pptx else None
     slides = None
     if a.pptx and effects is None:
         unver.append("[课件] 课件 %s 无法解析（不是有效 pptx／文件损坏／已加密）："
@@ -351,6 +414,27 @@ def main():
                 elif cov < 0.67:
                     warns.append("[课件] 第 %d 页课件问“%s”，稿该页只沾到 %.0f%% 的实词，"
                                  "核对是否换了问法" % (p["page"], q.strip(), cov * 100))
+            # [课件] 任务型陈述落地（V7 加固，4.3）：课件该页含任务动词的长句须在稿中体现实施
+            for seg in re.split(r"[。！!？?；;]", st):
+                if "？" in seg or "?" in seg:
+                    continue
+                if len(han(seg)) < 5:
+                    continue
+                if DECOR_RE.search(seg):
+                    continue
+                mv = TASK_VB_RE.search(seg)
+                if not mv:
+                    continue
+                # 取「动词前 2 汉字 + 动词 + 后 6 汉字」为核心串（动词恰在句尾时向前借 2 字，
+                # 如「和同学交流」取「同学交流」），再用 n=4 局部片段匹配：稿中只要覆盖
+                # 「同学交流」这类核心组合即视为已体现，换说法（如加「身边的」）不误报；
+                # 整段核心都未出现才报。
+                core = han(seg[max(0, mv.start() - 2): mv.start() + 6])[:12]
+                if len(core) < 4:
+                    continue
+                if not share_frag(core, p["title"] + " " + p["body"], 4):
+                    warns.append("[课件] 第 %d 页课件任务“%s”在稿该页未见落实（4.3 任务表述须落地），"
+                                 "若以其他说法体现请忽略此条" % (p["page"], seg.strip()[:30]))
             # 顺序指令条（卡住时／先…再…／对照／重写）也须在稿该页落地
             for cmd in [x for x in st.split(" ")
                         if SEQ_CMD_RE.search(x) and len(han(x)) >= 5]:
@@ -417,11 +501,58 @@ def main():
             warns.append("[时间] 第 %d 页余量 %d 秒（页时长 − 活动），低于分档下限 %d 秒"
                          "（单击 %d 次、师台词 %d 字）；先删重复台词，别压学生活动"
                          % (p["page"], rest, floor, clicks_n, tea_chars))
+        # [时间] 难点页最小时长（V7 加固）：核心追问/思辨页须留足师生思辨与板书时间
+        if HARD_PAGE_RE.search(p["title"]) and (p["end"] - p["start"]) < HARD_PAGE_MIN:
+            warns.append("[时间] 第 %d 页（难点/核心追问页）时长 %.1f 分钟低于最低建议 %.1f 分钟，"
+                         "核心难点须留足师生思辨与板书时间"
+                         % (p["page"], dur, HARD_PAGE_MIN / 60.0))
 
     script_min = total / 60.0
     if ops_total / script_min < 0.40:
         warns.append("[时间] 学生活动合计 %.1f 分钟，只占课时 %.0f%%，低于 40%%（规范 10.3）"
                      % (ops_total, ops_total / script_min * 100))
+
+    # ── 阶段预算 + 机动余量（V8 加固，改硬 [时间]）─────────────
+    if a.stages:
+        stages = parse_stages(a.stages)
+        if stages:
+            for si, (s0, s1, budget) in enumerate(stages):
+                actual = sum((p["end"] - p["start"]) for p in pages
+                             if s0 <= p["page"] <= s1) / 60.0
+                diff = actual - budget
+                is_last = (si == len(stages) - 1)
+                if not is_last and diff > 1.0:
+                    warns.append("[时间] 第 %d–%d 页（阶段）实耗 %.1f 分钟，超预算 %.1f 分钟 %.1f 分钟，"
+                                 "前松后紧，压缩本阶段重复语言/空评价（规范 11.5）"
+                                 % (s0, s1, actual, budget, diff))
+                elif not is_last and diff < -1.5:
+                    warns.append("[时间] 第 %d–%d 页（阶段）实耗 %.1f 分钟，比预算 %.1f 分钟少 %.1f 分钟，"
+                                 "可能节奏过赶，核对是否塞得过满"
+                                 % (s0, s1, actual, budget, -diff))
+                elif is_last and diff > 1.0:
+                    notes.append("[时间] 第 %d–%d 页（末段）实耗 %.1f 分钟，超预算 %.1f 分钟 %.1f 分钟，"
+                                 "视作含课堂机动，仅提示不报错" % (s0, s1, actual, budget, diff))
+        else:
+            warns.append("[时间] --stages 参数无法解析（应为 '起-止:分钟,...'），阶段预算未校验")
+    # 机动余量：全课真实未分配时间 = 总时长 − 学生活动 − 教师台词（不含被学生活动占用的部分）
+    buffer_min = (total - ops_total * 60 - tea_total / RATE) / 60.0
+    if buffer_min < 3.0:
+        warns.append("[时间] 全课机动余量仅 %.1f 分钟（总时长 − 学生活动 − 教师台词），建议预留约 3 分钟缓冲，"
+                     "以应对真实课堂节奏波动（规范 11.5）" % buffer_min)
+
+    # ── 动画分步充分性（V8 加固，改硬 [PPT]）──────────────────
+    if click_counts:
+        for p in pages:
+            idx = p["page"] - 1
+            if idx >= len(click_counts):
+                continue
+            n = click_counts[idx]
+            if n >= 4 and not MULTISTEP_RE.search(p["body"]):
+                warns.append("[PPT] 第 %d 页含 %d 组单击动画，〔操作〕未指明分步点击顺序"
+                             "（如「先出示X，再逐一点击出示Y」），授课易单击一次误以为已全显"
+                             % (p["page"], n))
+    elif a.pptx:
+        unver.append("[PPT] 课件无法解析单击组数，动画分步充分性未验证——不得当作已核实")
 
     # ── 页内自述时长 ──────────────────────────────────────────
     for p in pages:
@@ -589,9 +720,9 @@ def main():
     slide_note = "｜课件 %d 页" % len(slides) if slides else "｜课件未解析"
     if not a.quiet:
         print("源稿：%s" % os.path.basename(a.script))
-        print("页数：%d%s ｜ 总时长：%s ｜ 学生活动：%.1f 分钟（%.0f%%）%s"
+        print("页数：%d%s ｜ 总时长：%s ｜ 学生活动：%.1f 分钟（%.0f%%）｜ 机动余量：%.1f 分钟%s"
               % (len(pages), slide_note, fmt(prev), ops_total,
-                 ops_total / script_min * 100, img_note))
+                 ops_total / script_min * 100, buffer_min, img_note))
         slow = tea_total / 3.5 / 60.0
         fast = tea_total / RATE / 60.0
         if abs(RATE - 3.5) < 1e-6:
@@ -616,6 +747,8 @@ def main():
         print("WARN      " + w)
     for u in unver:
         print("未验证  " + u)
+    for n in notes:
+        print("提示    " + n)
     if not errors:
         print("通过机检：课件逐页对齐、时间轴连续、总长 %s%s"
               % (fmt(total), "，配图张数正确" if a.images else ""))
