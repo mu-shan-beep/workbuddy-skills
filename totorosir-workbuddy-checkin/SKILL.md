@@ -13,6 +13,13 @@ agent_created: true
 
 # WorkBuddy签到助手（每日自动签到 · 派猫猫旅行 · 多渠道消息推送 · 三通道授权）
 
+> **规则治理（全技能通用，2026-11-13 用户立规）**：改本技能规则或做自检前，先跑
+> `python3 ~/.workbuddy/skills/teaching-ppt-workflow/scripts/rule_audit.py`（FAIL 先修再谈其他）。
+> 执行状态机 `LOCK → AUDIT → EXECUTE → VERIFY → DONE` 的定义见
+> `teaching-ppt-workflow/SKILL.md`「全任务执行状态机与硬门禁」；单点定义表与「不得越界改规则」的权限边界见
+> `teaching-ppt-workflow/references/self-maintenance.md`。本技能不另立治理流程。
+
+
 WorkBuddy「Buddy 加油站」每日签到本质是一次带鉴权凭据的 HTTP 接口请求，**不需要**模拟点击左下角「个人信息 → Buddy 加油站 → 签到」这一套 GUI 流程（自动化代理也没有点击桌面 UI 的能力）。
 
 本 Skill 自带脚本，仅用 Python 标准库，零第三方依赖。

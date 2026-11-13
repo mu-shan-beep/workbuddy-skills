@@ -1,0 +1,3 @@
+[submodule "teardown"]
+	path = teardown
+	url = https://github.com/elvarofficial/teardown.git

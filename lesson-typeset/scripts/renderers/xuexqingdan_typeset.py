@@ -210,12 +210,19 @@ def add_run(p, text, size=None, color=None, bold=False, font=None):
 
 
 def add_rich(p, text, size, color, font=None, bold=False):
-    """支持行内 **加粗**。"""
-    for seg in re.split(r"(\*\*.+?\*\*)", text):
+    """支持行内 **加粗**；单星 *斜体* 只剥离标记不保留星号；HTML <br> 转单元格内换行。
+
+    2026-11-13 用户裁定：所有 Markdown／HTML 语法标记都是排版中间符号，
+    严禁作为可见字符打进 Word 成品。单星斜体在楷体正文里也不好看，剥离即可。
+    """
+    text = re.sub(r"<br\s*/?>", "\n", text, flags=re.I)
+    for seg in re.split(r"(\*\*.+?\*\*|\*[^*\n]+?\*)", text):
         if not seg:
             continue
         if seg.startswith("**") and seg.endswith("**") and len(seg) > 4:
             add_run(p, seg[2:-2], size=size, color=color, font=font, bold=True)
+        elif seg.startswith("*") and seg.endswith("*") and len(seg) > 2:
+            add_run(p, seg[1:-1], size=size, color=color, font=font, bold=bold)
         else:
             add_run(p, seg, size=size, color=color, font=font, bold=bold)
 
@@ -389,8 +396,8 @@ def _row_cant_split(row):
 
 
 def _row_header(row):
-    trPr = row._tr.get_or_add_trPr()
-    _put(trPr, OxmlElement("w:tblHeader"), _TRPR_ORDER)
+    # 2026-11-13 用户明确裁定：表格跨页断行，一律不重复表头（不写入 w:tblHeader）
+    pass
 
 
 def _first_para(cell, align=WD_ALIGN_PARAGRAPH.LEFT, line=1.3):
@@ -679,7 +686,7 @@ def parse(md):
 
     while i < len(lines):
         s = lines[i].strip()
-        if not s:
+        if not s or s.startswith("```") or re.match(r"^[-*_]{3,}$", s):
             i += 1
             continue
 

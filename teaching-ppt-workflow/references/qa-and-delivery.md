@@ -15,14 +15,16 @@ Choose checks for the current output; do not turn an isolated task into a full-p
 | Teaching-content review | Evidence-based problems with exact locations and actionable advice; use provided artifacts only, no mutations or technical audit |
 | Materials analysis | Traceable confirmed requirements, useful source inventory, reference versus requirement distinction, only consequential open questions |
 | Repaired Canva design | Correct copy, missing/duplicate/fragmented layers, edges and backgrounds, faithful redrawing, tested editability, actual saved result; see `canva-layer-repair.md` |
-| Learning sheet | Correct topic/period, tasks aligned with the current design and deck, useful writing rather than repeated copying, age-appropriate load and actual printable writing space |
+| Learning sheet | Correct topic/period, tasks aligned with the current design and deck, useful writing rather than repeated copying, age-appropriate load and actual printable writing space. 必须执行教材原件物理Grep对读、轻量行动支架与大题级【完成标准】核验 |
 | Board image | Confirmed wording and relationships preserved, specified style and suitable ratio, readable knowledge structure rather than a decorated summary slide |
-| Usage notes | Actual topic/edition/period/page counts and supported feature claims, accurate courseware page references and preparation; natural teacher-facing prose tied to this lesson, without internal production/audit language or invented teaching experience; limitations explained as practical usage advice; no courseware entry/access/download links or entry QR codes in the document |
+| Usage notes | Actual topic/edition/period/page counts and supported feature claims, accurate courseware page references and preparation; natural teacher-facing prose tied to this lesson, without internal production/audit language or invented teaching experience; limitations explained as practical usage advice; no courseware entry/access/download links or entry QR codes in the document. 必须执行课件底层XML时序Dump物理对账，严禁脱离实际播放行为凭空默写动画与单击次数；模块白名单与源稿纯净按 `lesson-pack.md`「全包源稿纯净化与去 AI 味铁律」（唯一归属） |
 | Whole-image assembly | Unchanged source images, one per page, correct numeric order, counts, ratio and separate period decks when requested; no unrequested layer recovery |
 | Promotional poster or collage | Intended publicity format rather than a PPT cover; truthful resource claims; collages use actual unchanged slides and specified arrangement |
 | Resource package | Only requested existing resources, correct versions and names, preserved source bytes, expected archive entries and successful integrity check; no unsolicited content review |
 
 The remaining sections apply when their corresponding artifacts or features are in scope. Skip absent media, animation and linked documents rather than inventing work to fill a checklist.
+
+**关键图片素材来源门禁（优先于其他检查，唯一归属 `lesson-typeset/SKILL.md` §1.0 ＋ `references/unified-spec.md` 2.5／2.5.1）**：接到任何排版／交付整理委托，第一步必须按该归属跑 `check_assets.py`、把齐备状态主动报给用户（齐备也要报）；缺「板书设计图片」或「课件 PDF」即暂停并请求提供，等齐备再排，缺失期间不得产出或覆盖任何成品。用户会忘记提供，助手负有主动提醒义务，不得等用户想起来或命令报错才说。此处只挂接入口，不复制口径。
 
 Check the task boundary too: a standalone style analysis must not generate images, but a drawing request or an active full-production commission must not stop merely because there is no separate analysis document or the latest message only supplies requested materials. Respect explicit analysis-only or pause instructions.
 

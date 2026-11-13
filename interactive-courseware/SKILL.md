@@ -6,6 +6,13 @@ agent_created: true
 
 # 交互式课件制作（单文件离线版）
 
+> **规则治理（全技能通用，2026-11-13 用户立规）**：改本技能规则或做自检前，先跑
+> `python3 ~/.workbuddy/skills/teaching-ppt-workflow/scripts/rule_audit.py`（FAIL 先修再谈其他）。
+> 执行状态机 `LOCK → AUDIT → EXECUTE → VERIFY → DONE` 的定义见
+> `teaching-ppt-workflow/SKILL.md`「全任务执行状态机与硬门禁」；单点定义表与「不得越界改规则」的权限边界见
+> `teaching-ppt-workflow/references/self-maintenance.md`。本技能不另立治理流程。
+
+
 交付物永远是**一个 HTML 文件**：双击即开、不联网、不装软件、拷进 U 盘能上课。
 内容由学科决定，**引擎结构固定不变**——图层开关、关卡进度、分层提示、提交检测这四件事每次都一样，不要重新设计。
 

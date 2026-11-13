@@ -20,13 +20,23 @@
 
 | 类别 | 目录 |
 |---|---|
-| 自建技能（6） | `lesson-typeset`、`lesson-transcript`、`xhs-lesson-notes`、`interactive-courseware`、`teaching-ppt-workflow`、`ppt-visual-style` |
-| 网盘编排（2） | `quark-drive`、`baidu-pan-ops` |
-| 安装来源技能 | `ima-skills`、`ima-skills__skillhub`、`teachable-figures`、`totorosir-workbuddy-checkin`、`ppt-master`、`pdfkit-py` |
-| 宿主存档（非技能路由） | `codex-skills/`（Codex 技能快照）、`plugins/`（ppt-native-animator 插件源码） |
+| 自建技能（6，本机维护） | `lesson-typeset`、`lesson-transcript`、`xhs-lesson-notes`、`interactive-courseware`、`teaching-ppt-workflow`、`ppt-visual-style` |
+| 第三方·市场安装（9，只报不改） | `quark-drive`、`baidu-pan-ops`、`totorosir-workbuddy-checkin`、`ima-skills`（官方「腾讯ima」）、`wps-office-suite__skillhub`、`teachable-figures`、`ppt-master`、`pdfkit-py`、`teardown` |
 
-⚠️ `codex-skills/` 与 `plugins/` 是备份存档，但放在 `skills/` 根目录下会被平台扫描并注册成技能，
-产生同名重复加载。若不需要它们参与触发，应把存档移出技能扫描路径（保留文件，换位置）。
+> **自建判定标准（2026-11-13 用户裁定）**：目录内含 `_skillhub_meta.json`（技能市场安装标志）的一律判为**第三方**，
+> 即便 frontmatter 误标 `agent_created: true` 也不算自建，体检只报不改。
+> 据此 `quark-drive`、`baidu-pan-ops`、`totorosir-workbuddy-checkin` 由「自建」改判第三方，自建口径由 9 个收紧为 **6 个**。
+> 机器判定实现在 `teaching-ppt-workflow/scripts/rule_audit.py::is_owned()`。
+
+> **同能力多版本取舍（2026-11-12）**：以官方版为主；没有官方版就以最新版为主。
+> 已据此下线 `ima-skills__skillhub`（技能中心旧版 IMA 技能）与 `plugins/ppt-native-animator`（PPT 原生动画插件）。
+> 删除已随提交 `6b10ab3` 入库；其父提交 `935708b` 仍含全部 57 个文件，
+> 需要时用 `git checkout 935708b -- <路径>` 恢复。
+
+✅ `codex-skills/` **已于 2026-11-13 删除**（用户裁定，`/usr/bin/trash` 移入废纸篓可恢复）。
+删除前已核对：内部 3 个副本（`interactive-courseware` 差 227 行、`teaching-ppt-workflow` 差 108 行、`ppt-visual-style` 差 12 行）
+均为被主目录完全替代的旧实现，主目录 `SKILL.md` 对旧副本独有文件（`agents/openai.yaml`、`references/improvement-loop.md` 等 6 个）零引用。
+该目录曾因位于技能扫描路径内导致同名技能重复注册与旧版本漂移，且 `rule_audit.py` 只扫一层、从未覆盖到它——属长期失检区，一并清除。
 
 **备份范围 ≠ 自动触发范围**：全量入库只决定「哪些文件进版本库」；哪些技能可被自动调用，
 由会话路由表与 `settings.json` 的 `skillOverrides` 决定，两套口径互不影响。

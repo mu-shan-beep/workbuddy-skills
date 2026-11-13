@@ -117,6 +117,151 @@ GENERIC_IMG_DIRS = ("assets/ppt", "assets/ppt-第一课时",
                     "assets/ppt-第二课时", "assets/ppt2")
 
 
+# ─── 关键图片素材来源硬门禁（2026-11-13 用户裁定：缺失即暂停，禁止 AI 造素材） ───
+def find_courseware_pdf(root, explicit=None):
+    """逐字稿 ppt 预览图的唯一合法来源 = 用户提供的课件 PDF。
+
+    教材 PDF（只含课文正文，如 <课题>.pdf）不算；禁止 AI 用 ppt2png.py
+    从 pptx 自行渲染替代。assets/ 下的 PDF 优先，其次根目录名含「课件」的 PDF。
+    """
+    if explicit:
+        return explicit if os.path.isfile(explicit) else None
+    cands = []
+    a = os.path.join(root, "assets")
+    if os.path.isdir(a):
+        cands += [os.path.join(a, n) for n in sorted(os.listdir(a))
+                  if n.lower().endswith(".pdf")]
+    for n in sorted(os.listdir(root)):
+        if n.lower().endswith(".pdf") and "课件" in n:
+            cands.append(os.path.join(root, n))
+    return cands[0] if cands else None
+
+
+def export_pdf_pages(pdf, outdir, dpi=110):
+    """从用户提供的课件 PDF 逐页导出 pNN.jpg —— 逐字稿配图唯一合法的生成方式。
+
+    同时写 .source.json 来源标记，供 check_assets.py 判定现有预览图是否合法来源。
+    """
+    import hashlib, json, datetime
+    import pymupdf
+    os.makedirs(outdir, exist_ok=True)
+    doc = pymupdf.open(pdf)
+    n = 0
+    for i, page in enumerate(doc, 1):
+        p = os.path.join(outdir, "p%02d.jpg" % i)
+        page.get_pixmap(dpi=dpi).save(p)
+        n += 1
+    doc.close()
+    sha = hashlib.sha256(open(pdf, "rb").read()).hexdigest()
+    with open(os.path.join(outdir, ".source.json"), "w", encoding="utf-8") as f:
+        json.dump({"source_pdf": os.path.basename(pdf), "sha256": sha,
+                   "pages": n, "generator": "lesson-typeset/export_pdf_pages",
+                   "exported_at": datetime.datetime.now().isoformat(timespec="seconds")},
+                  f, ensure_ascii=False, indent=2)
+    return n
+
+
+SOURCE_MARKER = os.path.join("assets", "ppt", ".source.json")
+
+
+def asset_status(root, explicit_pdf=None):
+    """只读素材齐备预检 —— 唯一判定源，check_assets.py 与 preflight_assets() 共用。
+
+    返回 dict：board_ref / board_ok / pdf / pdf_ok / source_ok / page_count /
+    deck_pages / missing[]。绝不修改任何文件。
+    """
+    import hashlib, json
+    st = {"board_ref": None, "board_ok": False, "pdf": None, "pdf_ok": False,
+          "source_ok": False, "page_count": 0, "deck_pages": 0, "missing": []}
+
+    # ① 板书设计图片：自动定位教学设计源稿中的引用
+    for n in sorted(os.listdir(root)):
+        if n.endswith("-教学设计-源.md"):
+            md = open(os.path.join(root, n), encoding="utf-8").read()
+            seg = re.search(r"###\s*板书设计([\s\S]{0,300})", md)
+            m = re.search(r"!\[[^\]]*\]\(([^)]+)\)", seg.group(1)) if seg else None
+            if m:
+                rel = m.group(1).strip()
+                st["board_ref"] = rel
+                p = rel if os.path.isabs(rel) else os.path.join(root, rel)
+                st["board_ok"] = os.path.isfile(p)
+            break
+    if not st["board_ok"]:
+        st["missing"].append(
+            "板书设计图片：教学设计「板书设计」必须引用用户提供的板书设计图片"
+            "（如 `### 板书设计` + `![](板书设计.png)`），禁止纯文本／ASCII 板书。")
+
+    # ② 课件 PDF：逐字稿预览图唯一合法来源
+    pdf = find_courseware_pdf(root, explicit_pdf)
+    st["pdf"] = pdf
+    st["pdf_ok"] = bool(pdf)
+    if not pdf:
+        st["missing"].append(
+            "课件 PDF：逐字稿 ppt 预览图必须从用户提供的课件 PDF 导出，"
+            "禁止 AI 自行用 ppt2png.py 从 .pptx 渲染。请放进 assets/、"
+            "或命名「<课题>-课件.pdf」、或用 --courseware-pdf 指定。")
+    else:
+        import pymupdf
+        try:
+            st["deck_pages"] = pymupdf.open(pdf).page_count
+        except Exception:
+            st["deck_pages"] = 0
+
+    # ③ 预览图来源标记与页数一致性
+    img_dir = os.path.join(root, "assets", "ppt")
+    if os.path.isdir(img_dir):
+        st["page_count"] = len([x for x in os.listdir(img_dir)
+                                if re.fullmatch(r"p\d+\.(jpg|jpeg|png)", x, re.I)])
+    marker = os.path.join(root, SOURCE_MARKER)
+    if os.path.isfile(marker) and pdf:
+        try:
+            meta = json.load(open(marker, encoding="utf-8"))
+            sha = hashlib.sha256(open(pdf, "rb").read()).hexdigest()
+            st["source_ok"] = (meta.get("sha256") == sha
+                               and meta.get("pages") == st["page_count"]
+                               and meta.get("pages") == st["deck_pages"])
+        except Exception:
+            pass
+    # source_ok=False 不是阻塞项：PDF 到位后引擎会自动重导出并覆盖，
+    # check_assets.py 只把它显示为「待重导出」状态。
+    return st
+
+
+def preflight_assets(root, src, typ, args):
+    """返回 (问题清单, 配图目录)。问题非空时调用方必须暂停排版，不产出任何成品。"""
+    st = asset_status(root, getattr(args, "courseware_pdf", None))
+    problems, img_dir = [], None
+
+    if typ == "教学设计":
+        md = open(src, encoding="utf-8").read()
+        seg = re.search(r"###\s*板书设计([\s\S]{0,300})", md)
+        m = re.search(r"!\[[^\]]*\]\(([^)]+)\)", seg.group(1)) if seg else None
+        if not m:
+            problems.append(
+                "教学设计「板书设计」未引用板书图片：必须使用用户提供的板书设计图片，"
+                "禁止纯文本／ASCII 板书。请提供图片后再排版。")
+        else:
+            rel = m.group(1).strip()
+            p = rel if os.path.isabs(rel) else os.path.join(root, rel)
+            if not os.path.isfile(p):
+                problems.append("板书设计图片不存在：%s（请用户提供后重排）" % rel)
+
+    if PROFILES.get(typ, {}).get("needs_images") and not args.no_images:
+        if not st["pdf_ok"]:
+            problems.append(
+                "逐字稿缺少用户提供的课件 PDF：ppt 预览图必须从该 PDF 导出，"
+                "禁止 AI 自行从 pptx 渲染。请把课件 PDF 放进 assets/，"
+                "或命名为「<课题>-课件.pdf」，或用 --courseware-pdf 指定路径。")
+        else:
+            outdir = os.path.join(root, "assets", "ppt")
+            n = export_pdf_pages(st["pdf"], outdir)
+            img_dir = outdir
+            print("课件 PDF 来源：%s → 导出 %d 张逐页图" %
+                  (os.path.relpath(st["pdf"], root), n))
+
+    return problems, img_dir
+
+
 def resolve_images_dir(src, root, explicit=None):
     """返回课件截图目录；找不到返回 None（由调用方显式告警，绝不静默出无图稿）。"""
     if explicit:
@@ -223,6 +368,7 @@ def main():
     ap.add_argument("--mode", default="preview", choices=("preview", "commit"))
     ap.add_argument("--images", help="显式指定课件截图目录（跨课题样张时用）")
     ap.add_argument("--no-images", action="store_true", help="明确跳过配图")
+    ap.add_argument("--courseware-pdf", help="用户提供的课件 PDF（逐字稿预览图唯一合法来源）")
     ap.add_argument("--dry-run", action="store_true", help="只打印命名推导与配图探测")
     a = ap.parse_args()
 
@@ -255,12 +401,17 @@ def main():
     title, keshi, typ, name = parse_stem(src)
     profile = a.profile or derive_profile(src)
     header = a.header or title
-    img_dir = None
-    if PROFILES[profile].get("needs_images") and not a.no_images:
-        img_dir = resolve_images_dir(src, root, a.images)
-        if not img_dir:
-            print("⚠️ 未找到课件截图目录（assets/ppt…/p01.jpg），将输出无图逐字稿；"
-                  "需要配图请导出截图或用 --images 指定")
+
+    # 关键图片素材来源硬门禁：素材未齐备立即暂停，绝不产出/覆盖任何成品
+    problems, img_dir = preflight_assets(root, src, typ, a)
+    if problems:
+        print("\n⛔ 排版已暂停（关键图片素材未齐备，按项目铁律不得擅自造素材）：")
+        for i, p in enumerate(problems, 1):
+            print("  %d. %s" % (i, p))
+        print("\n请提供上述素材后再执行排版；本次未生成、未覆盖任何交付成品。")
+        sys.exit(2)
+    if a.images:
+        img_dir = a.images
 
     preview_dir = os.path.join("/tmp", "lesson-typeset-preview",
                                os.path.basename(root))

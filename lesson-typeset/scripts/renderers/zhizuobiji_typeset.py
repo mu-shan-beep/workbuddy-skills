@@ -266,7 +266,7 @@ def parse(md):
 
     while i < len(lines):
         s = lines[i].strip()
-        if not s:
+        if not s or s.startswith("```") or re.match(r"^[-*_]{3,}$", s):
             i += 1
             continue
 

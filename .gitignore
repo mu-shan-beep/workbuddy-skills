@@ -34,6 +34,14 @@ Thumbs.db
 /.user_invocable_only_to_off_migration.json
 /_bm_skillid_migration.json
 
+# --- 技能自带的嵌套仓库元数据（仅排 .git，技能文件本体照常入库）---
+# teardown/ 是从上游 GitHub 克隆的第三方技能。若整体 add，git 会把该目录登记为
+# gitlink（embedded repository），远程仓库里只剩一个空的 commit 指针，clone 出来是空目录，
+# 达不到备份目的。故只排除其 .git 元数据，让 106 个技能文件真正进版本库。
+# 其 node_modules/ 与 teardown-out/ 由该目录自带的 .gitignore 排除，本文件不重复登记。
+/teardown/.git/
+/teardown/**/.git/
+
 # --- 凭证与本地配置（严禁入库）---
 *.env
 .env*

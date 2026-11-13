@@ -1,9 +1,17 @@
 ---
 name: ppt-visual-style
 description: "【本机】专门处理课堂 PPT 的选风格、视觉拆解和版式美化。提供画风与布局依据。整套教案包制作使用 teaching-ppt-workflow。**自动加载，无需用户显式 @ 技能**：用户说「选风格」「视觉拆解」「版式美化」「画风」「配色」「布局依据」「PPT 好不好看」，或由 teaching-ppt-workflow 进入风格环节时，第一步就加载本技能；已 @ 也照样按规则跑完。不适用：整套教案包制作（走 teaching-ppt-workflow）、PPT 文件的技术制作（走官方 PPT 能力）。"
+agent_created: true
 ---
 
 # 【本机】课件视觉风格库
+
+> **规则治理（全技能通用，2026-11-13 用户立规）**：改本技能规则或做自检前，先跑
+> `python3 ~/.workbuddy/skills/teaching-ppt-workflow/scripts/rule_audit.py`（FAIL 先修再谈其他）。
+> 执行状态机 `LOCK → AUDIT → EXECUTE → VERIFY → DONE` 的定义见
+> `teaching-ppt-workflow/SKILL.md`「全任务执行状态机与硬门禁」；单点定义表与「不得越界改规则」的权限边界见
+> `teaching-ppt-workflow/references/self-maintenance.md`。本技能不另立治理流程。
+
 
 用户偏好：在完成质量要求的前提下，优先高效、省 Token；复用已有设计决定与组件，避免重复搜索、反复全量预览和加载全部参考。
 

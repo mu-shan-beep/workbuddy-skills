@@ -11,6 +11,13 @@ agent_created: true
 
 # Quark Drive — 夸克网盘自动转存+自动分享
 
+> **规则治理（全技能通用，2026-11-13 用户立规）**：改本技能规则或做自检前，先跑
+> `python3 ~/.workbuddy/skills/teaching-ppt-workflow/scripts/rule_audit.py`（FAIL 先修再谈其他）。
+> 执行状态机 `LOCK → AUDIT → EXECUTE → VERIFY → DONE` 的定义见
+> `teaching-ppt-workflow/SKILL.md`「全任务执行状态机与硬门禁」；单点定义表与「不得越界改规则」的权限边界见
+> `teaching-ppt-workflow/references/self-maintenance.md`。本技能不另立治理流程。
+
+
 ## Overview
 
 两条已实测的抓包 API 链路封装：

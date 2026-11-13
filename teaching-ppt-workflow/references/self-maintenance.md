@@ -1,6 +1,6 @@
 # 规则自我修复、优化与梳理机制
 
-本文件是 `teaching-ppt-workflow` 及关联技能（lesson-transcript、lesson-typeset）的**常驻治理细则**。目的：让规则在每次修订、每次自检、每新课试跑时自动收敛，而不是越改越乱、越改越长、越改越自我矛盾。
+本文件是**全部自建技能**的**常驻治理细则**：教案包三件套（`teaching-ppt-workflow`、`lesson-transcript`、`lesson-typeset`）＋ `xhs-lesson-notes`、`ppt-visual-style`、`interactive-courseware`（共 6 个）。**第三方安装技能不在治理范围**（含带 `_skillhub_meta.json` 的 `baidu-pan-ops`、`quark-drive`、`totorosir-workbuddy-checkin`，以及 ppt-master、pdfkit-py、teachable-figures、teardown、ima-skills、wps-office-suite 共 9 个），对其只报不改。目的：让规则在每次修订、每次自检、每新课试跑时自动收敛，而不是越改越乱、越改越长、越改越自我矛盾。
 
 `SKILL.md`「规则权威层级」与「更新规程」是裁决与执行入口；本文件是其落地工具箱。两者冲突时以 `SKILL.md` 为准，并当次回写本文件。
 
@@ -14,6 +14,7 @@
 | 用户要求「检查规则是否矛盾／清晰／自相矛盾」 | 全库只读读盘（第 4 节），不改规则（只读例外见第 8 节） |
 | 每开启一个**新课**或新产物 | 全库读盘一次，与本文件单点定义表对账，产出「规则健康」备注 |
 | 自检／试跑发现新盲区 | 当次回写第 3 级或第 4 级文件并留案例；盲区落在清单／闸门之外时，当次修补判定式 |
+| 每个任务收口（DONE 前，不论大小） | 答「自省三问」（见 SKILL.md 更新规程段）：有无生成期可规避的缺陷／根因在哪／已回写到哪；无问题也要报「无」 |
 
 ---
 
@@ -31,9 +32,12 @@
 | 日常三道阻断闸门 + 取证清单，不评分；完整审查报告才五轮六维≥90 | lesson-pack.md「三道阻断闸门」小节、lesson-review.md:3 | task-modes.md:5、SKILL.md:54 |
 | 课时容量／负荷推演：先查任务组合再算时长；合计达标≠不过载；超载只准减动作 | lesson-review.md「先按常态课选择任务再细化」+「核查时必须问到的实施问题·容量」 | lesson-pack.md `[容量]` 取证项与闸门二（只引用 + 给取证物，不重写口径）；SKILL.md:38；task-modes.md:13 |
 | 教学设计动笔前基线（生成期准入）：四项基线不齐／容量预算超载不得展开四列表；成稿闸门只复核基线 | lesson-pack.md「教学设计动笔前基线（生成期准入）」 | SKILL.md:38、56；task-modes.md:9、13；lesson-review.md:7、75；lesson-pack-prompts.md 教案撰写段 |
-| 教案默认核心规范结构：资源状态表 + 目标矩阵 + 四列表格 + 内部五类预算表 + 板书 + 附件量规 | lesson-pack.md「教案默认模块」 | task-modes.md:11、SKILL.md:58、lesson-pack-prompts.md 教案撰写段 |
+| 教案及配套资料模块白名单与客户交付级源文件铁律（2026-11-13 用户裁定）：所有交付的源文件（-源.md）及 Word 成品必须是直接给客户看的纯净正文，不留制作痕迹；给 AI 的评分/说明/自检/表态性内容直接在生成源文件时全部去除，严禁入稿导入排版；排版期双重过滤 AI 味与残渣；教案＝基本信息／内容分析／学情／四维目标／重难点／教学准备／本课时目标／四列过程／板书／真实授课反思；配套资料正文纯净、制作笔记仅四部分 | `lesson-pack.md`「教案默认模块」+「全包源稿纯净化与去 AI 味铁律」 | task-modes.md:11、SKILL.md:58、lesson-pack-prompts.md 教案撰写段、qa-and-delivery.md、全局 MEMORY |
+| 关键图片素材来源与开工前主动提醒：板书必须用用户提供的板书图；逐字稿预览图必须从用户提供的课件 PDF 导出；缺件暂停并等提供；用户会忘，助手第一步跑 check_assets.py 主动报状态 | `lesson-typeset/SKILL.md` §1.0（执行入口）＋`references/unified-spec.md` 2.5／2.5.1（技术口径，单点实现 `typeset.py::asset_status()`） | lesson-pack.md 阶段表、qa-and-delivery.md、全局 MEMORY、check_assets.py |
 | 全流程各阶段生成前准入：各阶段必须具备上游定稿凭据与输入映射表，缺一不得启动 | lesson-pack.md 阶段表推进条件 | qa-and-delivery.md、task-modes.md、visual-planning.md |
-| 复杂任务执行状态机与硬门禁：LOCK→AUDIT→EXECUTE→VERIFY→DONE | SKILL.md「复杂任务状态机与硬门禁」 | 全局 MEMORY、项目 MEMORY、lesson-pack-prompts.md |
+| 全任务执行状态机与硬门禁（一切任务，无大小之分）：LOCK→AUDIT→EXECUTE→VERIFY→DONE＋六大硬门禁；**状态必须在答复中显式报出，不得只在心里走** | SKILL.md「全任务执行状态机与硬门禁」（唯一定义） | 全局 MEMORY、项目 MEMORY；`lesson-typeset`／`lesson-transcript` 的 SKILL.md「执行纪律」（**只写一行式绑定与各状态下必做动作，不复制状态定义**）；`lesson-pack-prompts.md` 的 11 份人工复制件（须逐字一致，由 `scripts/rule_audit.py` 断言） |
+| 规则修订权限边界：可自主修 bug／须指令才改规矩／一律禁止三类 | SKILL.md「规则修订权限边界」 | 本文件 §8 只读例外；feedback-regression.md |
+| 全技能规则治理入口与体检：一条命令跑 10 项断言，自建判 FAIL、第三方只报不改 | `teaching-ppt-workflow/scripts/rule_audit.py` ＋ 本文件 §4 步骤 0 | 6 个自建技能 SKILL.md 的「规则治理」段（只写入口，不复制断言口径） |
 | 大纲编制硬卡口：封面禁写单元、图片标注状态、支架前置与答案延后分流、动词忠于原文 | task-modes.md:03 | lesson-pack.md 阶段表、SKILL.md、全局 MEMORY:6 |
 | 画图任务隔离与提示词防拼图前置审核：一页一任务单图单指令、提交前负向词排查与单画幅锁定 | visual-planning.md#发送绘图调用前 | task-modes.md:04、lesson-pack.md 阶段表 |
 | 交付物落地与清理规程（末端契约）：交付文件/、--mode commit、纯 Word 禁交 pdf、/usr/bin/trash | lesson-pack.md「交付物落地与清理规程（末端契约）」 | 全局 MEMORY、qa-and-delivery.md、lesson-typeset SKILL |
@@ -43,6 +47,9 @@
 | 逐字稿以课件成品为唯一骨架（页序／单击／媒体） | task-modes.md:63、lesson-transcript SKILL §0 | workflow.md:56、lesson-pack-prompts.md「逐字稿」 |
 | md 源稿落课题根目录，`.workbuddy/` 仅存记忆／日志／审计 | 全局 MEMORY；lesson-transcript §3；lesson-typeset §2 | —— |
 | 持续委托＝阶段推进顺序授权，≠ 成果定稿确认 | SKILL.md:52、workflow.md:9 | —— |
+| 配套资料生成期物理双门禁（教材Grep + 课件XML时序Dump）：未出物理底数严禁动笔 | lesson-pack.md「配套资料准入」小节 | SKILL.md、lesson-pack-prompts.md、feedback-regression.md |
+| 自主进化与自省闭环：遇错必主动深度自省，代码级机器约束防复发，严禁转交用户监督 | SKILL.md「用户反馈后的自动改进与自主进化闭环」 | 全局 MEMORY、self-maintenance.md |
+| 双版本逐字稿严格隔离与审查同步（课堂实录 vs 视频脚本）：定位绝不混淆，审查发现必须全量同步映射 | lesson-pack.md「配套资料准入」小节、lesson-pack-prompts.md「视频脚本逐字稿」 | 全局 MEMORY、self-maintenance.md |
 
 **规则**：上表任一概念若在某下位文件被重新定义或加了相反条件，即判「口径分叉」，必须回写唯一归属处并删除分叉表述。
 
@@ -59,6 +66,13 @@
 ---
 
 ## 4. 改后自检协议（每次规则修订必跑）
+
+**步骤 0 — 机器项一次跑完（先跑它，再做人工读盘与试跑）**
+```bash
+python3 ~/.workbuddy/skills/teaching-ppt-workflow/scripts/rule_audit.py
+```
+断言：①三入口是否都绑定状态机；②`lesson-pack-prompts.md` 的 11 份复制件是否逐字一致；③跨文件锚点是否死链；④已删模块是否被下位文件正向要求（矛盾）；⑤Markdown 表格列数是否一致；⑥单点定义表登记项是否齐全。
+**脚本 PASS 不等于优化完成**——人工读盘与新课试跑仍必须做；脚本 FAIL 一律先修再谈其他。
 
 **步骤 1 — 术语检索分母**
 ```bash

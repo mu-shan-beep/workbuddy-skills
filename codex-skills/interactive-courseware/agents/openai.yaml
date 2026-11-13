@@ -1,4 +1,0 @@
-interface:
-  display_name: "交互课件制作"
-  short_description: "先画整体界面与模型预览，逐步确认，结合教学机制与分层验证制作交互课件"
-  default_prompt: "使用 $interactive-courseware 制作交互课件，先绘制整体 UI 和模型预览图，每一步展示产物等我确认后继续；简单模型用 teachable-figures，复杂造型用 img2threejs。"

@@ -106,10 +106,10 @@ def band2_row(text):                    # 环节分区行：§7.1 0.75pt 分隔�
 
 
 def head_row(cells):
-    # 现在每个课时一张活动表，表头只出现一次；跨页必须重复列名（tblHeader），
-    # 否则续页只剩数据、看不出哪一列是「教师活动」（2026-11-07 实测）。
+    # 2026-11-13 用户明确裁定：表格跨页断行，一律不重复表头（header=False），
+    # 避免在断页续页处机械复印表头造成视觉打断。
     return ([(span, {"t": "head", "text": txt}) for span, txt in cells],
-            {"h": H_HEAD, "cant": True, "keep": True, "header": True, "bd": "thin"})
+            {"h": H_HEAD, "cant": True, "keep": True, "header": False, "bd": "thin"})
 
 
 def field_row(cells):
@@ -156,7 +156,7 @@ def grid_spans(rows):
 
 def grid_head_row(spans, head):
     return ([(sp, {"t": "ghead", "text": h}) for sp, h in zip(spans, head)],
-            {"h": H_HEAD, "cant": True, "header": True, "bd": "thin"})
+            {"h": H_HEAD, "cant": True, "header": False, "bd": "thin"})
 
 
 def grid_body_row(spans, cells):
@@ -189,7 +189,7 @@ def parse_source(path):
     i = 0
     while i < len(lines):
         s = lines[i].strip()
-        if not s:
+        if not s or s.startswith("```") or re.match(r"^[-*_]{3,}$", s):
             i += 1
             continue
 
