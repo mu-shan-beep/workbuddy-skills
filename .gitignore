@@ -51,6 +51,9 @@ checkin-rt.json
 notify_config.json
 # 网盘类技能自动写入的会话 Cookie（夸克 cookie.txt 含真实登录态，严禁入库）
 cookie.txt
+# 夸克官方 Skill 登录授权后自动写入的账号令牌（accessToken / refreshToken，账号级凭据）
+# 此文件曾在 85c25e7 以「仅空 deviceId」状态入库；授权后被写入真实令牌，故从索引移除并永久排除。
+quarkclouddrive/workbuddy/config.json
 *.key
 *.pem
 *.p12
