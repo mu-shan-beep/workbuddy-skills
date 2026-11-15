@@ -7,24 +7,24 @@ Choose checks for the current output; do not turn an isolated task into a full-p
 | Output | Check |
 |---|---|
 | Lesson plan or revision | Accurate sources, observable objectives, executable activities, aligned assessment, appropriate lesson capacity and requested format |
-| Pure on-slide outline | Page order, complete student-facing text, staged answers; no teacher notes, timing, visual instructions, field labels or explanatory preface in the outline body. Needed reference-search keywords belong in a separate copy area; omit them when references are sufficient or only the pure outline is requested. |
+| Pure on-slide outline | Page order, complete student-facing text, staged answers; no teacher notes, internal timing notes, visual instructions, field labels or explanatory preface in the outline body. Needed reference-search keywords belong in a separate copy area; omit them when references are sufficient or only the pure outline is requested. |
 | Style-reference analysis | Images actually inspected; concise reusable style description only; no unsolicited drawing, sample page, new keyword list or copied composition |
-| Preview images | Drawing uses available references, reusable analysis, an approved direction/template, or explicit autonomous-design instructions; needed reference analysis may happen inside the drawing task. No repeated search/decomposition deliverable; independently organized lesson content, one image per page, correct dimensions and copy, source-supported diagrams, classroom readability and consistent visual language |
+| Preview images | Drawing uses available references, reusable analysis, an approved direction/template, or explicit autonomous-design instructions; needed reference analysis may happen inside the drawing task. No repeated search/decomposition deliverable; independently organized lesson content, one verified full-resolution image per page from an original, source export or independent reconstruction; see [image source and readability checks](visual-planning.md#逐页选择制作方式) |
 | Courseware production / existing PPT edit | Default deliverable is the Canva design link; produce an editable .pptx only when the user explicitly requests a deliverable pptx file. Never directly create an editable PPTX. New decks follow the Canva whole-image route; verify the actual saved design and link. File-integrity and media-preservation checks apply only to explicitly requested edits of an existing local PPT or a temporary image-only import container. |
 | Verbatim script | Actual finished-deck page sequence (课件成品页序), natural spoken language, clear questions/transitions, realistic interaction and media time; hypothetical student replies labeled |
 | Teaching-content review | Evidence-based problems with exact locations and actionable advice; use provided artifacts only, no mutations or technical audit |
 | Materials analysis | Traceable confirmed requirements, useful source inventory, reference versus requirement distinction, only consequential open questions |
 | Repaired Canva design | Correct copy, missing/duplicate/fragmented layers, edges and backgrounds, faithful redrawing, tested editability, actual saved result; see `canva-layer-repair.md` |
-| Learning sheet | Correct topic/period, tasks aligned with the current design and deck, useful writing rather than repeated copying, age-appropriate load and actual printable writing space. 必须执行教材原件物理Grep对读、轻量行动支架与大题级【完成标准】核验 |
+| Learning sheet | 按 [学习清单](teaching-resources.md#12-学习清单制作或修订) 核对已确认任务、实际作答载体、教材原句和主要任务的完成标准。用学生视角做一遍关键题，检查支架是否代答、不同材料是否重复要求同一产出。交 Word 时查看 A4 实际版面。 |
 | Board image | Confirmed wording and relationships preserved, specified style and suitable ratio, readable knowledge structure rather than a decorated summary slide |
-| Usage notes | Actual topic/edition/period/page counts and supported feature claims, accurate courseware page references and preparation; natural teacher-facing prose tied to this lesson, without internal production/audit language or invented teaching experience; limitations explained as practical usage advice; no courseware entry/access/download links or entry QR codes in the document. 必须执行课件底层XML时序Dump物理对账，严禁脱离实际播放行为凭空默写动画与单击次数；模块白名单与源稿纯净按 `lesson-pack.md`「全包源稿纯净化与去 AI 味铁律」（唯一归属） |
-| Whole-image assembly | Unchanged source images, one per page, correct numeric order, counts, ratio and separate period decks when requested; no unrequested layer recovery |
+| Usage notes | 按 [制作与使用笔记](teaching-resources.md#14-课件制作与使用笔记) 核对采用成品、实际页序、备课材料和关键操作，按实际课件格式取证。查四部分结构、教师能否按说明使用、正文是否混入内审内容或课件入口。 |
+| Whole-image assembly | Unchanged source image per page in numeric order and correct aspect ratio. Verify any approved delayed elements in presentation mode; see [assembly](teaching-resources.md#15-预览图整图组装) |
 | Promotional poster or collage | Intended publicity format rather than a PPT cover; truthful resource claims; collages use actual unchanged slides and specified arrangement |
 | Resource package | Only requested existing resources, correct versions and names, preserved source bytes, expected archive entries and successful integrity check; no unsolicited content review |
 
 The remaining sections apply when their corresponding artifacts or features are in scope. Skip absent media, animation and linked documents rather than inventing work to fill a checklist.
 
-**关键图片素材来源门禁（优先于其他检查，唯一归属 `lesson-typeset/SKILL.md` §1.0 ＋ `references/unified-spec.md` 2.5／2.5.1）**：接到任何排版／交付整理委托，第一步必须按该归属跑 `check_assets.py`、把齐备状态主动报给用户（齐备也要报）；缺「板书设计图片」或「课件 PDF」即暂停并请求提供，等齐备再排，缺失期间不得产出或覆盖任何成品。用户会忘记提供，助手负有主动提醒义务，不得等用户想起来或命令报错才说。此处只挂接入口，不复制口径。
+**关键图片素材预检**。排版／交付整理第一步遵循 `lesson-typeset/SKILL.md` §1.0 和 `references/unified-spec.md` 2.5／2.5.1，运行 `check_assets.py` 并主动报告齐备情况及缺项影响。由该技能执行缺项处理与暂停条件。
 
 Check the task boundary too: a standalone style analysis must not generate images, but a drawing request or an active full-production commission must not stop merely because there is no separate analysis document or the latest message only supplies requested materials. Respect explicit analysis-only or pause instructions.
 
@@ -42,9 +42,9 @@ Check the task boundary too: a standalone style analysis must not generate image
 
 ## Cross-document synchronization
 
-- PPT／大纲／讲稿须遵循教学设计已确认的活动顺序与含义；差异一律改下游（PPT／大纲／讲稿）以匹配上游权威，不反过来改教学设计去适配。学生上屏标题不必重复教学设计的形式栏目名。
+- 按 [权威维度裁决](lesson-pack.md#权威维度裁决单向从属的落地口径) 核对差异。教案提供已确认的课堂任务及顺序，现行课件成品提供讲稿与制作笔记的实际页序、上屏文字和操作依据。学生上屏标题可用课堂语言。发现冲突先定位来源，再依本次授权修订对应产物。
 - **全流程同类全扫**：任一产物发现缺陷进行修复时，必须回查本阶段及关联阶段同类全部对象并实际代入验证（改动一处填空扫全课填空，改动一页上屏扫连续页与后续讲稿），严禁点状替换。
-- PPT and verbatim script use the same questions, conclusions and media cues.
+- 对同一课堂任务，逐项核对相关课件、清单和逐字稿的题干、作答动作、记录符号、呈现时机和达标标准。讲稿的提问、结论及媒体提示按实际课件核对。
 - Classroom timing is plausible after adding discussion and media duration.
 - Teacher language sounds natural and is not copied onto slides unnecessarily.
 

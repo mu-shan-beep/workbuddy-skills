@@ -376,6 +376,31 @@ for d in OWNED:
 add("WARN" if fat else "PASS", "⑩ 臃肿预警（自建）",
     "无超 400 行入口" if not fat else "\n      ".join(fat))
 
+# ---------- 11. 判定契约完整性（单点登记／归属／断言绑定） ----------
+ref = os.path.join(SKILLS, "teaching-ppt-workflow", "references")
+scd = os.path.join(SKILLS, "teaching-ppt-workflow", "scripts")
+smt = read(os.path.join(ref, "self-maintenance.md"))
+lpt = read(os.path.join(ref, "lesson-pack.md"))
+lrt = read(os.path.join(ref, "lesson-review.md"))
+tmt = read(os.path.join(ref, "task-modes.md"))
+cgt = read(os.path.join(scd, "capacity_guard.py"))
+c2t = read(os.path.join(scd, "consistency_guard.py"))
+contract = []
+for k in ("课题级容量估算基线与口径锁定", "外部审查意见准入门禁",
+          "收敛与定稿判据", "修订影响面与反向核对取证物"):
+    if k not in smt:
+        contract.append("单点定义表缺登记：" + k)
+for phrase, owner in (("四项准入", lrt), ("收敛与定稿判据", lpt), ("change_impact", tmt)):
+    if phrase not in owner:
+        contract.append("唯一归属处缺判据：" + phrase)
+if not all(k in cgt for k in ("fingerprint", "external-estimate", "return 4")):
+    contract.append("闸门二口径未绑定指纹／待裁定退出码")
+if not all(k in c2t for k in ("change_impact", "issue_repeats", "first_period_board_forbidden")):
+    contract.append("影响面／收敛／板书时机未绑定一致性断言")
+add("PASS" if not contract else "FAIL", "⑪ 判定契约完整性（登记／单点／断言绑定）",
+    "4 项登记齐、判据在唯一归属、两支脚本断言齐" if not contract
+    else "\n      ".join(contract))
+
 # ---------- 输出 ----------
 print("=" * 70)
 print("规则体检｜%d 个技能（自建 %d／第三方 %d）｜%d 个 Markdown 文件"

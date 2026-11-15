@@ -37,9 +37,9 @@
 | 全流程各阶段生成前准入：各阶段必须具备上游定稿凭据与输入映射表，缺一不得启动 | lesson-pack.md 阶段表推进条件 | qa-and-delivery.md、task-modes.md、visual-planning.md |
 | 全任务执行状态机与硬门禁（一切任务，无大小之分）：LOCK→AUDIT→EXECUTE→VERIFY→DONE＋六大硬门禁；**状态必须在答复中显式报出，不得只在心里走** | SKILL.md「全任务执行状态机与硬门禁」（唯一定义） | 全局 MEMORY、项目 MEMORY；`lesson-typeset`／`lesson-transcript` 的 SKILL.md「执行纪律」（**只写一行式绑定与各状态下必做动作，不复制状态定义**）；`lesson-pack-prompts.md` 的 11 份人工复制件（须逐字一致，由 `scripts/rule_audit.py` 断言） |
 | 规则修订权限边界：可自主修 bug／须指令才改规矩／一律禁止三类 | SKILL.md「规则修订权限边界」 | 本文件 §8 只读例外；feedback-regression.md |
-| 全技能规则治理入口与体检：一条命令跑 10 项断言，自建判 FAIL、第三方只报不改 | `teaching-ppt-workflow/scripts/rule_audit.py` ＋ 本文件 §4 步骤 0 | 6 个自建技能 SKILL.md 的「规则治理」段（只写入口，不复制断言口径） |
-| 大纲编制硬卡口：封面禁写单元、图片标注状态、支架前置与答案延后分流、动词忠于原文 | task-modes.md:03 | lesson-pack.md 阶段表、SKILL.md、全局 MEMORY:6 |
-| 画图任务隔离与提示词防拼图前置审核：一页一任务单图单指令、提交前负向词排查与单画幅锁定 | visual-planning.md#发送绘图调用前 | task-modes.md:04、lesson-pack.md 阶段表 |
+| 全技能规则治理入口与体检：一条命令跑 11 项断言，自建判 FAIL、第三方只报不改 | `teaching-ppt-workflow/scripts/rule_audit.py` ＋ 本文件 §4 步骤 0 | 6 个自建技能 SKILL.md 的「规则治理」段（只写入口，不复制断言口径） |
+| 大纲：校对采用教案、学生任务与页码映射，按课堂动作安排出示 | task-modes.md:03 | lesson-pack.md 阶段表、SKILL.md、全局 MEMORY:6 |
+| 高清单页的来源、重制、调用审核和续画 | visual-planning.md#逐页选择制作方式 | task-modes.md:04、lesson-pack.md 阶段表 |
 | 交付物落地与清理规程（末端契约）：交付文件/、--mode commit、纯 Word 禁交 pdf、/usr/bin/trash | lesson-pack.md「交付物落地与清理规程（末端契约）」 | 全局 MEMORY、qa-and-delivery.md、lesson-typeset SKILL |
 | 取证清单取代日常评分；下游大纲不是教案取证对象 | lesson-pack.md:47-60、闸门三 | —— |
 | 权威维度裁决（遇不一致改下游不改上游） | lesson-pack.md「权威维度裁决」小节 | qa-and-delivery.md:43、source-of-truth.md:62、workflow.md:70 |
@@ -47,9 +47,13 @@
 | 逐字稿以课件成品为唯一骨架（页序／单击／媒体） | task-modes.md:63、lesson-transcript SKILL §0 | workflow.md:56、lesson-pack-prompts.md「逐字稿」 |
 | md 源稿落课题根目录，`.workbuddy/` 仅存记忆／日志／审计 | 全局 MEMORY；lesson-transcript §3；lesson-typeset §2 | —— |
 | 持续委托＝阶段推进顺序授权，≠ 成果定稿确认 | SKILL.md:52、workflow.md:9 | —— |
-| 配套资料生成期物理双门禁（教材Grep + 课件XML时序Dump）：未出物理底数严禁动笔 | lesson-pack.md「配套资料准入」小节 | SKILL.md、lesson-pack-prompts.md、feedback-regression.md |
+| 配套资料按各自实际依据撰写，目标应用验证交互，排版取证按所用素材 | teaching-resources.md §12／§14、lesson-pack.md 阶段表 | SKILL.md、lesson-pack-prompts.md、feedback-regression.md |
 | 自主进化与自省闭环：遇错必主动深度自省，代码级机器约束防复发，严禁转交用户监督 | SKILL.md「用户反馈后的自动改进与自主进化闭环」 | 全局 MEMORY、self-maintenance.md |
-| 双版本逐字稿严格隔离与审查同步（课堂实录 vs 视频脚本）：定位绝不混淆，审查发现必须全量同步映射 | lesson-pack.md「配套资料准入」小节、lesson-pack-prompts.md「视频脚本逐字稿」 | 全局 MEMORY、self-maintenance.md |
+| 双版本逐字稿严格隔离与审查同步（课堂实录 vs 视频脚本）：定位绝不混淆，审查发现必须全量同步映射 | lesson-pack.md 阶段表、lesson-pack-prompts.md「视频脚本逐字稿」 | 全局 MEMORY、self-maintenance.md |
+| 课题级容量估算基线与口径锁定：`external_baseline` 一经写入即锁定，变更须附新证据＋用户裁定＋重跑双断言；锁的是本课题本次判定数据，不是全技能统一分钟阈值 | `lesson-pack.md` 基线②（唯一定义）＋课题 `.workbuddy/capacity-baseline.json`（数据源） | `scripts/capacity_guard.py`、闸门二、task-modes.md:13 |
+| 外部审查意见准入门禁（版本／口径／模式／新证据四项；不合格项不进修订队列、不计入问题数） | `lesson-review.md`「先核对当前版本，再判断意见」 | lesson-pack.md:79、task-modes.md:17 |
+| 收敛与定稿判据（重复≥3 轮强制裁定、连续两轮零新增可提请定稿、新问题须附可复算证据） | `lesson-pack.md`「三道阻断闸门」小节 | lesson-review.md:3、workflow.md:9 |
+| 修订影响面与反向核对取证物（上屏→目标／板书／课时分工跨栏目全扫，绑定 `consistency_guard.py` 退出码与 `change_impact` 清单） | `task-modes.md` 02 | lesson-review.md:63-69、qa-and-delivery.md:46 |
 
 **规则**：上表任一概念若在某下位文件被重新定义或加了相反条件，即判「口径分叉」，必须回写唯一归属处并删除分叉表述。
 
