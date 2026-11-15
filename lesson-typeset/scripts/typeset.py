@@ -118,7 +118,7 @@ GENERIC_IMG_DIRS = ("assets/ppt", "assets/ppt-第一课时",
 
 
 # ─── 关键图片素材来源硬门禁（2026-11-13 用户裁定：缺失即暂停，禁止 AI 造素材） ───
-def find_courseware_pdf(root, explicit=None):
+def find_courseware_pdf(root, explicit=None, hint=None):
     """逐字稿 ppt 预览图的唯一合法来源 = 用户提供的课件 PDF。
 
     教材 PDF（只含课文正文，如 <课题>.pdf）不算；禁止 AI 用 ppt2png.py
@@ -134,7 +134,13 @@ def find_courseware_pdf(root, explicit=None):
     for n in sorted(os.listdir(root)):
         if n.lower().endswith(".pdf") and "课件" in n:
             cands.append(os.path.join(root, n))
-    return cands[0] if cands else None
+    if not cands:
+        return None
+    if hint:
+        for c in cands:
+            if hint in os.path.basename(c):
+                return c
+    return cands[0]
 
 
 def export_pdf_pages(pdf, outdir, dpi=110):
@@ -164,7 +170,7 @@ def export_pdf_pages(pdf, outdir, dpi=110):
 SOURCE_MARKER = os.path.join("assets", "ppt", ".source.json")
 
 
-def asset_status(root, explicit_pdf=None):
+def asset_status(root, explicit_pdf=None, hint=None):
     """只读素材齐备预检 —— 唯一判定源，check_assets.py 与 preflight_assets() 共用。
 
     返回 dict：board_ref / board_ok / pdf / pdf_ok / source_ok / page_count /
@@ -192,7 +198,7 @@ def asset_status(root, explicit_pdf=None):
             "（如 `### 板书设计` + `![](板书设计.png)`），禁止纯文本／ASCII 板书。")
 
     # ② 课件 PDF：逐字稿预览图唯一合法来源
-    pdf = find_courseware_pdf(root, explicit_pdf)
+    pdf = find_courseware_pdf(root, explicit_pdf, hint)
     st["pdf"] = pdf
     st["pdf_ok"] = bool(pdf)
     if not pdf:
@@ -229,7 +235,8 @@ def asset_status(root, explicit_pdf=None):
 
 def preflight_assets(root, src, typ, args):
     """返回 (问题清单, 配图目录)。问题非空时调用方必须暂停排版，不产出任何成品。"""
-    st = asset_status(root, getattr(args, "courseware_pdf", None))
+    m = KESHI.search(os.path.basename(src))
+    st = asset_status(root, getattr(args, "courseware_pdf", None), m.group(0) if m else None)
     problems, img_dir = [], None
 
     if typ == "教学设计":

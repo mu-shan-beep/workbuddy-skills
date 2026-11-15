@@ -14,6 +14,8 @@
   2. 治理入口可达：三套流程技能都必须指向 self-maintenance.md；
   3. frontmatter 合规：--- 围栏、name 与目录名一致、description 非空；
   4. 人工复制件一致：lesson-pack-prompts.md 的状态机复制件须逐字一致；
+     ④附：每个提示词代码块都必须自带状态机段，且不得残留旧口径「复杂任务执行状态机」；
+     ④附③：整体工作流「跨模型执行稿」状态机契约（维护规程绑定 + 本技能无旧口径残留）；
   5. 锚点死链：跨文件 / 同文件 #锚点 必须能在目标标题中解析；
   6. 旧口径矛盾：已被用户删除的模块不得被下位文件「正向要求」；
   7. 表格结构：Markdown 表格各组列数一致；
@@ -194,10 +196,19 @@ if os.path.isfile(prompts):
               if l.strip().startswith("【") and "状态机与硬门禁" in l]
     blocks = []
     for k in starts:
-        seg, j = [], k
+        seg, j, saw_gates = [], k, False
         while j < len(lines):
-            seg.append(lines[j].strip())
+            line = lines[j].strip()
+            if j > k and line.startswith("【") and "】" in line:
+                break  # 状态机段后的下一个独立规则块，不并入复制件
+            seg.append(line)
+            if line.startswith("六大硬门禁"):
+                saw_gates = True
             j += 1
+            # 状态机段固定边界：六大硬门禁的第 6 条即段末；
+            # 不依赖「下一段必须是【】块」的隐式结构，插在文件任意位置都稳定。
+            if saw_gates and line.startswith("6. "):
+                break
             if j < len(lines) and lines[j].strip().startswith("【") and "】" in lines[j]:
                 break
         blocks.append("\n".join(seg))
@@ -211,8 +222,45 @@ if os.path.isfile(prompts):
         add("PASS" if len(digests) <= 1 else "FAIL", "④ 人工复制件一致（lesson-pack-prompts.md）",
             "共 %d 份，%d 个版本%s" % (len(blocks), len(digests),
                                        "" if len(digests) <= 1 else "：" + str(digests)))
+        # 覆盖性断言（2026-11-14 用户指出「状态机必须在每一个提示词中」）：
+        # 只比对已有复制件是否逐字一致，无法发现「整段提示词没带状态机」的缺口；
+        # 须逐代码块扫描，缺一个即 FAIL，并拦截旧口径「复杂任务执行状态机」。
+        code_blocks = re.findall(r"```Plain Text\n(.*?)\n```", read(prompts), re.S)
+        missing = [n for n, b in enumerate(code_blocks, 1)
+                   if "全任务执行状态机与硬门禁" not in b]
+        add("PASS" if code_blocks and not missing else "FAIL",
+            "④附 提示词状态机全覆盖（lesson-pack-prompts.md）",
+            "代码块 %d 个，缺状态机 %d 个%s" % (
+                len(code_blocks), len(missing),
+                "" if not missing else "：第 " + "、".join(map(str, missing)) + " 块"))
+        old = [n for n, b in enumerate(code_blocks, 1) if "复杂任务执行状态机" in b]
+        add("PASS" if not old else "FAIL", "④附 旧口径残留（复杂任务）",
+            "0 处" if not old else "命中代码块：第 " + "、".join(map(str, old)) + " 块")
 else:
     add("FAIL", "④ 人工复制件一致（lesson-pack-prompts.md）", "文件不存在")
+
+# ---------- 4b. 整体工作流提示词（飞书文档二）状态机契约 ----------
+# 「跨模型执行稿」只存在于飞书文档，本机无源文件，内容级核验靠写入后回读；
+# 门禁在此校验维护规程是否强制同一段状态机，以及本技能文档无旧口径残留，
+# 防止「分环节提示词补齐了、整体工作流仍是旧口径」的漏同步再次发生。
+wf_skill = os.path.join(SKILLS, "teaching-ppt-workflow", "SKILL.md")
+wf_txt = read(wf_skill) if os.path.isfile(wf_skill) else ""
+contract_keys = ("跨模型执行稿", "全任务执行状态机与硬门禁", "逐字一致", "④附③")
+# 必须在同一行（整体工作流维护段）齐备：全文散落命中会被分环节规程的同类词误满足。
+wf_line = next((l for l in wf_txt.split("\n") if "跨模型执行稿" in l), "")
+missing_keys = [k for k in contract_keys if k not in wf_line]
+add("PASS" if not missing_keys else "FAIL",
+    "④附③ 整体工作流提示词状态机契约（规程）",
+    "规程四项齐备" if not missing_keys else "SKILL.md「飞书人工提示词维护」缺：" + "、".join(missing_keys))
+legacy_hits = []
+for f in ALL_MD:
+    if not f.startswith(os.path.join(SKILLS, "teaching-ppt-workflow") + os.sep):
+        continue
+    for n, line in enumerate(read(f).split("\n"), 1):
+        if "复杂任务执行状态机" in line or "任何复杂任务必须" in line:
+            legacy_hits.append("%s:%d" % (rel(f), n))
+add("PASS" if not legacy_hits else "FAIL", "④附③ 旧口径残留（本技能全部文档）",
+    "0 处" if not legacy_hits else "、".join(legacy_hits[:6]))
 
 # ---------- 5. 锚点死链 ----------
 cache = {}
