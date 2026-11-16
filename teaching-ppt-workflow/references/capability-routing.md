@@ -21,7 +21,7 @@ After execution, retain only:
 
 Do not copy an executor's commands, schemas or troubleshooting guide into this workflow. Do not load executors for later stages in advance.
 
-本用户固定不直接制作可编辑PPTX；课件默认交付可画设计链接，仅当用户明确要求交付可编辑 pptx 文件时才制作并交付 .pptx。下面的本地PPT工具仅供已有文件的明确修改或检查；新课件按整页绘图→可画组装完成，不能由模板、动画或工具选择绕过此约束。
+新课件先按页组装可画。明确交可编辑 PPTX 时，受理用户手动导出的文件并在本机修复、添加动画或检查；交付路线见[课件出品路线](lesson-pack.md#课件出品路线)。
 
 ## Route by capability
 

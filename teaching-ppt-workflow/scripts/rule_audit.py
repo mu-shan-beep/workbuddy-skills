@@ -10,12 +10,10 @@
   - 第三方安装技能：只报不判 FAIL，不改其内容（不越界）。
 
 断言项：
-  1. 状态机三入口绑定：teaching-ppt-workflow / lesson-typeset / lesson-transcript；
+  1. 按需记录进度，自建入口不套用通用状态模板；
   2. 治理入口可达：三套流程技能都必须指向 self-maintenance.md；
   3. frontmatter 合规：--- 围栏、name 与目录名一致、description 非空；
-  4. 人工复制件一致：lesson-pack-prompts.md 的状态机复制件须逐字一致；
-     ④附：每个提示词代码块都必须自带状态机段，且不得残留旧口径「复杂任务执行状态机」；
-     ④附③：整体工作流「跨模型执行稿」状态机契约（维护规程绑定 + 本技能无旧口径残留）；
+  4. 人工提示词的独立结构及预览图两类入口；整体工作流同步规程。
   5. 锚点死链：跨文件 / 同文件 #锚点 必须能在目标标题中解析；
   6. 旧口径矛盾：已被用户删除的模块不得被下位文件「正向要求」；
   7. 表格结构：Markdown 表格各组列数一致；
@@ -40,7 +38,7 @@ elif len(sys.argv) > 1 and sys.argv[1] in ("-h", "--help"):
     sys.exit(0)
 PIPELINE = ["teaching-ppt-workflow", "lesson-typeset", "lesson-transcript"]
 KNOWN_OWNED = set(PIPELINE) | {"xhs-lesson-notes", "ppt-visual-style", "interactive-courseware"}
-STATE = "LOCK → AUDIT → EXECUTE → VERIFY → DONE"
+FORCED_STATE = re.compile(r"LOCK\s*→\s*AUDIT\s*→\s*EXECUTE|全任务执行状态机|六大硬门禁")
 ANCHOR_STRIP = r"[（）()：:，,、｜|／/《》<>「」\[\]【】#*`\s\-—…·]"
 NEG = r"(不另设|严禁|禁止|不得|不附|不写|不复制|非法定|历史工具|仅保留作|不作.*来源|禁止.*替代|已删除|不再)"
 
@@ -140,26 +138,29 @@ def scan_lines(path):
             yield ln, line
 
 
-# ---------- 1. 状态机三入口绑定 ----------
-missing = []
-for s in PIPELINE:
-    p = os.path.join(SKILLS, s, "SKILL.md")
-    if not os.path.isfile(p):
-        missing.append("%s（缺文件）" % s)
-        continue
-    t = read(p)
-    if STATE not in t:
-        missing.append("%s（缺状态链）" % s)
-    elif "禁止跳级" not in t:
-        missing.append("%s（缺「禁止跳级」）" % s)
-add("PASS" if not missing else "FAIL", "① 状态机三入口绑定",
-    "三入口均已绑定" if not missing else "缺失：" + "；".join(missing))
+# ---------- 1. 仅在需要接续时记录进度 ----------
+owner = os.path.join(SKILLS, "teaching-ppt-workflow", "SKILL.md")
+owner_text = read(owner) if os.path.isfile(owner) else ""
+section = re.search(r"^## 跨阶段与批量任务的进度记录\n(.*?)(?=^## )", owner_text, re.M | re.S)
+required_states = ("待确认", "待返回", "待修", "已验收", "失败恢复")
+missing_states = [term for term in required_states if not section or term not in section[1]]
+old_entries = []
+for skill in sorted(KNOWN_OWNED):
+    path = os.path.join(SKILLS, skill, "SKILL.md")
+    if not os.path.isfile(path) or FORCED_STATE.search(read(path)):
+        old_entries.append(skill)
+details = missing_states + old_entries
+add("FAIL" if details else "PASS", "① 进度记录按需启用",
+    "需检查：" + "、".join(details) if details else "单项按各自要求执行；交接、等待及失败恢复有状态")
 
 # ---------- 2. 治理入口可达（全部自建技能） ----------
 nogovern = []
+review_entry = os.path.isfile(os.path.join(SKILLS, "rule-review", "SKILL.md"))
 for s in OWNED:
     t = read(os.path.join(SKILLS, s, "SKILL.md"))
-    if "self-maintenance.md" not in t and "rule_audit.py" not in t:
+    has_legacy_entry = "self-maintenance.md" in t or "rule_audit.py" in t
+    has_fact_review_entry = review_entry and "`rule-review`" in t
+    if not (has_legacy_entry or has_fact_review_entry):
         nogovern.append(s)
 add("PASS" if not nogovern else "FAIL", "② 治理入口可达（自建 %d 个）" % len(OWNED),
     "%d 个自建技能均已挂治理入口" % len(OWNED) if not nogovern
@@ -186,81 +187,35 @@ add("PASS" if not bad_fm else "FAIL", "③ frontmatter 合规（自建）",
 if third_fm:
     add("INFO", "③ 附：第三方 frontmatter 异常（只报不改）", "\n      ".join(third_fm))
 
-# ---------- 4. 人工复制件一致 ----------
-prompts = os.path.join(SKILLS, "teaching-ppt-workflow", "references", "lesson-pack-prompts.md")
-if os.path.isfile(prompts):
-    lines = read(prompts).split("\n")
-    # 标题可能随口径修订变化（如「复杂任务」→「全任务」），按特征匹配而非逐字硬编码；
-    # 但每份复制件的正文仍逐字比对。零份复制必须 FAIL——空集不算「一致」。
-    starts = [i for i, l in enumerate(lines)
-              if l.strip().startswith("【") and "状态机与硬门禁" in l]
-    blocks = []
-    for k in starts:
-        seg, j, saw_gates = [], k, False
-        while j < len(lines):
-            line = lines[j].strip()
-            if j > k and line.startswith("【") and "】" in line:
-                break  # 状态机段后的下一个独立规则块，不并入复制件
-            seg.append(line)
-            if line.startswith("六大硬门禁"):
-                saw_gates = True
-            j += 1
-            # 状态机段固定边界：六大硬门禁的第 6 条即段末；
-            # 不依赖「下一段必须是【】块」的隐式结构，插在文件任意位置都稳定。
-            if saw_gates and line.startswith("6. "):
-                break
-            if j < len(lines) and lines[j].strip().startswith("【") and "】" in lines[j]:
-                break
-        blocks.append("\n".join(seg))
-    digests = {}
-    for n, b in enumerate(blocks, 1):
-        digests.setdefault(hashlib.md5(b.encode("utf-8")).hexdigest()[:8], []).append(n)
-    if not blocks:
-        add("FAIL", "④ 人工复制件一致（lesson-pack-prompts.md）",
-            "未检出任何状态机复制件（0 份）——匹配失效或副本被删，按失败处理")
-    else:
-        add("PASS" if len(digests) <= 1 else "FAIL", "④ 人工复制件一致（lesson-pack-prompts.md）",
-            "共 %d 份，%d 个版本%s" % (len(blocks), len(digests),
-                                       "" if len(digests) <= 1 else "：" + str(digests)))
-        # 覆盖性断言（2026-11-14 用户指出「状态机必须在每一个提示词中」）：
-        # 只比对已有复制件是否逐字一致，无法发现「整段提示词没带状态机」的缺口；
-        # 须逐代码块扫描，缺一个即 FAIL，并拦截旧口径「复杂任务执行状态机」。
-        code_blocks = re.findall(r"```Plain Text\n(.*?)\n```", read(prompts), re.S)
-        missing = [n for n, b in enumerate(code_blocks, 1)
-                   if "全任务执行状态机与硬门禁" not in b]
-        add("PASS" if code_blocks and not missing else "FAIL",
-            "④附 提示词状态机全覆盖（lesson-pack-prompts.md）",
-            "代码块 %d 个，缺状态机 %d 个%s" % (
-                len(code_blocks), len(missing),
-                "" if not missing else "：第 " + "、".join(map(str, missing)) + " 块"))
-        old = [n for n, b in enumerate(code_blocks, 1) if "复杂任务执行状态机" in b]
-        add("PASS" if not old else "FAIL", "④附 旧口径残留（复杂任务）",
-            "0 处" if not old else "命中代码块：第 " + "、".join(map(str, old)) + " 块")
-else:
-    add("FAIL", "④ 人工复制件一致（lesson-pack-prompts.md）", "文件不存在")
+# ---------- 4. 人工提示词结构与整体工作流同步规程 ----------
+workflow_dir = os.path.join(SKILLS, "teaching-ppt-workflow")
+prompts_path = os.path.join(workflow_dir, "references", "lesson-pack-prompts.md")
+prompts_text = read(prompts_path) if os.path.isfile(prompts_path) else ""
+prompt_blocks = re.findall(r"^#{2,3} ([^\n]+)\n\n```Plain Text\n(.*?)\n```$", prompts_text, re.M | re.S)
+total_blocks = prompts_text.count(chr(96) * 3 + "Plain Text")
+invalid = [
+    title for title, body in prompt_blocks
+    if not re.match(r"【角色设定】\n[^\n]+\n\n【要求】\n\S", body)
+    or FORCED_STATE.search(body) or re.search(r"^【[^\n]*状态机", body, re.M)
+]
+routes = {
+    "PPT页面绘制｜有逐页预览图": ("高清", "构图", "一张"),
+    "PPT页面绘制｜无逐页预览图": ("定稿大纲", "获批", "一张"),
+}
+for title, expected in routes.items():
+    matching = [body for label, body in prompt_blocks if title == label]
+    if len(matching) != 1 or not all(term in matching[0] for term in expected):
+        invalid.append(title)
+valid = bool(prompt_blocks) and len(prompt_blocks) == total_blocks and not invalid
+add("PASS" if valid else "FAIL", "④ 人工提示词独立结构与绘图分流",
+    f"已解析 {len(prompt_blocks)}/{total_blocks} 个代码块"
+    + ("" if not invalid else "；需检查：" + "、".join(invalid)))
 
-# ---------- 4b. 整体工作流提示词（飞书文档二）状态机契约 ----------
-# 「跨模型执行稿」只存在于飞书文档，本机无源文件，内容级核验靠写入后回读；
-# 门禁在此校验维护规程是否强制同一段状态机，以及本技能文档无旧口径残留，
-# 防止「分环节提示词补齐了、整体工作流仍是旧口径」的漏同步再次发生。
-wf_skill = os.path.join(SKILLS, "teaching-ppt-workflow", "SKILL.md")
-wf_txt = read(wf_skill) if os.path.isfile(wf_skill) else ""
-contract_keys = ("跨模型执行稿", "全任务执行状态机与硬门禁", "逐字一致", "④附③")
-# 必须在同一行（整体工作流维护段）齐备：全文散落命中会被分环节规程的同类词误满足。
-wf_line = next((l for l in wf_txt.split("\n") if "跨模型执行稿" in l), "")
-missing_keys = [k for k in contract_keys if k not in wf_line]
-add("PASS" if not missing_keys else "FAIL",
-    "④附③ 整体工作流提示词状态机契约（规程）",
-    "规程四项齐备" if not missing_keys else "SKILL.md「飞书人工提示词维护」缺：" + "、".join(missing_keys))
-legacy_hits = []
-for f in ALL_MD:
-    if not f.startswith(os.path.join(SKILLS, "teaching-ppt-workflow") + os.sep):
-        continue
-    for n, line in enumerate(read(f).split("\n"), 1):
-        if "复杂任务执行状态机" in line or "任何复杂任务必须" in line:
-            legacy_hits.append("%s:%d" % (rel(f), n))
-add("PASS" if not legacy_hits else "FAIL", "④附③ 旧口径残留（本技能全部文档）",
-    "0 处" if not legacy_hits else "、".join(legacy_hits[:6]))
+workflow_skill = read(os.path.join(workflow_dir, "SKILL.md"))
+workflow_line = next((line for line in workflow_skill.splitlines() if "跨模型执行稿" in line), "")
+required = ("原位", "回读", "两类正式页入口")
+add("PASS" if all(term in workflow_line for term in required) else "FAIL",
+    "④附 整体工作流同步规程", "原位更新后回读核对正式页两类入口")
 
 # ---------- 5. 锚点死链 ----------
 cache = {}

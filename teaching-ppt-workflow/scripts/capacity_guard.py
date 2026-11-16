@@ -236,9 +236,9 @@ def main():
         if data.get("source"):
             src = root / data["source"]
         else:
-            sources = list(root.glob("*-教学设计-源.md"))
+            sources = list((root / "源稿").glob("*-教学设计-源.md")) or list(root.glob("*-教学设计-源.md"))
             if len(sources) != 1:
-                raise ValueError("未登记 source 且目录中没有唯一的教学设计源稿")
+                raise ValueError("未登记 source 且 源稿/ 与根目录均没有唯一的教学设计源稿")
             src = sources[0]
         sections = period_sections(src.read_text(encoding="utf-8"), periods)
         fp = fingerprint(data, periods)

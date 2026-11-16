@@ -30,20 +30,9 @@ agent_created: true
 
 ---
 
-## 执行纪律（与教案包主流程同一套，不得另立）
+## 编写与审核核对
 
-写稿与审稿一律按全任务口径执行（不论任务大小，不因「只是改一段」豁免），按 `teaching-ppt-workflow/SKILL.md`「全任务执行状态机与硬门禁」执行，禁止跳级（状态定义只有一个归属，此处不复制全文）：
-`LOCK → AUDIT → EXECUTE → VERIFY → DONE`
-
-写稿侧的硬含义，缺一项即不算交付：
-
-| 状态 | 写稿侧的必做动作 |
-| :-- | :-- |
-| LOCK | 锁定课件实物（页数／页序／版本）与本次不改范围 |
-| AUDIT | 先跑 §0「不读教学设计」的取材核对与 `scripts/pptx_text.py` 逐页抽文，报页数与来源 |
-| EXECUTE | 按审过的页序写，不跳页、不改课件、不夹带教材页码 |
-| VERIFY | 跑 `scripts/audit_script.py`（或按 §9 说明报「未验证」），贴出 ERROR／WARN 计数 |
-| DONE | 只有 VERIFY 有输出才可报「稿已写完」；**不得用「已核对」代替机检输出** |
+先核对采用课件的版本、页数和页序。按 §0 取材，能抽取时用 `scripts/pptx_text.py` 逐页提取。编写时按采用页序展开。提交前用 `scripts/audit_script.py` 核验适用项目并说明 ERROR／WARN，无法机检时按 §9 标明未验证项及实际人工核查结果。
 
 规则改动前后必跑体检：`python3 ~/.workbuddy/skills/teaching-ppt-workflow/scripts/rule_audit.py`（FAIL 先修）；治理细则、单点定义表与权限边界见 `teaching-ppt-workflow/references/self-maintenance.md`，本技能不另立治理流程。
 

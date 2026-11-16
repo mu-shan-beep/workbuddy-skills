@@ -181,17 +181,22 @@ def asset_status(root, explicit_pdf=None, hint=None):
           "source_ok": False, "page_count": 0, "deck_pages": 0, "missing": []}
 
     # ① 板书设计图片：自动定位教学设计源稿中的引用
-    for n in sorted(os.listdir(root)):
-        if n.endswith("-教学设计-源.md"):
-            md = open(os.path.join(root, n), encoding="utf-8").read()
-            seg = re.search(r"###\s*板书设计([\s\S]{0,300})", md)
-            m = re.search(r"!\[[^\]]*\]\(([^)]+)\)", seg.group(1)) if seg else None
-            if m:
-                rel = m.group(1).strip()
-                st["board_ref"] = rel
-                p = rel if os.path.isabs(rel) else os.path.join(root, rel)
-                st["board_ok"] = os.path.isfile(p)
-            break
+    # 2026-11-16 起源稿收进 源稿/；同时兼容旧课题源稿仍在根目录（按用户约定）
+    src_dirs = [os.path.join(root, "源稿"), root]
+    for sd in src_dirs:
+        if not os.path.isdir(sd): continue
+        found = [n for n in sorted(os.listdir(sd)) if n.endswith("-教学设计-源.md")]
+        if not found: continue
+        n = found[0]
+        md = open(os.path.join(sd, n), encoding="utf-8").read()
+        seg = re.search(r"###\s*板书设计([\s\S]{0,300})", md)
+        m = re.search(r"!\[[^\]]*\]\(([^)]+)\)", seg.group(1)) if seg else None
+        if m:
+            rel = m.group(1).strip()
+            st["board_ref"] = rel
+            p = rel if os.path.isabs(rel) else os.path.join(root, rel)
+            st["board_ok"] = os.path.isfile(p)
+        break
     if not st["board_ok"]:
         st["missing"].append(
             "板书设计图片：教学设计「板书设计」必须引用用户提供的板书设计图片"

@@ -1,0 +1,4 @@
+# seewo-easinote-assistant-skill 运行依赖
+# build_v2.py 的图片预检（preflight_images）用 Pillow 验证背景图/配图可解码；
+# 未安装时自动降级为「文件存在 + 扩展名」检查并输出警告，不影响其余流程。
+Pillow>=10.0.0

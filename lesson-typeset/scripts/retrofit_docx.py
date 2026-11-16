@@ -253,7 +253,9 @@ def main():
              if x.endswith(".docx") and not x.startswith("~$")]
     if a.all:
         names = [x for x in names
-                 if not os.path.isfile(os.path.join(wb, x[:-5] + "-源.md"))]
+                 if not (os.path.isfile(os.path.join(wb, x[:-5] + "-源.md"))
+                         or os.path.isfile(os.path.join(root, "源稿", x[:-5] + "-源.md"))
+                         or os.path.isfile(os.path.join(root, x[:-5] + "-源.md")))]
     if a.file:
         names = [x for x in names if x in a.file]
     if not names:
