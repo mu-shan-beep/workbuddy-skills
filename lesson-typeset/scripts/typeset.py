@@ -10,10 +10,10 @@
 
 用法：
     python3 typeset.py --root "<课题目录>" \
-        --input ".workbuddy/牛和鹅-教学设计-源.md" \
+        --input "源稿/牛和鹅-教学设计-源.md" \
         --header "20 牛和鹅" --mode preview      # 只写 /tmp
     python3 typeset.py --root "<课题目录>" \
-        --input ".workbuddy/牛和鹅-教学设计-源.md" \
+        --input "源稿/牛和鹅-教学设计-源.md" \
         --header "20 牛和鹅" --mode commit       # 落「交付文件/」，旧版进废纸篓
     python3 typeset.py --dry-run                  # 命名推导与配图探测
 
@@ -386,11 +386,11 @@ def main():
 
     if a.dry_run:
         samples = [
-            ".workbuddy/牛和鹅-教学设计-源.md",
-            ".workbuddy/牛和鹅-第一课时-学习清单-源.md",
-            ".workbuddy/牛和鹅-第二课时-学习清单-源.md",
-            ".workbuddy/牛和鹅-制作笔记-源.md",
-            ".workbuddy/长城-第二课时-逐字稿-源.md",
+            "源稿/牛和鹅-教学设计-源.md",
+            "源稿/牛和鹅-第一课时-学习清单-源.md",
+            "源稿/牛和鹅-第二课时-学习清单-源.md",
+            "源稿/牛和鹅-制作笔记-源.md",
+            "源稿/长城-第二课时-逐字稿-源.md",
         ]
         print("源稿 → 成品（自动推导）：")
         for s in samples:

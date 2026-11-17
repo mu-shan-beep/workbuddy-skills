@@ -863,15 +863,29 @@ def build(md, out_path, header, title=None, mirror=False,
 
     blocks = parse(md)
 
+    # 2026-11-17 修：源稿手写的「班级：__ 姓名：__ 日期：__」与下面自动生成的
+    # blank_table 信息区重复，同一页会印两遍。信息栏交 blank_table 统一生成，
+    # md 里的同义行直接跳过（只跳过以「班级：」开头的整段，不动其他正文）。
+    blocks = [(k, t) for k, t in blocks
+              if not (k == "p" and re.match(r"^\s*班级\s*[：:]", t))]
+
     # 标题素材
     h1 = next((t for k, t in blocks if k == "h1"), "") or header
+    # 旧写法兼容：源稿首部用「## 第二课时学习清单」「## 学生学习清单　·　40分钟」
+    # 不带文档标题，此时把它提为标题并从正文移除。
+    # 2026-11-17 修：原判定是「h2 里含『清单』」，会误吞真正的正文小节
+    # （如「## 二、给三幅图起名（在清单上填写）」——标题被拼上、小节标题消失），
+    # 改为整行精确匹配，只认「[第X课时] [学生] 学习清单／学习单／任务单」。
+    KIND_LINE = re.compile(
+        r"^\s*(第[一二三四五六七八九十]+课时\s*[·・\-—]?\s*)?(学生)?"
+        r"(学习清单|学习单|任务单)(\s*[·・]\s*\S.*)?\s*$")
     kind_line = ""
     for k, t in blocks:
-        if k == "h2" and "清单" in t:
+        if k == "h2" and KIND_LINE.match(t):
             kind_line = t
             break
     for k, t in blocks:
-        if k == "h2" and "清单" in t:
+        if k == "h2" and KIND_LINE.match(t):
             blocks = [(kk, tt) for kk, tt in blocks if not (kk == "h2" and tt == t)]
             break
     doc_title = title or (("%s｜%s" % (h1.strip(), kind_line.strip()))
@@ -960,6 +974,11 @@ def build(md, out_path, header, title=None, mirror=False,
             continue
 
         if kind == "ans":
+            # 2026-11-17 修：源稿用 Markdown 待办写法「- [ ] 任务」，直接输出会把
+            # 半角「[ ]」印到卷面上，与同一份清单里其他地方的自查方框 □ 不一致。
+            # 统一转成 □／☑，学生才不会把它读成符号而不是勾选框。
+            payload = re.sub(r"^\[[xX]\]\s*", "☑ ", payload)
+            payload = re.sub(r"^\[\s?\]\s*", "□ ", payload)
             if last in ("table", "blank", "grid", "stars"):
                 gap(doc, GAP_GAP, keep_next=True)
             p = doc.add_paragraph()

@@ -356,6 +356,27 @@ add("PASS" if not contract else "FAIL", "⑪ 判定契约完整性（登记／�
     "4 项登记齐、判据在唯一归属、两支脚本断言齐" if not contract
     else "\n      ".join(contract))
 
+# ---------- 12. 阈值单一归属（数字只在归属文件定义，提示词可自足复述） ----------
+thresholds = [
+    ("4~6", "lesson-pack.md", {"lesson-pack-prompts.md"}),
+    ("200 字", "lesson-pack.md", {"lesson-pack-prompts.md"}),
+    ("25／20／20／15／10／10", "lesson-pack.md", set()),
+]
+dup = []
+for tok, owner, allow in thresholds:
+    for path in ALL_MD:
+        if not rel(path).startswith("teaching-ppt-workflow/"):
+            continue
+        base = os.path.basename(path)
+        # 回归台账可引用历史阈值，实际执行口径才参与检查。
+        if base == owner or base in allow or base == "feedback-regression.md":
+            continue
+        if tok in read(path):
+            dup.append("%s：%s 应在 %s 定义，此处重复" % (base, tok, owner))
+add("WARN" if dup else "PASS", "⑫ 阈值单一归属（跨文件重复）",
+    "阈值只在归属文件定义，提示词按自足例外复述" if not dup
+    else "\n      ".join(dup))
+
 # ---------- 输出 ----------
 print("=" * 70)
 print("规则体检｜%d 个技能（自建 %d／第三方 %d）｜%d 个 Markdown 文件"

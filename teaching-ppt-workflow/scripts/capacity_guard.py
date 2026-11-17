@@ -3,6 +3,7 @@
 
 退出码：0 对账通过 ｜ 2 数据或对账失败 ｜ 3 同课时连续两次独立修订仍超载
         4 外部估算口径待裁定 ｜ 5 容量证据未齐
+耗时可为单值或 [下限, 上限]；标称不得低于该环节动作上限；动作上限已占满课时时须补 slack 余量论证。
 脚本核验记录和稿件之间的一致性。录入者仍须评估具体课堂动作及估算依据。
 """
 import argparse
@@ -15,6 +16,7 @@ from pathlib import Path
 
 CATS = ("阅读", "书写", "讨论互读", "反馈", "转换")
 EPSILON = 1e-6
+ROUNDING = 0.5
 
 
 def jload(path):
@@ -54,6 +56,25 @@ def number(value, label):
     return value
 
 
+def span(value, label):
+    """耗时上下界。单值视作 [x, x]；列表须为 [下限, 上限]。"""
+    if isinstance(value, (list, tuple)):
+        if len(value) != 2:
+            raise ValueError(f"{label}须为单值或 [下限, 上限]")
+        low = number(value[0], f"{label}下限")
+        high = number(value[1], f"{label}上限")
+        if low - EPSILON > high:
+            raise ValueError(f"{label}下限大于上限")
+        return low, high
+    single = number(value, label)
+    return single, single
+
+
+def within(value, point):
+    low, high = span(value, "耗时")
+    return low - EPSILON <= point <= high + EPSILON
+
+
 def label_text(value, label):
     if not isinstance(value, str) or not value.strip():
         raise ValueError(f"{label}须有具体内容")
@@ -68,8 +89,10 @@ def row_index(rows, label, final=False):
         name = label_text(row["name"], f"{label}环节名")
         if name in indexed:
             raise ValueError(f"{label}重复环节：{name}")
-        for category in (*CATS, "declared") if final else CATS:
-            number(row[category], f"{label}/{name}/{category}")
+        for category in CATS:
+            span(row[category], f"{label}/{name}/{category}")
+        if final:
+            number(row["declared"], f"{label}/{name}/declared")
         indexed[name] = row
     return indexed
 
@@ -143,9 +166,11 @@ def check_period(period, segment, actions, errors, pending):
     else:
         external_rows = row_index(external["rows"], f"{label}独立估算")
         external_total = number(external["total"], f"{label}独立估算合计")
-        external_sum = sum(sum(r[c] for c in CATS) for r in external_rows.values())
-        print(f"  外部独立基线合计 {external_sum:g} ｜声明 {external_total:g}")
-        if abs(external_sum - external_total) > EPSILON:
+        ext_low = sum(sum(span(r[c], "独立估算")[0] for c in CATS) for r in external_rows.values())
+        ext_high = sum(sum(span(r[c], "独立估算")[1] for c in CATS) for r in external_rows.values())
+        shown = f"{ext_low:g}" if abs(ext_high - ext_low) <= EPSILON else f"{ext_low:g}–{ext_high:g}"
+        print(f"  外部独立基线合计 {shown} ｜声明 {external_total:g}")
+        if not ext_low - EPSILON <= external_total <= ext_high + EPSILON:
             errors.append(f"{label}独立估算合计与明细不一致")
         if not any(isinstance(external.get(k), str) and external[k].strip() for k in ("note", "source")):
             errors.append(f"{label}独立估算缺 note/source 依据")
@@ -156,23 +181,30 @@ def check_period(period, segment, actions, errors, pending):
         before = number(cut["from"], f"{label}/{row}调整前用时")
         after = number(cut["to"], f"{label}/{row}调整后用时")
         if (category not in CATS or row not in final or row not in external_rows
-                or abs(external_rows[row][category] - before) > EPSILON
-                or abs(final[row][category] - after) > EPSILON):
+                or not within(external_rows[row][category], before)
+                or not within(final[row][category], after)):
             errors.append(f"{label}/{row}/{category}调整未与基线和终稿对上")
 
     if len(actions) != len(final):
         errors.append(f"{label}源稿 {len(actions)} 环节、预算 {len(final)} 环节，数量不一致")
-    total = 0
+    total_low = total_high = 0.0
     for index, (name, row) in enumerate(final.items()):
-        subtotal = sum(row[c] for c in CATS)
-        total += subtotal
+        bounds = {c: span(row[c], f"{label}/{name}/{c}") for c in CATS}
+        low = sum(bounds[c][0] for c in CATS)
+        high = sum(bounds[c][1] for c in CATS)
+        total_low += low
+        total_high += high
+        declared = row["declared"]
         actual = actions[index][0] if index < len(actions) else None
-        print(f"  {name}：动作小计 {subtotal:g} ｜标称 {row['declared']:g} ｜终稿 {actual}")
-        if row["反馈"] <= 0 or row["转换"] <= 0:
+        shown = f"{low:g}" if abs(high - low) <= EPSILON else f"{low:g}–{high:g}"
+        print(f"  {name}：动作小计 {shown} ｜标称 {declared:g} ｜终稿 {actual}")
+        if bounds["反馈"][0] <= 0 or bounds["转换"][0] <= 0:
             errors.append(f"{label}/{name}须计入反馈和转换")
-        if abs(row["declared"] - subtotal) > EPSILON:
-            errors.append(f"{label}/{name}标称不等于五类小计")
-        if actual is None or abs(row["declared"] - actual) > EPSILON:
+        if declared + EPSILON < high:
+            errors.append(f"{label}/{name}标称 {declared:g}′ 装不下动作上限 {high:g}′：只准删／并动作或上调标称，不得回压小计")
+        elif declared - high > ROUNDING + EPSILON:
+            errors.append(f"{label}/{name}标称 {declared:g}′ 高出动作上限 {high:g}′ 逾 {ROUNDING:g}′：回填小计或改标称")
+        if actual is None or abs(declared - actual) > EPSILON:
             errors.append(f"{label}/{name}与终稿该环节用时不一致")
     for marker in period.get("source_checks", []):
         label_text(marker, f"{label}动作标记")
@@ -182,9 +214,25 @@ def check_period(period, segment, actions, errors, pending):
                 pending.append(message + "，迁移时核对原登记位置")
             else:
                 errors.append(message)
-    print(f"  动作小计合计 {total:g} ｜终稿标称合计 {sum(t for t, _ in actions):g}")
-    if total > limit + EPSILON:
-        return action_fp, total - limit
+    displayed_total = sum(minutes for minutes, _ in actions)
+    print(f"  动作小计合计 {total_low:g}–{total_high:g} ｜终稿标称合计 {displayed_total:g}")
+    # 实际动作已超载时，不用余量字段改变超载分类。
+    if total_high > limit + EPSILON:
+        return action_fp, total_high - limit
+    if displayed_total > limit + EPSILON:
+        errors.append(f"{label}终稿标称合计 {displayed_total:g}′ 超出课时 {limit:g}′")
+
+    slack = period.get("slack")
+    if slack is None:
+        if total_high >= limit - ROUNDING - EPSILON:
+            pending.append(f"{label}动作上限合计 {total_high:g}′ 接近或达到 {limit:g}′ 课时，须核余量和释放动作")
+    else:
+        slack_minutes = number(slack.get("minutes"), f"{label}余量分钟数")
+        label_text(slack.get("where"), f"{label}余量释放来源")
+        if slack_minutes <= 0:
+            errors.append(f"{label}余量论证须写明大于 0 的分钟数")
+        elif total_high + slack_minutes > limit + EPSILON:
+            errors.append(f"{label}动作上限 {total_high:g}′ 加余量 {slack_minutes:g}′ 超出课时 {limit:g}′")
     return action_fp, 0
 
 
@@ -224,6 +272,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--root", required=True)
     ap.add_argument("--baseline")
+    ap.add_argument("--read-only", action="store_true", help="核对文本与预算，不更新超载状态")
     ap.add_argument("--limit", type=float, default=40.0)
     ap.add_argument("--external-estimate", help="外部报告的估算分钟数；合计或逗号分隔的逐课时值")
     args = ap.parse_args()
@@ -252,9 +301,10 @@ def main():
         for period, section in zip(periods, sections):
             name = period["name"]
             actions = source_actions(section, name)
-            fingerprints[name], overage = check_period(period, section, actions, errors, pending)
+            _, overage = check_period(period, section, actions, errors, pending)
             if overage:
                 overages[name] = overage
+                fingerprints[name] = digest([cells[1:] for _, cells in actions])
 
         if args.external_estimate is not None and not errors:
             values = external_values(args.external_estimate, periods)
@@ -272,11 +322,12 @@ def main():
         if overages:
             for name, minutes in overages.items():
                 print(f"FAIL：{name}动作总量超出预算 {minutes:g} 分钟")
-            if record_overload(state, [str(src.resolve()), str(base.resolve())], overages, fingerprints):
+            if not args.read_only and record_overload(state, [str(src.resolve()), str(base.resolve())], overages, fingerprints):
                 print("FUSE：同一课时两次不同修订仍超载，交用户裁定内容总量与课时")
                 return 3
             return 2
-        record_overload(state, [str(src.resolve()), str(base.resolve())], {}, fingerprints)
+        if not args.read_only:
+            record_overload(state, [str(src.resolve()), str(base.resolve())], {}, fingerprints)
         print(f"\nPASS：{len(periods)} 个课时预算与当前源稿均对账通过｜基线指纹 {fp}")
         return 0
     except (KeyError, TypeError, ValueError, OverflowError, OSError) as exc:

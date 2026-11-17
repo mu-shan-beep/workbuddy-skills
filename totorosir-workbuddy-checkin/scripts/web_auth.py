@@ -36,6 +36,7 @@ import base64
 import binascii
 import json
 import os
+import random
 import re
 import stat
 import sys
@@ -71,6 +72,7 @@ DEFAULT_UA = ("Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:156.0) "
 STATUS_PATH = "/v2/billing/meter/checkin-activity-status"
 CHECKIN_PATH = "/v2/billing/meter/daily-checkin"
 TRAVEL_STATUS_PATH = "/activity/growth/buddy/travel/status"
+TRAVEL_CONFIG_PATH = "/activity/growth/buddy/travel/config"
 TRAVEL_CLAIM_PATH = "/activity/growth/buddy/travel/claim"
 TRAVEL_DEPART_PATH = "/activity/growth/buddy/travel/depart"
 
@@ -621,6 +623,16 @@ def write_log(res):
 # ----------------------------------------------------------------------------
 # 派猫猫旅行
 # ----------------------------------------------------------------------------
+def _pick_location_id(cred, base):
+    """拉取 travel/config，随机返回一个可用地点 id；失败返回 None。"""
+    st, body = get(TRAVEL_CONFIG_PATH, cred, base)
+    if st != 200 or (body or {}).get("code") != 0:
+        return None, []
+    locs = ((body or {}).get("data") or {}).get("locations") or []
+    ids = [l.get("id") for l in locs if isinstance(l, dict) and l.get("id") is not None]
+    return (random.choice(ids) if ids else None), locs
+
+
 def travel(cred, location=None, base=None):
     """旅行状态查询 / 补领 / 派遣（先领后派）。出错静默降级。"""
     base = (base or TRAVEL_DOMAIN_DEFAULT).rstrip("/")
@@ -634,14 +646,40 @@ def travel(cred, location=None, base=None):
     out["state"] = data.get("state")
     if data.get("state") == "arrived":
         st2, b2 = post(TRAVEL_CLAIM_PATH, cred, {}, base)
-        out["claim"] = {"http": st2, "code": (b2 or {}).get("code")}
+        code2 = (b2 or {}).get("code")
+        out["claim"] = {"http": st2, "code": code2,
+                        "ok": (st2 == 200 and code2 == 0),
+                        "credit": ((b2 or {}).get("data") or {}).get("credit")}
         st, body = get(TRAVEL_STATUS_PATH, cred, base)
         data = (body or {}).get("data") or {}
         out["state"] = data.get("state")
     if data.get("state") == "idle" and not data.get("daily_limit_reached"):
-        payload = {"location_id": location} if location else {}
-        st3, b3 = post(TRAVEL_DEPART_PATH, cred, payload, base)
-        out["depart"] = {"http": st3, "code": (b3 or {}).get("code")}
+        loc_id = location
+        loc_name = None
+        if loc_id is None:
+            loc_id, locs = _pick_location_id(cred, base)
+            for l in locs:
+                if isinstance(l, dict) and l.get("id") == loc_id:
+                    loc_name = l.get("name")
+                    break
+        if loc_id is None:
+            out["depart"] = {"http": 0, "code": None, "ok": False,
+                             "msg": "未能获取可选地点列表，已跳过派遣"}
+        else:
+            st3, b3 = post(TRAVEL_DEPART_PATH, cred, {"location_id": loc_id}, base)
+            code3 = (b3 or {}).get("code")
+            body3 = b3 or {}
+            out["depart"] = {
+                "http": st3, "code": code3,
+                "location_id": loc_id,
+                "ok": (st3 == 200 and code3 == 0),
+                "msg": body3.get("msg"),
+            }
+            if out["depart"]["ok"]:
+                loc = (body3.get("data") or {}).get("location") or {}
+                out["depart"]["location_name"] = loc.get("name") or loc_name
+                out["depart"]["arrive_at"] = (body3.get("data") or {}).get("arrive_at")
+                out["state"] = "traveling"
     elif data.get("state") == "traveling":
         out["note"] = "旅行中，暂不可派遣；到达后下次运行自动补领。"
     elif data.get("state") == "idle" and data.get("daily_limit_reached"):
@@ -711,10 +749,26 @@ def checkin(travel_on=True, location=None, domain=None,
         res["travel"] = tv
         if tv.get("available"):
             extra = []
-            if tv.get("claim"):
-                extra.append("已领取旅行积分")
-            if tv.get("depart"):
-                extra.append("已派出 Buddy")
+            claim = tv.get("claim") or {}
+            if claim.get("ok"):
+                credit = claim.get("credit")
+                extra.append("已领取旅行积分%s" % (" +%s" % credit if credit else ""))
+            elif claim:
+                extra.append("旅行奖励领取失败（HTTP %s / code %s）"
+                             % (claim.get("http"), claim.get("code")))
+            dep = tv.get("depart") or {}
+            if dep.get("ok"):
+                name = dep.get("location_name")
+                extra.append("已派出 Buddy%s" % ("前往【%s】" % name if name else ""))
+            elif dep:
+                dmsg = str(dep.get("msg") or "")
+                if "no active buddy" in dmsg.lower():
+                    extra.append("账号尚未激活派猫猫旅行（no active buddy），"
+                                 "需在客户端激活后才会派遣，非脚本故障")
+                else:
+                    extra.append("派猫猫旅行派遣失败（HTTP %s / code %s）：%s"
+                                 % (dep.get("http"), dep.get("code"),
+                                    dmsg or "接口未返回原因"))
             if tv.get("note"):
                 extra.append(tv["note"])
             if extra:

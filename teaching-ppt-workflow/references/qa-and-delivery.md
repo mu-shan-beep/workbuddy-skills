@@ -43,7 +43,7 @@ Check the task boundary too: a standalone style analysis must not generate image
 ## Cross-document synchronization
 
 - 按 [权威维度裁决](lesson-pack.md#权威维度裁决单向从属的落地口径) 核对差异。教案提供已确认的课堂任务及顺序，现行课件成品提供讲稿与制作笔记的实际页序、上屏文字和操作依据。学生上屏标题可用课堂语言。发现冲突先定位来源，再依本次授权修订对应产物。
-- **全流程同类全扫**：任一产物发现缺陷进行修复时，必须回查本阶段及关联阶段同类全部对象并实际代入验证（改动一处填空扫全课填空，改动一页上屏扫连续页与后续讲稿），严禁点状替换。
+- **全流程按类别全扫**：任一产物发现缺陷进行修复时，按 [按类别全量扫描](lesson-pack.md#教学设计动笔前基线生成期准入) 的唯一定义执行，并延伸到关联产物（改动一页上屏须扫连续页与后续讲稿），严禁点状替换。
 - 对同一课堂任务，逐项核对相关课件、清单和逐字稿的题干、作答动作、记录符号、呈现时机和达标标准。讲稿的提问、结论及媒体提示按实际课件核对。
 - Classroom timing is plausible after adding discussion and media duration.
 - Teacher language sounds natural and is not copied onto slides unnecessarily.
