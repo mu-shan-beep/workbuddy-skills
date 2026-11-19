@@ -457,6 +457,21 @@ def parse(md):
             i += 1
             continue
 
+        # 使用说明段：源稿保留（撰写对照用），成品 docx 不输出（2026-11-19 用户定规）。
+        # 跳过标题及其下正文，直到下一个 Markdown 标题。仅认 lvl==2，避免误伤正文里
+        # 可能出现的同名三级小标题（课时主题为 lvl==2，本段固定 ## 使用说明）。
+        if s == "## 使用说明" or re.match(r"^##\s+使用说明\s*$", s):
+            i += 1
+            while i < len(lines):
+                nxt = lines[i].strip()
+                if not nxt:
+                    i += 1
+                    continue
+                if re.match(r"^#{1,4}\s+", nxt):
+                    break
+                i += 1
+            continue
+
         # Markdown 表格
         if s.startswith("|") and i + 1 < len(lines) and is_sep.match(lines[i + 1].strip()):
             headers = cells(s)
