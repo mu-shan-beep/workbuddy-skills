@@ -88,7 +88,7 @@ agent_created: true
 
 具体格式按 [lesson-pack-prompts.md](references/lesson-pack-prompts.md) 对应标题定位读取，只加载当前环节。整套委托逐阶段推进，明确限定的单项只做该项；新流程规定的确认点优先于下文通用的自动衔接建议，已有明确确认不重复索要。制作任务已授权的内部修订可继续；单独只读检查仍不改原稿。
 
-样稿与正式页按 [课件视觉分镜、逐页绘图与验收](references/visual-planning.md) 执行。按本页任务决定构图，复用相关获批样稿中的视觉元素。阶段确认依 [教案包流程](references/lesson-pack.md)，字体依 [共用教案包规范](references/lesson-pack.md#共用教案包规范)。
+样稿与正式页按 [课件视觉分镜、逐页绘图与验收](references/visual-planning.md) 执行，以 JSON 为单一页面数据源，按当前页读取 → 构建独立单页指令 → 生成 → 验收并写回 JSON；定稿绑定和实际输入核对见 [JSON 页面数据](references/json-page-data.md)。按本页任务决定构图，复用相关获批样稿中的视觉元素。阶段确认依 [教案包流程](references/lesson-pack.md)，字体依 [共用教案包规范](references/lesson-pack.md#共用教案包规范)。
 
 ## 用户反馈后的自动改进与自主进化闭环
 

@@ -44,7 +44,7 @@
 | 全技能规则治理入口与体检：一条命令跑 11 项断言，自建判 FAIL、第三方只报不改 | `teaching-ppt-workflow/scripts/rule_audit.py` ＋ 本文件 §4 步骤 0 | 6 个自建技能 SKILL.md 的「规则治理」段（只写入口，不复制断言口径） |
 | 大纲：校对采用教案、学生任务与页码映射，按课堂动作安排出示 | task-modes.md:03 | lesson-pack.md 阶段表、SKILL.md、全局 MEMORY:6 |
 | 课堂 PPT 封面文字面：只写课题、作者、学段版本三项；不写单元、不写课号（课号长期不加，不因改版或单次要求追加）；不随教案基本信息带出 | `task-modes.md` 03「教材和文本」（唯一定义） | `lesson-pack-prompts.md` 大纲提示词第 2 条、`teaching-resources.md` 封面用途表（只列三要素，不重写禁令）、全局 MEMORY 第 6 条 |
-| 高清单页的来源、重制、调用审核和续画 | visual-planning.md#逐页选择制作方式 | task-modes.md:04、lesson-pack.md 阶段表 |
+| 高清单页的来源、重制与续画；JSON 单一页面数据源、定稿绑定、最终参数核对及结果写回 | visual-planning.md#逐页选择制作方式；字段与工具见 json-page-data.md | task-modes.md:04、lesson-pack.md 阶段表、单页提示词 |
 | 交付物落地与清理规程（末端契约）：交付文件/、--mode commit、纯 Word 禁交 pdf、/usr/bin/trash | lesson-pack.md「交付物落地与清理规程（末端契约）」 | 全局 MEMORY、qa-and-delivery.md、lesson-typeset SKILL |
 | 取证清单取代日常评分；下游大纲不是教案取证对象 | lesson-pack.md:47-60、闸门三 | —— |
 | 权威维度裁决（遇不一致改下游不改上游） | lesson-pack.md「权威维度裁决」小节 | qa-and-delivery.md:43、source-of-truth.md:62、workflow.md:70 |
