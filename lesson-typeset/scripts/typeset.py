@@ -181,13 +181,15 @@ def asset_status(root, explicit_pdf=None, hint=None):
           "source_ok": False, "page_count": 0, "deck_pages": 0, "missing": []}
 
     # ① 板书设计图片：自动定位教学设计源稿中的引用
-    # 2026-11-16 起源稿收进 源稿/；同时兼容旧课题源稿仍在根目录（按用户约定）
-    src_dirs = [os.path.join(root, "源稿"), root]
+    # 2026-11-16 起源稿收进 源稿/；2026-11-20 起支持 源文件/；兼容旧课题源稿仍在根目录
+    src_dirs = [os.path.join(root, "源文件"), os.path.join(root, "源稿"), root]
+    src_dir = root
     for sd in src_dirs:
         if not os.path.isdir(sd): continue
         found = [n for n in sorted(os.listdir(sd)) if n.endswith("-教学设计-源.md")]
         if not found: continue
         n = found[0]
+        src_dir = sd
         md = open(os.path.join(sd, n), encoding="utf-8").read()
         seg = re.search(r"###\s*板书设计([\s\S]{0,300})", md)
         m = re.search(r"!\[[^\]]*\]\(([^)]+)\)", seg.group(1)) if seg else None
@@ -195,6 +197,8 @@ def asset_status(root, explicit_pdf=None, hint=None):
             rel = m.group(1).strip()
             st["board_ref"] = rel
             p = rel if os.path.isabs(rel) else os.path.join(root, rel)
+            if not os.path.isfile(p) and not os.path.isabs(rel):
+                p = os.path.join(src_dir, rel)  # 源稿与板书图同收进 源文件/ 时回退解析
             st["board_ok"] = os.path.isfile(p)
         break
     if not st["board_ok"]:
@@ -255,6 +259,8 @@ def preflight_assets(root, src, typ, args):
         else:
             rel = m.group(1).strip()
             p = rel if os.path.isabs(rel) else os.path.join(root, rel)
+            if not os.path.isfile(p) and not os.path.isabs(rel):
+                p = os.path.join(os.path.dirname(os.path.abspath(src)), rel)
             if not os.path.isfile(p):
                 problems.append("板书设计图片不存在：%s（请用户提供后重排）" % rel)
 

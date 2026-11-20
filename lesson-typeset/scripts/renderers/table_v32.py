@@ -166,12 +166,17 @@ def render_free(doc, cells, opts):
                            left=FREE_IND + V.HANG, first=Mm(-6), align=V.LEFT_A)
                 X.add_rich(p, text, size=V.FS_BODY, color=V.INK)
             elif kind == "tab":
+                # framed 时左边框须与 sub 段(left=0)齐平，否则数据行边框
+                # 比表头右突 3mm；用 firstLine 补偿，文字绝对位置不变。
                 X.fmt_para(p, 0, V.AFTER_CELL, line=V.LINE_CELL,
-                           left=FREE_IND, align=V.LEFT_A)
+                           left=(Cm(0) if framed else FREE_IND),
+                           first=(FREE_IND if framed else 0), align=V.LEFT_A)
                 X.add_rich(p, text, size=V.FS_CELL, color=V.INK)
             else:
                 X.fmt_para(p, 0, V.AFTER_BODY, line=V.LINE_BODY,
-                           left=FREE_IND, first=V.FIRST_INDENT, align=V.LEFT_A)
+                           left=(Cm(0) if framed else FREE_IND),
+                           first=(V.FIRST_INDENT + FREE_IND if framed
+                                  else V.FIRST_INDENT), align=V.LEFT_A)
                 X.add_rich(p, text, size=V.FS_BODY, color=V.INK)
             if framed:
                 edges = ["left", "right"]

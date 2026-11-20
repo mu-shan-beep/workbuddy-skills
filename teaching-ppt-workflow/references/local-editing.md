@@ -10,6 +10,8 @@ Read this reference for a bounded change to an existing deck, especially when fi
 4. Make related edits in one batch where possible. Run operations against the same file sequentially, including previews and validation; OfficeCLI's resident session can contend even on concurrent reads. Flush the file before a different program reads it. Save the approved batch back to the current source path, not a separate file for the batch or each operation.
 5. Verify the saved object and compare before/after renders of changed slides. Check text wrapping, clipping, overlap, alignment and locked template elements; a successful save or structural validation does not establish layout quality. Structural validity, visual appearance and actual playback are distinct checks. Run a full-deck check only for global changes or at a formal review or delivery gate.
 
+When rebuilding a page from a flattened image or separated assets, follow [layout records and reconstruction](canva-layer-repair.md#拆分前记录与还原方式). Use the recorded page geometry and object types; verify visual fidelity separately from editability. This does not require a full reconstruction for ordinary local edits.
+
 When a live editor is used, pass only the file, affected slides, approved wording/assets and relevant template, media or animation constraints. Record the saved output and verification. Check linked documents for consequences, but edit them only when synchronization is part of the user's requested scope.
 
 ## Save and cleanup
