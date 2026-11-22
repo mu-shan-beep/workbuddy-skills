@@ -26,7 +26,7 @@ python3 ~/.workbuddy/skills/rule-review/scripts/scan.py <本目录> --fact 交�
 | 编号 | 事实 | 权威源 | 投影位置 | 不一致后果 | 最近核对 |
 |---|---|---|---|---|---|
 | **F-01** | 课件交付形态不预设（可画链接或 pptx 均可能），稿件按本课采用的成品写，编辑权限按买家实际访问方式核 | 采用成品与买家权限；课件形态由制作阶段的「课件出品路线」决定 | SKILL 4.4、4.5，`examples.md`、`compliance.md`、`fulfillment.md`、`pitfalls.md`、`rule-index.md`、`rule-selfcheck.md` | 交付形态或编辑权限失实 | 2026-11-16 |
-| **F-02** | 其余四项交付（教学设计／逐字稿／学习清单／制作笔记）只交 `.docx`，**严禁 pdf** | 同上 | SKILL 八、`fulfillment.md` 第 4 步、`rule-index.md` | 交付 `.pdf` 违约且无法编辑 | 2026-11-16 |
+| **F-02** | 其余文档交付（教学设计／逐字稿／学习清单）只交 `.docx`，**严禁 pdf**；板贴为图片素材（`.png`／`.jpg`），按原图交付，不转 docx／pdf | 同上 | SKILL 八、`fulfillment.md` 第 4 步、`rule-index.md` | 交付 `.pdf` 违约且无法编辑；板贴转格式失真 | 2026-11-21 |
 | **F-03** | 无真实交付文件时**不写发货文案**，直接阻断 | 交易履约常识 | SKILL 2.3（L86／98）、`fulfillment.md` 第 0 步（L90—130）、`rule-index.md` A-15 | 买家付款后领不到货，虚假发货 | 2026-11-16 |
 | **F-04** | 正文收尾**不放任何声明**（不写配图来源、「仅供教学交流」、「原创整理」） | 21 条样本此类声明 0 出现 | SKILL 3.2（L149）、4.4 M1／M6 模板、`examples.md`、`rule-selfcheck.md`（L82）、`account-matrix.md`（L50）、`pitfalls.md` | 声明与售卖定位矛盾，显营销号 | 2026-11-16 |
 | **F-05** | 标签**合计 10 个**：精确层（篇名系）＋大类层，按篇名长度分三档生成 | 19 条有标签样本中 13 条正好 10 个 | SKILL 五、`examples.md`、`rule-selfcheck.md` 2.3、`pitfalls.md`（L13） | 标签数说法不一，复制时漏配 | 2026-11-16 |
