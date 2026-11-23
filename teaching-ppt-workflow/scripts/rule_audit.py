@@ -377,6 +377,12 @@ add("WARN" if dup else "PASS", "⑫ 阈值单一归属（跨文件重复）",
     "阈值只在归属文件定义，提示词按自足例外复述" if not dup
     else "\n      ".join(dup))
 
+# ---------- 13. 工作流跨文件契约 ----------
+from workflow_contracts import violations as workflow_violations
+workflow_issues = workflow_violations(SKILLS)
+add("FAIL" if workflow_issues else "PASS", "⑬ 工作流跨文件契约",
+    "\n      ".join(workflow_issues) if workflow_issues else "基线计数、Markdown范围、停用入口、封面与大纲边界一致")
+
 # ---------- 输出 ----------
 print("=" * 70)
 print("规则体检｜%d 个技能（自建 %d／第三方 %d）｜%d 个 Markdown 文件"

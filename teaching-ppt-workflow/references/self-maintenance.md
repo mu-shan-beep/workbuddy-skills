@@ -29,24 +29,24 @@
 | 未获定稿确认不得启动任何下游成果 | lesson-pack.md 阶段表；lesson-pack-prompts.md:12 | SKILL.md:90、task-modes.md:3、workflow.md:5 |
 | 确认凭据＝「成果名与版本｜用户确认原话｜时点」；课时／范围决策不算 | lesson-pack.md「明确确认点」 | SKILL.md:52、workflow.md:9 |
 | 课件做可画链接还是 pptx＝制作形态决策，唯一归「课件出品路线」；交付规程只按采用成品实际形态落地 | lesson-pack.md「课件出品路线」 | SKILL.md 交付口径段、lesson-pack.md 交付清单/阶段表、qa-and-delivery.md、assets 两模板、全局 MEMORY（只引用不重写形态口径） |
-| 日常三道阻断闸门 + 取证清单，不评分；完整审查报告才五轮六维≥90 | lesson-pack.md「三道阻断闸门」小节、lesson-review.md:3 | task-modes.md:5、SKILL.md:54 |
+| 日常三道阻断闸门与内部取证，不评分；用户要求评分时先取得维度与放行标准 | lesson-pack.md「三道阻断闸门」小节、lesson-review.md:3 | task-modes.md:5、SKILL.md:54 |
 | 课时容量／负荷推演：先查任务组合再算时长；合计达标≠不过载；超载只准减动作 | lesson-review.md「先按常态课选择任务再细化」+「核查时必须问到的实施问题·容量」 | lesson-pack.md `[容量]` 取证项与闸门二（只引用 + 给取证物，不重写口径）；SKILL.md:38；task-modes.md:13 |
 | 容量估算须记区间：逐项耗时写 `[下限,上限]`；标称不得低于动作上限、取整差 ≤0.5′；上限占满课时须补 `slack` 余量论证，否则判退出码 5 | `lesson-pack.md` 基线②（唯一定义） | `scripts/capacity_guard.py`（`span`／`check_period` 三条判据）、闸门二；不设固定百分比机动 |
 | 教学设计动笔前基线（生成期准入）：五项基线不齐／容量预算超载不得展开四列表；**单元信息按字段核证，缺项分别标待核；课文与课后题已核实的内容可继续**；成稿闸门只复核基线 | lesson-pack.md「教学设计动笔前基线（生成期准入）」 | SKILL.md:38、56；task-modes.md:9、13；lesson-review.md:7、75；lesson-pack-prompts.md 教案撰写段 |
 | 问题分级与放行（关键问题／实施问题／可选优化／待验证四类；A 类清零才放行） | lesson-review.md「问题记录与放行规则」 | lesson-pack.md 闸门与收敛判据、qa-and-delivery.md；不合并为三类 |
 | 按类别全量扫描（被点名的是哪一类缺陷，就对全稿该类全部对象逐条核并给判据；不限于被点名那一处） | `lesson-pack.md` 基线准入末段（唯一定义） | `task-modes.md` 修订模式、`qa-and-delivery.md` 全流程全扫（只写各自绑定物，不另立口径） |
 | 课堂任务（动作承接／板书可作答／材料自足／反思可回溯）与环节级零余量 | `lesson-pack.md` 基线⑤ | `scripts/classroom_guard.py`（辅助列候选；任务材料自足须人工对读）；`lesson-review.md` 闸门三只引用 |
-| 教案及配套资料模块白名单与客户交付级源文件铁律（2026-11-13 用户裁定）：所有交付的源文件（-源.md）及 Word 成品必须是直接给客户看的纯净正文，不留制作痕迹；给 AI 的评分/说明/自检/表态性内容直接在生成源文件时全部去除，严禁入稿导入排版；排版期双重过滤 AI 味与残渣；教案＝基本信息／内容分析／学情／四维目标／重难点／教学准备／本课时目标／四列过程／板书／真实授课反思；配套资料正文纯净、制作笔记仅四部分 | `lesson-pack.md`「教案默认模块」+「全包源稿纯净化与去 AI 味铁律」 | task-modes.md:11、SKILL.md:58、lesson-pack-prompts.md 教案撰写段、qa-and-delivery.md、全局 MEMORY |
-| 关键图片素材来源与开工前主动提醒：板书必须用用户提供的板书图；逐字稿预览图必须从用户提供的课件 PDF 导出；缺件暂停并等提供；用户会忘，助手第一步跑 check_assets.py 主动报状态 | `lesson-typeset/SKILL.md` §1.0（执行入口）＋`references/unified-spec.md` 2.5／2.5.1（技术口径，单点实现 `typeset.py::asset_status()`） | lesson-pack.md 阶段表、qa-and-delivery.md、全局 MEMORY、check_assets.py |
+| 教案及配套资料模块白名单与客户交付级源文件铁律（2026-11-13 用户裁定）：所有交付的源文件（-源.md）及 Word 成品必须是直接给客户看的纯净正文，不留制作痕迹；给 AI 的评分/说明/自检/表态性内容直接在生成源文件时全部去除，严禁入稿导入排版；排版期双重过滤 AI 味与残渣；教案＝基本信息／内容分析／学情／四维目标／重难点／教学准备／本课时目标／四列过程／板书／真实授课反思；配套资料正文纯净（制作笔记已永久废弃，其原四部分结构不再适用） | `lesson-pack.md`「教案默认模块」+「全包源稿纯净化与去 AI 味铁律」 | task-modes.md:11、SKILL.md:58、lesson-pack-prompts.md 教案撰写段、qa-and-delivery.md、全局 MEMORY |
+| Word排版素材来源与预检：仅明确委托Word排版时启用；Markdown撰写、检查和交付整理不索要板书图或课件PDF | `lesson-typeset/SKILL.md` §1.0 | lesson-pack.md 阶段表、qa-and-delivery.md |
 | 全流程各阶段生成前准入：各阶段必须具备上游定稿凭据与输入映射表，缺一不得启动 | lesson-pack.md 阶段表推进条件 | qa-and-delivery.md、task-modes.md、visual-planning.md |
 | 进度记录仅用于跨阶段接续、批量等待和失败恢复 | SKILL.md「跨阶段与批量任务的进度记录」 | 阶段确认与页面续画规程；人工提示词写具体核对、操作和验收 |
 | 规则修订权限边界：可自主修 bug／须指令才改规矩／一律禁止三类 | SKILL.md「规则修订权限边界」 | 本文件 §8 只读例外；feedback-regression.md |
 | 全技能规则治理入口与体检：一条命令跑 11 项断言，自建判 FAIL、第三方只报不改 | `teaching-ppt-workflow/scripts/rule_audit.py` ＋ 本文件 §4 步骤 0 | 6 个自建技能 SKILL.md 的「规则治理」段（只写入口，不复制断言口径） |
 | 大纲：校对采用教案、学生任务与页码映射，按课堂动作安排出示 | task-modes.md:03 | lesson-pack.md 阶段表、SKILL.md、全局 MEMORY:6 |
-| 课堂 PPT 封面文字面：只写课题、作者、学段版本三项；不写单元、不写课号（课号长期不加，不因改版或单次要求追加）；不随教案基本信息带出 | `task-modes.md` 03「教材和文本」（唯一定义） | `lesson-pack-prompts.md` 大纲提示词第 2 条、`teaching-resources.md` 封面用途表（只列三要素，不重写禁令）、全局 MEMORY 第 6 条 |
+| 课堂PPT封面：只写课题及有依据的作者署名；用户当前明确指令优先 | task-modes.md 03「教材和文本」 | 大纲提示词、封面用途表、飞书整体稿 |
 | 拆层还原的布局记录与对象选择；视觉还原、可编辑性分别验收 | canva-layer-repair.md#拆分前记录与还原方式 | SKILL.md分层条款、local-editing.md、拆层与本地整理提示词 |
 | 高清单页的来源、重制与续画；参考编号、首图试做确认、逐张调用和独立文件 | visual-planning.md#发送绘图调用前 | task-modes.md:04、lesson-pack.md阶段表、绘图提示词 |
-| 交付物落地与清理规程（末端契约）：交付文件/、--mode commit、纯 Word 禁交 pdf、/usr/bin/trash | lesson-pack.md「交付物落地与清理规程（末端契约）」 | 全局 MEMORY、qa-and-delivery.md、lesson-typeset SKILL |
+| 交付物落地与清理规程（末端契约）：交付文件/、四类成果、文本 Markdown、课件按采用形态、旧稿按授权安全整理 | lesson-pack.md「交付物落地与清理规程（末端契约）」 | 全局 MEMORY、qa-and-delivery.md、lesson-typeset SKILL |
 | 取证清单取代日常评分；下游大纲不是教案取证对象 | lesson-pack.md:47-60、闸门三 | —— |
 | 权威维度裁决（遇不一致改下游不改上游） | lesson-pack.md「权威维度裁决」小节 | qa-and-delivery.md:43、source-of-truth.md:62、workflow.md:70 |
 | 失效产物登记与处置（未生效／待重校） | lesson-pack.md「失效产物登记与处置」小节 | SKILL.md:90 |
@@ -148,7 +148,6 @@ git diff --numstat -- teaching-ppt-workflow/
 
 ---
 
-## 9. 已知待解 gap（记此，不擅自改）
+## 9. 可画路线的逐字稿核验范围
 
-- **逐字稿机检与可画路线**：`lesson-transcript` 的 `audit_script.py` 以 `--pptx` 实物课件为输入，而本课采用可画链接且没有本地 pptx 时。需明确：可画路线下逐字稿机检如何取得逐页文字与页序（导出 pNN.jpg 后人工对读，或改机检支持可画导出物）。当前以「没有课件文件就别写稿」兜底，机检对可画路线退化为人工核查，列为未验证。
-- 上述 gap 不阻塞规则交付，但每次涉及可画路线逐字稿时须在交付说明标注「机检未跑（可画路线），人工对读替代」。
+可画成品与PPTX均可作为逐字稿依据。可画路线先打开实际成品、核页序及动态页，按可访问设计或其同版逐页图人工对读；无需为Markdown交付索取PPTX或PDF。`audit_script.py` 无 `--pptx` 时仍可核文本、时间轴及已有截图数量，但必须将课件对齐与动画检查标为未验证。交付分别报告文本机检、人工页面对读、动态页实播的实际范围，不能把文本机检通过等同课件对齐通过。PPTX路线继续按实物执行自动对齐；静态截图无法证明点击行为。

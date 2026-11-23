@@ -20,8 +20,16 @@ import urllib.error
 import urllib.request
 from pathlib import Path
 
-# ffmpeg 路径
-FFMPEG_PATH = r'C:\Users\User\.workbuddy\binaries\python\versions\3.13.12\Lib\site-packages\imageio_ffmpeg\binaries\ffmpeg-win-x86_64-v7.1.exe'
+def _resolve_ffmpeg():
+    """优先用 imageio-ffmpeg 自带的 ffmpeg，其次退回系统 PATH，避免硬编码本机路径。"""
+    try:
+        import imageio_ffmpeg
+        return imageio_ffmpeg.get_ffmpeg_exe()
+    except Exception:
+        return "ffmpeg"
+
+
+FFMPEG_PATH = _resolve_ffmpeg()
 
 UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36"
 REF = "https://www.smartedu.cn/"

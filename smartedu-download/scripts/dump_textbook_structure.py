@@ -21,7 +21,7 @@
   python dump_textbook_structure.py --capture \
       --teachingmaterial-id 08c775e6-83eb-7f05-ef45-3a8d03a0ceda \
       --url "https://basic.smartedu.cn/syncClassroom/teachingmaterial?teachingmaterialId=08c775e6-83eb-7f05-ef45-3a8d03a0ceda" \
-      --user-data-dir "C:/Users/User/AppData/Local/Microsoft/Edge/User Data"
+      --user-data-dir "C:/Users/<你的用户名>/AppData/Local/Microsoft/Edge/User Data"
 
   # 2) 解析（任何时候都能跑，离线）
   python dump_textbook_structure.py --parse --out ./structure_report
@@ -299,21 +299,36 @@ def cmd_capture(args):
 
     with sync_playwright() as p:
         launch_kwargs = {"headless": False}
+        if args.channel:
+            launch_kwargs["channel"] = args.channel
+        browser = None
         if args.user_data_dir:
-            launch_kwargs["user_data_dir"] = args.user_data_dir
             print(f"[capture] 使用持久化会话目录：{args.user_data_dir}")
-        browser = p.chromium.launch(**launch_kwargs)
-        context = browser.new_context()
-        page = context.new_page()
+            context = p.chromium.launch_persistent_context(args.user_data_dir, **launch_kwargs)
+        else:
+            browser = p.chromium.launch(**launch_kwargs)
+            context = browser.new_context()
+        page = context.pages[0] if context.pages else context.new_page()
+
+        def _close_browser():
+            try:
+                context.close()
+            except Exception:
+                pass
+            if browser is not None:
+                try:
+                    browser.close()
+                except Exception:
+                    pass
 
         captured = []
 
         def on_response(response):
             url = response.url
-            # 只捕 teachingmaterials 且含 resources 的 JSON 响应
-            if "teachingmaterials" in url and "resources" in url:
+            # 捕获 teachingmaterials 下所有 JSON 响应（details 树 / resources 列表都要）
+            if "teachingmaterials" in url:
                 ct = response.headers.get("content-type", "")
-                if "json" in ct or url.endswith(".json"):
+                if "json" in ct or url.endswith(".json") or "/api/" in url:
                     try:
                         body = response.body()
                         text = body.decode("utf-8", "replace")
@@ -322,7 +337,7 @@ def cmd_capture(args):
                         (cap_dir / fname).write_text(text, encoding="utf-8")
                         captured.append(fname)
                         print(f"[capture] 已保存 {fname}  <- {url[:90]}")
-                    except Exception as e:
+                    except Exception:
                         pass
 
         page.on("response", on_response)
@@ -340,7 +355,7 @@ def cmd_capture(args):
                 page.goto(UC_LOGIN_URL, wait_until="domcontentloaded", timeout=60000)
                 if not wait_qr_login(page):
                     print("[capture] ❌ 登录超时")
-                    browser.close()
+                    _close_browser()
                     return 2
             # 若给了 url 但还没进，重新进入
             if args.url and "teachingmaterials" not in page.url:
@@ -359,52 +374,86 @@ def cmd_capture(args):
         if args.auto:
             auto_navigate(page)
 
-        input("按 Enter 结束捕获并保存……")
-        browser.close()
+        wait_secs = getattr(args, "capture_seconds", 0) or 0
+        if wait_secs > 0:
+            print(f"[capture] 自动捕获 {wait_secs} 秒，期间自动滚动展开教材目录……")
+            _auto_scroll_and_expand(page, wait_secs)
+        else:
+            try:
+                input("按 Enter 结束捕获并保存……")
+            except (EOFError, OSError):
+                print("[capture] 非交互环境（无法读取 stdin），自动等待 90 秒后结束……")
+                _auto_scroll_and_expand(page, 90)
+        _close_browser()
 
     print(f"\n[capture] 共捕获 {len(captured)} 个资源响应，保存于 {cap_dir}")
     print(f"[capture] 下一步运行：python dump_textbook_structure.py --parse")
     return 0
 
 
-def auto_navigate(page):
-    """实验性：按文本点击选择器完成教材定位 + 逐课展开。"""
-    print("[auto] 尝试自动导航（如失败请改为手动）……")
-    steps = [
-        ("切换教材", "button, .switch, [class*='switch']"),
-        ("小学（五•四学制）", "*"),
-        ("道德与法治", "*"),
-        ("二年级", "*"),
-        ("上册", "*"),
-        ("统编版", "*"),
-    ]
-    for label, sel in steps:
+LESSON_SELECTORS = [
+    "[class*='lesson']",
+    "[class*='catalog'] li",
+    "[class*='chapter'] li",
+    "[class*='tree'] li",
+    "[class*='directory'] li",
+]
+
+
+def _auto_scroll_and_expand(page, seconds):
+    """在给定时间内反复滚动页面，并尝试点击目录项触发资源接口。"""
+    deadline = time.time() + max(5, seconds)
+    clicked = set()
+    while time.time() < deadline:
         try:
-            # 文本匹配点击
-            page.click(f"text={label}", timeout=8000)
-            print(f"[auto] 点击：{label}")
-            time.sleep(1.5)
-        except Exception as e:
-            print(f"[auto] 点击失败：{label} -> {e}")
-    # 点教材卡片（含二年级上册）
-    try:
-        page.click("text=二年级上册", timeout=8000)
-        print("[auto] 点开教材卡片")
-        time.sleep(2)
-    except Exception as e:
-        print(f"[auto] 点教材卡片失败：{e}")
-    # 逐课点击
-    lessons = ["假期有收获", "周末巧安排", "欢欢喜喜庆国庆", "团团圆圆过中秋",
-               "我爱我们班", "班级生活有规则", "我是班级值日生", "装扮我们的教室",
-               "这些是大家的", "我们不乱扔", "大家排好队", "我们小点儿声",
-               "我爱家乡山和水", "家乡物产养育我", "可亲可敬的家乡人", "家乡新变化"]
-    for ln in lessons:
-        try:
-            page.click(f"text={ln}", timeout=6000)
-            print(f"[auto] 展开课时：{ln}")
-            time.sleep(1.2)
+            page.mouse.wheel(0, 600)
         except Exception:
             pass
+        try:
+            page.evaluate("window.scrollBy(0, Math.max(300, document.body.scrollHeight/4))")
+        except Exception:
+            pass
+        n_click = 0
+        for sel in LESSON_SELECTORS:
+            if n_click >= 3:
+                break
+            try:
+                items = page.query_selector_all(sel)
+            except Exception:
+                continue
+            for it in items:
+                if n_click >= 3 or time.time() >= deadline:
+                    break
+                try:
+                    txt = (it.inner_text() or "").strip()
+                except Exception:
+                    continue
+                if not txt or len(txt) > 60:
+                    continue
+                key = txt[:30]
+                if key in clicked:
+                    continue
+                clicked.add(key)
+                try:
+                    it.scroll_into_view_if_needed(timeout=1000)
+                    it.click(timeout=1500)
+                    n_click += 1
+                    print(f"[auto] 点开：{key}")
+                    time.sleep(0.6)
+                except Exception:
+                    pass
+        time.sleep(1.0)
+    print(f"[auto] 自动探测结束，共尝试点开 {len(clicked)} 个节点")
+
+
+def auto_navigate(page):
+    """通用：滚动页面触发懒加载，并尝试点开目录中的课时节点（不依赖具体教材）。"""
+    print("[auto] 通用自动导航：滚动 + 展开课时……")
+    try:
+        page.wait_for_load_state("domcontentloaded", timeout=30000)
+    except Exception:
+        pass
+    _auto_scroll_and_expand(page, 8)
 
 
 def main():
@@ -417,6 +466,9 @@ def main():
     ap.add_argument("--auto", action="store_true", help="捕获时尝试自动点选（实验性）")
     ap.add_argument("--captures", help="捕获目录（默认 <skill>/captures）")
     ap.add_argument("--out", help="解析报告输出路径（默认 <skill>/structure_report.json/.md）")
+    ap.add_argument("--channel", default="msedge", help="Playwright 浏览器渠道（msedge/chrome；默认 msedge）")
+    ap.add_argument("--capture-seconds", type=int, default=0,
+                    help="自动捕获时长（秒）；0 表示交互等待 Enter，非交互环境自动 90 秒")
     args = ap.parse_args()
 
     if args.parse:

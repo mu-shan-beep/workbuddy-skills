@@ -383,12 +383,16 @@ def main():
     effects = slide_effects(a.pptx) if a.pptx else None
     click_counts = slide_click_groups(a.pptx) if a.pptx else None
     slides = None
+    if not a.pptx:
+        unver.append("[课件] 未提供PPTX：本次仅核文本、时间轴及已有截图数量；课件逐页文字对齐和动画未自动验证，可画成品须另作人工对读及实播。")
     if a.pptx and effects is None:
         unver.append("[课件] 课件 %s 无法解析（不是有效 pptx／文件损坏／已加密）："
                      "页数、页标题、问句覆盖、动画一律未验证，不得当作已核对"
                      % os.path.basename(a.pptx))
     elif a.pptx:
         slides = slide_texts(a.pptx)
+        if any(not text.strip() for text in slides):
+            unver.append("[课件] 存在无可提取文字的图片页：该页文字和问句须看实际页面人工对读，不能据XML判定已核对。")
         if len(slides) != len(pages):
             errors.append("[课件] 课件 %d 页，稿 %d 页，数量不等——课件是唯一权威，必须一页对一页"
                           % (len(slides), len(pages)))
@@ -750,8 +754,8 @@ def main():
     for n in notes:
         print("提示    " + n)
     if not errors:
-        print("通过机检：课件逐页对齐、时间轴连续、总长 %s%s"
-              % (fmt(total), "，配图张数正确" if a.images else ""))
+        scope = "文本与时间轴机检通过（课件对齐未全量验证）" if slides is None or any(not text.strip() for text in slides) else "课件文字对齐与时间轴机检通过"
+        print("%s：总长 %s%s" % (scope, fmt(total), "，配图张数正确" if a.images else ""))
     if unver:
         print("注意：有 %d 项未验证，交付时须如实说明，不得写作已核实。" % len(unver))
 

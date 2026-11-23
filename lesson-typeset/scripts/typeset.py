@@ -5,7 +5,7 @@
 ================================================================
 
 一份规范（references/unified-spec.md）＋ 一支入口命令。
-版式常量以规范第 1 章为准，本文不重复定义；四类文档的差异只剩 PROFILES 四行参数档；
+版式常量以规范第 1 章为准，本文不重复定义；三类文档的差异只剩 PROFILES 三行参数档；
 独有构件按块语法按需启用。renderers/ 是已验证的内部渲染模块，不直接调用。
 
 用法：
@@ -45,12 +45,13 @@ PROFILES = {
                  extras="逐页标题、师/生/预设/提示分层、课件截图（自动配图）"),
     "学习清单": dict(script="xuexqingdan_typeset.py", m=(1.6, 1.6, 1.8, 1.8),
                  fs=(17.0, 12.5), extras="标题栏、作答横线、田字格、三星自评"),
-    "制作笔记": dict(script="zhizuobiji_typeset.py", m=(1.8, 1.8, 2.0, 2.0),
-                 fs=(20.0, 14.0), extras="一级标题分隔线、强调块、图配图注"),
+    # 「制作笔记」已于 2026-11-19 永久废弃（用户最高立规）：不撰写、不产出、不交付。
+    # 此处从 PROFILES 移除即引擎层硬门禁——任何调用（含 --profile 直选、源稿名推导）
+    # 都会在 derive_profile() 被拒，不再可能排出制作笔记 docx。
 }
 PROFILE_BY_TYPE = {k: k for k in PROFILES}
 # 规范 4.2（2026-11-10 改）：所有类型统一落课题根目录下新建的「交付文件/」，
-# 制作笔记不再单独落 .workbuddy/——交付包是唯一成品出处，包外不留任何成品副本。
+# 包外不留任何成品副本。（制作笔记已于 2026-11-19 废弃，不再有其落位问题。）
 OUTPUT_SUBDIR = {}
 DELIVERY_DIR = "交付文件"
 # 兼容：用户可能把交付包改名（如「交付件」）。已存在的交付目录优先复用，
@@ -89,6 +90,10 @@ def derive_profile(src):
     """profile 由源稿名自动推导，不必手工指定。"""
     typ = parse_stem(src)[2]
     if typ not in PROFILE_BY_TYPE:
+        if typ == "制作笔记":
+            raise ValueError(
+                "「制作笔记」已于 2026-11-19 永久废弃，本技能不排、不产、不交；"
+                "可用类型：%s" % "、".join(PROFILE_BY_TYPE))
         raise ValueError("内容类型「%s」暂无渲染器（现有：%s）"
                          % (typ, "、".join(PROFILE_BY_TYPE)))
     return PROFILE_BY_TYPE[typ]
@@ -334,7 +339,7 @@ def commit(tmp_docx, dst):
 def output_folder(root, typ):
     """按规范 4.2（2026-11-10 改）：所有成品统一落课题根目录下的「交付文件/」。
 
-    OUTPUT_SUBDIR 保留为扩展点，现为空——制作笔记也进交付包，包外不留成品。
+    OUTPUT_SUBDIR 保留为扩展点，现为空——三类成品统一进交付包，包外不留成品。（制作笔记已于 2026-11-19 废弃，不再涉及其落位。）
     """
     if typ in OUTPUT_SUBDIR:
         return os.path.join(root, OUTPUT_SUBDIR[typ])
@@ -395,7 +400,6 @@ def main():
             "源稿/牛和鹅-教学设计-源.md",
             "源稿/牛和鹅-第一课时-学习清单-源.md",
             "源稿/牛和鹅-第二课时-学习清单-源.md",
-            "源稿/牛和鹅-制作笔记-源.md",
             "源稿/长城-第二课时-逐字稿-源.md",
         ]
         print("源稿 → 成品（自动推导）：")

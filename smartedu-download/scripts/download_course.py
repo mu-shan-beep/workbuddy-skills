@@ -663,7 +663,58 @@ def main():
     ap.add_argument("--out", default=None, help="输出根目录（默认 ./<课程名> 或 ./smartedu_<activity_id>）")
     ap.add_argument("--quality", default="720", choices=["720", "480", "360"], help="视频清晰度，默认 720")
     ap.add_argument("--no-pdf", action="store_true", help="不保留平台原始 PDF 副本")
+    # ---- 整册批量下载（委托 download_full_volume，按课本搜索后整册拉取）----
+    ap.add_argument("--whole-book", nargs="?", const="", default=None, metavar="课本名|ID|URL",
+                    help="整册下载：可传课本名（如「北师大版七年级上册数学」）、教材 ID 或教材 URL；"
+                         "不传值时使用 --url 指向的教材")
+    ap.add_argument("--workers", type=int, default=4, help="整册下载的课时并发数（默认 4，上限 8）")
+    ap.add_argument("--limit", type=int, default=0, help="整册下载时只处理前 N 课（试跑）")
+    ap.add_argument("--force", action="store_true", help="整册下载时强制重下（默认增量跳过已存在文件）")
+    ap.add_argument("--keep-ts", action="store_true", help="整册下载时保留 _ts_ 临时分片目录")
     args = ap.parse_args()
+
+    # ---- 整册批量下载：早期分流，内部复用本文件的 run_resources ----
+    if args.whole_book is not None:
+        import download_full_volume as _fv
+        book = (args.whole_book or args.url or "").strip()
+        if not book:
+            print("--whole-book 需要课本名、教材 ID 或教材 URL。")
+            sys.exit(2)
+        fv_argv = []
+        if _fv.extract_tid(book):
+            fv_argv += ["--id", book]
+        elif book.lower().startswith("http"):
+            fv_argv += ["--url", book]
+        else:
+            fv_argv += ["--search", book]
+        if args.out:
+            fv_argv += ["--out", args.out]
+        if args.workers:
+            fv_argv += ["--workers", str(args.workers)]
+        if args.limit:
+            fv_argv += ["--limit", str(args.limit)]
+        if args.only_video:
+            fv_argv += ["--only-video"]
+        elif args.only:
+            fv_argv += ["--only", args.only]
+        if args.quality:
+            fv_argv += ["--quality", args.quality]
+        if args.no_pdf:
+            fv_argv += ["--no-pdf"]
+        if args.force:
+            fv_argv += ["--force"]
+        if args.keep_ts:
+            fv_argv += ["--keep-ts"]
+        if args.inspect:
+            fv_argv += ["--inspect"]
+        if args.token:
+            fv_argv += ["--token", args.token]
+        else:
+            fv_argv += ["--token-file", args.token_file or os.path.join(
+                os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
+                "smartedu_token.txt")]
+        _fv.main(fv_argv)
+        return
 
     # 取 token（统一走 token_manager：支持 --token / 文件 / 过期无感续期 / 本机 Edge 兜底）
     import token_manager as _tm

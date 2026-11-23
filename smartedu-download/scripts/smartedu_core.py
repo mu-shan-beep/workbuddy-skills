@@ -711,7 +711,10 @@ def search_tch_material(keyword, index=None, max_parts=None):
         parts = []
         for t in tags:
             if isinstance(t, dict):
-                parts.append(str(t.get("name") or t.get("title") or ""))
+                # 字段是 tag_name（与 find_textbook.py 一致）；旧代码只取 name 导致
+                # 「北师大版/人教版」这类版本标签永远匹配不到，按课本搜索失效
+                parts.append(str(t.get("tag_name") or t.get("name")
+                                 or t.get("title") or ""))
             else:
                 parts.append(str(t))
         tag_str = " ".join(p for p in parts if p)

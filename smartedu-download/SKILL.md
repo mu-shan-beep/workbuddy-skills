@@ -2,11 +2,11 @@
 name: smartedu-download
 display_name: 国家中小学智慧教育平台资源下载
 display_name_en: SmartEdu Resource Downloader
-description: "下载国家中小学智慧教育平台（basic.smartedu.cn）及公开课直播（www.smartedu.cn/publiclive）资源：教材PDF、课程视频(mp4)、课件(pptx)、教学设计/学习任务单/课后练习(docx)、公开课直播回放(mp4)。支持免登录公开教材下载、登录后受保护资源下载、多CDN源自动切换、断点续传。触发词：下载智慧平台教材/课程/课件/视频/教案，或提供 activityId / contentId / 课程链接。"
-description_zh: "一键下载国家中小学智慧教育平台（basic.smartedu.cn）的教材PDF、课程视频、课件、教学设计、学习任务单、课后练习，以及公开课直播（www.smartedu.cn/publiclive）回放视频。支持免登录公开教材与登录后受保护资源，自动处理双认证与AES-128加密HLS。"
-description_en: "One-click download of textbooks (PDF), course videos, slides, lesson plans and public live-class replays from China's Smart Education Platform (basic.smartedu.cn / www.smartedu.cn). Handles dual-auth and AES-128 encrypted HLS."
+description: "下载国家中小学智慧教育平台（basic.smartedu.cn）及公开课直播（www.smartedu.cn/publiclive）资源：教材PDF、课程视频(mp4)、课件(pptx)、教学设计/学习任务单/课后练习(docx)、公开课直播回放(mp4)。支持「按课本搜索 → 整册批量下载」：给出课本名（如北师大版七年级上册数学）即可自动定位该册全部课时，批量下载整套关联课程资源。支持免登录公开教材下载、登录后受保护资源下载、多CDN源自动切换、断点续传。触发词：下载整册/整本课本配套资源、按课本名下载全套课程资源、下载智慧平台教材/课程/课件/视频/教案，或提供 activityId / contentId / 课程链接。"
+description_zh: "一键下载国家中小学智慧教育平台（basic.smartedu.cn）的教材PDF、课程视频、课件、教学设计、学习任务单、课后练习，以及公开课直播（www.smartedu.cn/publiclive）回放视频。核心能力：可按课本搜索（书名/版本/学科/年级/册次），自动定位整册全部课时并批量下载整套关联课程资源（视频+课件+教学设计+学习任务单+课后练习）。支持免登录公开教材与登录后受保护资源，自动处理双认证与AES-128加密HLS。"
+description_en: "One-click download of textbooks (PDF), course videos, slides, lesson plans and public live-class replays from China's Smart Education Platform (basic.smartedu.cn / www.smartedu.cn). Search by textbook (title/edition/subject/grade/volume) and batch-download the complete set of lesson resources for the whole book. Handles dual-auth and AES-128 encrypted HLS."
 category: 教育资源下载
-version: "2.5.0"
+version: "2.5.5"
 author: WorkBuddy
 license: MIT
 agent_created: true
@@ -25,6 +25,31 @@ agent_created: true
 | **课件** | `download_course.py` | pptx | 需 token（Bearer 认证） |
 | **教学设计/任务单/练习** | `download_course.py` | docx | 需 token（Bearer 认证） |
 | **公开课直播回放** | `download_publiclive.py` | mp4 | 需 token（Bearer + MAC 双认证） |
+
+## ⭐ 整册批量下载：按课本搜索，一次下完整本书的配套资源
+
+**只需给一个课本名**（教材名/版本/学科/年级/册次任意组合，如「北师大版七年级上册数学」「人教版八年级下册物理」），
+技能会先在教材索引里检索定位到这本书，再自动展开该册**全部章节 → 全部课时**，批量下载每节课的
+**视频 + 课件 + 教学设计 + 学习任务单 + 课后练习**整套关联资源，无需逐课给链接、无需人工点选。
+
+```bash
+# 一句话整册下载（推荐入口，自动识别"课本名 / 教材ID / 教材URL"三种输入）
+python "{skill_base}/scripts/download_course.py" --whole-book "北师大版七年级上册数学"
+
+# 先看看检索到哪本书、有多少课时（不下载）
+python "{skill_base}/scripts/download_course.py" --whole-book "北师大版七年级上册数学" --inspect
+
+# 只要文档（不用下视频） / 只要视频
+python ... --whole-book "北师大版七年级上册数学" --only courseware,plan,task,exercise
+python ... --whole-book "北师大版七年级上册数学" --only-video
+```
+
+- 检索维度：书名关键词 + `zxxbb`版本 / `zxxxk`学科 / `zxxnj`年级 / `zxxcc`册次 / `zxxxd`学段，命中多条时优先「2022 年版新课标 / 新教材」
+- 下载并发：课时级默认 4 路（`--workers` 可调至 8），单课视频内部再开 16 线程拉 HLS 分片
+- 增量重跑：已存在的成品文件自动跳过，断网/中断后重跑只补缺；结束时写 `_volume_manifest.json` 清单
+- 实测：北师大版数学七年级上册 23 课时 × 5 类 = 115 项资源（约 696 MB）4 并发约 2 分钟、失败 0；索引检索到出清单约 8 秒
+
+详细链路与参数见下文「6. 整册批量下载」。
 
 ## 公开课直播下载（www.smartedu.cn/publiclive）
 
@@ -138,9 +163,91 @@ python dump_textbook_structure.py --capture \
 python dump_textbook_structure.py --parse
 ```
 
-- `--capture`：默认用 Playwright 启动 Chromium + 扫码登录；传 `--user-data-dir` 可复用本机已登录 Edge 会话（注意：若 Edge 正在运行会冲突，需先关闭）。监听所有含 `teachingmaterials`+`resources` 的 JSON 响应，自动存到 `captures/`。用户手动逐课点开（或加 `--auto` 实验性自动点选），结束后按 Enter。
-- `--parse`：递归提取每课 5 类资源（`micro_lesson_video`/`coursewares`/`lesson_plandesign`/`learning_task`/`after_class_exercise`）及其直链，输出 `structure_report.json` + `structure_report.md`。
-- 资源条目字段与 national_lesson 一致：`global_title.zh-CN` + `resource_type_code` + `ti_items[].ti_storages`（m3u8 / pdf）。
+### 6. 整册批量下载（v2.5.5：按课本搜索 + 备课快通道）——`scripts/download_course.py --whole-book`
+
+输入**课本名 / 教材 ID / 教材 URL** 任一，自动下载该册**全部课时**的配套资源（视频/课件/教学设计/学习任务单/课后练习），全程无需浏览器、无需逐课点选。
+
+**检索链路（按课本名时，v2.5.5 新增）**：
+```
+课本名（如「北师大版七年级上册数学」）
+  → tch_material 匿名整库索引（data_version.json → part_*.json，约 3565 条 / 1~2 秒）
+  → 按 zxxbb版本 / zxxxk学科 / zxxnj年级 / zxxcc册次 / zxxxd学段 分词匹配
+  → 命中多条时优先「2022 年版新课标 / 新教材」→ 得到教材 ID
+```
+
+**下载链路（全 API，v2.5.5 起优先备课快通道，匿名可读）**：
+```
+教材 ID → 教材详情 tag_list → 按标签匹配「课程包」（新教材-xx版xx学科x年级x册）
+课程包 ID（也可直接给，跳过匹配）
+  → /zxx/ndrs/prepare_lesson/teachingmaterials/{pack}/resources/part_*.json   # 课时条目
+  → /zxx/ndrv2/prepare_sub_type/resources/details/{resourceId}.json           # 每课 5 类资源（ti_storages 直链）
+  → /zxx/ndrv2/national_lesson/trees/{pack}.json                              # 章节树（章 → 节）
+  → download_course.run_resources() 并发下载
+```
+> 备课通道（`prepare_lesson` + `prepare_sub_type`）匿名即可读、无需全站索引，实测比 national_lesson 更宽松更快；
+> 若不可用会自动回退到 `national_lesson` 分片（`--source legacy`）。
+
+```bash
+# ★ 1) 一句话整册下载：按课本名搜索 → 整册全部课时
+python "{skill_base}/scripts/download_course.py" --whole-book "北师大版七年级上册数学"
+
+# 2) 先看检索到哪本书 + 章节/课时清单（不下载）
+python "{skill_base}/scripts/download_course.py" --whole-book "北师大版七年级上册数学" --inspect
+
+# 3) 也可直接给教材 ID / 课程包 ID / 教材 URL
+python ".../download_course.py" --whole-book 8376191d-2d32-4c68-aba9-2f6c9ddfd4a
+python ".../download_course.py" --whole-book "https://basic.smartedu.cn/syncClassroom/teachingmaterial?teachingmaterialId=<ID>"
+
+# 4) 只要文档（课件/教学设计/任务单/练习） / 只要视频
+python ".../download_course.py" --whole-book "北师大版七年级上册数学" --only courseware,plan,task,exercise
+python ".../download_course.py" --whole-book "北师大版七年级上册数学" --only-video
+
+# 5) 试跑 3 课 / 强制重下 / 并发 6
+python ... --limit 3
+python ... --force
+python ... --workers 6
+```
+
+**等价底层脚本**（`download_full_volume.py`，可精细控制）：
+```bash
+python "{skill_base}/scripts/download_full_volume.py" --search "北师大版七年级上册数学" --list 10 --inspect
+python "{skill_base}/scripts/download_full_volume.py" --id <教材ID 或 课程包ID> --out ./教材全册下载
+```
+
+**关键参数**：
+- `--whole-book <课本名|ID|URL>`：整册入口（`download_course.py`），内部委托 `download_full_volume.py`
+- `--search <关键词>`：按课本名检索（也可直接 `--id` / `--url`；`--list N` 打印前 N 条候选）
+- `--inspect`：只列章节与课时，不下载
+- `--limit N`：只处理前 N 课（试跑）
+- `--workers N`（默认 4，上限 8）：课时级并发；单课内的视频由 `download_hls` 再用 16 线程拉分片
+- `--only` / `--only-video`：类型过滤（video / courseware / plan / task / exercise）
+- `--force`：忽略已存在的成品文件（默认**增量跳过**，重跑只补缺）
+- `--keep-ts`：保留 `_ts_` 临时分片目录（默认结束后兜底清理）
+- `--token` / `--token-file`：缺省读 `<skill>/smartedu_token.txt`
+
+**输出结构**：
+```
+<out>/<教材名>/<第X章 章名>/<课时名>/视频课程|课件|教学设计|学习任务单|课后练习/
+```
+结束后在根目录写 `_volume_manifest.json`（成功文件、失败明细、课程包 ID）。
+
+**实测（北师大版数学七年级上册，2026-11-20，v2.5.5）**：
+- 课本名检索 → 命中《（根据2022年版课程标准修订）义务教育教科书•数学七年级上册》→ 课程包 `c8be2fb3…` → 23 课时，全程 **7.7 秒**
+- 23 课时 × 5 类 = **115 项资源**，产出 23 个 mp4 + 23 个 pptx + 69 个 docx（+92 个中间 PDF）
+- 总量约 **696 MB**（视频 540 MB），4 并发全量约 2 分钟，失败 0
+- 增量重跑：23/23 全部识别为已存在并跳过，约 1.4 秒完成
+- 校验：所有 pptx/docx 的 zip 结构完好；mp4 经 ffmpeg 全解码无错误；`_ts_` 残留 0
+
+> 说明：文件下载需 `Authorization: Bearer <access_token>`，token 失效会 403，先跑 `token_manager.py acquire` 续期。
+> 章节树、课时条目、资源详情在备课通道下均**匿名可读**，因此 `--inspect` 不需要 token。
+
+---
+
+#### 附：手动两步走（老版本兼容，可选）
+
+若需自行核对原始接口响应，仍可用 `dump_textbook_structure.py`：
+- `--capture`：Playwright 启动浏览器监听 `teachingmaterials/**` JSON，落盘 `captures/`（需已登录 Edge 会话；Edge 运行中会冲突）
+- `--parse`：解析 `captures/` 输出 `structure_report.json/.md`
 
 # 国家智慧教育平台资源下载
 
@@ -159,6 +266,7 @@ python dump_textbook_structure.py --parse
 - 给出类似 `https://basic.smartedu.cn/syncClassroom/classActivity?activityId=...` 的课程链接
 - 直接提供 `activityId`
 - 要求「下载智慧平台课程 / 课件 / 视频 / 教案 / 学习任务单 / 课后练习」
+- 要求「下载**整册 / 整本书 / 全册**的配套资源」，或给出课本名（如「北师大版七年级上册数学」）要求「整本下下来 / 全部课时资源都要」→ 走 `--whole-book`
 
 ## 首次交互引导（技能第一次被使用时，优先执行一次）
 
@@ -167,6 +275,7 @@ python dump_textbook_structure.py --parse
 > 欢迎使用「国家中小学智慧教育平台资源下载」。
 > - **直接复制粘贴资源链接给我即可**：教材详情页、课程页（classActivity / qualityCourse）、课件、公开课直播回放（publiclive）等任意链接都支持。
 > - **如果是课程**，你可以明确说「只要视频」或「只要课件 / 文档」；**不说明的话，默认下载该课程的全部资源**（视频 + 课件 + 教学设计 + 学习任务单 + 课后练习）。
+> - **想下整本书？直接报课本名即可**：例如「把北师大版七年级上册数学的配套资源全下了」，技能会先按课本名检索定位该书，再自动展开全部课时批量下载整套资源，不用逐课给链接。
 > - 受保护资源（视频 / 课件 / 文档）需要登录态 token，脚本会自动从本机已登录浏览器读取，无需你手动操作。
 
 （以下是链接形态最佳实践，可选阅读，不必每次重复）
@@ -480,6 +589,34 @@ python scripts/download_course.py --activity-id e3881dc5-1c4e-4bb4-9b08-f22a9eb0
 ---
 
 ## 更新日志
+
+### v2.5.5（按课本搜索 + 整册下载封装，2026-11-20）
+
+- **新增「按课本搜索」入口**：`--search "北师大版七年级上册数学"`。平台搜索 API 对匿名 403，改走 tch_material 匿名整库索引（3565 条，1~2 秒），并按 `zxxbb/zxxxk/zxxnj/zxxcc/zxxxd` 维度分词匹配；命中多条时优先「2022 年版新课标 / 新教材」。实测从课本名到 23 课时清单 **7.7 秒**。
+- **新增 `--whole-book` 参数（`download_course.py`）**：一句话整册下载，接受「课本名 / 教材 ID / 课程包 ID / 教材 URL」四种输入，内部委托 `download_full_volume.py`，并透传 `--only/--only-video/--limit/--workers/--out/--force` 等参数。
+- **整册链路切到备课快通道**：`prepare_lesson/teachingmaterials/{pack}/resources/part_*.json` + `prepare_sub_type/resources/details/{id}.json`（匿名可读，无需全站索引），失败自动回退 `national_lesson` 分片。
+- **修复 `smartedu_core.search_tch_material()` 标签字段 bug**：原代码读 `t.get("name")`，而索引里是 `tag_name`，导致「北师大版 / 人教版」这类版本标签永远匹配不到、按课本搜索失效；现兼容 `tag_name/name/title`。
+- **修复整册下载 source 硬编码**：并发任务原固定 `source="prepare"`，回退到 legacy 分片时会取错资源详情接口，现按 `mode` 动态选择。
+- `download_full_volume.py` 的 `main()` 改为 `main(argv=None)`，便于被其它脚本调用。
+- 文档新增「⭐ 整册批量下载：按课本搜索」章节，首次引导补充整本书用法。
+
+### v2.5.2（整册下载改为纯 API，实测通过）
+
+- **重构 `scripts/download_full_volume.py`：彻底去掉浏览器依赖**。原 v2.5.1 方案要 Playwright 打开页面、等用户点课时、靠 `captures/` 落盘，实际不可用（Edge 运行中 profile 被锁、非交互环境 `input()` 直接 EOF）。新方案全走 API：
+  `教材 tid → tag_list → national_lesson 索引按标签匹配课程包 → /zxx/ndrv2/national_lesson/trees/{pack}.json → resources/part_*.json → /zxx/ndrv2/national_lesson/resources/details/{lessonId}.json → run_resources()`
+  实测一次跑通 23 课 115 项资源，0 失败。
+- **新增增量跳过**：目标文件已存在且 >1KB 自动跳过（重跑只补缺），`--force` 可强制重下。
+- **新增 `_ts_` 兜底清理**：结束扫描输出目录删 `_ts_*` 临时分片目录（实测清掉 24 个 / 634.6 MB）。
+- **新增 `--limit N`**：只处理前 N 课，便于试跑。
+- 修复：`ensure_deps()` 未调用导致 `name 'fitz' is not defined`（PDF→pptx/docx 转换全失败）。
+- 修复：`sorted_lessons` 在定义前被引用（NameError）。
+- 章节归属改为从 `trees` 接口取「章 → 节」映射，输出目录按章分拣。
+
+### v2.5.1（已并入 2.5.2）
+
+- **新增整册批量下载** `scripts/download_full_volume.py`（初版走浏览器 capture，v2.5.2 已改为纯 API）。
+- **修复 smartedu_search.py**：`extract_hits()` 在标题含 `<b>` 高亮标签时匹配失败；现增加 `_TAG_STRIP_RE` 预处理剥掉所有 HTML 标签后再正则匹配。
+- `dump_textbook_structure.py` 新增 `--channel msedge` 参数（默认值）；同时修了 `user_data_dir` 误传给 `launch()` 导致 TypeError 的问题。
 
 ### v2.4.3（本机应用，待同步到源→另一台设备）
 

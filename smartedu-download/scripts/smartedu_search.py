@@ -21,21 +21,23 @@ DEFAULT_PROFILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..",
 
 ID_PAT = re.compile(r"[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}")
 
-# 常见课程/资源详情页路由
-ROUTE_PAT = re.compile(
-    r"(qualityCourse|classActivity|experimentLesson|prepare|tchMaterial|tresource|"
-    r"syncClassroom|eliteLesson|lesson|course)", re.I)
+# 搜索结果 JSON 里的标题经常带 <b> 高亮标签（如「语文<b>四年级</b>上册」），
+# 直接用原始关键词做正则匹配会失败。搜索前必须剥掉所有 HTML 标签再比对。
+_TAG_STRIP_RE = re.compile(r"<[^>]+>")
 
 
 def extract_hits(text, keyword):
     """从一段 JSON/HTML 文本里抽取与 keyword 同现的 uuid 及附近标题。"""
     hits = []
-    if not text:
+    if not text or not keyword:
         return hits
-    for m in re.finditer(re.escape(keyword), text):
+    # 剥掉 <b>...</b> 等 HTML 标签，让「语文四年级上册」在
+    # 「语文<b>四年级</b>上册」这样的字符串里能命中
+    clean = _TAG_STRIP_RE.sub("", text)
+    for m in re.finditer(re.escape(keyword), clean):
         s = max(0, m.start() - 400)
-        e = min(len(text), m.end() + 400)
-        chunk = text[s:e]
+        e = min(len(clean), m.end() + 400)
+        chunk = clean[s:e]
         for uid in ID_PAT.findall(chunk):
             hits.append(uid)
     return hits

@@ -7,7 +7,7 @@ Choose checks for the current output; do not turn an isolated task into a full-p
 | Output | Check |
 |---|---|
 | Lesson plan or revision | Accurate sources, observable objectives, executable activities, aligned assessment, appropriate lesson capacity and requested format |
-| Pure on-slide outline | Page order, complete student-facing text, staged answers; no teacher notes, internal timing notes, visual instructions, field labels or explanatory preface in the outline body. Needed reference-search keywords belong in a separate copy area; omit them when references are sufficient or only the pure outline is requested. |
+| Pure on-slide outline | Page order, complete student-facing text and teaching sequence; answer visibility and click reveals are checked during assembly, not outline review; no teacher notes, internal timing notes, visual instructions, field labels or explanatory preface in the outline body. Needed reference-search keywords belong in a separate copy area; omit them when references are sufficient or only the pure outline is requested. |
 | Style-reference analysis | Images actually inspected; concise reusable style description only; no unsolicited drawing, sample page, new keyword list or copied composition |
 | Preview images | Drawing uses available references, reusable analysis, an approved direction/template, or explicit autonomous-design instructions; needed reference analysis may happen inside the drawing task. No repeated search/decomposition deliverable; independently organized lesson content, one verified full-resolution image per page from an original, source export or independent reconstruction; see [image source and readability checks](visual-planning.md#逐页选择制作方式) |
 | Courseware production / existing PPT edit | New decks start in Canva. For the default Canva route, verify the actual saved design and link. For explicitly requested editable PPTX, verify the file manually exported by the user. Repair it in place, add native animations after repairs, and check the actual saved file and slide show before delivery. See [delivery routes](lesson-pack.md#课件出品路线). |
@@ -17,14 +17,13 @@ Choose checks for the current output; do not turn an isolated task into a full-p
 | Repaired Canva design | Correct copy, missing/duplicate/fragmented layers, edges and backgrounds, faithful redrawing, tested editability, actual saved result; see `canva-layer-repair.md` |
 | Learning sheet | 按 [学习清单](teaching-resources.md#12-学习清单制作或修订) 核对已确认任务、实际作答载体、教材原句和主要任务的完成标准。用学生视角做一遍关键题，检查支架是否代答、不同材料是否重复要求同一产出。交 Word 时查看 A4 实际版面。 |
 | Board image | Confirmed wording and relationships preserved, specified style and suitable ratio, readable knowledge structure rather than a decorated summary slide |
-| Usage notes | 按 [制作与使用笔记](teaching-resources.md#14-课件制作与使用笔记) 核对采用成品、实际页序、备课材料和关键操作，按实际课件格式取证。查四部分结构、教师能否按说明使用、正文是否混入内审内容或课件入口。 |
 | Whole-image assembly | Unchanged source image per page in numeric order and correct aspect ratio. Verify any approved delayed elements in presentation mode; see [assembly](teaching-resources.md#15-预览图整图组装) |
 | Promotional poster or collage | Intended publicity format rather than a PPT cover; truthful resource claims; collages use actual unchanged slides and specified arrangement |
 | Resource package | Only requested existing resources, correct versions and names, preserved source bytes, expected archive entries and successful integrity check; no unsolicited content review |
 
 The remaining sections apply when their corresponding artifacts or features are in scope. Skip absent media, animation and linked documents rather than inventing work to fill a checklist.
 
-**关键图片素材预检**。排版／交付整理第一步遵循 `lesson-typeset/SKILL.md` §1.0 和 `references/unified-spec.md` 2.5／2.5.1，运行 `check_assets.py` 并主动报告齐备情况及缺项影响。由该技能执行缺项处理与暂停条件。
+**关键图片素材预检（仅另行委托Word排版时）**。进入 `lesson-typeset` 后按其素材预检执行；Markdown撰写、检查和交付整理不触发该门禁，不索要板书图或课件PDF。
 
 Check the task boundary too: a standalone style analysis must not generate images, but a drawing request or an active full-production commission must not stop merely because there is no separate analysis document or the latest message only supplies requested materials. Respect explicit analysis-only or pause instructions.
 
@@ -42,7 +41,7 @@ Check the task boundary too: a standalone style analysis must not generate image
 
 ## Cross-document synchronization
 
-- 按 [权威维度裁决](lesson-pack.md#权威维度裁决单向从属的落地口径) 核对差异。教案提供已确认的课堂任务及顺序，现行课件成品提供讲稿与制作笔记的实际页序、上屏文字和操作依据。学生上屏标题可用课堂语言。发现冲突先定位来源，再依本次授权修订对应产物。
+- 按 [权威维度裁决](lesson-pack.md#权威维度裁决单向从属的落地口径) 核对差异。教案提供已确认的课堂任务及顺序，现行课件成品提供讲稿的实际页序、上屏文字和操作依据。学生上屏标题可用课堂语言。发现冲突先定位来源，再依本次授权修订对应产物。
 - **全流程按类别全扫**：任一产物发现缺陷进行修复时，按 [按类别全量扫描](lesson-pack.md#教学设计动笔前基线生成期准入) 的唯一定义执行，并延伸到关联产物（改动一页上屏须扫连续页与后续讲稿），严禁点状替换。
 - 对同一课堂任务，逐项核对相关课件、清单和逐字稿的题干、作答动作、记录符号、呈现时机和达标标准。讲稿的提问、结论及媒体提示按实际课件核对。
 - Classroom timing is plausible after adding discussion and media duration.
@@ -89,10 +88,10 @@ Check the task boundary too: a standalone style analysis must not generate image
 - Record each affected dynamic page as `已播放通过`, `播放失败`, or `未验证`, with the tested application; never report `未验证` as passed.
 - Delivery filenames are clear and free of temporary suffixes.
 - 图片交付前验证实际文件存在、可解码及尺寸/数量；ZIP实际打开并检查条目、完整性及内容与交付图片一致。文件可读与用户端可下载分别报告：本地检查不等于已验证用户下载。用户反馈无法下载时，先检查交付文件和当前有效的附件/下载入口，必要时重新附上已核对文件；未经复现不把中文文件名、签名过期或其他猜测写成根因。不只重发同一失效入口，也不把其他聊天的 sandbox 路径或临时链接当作当前可用交付。
-- 整包交付验收仅核对教学设计、PPT课件、制作笔记、逐字稿、学习清单五项及各自采用版本。必须严格落实末端交付契约：
-  - **交付落位**：成品必须以 `--mode commit` 直接输出至课题根目录下的 `交付文件/` 文件夹中。
-  - **格式约束**：课件按采用成品的实际形态交付（形态决策归「课件出品路线」，交付规程不预设）；其余四项（教学设计、逐字稿、学习清单、制作笔记）**一律只交 Word（`.docx`），严禁保留或交付 `.pdf`**。
-  - **安全清理**：未排版的旧稿、旧命名版本或包外副本统一使用 `/usr/bin/trash` 移入系统废纸篓；源稿、大纲、样稿、素材、工作日志、旧版、重复格式和额外压缩包不进入最终交付。
+- 整包交付验收仅核对教学设计、PPT课件、逐字稿、学习清单四类及各自采用版本。必须严格落实末端交付契约：
+  - **交付落位**：采用成果直接保存至课题根目录下的 `交付文件/` 文件夹中；Markdown交付不调用Word排版。
+  - **格式约束**：课件按采用成品的实际形态交付（形态决策归「课件出品路线」，交付规程不预设）；其余三项（教学设计、逐字稿、学习清单）**最终只交Markdown（`.md`），严禁保留或交付 `.pdf`**。
+  - **安全清理**：按授权核准旧稿、旧命名版本或包外副本后使用 `/usr/bin/trash` 移入系统废纸篓；大纲、样稿、素材、工作日志、旧版、重复格式和额外压缩包不进入最终交付；采用的Markdown就是文本成品，不能按未排版源稿清走。
 
 ## Delivery report
 
