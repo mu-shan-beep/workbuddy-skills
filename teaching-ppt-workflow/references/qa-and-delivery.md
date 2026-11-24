@@ -21,6 +21,8 @@ Choose checks for the current output; do not turn an isolated task into a full-p
 | Promotional poster or collage | Intended publicity format rather than a PPT cover; truthful resource claims; collages use actual unchanged slides and specified arrangement |
 | Resource package | Only requested existing resources, correct versions and names, preserved source bytes, expected archive entries and successful integrity check; no unsolicited content review |
 
+For slide visual design, image QA and assembly, also apply the approved [content-frame checks](lesson-pack.md#课件统一版心): compare same-type pages at a common scale, verify title anchors, body bounds and margins, and respect approved special-page exceptions. An unchanged image must not be cropped or stretched to conceal frame drift; a text-only or animation-only edit does not authorize moving approved content.
+
 The remaining sections apply when their corresponding artifacts or features are in scope. Skip absent media, animation and linked documents rather than inventing work to fill a checklist.
 
 **关键图片素材预检（仅另行委托Word排版时）**。进入 `lesson-typeset` 后按其素材预检执行；Markdown撰写、检查和交付整理不触发该门禁，不索要板书图或课件PDF。
@@ -88,10 +90,8 @@ Check the task boundary too: a standalone style analysis must not generate image
 - Record each affected dynamic page as `已播放通过`, `播放失败`, or `未验证`, with the tested application; never report `未验证` as passed.
 - Delivery filenames are clear and free of temporary suffixes.
 - 图片交付前验证实际文件存在、可解码及尺寸/数量；ZIP实际打开并检查条目、完整性及内容与交付图片一致。文件可读与用户端可下载分别报告：本地检查不等于已验证用户下载。用户反馈无法下载时，先检查交付文件和当前有效的附件/下载入口，必要时重新附上已核对文件；未经复现不把中文文件名、签名过期或其他猜测写成根因。不只重发同一失效入口，也不把其他聊天的 sandbox 路径或临时链接当作当前可用交付。
-- 整包交付验收仅核对教学设计、PPT课件、逐字稿、学习清单四类及各自采用版本。必须严格落实末端交付契约：
-  - **交付落位**：采用成果直接保存至课题根目录下的 `交付文件/` 文件夹中；Markdown交付不调用Word排版。
-  - **格式约束**：课件按采用成品的实际形态交付（形态决策归「课件出品路线」，交付规程不预设）；其余三项（教学设计、逐字稿、学习清单）**最终只交Markdown（`.md`），严禁保留或交付 `.pdf`**。
-  - **安全清理**：按授权核准旧稿、旧命名版本或包外副本后使用 `/usr/bin/trash` 移入系统废纸篓；大纲、样稿、素材、工作日志、旧版、重复格式和额外压缩包不进入最终交付；采用的Markdown就是文本成品，不能按未排版源稿清走。
+- **制作端验收只到「成果可交付」为止**：核对五类各自的采用版本、内容与格式是否符合交付条件（五类清单见 `lesson-pack.md`「交付物清单（五类，产品定义）」）。**交付包整理与网盘落位不属本检查表**（2026-11-24 用户裁定）：五类齐全核对、`交付文件/` 落位、跨类别旧稿清理、网盘目录结构与上传双向核验一律由 `lesson-typeset/SKILL.md` §3.5 执行，本文件只引用不重写，不另立口径。
+- 制作端自查只需回答两件事：**这类成果自己做完了没有**、**格式对不对**（教学设计／逐字稿／学习清单为 Markdown 源稿、课件按采用形态、板贴为 png 原图，不得交 `.pdf` 充数）。整理阶段要不要落 `交付文件/`、要不要上传网盘，交 `lesson-typeset` 判断。
 
 ## Delivery report
 

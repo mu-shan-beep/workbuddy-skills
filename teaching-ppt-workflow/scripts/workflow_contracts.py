@@ -17,11 +17,15 @@ def violations(root):
  if 'Markdown' in main and '仅' not in paragraph:issues.append('Word素材预检未限定适用范围')
  if '用户未限定课时时，据教材任务' in pack:issues.append('缺课时仍自动推导')
  if '课题、作者与学段版本三项' in modes:issues.append('封面仍强制学段版本')
- if re.search(r'^## (?:检查)?制作笔记',pro,re.M):issues.append('人工提示词仍存在制作笔记入口')
- if '；制作笔记仅在另行委托时制作' in read(ref/'workflow.md'):issues.append('停用后仍恢复制作笔记')
  if '一律走「抽读看样本' in pack:issues.append('个案评价动作仍为全局一律要求')
  transcript=read(root/'lesson-transcript'/'SKILL.md')
  if '路径与命名：课题根目录 `<课文>' in transcript:issues.append('逐字稿源稿路径仍为根目录默认')
+ cover_line=next((l for l in modes.splitlines() if l.startswith('- **教材和文本**')),'')
+ if not all(word in cover_line for word in ['多个课时','第一课时','大纲']):
+  issues.append('多课时封面未在大纲明确课时要求')
+ font_line=next((l for l in pack.splitlines() if l.startswith('- 字体：')),'')
+ if not all(word in font_line for word in ['楷体','思源宋体','花体']):
+  issues.append('课件朴素字体限制缺失')
  return issues
 if __name__=='__main__':
  import sys

@@ -45,8 +45,7 @@ Do not copy an executor's commands, schemas or troubleshooting guide into this w
 | Turn an approved artifact into a reusable personal template skill | `template-creator:template-creator` | Invoke only when the user asks for a reusable template, not for a one-off deck based on a template. |
 | Find a missing external capability or connected service | `plugin-management:plugin-management` | Discover an appropriate plugin instead of expanding this workflow with application-specific procedures. |
 
-> 2026-11-12：本地 `ppt-mcp`（`mcp.json` 已清空）与 `ppt-native-animator` 插件已下线，
-> 对应四行路由已移除。相关需求走上一行 `plugin-management` 重新发现可用能力，本表不保留失效条目。
+> 相关需求走 `plugin-management` 重新发现可用能力，本表不保留失效条目。
 
 ## 教案包专项交接
 

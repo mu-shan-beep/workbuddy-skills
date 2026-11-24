@@ -36,21 +36,25 @@
 | 问题分级与放行（关键问题／实施问题／可选优化／待验证四类；A 类清零才放行） | lesson-review.md「问题记录与放行规则」 | lesson-pack.md 闸门与收敛判据、qa-and-delivery.md；不合并为三类 |
 | 按类别全量扫描（被点名的是哪一类缺陷，就对全稿该类全部对象逐条核并给判据；不限于被点名那一处） | `lesson-pack.md` 基线准入末段（唯一定义） | `task-modes.md` 修订模式、`qa-and-delivery.md` 全流程全扫（只写各自绑定物，不另立口径） |
 | 课堂任务（动作承接／板书可作答／材料自足／反思可回溯）与环节级零余量 | `lesson-pack.md` 基线⑤ | `scripts/classroom_guard.py`（辅助列候选；任务材料自足须人工对读）；`lesson-review.md` 闸门三只引用 |
-| 教案及配套资料模块白名单与客户交付级源文件铁律（2026-11-13 用户裁定）：所有交付的源文件（-源.md）及 Word 成品必须是直接给客户看的纯净正文，不留制作痕迹；给 AI 的评分/说明/自检/表态性内容直接在生成源文件时全部去除，严禁入稿导入排版；排版期双重过滤 AI 味与残渣；教案＝基本信息／内容分析／学情／四维目标／重难点／教学准备／本课时目标／四列过程／板书／真实授课反思；配套资料正文纯净（制作笔记已永久废弃，其原四部分结构不再适用） | `lesson-pack.md`「教案默认模块」+「全包源稿纯净化与去 AI 味铁律」 | task-modes.md:11、SKILL.md:58、lesson-pack-prompts.md 教案撰写段、qa-and-delivery.md、全局 MEMORY |
-| Word排版素材来源与预检：仅明确委托Word排版时启用；Markdown撰写、检查和交付整理不索要板书图或课件PDF | `lesson-typeset/SKILL.md` §1.0 | lesson-pack.md 阶段表、qa-and-delivery.md |
+| 教案及配套资料模块白名单与客户交付级源文件铁律（2026-11-13 用户裁定）：所有交付的源文件（-源.md）及 Word 成品必须是直接给客户看的纯净正文，不留制作痕迹；给 AI 的评分/说明/自检/表态性内容直接在生成源文件时全部去除，严禁入稿导入排版；排版期双重过滤 AI 味与残渣；教案＝基本信息／内容分析／学情／四维目标／重难点／教学准备／本课时目标／四列过程／板书／真实授课反思；配套资料正文纯净 | `lesson-pack.md`「教案默认模块」+「全包源稿纯净化与去 AI 味铁律」 | task-modes.md:11、SKILL.md:58、lesson-pack-prompts.md 教案撰写段、qa-and-delivery.md、全局 MEMORY |
+| Word排版素材来源与预检、排版期内容取舍与成品校验：仅明确委托Word排版时启用，归排版技能独占；撰写方只交纯净源稿，不判定版式结果 | `lesson-typeset/SKILL.md` §1.0 与 §10 | `teaching-ppt-workflow/SKILL.md`「客户交付级源文件」第 2 条（只交源稿，不重写排版口径）、lesson-pack.md 阶段表、qa-and-delivery.md |
 | 全流程各阶段生成前准入：各阶段必须具备上游定稿凭据与输入映射表，缺一不得启动 | lesson-pack.md 阶段表推进条件 | qa-and-delivery.md、task-modes.md、visual-planning.md |
 | 进度记录仅用于跨阶段接续、批量等待和失败恢复 | SKILL.md「跨阶段与批量任务的进度记录」 | 阶段确认与页面续画规程；人工提示词写具体核对、操作和验收 |
 | 规则修订权限边界：可自主修 bug／须指令才改规矩／一律禁止三类 | SKILL.md「规则修订权限边界」 | 本文件 §8 只读例外；feedback-regression.md |
 | 全技能规则治理入口与体检：一条命令跑 11 项断言，自建判 FAIL、第三方只报不改 | `teaching-ppt-workflow/scripts/rule_audit.py` ＋ 本文件 §4 步骤 0 | 6 个自建技能 SKILL.md 的「规则治理」段（只写入口，不复制断言口径） |
 | 大纲：校对采用教案、学生任务与页码映射，按课堂动作安排出示 | task-modes.md:03 | lesson-pack.md 阶段表、SKILL.md、全局 MEMORY:6 |
-| 课堂PPT封面：只写课题及有依据的作者署名；用户当前明确指令优先 | task-modes.md 03「教材和文本」 | 大纲提示词、封面用途表、飞书整体稿 |
+| 课堂PPT封面：课题、作者；多课时必须标第几课时并在大纲写定；用户当前明确指令优先 | task-modes.md 03「教材和文本」 | 大纲提示词、封面用途表、飞书整体稿 |
+| 整套课件版心的数值定义、逐页传递及连续页位置核验 | `lesson-pack.md`「课件统一版心」 | visual-planning.md、ppt-visual-style、人工提示词；参数在原视觉确认点确认，不新增阶段 |
 | 拆层还原的布局记录与对象选择；视觉还原、可编辑性分别验收 | canva-layer-repair.md#拆分前记录与还原方式 | SKILL.md分层条款、local-editing.md、拆层与本地整理提示词 |
 | 高清单页的来源、重制与续画；参考编号、首图试做确认、逐张调用和独立文件 | visual-planning.md#发送绘图调用前 | task-modes.md:04、lesson-pack.md阶段表、绘图提示词 |
-| 交付物落地与清理规程（末端契约）：交付文件/、四类成果、文本 Markdown、课件按采用形态、旧稿按授权安全整理 | lesson-pack.md「交付物落地与清理规程（末端契约）」 | 全局 MEMORY、qa-and-delivery.md、lesson-typeset SKILL |
+| 交付物清单（五类）：教学设计、课件（采用形态）、逐字稿、学习清单、板贴 png；文本三项只交 Markdown 源稿，禁 pdf | lesson-pack.md「交付物清单（五类，产品定义）」 | 全局 MEMORY、teaching-resources.md:17、qa-and-delivery.md |
+| 交付包整理与网盘落位：五类齐全核对、`交付文件/` 落位、跨类别旧稿清理、网盘目录结构与上传双向核验；缺项不阻断但须列明请用户补充 | `lesson-typeset/SKILL.md` §3.5（唯一定义） | 全局 MEMORY、lesson-pack.md（只引清单不写落位）、qa-and-delivery.md、xhs-lesson-notes/fulfillment.md（只读核验链接） |
+| 四技能功能隔离（2026-11-24 用户裁定，每个技能只一个主功能）：制作并交 md 源稿＝teaching-ppt-workflow；逐字稿撰写／自检／修复＝lesson-transcript；排版＋交付包整理＋网盘落位＝lesson-typeset；小红书运营与文案输出＝xhs-lesson-notes | 本节本行（唯一定义） | 四个技能的 SKILL.md 与各自 references、全局 MEMORY 路由表（只引用，不把别技能的功能写回本技能） |
+| 网盘建目／上传归交付包整理；建分享／回填底稿的履约执行归文案环节（须另行授权） | 建目上传见 `lesson-typeset/SKILL.md` §3.5；分享与回填见 `xhs-lesson-notes/references/fulfillment.md` | teaching 技能不碰网盘 |
 | 取证清单取代日常评分；下游大纲不是教案取证对象 | lesson-pack.md:47-60、闸门三 | —— |
 | 权威维度裁决（遇不一致改下游不改上游） | lesson-pack.md「权威维度裁决」小节 | qa-and-delivery.md:43、source-of-truth.md:62、workflow.md:70 |
 | 失效产物登记与处置（未生效／待重校） | lesson-pack.md「失效产物登记与处置」小节 | SKILL.md:90 |
-| 逐字稿以课件成品为唯一骨架（页序／单击／媒体） | task-modes.md:63、lesson-transcript SKILL §0 | workflow.md:56、lesson-pack-prompts.md「逐字稿」 |
+| 逐字稿以课件成品为唯一骨架（页序／单击／媒体）：编写与审核方法唯一归 lesson-transcript | lesson-transcript SKILL §0 与 script-spec.md | task-modes.md 07（只做阶段调度与交接，不重写方法）、workflow.md:56、lesson-pack-prompts.md「逐字稿」 |
 | md 源稿一律收进 `<课题根>/源稿/`（根目录仅为旧课题兼容位），`.workbuddy/` 仅存记忆／日志／审计 | 全局 MEMORY（2026-11-16 改规）；lesson-transcript §3；lesson-typeset §2 | —— |
 | 持续委托＝阶段推进顺序授权，≠ 成果定稿确认 | SKILL.md:52、workflow.md:9 | —— |
 | 配套资料按各自实际依据撰写，目标应用验证交互，排版取证按所用素材 | teaching-resources.md §12／§14、lesson-pack.md 阶段表 | SKILL.md、lesson-pack-prompts.md、feedback-regression.md |
