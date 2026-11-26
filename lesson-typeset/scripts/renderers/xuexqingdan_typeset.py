@@ -912,7 +912,10 @@ def build(md, out_path, header, title=None, mirror=False,
 
     blank_table(doc, ["班级：", "姓名：", "日期："], cw)
 
-    last = None          # 上一个块的类型，用于算间距
+    # 2026-11-26 修：标题信息区（班级／姓名／日期）本身就是一张表，初始化成 None 会让
+    # 紧随其后的首个块（源稿直接以 ### 小标题起头时）段前距取 0，小标题压在该表底边上。
+    # 初始化为 "blank" 与「表格之后」一致，由各分支的 gap 正常拉开间距。
+    last = "blank"       # 上一个块的类型，用于算间距
     first_band = False   # 标题信息区已占位
     prev_is_table = False
 
