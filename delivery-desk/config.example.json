@@ -1,0 +1,5 @@
+{
+  "_说明": "可选的机器本地配置：复制本文件为同目录 config.json 并按需填写，全部字段可省略。没有 config.json 时，技能根自动定位（与 inventory.mjs 同源），资产根不查、查重③级记 N/A。",
+  "skillsRoots": ["~/another-skills-dir"],
+  "assetsRoot": "~/my-assets"
+}
